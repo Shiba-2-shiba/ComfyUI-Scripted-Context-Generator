@@ -55,15 +55,6 @@ except ImportError as e:
     log_import_error("GarnishNodes", e)
     print("\033[93m[ComfyUI-Nodes] Warning: nodes_garnish.py import failed.\033[0m")
 
-# TextLoaderNeo
-try:
-    from .Text_Load_Line_From_File_neo import Text_Load_Line_From_File_neo
-    NODE_CLASS_MAPPINGS["Text_Load_Line_From_File_neo"] = Text_Load_Line_From_File_neo
-    NODE_DISPLAY_NAME_MAPPINGS["Text_Load_Line_From_File_neo"] = "Text Load Line From File (Neo)"
-except ImportError as e:
-    log_import_error("Text_Load_Line_From_File_neo", e)
-    print("\033[93m[ComfyUI-Nodes] Warning: Text_Load_Line_From_File_neo.py import failed.\033[0m")
-
 # PromptCleaner
 try:
     from .nodes_prompt_cleaner import PromptCleaner
