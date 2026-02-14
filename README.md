@@ -95,8 +95,6 @@ git clone https://github.com/<your-account>/ComfyUI-Scripted-Context-Generator.g
 
 ## 既知の注意点
 
-- 以前の説明で `templete.txt` / `prompt.jsonl` と書かれているケースがありますが、現行ファイル名は **`templates.txt` / `prompts.jsonl`** です。
-- `__init__.py` には `Text_Load_Line_From_File_neo` の import 記述がありますが、同梱されていない環境では警告表示される場合があります（他ノード利用には必須ではありません）。
 - 本ノードは女性主人公・SFW寄りの設計思想です。用途に応じた語彙拡張は各自で実施してください。
 
 ## ライセンス
