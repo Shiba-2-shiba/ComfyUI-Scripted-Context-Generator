@@ -1,0 +1,74 @@
+{
+    "quiet_focused": [
+        "soft natural lighting, calm atmosphere, silence, serene environment, muted colors, low contrast",
+        "morning mist, cool color palette, stillness, soft rays of light, peaceful solitude, clean air",
+        "filtered sunlight through windows, dust motes dancing in light, studious atmosphere, hush, gentle shadows",
+        "library atmosphere, dust floating in sunbeams, scent of old paper visualized, quiet solitude, soft shadows",
+        "dim ambient light, focused spotlight effect, stillness, cool color tones, sharp details",
+        "ambient occlusion, neutral lighting, tranquil space, motionless air, soft edges"
+    ],
+    "energetic_joy": [
+        "bright sunlight, vibrant colors, high saturation, clear blue sky, dynamic lighting, lively atmosphere, sparkling air",
+        "pop art colors, festival atmosphere, warm sunlight, colorful background, sharp focus, high key lighting",
+        "dazzling sunshine, vivid contrast, summer vibes, energetic aura, lens flare (subtle)",
+        "confetti in the air, rainbow lens flare, high energy atmosphere, saturated colors, motion blur usage (background only)",
+        "summer festival vibes, bright lanterns, warm glowing lights, lively crowd atmosphere (blurred background)",
+        "cheerfulness visualized, prismatic light leaks, blooming light, fresh and airy"
+    ],
+    "mysterious_curious": [
+        "foggy, dim lighting, volumetric light, deep shadows, purple and blue tones, ethereal atmosphere, rim lighting",
+        "misty air, glowing particles, dark corners, cinematic contrast, hidden details, low key",
+        "moonlight ambiance, bioluminescent glow, enigmatic shadows, cold color temperature, haze",
+        "hidden passage lighting, torchlight flicker, ancient atmosphere, deep contrast, floating glyphs",
+        "secret laboratory vibe, cool blue rim light, shadows hiding details, technological glow",
+        "twilight atmosphere, otherworldly lighting, supernatural aura, obscure background"
+    ],
+    "peaceful_relaxed": [
+        "warm golden hour lighting, bloom effect, gentle breeze visualized, pastel colors, harmonious composition, soft focus",
+        "dappled sunlight through trees, airy atmosphere, light leaks, fluffy clouds, bright and fresh",
+        "afternoon sun, cozy atmosphere, warm tones, slow time, gentle radiance",
+        "spa atmosphere, steam rising gently, soft diffused light, warm towels texture, calming gradient",
+        "sunday morning vibe, white curtains blowing in wind, overexposed window light, cozy bedroom air",
+        "komorebi (sunlight filtering through trees), soft shadows, relaxing vibe, nature-inspired palette"
+    ],
+    "melancholic_sadness": [
+        "rainy atmosphere, cold color palette, dramatic shadows, film grain, muted tones, cloudy sky, vignette effect",
+        "gray ambient light, desaturated colors, cinematic sorrow, cool artificial light, window reflections",
+        "overcast sky, heavy atmosphere, monochromatic tones, loneliness visualized, rain streaks",
+        "empty street at night, flickering streetlight, cold asphalt texture, lonely atmosphere, blue and grey palette",
+        "abandoned room, peeling paint texture, dust layers, desaturated tones, silent despair visualized",
+        "gloomy lighting, damp air, low contrast, emotional weight, shadowed background"
+    ],
+    "intense_anger": [
+        "extreme contrast, harsh lighting, debris in air, overwhelming power, shockwaves, dark stormy clouds, heat haze",
+        "red and black tones, gritty texture, speed lines, lightning flashes, chaotic atmosphere",
+        "burning embers, hellish landscape, dramatic backlighting, intense saturation, dangerous vibe",
+        "volcanic atmosphere, ash falling like snow, red ambient light, heat distortion waves, menacing shadows",
+        "battle aura, cracked ground, intense rim lighting, high contrast black and white with red accents",
+        "jagged shadows, heavy vignette, aggressive lighting, storm brewing"
+    ],
+    "romantic_allure": [
+        "warm sunset lighting, soft focus, sparkles, intimate atmosphere, dreamy bokeh, cinematic romance, lens flare",
+        "shimmering light, pink and orange tones, magical glow, evening light, emotional lighting",
+        "candlelight ambiance, rose-tinted hues, love atmosphere, soft diffusion, enchanting night",
+        "boudoir lighting, satin texture reflections, soft pink vignette, intimate mood, perfume mist visualized",
+        "moonlit balcony, starry sky background, elegant glow, soft blue and silver tones, dreamy atmosphere",
+        "starlight, elegant lighting, dreamy haze, sentimental mood, lustrous texture"
+    ],
+    "creepy_fear": [
+        "shadowy, unsettling lighting, cold green tones, heavy vignette, horror atmosphere, noise texture, flickering light",
+        "claustrophobic darkness, harsh artificial light, uncanny shadows, dust particles, gloom",
+        "abyssal darkness, spotlight effect, grimy texture, unnerving silence visualized, cold sweat atmosphere",
+        "abandoned hospital vibe, green fluorescent hum visualized, grime and rust textures, unease, dark corners",
+        "forest at night, twisting branches shadows, cold fog, pale moonlight, unseen presence atmosphere",
+        "blood red lighting, distorted perspective effect, nightmare fuel, ominous fog"
+    ],
+    "whimsical_playful": [
+        "pastel colors, soft glow, sparkles, dreamlike atmosphere, floating bubbles, rainbow light leaks, magical aura",
+        "bright primary colors, surreal lighting, fluffy textures, soft white vignette, fantasy glow",
+        "candy colors, fairy tale lighting, glittering air, soft edges, wonderland vibe",
+        "storybook illustration style, paper cutout textures, soft pastel vignette, childhood dream vibe",
+        "zero gravity atmosphere, floating objects, bright candy colors, soft focus, joyful chaos",
+        "marshmallow tones, joyful radiance, fantasy particles, dreamscape lighting"
+    ]
+}

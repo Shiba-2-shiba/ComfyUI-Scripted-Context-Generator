@@ -1,0 +1,18 @@
+{subj} wearing {costume}. {action}. {garnish}. The location is {loc}, {meta_mood}.
+{subj} in {costume}. {action}. {garnish}. The background depicts {loc}, featuring {meta_mood}.
+{subj} dressed in {costume}. {action}, with {garnish}. The setting is {loc}, with an atmosphere of {meta_mood}.
+{subj} wearing {costume}. {action}. {garnish}. She is situated in {loc}, characterized by {meta_mood}.
+{subj} in {costume}. {action}. {garnish}. The scene is {loc}, {meta_mood}.
+{subj} wearing {costume}. {action}. {garnish}. The environment is {loc}, bathed in {meta_mood}.
+{subj} in {costume}. {action}. {garnish}. The background is {loc}, {meta_mood}.
+The character is {subj} in {costume}. {action}. {garnish}. The location is {loc}, with {meta_mood}.
+{subj} wearing {costume}. {action}. {garnish}. The setting is {loc}, {meta_mood}.
+Features {subj} in {costume}. {action}. {garnish}. The background is {loc}, creating a {meta_mood} atmosphere.
+The character is {subj} in {costume}. {action}. {garnish}. The background is {loc}, {meta_mood}.
+{subj} wearing {costume}. {action}. {garnish}. The setting is {loc}, featuring {meta_mood}.
+{loc}, {meta_mood}. In this setting, {subj} wearing {costume}. {action}. {garnish}.
+{subj} dressed in {costume}. {action}. {garnish}. The scene is {loc}, with {meta_mood} lighting.
+{subj} in {costume}. {action}. {garnish}. The location is {loc}, {meta_mood}.
+The focus is on {subj} wearing {costume}. {action}. {garnish}. The surrounding area is {loc}, {meta_mood}.
+{subj} in {costume}. {action}. {garnish}. The background describes {loc}, with {meta_mood}.
+{subj} wearing {costume}. {action}. {garnish}. She is in {loc}, surrounded by {meta_mood}.
