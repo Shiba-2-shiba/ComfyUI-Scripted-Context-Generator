@@ -1,0 +1,207 @@
+{
+  "office_lady": {
+    "dresses": [
+      "executive_pencil_dress"
+    ],
+    "separates": [
+      "modern_office_attire"
+    ],
+    "outerwear": [
+      "tailored_blazer",
+      "rainproof_trench"
+    ]
+  },
+  "beach_resort": {
+    "dresses": [
+      "romantic_garden_party",
+      "boho_maxi_dress"
+    ],
+    "separates": [
+      "beach_resort_coord"
+    ],
+    "outerwear": [
+      "romantic_lace_shawl"
+    ]
+  },
+  "rainy_day": {
+    "dresses": [
+      "winter_knit_dress"
+    ],
+    "separates": [
+      "rainy_day_layers"
+    ],
+    "outerwear": [
+      "rainproof_trench",
+      "cozy_wool_coat"
+    ]
+  },
+  "fantasy_battle": {
+    "dresses": [
+      "arcane_battle_dress"
+    ],
+    "separates": [
+      "fantasy_battle_armor"
+    ],
+    "outerwear": [
+      "armored_cloak"
+    ]
+  },
+  "cyberpunk_night": {
+    "dresses": [
+      "cyberpunk_bodycon_dress"
+    ],
+    "separates": [
+      "street_denim_layer",
+      "punk_rock_stagewear"
+    ],
+    "outerwear": [
+      "techwear_translucent_parka",
+      "edgy_biker_jacket"
+    ]
+  },
+  "traditional_japanese": {
+    "dresses": [
+      "traditional_kimono_dress"
+    ],
+    "separates": [
+      "retro_hakama_coord"
+    ],
+    "outerwear": [
+      "kimono_haori"
+    ]
+  },
+  "school_uniform": {
+    "dresses": [
+      "classic_jumper_uniform"
+    ],
+    "separates": [
+      "preppy_school_uniform"
+    ],
+    "outerwear": [
+      "tailored_blazer",
+      "cozy_wool_coat"
+    ]
+  },
+  "gothic_lolita": {
+    "dresses": [
+      "victorian_gothic_dress"
+    ],
+    "separates": [
+      "gothic_lolita_coord"
+    ],
+    "outerwear": [
+      "romantic_lace_shawl",
+      "cozy_wool_coat"
+    ]
+  },
+  "rock_concert": {
+    "dresses": [
+      "sleek_evening_gown",
+      "cyberpunk_bodycon_dress"
+    ],
+    "separates": [
+      "punk_rock_stagewear",
+      "street_denim_layer"
+    ],
+    "outerwear": [
+      "edgy_biker_jacket"
+    ]
+  },
+  "winter_date": {
+    "dresses": [
+      "winter_knit_dress"
+    ],
+    "separates": [
+      "winter_layered_knit"
+    ],
+    "outerwear": [
+      "cozy_wool_coat"
+    ]
+  },
+  "secret_agent": {
+    "dresses": [
+      "sleek_evening_gown",
+      "athletic_bodysuit"
+    ],
+    "separates": [
+      "secret_agent_suit"
+    ],
+    "outerwear": [
+      "tailored_blazer",
+      "rainproof_trench",
+      "edgy_biker_jacket"
+    ]
+  },
+  "gym_workout": {
+    "dresses": [
+      "athletic_bodysuit"
+    ],
+    "separates": [
+      "athleisure_training_set"
+    ],
+    "outerwear": [
+      "sporty_track_jacket"
+    ]
+  },
+  "cozy_cafe": {
+    "dresses": [
+      "winter_knit_dress",
+      "boho_maxi_dress"
+    ],
+    "separates": [
+      "casual_chic_date"
+    ],
+    "outerwear": [
+      "cozy_wool_coat",
+      "tailored_blazer"
+    ]
+  },
+  "urban_shopping": {
+    "dresses": [
+      "executive_pencil_dress"
+    ],
+    "separates": [
+      "shopping_casual_chic",
+      "modern_office_attire"
+    ],
+    "outerwear": [
+      "tailored_blazer",
+      "rainproof_trench"
+    ]
+  },
+  "mori_natural": {
+    "dresses": [
+      "boho_maxi_dress"
+    ],
+    "separates": [
+      "mori_girl_natural"
+    ],
+    "outerwear": [
+      "cozy_wool_coat",
+      "romantic_lace_shawl"
+    ]
+  },
+  "scifi_space": {
+    "dresses": [
+      "cyberpunk_bodycon_dress"
+    ],
+    "separates": [
+      "scifi_pilot_suit"
+    ],
+    "outerwear": [
+      "techwear_translucent_parka"
+    ]
+  },
+  "steampunk": {
+    "dresses": [
+      "victorian_gothic_dress"
+    ],
+    "separates": [
+      "steampunk_inventor"
+    ],
+    "outerwear": [
+      "tailored_blazer",
+      "edgy_biker_jacket"
+    ]
+  }
+}

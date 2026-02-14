@@ -1,0 +1,537 @@
+{
+  "universal_locs": [
+    "street_cafe",
+    "commuter_transport",
+    "bedroom_boudoir",
+    "picnic_park",
+    "cozy_bookstore",
+    "winter_street",
+    "shopping_mall_atrium",
+    "illuminated_park",
+    "botanical_garden"
+  ],
+  "loc_tags": {
+    "school": [
+      "school_classroom",
+      "school_rooftop",
+      "school_library",
+      "school_gym_hall"
+    ],
+    "office": [
+      "modern_office",
+      "boardroom",
+      "office_elevator",
+      "surveillance_room",
+      "messy_copy_room"
+    ],
+    "urban": [
+      "neon_city_street",
+      "rainy_alley",
+      "karaoke_bar",
+      "fashion_boutique"
+    ],
+    "nature": [
+      "fantasy_forest",
+      "bamboo_forest",
+      "tropical_beach",
+      "wave_barrel",
+      "shinto_shrine"
+    ],
+    "fantasy": [
+      "burning_battlefield",
+      "dungeon_crypt",
+      "dragon_lair",
+      "alien_planet"
+    ],
+    "music": [
+      "concert_stage",
+      "recording_studio",
+      "opera_house",
+      "karaoke_bar"
+    ],
+    "sport": [
+      "fitness_gym",
+      "yoga_studio",
+      "stadium_court"
+    ],
+    "domestic": [
+      "messy_kitchen",
+      "bedroom_boudoir"
+    ],
+    "resort": [
+      "poolside_resort",
+      "tropical_beach",
+      "luxury_hotel_lobby"
+    ],
+    "scifi": [
+      "spaceship_bridge",
+      "cyber_lab",
+      "airship_deck",
+      "neon_city_street"
+    ],
+    "craft": [
+      "clockwork_workshop",
+      "messy_copy_room",
+      "antique_shop"
+    ]
+  },
+  "characters": {
+    "silver-haired girl": {
+      "tags": [
+        "school"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "student": {
+      "tags": [
+        "school"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "library girl": {
+      "tags": [
+        "school"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "bookworm girl": {
+      "tags": [
+        "school"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "kendo girl": {
+      "tags": [
+        "school",
+        "nature"
+      ],
+      "default_costume": "traditional_japanese"
+    },
+    "business girl": {
+      "tags": [
+        "office"
+      ],
+      "default_costume": "office_lady"
+    },
+    "CEO": {
+      "tags": [
+        "office"
+      ],
+      "default_costume": "office_lady"
+    },
+    "office worker": {
+      "tags": [
+        "office"
+      ],
+      "default_costume": "office_lady"
+    },
+    "cyberpunk girl": {
+      "tags": [
+        "urban",
+        "scifi"
+      ],
+      "default_costume": "cyberpunk_night"
+    },
+    "cyberpunk mercenary": {
+      "tags": [
+        "urban",
+        "scifi"
+      ],
+      "default_costume": "cyberpunk_night"
+    },
+    "cyberpunk hacker": {
+      "tags": [
+        "urban",
+        "scifi"
+      ],
+      "default_costume": "cyberpunk_night"
+    },
+    "gothic girl": {
+      "tags": [
+        "urban",
+        "fantasy"
+      ],
+      "default_costume": "gothic_lolita"
+    },
+    "gothic doll": {
+      "tags": [
+        "urban",
+        "fantasy"
+      ],
+      "default_costume": "gothic_lolita"
+    },
+    "doll-like girl": {
+      "tags": [
+        "urban",
+        "fantasy"
+      ],
+      "default_costume": "gothic_lolita"
+    },
+    "shrine maiden": {
+      "tags": [
+        "nature"
+      ],
+      "default_costume": "traditional_japanese"
+    },
+    "geisha": {
+      "tags": [
+        "nature"
+      ],
+      "default_costume": "traditional_japanese"
+    },
+    "blonde elf archer": {
+      "tags": [
+        "fantasy",
+        "nature"
+      ],
+      "default_costume": "fantasy_battle"
+    },
+    "sorceress": {
+      "tags": [
+        "fantasy"
+      ],
+      "default_costume": "fantasy_battle"
+    },
+    "female knight": {
+      "tags": [
+        "fantasy"
+      ],
+      "default_costume": "fantasy_battle"
+    },
+    "injured knight": {
+      "tags": [
+        "fantasy"
+      ],
+      "default_costume": "fantasy_battle"
+    },
+    "fantasy warrior": {
+      "tags": [
+        "fantasy"
+      ],
+      "default_costume": "fantasy_battle"
+    },
+    "rock singer": {
+      "tags": [
+        "music",
+        "urban"
+      ],
+      "default_costume": "rock_concert"
+    },
+    "guitarist": {
+      "tags": [
+        "music"
+      ],
+      "default_costume": "rock_concert"
+    },
+    "rock star": {
+      "tags": [
+        "music",
+        "urban"
+      ],
+      "default_costume": "rock_concert"
+    },
+    "recording artist": {
+      "tags": [
+        "music"
+      ],
+      "default_costume": "rock_concert"
+    },
+    "opera singer": {
+      "tags": [
+        "music"
+      ],
+      "default_costume": "gothic_lolita"
+    },
+    "fitness model": {
+      "tags": [
+        "sport"
+      ],
+      "default_costume": "gym_workout"
+    },
+    "runner": {
+      "tags": [
+        "sport"
+      ],
+      "default_costume": "gym_workout"
+    },
+    "yoga instructor": {
+      "tags": [
+        "sport",
+        "nature"
+      ],
+      "default_costume": "gym_workout"
+    },
+    "gym girl": {
+      "tags": [
+        "sport"
+      ],
+      "default_costume": "gym_workout"
+    },
+    "surfer girl": {
+      "tags": [
+        "sport",
+        "resort"
+      ],
+      "default_costume": "beach_resort"
+    },
+    "spy agent": {
+      "tags": [
+        "office",
+        "urban"
+      ],
+      "default_costume": "secret_agent"
+    },
+    "detective": {
+      "tags": [
+        "office",
+        "urban"
+      ],
+      "default_costume": "secret_agent"
+    },
+    "secret agent": {
+      "tags": [
+        "office",
+        "urban"
+      ],
+      "default_costume": "secret_agent"
+    },
+    "vacationer": {
+      "tags": [
+        "resort"
+      ],
+      "default_costume": "beach_resort"
+    },
+    "vacation girl": {
+      "tags": [
+        "resort"
+      ],
+      "default_costume": "beach_resort"
+    },
+    "winter traveler": {
+      "tags": [
+        "urban"
+      ],
+      "default_costume": "winter_date"
+    },
+    "winter date girl": {
+      "tags": [
+        "urban"
+      ],
+      "default_costume": "winter_date"
+    },
+    "sleepy girl": {
+      "tags": [
+        "domestic"
+      ],
+      "default_costume": "winter_date"
+    },
+    "cafe customer": {
+      "tags": [
+        "urban"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "urban shopper": {
+      "tags": [
+        "urban"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "mori girl": {
+      "tags": [
+        "nature"
+      ],
+      "default_costume": "mori_natural"
+    },
+    "chef girl": {
+      "tags": [
+        "domestic"
+      ],
+      "default_costume": "rainy_day"
+    },
+    "rainy day girl": {
+      "tags": [
+        "urban"
+      ],
+      "default_costume": "rainy_day"
+    },
+    "space pilot": {
+      "tags": [
+        "scifi"
+      ],
+      "default_costume": "scifi_space"
+    },
+    "inventor girl": {
+      "tags": [
+        "craft",
+        "scifi"
+      ],
+      "default_costume": "steampunk"
+    },
+    "solarpunk girl": {
+      "tags": [
+        "nature",
+        "scifi"
+      ],
+      "default_costume": "beach_resort"
+    },
+    "street dancer": {
+      "tags": [
+        "urban",
+        "music"
+      ],
+      "default_costume": "cyberpunk_night"
+    },
+    "cafe barista": {
+      "tags": [
+        "urban"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "afternoon reader": {
+      "tags": [
+        "urban"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "fashionista": {
+      "tags": [
+        "urban"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "window shopper": {
+      "tags": [
+        "urban"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "flower girl": {
+      "tags": [
+        "nature"
+      ],
+      "default_costume": "mori_natural"
+    },
+    "nature wanderer": {
+      "tags": [
+        "nature"
+      ],
+      "default_costume": "mori_natural"
+    },
+    "space engineer": {
+      "tags": [
+        "scifi"
+      ],
+      "default_costume": "scifi_space"
+    },
+    "stargazer": {
+      "tags": [
+        "scifi",
+        "nature"
+      ],
+      "default_costume": "scifi_space"
+    },
+    "clockwork artisan": {
+      "tags": [
+        "craft"
+      ],
+      "default_costume": "steampunk"
+    },
+    "airship captain": {
+      "tags": [
+        "scifi",
+        "craft"
+      ],
+      "default_costume": "steampunk"
+    }
+  },
+  "exclusions": [
+    {
+      "reason": "ファンタジー戦闘キャラがオフィス環境に不自然",
+      "characters": [
+        "blonde elf archer",
+        "sorceress",
+        "female knight",
+        "injured knight",
+        "fantasy warrior"
+      ],
+      "denied_locs": [
+        "modern_office",
+        "boardroom",
+        "office_elevator",
+        "surveillance_room"
+      ]
+    },
+    {
+      "reason": "伝統キャラがサイバー/SF空間に不自然",
+      "characters": [
+        "shrine maiden",
+        "geisha",
+        "kendo girl"
+      ],
+      "denied_locs": [
+        "cyber_lab",
+        "spaceship_bridge",
+        "airship_deck"
+      ]
+    },
+    {
+      "reason": "SF/サイバーパンクキャラが伝統環境に不自然",
+      "characters": [
+        "cyberpunk girl",
+        "cyberpunk mercenary",
+        "cyberpunk hacker",
+        "space pilot"
+      ],
+      "denied_locs": [
+        "shinto_shrine",
+        "bamboo_forest"
+      ]
+    },
+    {
+      "reason": "ファンタジー戦闘キャラが現代日常空間に不自然",
+      "characters": [
+        "blonde elf archer",
+        "sorceress",
+        "female knight",
+        "injured knight",
+        "fantasy warrior"
+      ],
+      "denied_locs": [
+        "commuter_transport",
+        "shopping_mall_atrium",
+        "street_cafe",
+        "cozy_bookstore"
+      ]
+    },
+    {
+      "reason": "SF/サイバーパンクキャラが自然環境に不自然",
+      "characters": [
+        "cyberpunk girl",
+        "cyberpunk mercenary",
+        "cyberpunk hacker",
+        "space pilot"
+      ],
+      "denied_locs": [
+        "botanical_garden",
+        "picnic_park"
+      ]
+    },
+    {
+      "reason": "伝統装束キャラが商業/スポーツ施設に不自然",
+      "characters": [
+        "shrine maiden",
+        "geisha"
+      ],
+      "denied_locs": [
+        "commuter_transport",
+        "shopping_mall_atrium"
+      ]
+    }
+  ],
+  "priority_weights": {
+    "existing": 50,
+    "genre_gated": 35,
+    "universal": 15
+  }
+}

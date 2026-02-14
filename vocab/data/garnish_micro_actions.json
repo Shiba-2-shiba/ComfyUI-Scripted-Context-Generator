@@ -1,0 +1,691 @@
+{
+  "daily_life": {
+    "triggers": [
+      "relax",
+      "sit",
+      "wait",
+      "break",
+      "chill",
+      "home",
+      "room",
+      "daily",
+      "life",
+      "rest",
+      "coffee",
+      "tea",
+      "drink",
+      "urban",
+      "street",
+      "browsing",
+      "shop",
+      "commuter",
+      "transit"
+    ],
+    "specific": {
+      "coffee": [
+        "blowing on hot coffee",
+        "inhaling aroma",
+        "holding mug with both hands",
+        "sipping coffee"
+      ],
+      "tea": [
+        "sipping tea",
+        "pouring tea",
+        "holding teacup elegantly"
+      ],
+      "drink": [
+        "holding a drink",
+        "straw in mouth",
+        "glass touching lips",
+        "holding tapioca drink"
+      ],
+      "smartphone": [
+        "scrolling with thumb",
+        "looking at phone screen",
+        "tapping screen",
+        "taking a selfie",
+        "smiling at screen"
+      ],
+      "phone": [
+        "holding phone to ear",
+        "checking notifications",
+        "typing message"
+      ],
+      "book": [
+        "turning a page",
+        "tracing text with finger",
+        "marking a page",
+        "holding book open"
+      ],
+      "cat": [
+        "stroking a cat",
+        "cat sleeping on lap",
+        "playing with cat"
+      ],
+      "dog": [
+        "petting a dog",
+        "playing fetch",
+        "dog resting head on knee"
+      ],
+      "cooking": [
+        "stirring pot",
+        "chopping vegetables",
+        "tasting with spoon",
+        "holding frying pan"
+      ],
+      "eating": [
+        "holding utensils",
+        "chewing",
+        "wiping mouth with napkin"
+      ]
+    },
+    "roulette": {
+      "triggers": [
+        "relax",
+        "rest",
+        "break",
+        "chill",
+        "daily",
+        "browsing",
+        "shop",
+        "commuter",
+        "transit",
+        "mission"
+      ],
+      "options": {
+        "reading": [
+          "reading a book",
+          "flipping through a magazine",
+          "looking at a tablet"
+        ],
+        "drink": [
+          "sipping coffee",
+          "holding a mug",
+          "drinking tea",
+          "holding a water bottle"
+        ],
+        "care": [
+          "brushing hair",
+          "looking in mirror",
+          "applying lip gloss",
+          "stretching arms"
+        ],
+        "pet": [
+          "playing with a cat",
+          "petting a dog",
+          "watching a bird"
+        ],
+        "smartphone": [
+          "looking at smartphone",
+          "checking messages",
+          "taking a selfie"
+        ],
+        "idling": [
+          "looking out window",
+          "resting chin on hand",
+          "dazing off",
+          "lying on sofa"
+        ],
+        "hobby": [
+          "sketching in notebook",
+          "listening to music with headphones",
+          "writing in diary"
+        ],
+        "browsing_shop": [
+          "looking at old clock",
+          "inspecting jewelry",
+          "holding a vintage book",
+          "dusting off item",
+          "peering into display case"
+        ],
+        "commuter_transit": [
+          "holding strap",
+          "checking watch",
+          "looking at smartphone",
+          "sleeping",
+          "looking out window",
+          "reading a newspaper"
+        ]
+      }
+    },
+    "generic": [
+      "stretching arms",
+      "yawning slightly",
+      "brushing hair back",
+      "fixing clothes",
+      "looking at fingernails",
+      "tapping fingers",
+      "resting chin on hand",
+      "dazing off",
+      "looking out window",
+      "humming softly",
+      "adjusting collar",
+      "checking watch",
+      "adjusting glasses",
+      "holding a water bottle",
+      "hands folded in lap",
+      "playing with hair",
+      "tilting head thinking",
+      "holding a bag",
+      "putting hand in pocket",
+      "wiping brow",
+      "checking nails",
+      "adjusting buttons",
+      "tying shoelace",
+      "looking at map",
+      "stretching neck",
+      "dusting off clothes",
+      "searching in bag",
+      "leaning against wall",
+      "crossing legs while standing",
+      "waiting patiently",
+      "checking pockets",
+      "rubbing hands together",
+      "shielding eyes from sun",
+      "fixing hair strand",
+      "tapping foot",
+      "resting hand on chin"
+    ],
+    "obstacle_actions": {
+      "spill": [
+        "wiping spill off table",
+        "dabbing stain with napkin",
+        "looking embarrassed at mess",
+        "holding wet sleeve away"
+      ],
+      "wind": [
+        "holding down skirt in wind",
+        "hair blown wildly across face",
+        "chasing loose paper",
+        "shielding face from gust"
+      ],
+      "delay": [
+        "checking phone anxiously",
+        "tapping foot impatiently",
+        "sighing and looking at ceiling",
+        "pacing back and forth"
+      ],
+      "luggage": [
+        "adjusting heavy bag strap",
+        "balancing armful of items",
+        "picking up dropped item",
+        "shifting weight between feet"
+      ],
+      "forgot": [
+        "patting pockets frantically",
+        "searching through bag urgently",
+        "turning back suddenly",
+        "hand on forehead in realization"
+      ]
+    }
+  },
+  "relaxing_nature": {
+    "triggers": [
+      "nature",
+      "park",
+      "forest",
+      "garden",
+      "picnic",
+      "flower"
+    ],
+    "specific": {
+      "flower": [
+        "smelling a flower",
+        "picking a flower",
+        "holding a bouquet"
+      ],
+      "picnic": [
+        "eating a sandwich",
+        "sitting on picnic blanket",
+        "holding a basket"
+      ]
+    },
+    "roulette": {
+      "triggers": [
+        "nature",
+        "relax",
+        "park"
+      ],
+      "options": {
+        "reading": [
+          "reading a book under a tree",
+          "sketching scenery",
+          "writing poetry"
+        ],
+        "observation": [
+          "looking at flowers",
+          "watching butterflies",
+          "searching for four-leaf clover"
+        ],
+        "rest": [
+          "lying on grass",
+          "leaning against a tree",
+          "taking a nap in shade",
+          "stretching in sunlight"
+        ],
+        "drink": [
+          "sipping tea from thermos",
+          "drinking water"
+        ]
+      }
+    },
+    "generic": [
+      "taking a deep breath",
+      "shielding eyes from sun",
+      "wiping sweat",
+      "looking at sky"
+    ]
+  },
+  "surveillance": {
+    "triggers": [
+      "surveillance",
+      "investigate",
+      "spy",
+      "detective",
+      "search",
+      "watch"
+    ],
+    "specific": {
+      "camera": [
+        "holding a camera",
+        "adjusting camera lens",
+        "looking through viewfinder"
+      ],
+      "binoculars": [
+        "looking through binoculars",
+        "holding binoculars"
+      ],
+      "magnifier": [
+        "holding a magnifying glass",
+        "inspecting ground"
+      ]
+    },
+    "roulette": {
+      "triggers": [
+        "surveillance",
+        "investigate",
+        "search"
+      ],
+      "options": {
+        "observation": [
+          "looking through binoculars",
+          "peering from shadows",
+          "watching intently"
+        ],
+        "record": [
+          "taking notes in notebook",
+          "holding a camera",
+          "recording voice memo"
+        ],
+        "search": [
+          "holding a flashlight",
+          "looking for clues",
+          "checking a map"
+        ],
+        "disguise": [
+          "adjusting hat",
+          "pulling up collar",
+          "wearing sunglasses"
+        ]
+      }
+    },
+    "generic": [
+      "looking suspicious",
+      "hiding behind cover",
+      "checking watch nervously",
+      "tiptoeing"
+    ]
+  },
+  "work_office": {
+    "triggers": [
+      "work",
+      "office",
+      "business",
+      "meeting",
+      "presentation"
+    ],
+    "specific": {
+      "laptop": [
+        "typing on laptop",
+        "pointing at screen",
+        "closing laptop"
+      ],
+      "phone": [
+        "talking on office phone",
+        "checking smartphone"
+      ],
+      "document": [
+        "reading documents",
+        "signing a paper",
+        "organizing files"
+      ]
+    },
+    "roulette": {
+      "triggers": [
+        "work",
+        "business"
+      ],
+      "options": {
+        "pc_work": [
+          "typing on keyboard",
+          "staring at monitor",
+          "operating mouse"
+        ],
+        "paper_work": [
+          "writing with pen",
+          "holding a clipboard",
+          "shuffling papers"
+        ],
+        "communication": [
+          "talking on phone",
+          "explaining with gestures",
+          "pointing at chart"
+        ],
+        "break": [
+          "drinking coffee",
+          "rubbing tired eyes",
+          "stretching in chair"
+        ]
+      }
+    },
+    "generic": [
+      "adjusting tie",
+      "fixing glasses",
+      "looking at wristwatch",
+      "carrying a briefcase"
+    ]
+  },
+  "performance": {
+    "triggers": [
+      "sing",
+      "song",
+      "music",
+      "play",
+      "concert",
+      "perform",
+      "idol",
+      "guitar",
+      "piano",
+      "band",
+      "instrument"
+    ],
+    "specific": {
+      "microphone": [
+        "gripping the microphone",
+        "singing into microphone",
+        "adjusting mic stand"
+      ],
+      "guitar": [
+        "strumming chords",
+        "fingers on fretboard",
+        "adjusting guitar strap",
+        "holding pick"
+      ],
+      "bass": [
+        "plucking bass strings",
+        "slapping bass",
+        "wide stance"
+      ],
+      "piano": [
+        "fingers dancing on keys",
+        "pressing piano pedals",
+        "crossing hands on keyboard"
+      ],
+      "violin": [
+        "holding violin bow",
+        "vibrato finger motion",
+        "resting chin on violin"
+      ],
+      "drum": [
+        "twirling drumsticks",
+        "hitting cymbals",
+        "keeping rhythm"
+      ]
+    },
+    "roulette": {
+      "triggers": [
+        "play",
+        "music",
+        "perform",
+        "band",
+        "instrument"
+      ],
+      "options": {
+        "guitar": [
+          "strumming chords",
+          "holding a guitar"
+        ],
+        "bass": [
+          "plucking bass strings",
+          "holding a bass guitar"
+        ],
+        "drum": [
+          "holding drumsticks",
+          "hitting cymbals"
+        ],
+        "keyboard": [
+          "playing keyboard",
+          "synthesizer controls"
+        ],
+        "sax": [
+          "playing saxophone",
+          "fingers on keys",
+          "blowing into instrument"
+        ],
+        "violin": [
+          "playing violin",
+          "drawing bow"
+        ],
+        "flute": [
+          "playing flute",
+          "fingers on flute keys"
+        ]
+      }
+    },
+    "generic": [
+      "hand on chest",
+      "arms spread wide",
+      "eyes closed in emotion",
+      "singing passionately",
+      "mouth open singing",
+      "projecting voice",
+      "hand reaching out",
+      "swaying to music",
+      "tapping foot to rhythm"
+    ]
+  },
+  "movement": {
+    "triggers": [
+      "run",
+      "walk",
+      "jog",
+      "sprint",
+      "hurry",
+      "move",
+      "step"
+    ],
+    "specific": {
+      "sprint": [
+        "pumping arms",
+        "leaning forward",
+        "hair blown back hard",
+        "intense expression",
+        "high speed"
+      ],
+      "dash": [
+        "explosive start",
+        "leaning forward",
+        "kicking up dust"
+      ],
+      "walk": [
+        "steady pace",
+        "looking around",
+        "swinging arms gently",
+        "strolling"
+      ]
+    },
+    "generic": [
+      "in motion",
+      "hair flowing",
+      "light jogging",
+      "looking ahead",
+      "breathing rhythmically",
+      "steps echoing",
+      "moving forward"
+    ]
+  },
+  "combat": {
+    "triggers": [
+      "fight",
+      "battle",
+      "attack",
+      "warrior",
+      "soldier",
+      "knight",
+      "defend",
+      "enemy",
+      "weapon"
+    ],
+    "specific": {
+      "sword": [
+        "gripping sword hilt",
+        "parrying stance",
+        "pointing blade",
+        "sword planted in ground"
+      ],
+      "katana": [
+        "hand on katana hilt",
+        "drawing katana",
+        "iai stance"
+      ],
+      "bow": [
+        "drawing bowstring",
+        "aiming arrow",
+        "checking wind",
+        "nocking arrow"
+      ],
+      "gun": [
+        "aiming down sights",
+        "finger on trigger",
+        "reloading",
+        "checking safety"
+      ],
+      "magic": [
+        "gathering energy in hand",
+        "chanting spell",
+        "glowing fingertips",
+        "magic circle"
+      ],
+      "staff": [
+        "brandishing staff",
+        "staff glowing",
+        "slamming staff on ground"
+      ]
+    },
+    "roulette": {
+      "triggers": [
+        "fight",
+        "battle",
+        "attack",
+        "warrior"
+      ],
+      "options": {
+        "melee": [
+          "clenched fists",
+          "martial arts stance",
+          "guarding face",
+          "ready to punch"
+        ],
+        "sword_art": [
+          "hand on sword hilt",
+          "drawing weapon",
+          "sword stance"
+        ],
+        "archery": [
+          "miming a bow draw",
+          "sharp sighting eye",
+          "reaching for back (quiver)"
+        ],
+        "magic": [
+          "gathering energy in hand",
+          "chanting spell",
+          "glowing fingertips"
+        ]
+      }
+    },
+    "generic": [
+      "clenched fists",
+      "wiping sweat/blood",
+      "glaring at enemy",
+      "defensive posture",
+      "ready to pounce",
+      "intense focus",
+      "adrenaline rush"
+    ]
+  },
+  "fantasy": {
+    "triggers": [
+      "magic",
+      "spell",
+      "witch",
+      "wizard",
+      "sorceress",
+      "enchant",
+      "summon"
+    ],
+    "specific": {
+      "potion": [
+        "swirling potion bottle",
+        "uncorking vial",
+        "inspecting liquid"
+      ],
+      "book": [
+        "reading ancient grimoire",
+        "floating book",
+        "turning pages of spellbook"
+      ],
+      "staff": [
+        "clutching staff",
+        "raising staff high"
+      ]
+    },
+    "generic": [
+      "floating particles",
+      "glowing aura",
+      "whispering incantation",
+      "levitating slightly",
+      "eyes glowing",
+      "wind gathering"
+    ]
+  },
+  "tech": {
+    "triggers": [
+      "work",
+      "type",
+      "office",
+      "computer",
+      "laptop",
+      "code",
+      "hacker"
+    ],
+    "specific": {
+      "laptop": [
+        "fingers on keyboard",
+        "adjusting screen",
+        "staring at code"
+      ],
+      "tablet": [
+        "using stylus",
+        "swiping screen"
+      ]
+    },
+    "generic": [
+      "adjusting glasses",
+      "rubbing eyes",
+      "stretching neck",
+      "focused expression",
+      "typing rhythmically",
+      "sipping coffee"
+    ]
+  }
+}

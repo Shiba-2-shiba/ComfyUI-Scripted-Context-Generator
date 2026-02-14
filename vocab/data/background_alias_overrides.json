@@ -1,0 +1,146 @@
+{
+  "giant tree library": [
+    "school_library",
+    "fantasy_forest"
+  ],
+  "skyscraper window": [
+    "modern_office",
+    "luxury_hotel_lobby"
+  ],
+  "neon-lit alleyway": [
+    "neon_city_street",
+    "rainy_alley"
+  ],
+  "neon-reflected puddle": [
+    "rainy_alley",
+    "neon_city_street"
+  ],
+  "graffiti tunnel": [
+    "neon_city_street",
+    "rainy_alley"
+  ],
+  "paris street": [
+    "rainy_alley",
+    "neon_city_street"
+  ],
+  "kyoto street": [
+    "winter_street",
+    "shinto_shrine"
+  ],
+  "subway station": [
+    "commuter_transport",
+    "rainy_alley"
+  ],
+  "basement club": [
+    "karaoke_bar",
+    "concert_stage"
+  ],
+  "rooftop skyline": [
+    "school_rooftop",
+    "neon_city_street"
+  ],
+  "poolside lounge chair": [
+    "poolside_resort",
+    "tropical_beach"
+  ],
+  "illuminated tree path": [
+    "illuminated_park",
+    "winter_street"
+  ],
+  "dressing room": [
+    "bedroom_boudoir",
+    "recording_studio"
+  ],
+  "tea party room": [
+    "bedroom_boudoir",
+    "luxury_hotel_lobby"
+  ],
+  "mirror wall": [
+    "fitness_gym",
+    "yoga_studio"
+  ],
+  "competition stage": [
+    "stadium_court",
+    "concert_stage"
+  ],
+  "theater stage": [
+    "concert_stage",
+    "school_gym_hall"
+  ],
+  "misty mountain path": [
+    "fantasy_forest",
+    "bamboo_forest"
+  ],
+  "zen garden": [
+    "shinto_shrine",
+    "yoga_studio"
+  ],
+  "dojo": [
+    "yoga_studio",
+    "shinto_shrine"
+  ],
+  "stormy sky": [
+    "alien_planet",
+    "burning_battlefield"
+  ],
+  "abandoned church": [
+    "dungeon_crypt",
+    "school_gym_hall"
+  ],
+  "magic tower": [
+    "dungeon_crypt",
+    "school_library"
+  ],
+  "floating concert hall": [
+    "concert_stage",
+    "fantasy_forest"
+  ],
+  "ice castle": [
+    "winter_street",
+    "fantasy_forest"
+  ],
+  "throne of thorns": [
+    "dungeon_crypt",
+    "fantasy_forest"
+  ],
+  "ruined temple": [
+    "dungeon_crypt",
+    "fantasy_forest"
+  ],
+  "glowing spring": [
+    "fantasy_forest",
+    "tropical_beach"
+  ],
+  "tropical jungle": [
+    "fantasy_forest",
+    "tropical_beach"
+  ],
+  "cliff edge at sunset": [
+    "fantasy_forest",
+    "alien_planet"
+  ],
+  "sunrise mountain top": [
+    "fantasy_forest",
+    "winter_street"
+  ],
+  "interrogation room": [
+    "boardroom",
+    "surveillance_room"
+  ],
+  "vr space": [
+    "neon_city_street",
+    "alien_planet"
+  ],
+  "library": [
+    "cozy_bookstore",
+    "school_library"
+  ],
+  "park": [
+    "picnic_park",
+    "illuminated_park"
+  ],
+  "workshop": [
+    "clockwork_workshop",
+    "messy_copy_room"
+  ]
+}

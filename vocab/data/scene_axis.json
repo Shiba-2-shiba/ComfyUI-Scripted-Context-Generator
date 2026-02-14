@@ -1,0 +1,122 @@
+{
+  "place_type": {
+    "public": {
+      "tags": ["outdoor", "open space", "busy area"],
+      "micro_actions": ["navigating through crowd", "waiting at crosswalk", "sitting on public bench"]
+    },
+    "semi_public": {
+      "tags": ["indoor shared space", "shop", "office"],
+      "micro_actions": ["ordering at counter", "finding a seat", "browsing shelves"]
+    },
+    "private": {
+      "tags": ["personal space", "home", "bedroom"],
+      "micro_actions": ["sprawling on sofa", "reaching for remote", "wrapped in blanket"]
+    }
+  },
+  "purpose": {
+    "work": {
+      "tags": ["focused", "productive"],
+      "micro_actions": ["reviewing documents", "adjusting desk lamp", "clicking pen"]
+    },
+    "study": {
+      "tags": ["concentration", "learning"],
+      "micro_actions": ["highlighting text", "flipping textbook pages", "counting on fingers"]
+    },
+    "commute": {
+      "tags": ["in transit", "on the move"],
+      "micro_actions": ["gripping strap", "checking route on phone", "swaying with train"]
+    },
+    "rest": {
+      "tags": ["idle", "relaxing"],
+      "micro_actions": ["closing eyes briefly", "stretching neck", "deep sigh"]
+    },
+    "shop": {
+      "tags": ["browsing", "selecting"],
+      "micro_actions": ["comparing two items", "checking price tag", "rummaging through rack"]
+    },
+    "wait": {
+      "tags": ["anticipation", "idle time"],
+      "micro_actions": ["fidgeting with phone", "tapping foot", "glancing at clock"]
+    }
+  },
+  "social_distance": {
+    "alone": {
+      "tags": ["solitary", "self-absorbed"],
+      "micro_actions": ["talking to self", "humming", "lost in thought"]
+    },
+    "acquaintance": {
+      "tags": ["casual conversation", "familiar face"],
+      "micro_actions": ["waving hello", "light chat", "sharing a laugh"]
+    },
+    "stranger": {
+      "tags": ["polite distance", "cautious glance"],
+      "micro_actions": ["avoiding eye contact", "nodding politely", "stepping aside"]
+    },
+    "crowd": {
+      "tags": ["surrounded by people", "background noise"],
+      "micro_actions": ["weaving through crowd", "protecting bag", "squeezed in"]
+    }
+  },
+  "progress": {
+    "preparing": {
+      "tags": ["about to start", "getting ready"],
+      "micro_actions": ["checking bag contents", "putting on coat", "grabbing keys", "tying shoelaces"]
+    },
+    "midway": {
+      "tags": ["in the middle", "ongoing"],
+      "micro_actions": ["half-eaten meal", "open notebook", "paused mid-sentence"]
+    },
+    "wrapping_up": {
+      "tags": ["finishing", "almost done"],
+      "micro_actions": ["packing up belongings", "last sip of coffee", "pushing back chair", "closing laptop"]
+    }
+  },
+  "obstacle": {
+    "delay": {
+      "tags": ["waiting longer", "stuck"],
+      "micro_actions": ["checking phone anxiously", "tapping foot impatiently", "sighing deeply", "looking at watch again"]
+    },
+    "spill": {
+      "tags": ["minor accident", "oops"],
+      "micro_actions": ["wiping spill off table", "dabbing stain with napkin", "looking embarrassed", "holding wet sleeve"]
+    },
+    "wind": {
+      "tags": ["gusty", "breezy"],
+      "micro_actions": ["holding down skirt", "hair blown across face", "chasing loose paper", "shielding eyes"]
+    },
+    "luggage": {
+      "tags": ["heavy load", "carrying too much"],
+      "micro_actions": ["adjusting heavy bag strap", "balancing multiple items", "dropping something", "shifting weight"]
+    },
+    "forgot": {
+      "tags": ["forgetful moment", "realization"],
+      "micro_actions": ["patting pockets frantically", "searching in bag", "turning back suddenly", "face-palm gesture"]
+    }
+  },
+  "emotion_nuance": {
+    "tense": {
+      "tags": ["nervous energy", "on edge"],
+      "garnish_bias": ["biting lip", "clenched jaw", "stiff posture", "gripping pen tightly"]
+    },
+    "absorbed": {
+      "tags": ["deep focus", "in the zone"],
+      "garnish_bias": ["eyes locked on subject", "leaning forward slightly", "mouth slightly open", "tuning out surroundings"]
+    },
+    "relieved": {
+      "tags": ["relaxing tension", "exhale"],
+      "garnish_bias": ["shoulders dropping", "soft exhale", "slight smile forming", "unclenching hands"]
+    },
+    "awkward": {
+      "tags": ["uncomfortable", "self-conscious"],
+      "garnish_bias": ["avoiding eye contact", "fidgeting with sleeve", "forced smile", "rubbing back of neck"]
+    },
+    "content": {
+      "tags": ["quietly happy", "at ease"],
+      "garnish_bias": ["gentle smile", "relaxed posture", "soft gaze", "chin resting on palm"]
+    },
+    "bored": {
+      "tags": ["restless", "distracted"],
+      "garnish_bias": ["staring into space", "doodling absently", "counting ceiling tiles", "chin on desk"]
+    }
+  }
+}

@@ -1,0 +1,461 @@
+{
+  "classroom": [
+    "school_classroom"
+  ],
+  "school_classroom": [
+    "school_classroom"
+  ],
+  "school_rooftop": [
+    "school_rooftop"
+  ],
+  "school_library": [
+    "school_library"
+  ],
+  "school_gym_hall": [
+    "school_gym_hall"
+  ],
+  "school rooftop": [
+    "school_rooftop"
+  ],
+  "school rooftop fence": [
+    "school_rooftop"
+  ],
+  "library shelves": [
+    "school_library"
+  ],
+  "giant tree library": [
+    "school_library",
+    "fantasy_forest"
+  ],
+  "assembly hall podium": [
+    "school_gym_hall"
+  ],
+  "abandoned classroom": [
+    "school_classroom"
+  ],
+  "modern office": [
+    "modern_office"
+  ],
+  "modern_office": [
+    "modern_office"
+  ],
+  "boardroom": [
+    "boardroom"
+  ],
+  "office_elevator": [
+    "office_elevator"
+  ],
+  "surveillance_room": [
+    "surveillance_room"
+  ],
+  "messy_copy_room": [
+    "messy_copy_room"
+  ],
+  "skyscraper window": [
+    "modern_office",
+    "luxury_hotel_lobby"
+  ],
+  "elevator": [
+    "office_elevator"
+  ],
+  "surveillance room": [
+    "surveillance_room"
+  ],
+  "messy copy room": [
+    "messy_copy_room"
+  ],
+  "garage": [
+    "messy_copy_room"
+  ],
+  "gear-filled workshop": [
+    "messy_copy_room"
+  ],
+  "neon city street": [
+    "neon_city_street"
+  ],
+  "neon-lit alleyway": [
+    "neon_city_street",
+    "rainy_alley"
+  ],
+  "rainy alley": [
+    "rainy_alley"
+  ],
+  "neon-reflected puddle": [
+    "rainy_alley",
+    "neon_city_street"
+  ],
+  "graffiti wall": [
+    "rainy_alley"
+  ],
+  "graffiti tunnel": [
+    "neon_city_street",
+    "rainy_alley"
+  ],
+  "foggy london street": [
+    "rainy_alley"
+  ],
+  "paris street": [
+    "rainy_alley",
+    "neon_city_street"
+  ],
+  "snowy street": [
+    "winter_street"
+  ],
+  "kyoto street": [
+    "winter_street",
+    "shinto_shrine"
+  ],
+  "commuter train": [
+    "commuter_transport"
+  ],
+  "crowded train": [
+    "commuter_transport"
+  ],
+  "subway station": [
+    "commuter_transport",
+    "rainy_alley"
+  ],
+  "departing bus": [
+    "commuter_transport"
+  ],
+  "luxury hotel lobby": [
+    "luxury_hotel_lobby"
+  ],
+  "karaoke bar": [
+    "karaoke_bar"
+  ],
+  "basement club": [
+    "karaoke_bar",
+    "concert_stage"
+  ],
+  "future highway": [
+    "neon_city_street"
+  ],
+  "rooftop skyline": [
+    "school_rooftop",
+    "neon_city_street"
+  ],
+  "neon_city_street": [
+    "neon_city_street"
+  ],
+  "rainy_alley": [
+    "rainy_alley"
+  ],
+  "commuter_transport": [
+    "commuter_transport"
+  ],
+  "luxury_hotel_lobby": [
+    "luxury_hotel_lobby"
+  ],
+  "karaoke_bar": [
+    "karaoke_bar"
+  ],
+  "opera house balcony": [
+    "opera_house"
+  ],
+  "antique shop shelf": [
+    "antique_shop"
+  ],
+  "poolside lounge chair": [
+    "poolside_resort",
+    "tropical_beach"
+  ],
+  "illuminated tree path": [
+    "illuminated_park",
+    "winter_street"
+  ],
+  "messy_kitchen": [
+    "messy_kitchen"
+  ],
+  "messy kitchen": [
+    "messy_kitchen"
+  ],
+  "bedroom": [
+    "bedroom_boudoir"
+  ],
+  "bedroom_boudoir": [
+    "bedroom_boudoir"
+  ],
+  "candlelit boudoir": [
+    "bedroom_boudoir"
+  ],
+  "dressing room": [
+    "bedroom_boudoir",
+    "recording_studio"
+  ],
+  "tea party room": [
+    "bedroom_boudoir",
+    "luxury_hotel_lobby"
+  ],
+  "fitness gym": [
+    "fitness_gym"
+  ],
+  "peaceful studio": [
+    "yoga_studio"
+  ],
+  "mirror wall": [
+    "fitness_gym",
+    "yoga_studio"
+  ],
+  "treadmill": [
+    "fitness_gym"
+  ],
+  "park track": [
+    "stadium_court"
+  ],
+  "competition stage": [
+    "stadium_court",
+    "concert_stage"
+  ],
+  "stadium_court": [
+    "stadium_court"
+  ],
+  "fitness_gym": [
+    "fitness_gym"
+  ],
+  "yoga_studio": [
+    "yoga_studio"
+  ],
+  "concert_stage": [
+    "concert_stage"
+  ],
+  "explosive stage": [
+    "concert_stage"
+  ],
+  "rock_concert": [
+    "concert_stage"
+  ],
+  "recording studio": [
+    "recording_studio"
+  ],
+  "theater stage": [
+    "concert_stage",
+    "school_gym_hall"
+  ],
+  "recording_studio": [
+    "recording_studio"
+  ],
+  "opera_house": [
+    "opera_house"
+  ],
+  "ancient forest": [
+    "fantasy_forest"
+  ],
+  "misty mountain path": [
+    "fantasy_forest",
+    "bamboo_forest"
+  ],
+  "bamboo forest": [
+    "bamboo_forest"
+  ],
+  "shinto shrine": [
+    "shinto_shrine"
+  ],
+  "zen garden": [
+    "shinto_shrine",
+    "yoga_studio"
+  ],
+  "dojo": [
+    "yoga_studio",
+    "shinto_shrine"
+  ],
+  "burning battlefield": [
+    "burning_battlefield"
+  ],
+  "mecha pilot": [
+    "burning_battlefield"
+  ],
+  "alien planet surface": [
+    "alien_planet"
+  ],
+  "stormy sky": [
+    "alien_planet",
+    "burning_battlefield"
+  ],
+  "dungeon": [
+    "dungeon_crypt"
+  ],
+  "crypt": [
+    "dungeon_crypt"
+  ],
+  "abandoned church": [
+    "dungeon_crypt",
+    "school_gym_hall"
+  ],
+  "magic tower": [
+    "dungeon_crypt",
+    "school_library"
+  ],
+  "floating concert hall": [
+    "concert_stage",
+    "fantasy_forest"
+  ],
+  "ice castle": [
+    "winter_street",
+    "fantasy_forest"
+  ],
+  "dragon's jaw": [
+    "dragon_lair"
+  ],
+  "throne of thorns": [
+    "dungeon_crypt",
+    "fantasy_forest"
+  ],
+  "ruined temple": [
+    "dungeon_crypt",
+    "fantasy_forest"
+  ],
+  "fantasy_forest": [
+    "fantasy_forest"
+  ],
+  "burning_battlefield": [
+    "burning_battlefield"
+  ],
+  "dungeon_crypt": [
+    "dungeon_crypt"
+  ],
+  "alien_planet": [
+    "alien_planet"
+  ],
+  "dragon_lair": [
+    "dragon_lair"
+  ],
+  "shinto_shrine": [
+    "shinto_shrine"
+  ],
+  "tropical beach": [
+    "tropical_beach"
+  ],
+  "sunset beach": [
+    "tropical_beach"
+  ],
+  "shallow water": [
+    "tropical_beach"
+  ],
+  "inside a wave barrel": [
+    "wave_barrel"
+  ],
+  "frozen lake": [
+    "winter_street"
+  ],
+  "frozen pond": [
+    "winter_street"
+  ],
+  "glowing spring": [
+    "fantasy_forest",
+    "tropical_beach"
+  ],
+  "tropical jungle": [
+    "fantasy_forest",
+    "tropical_beach"
+  ],
+  "desert highway": [
+    "alien_planet"
+  ],
+  "cliff edge at sunset": [
+    "fantasy_forest",
+    "alien_planet"
+  ],
+  "windy cliff": [
+    "fantasy_forest"
+  ],
+  "sunrise mountain top": [
+    "fantasy_forest",
+    "winter_street"
+  ],
+  "bamboo_forest": [
+    "bamboo_forest"
+  ],
+  "winter_street": [
+    "winter_street"
+  ],
+  "tropical_beach": [
+    "tropical_beach"
+  ],
+  "wave_barrel": [
+    "wave_barrel"
+  ],
+  "interrogation room": [
+    "boardroom",
+    "surveillance_room"
+  ],
+  "ventilation shaft": [
+    "school_rooftop"
+  ],
+  "vr space": [
+    "neon_city_street",
+    "alien_planet"
+  ],
+  "snow fort": [
+    "winter_street"
+  ],
+  "poolside_resort": [
+    "poolside_resort"
+  ],
+  "antique_shop": [
+    "antique_shop"
+  ],
+  "illuminated_park": [
+    "illuminated_park"
+  ],
+  "street_cafe": [
+    "street_cafe"
+  ],
+  "cozy_bookstore": [
+    "cozy_bookstore"
+  ],
+  "library": [
+    "cozy_bookstore",
+    "school_library"
+  ],
+  "cafe": [
+    "street_cafe"
+  ],
+  "shopping_mall": [
+    "shopping_mall_atrium"
+  ],
+  "boutique": [
+    "fashion_boutique"
+  ],
+  "picnic_park": [
+    "picnic_park"
+  ],
+  "park": [
+    "picnic_park",
+    "illuminated_park"
+  ],
+  "botanical_garden": [
+    "botanical_garden"
+  ],
+  "greenhouse": [
+    "botanical_garden"
+  ],
+  "spaceship": [
+    "spaceship_bridge"
+  ],
+  "lab": [
+    "cyber_lab"
+  ],
+  "airship": [
+    "airship_deck"
+  ],
+  "workshop": [
+    "clockwork_workshop",
+    "messy_copy_room"
+  ],
+  "airship_deck": [
+    "airship_deck"
+  ],
+  "cyber_lab": [
+    "cyber_lab"
+  ],
+  "fashion_boutique": [
+    "fashion_boutique"
+  ],
+  "clockwork_workshop": [
+    "clockwork_workshop"
+  ],
+  "shopping_mall_atrium": [
+    "shopping_mall_atrium"
+  ]
+}

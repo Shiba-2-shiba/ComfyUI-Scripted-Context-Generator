@@ -1,0 +1,273 @@
+{
+    "_comment": "loc別のアクションプール。互換性マトリクスで新しいloc×キャラの組み合わせが生成された際に使用。",
+    "school_classroom": [
+        "sitting at a desk, looking down with focused expression",
+        "standing at the blackboard writing notes",
+        "sitting and reading a textbook quietly",
+        "standing by the window gazing outside"
+    ],
+    "school_rooftop": [
+        "leaning on the fence, looking at the sky",
+        "sitting on the ground with knees up",
+        "standing with arms stretched, feeling the wind",
+        "leaning against the wall, lost in thought"
+    ],
+    "school_library": [
+        "standing and reaching for a book on the shelf",
+        "sitting at a table reading quietly",
+        "standing between bookshelves browsing titles",
+        "sitting with a stack of books, studying"
+    ],
+    "school_gym_hall": [
+        "sitting in seiza posture on the floor",
+        "standing in the center of the gym",
+        "sitting on a bench watching others",
+        "standing near the stage, looking up"
+    ],
+    "modern_office": [
+        "sitting and working at a desk",
+        "standing by the window holding a cup of coffee",
+        "walking through the office hallway",
+        "sitting in a chair, taking a break"
+    ],
+    "boardroom": [
+        "standing by the window looking out at the city",
+        "sitting at the head of a long table",
+        "standing and holding documents",
+        "leaning against the table, arms crossed"
+    ],
+    "office_elevator": [
+        "standing and checking her watch",
+        "leaning against the elevator wall",
+        "standing and looking at phone",
+        "standing with arms holding a bag"
+    ],
+    "surveillance_room": [
+        "sitting and typing on multiple keyboards",
+        "standing and staring at monitor screens",
+        "sitting with headphones on",
+        "leaning forward, focused on a screen"
+    ],
+    "messy_copy_room": [
+        "standing near the copier, waiting",
+        "sitting on a box, taking a break",
+        "crouching and searching through supplies",
+        "standing and organizing papers"
+    ],
+    "neon_city_street": [
+        "standing and waiting under a neon sign",
+        "walking through the neon-lit street",
+        "leaning against a wall, looking at the crowd",
+        "standing at a crosswalk, looking up at signs"
+    ],
+    "rainy_alley": [
+        "standing under an overhang, avoiding the rain",
+        "walking through a narrow alley",
+        "leaning against a brick wall",
+        "standing and holding an umbrella"
+    ],
+    "commuter_transport": [
+        "standing in the train, holding a strap",
+        "sitting by the window, looking outside",
+        "standing and checking phone",
+        "sitting with a bag on lap, dozing off"
+    ],
+    "luxury_hotel_lobby": [
+        "sitting on a sofa, relaxing elegantly",
+        "standing near the reception desk",
+        "walking through the grand lobby",
+        "sitting and sipping tea"
+    ],
+    "karaoke_bar": [
+        "sitting on a sofa humming softly",
+        "standing and holding a microphone",
+        "sitting with a drink, looking relaxed",
+        "standing and choosing a song on the screen"
+    ],
+    "messy_kitchen": [
+        "standing and cooking with a frying pan",
+        "sitting at the kitchen table eating",
+        "standing at the counter chopping vegetables",
+        "leaning against the counter, holding a mug"
+    ],
+    "bedroom_boudoir": [
+        "lying on bed hugging a pillow",
+        "sitting on the edge of the bed",
+        "standing by the mirror, adjusting clothes",
+        "lying down reading a book"
+    ],
+    "fitness_gym": [
+        "stretching on the floor",
+        "standing and holding dumbbells",
+        "sitting on a bench, resting between sets",
+        "standing in front of the mirror"
+    ],
+    "yoga_studio": [
+        "sitting in meditation pose",
+        "standing in a yoga pose",
+        "lying on a yoga mat, stretching",
+        "sitting cross-legged, eyes closed"
+    ],
+    "stadium_court": [
+        "running down the track",
+        "standing at the starting line",
+        "walking briskly around the track",
+        "sitting on the sideline bench, resting"
+    ],
+    "concert_stage": [
+        "singing on stage, dynamic pose",
+        "standing and playing an instrument",
+        "standing at the microphone, eyes closed",
+        "walking across the stage dramatically"
+    ],
+    "recording_studio": [
+        "sitting and adjusting headphones",
+        "standing in front of the microphone",
+        "sitting at the mixing console",
+        "standing and tuning an instrument"
+    ],
+    "opera_house": [
+        "standing on stage singing dramatically",
+        "sitting in the audience seats",
+        "standing in the balcony, looking down",
+        "standing backstage, preparing"
+    ],
+    "fantasy_forest": [
+        "standing ready for battle, warrior pose",
+        "walking along a mystical forest path",
+        "sitting on a mossy rock, resting",
+        "standing and looking at a glowing light"
+    ],
+    "burning_battlefield": [
+        "standing ready for battle, knight pose",
+        "running through the smoke and fire",
+        "standing with a weapon, surveying the field",
+        "crouching behind cover"
+    ],
+    "dungeon_crypt": [
+        "sitting against a wall, resting",
+        "standing in the darkness, looking alert",
+        "walking cautiously through the corridor",
+        "standing and holding a torch"
+    ],
+    "alien_planet": [
+        "standing and looking at the alien landscape",
+        "walking across strange terrain",
+        "standing and holding a bouquet, pointing at a strange plant",
+        "crouching and examining the ground"
+    ],
+    "dragon_lair": [
+        "standing and hiding behind a rock",
+        "crouching with a weapon ready",
+        "standing at the entrance, looking in",
+        "sitting and tending to wounds"
+    ],
+    "shinto_shrine": [
+        "standing and sweeping leaves with a broom",
+        "walking slowly along the stone path",
+        "standing and praying at the shrine",
+        "sitting on the shrine steps, resting"
+    ],
+    "bamboo_forest": [
+        "walking slowly along the path",
+        "standing among the bamboo, looking up",
+        "sitting on a rock by the path",
+        "standing with arms behind back, enjoying the view"
+    ],
+    "winter_street": [
+        "standing in winter, breathing into cold hands",
+        "walking through the snowy street",
+        "standing and looking at a shop window",
+        "walking with arms wrapped around self"
+    ],
+    "tropical_beach": [
+        "walking along the shoreline",
+        "standing and looking at the ocean",
+        "sitting on the sand, relaxing",
+        "standing with feet in the water"
+    ],
+    "wave_barrel": [
+        "standing on a surfboard",
+        "crouching on the surfboard in the wave",
+        "standing at the water's edge with a surfboard",
+        "sitting on the beach watching the waves"
+    ],
+    "poolside_resort": [
+        "lying on a deck chair, relaxing",
+        "sitting at the pool edge, feet in water",
+        "standing by the pool, sipping a drink",
+        "walking around the pool area"
+    ],
+    "antique_shop": [
+        "browsing antiques, looking for rare items",
+        "standing and holding a vintage item",
+        "sitting and examining an old clock",
+        "standing near a shelf, peering at objects"
+    ],
+    "illuminated_park": [
+        "standing in the snow, looking up at the lights",
+        "walking along the illuminated path",
+        "sitting on a bench, enjoying the lights",
+        "standing under a tree of lights"
+    ],
+    "street_cafe": [
+        "sitting at a round table, sipping coffee",
+        "standing outside looking at the menu",
+        "sitting and reading a book at the table",
+        "sitting and looking at her phone"
+    ],
+    "cozy_bookstore": [
+        "standing between shelves, browsing books",
+        "sitting in a corner, reading",
+        "standing and holding a stack of books",
+        "crouching and looking at books on a low shelf"
+    ],
+    "shopping_mall_atrium": [
+        "walking and holding shopping bags",
+        "standing and looking at a store window",
+        "sitting on a bench, taking a break",
+        "walking up the escalator"
+    ],
+    "fashion_boutique": [
+        "standing in front of a mirror, trying on clothes",
+        "holding up a dress, examining it",
+        "browsing through a rack of clothes",
+        "standing at the counter, making a purchase"
+    ],
+    "picnic_park": [
+        "sitting on grass, relaxing in nature",
+        "lying on a picnic blanket",
+        "sitting under a tree, reading",
+        "standing and stretching arms toward the sky"
+    ],
+    "botanical_garden": [
+        "standing and smelling a flower",
+        "walking along the greenhouse path",
+        "sitting on a bench surrounded by flowers",
+        "standing and taking a photo of a plant"
+    ],
+    "spaceship_bridge": [
+        "standing on the bridge, looking at stars",
+        "sitting in the captain's chair",
+        "standing at the console, pressing buttons",
+        "standing by the viewport, arms behind back"
+    ],
+    "cyber_lab": [
+        "standing in front of holo-displays",
+        "sitting at a workstation, typing rapidly",
+        "standing and examining a glowing device",
+        "leaning over a table of circuit boards"
+    ],
+    "airship_deck": [
+        "standing at the railing, looking at the clouds",
+        "sitting on a crate, wind blowing hair",
+        "standing at the helm, steering",
+        "leaning against the mast, relaxing"
+    ],
+    "clockwork_workshop": [
+        "sitting at a workbench, assembling gears",
+        "standing and examining a clockwork device",
+        "working on a machine with tools",
+        "standing surrounded by ticking clocks"
+    ]
+}

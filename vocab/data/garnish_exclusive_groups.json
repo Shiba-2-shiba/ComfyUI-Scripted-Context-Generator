@@ -1,0 +1,34 @@
+{
+  "gaze_direction": [
+    "looking at viewer",
+    "looking away",
+    "looking up",
+    "looking down",
+    "looking aside"
+  ],
+  "mouth_state": [
+    "closed mouth",
+    "open mouth",
+    "parted lips",
+    "mouth slightly open",
+    "gasping",
+    "biting lip"
+  ],
+  "framing": [
+    "close-up",
+    "full body",
+    "cowboy shot",
+    "upper body",
+    "medium shot"
+  ],
+  "mood_conflict": [
+    "smile",
+    "frown",
+    "crying",
+    "angry",
+    "scowl",
+    "laughing",
+    "smirk",
+    "pout"
+  ]
+}

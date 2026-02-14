@@ -1,0 +1,2086 @@
+{
+  "dresses": {
+    "romantic_garden_party": {
+      "core": [
+        "floral-print",
+        "fit and flare dress"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "sundress",
+            "floral-print"
+          ],
+          [
+            "A-line dress",
+            "breezy"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "soft pink",
+          "white",
+          "sky blue",
+          "lavender"
+        ],
+        "materials": [
+          "cotton",
+          "chiffon",
+          "linen"
+        ],
+        "patterns": [
+          "floral",
+          "botanical"
+        ],
+        "styles": [
+          "sleeveless",
+          "knee-length",
+          "flowy silhouette"
+        ],
+        "embellishments": [
+          "lace trim",
+          "ruffles",
+          "belted waist"
+        ]
+      },
+      "optional_details": [
+        "delicate waist ribbon",
+        "matching sun hat"
+      ],
+      "states": []
+    },
+    "executive_pencil_dress": {
+      "core": [
+        "tailored fit",
+        "sleek silhouette"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "sheath dress",
+            "tailored"
+          ],
+          [
+            "bodycon dress",
+            "sleek"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "navy blue",
+          "charcoal",
+          "wine",
+          "black"
+        ],
+        "materials": [
+          "wool blend",
+          "stretch cotton"
+        ],
+        "patterns": [
+          "solid",
+          "pinstripe"
+        ],
+        "styles": [
+          "knee-length",
+          "cap-sleeve",
+          "high-neck"
+        ],
+        "embellishments": [
+          "waist belt",
+          "covered buttons"
+        ]
+      },
+      "optional_details": [
+        "minimalist jewelry accent",
+        "structured peplum"
+      ],
+      "states": []
+    },
+    "boho_maxi_dress": {
+      "core": [
+        "bohemian",
+        "flowing layers"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "maxi dress",
+            "bohemian"
+          ],
+          [
+            "wrap dress",
+            "flowy"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "earthy brown",
+          "sage green",
+          "sunset orange"
+        ],
+        "materials": [
+          "cotton",
+          "gauze",
+          "silk"
+        ],
+        "patterns": [
+          "paisley",
+          "floral",
+          "tie-dye"
+        ],
+        "styles": [
+          "long-sleeve",
+          "wrap-front",
+          "tiered hem"
+        ],
+        "embellishments": [
+          "fringe",
+          "tassels",
+          "embroidery"
+        ]
+      },
+      "optional_details": [
+        "layered necklaces",
+        "wide waist sash"
+      ],
+      "states": []
+    },
+    "sleek_evening_gown": {
+      "core": [
+        "elegant evening",
+        "floor-length"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "evening gown",
+            "elegant"
+          ],
+          [
+            "little black dress",
+            "chic"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "black",
+          "deep crimson",
+          "emerald",
+          "royal blue"
+        ],
+        "materials": [
+          "silk",
+          "velvet",
+          "satin"
+        ],
+        "patterns": [
+          "solid",
+          "ombre"
+        ],
+        "styles": [
+          "backless",
+          "thigh-high slit",
+          "mermaid silhouette"
+        ],
+        "embellishments": [
+          "sequins",
+          "crystals",
+          "beaded straps"
+        ]
+      },
+      "optional_details": [
+        "opera gloves",
+        "draped shawl"
+      ],
+      "states": []
+    },
+    "cyberpunk_bodycon_dress": {
+      "core": [
+        "futuristic",
+        "techwear accents"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "bodycon dress",
+            "futuristic"
+          ],
+          [
+            "techwear mini dress",
+            "tactical"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "black",
+          "electric blue",
+          "neon magenta",
+          "gunmetal"
+        ],
+        "materials": [
+          "PVC",
+          "latex",
+          "neoprene"
+        ],
+        "patterns": [
+          "geometric-pattern",
+          "circuit motif"
+        ],
+        "styles": [
+          "high-neck",
+          "cutout panels",
+          "asymmetric hem"
+        ],
+        "embellishments": [
+          "glowing piping",
+          "buckles",
+          "metal hardware"
+        ]
+      },
+      "optional_details": [
+        "holographic visor",
+        "fingerless gloves"
+      ],
+      "states": []
+    },
+    "victorian_gothic_dress": {
+      "core": [
+        "victorian goth",
+        "layered lace"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "babydoll dress",
+            "gothic"
+          ],
+          [
+            "gothic lolita dress",
+            "elaborate"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "jet black",
+          "wine",
+          "ivory"
+        ],
+        "materials": [
+          "velvet",
+          "lace",
+          "cotton"
+        ],
+        "patterns": [
+          "baroque",
+          "damask"
+        ],
+        "styles": [
+          "long-sleeve",
+          "high-neck",
+          "tiered skirt"
+        ],
+        "embellishments": [
+          "lace trim",
+          "bows",
+          "ruffles"
+        ]
+      },
+      "optional_details": [
+        "lace gloves",
+        "mini top hat"
+      ],
+      "states": []
+    },
+    "winter_knit_dress": {
+      "core": [
+        "cozy knit",
+        "winter date"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "sweater dress",
+            "cozy"
+          ],
+          [
+            "turtleneck sweater dress",
+            "warm"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "cream",
+          "dusty rose",
+          "soft gray",
+          "beige"
+        ],
+        "materials": [
+          "wool",
+          "cashmere",
+          "fleece"
+        ],
+        "patterns": [
+          "fair isle",
+          "solid",
+          "cable-knit"
+        ],
+        "styles": [
+          "long-sleeve",
+          "fitted silhouette",
+          "knee-length"
+        ],
+        "embellishments": [
+          "ribbed texture",
+          "knit belt"
+        ]
+      },
+      "optional_details": [
+        "cozy scarf",
+        "fuzzy leg warmers"
+      ],
+      "states": [
+        "covered in snow"
+      ]
+    },
+    "traditional_kimono_dress": {
+      "core": [
+        "kimono",
+        "obi sash"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "kimono",
+            "traditional"
+          ],
+          [
+            "yukata",
+            "casual"
+          ],
+          [
+            "furisode",
+            "elaborate"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "crimson",
+          "indigo",
+          "soft gold",
+          "white"
+        ],
+        "materials": [
+          "silk",
+          "satin",
+          "cotton"
+        ],
+        "patterns": [
+          "cherry-blossom-print",
+          "asanoha",
+          "seigaiha",
+          "camellia"
+        ],
+        "styles": [
+          "long-sleeve",
+          "floor-length",
+          "layered"
+        ],
+        "embellishments": [
+          "gold embroidery",
+          "obijime cord",
+          "kanzashi adornment"
+        ]
+      },
+      "optional_details": [
+        "floral hair ornament",
+        "tabi socks"
+      ],
+      "states": []
+    },
+    "athletic_bodysuit": {
+      "core": [
+        "performance wear",
+        "streamlined"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "bodysuit",
+            "streamlined"
+          ],
+          [
+            "unitard",
+            "performance"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "slate gray",
+          "cerulean",
+          "white",
+          "black"
+        ],
+        "materials": [
+          "spandex",
+          "nylon",
+          "lycra"
+        ],
+        "patterns": [
+          "color-block",
+          "gradient"
+        ],
+        "styles": [
+          "zip-front",
+          "thumb holes",
+          "panelled"
+        ],
+        "embellishments": [
+          "reflective piping",
+          "mesh inserts"
+        ]
+      },
+      "optional_details": [
+        "supportive sports belt",
+        "performance gloves"
+      ],
+      "states": [
+        "sweaty"
+      ]
+    },
+    "arcane_battle_dress": {
+      "core": [
+        "fantasy battle",
+        "armored bodice"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "armored gown",
+            "plate-reinforced"
+          ],
+          [
+            "battle mage robe",
+            "mystical"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "midnight blue",
+          "gunmetal",
+          "amethyst",
+          "white and gold"
+        ],
+        "materials": [
+          "leather",
+          "metal",
+          "brocade"
+        ],
+        "patterns": [
+          "arcane sigils",
+          "geometric-pattern"
+        ],
+        "styles": [
+          "structured skirt",
+          "high slit",
+          "layered plates"
+        ],
+        "embellishments": [
+          "studs",
+          "engraved plates",
+          "chainmail trim"
+        ]
+      },
+      "optional_details": [
+        "spell scroll belt",
+        "pauldron accents"
+      ],
+      "states": [
+        "battle-worn"
+      ]
+    },
+    "classic_jumper_uniform": {
+      "core": [
+        "school uniform",
+        "classic style"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "jumper skirt",
+            "classic"
+          ],
+          [
+            "pinafore dress",
+            "pleated"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "navy",
+          "charcoal",
+          "forest green"
+        ],
+        "materials": [
+          "wool blend",
+          "cotton"
+        ],
+        "patterns": [
+          "solid",
+          "plaid"
+        ],
+        "styles": [
+          "pleated skirt",
+          "square neckline",
+          "knee-length"
+        ],
+        "embellishments": [
+          "school crest",
+          "side buttons"
+        ]
+      },
+      "optional_details": [
+        "white blouse worn underneath",
+        "ribbon tie"
+      ],
+      "states": []
+    }
+  },
+  "separates": {
+    "modern_office_attire": {
+      "core": [
+        "professional ensemble"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "silk blouse",
+            "long-sleeve"
+          ],
+          [
+            "button-down shirt",
+            "tucked-in"
+          ],
+          [
+            "knit top",
+            "fitted"
+          ]
+        ],
+        "bottoms": [
+          [
+            "pencil skirt",
+            "high-waist"
+          ],
+          [
+            "tailored trousers",
+            "pressed"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "ivory",
+          "charcoal",
+          "navy blue",
+          "beige"
+        ],
+        "materials": [
+          "silk",
+          "cotton",
+          "wool"
+        ],
+        "patterns": [
+          "solid",
+          "pinstripe"
+        ],
+        "styles": [
+          "waist-cinched",
+          "knee-length",
+          "structured"
+        ],
+        "embellishments": [
+          "waist belt",
+          "minimalist buttons"
+        ]
+      },
+      "optional_details": [
+        "delicate neck scarf",
+        "minimal jewelry"
+      ],
+      "states": []
+    },
+    "street_denim_layer": {
+      "core": [
+        "street fashion",
+        "layered casual"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "graphic tee",
+            "oversized"
+          ],
+          [
+            "cropped hoodie",
+            "streetwear"
+          ],
+          [
+            "tank top",
+            "layered"
+          ]
+        ],
+        "bottoms": [
+          [
+            "ripped jeans",
+            "distressed"
+          ],
+          [
+            "denim shorts",
+            "frayed"
+          ],
+          [
+            "cargo pants",
+            "baggy"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "black",
+          "ash gray",
+          "electric blue",
+          "white"
+        ],
+        "materials": [
+          "denim",
+          "cotton",
+          "mesh"
+        ],
+        "patterns": [
+          "graphic print",
+          "striped"
+        ],
+        "styles": [
+          "relaxed fit",
+          "high-waist",
+          "cropped"
+        ],
+        "embellishments": [
+          "zippers",
+          "buckles",
+          "contrast stitching"
+        ]
+      },
+      "optional_details": [
+        "layered chains",
+        "fingerless gloves"
+      ],
+      "states": []
+    },
+    "preppy_school_uniform": {
+      "core": [
+        "school uniform",
+        "neat pleats"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "sailor blouse",
+            "classic"
+          ],
+          [
+            "button-down shirt",
+            "crisp"
+          ],
+          [
+            "blazer",
+            "fitted"
+          ]
+        ],
+        "bottoms": [
+          [
+            "pleated skirt",
+            "miniskirt"
+          ],
+          [
+            "plaid skirt",
+            "traditional"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "navy",
+          "white",
+          "burgundy",
+          "gray"
+        ],
+        "materials": [
+          "cotton",
+          "wool blend"
+        ],
+        "patterns": [
+          "plaid",
+          "solid"
+        ],
+        "styles": [
+          "long-sleeve",
+          "pleated",
+          "collared"
+        ],
+        "embellishments": [
+          "ribbons",
+          "decorative buttons",
+          "badge emblem"
+        ]
+      },
+      "optional_details": [
+        "knee-high socks",
+        "school satchel"
+      ],
+      "states": []
+    },
+    "athleisure_training_set": {
+      "core": [
+        "training set",
+        "sporty"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "sports bra",
+            "supportive"
+          ],
+          [
+            "tank top",
+            "racerback"
+          ]
+        ],
+        "bottoms": [
+          [
+            "leggings",
+            "compression"
+          ],
+          [
+            "biker shorts",
+            "tight"
+          ],
+          [
+            "joggers",
+            "tapered"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "black",
+          "teal",
+          "coral",
+          "lavender"
+        ],
+        "materials": [
+          "spandex",
+          "nylon",
+          "jersey"
+        ],
+        "patterns": [
+          "color-block",
+          "ombre"
+        ],
+        "styles": [
+          "bodycon",
+          "crop length",
+          "supportive waistband"
+        ],
+        "embellishments": [
+          "mesh inserts",
+          "reflective piping"
+        ]
+      },
+      "optional_details": [
+        "sweatband",
+        "sports smartwatch"
+      ],
+      "states": [
+        "sweaty"
+      ]
+    },
+    "punk_rock_stagewear": {
+      "core": [
+        "stage ready",
+        "edgy"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "mesh top",
+            "sheer"
+          ],
+          [
+            "band t-shirt",
+            "distressed"
+          ],
+          [
+            "corset top",
+            "punk"
+          ]
+        ],
+        "bottoms": [
+          [
+            "leather pants",
+            "skin-tight"
+          ],
+          [
+            "mini skirt",
+            "plaid"
+          ],
+          [
+            "ripped fishnets",
+            "layered"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "black",
+          "scarlet",
+          "metallic"
+        ],
+        "materials": [
+          "leather",
+          "PVC",
+          "mesh"
+        ],
+        "patterns": [
+          "solid",
+          "grunge print",
+          "checkered"
+        ],
+        "styles": [
+          "bodycon",
+          "high-waist",
+          "asymmetric hem"
+        ],
+        "embellishments": [
+          "studs",
+          "chains",
+          "zippers",
+          "safety pins"
+        ]
+      },
+      "optional_details": [
+        "choker necklace",
+        "wristbands"
+      ],
+      "states": []
+    },
+    "gothic_lolita_coord": {
+      "core": [
+        "layered lolita",
+        "sweet goth"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "lace blouse",
+            "puffed-sleeve"
+          ],
+          [
+            "high-neck blouse",
+            "victorian"
+          ]
+        ],
+        "bottoms": [
+          [
+            "tiered skirt",
+            "voluminous"
+          ],
+          [
+            "ruffled bloomers",
+            "layered"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "black",
+          "wine",
+          "cream"
+        ],
+        "materials": [
+          "lace",
+          "velvet",
+          "cotton"
+        ],
+        "patterns": [
+          "baroque",
+          "floral"
+        ],
+        "styles": [
+          "long-sleeve",
+          "corseted waist",
+          "layered"
+        ],
+        "embellishments": [
+          "bows",
+          "lace trim",
+          "frills"
+        ]
+      },
+      "optional_details": [
+        "bonnet headpiece",
+        "lace parasol"
+      ],
+      "states": []
+    },
+    "beach_resort_coord": {
+      "core": [
+        "resort wear",
+        "breezy layers"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "off-the-shoulder top",
+            "breezy"
+          ],
+          [
+            "bandeau top",
+            "ruched"
+          ],
+          [
+            "bikini top",
+            "halter"
+          ]
+        ],
+        "bottoms": [
+          [
+            "wrap skirt",
+            "pareo"
+          ],
+          [
+            "linen shorts",
+            "casual"
+          ],
+          [
+            "sarong",
+            "sheer"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "turquoise",
+          "white",
+          "sunny yellow",
+          "coral"
+        ],
+        "materials": [
+          "linen",
+          "cotton",
+          "chiffon"
+        ],
+        "patterns": [
+          "tropical-print",
+          "floral",
+          "gradient"
+        ],
+        "styles": [
+          "lightweight",
+          "high-low hem",
+          "off-the-shoulder"
+        ],
+        "embellishments": [
+          "shell accents",
+          "beaded tassels"
+        ]
+      },
+      "optional_details": [
+        "wide-brim hat",
+        "ankle bracelet"
+      ],
+      "states": [
+        "sun-kissed glow",
+        "wet"
+      ]
+    },
+    "winter_layered_knit": {
+      "core": [
+        "layered knitwear",
+        "cozy"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "turtleneck sweater",
+            "chunky-knit"
+          ],
+          [
+            "cashmere knit",
+            "soft"
+          ]
+        ],
+        "bottoms": [
+          [
+            "wool trousers",
+            "warm"
+          ],
+          [
+            "corduroy skirt",
+            "vintage"
+          ],
+          [
+            "thermal leggings",
+            "thick"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "cream",
+          "dusty mauve",
+          "forest green",
+          "brown"
+        ],
+        "materials": [
+          "wool",
+          "cashmere",
+          "fleece",
+          "corduroy"
+        ],
+        "patterns": [
+          "solid",
+          "fair isle"
+        ],
+        "styles": [
+          "relaxed fit",
+          "layered",
+          "tucked"
+        ],
+        "embellishments": [
+          "cable knit texture",
+          "faux fur trim"
+        ]
+      },
+      "optional_details": [
+        "knit mittens",
+        "wool beret"
+      ],
+      "states": [
+        "covered in snow"
+      ]
+    },
+    "fantasy_battle_armor": {
+      "core": [
+        "armored elegance",
+        "battle ready"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "corset top",
+            "plate-reinforced"
+          ],
+          [
+            "leather bustier",
+            "studded"
+          ],
+          [
+            "chainmail shirt",
+            "glimmering"
+          ]
+        ],
+        "bottoms": [
+          [
+            "armored skirt",
+            "plated"
+          ],
+          [
+            "leather pants",
+            "heavy"
+          ],
+          [
+            "loincloth",
+            "barbarian"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "steel",
+          "midnight blue",
+          "crimson",
+          "gold"
+        ],
+        "materials": [
+          "leather",
+          "metal",
+          "brocade"
+        ],
+        "patterns": [
+          "geometric-pattern",
+          "engraved runes"
+        ],
+        "styles": [
+          "cinched waist",
+          "high slit",
+          "structured panels"
+        ],
+        "embellishments": [
+          "studs",
+          "buckles",
+          "chainmail trim"
+        ]
+      },
+      "optional_details": [
+        "armored gauntlets",
+        "battle cloak"
+      ],
+      "states": [
+        "battle-worn",
+        "blood-stained"
+      ]
+    },
+    "secret_agent_suit": {
+      "core": [
+        "sleek agent",
+        "stealthy"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "tailored bodysuit",
+            "tactical"
+          ],
+          [
+            "silk blouse",
+            "sharp"
+          ]
+        ],
+        "bottoms": [
+          [
+            "tailored trousers",
+            "slim-fit"
+          ],
+          [
+            "sleek pencil skirt",
+            "professional"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "black",
+          "graphite",
+          "deep navy"
+        ],
+        "materials": [
+          "stretch twill",
+          "silk",
+          "neoprene"
+        ],
+        "patterns": [
+          "solid",
+          "subtle herringbone"
+        ],
+        "styles": [
+          "bodycon",
+          "high slit",
+          "structured"
+        ],
+        "embellishments": [
+          "concealed holster harness",
+          "minimalist belt"
+        ]
+      },
+      "optional_details": [
+        "glossy gloves",
+        "earpiece"
+      ],
+      "states": []
+    },
+    "rainy_day_layers": {
+      "core": [
+        "weather ready",
+        "layered"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "turtleneck sweater",
+            "warm"
+          ],
+          [
+            "long-sleeve tee",
+            "basic"
+          ]
+        ],
+        "bottoms": [
+          [
+            "jeans",
+            "rolled-cuff"
+          ],
+          [
+            "tailored trousers",
+            "water-repellent"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "charcoal",
+          "navy",
+          "olive",
+          "mustard"
+        ],
+        "materials": [
+          "cotton",
+          "wool blend",
+          "technical fabric"
+        ],
+        "patterns": [
+          "solid",
+          "pinstripe"
+        ],
+        "styles": [
+          "layered",
+          "ankle-length",
+          "high-waist"
+        ],
+        "embellishments": [
+          "storm flap",
+          "sealed seams"
+        ]
+      },
+      "optional_details": [
+        "cozy scarf",
+        "weatherproof boots"
+      ],
+      "states": [
+        "rain-soaked"
+      ]
+    },
+    "solarpunk_breeze": {
+      "core": [
+        "solarpunk",
+        "organic silhouettes"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "sleeveless tunic",
+            "draped"
+          ],
+          [
+            "wrap top",
+            "linen"
+          ]
+        ],
+        "bottoms": [
+          [
+            "pleated skirt",
+            "air"
+          ],
+          [
+            "wide-leg pants",
+            "flowing"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "mint green",
+          "sunlit gold",
+          "off-white"
+        ],
+        "materials": [
+          "bamboo fabric",
+          "cotton",
+          "silk"
+        ],
+        "patterns": [
+          "botanical",
+          "geometric-pattern"
+        ],
+        "styles": [
+          "flowy",
+          "high-waist",
+          "layered"
+        ],
+        "embellishments": [
+          "embroidery",
+          "beads",
+          "leafy appliques"
+        ]
+      },
+      "optional_details": [
+        "bioluminescent accents",
+        "seed pod jewelry"
+      ],
+      "states": []
+    },
+    "retro_hakama_coord": {
+      "core": [
+        "taisho roman",
+        "traditional japanese"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "kimono top",
+            "wide-sleeve"
+          ],
+          [
+            "haori jacket",
+            "Taisho-style"
+          ]
+        ],
+        "bottoms": [
+          [
+            "hakama pants",
+            "pleated"
+          ],
+          [
+            "long pleated skirt",
+            "high-waist"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "indigo",
+          "vermillion",
+          "white",
+          "purple"
+        ],
+        "materials": [
+          "cotton",
+          "silk",
+          "kasuri fabric"
+        ],
+        "patterns": [
+          "yagasuri (arrow pattern)",
+          "striped",
+          "floral"
+        ],
+        "styles": [
+          "traditional",
+          "layered",
+          "loose fit"
+        ],
+        "embellishments": [
+          "tasuki cord",
+          "embroidered collar"
+        ]
+      },
+      "optional_details": [
+        "leather boots (taisho style)",
+        "hair ribbon"
+      ],
+      "states": []
+    },
+    "casual_chic_date": {
+      "core": [
+        "casual chic",
+        "cafe date"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "knit cardigan",
+            "soft"
+          ],
+          [
+            "chiffon blouse",
+            "elegant"
+          ],
+          [
+            "turtleneck",
+            "fitted"
+          ]
+        ],
+        "bottoms": [
+          [
+            "midi skirt",
+            "pleated"
+          ],
+          [
+            "wide-leg trousers",
+            "high-waist"
+          ],
+          [
+            "patterned skirt",
+            "floral"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "beige",
+          "mocha",
+          "dusty pink",
+          "terracotta"
+        ],
+        "materials": [
+          "knit",
+          "chiffon",
+          "crepe"
+        ],
+        "patterns": [
+          "solid",
+          "small floral"
+        ],
+        "styles": [
+          "relaxed",
+          "layered",
+          "soft silhouette"
+        ],
+        "embellishments": [
+          "pearl buttons",
+          "ribbon tie"
+        ]
+      },
+      "optional_details": [
+        "beret hat",
+        "shoulder bag",
+        "dainty necklace"
+      ],
+      "states": []
+    },
+    "shopping_casual_chic": {
+      "core": [
+        "shopping day",
+        "stylish"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "designer tee",
+            "fitted"
+          ],
+          [
+            "satin camisole",
+            "layered"
+          ],
+          [
+            "cropped blazer",
+            "stylish"
+          ]
+        ],
+        "bottoms": [
+          [
+            "skinny jeans",
+            "distressed"
+          ],
+          [
+            "leather mini skirt",
+            "chic"
+          ],
+          [
+            "culottes",
+            "trendy"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "monochrome",
+          "royal blue",
+          "white",
+          "denim blue"
+        ],
+        "materials": [
+          "denim",
+          "cotton",
+          "leather"
+        ],
+        "patterns": [
+          "logo print",
+          "solid"
+        ],
+        "styles": [
+          "urban",
+          "trendy",
+          "fitted"
+        ],
+        "embellishments": [
+          "designer belt",
+          "zipper details"
+        ]
+      },
+      "optional_details": [
+        "large sunglasses",
+        "shopping bags",
+        "hoop earrings"
+      ],
+      "states": []
+    },
+    "mori_girl_natural": {
+      "core": [
+        "mori girl",
+        "forest natural"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "linen smudge",
+            "loose"
+          ],
+          [
+            "crochet poncho",
+            "layered"
+          ],
+          [
+            "cotton tunic",
+            "oversized"
+          ]
+        ],
+        "bottoms": [
+          [
+            "maxi skirt",
+            "tiered"
+          ],
+          [
+            "cotton petticoat",
+            "visible hem"
+          ],
+          [
+            "loose trousers",
+            "linen"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "moss green",
+          "cream",
+          "brown",
+          "mustard"
+        ],
+        "materials": [
+          "linen",
+          "cotton",
+          "wool"
+        ],
+        "patterns": [
+          "solid",
+          "tiny floral",
+          "lace trim"
+        ],
+        "styles": [
+          "loose fit",
+          "multi-layered",
+          "comfortable"
+        ],
+        "embellishments": [
+          "wooden buttons",
+          "crochet lace",
+          "tassels"
+        ]
+      },
+      "optional_details": [
+        "straw hat",
+        "leather satchel",
+        "knitted socks"
+      ],
+      "states": []
+    },
+    "scifi_pilot_suit": {
+      "core": [
+        "pilot suit",
+        "futuristic"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "interface suit top",
+            "glowing"
+          ],
+          [
+            "pilot jacket",
+            "armored"
+          ]
+        ],
+        "bottoms": [
+          [
+            "interface leggings",
+            "seamless"
+          ],
+          [
+            "armored trousers",
+            "padded"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "white",
+          "orange",
+          "silver",
+          "neon blue"
+        ],
+        "materials": [
+          "latex",
+          "tech-fabric",
+          "plastic"
+        ],
+        "patterns": [
+          "geometric-pattern",
+          "hex comb"
+        ],
+        "styles": [
+          "skin-tight",
+          "aerodynamic",
+          "modular"
+        ],
+        "embellishments": [
+          "glowing lines",
+          "connection ports",
+          "badges"
+        ]
+      },
+      "optional_details": [
+        "interface headset",
+        "oxygen mask (hanging)"
+      ],
+      "states": []
+    },
+    "steampunk_inventor": {
+      "core": [
+        "steampunk",
+        "victorian industrial"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "corset vest",
+            "leather"
+          ],
+          [
+            "ruffled shirt",
+            "white"
+          ],
+          [
+            "tailcoat",
+            "striped"
+          ]
+        ],
+        "bottoms": [
+          [
+            "striped trousers",
+            "high-waist"
+          ],
+          [
+            "bustle skirt",
+            "layered"
+          ],
+          [
+            "breeches",
+            "leather"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "brown",
+          "copper",
+          "cream",
+          "burgundy"
+        ],
+        "materials": [
+          "leather",
+          "brass",
+          "cotton",
+          "velvet"
+        ],
+        "patterns": [
+          "striped",
+          "damask"
+        ],
+        "styles": [
+          "victorian",
+          "layered",
+          "structured"
+        ],
+        "embellishments": [
+          "gears",
+          "pocket watch chain",
+          "buckles"
+        ]
+      },
+      "optional_details": [
+        "goggles on head",
+        "leather gloves",
+        "tool belt"
+      ],
+      "states": [
+        "grease stained"
+      ]
+    }
+  },
+  "outerwear": {
+    "tailored_blazer": {
+      "core": [
+        "structured blazer"
+      ],
+      "choices": {
+        "outerwear": [
+          "structured blazer",
+          "longline tailored blazer"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "charcoal",
+          "camel",
+          "navy"
+        ],
+        "materials": [
+          "wool",
+          "tweed",
+          "cotton blend"
+        ],
+        "styles": [
+          "waist-cinched",
+          "double-breasted",
+          "sleek lapels"
+        ],
+        "embellishments": [
+          "padded shoulders",
+          "polished buttons"
+        ]
+      },
+      "optional_details": [
+        "pocket square",
+        "skinny belt"
+      ],
+      "states": []
+    },
+    "cozy_wool_coat": {
+      "core": [
+        "warm outerwear"
+      ],
+      "choices": {
+        "outerwear": [
+          "warm wool coat",
+          "classic duffle coat",
+          "insulated puffer jacket"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "cream",
+          "burgundy",
+          "forest green",
+          "camel"
+        ],
+        "materials": [
+          "wool",
+          "cashmere",
+          "faux fur"
+        ],
+        "styles": [
+          "longline",
+          "hooded",
+          "wrap-front"
+        ],
+        "embellishments": [
+          "toggle closures",
+          "faux fur trim"
+        ]
+      },
+      "optional_details": [
+        "knit scarf",
+        "cozy earmuffs"
+      ],
+      "states": [
+        "covered in snow"
+      ]
+    },
+    "edgy_biker_jacket": {
+      "core": [
+        "biker jacket",
+        "edgy"
+      ],
+      "choices": {
+        "outerwear": [
+          "leather biker jacket",
+          "cropped moto jacket",
+          "studded leather jacket"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "black",
+          "charcoal",
+          "oxblood"
+        ],
+        "materials": [
+          "leather",
+          "faux leather",
+          "suede"
+        ],
+        "styles": [
+          "cropped",
+          "asymmetric zipper",
+          "fitted"
+        ],
+        "embellishments": [
+          "studs",
+          "zip hardware",
+          "buckled straps"
+        ]
+      },
+      "optional_details": [
+        "shoulder spikes",
+        "chain epaulettes"
+      ],
+      "states": []
+    },
+    "techwear_translucent_parka": {
+      "core": [
+        "techwear parka",
+        "futuristic"
+      ],
+      "choices": {
+        "outerwear": [
+          "transparent vinyl jacket",
+          "bomber jacket with LED",
+          "oversized anorak"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "transparent",
+          "holographic",
+          "electric blue"
+        ],
+        "materials": [
+          "PVC",
+          "nylon",
+          "neoprene"
+        ],
+        "styles": [
+          "hooded",
+          "oversized",
+          "modular"
+        ],
+        "embellishments": [
+          "glowing piping",
+          "utility straps",
+          "zippered pockets"
+        ]
+      },
+      "optional_details": [
+        "tech visor",
+        "cybernetic armband"
+      ],
+      "states": []
+    },
+    "romantic_lace_shawl": {
+      "core": [
+        "delicate cover-up"
+      ],
+      "choices": {
+        "outerwear": [
+          "delicate lace shawl",
+          "sheer tulle cape",
+          "cropped bolero"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "ivory",
+          "blush",
+          "lavender"
+        ],
+        "materials": [
+          "lace",
+          "tulle",
+          "chiffon"
+        ],
+        "styles": [
+          "shoulder drape",
+          "open-front",
+          "short-sleeve"
+        ],
+        "embellishments": [
+          "lace trim",
+          "scalloped edges",
+          "pearls"
+        ]
+      },
+      "optional_details": [
+        "delicate brooch",
+        "floral corsage"
+      ],
+      "states": []
+    },
+    "sporty_track_jacket": {
+      "core": [
+        "athletic layer"
+      ],
+      "choices": {
+        "outerwear": [
+          "athletic track jacket",
+          "lightweight windbreaker"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "white",
+          "teal",
+          "coral",
+          "black"
+        ],
+        "materials": [
+          "nylon",
+          "polyester",
+          "spandex"
+        ],
+        "styles": [
+          "zip-front",
+          "stand collar",
+          "cropped"
+        ],
+        "embellishments": [
+          "reflective stripes",
+          "contrast piping"
+        ]
+      },
+      "optional_details": [
+        "thumb hole cuffs",
+        "hood hidden in collar"
+      ],
+      "states": []
+    },
+    "armored_cloak": {
+      "core": [
+        "battle cloak"
+      ],
+      "choices": {
+        "outerwear": [
+          "heavy battle cape",
+          "armored vest",
+          "hooded traveler cloak"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "black",
+          "midnight blue",
+          "bronze"
+        ],
+        "materials": [
+          "leather",
+          "brocade",
+          "metal"
+        ],
+        "styles": [
+          "floor-length",
+          "hooded",
+          "shoulder plating"
+        ],
+        "embellishments": [
+          "engraved clasps",
+          "chainmail edging"
+        ]
+      },
+      "optional_details": [
+        "sigil brooch",
+        "fur-lined collar"
+      ],
+      "states": [
+        "tattered"
+      ]
+    },
+    "rainproof_trench": {
+      "core": [
+        "raincoat",
+        "weather shield"
+      ],
+      "choices": {
+        "outerwear": [
+          "classic trench coat",
+          "heavy duty raincoat"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "charcoal",
+          "navy",
+          "olive",
+          "beige"
+        ],
+        "materials": [
+          "waterproof fabric",
+          "coated cotton"
+        ],
+        "styles": [
+          "belted",
+          "storm flap",
+          "hooded"
+        ],
+        "embellishments": [
+          "sealed seams",
+          "epaulettes"
+        ]
+      },
+      "optional_details": [
+        "transparent umbrella",
+        "waterproof bag"
+      ],
+      "states": [
+        "wet"
+      ]
+    },
+    "kimono_haori": {
+      "core": [
+        "haori jacket"
+      ],
+      "choices": {
+        "outerwear": [
+          "silk haori",
+          "kimono-style jacket"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "indigo",
+          "vermillion",
+          "cream",
+          "black"
+        ],
+        "materials": [
+          "silk",
+          "cotton",
+          "brocade"
+        ],
+        "styles": [
+          "three-quarter sleeve",
+          "open-front",
+          "patterned lining"
+        ],
+        "embellishments": [
+          "embroidered crest",
+          "woven sash"
+        ]
+      },
+      "optional_details": [
+        "sensu fan",
+        "obi-inspired belt"
+      ],
+      "states": []
+    }
+  }
+}
