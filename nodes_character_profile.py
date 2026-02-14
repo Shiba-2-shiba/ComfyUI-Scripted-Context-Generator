@@ -28,13 +28,24 @@ class CharacterProfileNode:
 
     @classmethod
     def INPUT_TYPES(s):
-        # We can't dynamically load keys here easily for the dropdown if we want it to be static for API, 
-        # but we can try to load on import or just use a standard STRING input with autocomplete potential in future.
-        # For now, we will add a "random" mode and a manual mode.
+        # Load character names for the dropdown
+        data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "vocab", "data", "character_profiles.json")
+        character_names = []
+        if os.path.exists(data_path):
+            try:
+                with open(data_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    character_names = list(data.get("characters", {}).keys())
+            except Exception as e:
+                print(f"\033[91m[CharacterProfile] Error loading profiles for dropdown: {e}\033[0m")
+        
+        if not character_names:
+            character_names = ["None"]
+
         return {
             "required": {
                 "mode": (["random", "fixed"], {"default": "random"}),
-                "character_name": ("STRING", {"multiline": False, "default": "Aiko"}),
+                "character_name": (character_names, {"default": character_names[0]}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             }
         }
