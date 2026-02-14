@@ -1,7 +1,10 @@
 import json
 import os
 import random
-from .vocab.seed_utils import mix_seed
+try:
+    from .vocab.seed_utils import mix_seed
+except ImportError:
+    from vocab.seed_utils import mix_seed
 
 # --------------------------------------------------------------------------------
 # Data Loading
@@ -89,15 +92,43 @@ class SceneVariator:
             }
         }
 
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING")
-    RETURN_NAMES = ("subj", "costume", "loc", "action")
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "DICT")
+    RETURN_NAMES = ("subj", "costume", "loc", "action", "debug_info")
     FUNCTION = "variate"
     CATEGORY = "prompt_builder"
 
     def variate(self, subj, costume, loc, action, seed, variation_mode):
+        # Import Schema
+        try:
+            from .core.schema import PromptContext, DebugInfo
+        except ImportError:
+            import sys
+            sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+            from core.schema import PromptContext, DebugInfo
+
+        # Wrap inputs in Context
+        ctx = PromptContext(
+            subj=subj,
+            costume=costume,
+            loc=loc,
+            action=action
+        )
+
+        decision_log = {
+            "mode": variation_mode,
+            "candidates_count": 0,
+            "selected_source": "original",
+            "selected_loc": loc
+        }
+
         # original モードでは何も変更しない
         if variation_mode == "original":
-            return (subj, costume, loc, action)
+            debug_info = DebugInfo(
+                node="SceneVariator",
+                seed=seed,
+                decision=decision_log
+            )
+            return (ctx.subj, ctx.costume, ctx.loc, ctx.action, debug_info.to_dict())
 
         compat = _load_compatibility()
         action_pools = _load_action_pools()
@@ -106,11 +137,16 @@ class SceneVariator:
         rng = random.Random(mix_seed(seed, "scene_var"))
 
         # 互換ロケーション一覧を取得
-        compatible = _get_compatible_locs(subj, compat, excluded, mode=variation_mode)
+        compatible = _get_compatible_locs(ctx.subj, compat, excluded, mode=variation_mode)
 
         if not compatible:
-            # 互換先がない場合はそのまま返す
-            return (subj, costume, loc, action)
+            decision_log["warnings"] = ["No compatible locations found"]
+            debug_info = DebugInfo(
+                node="SceneVariator",
+                seed=seed,
+                decision=decision_log
+            )
+            return (ctx.subj, ctx.costume, ctx.loc, ctx.action, debug_info.to_dict())
 
         # 既存の loc も候補に含める（重み付き選択のため）
         weights = compat.get("priority_weights", {})
@@ -122,12 +158,12 @@ class SceneVariator:
         candidate_weights = []
 
         # 既存 (original) の組み合わせ
-        candidates.append(("existing", loc))
+        candidates.append(("existing", ctx.loc))
         candidate_weights.append(existing_weight)
 
         # 互換ロケーション
         for compat_loc, source in compatible:
-            if compat_loc == loc:
+            if compat_loc == ctx.loc:
                 continue  # 既存と同じlocは除外
             candidates.append((source, compat_loc))
             if source.startswith("tag:"):
@@ -135,14 +171,21 @@ class SceneVariator:
             else:
                 candidate_weights.append(universal_weight)
 
+        decision_log["candidates_count"] = len(candidates)
+        # Capture candidates for debug (limit size if needed, but 10-20 is fine)
+        decision_log["candidates_preview"] = [f"{c[1]} ({c[0]})" for c in candidates]
+
         # 重み付きランダム選択
         chosen_source, chosen_loc = rng.choices(
             candidates, weights=candidate_weights, k=1
         )[0]
+        
+        decision_log["selected_source"] = chosen_source
+        decision_log["selected_loc"] = chosen_loc
 
         # actionの差し替え
-        new_action = action
-        if chosen_loc != loc:
+        new_action = ctx.action
+        if chosen_loc != ctx.loc:
             # action_pools から新しいlocに対応するアクションを選択
             pool_key = chosen_loc
             pool = action_pools.get(pool_key, [])
@@ -150,8 +193,16 @@ class SceneVariator:
             pool = [a for a in pool if not isinstance(a, str) or not a.startswith("_")]
             if pool:
                 new_action = rng.choice(pool)
+                decision_log["action_updated"] = True
+                decision_log["new_action"] = new_action
+        
+        debug_info = DebugInfo(
+            node="SceneVariator",
+            seed=seed,
+            decision=decision_log
+        )
 
-        return (subj, costume, chosen_loc, new_action)
+        return (ctx.subj, ctx.costume, chosen_loc, new_action, debug_info.to_dict())
 
 
 # --------------------------------------------------------------------------------
