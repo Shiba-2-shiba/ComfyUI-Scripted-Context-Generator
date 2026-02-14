@@ -18,11 +18,19 @@ class PackParser:
     def parse(self, json_string, seed):
         import os
         import random
+        # Import Schema
+        try:
+            from .core.schema import PromptContext
+        except ImportError:
+            # Fallback path if running as script from root without package context
+            import sys
+            sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+            from core.schema import PromptContext
         
-        data = {}
-        
-        # Default loading: prompts.jsonl if input is empty or just '{}'
+        # 1. Load Data Source (JSON String or File)
+        data_dict = {}
         use_default_file = False
+        
         if not json_string or json_string.strip() == "" or json_string.strip() == "{}":
             use_default_file = True
             
@@ -36,28 +44,27 @@ class PackParser:
                             rng = random.Random(seed)
                             selected_line = rng.choice(lines)
                             try:
-                                data = json.loads(selected_line)
+                                data_dict = json.loads(selected_line)
                             except Exception as e:
                                 print(f"\033[93m[PackParser] Error parsing line from prompts.jsonl: {e}\033[0m")
                 except Exception as e:
                     print(f"\033[93m[PackParser] Error loading prompts.jsonl: {e}\033[0m")
         else:
             try:
-                data = json.loads(json_string)
+                data_dict = json.loads(json_string)
             except Exception:
-                # パース失敗時は空の辞書として扱う（エラー文字列を返す実装も可）
                 pass
 
-        meta = data.get("meta", {})
-        if not isinstance(meta, dict):
-            meta = {}
+        # 2. Convert to Schema
+        context = PromptContext.from_dict(data_dict)
 
+        # 3. Return (Standard ComfyUI Outputs - Flattened)
         return (
-            str(data.get("subj", "")),
-            str(data.get("costume", "")),
-            str(data.get("loc", "")),
-            str(data.get("action", "")),
-            str(meta.get("mood", "")),
-            str(meta.get("style", "")),
-            json.dumps(meta.get("tags", {})),
+            context.subj,
+            context.costume,
+            context.loc,
+            context.action,
+            context.meta.mood,
+            context.meta.style,
+            json.dumps(context.meta.tags, ensure_ascii=False),
         )
