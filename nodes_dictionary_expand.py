@@ -52,18 +52,24 @@ class DictionaryExpand:
     CATEGORY = "prompt_builder"
 
     def expand(self, key, json_path, default_value, seed):
+        # Default to mood_map.json if path is empty
+        if not json_path or json_path.strip() == "":
+            json_path = "mood_map.json"
+
         # Handle relative path resolution
         if not os.path.isabs(json_path):
             base_dir = os.path.dirname(os.path.realpath(__file__))
             json_path = os.path.join(base_dir, json_path)
 
         data = {}
-        if os.path.exists(json_path):
+        if os.path.exists(json_path) and os.path.isfile(json_path):
             try:
                 with open(json_path, 'r', encoding='utf-8') as f:
                     data = json.load(f)
             except Exception as e:
-                print(f"[DictionaryExpand] Error loading JSON: {e}")
+                print(f"\033[93m[DictionaryExpand] Error loading JSON: {e}\033[0m")
+        else:
+            print(f"\033[93m[DictionaryExpand] File not found: {json_path}\033[0m")
 
         key_lower = key.lower().strip()
         data_lower = {k.lower(): v for k, v in data.items()}
