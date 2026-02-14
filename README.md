@@ -36,3 +36,10 @@ Connect it to your prompt builder or text concatenation nodes.
 Select a mode (random or fixed) and enjoy context-rich prompts instantly.
 
 ワークフローにノードを追加し、プロンプト生成フローの一部として接続するだけで機能します。
+
+注意点
+カスタムノード内にtemplete.txt、prompt.jsonl、mood_map.jsonファイルがありますが、パスを入力する必要があります。
+これは別なものを作成した際に使えるようにするための処置です。
+/ComfyUI/custom_nodes/ComfyUI-Scripted-Context-Generator/templete.txt
+/ComfyUI/custom_nodes/ComfyUI-Scripted-Context-Generator/prompt.jsonl
+/ComfyUI/custom_nodes/ComfyUI-Scripted-Context-Generator/mood_map.json
