@@ -1,0 +1,10 @@
+{subj} wearing {costume}.
+{subj} in {costume}.
+{subj} dressed in {costume}.
+The character is {subj} in {costume}.
+Features {subj} in {costume}.
+The focus is on {subj} wearing {costume}.
+A view of {subj} wearing {costume}.
+Captured here is {subj} in {costume}.
+{subj} sporting {costume}.
+{subj} clad in {costume}.
