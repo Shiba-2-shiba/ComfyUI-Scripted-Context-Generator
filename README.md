@@ -95,7 +95,6 @@ git clone https://github.com/<your-account>/ComfyUI-Scripted-Context-Generator.g
 
 ## 既知の注意点
 
-- 以前の説明で `templete.txt` / `prompt.jsonl` と書かれているケースがありますが、現行ファイル名は **`templates.txt` / `prompts.jsonl`** です。
 - 本ノードは女性主人公・SFW寄りの設計思想です。用途に応じた語彙拡張は各自で実施してください。
 
 ## ライセンス
