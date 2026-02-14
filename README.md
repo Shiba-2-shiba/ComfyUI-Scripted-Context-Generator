@@ -31,11 +31,7 @@ Context-Aware: The generated text changes dynamically based on the selected prof
 文脈意識: 選択されたプロファイルに基づき、コアとなるアイデンティティを保ちながら、動的にテキストを変化させます。
 
 ### 🛠 Usage / 使い方
-Add the Scripted Context Generator node to your workflow.
-Connect it to your prompt builder or text concatenation nodes.
-Select a mode (random or fixed) and enjoy context-rich prompts instantly.
 
-ワークフローにノードを追加し、プロンプト生成フローの一部として接続するだけで機能します。
 
 注意点
 カスタムノード内にtemplete.txt、prompt.jsonl、mood_map.jsonファイルがありますが、パスを入力する必要があります。
