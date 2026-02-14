@@ -1,5 +1,6 @@
 import importlib
 import random
+import os
 
 # --------------------------------------------------------------------------------
 # Module Import Logic
@@ -48,15 +49,24 @@ class GarnishSampler:
             }
         }
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("garnish_string",)
+    RETURN_TYPES = ("STRING", "DICT")
+    RETURN_NAMES = ("garnish_string", "debug_info")
     FUNCTION = "sample"
     CATEGORY = "prompt_builder/garnish"
 
     def sample(self, action_text, meta_mood_key, seed, max_items, include_camera, context_loc="", context_costume="", scene_tags="{}", personality=""):
         if not vocab_module:
-            return ("",)
+            return ("", {})
 
+        # Import Schema
+        try:
+            from .core.schema import PromptContext, MetaInfo, DebugInfo
+        except ImportError:
+            import sys
+            import os
+            sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+            from core.schema import PromptContext, MetaInfo, DebugInfo
+        
         # Parse scene_tags JSON string to dict
         import json
         try:
@@ -64,20 +74,44 @@ class GarnishSampler:
         except (json.JSONDecodeError, TypeError):
             parsed_tags = {}
 
-        # 暫定的なエラーハンドリング: vocab側がまだ新APIに対応していない場合への備え
+        # Construct Context
+        # Note: action_text is main input here, but strictly it belongs to context.action
+        # We build a context representing the state *before* garnish
+        ctx = PromptContext(
+            action=action_text,
+            loc=context_loc,
+            costume=context_costume,
+            meta=MetaInfo(
+                mood=meta_mood_key,
+                tags=parsed_tags
+            )
+        )
+        
+        local_debug = {}
+        
         try:
-            # 新API呼び出し
+            # Call Vocab Module with debug_log
             tags = vocab_module.sample_garnish(
                 seed=seed,
-                meta_mood=meta_mood_key,
-                action_text=action_text,
+                meta_mood=ctx.meta.mood,
+                action_text=ctx.action,
                 max_items=max_items,
                 include_camera=include_camera,
-                context_loc=context_loc,
-                context_costume=context_costume,
-                scene_tags=parsed_tags if parsed_tags else None,
-                personality=personality
+                context_loc=ctx.loc,
+                context_costume=ctx.costume,
+                scene_tags=ctx.meta.tags,
+                personality=personality,
+                debug_log=local_debug
             )
+            
+            debug_info = DebugInfo(
+                node="GarnishSampler",
+                seed=seed,
+                decision=local_debug
+            )
+            
+            return (", ".join(tags), debug_info.to_dict())
+
         except TypeError:
             # 旧APIへのフォールバック（引数が違う場合など）
             print("\033[93m[GarnishSampler] Warning: Falling back to legacy API signature.\033[0m")
@@ -85,15 +119,17 @@ class GarnishSampler:
                 # 旧シグネチャを想定: sample_garnish(seed, meta_mood, action_text, max_items)
                 tags = vocab_module.sample_garnish(
                     seed=seed, 
-                    meta_mood=meta_mood_key, 
-                    action_text=action_text, 
+                    meta_mood=ctx.meta.mood, 
+                    action_text=ctx.action, 
                     max_items=max_items
                 )
+                return (", ".join(tags), {})
             except Exception as e:
                 print(f"\033[91m[GarnishSampler] Error calling vocab module: {e}\033[0m")
-                return ("",)
-
-        return (", ".join(tags),)
+                return ("", {"error": str(e)})
+        except Exception as e:
+            print(f"\033[91m[GarnishSampler] Error calling vocab module: {e}\033[0m")
+            return ("", {"error": str(e)})
 
 
 # --------------------------------------------------------------------------------
@@ -124,18 +160,16 @@ class ActionMerge:
             parts.append(original_action)
         if garnish:
             parts.append(garnish)
-            
+        
         return (", ".join(parts),)
 
-# --------------------------------------------------------------------------------
-# Node Mappings
-# --------------------------------------------------------------------------------
+# ノード登録
 NODE_CLASS_MAPPINGS = {
     "GarnishSampler": GarnishSampler,
     "ActionMerge": ActionMerge
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "GarnishSampler": "Garnish Sampler (Mood & Pose)",
-    "ActionMerge": "Action Merge (Add Garnish)"
+    "GarnishSampler": "Garnish Sampler (Improved)",
+    "ActionMerge": "Action Merge"
 }
