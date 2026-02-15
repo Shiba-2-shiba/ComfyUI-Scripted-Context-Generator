@@ -1,0 +1,17 @@
+{
+    "schema_version": "1.0",
+    "_comment": "Maps alias names to their canonical location IDs. Used for normalization.",
+    "aliases": {
+        "shopping_mall": "shopping_mall_atrium",
+        "spaceship": "spaceship_bridge",
+        "workshop": "clockwork_workshop",
+        "steampunk_airship": "airship_deck",
+        "rainy_bus_stop": "rainy_alley",
+        "luxury_hotel_room": "bedroom_boudoir",
+        "elegant_dining_room": "street_cafe",
+        "luxury_bathroom": "bedroom_boudoir",
+        "bamboo_forest": "fantasy_forest",
+        "suburban_neighborhood": "winter_street",
+        "rural_town_street": "winter_street"
+    }
+}
