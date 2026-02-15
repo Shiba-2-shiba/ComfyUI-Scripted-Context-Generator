@@ -1986,5 +1986,41 @@
       "night work"
     ],
     "aliases": []
+  },
+  "aquarium": {
+    "label": "水族館",
+    "environment": [
+      "dimly lit aquarium tunnel",
+      "large open ocean tank viewing area"
+    ],
+    "core": [
+      "massive curved glass wall",
+      "swirling schools of sardines",
+      "glowing jellyfish tank cylinder",
+      "touch pool with starfish"
+    ],
+    "texture": [
+      "thick acrylic glass",
+      "rippling blue water projection on floor",
+      "dark carpeted floor"
+    ],
+    "props": [
+      "informational digital displays",
+      "silhouettes of other visitors",
+      "bench for watching fish"
+    ],
+    "fx": [
+      "serene underwater blue lighting",
+      "slow movement of marine life",
+      "caustics dancing on walls",
+      "peaceful silence"
+    ],
+    "time": [
+      "daytime visit",
+      "night aquarium event"
+    ],
+    "aliases": [
+      "aquarium"
+    ]
   }
 }
