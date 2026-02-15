@@ -8,20 +8,20 @@
     "luxury_hotel_lobby"
   ],
   "neon-lit alleyway": [
-    "neon_city_street",
+    "cyberpunk_street",
     "rainy_alley"
   ],
   "neon-reflected puddle": [
     "rainy_alley",
-    "neon_city_street"
+    "cyberpunk_street"
   ],
   "graffiti tunnel": [
-    "neon_city_street",
+    "cyberpunk_street",
     "rainy_alley"
   ],
   "paris street": [
     "rainy_alley",
-    "neon_city_street"
+    "cyberpunk_street"
   ],
   "kyoto street": [
     "winter_street",
@@ -37,7 +37,7 @@
   ],
   "rooftop skyline": [
     "school_rooftop",
-    "neon_city_street"
+    "cyberpunk_street"
   ],
   "poolside lounge chair": [
     "poolside_resort",
@@ -128,7 +128,7 @@
     "surveillance_room"
   ],
   "vr space": [
-    "neon_city_street",
+    "cyberpunk_street",
     "alien_planet"
   ],
   "library": [
@@ -142,5 +142,29 @@
   "workshop": [
     "clockwork_workshop",
     "messy_copy_room"
+  ],
+  "abandoned classroom": [
+    "school_classroom"
+  ],
+  "modern office": [
+    "modern_office"
+  ],
+  "future highway": [
+    "cyberpunk_street"
+  ],
+  "neon city street": [
+    "cyberpunk_street"
+  ],
+  "cyberpunk_street": [
+    "cyberpunk_street"
+  ],
+  "school rooftop fence": [
+    "school_rooftop"
+  ],
+  "ventilation shaft": [
+    "school_rooftop"
+  ],
+  "windy cliff": [
+    "fantasy_forest"
   ]
 }
