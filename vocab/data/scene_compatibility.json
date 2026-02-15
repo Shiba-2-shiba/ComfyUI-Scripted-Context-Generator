@@ -364,7 +364,8 @@
     },
     "sleepy girl": {
       "tags": [
-        "domestic"
+        "domestic",
+        "school"
       ],
       "default_costume": "winter_date"
     },
@@ -388,7 +389,8 @@
     },
     "chef girl": {
       "tags": [
-        "domestic"
+        "domestic",
+        "urban"
       ],
       "default_costume": "rainy_day"
     },
@@ -480,7 +482,6 @@
       "characters": [
         "blonde elf archer",
         "sorceress",
-        "female knight",
         "injured knight",
         "fantasy warrior"
       ],
@@ -522,7 +523,6 @@
       "characters": [
         "blonde elf archer",
         "sorceress",
-        "female knight",
         "injured knight",
         "fantasy warrior"
       ],
