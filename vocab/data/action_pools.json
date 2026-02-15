@@ -1,5 +1,6 @@
 {
     "_comment": "loc別のアクションプール。互換性マトリクスで新しいloc×キャラの組み合わせが生成された際に使用。",
+    "schema_version": "1.0",
     "school_classroom": [
         "sitting at a desk, looking down with focused expression",
         "standing at the blackboard writing notes",
@@ -263,6 +264,18 @@
         "sitting on a crate, wind blowing hair",
         "standing at the helm, steering",
         "leaning against the mast, relaxing"
+    ],
+    "shinto_shrine": [
+        "praying at the altar",
+        "walking through the torii gate",
+        "sweeping the grounds",
+        "standing calmly under a tree"
+    ],
+    "japanese_bath": [
+        "soaking in the hot water",
+        "sitting on the edge of the bath",
+        "relaxing with a towel on head",
+        "pouring water over shoulder"
     ],
     "clockwork_workshop": [
         "sitting at a workbench, assembling gears",
