@@ -71,10 +71,10 @@
     "messy_copy_room"
   ],
   "neon city street": [
-    "neon_city_street"
+    "cyberpunk_street"
   ],
   "neon-lit alleyway": [
-    "neon_city_street",
+    "cyberpunk_street",
     "rainy_alley"
   ],
   "rainy alley": [
@@ -82,13 +82,13 @@
   ],
   "neon-reflected puddle": [
     "rainy_alley",
-    "neon_city_street"
+    "cyberpunk_street"
   ],
   "graffiti wall": [
     "rainy_alley"
   ],
   "graffiti tunnel": [
-    "neon_city_street",
+    "cyberpunk_street",
     "rainy_alley"
   ],
   "foggy london street": [
@@ -96,7 +96,7 @@
   ],
   "paris street": [
     "rainy_alley",
-    "neon_city_street"
+    "cyberpunk_street"
   ],
   "snowy street": [
     "winter_street"
@@ -129,14 +129,14 @@
     "concert_stage"
   ],
   "future highway": [
-    "neon_city_street"
+    "cyberpunk_street"
   ],
   "rooftop skyline": [
     "school_rooftop",
-    "neon_city_street"
+    "cyberpunk_street"
   ],
-  "neon_city_street": [
-    "neon_city_street"
+  "cyberpunk_street": [
+    "cyberpunk_street"
   ],
   "rainy_alley": [
     "rainy_alley"
@@ -383,7 +383,7 @@
     "school_rooftop"
   ],
   "vr space": [
-    "neon_city_street",
+    "cyberpunk_street",
     "alien_planet"
   ],
   "snow fort": [
@@ -457,5 +457,8 @@
   ],
   "shopping_mall_atrium": [
     "shopping_mall_atrium"
+  ],
+  "aquarium": [
+    "aquarium"
   ]
 }
