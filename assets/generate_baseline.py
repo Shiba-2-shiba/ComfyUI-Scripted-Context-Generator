@@ -149,6 +149,7 @@ def generate_baseline():
         json.dump(results, f, indent=2, ensure_ascii=False)
         
     print(f"Baseline generated at: {output_path}")
+    return output_path
 
 if __name__ == "__main__":
     generate_baseline()
