@@ -31,6 +31,21 @@ def load_csv(path):
         print(f"Error: File not found: {path}", file=sys.stderr)
     return rows
 
+def is_action_pool_location_key(key, value):
+    """Return True when an action_pools entry looks like a real location pool."""
+    if not isinstance(key, str):
+        return False
+    key = key.strip()
+    if not key:
+        return False
+    if key.startswith('_'):
+        return False
+    if key.lower() in {'schema_version', 'version'}:
+        return False
+    if not isinstance(value, list):
+        return False
+    return True
+
 def get_unique_tags_recursive(data, collected=None):
     if collected is None:
         collected = set()
@@ -55,6 +70,12 @@ def calc_base_metrics(project_root, subject_filter=None):
     
     rows = load_csv(csv_path)
     action_pools = load_json(action_pools_path)
+    valid_action_pools = {
+        key: value
+        for key, value in action_pools.items()
+        if is_action_pool_location_key(key, value)
+    }
+    ignored_action_pool_keys = sorted(set(action_pools.keys()) - set(valid_action_pools.keys()))
     
     # Filter by subject if requested
     if subject_filter:
@@ -80,8 +101,8 @@ def calc_base_metrics(project_root, subject_filter=None):
             location_stats[loc]["rows"] += 1
             
             # Count actions
-            if loc in action_pools:
-                count = len(action_pools[loc])
+            if loc in valid_action_pools:
+                count = len(valid_action_pools[loc])
                 total_actions += count
                 location_stats[loc]["actions"] = count
                 location_stats[loc]["contribution"] += count
@@ -121,6 +142,7 @@ def calc_base_metrics(project_root, subject_filter=None):
         "row_count": len(rows),
         "location_stats": sorted_location_stats,
         "action_count_summary": action_summary,
+        "ignored_action_pool_keys": ignored_action_pool_keys,
     }
 
 
@@ -130,6 +152,11 @@ def calc_per_subject_metrics(project_root):
 
     rows = load_csv(csv_path)
     action_pools = load_json(action_pools_path)
+    valid_action_pools = {
+        key: value
+        for key, value in action_pools.items()
+        if is_action_pool_location_key(key, value)
+    }
 
     by_subject = defaultdict(lambda: {"rows": 0, "locations": set(), "variations": 0, "missing_pools": set()})
 
@@ -143,8 +170,8 @@ def calc_per_subject_metrics(project_root):
         data["rows"] += 1
         if loc:
             data["locations"].add(loc)
-            if loc in action_pools:
-                data["variations"] += len(action_pools[loc])
+            if loc in valid_action_pools:
+                data["variations"] += len(valid_action_pools[loc])
             else:
                 data["missing_pools"].add(loc)
 
@@ -295,6 +322,8 @@ def main():
             f"mean={base['action_count_summary']['mean']}, "
             f"max={base['action_count_summary']['max']}"
         )
+        if base['ignored_action_pool_keys']:
+            print(f"  Ignored action_pools keys: {', '.join(base['ignored_action_pool_keys'])}")
 
         print("  Top 5 location contribution (Rows x Action pool size):")
         for row in base['location_stats'][:5]:
