@@ -5,7 +5,9 @@
         "sitting at a desk, looking down with focused expression",
         "standing at the blackboard writing notes",
         "sitting and reading a textbook quietly",
-        "standing by the window gazing outside"
+        "standing by the window gazing outside",
+        "chatting with friends during a break",
+        "hurriedly packing bag after the bell"
     ],
     "school_rooftop": [
         "leaning on the fence, looking at the sky",
@@ -29,7 +31,9 @@
         "sitting and working at a desk",
         "standing by the window holding a cup of coffee",
         "walking through the office hallway",
-        "sitting in a chair, taking a break"
+        "sitting in a chair, taking a break",
+        "checking a document while on a call",
+        "typing furiously to meet a deadline"
     ],
     "boardroom": [
         "standing by the window looking out at the city",
@@ -59,7 +63,9 @@
         "standing and waiting under a neon sign",
         "walking through the neon-lit street",
         "leaning against a wall, looking at the crowd",
-        "standing at a crosswalk, looking up at signs"
+        "standing at a crosswalk, looking up at signs",
+        "looking up at a holographic billboard",
+        "standing in the rain looking at reflections"
     ],
     "rainy_alley": [
         "standing under an overhang, avoiding the rain",
@@ -71,7 +77,9 @@
         "standing in the train, holding a strap",
         "sitting by the window, looking outside",
         "standing and checking phone",
-        "sitting with a bag on lap, dozing off"
+        "sitting with a bag on lap, dozing off",
+        "reading a book while the train moves",
+        "checking the transit map near the door"
     ],
     "luxury_hotel_lobby": [
         "sitting on a sofa, relaxing elegantly",
@@ -95,7 +103,9 @@
         "lying on bed hugging a pillow",
         "sitting on the edge of the bed",
         "standing by the mirror, adjusting clothes",
-        "lying down reading a book"
+        "lying down reading a book",
+        "waking up and stretching arms",
+        "sitting on the floor organizing a jewelry box"
     ],
     "fitness_gym": [
         "stretching on the floor",
@@ -167,7 +177,9 @@
         "standing and sweeping leaves with a broom",
         "walking slowly along the stone path",
         "standing and praying at the shrine",
-        "sitting on the shrine steps, resting"
+        "sitting on the shrine steps, resting",
+        "walking through the torii gate",
+        "standing calmly under a tree"
     ],
     "bamboo_forest": [
         "walking slowly along the path",
@@ -179,7 +191,9 @@
         "standing in winter, breathing into cold hands",
         "walking through the snowy street",
         "standing and looking at a shop window",
-        "walking with arms wrapped around self"
+        "walking with arms wrapped around self",
+        "standing and catching a snowflake",
+        "holding a hot drink with both hands"
     ],
     "tropical_beach": [
         "walking along the shoreline",
@@ -209,25 +223,33 @@
         "standing in the snow, looking up at the lights",
         "walking along the illuminated path",
         "sitting on a bench, enjoying the lights",
-        "standing under a tree of lights"
+        "standing under a tree of lights",
+        "standing with a sparkler in hand",
+        "taking a selfie with the lights"
     ],
     "street_cafe": [
         "sitting at a round table, sipping coffee",
         "standing outside looking at the menu",
         "sitting and reading a book at the table",
-        "sitting and looking at her phone"
+        "sitting and looking at her phone",
+        "enjoying a pastry while people watching",
+        "waving to a friend approaching the cafe"
     ],
     "cozy_bookstore": [
         "standing between shelves, browsing books",
         "sitting in a corner, reading",
         "standing and holding a stack of books",
-        "crouching and looking at books on a low shelf"
+        "crouching and looking at books on a low shelf",
+        "reaching for a book on a high shelf",
+        "smelling the pages of an old book"
     ],
     "shopping_mall_atrium": [
         "walking and holding shopping bags",
         "standing and looking at a store window",
         "sitting on a bench, taking a break",
-        "walking up the escalator"
+        "walking up the escalator",
+        "checking a store directory map",
+        "waiting for a friend near the fountain"
     ],
     "fashion_boutique": [
         "standing in front of a mirror, trying on clothes",
@@ -239,7 +261,9 @@
         "sitting on grass, relaxing in nature",
         "lying on a picnic blanket",
         "sitting under a tree, reading",
-        "standing and stretching arms toward the sky"
+        "standing and stretching arms toward the sky",
+        "eating a sandwich from a basket",
+        "standing and flying a kite"
     ],
     "botanical_garden": [
         "standing and smelling a flower",
@@ -264,12 +288,6 @@
         "sitting on a crate, wind blowing hair",
         "standing at the helm, steering",
         "leaning against the mast, relaxing"
-    ],
-    "shinto_shrine": [
-        "praying at the altar",
-        "walking through the torii gate",
-        "sweeping the grounds",
-        "standing calmly under a tree"
     ],
     "japanese_bath": [
         "soaking in the hot water",
