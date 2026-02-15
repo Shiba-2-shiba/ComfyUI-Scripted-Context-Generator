@@ -1,0 +1,4468 @@
+[
+  {
+    "index": 0,
+    "seed": 1000,
+    "input": {
+      "subj": "silver-haired girl",
+      "costume": "school_uniform",
+      "loc": "school_classroom",
+      "action": "sitting at a desk, looking down with focused expression",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "anime style illustration",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "study",
+          "social_distance": "crowd",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "silver-haired girl",
+      "costume": "school_uniform",
+      "loc": "school_classroom",
+      "action": "sitting at a desk, looking down with focused expression",
+      "garnish": "yawning slightly, leaning back, arms crossed",
+      "final_prompt": "a view of silver-haired girl wearing school_uniform. sitting at a desk, looking down with focused expression in the cold wind. yawning slightly, leaning back, arms crossed. She is situated in school_classroom, characterized by quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1000,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "existing",
+            "selected_loc": "school_classroom",
+            "candidates_preview": [
+              "school_classroom (existing)",
+              "school_rooftop (tag:school)",
+              "school_library (tag:school)",
+              "school_gym_hall (tag:school)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1000,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true,
+              "standing": true
+            },
+            "guaranteed_micro": "yawning slightly",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 1,
+    "seed": 1001,
+    "input": {
+      "subj": "cyberpunk girl",
+      "costume": "cyberpunk_night",
+      "loc": "neon_city_street",
+      "action": "standing and waiting under a neon sign, looking at object in hand",
+      "meta": {
+        "mood": "energetic_joy",
+        "style": "digital art, cel shading",
+        "tags": {
+          "place_type": "public",
+          "purpose": "wait",
+          "social_distance": "crowd",
+          "progress": "preparing",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "cyberpunk girl",
+      "costume": "cyberpunk_night",
+      "loc": "winter_street",
+      "action": "walking with arms wrapped around self",
+      "garnish": "strolling, gentle smile, atmospheric perspective",
+      "final_prompt": "cyberpunk girl wearing cyberpunk_night. walking with arms wrapped around self on the dry ground. strolling, gentle smile, atmospheric perspective. The background is winter_street, energetic_joy.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1001,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 14,
+            "selected_source": "universal",
+            "selected_loc": "winter_street",
+            "candidates_preview": [
+              "neon_city_street (existing)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "spaceship_bridge (tag:scifi)",
+              "cyber_lab (tag:scifi)",
+              "airship_deck (tag:scifi)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "walking with arms wrapped around self"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1001,
+          "decision": {
+            "mood_resolved": "energetic_joy",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "strolling",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 2,
+    "seed": 1002,
+    "input": {
+      "subj": "blonde elf archer",
+      "costume": "fantasy_battle",
+      "loc": "fantasy_forest",
+      "action": "standing ready for battle, warrior pose",
+      "meta": {
+        "mood": "mysterious_curious",
+        "style": "fantasy painting, thick coating",
+        "tags": {
+          "place_type": "public",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "preparing",
+          "emotion_nuance": "tense"
+        }
+      }
+    },
+    "output": {
+      "subj": "blonde elf archer",
+      "costume": "fantasy_battle",
+      "loc": "dragon_lair",
+      "action": "crouching with a weapon ready",
+      "garnish": "clenched fists, arms relaxed at sides, detailed texture",
+      "final_prompt": "blonde elf archer sporting fantasy_battle. crouching with a weapon ready on this hot day. clenched fists, arms relaxed at sides, detailed texture. The scene is dragon_lair, with mysterious_curious lighting.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1002,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 14,
+            "selected_source": "tag:fantasy",
+            "selected_loc": "dragon_lair",
+            "candidates_preview": [
+              "fantasy_forest (existing)",
+              "burning_battlefield (tag:fantasy)",
+              "dungeon_crypt (tag:fantasy)",
+              "dragon_lair (tag:fantasy)",
+              "alien_planet (tag:fantasy)",
+              "bamboo_forest (tag:nature)",
+              "tropical_beach (tag:nature)",
+              "wave_barrel (tag:nature)",
+              "shinto_shrine (tag:nature)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "winter_street (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "crouching with a weapon ready"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1002,
+          "decision": {
+            "mood_resolved": "mysterious_curious",
+            "personality_moods": [],
+            "anchors": {},
+            "guaranteed_micro": "clenched fists",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 7
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 3,
+    "seed": 1003,
+    "input": {
+      "subj": "business girl",
+      "costume": "office_lady",
+      "loc": "modern_office",
+      "action": "sitting and working in office",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "clean lineart",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "work",
+          "social_distance": "acquaintance",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "business girl",
+      "costume": "office_lady",
+      "loc": "street_cafe",
+      "action": "sitting and reading a book at the table",
+      "garnish": "marking a page, seated pose, gentle gaze",
+      "final_prompt": "Captured here is business girl in office_lady. sitting and reading a book at the table, under the blue sky. marking a page, seated pose, gentle gaze. The setting is street_cafe, featuring quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1003,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 14,
+            "selected_source": "universal",
+            "selected_loc": "street_cafe",
+            "candidates_preview": [
+              "modern_office (existing)",
+              "boardroom (tag:office)",
+              "office_elevator (tag:office)",
+              "surveillance_room (tag:office)",
+              "messy_copy_room (tag:office)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting and reading a book at the table"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1003,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "marking a page",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 4,
+    "seed": 1004,
+    "input": {
+      "subj": "gothic girl",
+      "costume": "gothic_lolita",
+      "loc": "dungeon_crypt",
+      "action": "standing and holding a black rose (flower)",
+      "meta": {
+        "mood": "melancholic_sadness",
+        "style": "dark fantasy illustration",
+        "tags": {
+          "place_type": "private",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "gothic girl",
+      "costume": "gothic_lolita",
+      "loc": "dragon_lair",
+      "action": "standing and hiding behind a rock",
+      "garnish": "sorrowful atmosphere, faint smile, pointing finger",
+      "final_prompt": "a view of gothic girl wearing gothic_lolita. She is standing and hiding behind a rock, sorrowful atmosphere, faint smile, pointing finger. She is in dragon_lair, surrounded by melancholic_sadness.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1004,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 17,
+            "selected_source": "tag:fantasy",
+            "selected_loc": "dragon_lair",
+            "candidates_preview": [
+              "dungeon_crypt (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "burning_battlefield (tag:fantasy)",
+              "dragon_lair (tag:fantasy)",
+              "alien_planet (tag:fantasy)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and hiding behind a rock"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1004,
+          "decision": {
+            "mood_resolved": "melancholic_sadness",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 5,
+    "seed": 1005,
+    "input": {
+      "subj": "fitness model",
+      "costume": "gym_workout",
+      "loc": "fitness_gym",
+      "action": "stretching her legs on the floor",
+      "meta": {
+        "mood": "energetic_joy",
+        "style": "sporty illustration",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "work",
+          "social_distance": "stranger",
+          "progress": "preparing",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "fitness model",
+      "costume": "gym_workout",
+      "loc": "yoga_studio",
+      "action": "standing in a yoga pose",
+      "garnish": "hands behind back, smirk, posture relaxed",
+      "final_prompt": "Captured here is fitness model in gym_workout. standing in a yoga pose on the dry ground. hands behind back, smirk, posture relaxed. yoga_studio, energetic_joy.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1005,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 12,
+            "selected_source": "tag:sport",
+            "selected_loc": "yoga_studio",
+            "candidates_preview": [
+              "fitness_gym (existing)",
+              "yoga_studio (tag:sport)",
+              "stadium_court (tag:sport)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing in a yoga pose"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1005,
+          "decision": {
+            "mood_resolved": "energetic_joy",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 6,
+    "seed": 1006,
+    "input": {
+      "subj": "shrine maiden",
+      "costume": "traditional_japanese",
+      "loc": "shinto_shrine",
+      "action": "standing and sweeping leaves into a bag with a broom",
+      "meta": {
+        "mood": "peaceful_relaxed",
+        "style": "watercolor style",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "shrine maiden",
+      "costume": "traditional_japanese",
+      "loc": "botanical_garden",
+      "action": "sitting on a bench surrounded by flowers",
+      "garnish": "looking at map, dreamy eyes, crossed legs",
+      "final_prompt": "The focus is on shrine maiden wearing traditional_japanese. sitting on a bench surrounded by flowers. looking at map, dreamy eyes, crossed legs. The location is botanical_garden, with peaceful_relaxed.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1006,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 12,
+            "selected_source": "universal",
+            "selected_loc": "botanical_garden",
+            "candidates_preview": [
+              "shinto_shrine (existing)",
+              "fantasy_forest (tag:nature)",
+              "bamboo_forest (tag:nature)",
+              "tropical_beach (tag:nature)",
+              "wave_barrel (tag:nature)",
+              "street_cafe (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting on a bench surrounded by flowers"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1006,
+          "decision": {
+            "mood_resolved": "peaceful_relaxed",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "looking at map",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 39
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 7,
+    "seed": 1007,
+    "input": {
+      "subj": "rock singer",
+      "costume": "rock_concert",
+      "loc": "concert_stage",
+      "action": "singing on stage (music), dynamic pose",
+      "meta": {
+        "mood": "intense_anger",
+        "style": "vibrant cel shading",
+        "tags": {
+          "place_type": "public",
+          "purpose": "work",
+          "social_distance": "crowd",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "rock singer",
+      "costume": "rock_concert",
+      "loc": "street_cafe",
+      "action": "sitting and reading a book at the table",
+      "garnish": "tracing text with finger, sitting upright, hand checking hair",
+      "final_prompt": "rock singer wearing rock_concert. sitting and reading a book at the table on the dry ground. tracing text with finger, sitting upright, hand checking hair. The environment is street_cafe, bathed in intense_anger.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1007,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 17,
+            "selected_source": "universal",
+            "selected_loc": "street_cafe",
+            "candidates_preview": [
+              "concert_stage (existing)",
+              "recording_studio (tag:music)",
+              "opera_house (tag:music)",
+              "karaoke_bar (tag:music)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting and reading a book at the table"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1007,
+          "decision": {
+            "mood_resolved": "intense_anger",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "tracing text with finger",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 8,
+    "seed": 1008,
+    "input": {
+      "subj": "spy agent",
+      "costume": "secret_agent",
+      "loc": "luxury_hotel_lobby",
+      "action": "sitting on a sofa, relaxing and adjusting sunglasses",
+      "meta": {
+        "mood": "mysterious_curious",
+        "style": "movie concept art",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "wait",
+          "social_distance": "stranger",
+          "progress": "preparing",
+          "emotion_nuance": "tense"
+        }
+      }
+    },
+    "output": {
+      "subj": "spy agent",
+      "costume": "secret_agent",
+      "loc": "picnic_park",
+      "action": "standing and stretching arms toward the sky",
+      "garnish": "muscles tensed, fidgeting with phone, closed mouth",
+      "final_prompt": "spy agent sporting secret_agent. standing and stretching arms toward the sky, enjoying the warm sun. muscles tensed, fidgeting with phone, closed mouth. The background is picnic_park, mysterious_curious.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1008,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 19,
+            "selected_source": "universal",
+            "selected_loc": "picnic_park",
+            "candidates_preview": [
+              "luxury_hotel_lobby (existing)",
+              "modern_office (tag:office)",
+              "boardroom (tag:office)",
+              "office_elevator (tag:office)",
+              "surveillance_room (tag:office)",
+              "messy_copy_room (tag:office)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and stretching arms toward the sky"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1008,
+          "decision": {
+            "mood_resolved": "mysterious_curious",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true,
+              "dynamic": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 10,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 9,
+    "seed": 1009,
+    "input": {
+      "subj": "vacationer",
+      "costume": "beach_resort",
+      "loc": "tropical_beach",
+      "action": "walking along the shoreline on the beach",
+      "meta": {
+        "mood": "peaceful_relaxed",
+        "style": "bright colors, anime style",
+        "tags": {
+          "place_type": "public",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "vacationer",
+      "costume": "beach_resort",
+      "loc": "bedroom_boudoir",
+      "action": "sitting on the edge of the bed",
+      "garnish": "putting hand in pocket, heavy eyelids, dreamy eyes",
+      "final_prompt": "vacationer dressed in beach_resort. sitting on the edge of the bed. putting hand in pocket, heavy eyelids, dreamy eyes. The surrounding area is bedroom_boudoir, peaceful_relaxed.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1009,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 12,
+            "selected_source": "universal",
+            "selected_loc": "bedroom_boudoir",
+            "candidates_preview": [
+              "tropical_beach (existing)",
+              "poolside_resort (tag:resort)",
+              "luxury_hotel_lobby (tag:resort)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting on the edge of the bed"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1009,
+          "decision": {
+            "mood_resolved": "peaceful_relaxed",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true,
+              "lying": true
+            },
+            "guaranteed_micro": "putting hand in pocket",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 10,
+    "seed": 1010,
+    "input": {
+      "subj": "winter traveler",
+      "costume": "winter_date",
+      "loc": "winter_street",
+      "action": "standing in winter, breathing into cold hands",
+      "meta": {
+        "mood": "romantic_allure",
+        "style": "soft lighting illustration",
+        "tags": {
+          "place_type": "public",
+          "purpose": "commute",
+          "social_distance": "acquaintance",
+          "progress": "midway",
+          "obstacle": "wind",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "winter traveler",
+      "costume": "winter_date",
+      "loc": "street_cafe",
+      "action": "sitting and reading a book at the table",
+      "garnish": "turning a page, alluring gaze, holding down skirt in wind",
+      "final_prompt": "winter traveler clad in winter_date. sitting and reading a book at the table. Note: turning a page, alluring gaze, holding down skirt in wind. She is in street_cafe, surrounded by romantic_allure.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1010,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "universal",
+            "selected_loc": "street_cafe",
+            "candidates_preview": [
+              "winter_street (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting and reading a book at the table"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1010,
+          "decision": {
+            "mood_resolved": "romantic_allure",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "turning a page",
+            "camera_tags": [],
+            "len_pools": 10,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 11,
+    "seed": 1011,
+    "input": {
+      "subj": "student",
+      "costume": "school_uniform",
+      "loc": "school_rooftop",
+      "action": "leaning on the fence, looking quietly at object in hand",
+      "meta": {
+        "mood": "whimsical_playful",
+        "style": "scenic anime style",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "relieved"
+        }
+      }
+    },
+    "output": {
+      "subj": "student",
+      "costume": "school_uniform",
+      "loc": "illuminated_park",
+      "action": "sitting on a bench, enjoying the lights",
+      "garnish": "tapping fingers, wide eyes, knees together",
+      "final_prompt": "The focus is on student wearing school_uniform. sitting on a bench, enjoying the lights. tapping fingers, wide eyes, knees together adds detail. The location is illuminated_park, whimsical_playful.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1011,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "universal",
+            "selected_loc": "illuminated_park",
+            "candidates_preview": [
+              "school_rooftop (existing)",
+              "school_classroom (tag:school)",
+              "school_library (tag:school)",
+              "school_gym_hall (tag:school)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting on a bench, enjoying the lights"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1011,
+          "decision": {
+            "mood_resolved": "whimsical_playful",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "tapping fingers",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 12,
+    "seed": 1012,
+    "input": {
+      "subj": "street dancer",
+      "costume": "cyberpunk_night",
+      "loc": "neon_city_street",
+      "action": "dancing, dynamic pose",
+      "meta": {
+        "mood": "energetic_joy",
+        "style": "street art style",
+        "tags": {
+          "place_type": "public",
+          "purpose": "work",
+          "social_distance": "crowd",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "street dancer",
+      "costume": "cyberpunk_night",
+      "loc": "neon_city_street",
+      "action": "dancing, dynamic pose",
+      "garnish": "happy tears, sparkling eyes, closed mouth",
+      "final_prompt": "The focus is on street dancer wearing cyberpunk_night. dancing, dynamic pose, with happy tears, sparkling eyes, closed mouth. The scene is neon_city_street, energetic_joy.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1012,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 17,
+            "selected_source": "existing",
+            "selected_loc": "neon_city_street",
+            "candidates_preview": [
+              "neon_city_street (existing)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "concert_stage (tag:music)",
+              "recording_studio (tag:music)",
+              "opera_house (tag:music)",
+              "karaoke_bar (tag:music)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1012,
+          "decision": {
+            "mood_resolved": "energetic_joy",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true,
+              "dynamic": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 11,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 13,
+    "seed": 1013,
+    "input": {
+      "subj": "sorceress",
+      "costume": "fantasy_battle",
+      "loc": "fantasy_forest",
+      "action": "standing and casting a spell with a staff",
+      "meta": {
+        "mood": "whimsical_playful",
+        "style": "thick impasto",
+        "tags": {
+          "place_type": "public",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "sorceress",
+      "costume": "fantasy_battle",
+      "loc": "illuminated_park",
+      "action": "sitting on a bench, enjoying the lights",
+      "garnish": "dusting off clothes, hand checking hair, playful smile",
+      "final_prompt": "Captured here is sorceress in fantasy_battle. sitting on a bench, enjoying the lights on the dry ground. dusting off clothes, hand checking hair, playful smile. The setting is illuminated_park, whimsical_playful.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1013,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 10,
+            "selected_source": "universal",
+            "selected_loc": "illuminated_park",
+            "candidates_preview": [
+              "fantasy_forest (existing)",
+              "burning_battlefield (tag:fantasy)",
+              "dungeon_crypt (tag:fantasy)",
+              "dragon_lair (tag:fantasy)",
+              "alien_planet (tag:fantasy)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "winter_street (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting on a bench, enjoying the lights"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1013,
+          "decision": {
+            "mood_resolved": "whimsical_playful",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "dusting off clothes",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 14,
+    "seed": 1014,
+    "input": {
+      "subj": "CEO",
+      "costume": "office_lady",
+      "loc": "boardroom",
+      "action": "standing by the window holding a cup of coffee",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "detailed background",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "wrapping_up",
+          "emotion_nuance": "relieved"
+        }
+      }
+    },
+    "output": {
+      "subj": "CEO",
+      "costume": "office_lady",
+      "loc": "boardroom",
+      "action": "standing by the window holding a cup of coffee",
+      "garnish": "inhaling aroma, closed mouth, closing laptop",
+      "final_prompt": "CEO sporting office_lady. standing by the window holding a cup of coffee. inhaling aroma, closed mouth, closing laptop. The location is boardroom, with quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1014,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 14,
+            "selected_source": "existing",
+            "selected_loc": "boardroom",
+            "candidates_preview": [
+              "boardroom (existing)",
+              "modern_office (tag:office)",
+              "office_elevator (tag:office)",
+              "surveillance_room (tag:office)",
+              "messy_copy_room (tag:office)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1014,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "inhaling aroma",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 15,
+    "seed": 1015,
+    "input": {
+      "subj": "doll-like girl",
+      "costume": "gothic_lolita",
+      "loc": "bedroom_boudoir",
+      "action": "sitting on a bed sipping tea",
+      "meta": {
+        "mood": "peaceful_relaxed",
+        "style": "intricate details",
+        "tags": {
+          "place_type": "private",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "doll-like girl",
+      "costume": "gothic_lolita",
+      "loc": "rainy_alley",
+      "action": "leaning against a brick wall",
+      "garnish": "faint smile, soft gaze, open palm",
+      "final_prompt": "doll-like girl in gothic_lolita. leaning against a brick wall. faint smile, soft gaze, open palm adds detail. The surrounding area is rainy_alley, peaceful_relaxed.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1015,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 17,
+            "selected_source": "tag:urban",
+            "selected_loc": "rainy_alley",
+            "candidates_preview": [
+              "bedroom_boudoir (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "burning_battlefield (tag:fantasy)",
+              "dungeon_crypt (tag:fantasy)",
+              "dragon_lair (tag:fantasy)",
+              "alien_planet (tag:fantasy)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "leaning against a brick wall"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1015,
+          "decision": {
+            "mood_resolved": "peaceful_relaxed",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 16,
+    "seed": 1016,
+    "input": {
+      "subj": "runner",
+      "costume": "gym_workout",
+      "loc": "stadium_court",
+      "action": "running down the track, sprinting, dynamic pose",
+      "meta": {
+        "mood": "energetic_joy",
+        "style": "dynamic pose illustration",
+        "tags": {
+          "place_type": "public",
+          "purpose": "work",
+          "social_distance": "stranger",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "runner",
+      "costume": "gym_workout",
+      "loc": "picnic_park",
+      "action": "sitting under a tree, reading",
+      "garnish": "tapping foot, legs crossed, knees together",
+      "final_prompt": "The focus is on runner wearing gym_workout. sitting under a tree, reading under the moonlight. tapping foot, legs crossed, knees together. picnic_park, energetic_joy.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1016,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 12,
+            "selected_source": "universal",
+            "selected_loc": "picnic_park",
+            "candidates_preview": [
+              "stadium_court (existing)",
+              "fitness_gym (tag:sport)",
+              "yoga_studio (tag:sport)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting under a tree, reading"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1016,
+          "decision": {
+            "mood_resolved": "energetic_joy",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "tapping foot",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 17,
+    "seed": 1017,
+    "input": {
+      "subj": "geisha",
+      "costume": "traditional_japanese",
+      "loc": "winter_street",
+      "action": "walking and holding an umbrella",
+      "meta": {
+        "mood": "romantic_allure",
+        "style": "ukiyo-e style",
+        "tags": {
+          "place_type": "public",
+          "purpose": "commute",
+          "social_distance": "stranger",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "geisha",
+      "costume": "traditional_japanese",
+      "loc": "wave_barrel",
+      "action": "sitting on the beach watching the waves",
+      "garnish": "yawning slightly, open palm, hands behind back",
+      "final_prompt": "Captured here is geisha in traditional_japanese. sitting on the beach watching the waves in the cold wind. yawning slightly, open palm, hands behind back. The scene is wave_barrel, with romantic_allure lighting.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1017,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 12,
+            "selected_source": "tag:nature",
+            "selected_loc": "wave_barrel",
+            "candidates_preview": [
+              "winter_street (existing)",
+              "fantasy_forest (tag:nature)",
+              "bamboo_forest (tag:nature)",
+              "tropical_beach (tag:nature)",
+              "wave_barrel (tag:nature)",
+              "shinto_shrine (tag:nature)",
+              "street_cafe (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting on the beach watching the waves"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1017,
+          "decision": {
+            "mood_resolved": "romantic_allure",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "yawning slightly",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 40
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 18,
+    "seed": 1018,
+    "input": {
+      "subj": "guitarist",
+      "costume": "rock_concert",
+      "loc": "recording_studio",
+      "action": "sitting and tuning an instrument (music)",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "sketchy style",
+        "tags": {
+          "place_type": "private",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "preparing",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "guitarist",
+      "costume": "rock_concert",
+      "loc": "concert_stage",
+      "action": "walking across the stage dramatically",
+      "garnish": "strolling, tying shoelaces, leaning slightly",
+      "final_prompt": "a view of guitarist wearing rock_concert. walking across the stage dramatically in the cold wind. strolling, tying shoelaces, leaning slightly. concert_stage, quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1018,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "tag:music",
+            "selected_loc": "concert_stage",
+            "candidates_preview": [
+              "recording_studio (existing)",
+              "concert_stage (tag:music)",
+              "opera_house (tag:music)",
+              "karaoke_bar (tag:music)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "walking across the stage dramatically"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1018,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "strolling",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 19,
+    "seed": 1019,
+    "input": {
+      "subj": "detective",
+      "costume": "secret_agent",
+      "loc": "rainy_alley",
+      "action": "standing on surveillance mission, looking for clues",
+      "meta": {
+        "mood": "melancholic_sadness",
+        "style": "noir style",
+        "tags": {
+          "place_type": "public",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "tense"
+        }
+      }
+    },
+    "output": {
+      "subj": "detective",
+      "costume": "secret_agent",
+      "loc": "illuminated_park",
+      "action": "standing under a tree of lights",
+      "garnish": "fingers touching face, touching lips, hugging self",
+      "final_prompt": "detective wearing secret_agent. Currently standing under a tree of lights. fingers touching face, touching lips, hugging self. The background is illuminated_park, melancholic_sadness.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1019,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 18,
+            "selected_source": "universal",
+            "selected_loc": "illuminated_park",
+            "candidates_preview": [
+              "rainy_alley (existing)",
+              "modern_office (tag:office)",
+              "boardroom (tag:office)",
+              "office_elevator (tag:office)",
+              "surveillance_room (tag:office)",
+              "messy_copy_room (tag:office)",
+              "neon_city_street (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing under a tree of lights"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1019,
+          "decision": {
+            "mood_resolved": "melancholic_sadness",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 20,
+    "seed": 1020,
+    "input": {
+      "subj": "female knight",
+      "costume": "fantasy_battle",
+      "loc": "burning_battlefield",
+      "action": "standing ready for battle, knight pose",
+      "meta": {
+        "mood": "intense_anger",
+        "style": "epic fantasy art",
+        "tags": {
+          "place_type": "public",
+          "purpose": "work",
+          "social_distance": "crowd",
+          "progress": "preparing",
+          "emotion_nuance": "tense"
+        }
+      }
+    },
+    "output": {
+      "subj": "female knight",
+      "costume": "fantasy_battle",
+      "loc": "botanical_garden",
+      "action": "standing and taking a photo of a plant",
+      "garnish": "flying debris, looking at viewer, dynamic lighting",
+      "final_prompt": "female knight in fantasy_battle. standing and taking a photo of a plant. flying debris, looking at viewer, dynamic lighting. The location is botanical_garden, intense_anger.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1020,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 9,
+            "selected_source": "universal",
+            "selected_loc": "botanical_garden",
+            "candidates_preview": [
+              "burning_battlefield (existing)",
+              "dungeon_crypt (tag:fantasy)",
+              "dragon_lair (tag:fantasy)",
+              "alien_planet (tag:fantasy)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "winter_street (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and taking a photo of a plant"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1020,
+          "decision": {
+            "mood_resolved": "intense_anger",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 21,
+    "seed": 1021,
+    "input": {
+      "subj": "library girl",
+      "costume": "school_uniform",
+      "loc": "school_library",
+      "action": "standing in the library reaching for something on shelf",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "anime background style",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "study",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "library girl",
+      "costume": "school_uniform",
+      "loc": "illuminated_park",
+      "action": "walking along the illuminated path",
+      "garnish": "steady pace, faint smile, paused mid-sentence",
+      "final_prompt": "library girl sporting school_uniform. walking along the illuminated path, under the blue sky. steady pace, faint smile, paused mid-sentence. The environment is illuminated_park, bathed in quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1021,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "universal",
+            "selected_loc": "illuminated_park",
+            "candidates_preview": [
+              "school_library (existing)",
+              "school_classroom (tag:school)",
+              "school_rooftop (tag:school)",
+              "school_gym_hall (tag:school)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "walking along the illuminated path"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1021,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "steady pace",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 22,
+    "seed": 1022,
+    "input": {
+      "subj": "yoga instructor",
+      "costume": "gym_workout",
+      "loc": "yoga_studio",
+      "action": "sitting in meditation pose",
+      "meta": {
+        "mood": "peaceful_relaxed",
+        "style": "soft pastel colors",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "work",
+          "social_distance": "acquaintance",
+          "progress": "midway",
+          "emotion_nuance": "relieved"
+        }
+      }
+    },
+    "output": {
+      "subj": "yoga instructor",
+      "costume": "gym_workout",
+      "loc": "wave_barrel",
+      "action": "crouching on the surfboard in the wave",
+      "garnish": "soft exhale, heavy eyelids, back straight",
+      "final_prompt": "yoga instructor dressed in gym_workout. crouching on the surfboard in the wave while soft exhale, heavy eyelids, back straight. The setting is wave_barrel, featuring peaceful_relaxed.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1022,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 17,
+            "selected_source": "tag:nature",
+            "selected_loc": "wave_barrel",
+            "candidates_preview": [
+              "yoga_studio (existing)",
+              "fitness_gym (tag:sport)",
+              "stadium_court (tag:sport)",
+              "fantasy_forest (tag:nature)",
+              "bamboo_forest (tag:nature)",
+              "tropical_beach (tag:nature)",
+              "wave_barrel (tag:nature)",
+              "shinto_shrine (tag:nature)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "crouching on the surfboard in the wave"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1022,
+          "decision": {
+            "mood_resolved": "peaceful_relaxed",
+            "personality_moods": [],
+            "anchors": {},
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 23,
+    "seed": 1023,
+    "input": {
+      "subj": "cyberpunk mercenary",
+      "costume": "cyberpunk_night",
+      "loc": "rainy_alley",
+      "action": "leaning against a wall, waiting and smoking (vape)",
+      "meta": {
+        "mood": "creepy_fear",
+        "style": "gritty cyberpunk",
+        "tags": {
+          "place_type": "public",
+          "purpose": "wait",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "tense"
+        }
+      }
+    },
+    "output": {
+      "subj": "cyberpunk mercenary",
+      "costume": "cyberpunk_night",
+      "loc": "spaceship_bridge",
+      "action": "standing at the console, pressing buttons",
+      "garnish": "mouth open singing, paused mid-sentence, intense stare",
+      "final_prompt": "Captured here is cyberpunk mercenary in cyberpunk_night. standing at the console, pressing buttons under the moonlight. mouth open singing, paused mid-sentence, intense stare. The location is spaceship_bridge, creepy_fear.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1023,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 15,
+            "selected_source": "tag:scifi",
+            "selected_loc": "spaceship_bridge",
+            "candidates_preview": [
+              "rainy_alley (existing)",
+              "neon_city_street (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "spaceship_bridge (tag:scifi)",
+              "cyber_lab (tag:scifi)",
+              "airship_deck (tag:scifi)",
+              "neon_city_street (tag:scifi)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing at the console, pressing buttons"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1023,
+          "decision": {
+            "mood_resolved": "creepy_fear",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "mouth open singing",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 9
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 24,
+    "seed": 1024,
+    "input": {
+      "subj": "rainy day girl",
+      "costume": "rainy_day",
+      "loc": "rainy_alley",
+      "action": "standing and holding a clear umbrella",
+      "meta": {
+        "mood": "melancholic_sadness",
+        "style": "anime style, emotional art",
+        "tags": {
+          "place_type": "public",
+          "purpose": "commute",
+          "social_distance": "alone",
+          "progress": "midway",
+          "obstacle": "delay",
+          "emotion_nuance": "awkward"
+        }
+      }
+    },
+    "output": {
+      "subj": "rainy day girl",
+      "costume": "rainy_day",
+      "loc": "street_cafe",
+      "action": "standing outside looking at the menu",
+      "garnish": "tapping foot impatiently, open palm, fingers intertwined",
+      "final_prompt": "rainy day girl wearing rainy_day. standing outside looking at the menu, enjoying the warm sun. tapping foot impatiently, open palm, fingers intertwined. street_cafe, melancholic_sadness.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1024,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "universal",
+            "selected_loc": "street_cafe",
+            "candidates_preview": [
+              "rainy_alley (existing)",
+              "neon_city_street (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing outside looking at the menu"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1024,
+          "decision": {
+            "mood_resolved": "melancholic_sadness",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 11,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 25,
+    "seed": 1025,
+    "input": {
+      "subj": "bookworm girl",
+      "costume": "school_uniform",
+      "loc": "antique_shop",
+      "action": "browsing antiques, looking for rare items",
+      "meta": {
+        "mood": "mysterious_curious",
+        "style": "detailed illustration",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "shop",
+          "social_distance": "stranger",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "bookworm girl",
+      "costume": "school_uniform",
+      "loc": "school_classroom",
+      "action": "sitting at a desk, looking down with focused expression",
+      "garnish": "holding a bag, mouth slightly open, tilted head",
+      "final_prompt": "The character is bookworm girl in school_uniform. sitting at a desk, looking down with focused expression. holding a bag, mouth slightly open, tilted head. The background depicts school_classroom, featuring mysterious_curious.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1025,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 14,
+            "selected_source": "tag:school",
+            "selected_loc": "school_classroom",
+            "candidates_preview": [
+              "antique_shop (existing)",
+              "school_classroom (tag:school)",
+              "school_rooftop (tag:school)",
+              "school_library (tag:school)",
+              "school_gym_hall (tag:school)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting at a desk, looking down with focused expression"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1025,
+          "decision": {
+            "mood_resolved": "mysterious_curious",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true,
+              "standing": true
+            },
+            "guaranteed_micro": "holding a bag",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 26,
+    "seed": 1026,
+    "input": {
+      "subj": "office worker",
+      "costume": "office_lady",
+      "loc": "office_elevator",
+      "action": "standing and checking her watch",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "modern anime style",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "commute",
+          "social_distance": "stranger",
+          "progress": "midway",
+          "obstacle": "delay",
+          "emotion_nuance": "awkward"
+        }
+      }
+    },
+    "output": {
+      "subj": "office worker",
+      "costume": "office_lady",
+      "loc": "surveillance_room",
+      "action": "standing and staring at monitor screens",
+      "garnish": "sunlight, looking up, index finger raised",
+      "final_prompt": "office worker wearing office_lady. standing and staring at monitor screens, enjoying the warm sun. sunlight, looking up, index finger raised. The setting is surveillance_room, quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1026,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 14,
+            "selected_source": "tag:office",
+            "selected_loc": "surveillance_room",
+            "candidates_preview": [
+              "office_elevator (existing)",
+              "modern_office (tag:office)",
+              "boardroom (tag:office)",
+              "surveillance_room (tag:office)",
+              "messy_copy_room (tag:office)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and staring at monitor screens"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1026,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 11,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 27,
+    "seed": 1027,
+    "input": {
+      "subj": "cyberpunk hacker",
+      "costume": "cyberpunk_night",
+      "loc": "surveillance_room",
+      "action": "sitting and typing on multiple keyboards",
+      "meta": {
+        "mood": "creepy_fear",
+        "style": "digital art, high contrast",
+        "tags": {
+          "place_type": "private",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "cyberpunk hacker",
+      "costume": "cyberpunk_night",
+      "loc": "surveillance_room",
+      "action": "sitting and typing on multiple keyboards",
+      "garnish": "stretching arms, soft focus eyes, adjusting hair",
+      "final_prompt": "cyberpunk hacker wearing cyberpunk_night. She is sitting and typing on multiple keyboards, stretching arms, soft focus eyes, adjusting hair. The setting is surveillance_room, with an atmosphere of creepy_fear.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1027,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 16,
+            "selected_source": "existing",
+            "selected_loc": "surveillance_room",
+            "candidates_preview": [
+              "surveillance_room (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "spaceship_bridge (tag:scifi)",
+              "cyber_lab (tag:scifi)",
+              "airship_deck (tag:scifi)",
+              "neon_city_street (tag:scifi)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1027,
+          "decision": {
+            "mood_resolved": "creepy_fear",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "stretching arms",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 28,
+    "seed": 1028,
+    "input": {
+      "subj": "vacation girl",
+      "costume": "beach_resort",
+      "loc": "poolside_resort",
+      "action": "lying on a deck chair relaxing on the beach, sipping a drink from a cup",
+      "meta": {
+        "mood": "peaceful_relaxed",
+        "style": "bright summer illustration",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "rest",
+          "social_distance": "stranger",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "vacation girl",
+      "costume": "beach_resort",
+      "loc": "winter_street",
+      "action": "standing in winter, breathing into cold hands",
+      "garnish": "slight smile, soft gaze, index finger raised",
+      "final_prompt": "Captured here is vacation girl in beach_resort. standing in winter, breathing into cold hands on this hot day. slight smile, soft gaze, index finger raised. winter_street, peaceful_relaxed.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1028,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 12,
+            "selected_source": "universal",
+            "selected_loc": "winter_street",
+            "candidates_preview": [
+              "poolside_resort (existing)",
+              "tropical_beach (tag:resort)",
+              "luxury_hotel_lobby (tag:resort)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing in winter, breathing into cold hands"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1028,
+          "decision": {
+            "mood_resolved": "peaceful_relaxed",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 29,
+    "seed": 1029,
+    "input": {
+      "subj": "shrine maiden",
+      "costume": "traditional_japanese",
+      "loc": "bamboo_forest",
+      "action": "walking slowly along the path",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "watercolor style, japanese art",
+        "tags": {
+          "place_type": "public",
+          "purpose": "commute",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "shrine maiden",
+      "costume": "traditional_japanese",
+      "loc": "winter_street",
+      "action": "standing and looking at a shop window",
+      "garnish": "taking a selfie, clenched fists, sparkling eyes",
+      "final_prompt": "shrine maiden clad in traditional_japanese. standing and looking at a shop window. taking a selfie, clenched fists, sparkling eyes adds detail. The background describes winter_street, with quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1029,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 12,
+            "selected_source": "universal",
+            "selected_loc": "winter_street",
+            "candidates_preview": [
+              "bamboo_forest (existing)",
+              "fantasy_forest (tag:nature)",
+              "tropical_beach (tag:nature)",
+              "wave_barrel (tag:nature)",
+              "shinto_shrine (tag:nature)",
+              "street_cafe (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and looking at a shop window"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1029,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "taking a selfie",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 3
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 30,
+    "seed": 1030,
+    "input": {
+      "subj": "rock star",
+      "costume": "rock_concert",
+      "loc": "karaoke_bar",
+      "action": "sitting on a sofa humming softly (music)",
+      "meta": {
+        "mood": "energetic_joy",
+        "style": "pop art style",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "rest",
+          "social_distance": "acquaintance",
+          "progress": "wrapping_up",
+          "emotion_nuance": "relieved"
+        }
+      }
+    },
+    "output": {
+      "subj": "rock star",
+      "costume": "rock_concert",
+      "loc": "picnic_park",
+      "action": "standing and stretching arms toward the sky",
+      "garnish": "open palm, radiant eyes, arms crossed",
+      "final_prompt": "rock star wearing rock_concert. standing and stretching arms toward the sky while open palm, radiant eyes, arms crossed. The environment is picnic_park, bathed in energetic_joy.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1030,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 16,
+            "selected_source": "universal",
+            "selected_loc": "picnic_park",
+            "candidates_preview": [
+              "karaoke_bar (existing)",
+              "concert_stage (tag:music)",
+              "recording_studio (tag:music)",
+              "opera_house (tag:music)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and stretching arms toward the sky"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1030,
+          "decision": {
+            "mood_resolved": "energetic_joy",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true,
+              "dynamic": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 11,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 31,
+    "seed": 1031,
+    "input": {
+      "subj": "fantasy warrior",
+      "costume": "fantasy_battle",
+      "loc": "dragon_lair",
+      "action": "standing and hiding behind a rock with a weapon",
+      "meta": {
+        "mood": "intense_anger",
+        "style": "epic fantasy painting",
+        "tags": {
+          "place_type": "private",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "preparing",
+          "emotion_nuance": "tense"
+        }
+      }
+    },
+    "output": {
+      "subj": "fantasy warrior",
+      "costume": "fantasy_battle",
+      "loc": "picnic_park",
+      "action": "sitting under a tree, reading",
+      "garnish": "brushing hair back, flying debris, seated pose",
+      "final_prompt": "fantasy warrior clad in fantasy_battle. sitting under a tree, reading, under the blue sky. brushing hair back, flying debris, seated pose. The background depicts picnic_park, featuring intense_anger.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1031,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 9,
+            "selected_source": "universal",
+            "selected_loc": "picnic_park",
+            "candidates_preview": [
+              "dragon_lair (existing)",
+              "burning_battlefield (tag:fantasy)",
+              "dungeon_crypt (tag:fantasy)",
+              "alien_planet (tag:fantasy)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "winter_street (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting under a tree, reading"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1031,
+          "decision": {
+            "mood_resolved": "intense_anger",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "brushing hair back",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 32,
+    "seed": 1032,
+    "input": {
+      "subj": "gym girl",
+      "costume": "gym_workout",
+      "loc": "stadium_court",
+      "action": "walking briskly around the track",
+      "meta": {
+        "mood": "energetic_joy",
+        "style": "dynamic sports illustration",
+        "tags": {
+          "place_type": "public",
+          "purpose": "work",
+          "social_distance": "stranger",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "gym girl",
+      "costume": "gym_workout",
+      "loc": "stadium_court",
+      "action": "walking briskly around the track",
+      "garnish": "swinging arms gently, sparks, cheerfulness",
+      "final_prompt": "a view of gym girl wearing gym_workout. walking briskly around the track in the cold wind. swinging arms gently, sparks, cheerfulness. She is in stadium_court, surrounded by energetic_joy.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1032,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 12,
+            "selected_source": "existing",
+            "selected_loc": "stadium_court",
+            "candidates_preview": [
+              "stadium_court (existing)",
+              "fitness_gym (tag:sport)",
+              "yoga_studio (tag:sport)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1032,
+          "decision": {
+            "mood_resolved": "energetic_joy",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "swinging arms gently",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 33,
+    "seed": 1033,
+    "input": {
+      "subj": "winter date girl",
+      "costume": "winter_date",
+      "loc": "illuminated_park",
+      "action": "standing in the snow, looking up at the lights",
+      "meta": {
+        "mood": "romantic_allure",
+        "style": "soft lighting, winter theme",
+        "tags": {
+          "place_type": "public",
+          "purpose": "rest",
+          "social_distance": "acquaintance",
+          "progress": "midway",
+          "obstacle": "wind",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "winter date girl",
+      "costume": "winter_date",
+      "loc": "bedroom_boudoir",
+      "action": "lying down reading a book",
+      "garnish": "reclining, cinematic lighting, natural lighting",
+      "final_prompt": "The character is winter date girl in winter_date. lying down reading a book under the moonlight. reclining, cinematic lighting, natural lighting. The setting is bedroom_boudoir, romantic_allure.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1033,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "universal",
+            "selected_loc": "bedroom_boudoir",
+            "candidates_preview": [
+              "illuminated_park (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "lying down reading a book"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1033,
+          "decision": {
+            "mood_resolved": "romantic_allure",
+            "personality_moods": [],
+            "anchors": {
+              "lying": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 11,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 34,
+    "seed": 1034,
+    "input": {
+      "subj": "gothic doll",
+      "costume": "gothic_lolita",
+      "loc": "messy_copy_room",
+      "action": "sitting on a box holding a doll and a bouquet",
+      "meta": {
+        "mood": "creepy_fear",
+        "style": "dark gothic art",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "bored"
+        }
+      }
+    },
+    "output": {
+      "subj": "gothic doll",
+      "costume": "gothic_lolita",
+      "loc": "rainy_alley",
+      "action": "standing and holding an umbrella",
+      "garnish": "hands in pockets, looking up, parted lips",
+      "final_prompt": "gothic doll wearing gothic_lolita. standing and holding an umbrella in the cold wind. hands in pockets, looking up, parted lips. The setting is rainy_alley, with an atmosphere of creepy_fear.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1034,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 18,
+            "selected_source": "tag:urban",
+            "selected_loc": "rainy_alley",
+            "candidates_preview": [
+              "messy_copy_room (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "burning_battlefield (tag:fantasy)",
+              "dungeon_crypt (tag:fantasy)",
+              "dragon_lair (tag:fantasy)",
+              "alien_planet (tag:fantasy)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and holding an umbrella"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1034,
+          "decision": {
+            "mood_resolved": "creepy_fear",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 35,
+    "seed": 1035,
+    "input": {
+      "subj": "secret agent",
+      "costume": "secret_agent",
+      "loc": "commuter_transport",
+      "action": "standing on undercover transit mission, blending in",
+      "meta": {
+        "mood": "mysterious_curious",
+        "style": "spy movie concept art",
+        "tags": {
+          "place_type": "public",
+          "purpose": "commute",
+          "social_distance": "crowd",
+          "progress": "midway",
+          "emotion_nuance": "tense"
+        }
+      }
+    },
+    "output": {
+      "subj": "secret agent",
+      "costume": "secret_agent",
+      "loc": "karaoke_bar",
+      "action": "sitting with a drink, looking relaxed",
+      "garnish": "holding a drink, fingers touching face, knees together",
+      "final_prompt": "Captured here is secret agent in secret_agent. sitting with a drink, looking relaxed, with holding a drink, fingers touching face, knees together. The setting is karaoke_bar, mysterious_curious.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1035,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 18,
+            "selected_source": "tag:urban",
+            "selected_loc": "karaoke_bar",
+            "candidates_preview": [
+              "commuter_transport (existing)",
+              "modern_office (tag:office)",
+              "boardroom (tag:office)",
+              "office_elevator (tag:office)",
+              "surveillance_room (tag:office)",
+              "messy_copy_room (tag:office)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "street_cafe (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting with a drink, looking relaxed"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1035,
+          "decision": {
+            "mood_resolved": "mysterious_curious",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true,
+              "standing": true
+            },
+            "guaranteed_micro": "holding a drink",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 36,
+    "seed": 1036,
+    "input": {
+      "subj": "solarpunk girl",
+      "costume": "beach_resort",
+      "loc": "alien_planet",
+      "action": "standing and holding a bouquet, pointing at a strange plant",
+      "meta": {
+        "mood": "whimsical_playful",
+        "style": "sci-fi illustration, pastel colors",
+        "tags": {
+          "place_type": "public",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "solarpunk girl",
+      "costume": "beach_resort",
+      "loc": "neon_city_street",
+      "action": "standing at a crosswalk, looking up at signs",
+      "garnish": "swinging arms gently, cinematic lighting, arms crossed",
+      "final_prompt": "a view of solarpunk girl wearing beach_resort. standing at a crosswalk, looking up at signs under the moonlight. swinging arms gently, cinematic lighting, arms crossed. The setting is neon_city_street, with an atmosphere of whimsical_playful.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1036,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 19,
+            "selected_source": "tag:scifi",
+            "selected_loc": "neon_city_street",
+            "candidates_preview": [
+              "alien_planet (existing)",
+              "fantasy_forest (tag:nature)",
+              "bamboo_forest (tag:nature)",
+              "tropical_beach (tag:nature)",
+              "wave_barrel (tag:nature)",
+              "shinto_shrine (tag:nature)",
+              "spaceship_bridge (tag:scifi)",
+              "cyber_lab (tag:scifi)",
+              "airship_deck (tag:scifi)",
+              "neon_city_street (tag:scifi)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing at a crosswalk, looking up at signs"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1036,
+          "decision": {
+            "mood_resolved": "whimsical_playful",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "swinging arms gently",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 37,
+    "seed": 1037,
+    "input": {
+      "subj": "chef girl",
+      "costume": "rainy_day",
+      "loc": "messy_kitchen",
+      "action": "standing and cooking food with a frying pan",
+      "meta": {
+        "mood": "energetic_joy",
+        "style": "slice of life anime",
+        "tags": {
+          "place_type": "private",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "midway",
+          "obstacle": "spill",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "chef girl",
+      "costume": "rainy_day",
+      "loc": "messy_kitchen",
+      "action": "standing and cooking food with a frying pan",
+      "garnish": "wide eyes, looking embarrassed, touching lips",
+      "final_prompt": "chef girl in rainy_day. standing and cooking food with a frying pan, enjoying the warm sun. wide eyes, looking embarrassed, touching lips. The surrounding area is messy_kitchen, energetic_joy.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1037,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 10,
+            "selected_source": "existing",
+            "selected_loc": "messy_kitchen",
+            "candidates_preview": [
+              "messy_kitchen (existing)",
+              "bedroom_boudoir (tag:domestic)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1037,
+          "decision": {
+            "mood_resolved": "energetic_joy",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 11,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 38,
+    "seed": 1038,
+    "input": {
+      "subj": "opera singer",
+      "costume": "gothic_lolita",
+      "loc": "opera_house",
+      "action": "standing on stage singing (music)",
+      "meta": {
+        "mood": "romantic_allure",
+        "style": "elegant illustration",
+        "tags": {
+          "place_type": "public",
+          "purpose": "work",
+          "social_distance": "crowd",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "opera singer",
+      "costume": "gothic_lolita",
+      "loc": "opera_house",
+      "action": "standing on stage singing (music)",
+      "garnish": "fingers on flute keys, wind effects, adjusting clothes",
+      "final_prompt": "opera singer in gothic_lolita. She is standing on stage singing (music), fingers on flute keys, wind effects, adjusting clothes. The setting is opera_house, romantic_allure.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1038,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "existing",
+            "selected_loc": "opera_house",
+            "candidates_preview": [
+              "opera_house (existing)",
+              "concert_stage (tag:music)",
+              "recording_studio (tag:music)",
+              "karaoke_bar (tag:music)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1038,
+          "decision": {
+            "mood_resolved": "romantic_allure",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true,
+              "dynamic": true
+            },
+            "guaranteed_micro": "fingers on flute keys",
+            "camera_tags": [],
+            "len_pools": 11,
+            "filtered_micro_count": 2
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 39,
+    "seed": 1039,
+    "input": {
+      "subj": "kendo girl",
+      "costume": "traditional_japanese",
+      "loc": "school_gym_hall",
+      "action": "sitting in seiza posture",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "martial arts illustration",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "study",
+          "social_distance": "acquaintance",
+          "progress": "preparing",
+          "emotion_nuance": "tense"
+        }
+      }
+    },
+    "output": {
+      "subj": "kendo girl",
+      "costume": "traditional_japanese",
+      "loc": "shinto_shrine",
+      "action": "standing and sweeping leaves with a broom",
+      "garnish": "putting hand in pocket, grabbing keys, arms crossed",
+      "final_prompt": "kendo girl dressed in traditional_japanese. standing and sweeping leaves with a broom. Note: putting hand in pocket, grabbing keys, arms crossed. She is situated in shinto_shrine, characterized by quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1039,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 18,
+            "selected_source": "tag:nature",
+            "selected_loc": "shinto_shrine",
+            "candidates_preview": [
+              "school_gym_hall (existing)",
+              "school_classroom (tag:school)",
+              "school_rooftop (tag:school)",
+              "school_library (tag:school)",
+              "fantasy_forest (tag:nature)",
+              "bamboo_forest (tag:nature)",
+              "tropical_beach (tag:nature)",
+              "wave_barrel (tag:nature)",
+              "shinto_shrine (tag:nature)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and sweeping leaves with a broom"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1039,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "putting hand in pocket",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 40,
+    "seed": 1040,
+    "input": {
+      "subj": "injured knight",
+      "costume": "fantasy_battle",
+      "loc": "dungeon_crypt",
+      "action": "sitting against a wall resting",
+      "meta": {
+        "mood": "melancholic_sadness",
+        "style": "dark fantasy, gritty",
+        "tags": {
+          "place_type": "private",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "wrapping_up",
+          "emotion_nuance": "relieved"
+        }
+      }
+    },
+    "output": {
+      "subj": "injured knight",
+      "costume": "fantasy_battle",
+      "loc": "dungeon_crypt",
+      "action": "sitting against a wall resting",
+      "garnish": "tying shoelace, hand on chin, pushing back chair",
+      "final_prompt": "Features injured knight in fantasy_battle. sitting against a wall resting, with tying shoelace, hand on chin, pushing back chair. The location is dungeon_crypt, with melancholic_sadness.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1040,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 9,
+            "selected_source": "existing",
+            "selected_loc": "dungeon_crypt",
+            "candidates_preview": [
+              "dungeon_crypt (existing)",
+              "burning_battlefield (tag:fantasy)",
+              "dragon_lair (tag:fantasy)",
+              "alien_planet (tag:fantasy)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "winter_street (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1040,
+          "decision": {
+            "mood_resolved": "melancholic_sadness",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "tying shoelace",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 41,
+    "seed": 1041,
+    "input": {
+      "subj": "surfer girl",
+      "costume": "beach_resort",
+      "loc": "wave_barrel",
+      "action": "standing on a surfboard at the beach",
+      "meta": {
+        "mood": "energetic_joy",
+        "style": "dynamic action shot",
+        "tags": {
+          "place_type": "public",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "surfer girl",
+      "costume": "beach_resort",
+      "loc": "tropical_beach",
+      "action": "walking along the shoreline",
+      "garnish": "looking around, radiant eyes, looking away",
+      "final_prompt": "Captured here is surfer girl in beach_resort. walking along the shoreline, with looking around, radiant eyes, looking away. The location is tropical_beach, energetic_joy.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1041,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 16,
+            "selected_source": "tag:resort",
+            "selected_loc": "tropical_beach",
+            "candidates_preview": [
+              "wave_barrel (existing)",
+              "fitness_gym (tag:sport)",
+              "yoga_studio (tag:sport)",
+              "stadium_court (tag:sport)",
+              "poolside_resort (tag:resort)",
+              "tropical_beach (tag:resort)",
+              "luxury_hotel_lobby (tag:resort)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "walking along the shoreline"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1041,
+          "decision": {
+            "mood_resolved": "energetic_joy",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "looking around",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 42,
+    "seed": 1042,
+    "input": {
+      "subj": "recording artist",
+      "costume": "rock_concert",
+      "loc": "recording_studio",
+      "action": "standing and adjusting headphones (music)",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "cool anime style",
+        "tags": {
+          "place_type": "private",
+          "purpose": "work",
+          "social_distance": "acquaintance",
+          "progress": "preparing",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "recording artist",
+      "costume": "rock_concert",
+      "loc": "concert_stage",
+      "action": "standing and playing an instrument",
+      "garnish": "playing violin, pout, adjusting clothes",
+      "final_prompt": "The character is recording artist in rock_concert. standing and playing an instrument, with playing violin, pout, adjusting clothes. The setting is concert_stage, featuring quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1042,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "tag:music",
+            "selected_loc": "concert_stage",
+            "candidates_preview": [
+              "recording_studio (existing)",
+              "concert_stage (tag:music)",
+              "opera_house (tag:music)",
+              "karaoke_bar (tag:music)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and playing an instrument"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1042,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "playing violin",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 2
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 43,
+    "seed": 1043,
+    "input": {
+      "subj": "sleepy girl",
+      "costume": "winter_date",
+      "loc": "bedroom_boudoir",
+      "action": "lying on bed hugging a pillow",
+      "meta": {
+        "mood": "peaceful_relaxed",
+        "style": "cozy illustration",
+        "tags": {
+          "place_type": "private",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "wrapping_up",
+          "emotion_nuance": "relieved"
+        }
+      }
+    },
+    "output": {
+      "subj": "sleepy girl",
+      "costume": "winter_date",
+      "loc": "bedroom_boudoir",
+      "action": "lying on bed hugging a pillow",
+      "garnish": "sighing happily, sharp gaze, on stomach",
+      "final_prompt": "sleepy girl clad in winter_date. Currently lying on bed hugging a pillow. sighing happily, sharp gaze, on stomach. The background is bedroom_boudoir, peaceful_relaxed.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1043,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 10,
+            "selected_source": "existing",
+            "selected_loc": "bedroom_boudoir",
+            "candidates_preview": [
+              "bedroom_boudoir (existing)",
+              "messy_kitchen (tag:domestic)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1043,
+          "decision": {
+            "mood_resolved": "peaceful_relaxed",
+            "personality_moods": [],
+            "anchors": {
+              "lying": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 44,
+    "seed": 1044,
+    "input": {
+      "subj": "cafe customer",
+      "costume": "cozy_cafe",
+      "loc": "street_cafe",
+      "action": "sitting at a round table, sipping coffee",
+      "meta": {
+        "mood": "peaceful_relaxed",
+        "style": "watercolor",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "rest",
+          "social_distance": "stranger",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "cafe customer",
+      "costume": "cozy_cafe",
+      "loc": "neon_city_street",
+      "action": "standing and waiting under a neon sign",
+      "garnish": "dazing off, deep sigh, soft gaze",
+      "final_prompt": "The character is cafe customer in cozy_cafe. Currently standing and waiting under a neon sign. dazing off, deep sigh, soft gaze. The location is neon_city_street, peaceful_relaxed.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1044,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "tag:urban",
+            "selected_loc": "neon_city_street",
+            "candidates_preview": [
+              "street_cafe (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and waiting under a neon sign"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1044,
+          "decision": {
+            "mood_resolved": "peaceful_relaxed",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "dazing off",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 45,
+    "seed": 1045,
+    "input": {
+      "subj": "urban shopper",
+      "costume": "urban_shopping",
+      "loc": "shopping_mall",
+      "action": "walking and holding shopping bags",
+      "meta": {
+        "mood": "energetic_joy",
+        "style": "fashion illustration",
+        "tags": {
+          "place_type": "public",
+          "purpose": "shop",
+          "social_distance": "crowd",
+          "progress": "midway",
+          "obstacle": "luggage",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "urban shopper",
+      "costume": "urban_shopping",
+      "loc": "neon_city_street",
+      "action": "leaning against a wall, looking at the crowd",
+      "garnish": "hands behind back, bloom, faint smile",
+      "final_prompt": "urban shopper wearing urban_shopping. leaning against a wall, looking at the crowd under the moonlight. hands behind back, bloom, faint smile. The scene is neon_city_street, with energetic_joy lighting.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1045,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 14,
+            "selected_source": "tag:urban",
+            "selected_loc": "neon_city_street",
+            "candidates_preview": [
+              "shopping_mall (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "leaning against a wall, looking at the crowd"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1045,
+          "decision": {
+            "mood_resolved": "energetic_joy",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 12,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 46,
+    "seed": 1046,
+    "input": {
+      "subj": "mori girl",
+      "costume": "mori_natural",
+      "loc": "picnic_park",
+      "action": "sitting on grass, relaxing in nature",
+      "meta": {
+        "mood": "peaceful_relaxed",
+        "style": "soft pastel",
+        "tags": {
+          "place_type": "public",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "mori girl",
+      "costume": "mori_natural",
+      "loc": "bamboo_forest",
+      "action": "standing among the bamboo, looking up",
+      "garnish": "fingers touching face, heavy eyelids, detailed texture",
+      "final_prompt": "Captured here is mori girl in mori_natural. standing among the bamboo, looking up on this hot day. fingers touching face, heavy eyelids, detailed texture. The surrounding area is bamboo_forest, peaceful_relaxed.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1046,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 14,
+            "selected_source": "tag:nature",
+            "selected_loc": "bamboo_forest",
+            "candidates_preview": [
+              "picnic_park (existing)",
+              "fantasy_forest (tag:nature)",
+              "bamboo_forest (tag:nature)",
+              "tropical_beach (tag:nature)",
+              "wave_barrel (tag:nature)",
+              "shinto_shrine (tag:nature)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing among the bamboo, looking up"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1046,
+          "decision": {
+            "mood_resolved": "peaceful_relaxed",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 47,
+    "seed": 1047,
+    "input": {
+      "subj": "space pilot",
+      "costume": "scifi_space",
+      "loc": "spaceship",
+      "action": "standing on the bridge, looking at stars",
+      "meta": {
+        "mood": "mysterious_curious",
+        "style": "scifi concept art",
+        "tags": {
+          "place_type": "private",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "space pilot",
+      "costume": "scifi_space",
+      "loc": "shopping_mall_atrium",
+      "action": "walking and holding shopping bags",
+      "garnish": "dusting off clothes, shifting weight to one leg, peering forward",
+      "final_prompt": "space pilot in scifi_space. walking and holding shopping bags. dusting off clothes, shifting weight to one leg, peering forward adds detail. shopping_mall_atrium, mysterious_curious.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1047,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 12,
+            "selected_source": "universal",
+            "selected_loc": "shopping_mall_atrium",
+            "candidates_preview": [
+              "spaceship (existing)",
+              "spaceship_bridge (tag:scifi)",
+              "cyber_lab (tag:scifi)",
+              "airship_deck (tag:scifi)",
+              "neon_city_street (tag:scifi)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "walking and holding shopping bags"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1047,
+          "decision": {
+            "mood_resolved": "mysterious_curious",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "dusting off clothes",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 40
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 48,
+    "seed": 1048,
+    "input": {
+      "subj": "inventor girl",
+      "costume": "steampunk",
+      "loc": "workshop",
+      "action": "working on a machine with tools",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "steampunk art",
+        "tags": {
+          "place_type": "private",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "inventor girl",
+      "costume": "steampunk",
+      "loc": "commuter_transport",
+      "action": "sitting by the window, looking outside",
+      "garnish": "yawning slightly, open palm, detailed texture",
+      "final_prompt": "Features inventor girl in steampunk. sitting by the window, looking outside. yawning slightly, open palm, detailed texture adds detail. The environment is commuter_transport, bathed in quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1048,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 17,
+            "selected_source": "universal",
+            "selected_loc": "commuter_transport",
+            "candidates_preview": [
+              "workshop (existing)",
+              "clockwork_workshop (tag:craft)",
+              "messy_copy_room (tag:craft)",
+              "antique_shop (tag:craft)",
+              "spaceship_bridge (tag:scifi)",
+              "cyber_lab (tag:scifi)",
+              "airship_deck (tag:scifi)",
+              "neon_city_street (tag:scifi)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "sitting by the window, looking outside"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1048,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true,
+              "standing": true
+            },
+            "guaranteed_micro": "yawning slightly",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 49,
+    "seed": 1049,
+    "input": {
+      "subj": "cafe barista",
+      "costume": "cozy_cafe",
+      "loc": "street_cafe",
+      "action": "standing behind the counter, preparing coffee with care",
+      "meta": {
+        "mood": "peaceful_relaxed",
+        "style": "warm illustration",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "work",
+          "social_distance": "acquaintance",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "cafe barista",
+      "costume": "cozy_cafe",
+      "loc": "street_cafe",
+      "action": "standing behind the counter, preparing coffee with care",
+      "garnish": "blowing on hot coffee, volumetric lighting, reviewing documents",
+      "final_prompt": "cafe barista clad in cozy_cafe. standing behind the counter, preparing coffee with care, enjoying the warm sun. blowing on hot coffee, volumetric lighting, reviewing documents. The background depicts street_cafe, featuring peaceful_relaxed.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1049,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "existing",
+            "selected_loc": "street_cafe",
+            "candidates_preview": [
+              "street_cafe (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1049,
+          "decision": {
+            "mood_resolved": "peaceful_relaxed",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "blowing on hot coffee",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 50,
+    "seed": 1050,
+    "input": {
+      "subj": "afternoon reader",
+      "costume": "cozy_cafe",
+      "loc": "cozy_bookstore",
+      "action": "sitting in a corner reading a book while sipping tea",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "soft lighting illustration",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "afternoon reader",
+      "costume": "cozy_cafe",
+      "loc": "shopping_mall_atrium",
+      "action": "standing and looking at a store window",
+      "garnish": "cinematic lighting, tight-lipped, sunlight",
+      "final_prompt": "The focus is on afternoon reader wearing cozy_cafe. standing and looking at a store window on this hot day. cinematic lighting, tight-lipped, sunlight. The scene is shopping_mall_atrium, with quiet_focused lighting.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1050,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "universal",
+            "selected_loc": "shopping_mall_atrium",
+            "candidates_preview": [
+              "cozy_bookstore (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and looking at a store window"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1050,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 51,
+    "seed": 1051,
+    "input": {
+      "subj": "fashionista",
+      "costume": "urban_shopping",
+      "loc": "fashion_boutique",
+      "action": "standing in front of a mirror, holding up a dress",
+      "meta": {
+        "mood": "energetic_joy",
+        "style": "fashion illustration",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "shop",
+          "social_distance": "stranger",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "fashionista",
+      "costume": "urban_shopping",
+      "loc": "winter_street",
+      "action": "standing and looking at a shop window",
+      "garnish": "petting a dog, shifting weight to one leg, glowing with happiness",
+      "final_prompt": "fashionista wearing urban_shopping. standing and looking at a shop window in the cold wind. petting a dog, shifting weight to one leg, glowing with happiness. She is situated in winter_street, characterized by energetic_joy.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1051,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "universal",
+            "selected_loc": "winter_street",
+            "candidates_preview": [
+              "fashion_boutique (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and looking at a shop window"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1051,
+          "decision": {
+            "mood_resolved": "energetic_joy",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "petting a dog",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 3
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 52,
+    "seed": 1052,
+    "input": {
+      "subj": "window shopper",
+      "costume": "urban_shopping",
+      "loc": "shopping_mall_atrium",
+      "action": "walking slowly and looking at store displays",
+      "meta": {
+        "mood": "whimsical_playful",
+        "style": "bright modern illustration",
+        "tags": {
+          "place_type": "public",
+          "purpose": "shop",
+          "social_distance": "crowd",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "window shopper",
+      "costume": "urban_shopping",
+      "loc": "shopping_mall_atrium",
+      "action": "walking slowly and looking at store displays",
+      "garnish": "drawing bow, finger on lips, mischievous eyes",
+      "final_prompt": "window shopper dressed in urban_shopping. walking slowly and looking at store displays in the cold wind. drawing bow, finger on lips, mischievous eyes. She is situated in shopping_mall_atrium, characterized by whimsical_playful.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1052,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "existing",
+            "selected_loc": "shopping_mall_atrium",
+            "candidates_preview": [
+              "shopping_mall_atrium (existing)",
+              "neon_city_street (tag:urban)",
+              "rainy_alley (tag:urban)",
+              "karaoke_bar (tag:urban)",
+              "fashion_boutique (tag:urban)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1052,
+          "decision": {
+            "mood_resolved": "whimsical_playful",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "drawing bow",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 6
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 53,
+    "seed": 1053,
+    "input": {
+      "subj": "flower girl",
+      "costume": "mori_natural",
+      "loc": "botanical_garden",
+      "action": "standing and gently touching a flower petal",
+      "meta": {
+        "mood": "peaceful_relaxed",
+        "style": "watercolor pastel",
+        "tags": {
+          "place_type": "public",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "flower girl",
+      "costume": "mori_natural",
+      "loc": "tropical_beach",
+      "action": "walking along the shoreline",
+      "garnish": "swinging arms gently, arms crossed, glowing light",
+      "final_prompt": "The focus is on flower girl wearing mori_natural. Currently walking along the shoreline. swinging arms gently, arms crossed, glowing light. The setting is tropical_beach, featuring peaceful_relaxed.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1053,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 14,
+            "selected_source": "tag:nature",
+            "selected_loc": "tropical_beach",
+            "candidates_preview": [
+              "botanical_garden (existing)",
+              "fantasy_forest (tag:nature)",
+              "bamboo_forest (tag:nature)",
+              "tropical_beach (tag:nature)",
+              "wave_barrel (tag:nature)",
+              "shinto_shrine (tag:nature)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "walking along the shoreline"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1053,
+          "decision": {
+            "mood_resolved": "peaceful_relaxed",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "swinging arms gently",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 4
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 54,
+    "seed": 1054,
+    "input": {
+      "subj": "nature wanderer",
+      "costume": "mori_natural",
+      "loc": "bamboo_forest",
+      "action": "walking along the path, looking up at the tall bamboo",
+      "meta": {
+        "mood": "mysterious_curious",
+        "style": "nature painting",
+        "tags": {
+          "place_type": "public",
+          "purpose": "commute",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "nature wanderer",
+      "costume": "mori_natural",
+      "loc": "botanical_garden",
+      "action": "standing and smelling a flower",
+      "garnish": "smelling a flower, touching lips, smirk",
+      "final_prompt": "nature wanderer in mori_natural. standing and smelling a flower, under the blue sky. smelling a flower, touching lips, smirk. The location is botanical_garden, mysterious_curious.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1054,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 14,
+            "selected_source": "universal",
+            "selected_loc": "botanical_garden",
+            "candidates_preview": [
+              "bamboo_forest (existing)",
+              "fantasy_forest (tag:nature)",
+              "tropical_beach (tag:nature)",
+              "wave_barrel (tag:nature)",
+              "shinto_shrine (tag:nature)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and smelling a flower"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1054,
+          "decision": {
+            "mood_resolved": "mysterious_curious",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "smelling a flower",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 3
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 55,
+    "seed": 1055,
+    "input": {
+      "subj": "space engineer",
+      "costume": "scifi_space",
+      "loc": "cyber_lab",
+      "action": "standing in front of holo-displays, adjusting controls",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "scifi digital art",
+        "tags": {
+          "place_type": "private",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "space engineer",
+      "costume": "scifi_space",
+      "loc": "neon_city_street",
+      "action": "standing and waiting under a neon sign",
+      "garnish": "tapping fingers, steady gaze, arms crossed",
+      "final_prompt": "space engineer in scifi_space. She is standing and waiting under a neon sign, tapping fingers, steady gaze, arms crossed. The setting is neon_city_street, featuring quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1055,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 13,
+            "selected_source": "tag:scifi",
+            "selected_loc": "neon_city_street",
+            "candidates_preview": [
+              "cyber_lab (existing)",
+              "spaceship_bridge (tag:scifi)",
+              "airship_deck (tag:scifi)",
+              "neon_city_street (tag:scifi)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and waiting under a neon sign"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1055,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "tapping fingers",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 56,
+    "seed": 1056,
+    "input": {
+      "subj": "stargazer",
+      "costume": "scifi_space",
+      "loc": "airship_deck",
+      "action": "standing at the railing, looking up at the night sky",
+      "meta": {
+        "mood": "romantic_allure",
+        "style": "cinematic scifi",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "rest",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "content"
+        }
+      }
+    },
+    "output": {
+      "subj": "stargazer",
+      "costume": "scifi_space",
+      "loc": "shinto_shrine",
+      "action": "standing and sweeping leaves with a broom",
+      "garnish": "adjusting buttons, open palm, scratching head",
+      "final_prompt": "stargazer in scifi_space. standing and sweeping leaves with a broom, with adjusting buttons, open palm, scratching head. The setting is shinto_shrine, featuring romantic_allure.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1056,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 18,
+            "selected_source": "tag:nature",
+            "selected_loc": "shinto_shrine",
+            "candidates_preview": [
+              "airship_deck (existing)",
+              "spaceship_bridge (tag:scifi)",
+              "cyber_lab (tag:scifi)",
+              "neon_city_street (tag:scifi)",
+              "fantasy_forest (tag:nature)",
+              "bamboo_forest (tag:nature)",
+              "tropical_beach (tag:nature)",
+              "wave_barrel (tag:nature)",
+              "shinto_shrine (tag:nature)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and sweeping leaves with a broom"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1056,
+          "decision": {
+            "mood_resolved": "romantic_allure",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": "adjusting buttons",
+            "camera_tags": [],
+            "len_pools": 8,
+            "filtered_micro_count": 36
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 57,
+    "seed": 1057,
+    "input": {
+      "subj": "clockwork artisan",
+      "costume": "steampunk",
+      "loc": "clockwork_workshop",
+      "action": "sitting at a workbench, carefully assembling tiny gears",
+      "meta": {
+        "mood": "quiet_focused",
+        "style": "detailed steampunk art",
+        "tags": {
+          "place_type": "private",
+          "purpose": "work",
+          "social_distance": "alone",
+          "progress": "midway",
+          "emotion_nuance": "absorbed"
+        }
+      }
+    },
+    "output": {
+      "subj": "clockwork artisan",
+      "costume": "steampunk",
+      "loc": "clockwork_workshop",
+      "action": "sitting at a workbench, carefully assembling tiny gears",
+      "garnish": "sipping coffee, leaning in, eyes locked on subject",
+      "final_prompt": "clockwork artisan sporting steampunk. sitting at a workbench, carefully assembling tiny gears, under the blue sky. sipping coffee, leaning, eyes locked on subject. The environment is clockwork_workshop, bathed in quiet_focused.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1057,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 12,
+            "selected_source": "existing",
+            "selected_loc": "clockwork_workshop",
+            "candidates_preview": [
+              "clockwork_workshop (existing)",
+              "messy_copy_room (tag:craft)",
+              "antique_shop (tag:craft)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ]
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1057,
+          "decision": {
+            "mood_resolved": "quiet_focused",
+            "personality_moods": [],
+            "anchors": {
+              "sitting": true
+            },
+            "guaranteed_micro": "sipping coffee",
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 43
+          },
+          "warnings": []
+        }
+      ]
+    }
+  },
+  {
+    "index": 58,
+    "seed": 1058,
+    "input": {
+      "subj": "airship captain",
+      "costume": "steampunk",
+      "loc": "airship_deck",
+      "action": "standing at the helm, gripping the steering wheel with determination",
+      "meta": {
+        "mood": "mysterious_curious",
+        "style": "adventure illustration",
+        "tags": {
+          "place_type": "semi_public",
+          "purpose": "work",
+          "social_distance": "acquaintance",
+          "progress": "midway",
+          "emotion_nuance": "tense"
+        }
+      }
+    },
+    "output": {
+      "subj": "airship captain",
+      "costume": "steampunk",
+      "loc": "messy_copy_room",
+      "action": "standing and organizing papers",
+      "garnish": "tiptoeing, open palm, standing tall",
+      "final_prompt": "Features airship captain in steampunk. standing and organizing papers on this hot day. tiptoeing, open palm, standing tall. The scene is messy_copy_room, mysterious_curious.",
+      "debug_info": [
+        {
+          "node": "SceneVariator",
+          "seed": 1058,
+          "decision": {
+            "mode": "full",
+            "candidates_count": 16,
+            "selected_source": "tag:craft",
+            "selected_loc": "messy_copy_room",
+            "candidates_preview": [
+              "airship_deck (existing)",
+              "spaceship_bridge (tag:scifi)",
+              "cyber_lab (tag:scifi)",
+              "neon_city_street (tag:scifi)",
+              "clockwork_workshop (tag:craft)",
+              "messy_copy_room (tag:craft)",
+              "antique_shop (tag:craft)",
+              "street_cafe (universal)",
+              "commuter_transport (universal)",
+              "bedroom_boudoir (universal)",
+              "picnic_park (universal)",
+              "cozy_bookstore (universal)",
+              "winter_street (universal)",
+              "shopping_mall_atrium (universal)",
+              "illuminated_park (universal)",
+              "botanical_garden (universal)"
+            ],
+            "action_updated": true,
+            "new_action": "standing and organizing papers"
+          },
+          "warnings": []
+        },
+        {
+          "node": "GarnishSampler",
+          "seed": 1058,
+          "decision": {
+            "mood_resolved": "mysterious_curious",
+            "personality_moods": [],
+            "anchors": {
+              "standing": true
+            },
+            "guaranteed_micro": null,
+            "camera_tags": [],
+            "len_pools": 9,
+            "filtered_micro_count": 0
+          },
+          "warnings": []
+        }
+      ]
+    }
+  }
+]
