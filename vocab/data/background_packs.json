@@ -27,7 +27,20 @@
     ],
     "time": [
       "golden hour",
-      "bright afternoon"
+      "bright afternoon",
+      "early morning",
+      "lunch break"
+    ],
+    "crowd": [
+      "full of chatting students",
+      "completely empty",
+      "scattered with a few students",
+      "teacher supervising"
+    ],
+    "weather": [
+      "sunny blue sky outside",
+      "heavy rain against the windows",
+      "cloudy grey sky"
     ],
     "aliases": [
       "classroom"
@@ -94,7 +107,20 @@
     ],
     "time": [
       "busy workday morning",
-      "late night overtime"
+      "late night overtime",
+      "quiet lunch hour",
+      "early monday morning"
+    ],
+    "crowd": [
+      "bustling with employees",
+      "nearly empty",
+      "small groups gathering",
+      "cleaning staff working"
+    ],
+    "weather": [
+      "clear city view",
+      "foggy morning window",
+      "rain streaks on glass"
     ],
     "aliases": [
       "office"
@@ -850,7 +876,20 @@
       "artificial interior lighting"
     ],
     "time": [
-      "rush hour"
+      "rush hour",
+      "late night last train",
+      "quiet midday"
+    ],
+    "crowd": [
+      "packed like sardines",
+      "sparse passengers",
+      "standing room only",
+      "mostly empty seats"
+    ],
+    "weather": [
+      "view of sunset city",
+      "rainy window reflection",
+      "dark tunnel window"
     ],
     "aliases": [
       "commuter train",
@@ -1592,7 +1631,20 @@
     ],
     "time": [
       "sunny afternoon",
-      "fresh morning"
+      "fresh morning",
+      "lazy sunday brunch",
+      "evening dusk"
+    ],
+    "crowd": [
+      "bustling with customers",
+      "quiet corner table",
+      "line of people waiting",
+      "sparse and relaxed"
+    ],
+    "weather": [
+      "warm sunlight",
+      "gentle breeze",
+      "cloudy afternoon"
     ],
     "aliases": [
       "cafe"
@@ -1627,7 +1679,20 @@
     ],
     "time": [
       "quiet daytime",
-      "rainy day"
+      "rainy day",
+      "late evening before closing",
+      "weekend afternoon"
+    ],
+    "crowd": [
+      "few silent readers",
+      "empty aisles",
+      "couple browsing together",
+      "lone customer"
+    ],
+    "weather": [
+      "soft diffused light",
+      "sound of rain outside",
+      "sunbeam through dust"
     ],
     "aliases": []
   },
@@ -1660,7 +1725,20 @@
     ],
     "time": [
       "daytime",
-      "weekend sale"
+      "weekend sale",
+      "holiday season",
+      "evening stroll"
+    ],
+    "crowd": [
+      "teeming with shoppers",
+      "families walking",
+      "clusters of teenagers",
+      "quiet weekday morning"
+    ],
+    "weather": [
+      "bright skylight sun",
+      "overcast skylight",
+      "night sky through glass roof"
     ],
     "aliases": [
       "shopping_mall"
