@@ -352,6 +352,13 @@ def main():
                     f"    - {row['subject']}: {row['base_variations']} "
                     f"(rows={row['rows']}, locations={row['locations']})"
                 )
+            
+            print("\n  Bottom 10 subjects by base variations (BOTTLENECKS):")
+            for row in per_subject[-10:]:
+                print(
+                    f"    - {row['subject']}: {row['base_variations']} "
+                    f"(rows={row['rows']}, locations={row['locations']})"
+                )
         print("="*60)
 
 if __name__ == "__main__":
