@@ -7,7 +7,14 @@
     "picnic_park",
     "cozy_bookstore",
     "winter_street",
-    "illuminated_park"
+    "winter_street",
+    "illuminated_park",
+    "art_gallery",
+    "museum_hall",
+    "shopping_mall_atrium",
+    "messy_kitchen",
+    "botanical_garden",
+    "aquarium"
   ],
   "loc_tags": {
     "school": [
@@ -28,7 +35,9 @@
       "rainy_alley",
       "karaoke_bar",
       "fashion_boutique",
-      "shopping_mall_atrium"
+      "fashion_boutique",
+      "shopping_mall_atrium",
+      "underground_bar"
     ],
     "nature": [
       "fantasy_forest",
@@ -36,13 +45,17 @@
       "tropical_beach",
       "wave_barrel",
       "shinto_shrine",
-      "botanical_garden"
+      "enchanted_lake",
+      "japanese_garden"
     ],
     "fantasy": [
       "burning_battlefield",
       "dungeon_crypt",
       "dragon_lair",
-      "alien_planet"
+      "alien_planet",
+      "castle_hall",
+      "enchanted_lake",
+      "magic_academy_library"
     ],
     "music": [
       "concert_stage",
@@ -80,7 +93,9 @@
     "japanese": [
       "japanese_bath",
       "shinto_shrine",
-      "bamboo_forest"
+      "bamboo_forest",
+      "japanese_garden",
+      "tea_room"
     ],
     "steampunk": [
       "steampunk_airship"
@@ -89,7 +104,10 @@
       "spaceship_bridge",
       "cyber_lab",
       "airship_deck",
-      "neon_city_street"
+      "neon_city_street",
+      "starship_quarters",
+      "high_tech_medbay",
+      "alien_planet"
     ],
     "craft": [
       "clockwork_workshop",
@@ -231,25 +249,29 @@
     },
     "sorceress": {
       "tags": [
-        "fantasy"
+        "fantasy",
+        "nature"
       ],
       "default_costume": "fantasy_battle"
     },
     "female knight": {
       "tags": [
-        "fantasy"
+        "fantasy",
+        "nature"
       ],
       "default_costume": "fantasy_battle"
     },
     "injured knight": {
       "tags": [
-        "fantasy"
+        "fantasy",
+        "nature"
       ],
       "default_costume": "fantasy_battle"
     },
     "fantasy warrior": {
       "tags": [
-        "fantasy"
+        "fantasy",
+        "nature"
       ],
       "default_costume": "fantasy_battle"
     },
@@ -471,7 +493,8 @@
     },
     "clockwork artisan": {
       "tags": [
-        "craft"
+        "craft",
+        "steampunk"
       ],
       "default_costume": "steampunk"
     }
@@ -542,7 +565,6 @@
         "space pilot"
       ],
       "denied_locs": [
-        "botanical_garden",
         "picnic_park"
       ]
     },
