@@ -78,13 +78,77 @@ class SimpleTemplateBuilder:
                         return False # Conflict
             return True
 
+        # --------------------------------------------------------------------------------
+        # Location Expansion (Phase 1) - MOVED TO TOP
+        # --------------------------------------------------------------------------------
+        # Load background packs to expand 'loc' key into descriptive text
+        bg_packs_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "vocab", "data", "background_packs.json")
+        if loc and isinstance(loc, str) and os.path.exists(bg_packs_path):
+            try:
+                import json
+                with open(bg_packs_path, 'r', encoding='utf-8') as f:
+                    bg_packs = json.load(f)
+                
+                if loc in bg_packs:
+                    pack = bg_packs[loc]
+                    parts = []
+                    
+                    # Define context values for consistency check
+                    # Note: We use the original 'loc' key in context_vals which is fine for now,
+                    # but we also want to ensure the expanded parts are consistent with EACH OTHER and INPUTS.
+                    context_vals = [subj, costume, loc, action, garnish, meta_mood, meta_style]
+
+                    def pick_consistent(candidates):
+                        if not candidates: return None
+                        # Try up to 10 times to find a consistent candidate
+                        for _ in range(10):
+                            candidate = rng.choice(candidates)
+                            if is_consistent(str(candidate), context_vals):
+                                return candidate
+                        # If no consistent candidate found, return None (omit this details)
+                        return None
+                    
+                    # 1. Environment (Base)
+                    envs = pack.get("environment", [])
+                    if envs:
+                        e = pick_consistent(envs)
+                        parts.append(e)
+                    else:
+                        parts.append(pack.get("label", loc))
+                    
+                    # 2. Time
+                    times = pack.get("time", [])
+                    if times:
+                        t = pick_consistent(times)
+                        if t:
+                            parts.append(f"during {t}")
+
+                    # 3. Weather (New Axis)
+                    weathers = pack.get("weather", [])
+                    if weathers:
+                        w = pick_consistent(weathers)
+                        if w:
+                            parts.append(w)
+                        
+                    # 4. Crowd (New Axis)
+                    crowds = pack.get("crowd", [])
+                    if crowds:
+                        c = pick_consistent(crowds)
+                        if c:
+                            parts.append(c)
+                    
+                    # Replace loc key with expanded description
+                    loc = ", ".join(parts)
+            except Exception as e:
+                print(f"[SimpleTemplateBuilder] Error expanding location: {e}")
+
         if composition_mode:
             # Composition Mode: Intro + Body + End
             intros = load_lines("vocab/templates_intro.txt")
             bodies = load_lines("vocab/templates_body.txt")
             ends = load_lines("vocab/templates_end.txt")
             
-            # Context values for checking
+            # Context values for checking - NOW INCLUDES EXPANDED LOC
             context_vals = [subj, costume, loc, action, garnish, meta_mood, meta_style]
             
             def select_part(candidates, default):
