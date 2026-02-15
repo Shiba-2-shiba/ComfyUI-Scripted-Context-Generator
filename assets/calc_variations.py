@@ -1,8 +1,7 @@
 import argparse
 import csv
 import json
-import math
-import os
+import statistics
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -69,7 +68,7 @@ def calc_base_metrics(project_root, subject_filter=None):
     unique_locs = set()
     total_actions = 0
     missing_pools = set()
-    loc_action_counts = {}
+    location_stats = defaultdict(lambda: {"rows": 0, "actions": 0, "contribution": 0})
 
     for row in rows:
         subj = row.get('subj') # Reverted to 'subj' based on error
@@ -78,15 +77,40 @@ def calc_base_metrics(project_root, subject_filter=None):
         if subj: unique_subjects.add(subj)
         if loc:
             unique_locs.add(loc)
+            location_stats[loc]["rows"] += 1
             
             # Count actions
             if loc in action_pools:
                 count = len(action_pools[loc])
                 total_actions += count
-                loc_action_counts[loc] = count
+                location_stats[loc]["actions"] = count
+                location_stats[loc]["contribution"] += count
             else:
                 missing_pools.add(loc)
                 # Do not add to total_actions (Strict mode)
+
+    # Sort location stats by contribution (descending) for bottleneck/impact checks
+    sorted_location_stats = sorted(
+        (
+            {
+                "location": loc,
+                "rows": stats["rows"],
+                "actions": stats["actions"],
+                "contribution": stats["contribution"],
+            }
+            for loc, stats in location_stats.items()
+        ),
+        key=lambda x: x["contribution"],
+        reverse=True,
+    )
+
+    action_counts = [s["actions"] for s in location_stats.values() if s["actions"] > 0]
+    action_summary = {
+        "min": min(action_counts) if action_counts else 0,
+        "max": max(action_counts) if action_counts else 0,
+        "median": int(statistics.median(action_counts)) if action_counts else 0,
+        "mean": round(statistics.mean(action_counts), 2) if action_counts else 0,
+    }
 
     return {
         "unique_subjects": len(unique_subjects),
@@ -94,8 +118,49 @@ def calc_base_metrics(project_root, subject_filter=None):
         "total_base_variations": total_actions, # This is effectively Char x Loc x Action since we iterate rows
         "missing_pools_count": len(missing_pools),
         "missing_pools_list": list(missing_pools),
-        "row_count": len(rows)
+        "row_count": len(rows),
+        "location_stats": sorted_location_stats,
+        "action_count_summary": action_summary,
     }
+
+
+def calc_per_subject_metrics(project_root):
+    csv_path = project_root / 'assets/compatibility_review.csv'
+    action_pools_path = project_root / 'vocab/data/action_pools.json'
+
+    rows = load_csv(csv_path)
+    action_pools = load_json(action_pools_path)
+
+    by_subject = defaultdict(lambda: {"rows": 0, "locations": set(), "variations": 0, "missing_pools": set()})
+
+    for row in rows:
+        subj = row.get('subj')
+        loc = row.get('canonical_loc') or row.get('loc')
+        if not subj:
+            continue
+
+        data = by_subject[subj]
+        data["rows"] += 1
+        if loc:
+            data["locations"].add(loc)
+            if loc in action_pools:
+                data["variations"] += len(action_pools[loc])
+            else:
+                data["missing_pools"].add(loc)
+
+    metrics = []
+    for subj, data in by_subject.items():
+        metrics.append({
+            "subject": subj,
+            "rows": data["rows"],
+            "locations": len(data["locations"]),
+            "base_variations": data["variations"],
+            "missing_pools_count": len(data["missing_pools"]),
+            "missing_pools": sorted(data["missing_pools"]),
+        })
+
+    metrics.sort(key=lambda x: x["base_variations"], reverse=True)
+    return metrics
 
 def calc_garnish_metrics(project_root):
     # Load separate vocabulary files
@@ -160,6 +225,7 @@ def main():
     parser = argparse.ArgumentParser(description="Calculate prompt variations metrics.")
     parser.add_argument("--project_root", default=".", help="Path to project root (default: current dir)")
     parser.add_argument("--subject", help="Filter analysis to a specific character subject")
+    parser.add_argument("--all-subjects", action="store_true", help="Include per-subject metrics for all characters")
     parser.add_argument("--json", action="store_true", help="Output metrics in JSON format")
     args = parser.parse_args()
 
@@ -172,6 +238,7 @@ def main():
             
     base = calc_base_metrics(root, args.subject)
     garnish = calc_garnish_metrics(root)
+    per_subject = calc_per_subject_metrics(root) if args.all_subjects else []
 
     # Combined Indices
     # Conservative Garnish Factor: 
@@ -195,7 +262,8 @@ def main():
         "combined": {
             "garnish_universe_size": garnish_universe,
             "theoretical_upper_bound": combined_upper_bound
-        }
+        },
+        "per_subject": per_subject,
     }
 
     if args.json:
@@ -220,6 +288,21 @@ def main():
         else:
             print(f"  Missing Action Pools: 0 (OK)")
 
+        print("  Actions per location summary:")
+        print(
+            f"    min={base['action_count_summary']['min']}, "
+            f"median={base['action_count_summary']['median']}, "
+            f"mean={base['action_count_summary']['mean']}, "
+            f"max={base['action_count_summary']['max']}"
+        )
+
+        print("  Top 5 location contribution (Rows x Action pool size):")
+        for row in base['location_stats'][:5]:
+            print(
+                f"    - {row['location']}: rows={row['rows']}, actions={row['actions']}, "
+                f"contribution={row['contribution']}"
+            )
+
         print("\n--- [2] GARNISH METRICS (Vocabulary Data) ---")
         print(f"  Camera Configs:      {garnish['camera_configs']} (Angles x Framing)")
         print(f"  Mood Keys:           {garnish['mood_keys']} (Unique Moods)")
@@ -230,6 +313,16 @@ def main():
         print("\n--- [3] COMBINED INDICES ---")
         print(f"  Garnish Universe:    {garnish_universe:,}")
         print(f"  Theoretical Max:     {combined_upper_bound:,} (Base x Garnish Universe)")
+
+        if per_subject:
+            print("\n--- [4] PER-SUBJECT BASE VARIATIONS ---")
+            print(f"  Subjects: {len(per_subject)}")
+            print("  Top 10 subjects by base variations:")
+            for row in per_subject[:10]:
+                print(
+                    f"    - {row['subject']}: {row['base_variations']} "
+                    f"(rows={row['rows']}, locations={row['locations']})"
+                )
         print("="*60)
 
 if __name__ == "__main__":
