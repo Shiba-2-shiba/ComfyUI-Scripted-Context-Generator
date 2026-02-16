@@ -1,6 +1,6 @@
 # ComfyUI-Scripted-Context-Generator
 
-LLM に依存せず、**ルールベース + シード再現**で自然言語プロンプトを構築する ComfyUI カスタムノード集です。  
+LLM に依存せず、**ルールベース + シード再現**で自然言語的プロンプトを構築する ComfyUI カスタムノード集です。  
 This custom-node pack generates natural-language prompts via deterministic/rule-based logic (no LLM required).
 
 ---
@@ -9,6 +9,8 @@ This custom-node pack generates natural-language prompts via deterministic/rule-
 
 - 本リポジトリは、作者の用途（女性主人公・SFW寄り）向けに設計された語彙セットを同梱しています。
 - 収録語彙はあくまで初期実装です。運用用途に合わせて `vocab/data/*.json` や `templates.txt` を編集してください。
+- プロンプトの追加依頼については対応は原則行いません。
+- プロンプトの追加・拡張は個人で行うことが可能です。このカスタムノードは、Google antigravityをメインに使用して作成をしているため、調整したい場合はGoogle antigravityを使うと楽だと思われます。
 - 生成結果の最終確認・利用判断は利用者自身の責任で行ってください。
 
 ---
