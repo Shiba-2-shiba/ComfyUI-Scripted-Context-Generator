@@ -49,19 +49,25 @@
         "standing by the window looking out at the city",
         "sitting at the head of a long table",
         "standing and holding documents",
-        "leaning against the table, arms crossed"
+        "leaning against the table, arms crossed",
+        "watching a presentation on the screen",
+        "arguing over a detail in the contract"
     ],
     "office_elevator": [
         "standing and checking her watch",
         "leaning against the elevator wall",
         "standing and looking at phone",
-        "standing with arms holding a bag"
+        "standing with arms holding a bag",
+        "holding the door open for someone",
+        "checking reflection in the mirrored wall"
     ],
     "surveillance_room": [
         "sitting and typing on multiple keyboards",
         "standing and staring at monitor screens",
         "sitting with headphones on",
-        "leaning forward, focused on a screen"
+        "leaning forward, focused on a screen",
+        "zooming in on a suspicious figure",
+        "eating a donut while watching screens"
     ],
     "messy_copy_room": [
         "standing near the copier, waiting",
@@ -191,7 +197,9 @@
         "sitting and adjusting headphones",
         "standing in front of the microphone",
         "sitting at the mixing console",
-        "standing and tuning an instrument"
+        "standing and tuning an instrument",
+        "adjusting the microphone stand",
+        "signaling 'OK' from the booth"
     ],
     "opera_house": [
         "standing on stage singing dramatically",
@@ -209,39 +217,49 @@
         "standing ready for battle, knight pose",
         "running through the smoke and fire",
         "standing with a weapon, surveying the field",
-        "crouching behind cover"
+        "crouching behind cover",
+        "crawling through the mud",
+        "signaling to advance"
     ],
     "dungeon_crypt": [
         "sitting against a wall, resting",
         "standing in the darkness, looking alert",
         "walking cautiously through the corridor",
-        "standing and holding a torch"
+        "standing and holding a torch",
+        "deciphering runes on the wall",
+        "listening to distant echoes"
     ],
     "alien_planet": [
         "standing and looking at the alien landscape",
         "walking across strange terrain",
         "standing and holding a bouquet, pointing at a strange plant",
-        "crouching and examining the ground"
+        "crouching and examining the ground",
+        "collecting a soil sample",
+        "watching the twin moons rise"
     ],
     "dragon_lair": [
         "standing and hiding behind a rock",
         "crouching with a weapon ready",
         "standing at the entrance, looking in",
-        "sitting and tending to wounds"
+        "sitting and tending to wounds",
+        "shielding eyes from the heat",
+        "spotting a shiny gem on the floor"
     ],
     "shinto_shrine": [
         "standing and sweeping leaves with a broom",
         "walking slowly along the stone path",
         "standing and praying at the shrine",
         "sitting on the shrine steps, resting",
-        "walking through the torii gate",
-        "standing calmly under a tree"
+        "standing calmly under a tree",
+        "clapping hands twice in prayer"
     ],
     "bamboo_forest": [
         "walking slowly along the path",
         "standing among the bamboo, looking up",
         "sitting on a rock by the path",
-        "standing with arms behind back, enjoying the view"
+        "standing with arms behind back, enjoying the view",
+        "listening to the wind in the leaves",
+        "spotting a bamboo shoot"
     ],
     "winter_street": [
         "standing in winter, breathing into cold hands",
@@ -265,7 +283,9 @@
         "standing on a surfboard",
         "crouching on the surfboard in the wave",
         "standing at the water's edge with a surfboard",
-        "sitting on the beach watching the waves"
+        "sitting on the beach watching the waves",
+        "dragging hand in the water wall",
+        "adjusting balance on the board"
     ],
     "poolside_resort": [
         "lying on a deck chair, relaxing",
@@ -514,5 +534,125 @@
         "taking a photo of a colorful coral reef",
         "looking at a starfish in the touch pool",
         "standing in awe of a giant stingray"
+    ],
+    "abandoned_shrine": [
+        "standing before the rotting main hall",
+        "sitting on the broken stone steps",
+        "walking through the tall overgrown grass",
+        "looking at a mossy stone statue",
+        "holding a rusted bell cord",
+        "feeling the eerie atmosphere in silence",
+        "clasping hands in prayer despite the ruin",
+        "brushing away spiderwebs"
+    ],
+    "rainy_bus_stop": [
+        "sitting on the bench waiting for a bus",
+        "standing under the shelter watching the rain",
+        "checking the faded timetable",
+        "holding an umbrella against the wind",
+        "looking down the empty wet road",
+        "wiping mist from the glass panel",
+        "shaking water off a raincoat",
+        "huddling for warmth"
+    ],
+    "elegant_dining_room": [
+        "sitting at the head of the table",
+        "arranging silverware on the tablecloth",
+        "standing and proposing a toast",
+        "sipping wine from a crystal glass",
+        "lighting the centerpiece candles",
+        "folding a napkin into a shape",
+        "waiting for the main course",
+        "admiring the chandelier above"
+    ],
+    "cyberpunk_street": [
+        "leaning against a graffiti-covered wall",
+        "walking through the neon haze",
+        "checking a holographic message",
+        "standing under a flickering street light",
+        "looking at a drone flying overhead",
+        "pulling up a hood to hide face",
+        "dodging a steam vent on the ground",
+        "buying a drink from a futuristic vending machine"
+    ],
+    "luxury_hotel_room": [
+        "lying on the king-sized bed",
+        "standing by the window looking at the city view",
+        "sitting in the lounge chair reading",
+        "opening a bottle of champagne",
+        "walking across the plush carpet",
+        "adjusting the room lighting controls",
+        "unpacking a suitcase",
+        "relaxing in a bathrobe"
+    ],
+    "steampunk_airship": [
+        "standing at the railing looking at clouds",
+        "checking the pressure gauge on a pipe",
+        "polishing a brass rail",
+        "looking through a telescope",
+        "walking carefully on the wooden deck",
+        "holding a map against the wind",
+        "listening to the hum of the engine",
+        "adjusting leather aviator goggles"
+    ],
+    "clean_modern_kitchen": [
+        "standing at the island chopping vegetables",
+        "opening the stainless steel fridge",
+        "sitting at the breakfast nook with coffee",
+        "wiping down the marble counter",
+        "arranging flowers in a vase",
+        "scrolling a tablet for recipes",
+        "tasting sauce from a spoon",
+        "loading the dishwasher"
+    ],
+    "luxury_bathroom": [
+        "soaking in the freestanding tub",
+        "standing in front of the large mirror",
+        "wrapping up in a fluffy towel",
+        "lighting aromatic candles",
+        "testing the water temperature",
+        "applying skincare products",
+        "stepping out of the glass shower",
+        "relaxing with eyes closed"
+    ],
+    "cozy_living_room": [
+        "curled up on the sofa with a book",
+        "sitting on the floor playing a game",
+        "standing and stretching near the window",
+        "adjusting cushions on the couch",
+        "watching TV with a remote in hand",
+        "sipping hot cocoa by the coffee table",
+        "petting a cat (imaginary) on the rug",
+        "dozing off under a blanket"
+    ],
+    "rural_town_street": [
+        "walking slowly down the quiet street",
+        "standing by a vending machine",
+        "looking at the distant mountains",
+        "sitting on a guardrail resting",
+        "listening to the cicadas (imaginary)",
+        "waving to a neighbor (imaginary)",
+        "carrying a grocery bag",
+        "inspecting a roadside flower"
+    ],
+    "suburban_neighborhood": [
+        "walking a dog (imaginary) down the sidewalk",
+        "standing by the mailbox checking mail",
+        "watering the front lawn",
+        "sitting on the front porch steps",
+        "washing a car (imaginary) in the driveway",
+        "waving to a car passing by",
+        "looking at the sunset over the houses",
+        "jogging slowly down the street"
+    ],
+    "mountain_resort": [
+        "sitting in a rocking chair on the deck",
+        "standing and breathing the fresh air",
+        "wrapping a blanket tight around shoulders",
+        "drinking hot coffee while looking at mountains",
+        "warming hands by the outdoor fireplace",
+        "reading a book in the quiet atmosphere",
+        "watching the stars (if night)",
+        "leaning on the wooden railing"
     ]
 }
