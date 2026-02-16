@@ -43,7 +43,8 @@
       "cloudy grey sky"
     ],
     "aliases": [
-      "classroom"
+      "classroom",
+      "lecture hall"
     ]
   },
   "school_rooftop": {
@@ -75,6 +76,8 @@
       "dramatic sunset"
     ],
     "aliases": [
+      "fenced rooftop",
+      "school roof",
       "school rooftop"
     ]
   },
@@ -123,7 +126,9 @@
       "rain streaks on glass"
     ],
     "aliases": [
-      "office"
+      "corporate office",
+      "office",
+      "open plan office"
     ]
   },
   "fantasy_forest": {
@@ -158,7 +163,8 @@
       "midnight with full moon"
     ],
     "aliases": [
-      "ancient forest"
+      "ancient forest",
+      "mystical woods"
     ]
   },
   "cyberpunk_street": {
@@ -206,7 +212,6 @@
       "eerie abandoned shrine at dusk"
     ],
     "core": [
-      "collapsed wooden torii gate",
       "shrine building with rotting wood",
       "stone statues covered in thick moss",
       "overgrown stone steps",
@@ -233,6 +238,7 @@
       "haunting twilight"
     ],
     "aliases": [
+      "haunted shrine",
       "ruined shrine"
     ]
   },
@@ -267,7 +273,8 @@
       "stormy evening"
     ],
     "aliases": [
-      "bus stop"
+      "bus stop",
+      "waiting shelter"
     ]
   },
   "luxury_hotel_room": {
@@ -303,6 +310,7 @@
       "sunrise"
     ],
     "aliases": [
+      "five star suite",
       "hotel room"
     ]
   },
@@ -340,7 +348,8 @@
       "clear blue sky high altitude"
     ],
     "aliases": [
-      "airship deck"
+      "airship deck",
+      "flying ship"
     ]
   },
   "clean_modern_kitchen": {
@@ -376,7 +385,9 @@
       "sunny afternoon"
     ],
     "aliases": [
-      "kitchen"
+      "chef's kitchen",
+      "kitchen",
+      "modern kitchen"
     ]
   },
   "elegant_dining_room": {
@@ -411,7 +422,9 @@
       "holiday feast"
     ],
     "aliases": [
-      "dining room"
+      "banquet hall",
+      "dining room",
+      "formal dining room"
     ]
   },
   "luxury_bathroom": {
@@ -447,7 +460,9 @@
       "morning routine"
     ],
     "aliases": [
-      "bathroom"
+      "bathroom",
+      "modern bathroom",
+      "spa bathroom"
     ]
   },
   "japanese_bath": {
@@ -518,7 +533,8 @@
       "movie night"
     ],
     "aliases": [
-      "living room"
+      "living room",
+      "lounge"
     ]
   },
   "rural_town_street": {
@@ -591,6 +607,7 @@
       "evening dog walk"
     ],
     "aliases": [
+      "quiet street",
       "residential area"
     ]
   },
@@ -627,7 +644,8 @@
       "starry night"
     ],
     "aliases": [
-      "mountain lodge"
+      "mountain lodge",
+      "ski resort"
     ]
   },
   "school_library": {
@@ -659,7 +677,8 @@
       "quiet afternoon"
     ],
     "aliases": [
-      "library shelves"
+      "library shelves",
+      "reading room"
     ]
   },
   "school_gym_hall": {
@@ -691,7 +710,9 @@
       "daytime practice"
     ],
     "aliases": [
-      "assembly hall podium"
+      "assembly hall",
+      "assembly hall podium",
+      "school gym"
     ]
   },
   "boardroom": {
@@ -702,16 +723,24 @@
     ],
     "core": [
       "long polished mahogany conference table",
-      "large presentation screen showing charts"
+      "large presentation screen showing charts",
+      "whiteboard covered in strategy diagrams",
+      "video conferencing camera system",
+      "credenza with coffee service"
     ],
     "texture": [
       "glossy wood grain",
-      "premium leather executive chairs"
+      "premium leather executive chairs",
+      "frosted glass partitions",
+      "plush carpet"
     ],
     "props": [
       "legal notepads and pens",
       "glass water bottles",
-      "laser pointer on table"
+      "laser pointer on table",
+      "pitch deck printouts",
+      "stainless steel pitcher",
+      "open laptop with presentation"
     ],
     "fx": [
       "tense business atmosphere",
@@ -719,9 +748,14 @@
       "cold air conditioning visualized"
     ],
     "time": [
-      "important meeting"
+      "important meeting",
+      "late night crisis meeting",
+      "early morning briefing"
     ],
-    "aliases": []
+    "aliases": [
+      "conference room",
+      "meeting room"
+    ]
   },
   "office_elevator": {
     "label": "エレベーター",
@@ -731,15 +765,22 @@
     ],
     "core": [
       "shining metallic sliding doors",
-      "illuminated floor button panel"
+      "illuminated floor button panel",
+      "LCD information screen",
+      "security card reader panel",
+      "emergency phone hatch"
     ],
     "texture": [
       "brushed steel walls",
-      "mirrored back wall reflecting infinity"
+      "mirrored back wall reflecting infinity",
+      "polished marble floor",
+      "textured metal ceiling"
     ],
     "props": [
       "cctv security camera dome",
-      "polished metal handrail"
+      "polished metal handrail",
+      "poster for company event",
+      "maintenance key hanging"
     ],
     "fx": [
       "slightly claustrophobic feel",
@@ -747,10 +788,13 @@
       "reflection of self"
     ],
     "time": [
-      "any"
+      "any",
+      "rush hour morning",
+      "empty late night"
     ],
     "aliases": [
-      "elevator"
+      "elevator",
+      "lift"
     ]
   },
   "surveillance_room": {
@@ -761,16 +805,24 @@
     ],
     "core": [
       "wall covered in surveillance monitors",
-      "complex control console with buttons"
+      "complex control console with buttons",
+      "server racks with blinking LEDs",
+      "ergonomic operator chair",
+      "emergency alert light"
     ],
     "texture": [
       "industrial metal grating floor",
-      "smooth plastic buttons"
+      "smooth plastic buttons",
+      "acoustic foam walls",
+      "anti-static floor mat"
     ],
     "props": [
       "half-empty coffee cups",
       "security logbooks",
-      "operator headsets"
+      "operator headsets",
+      "clipboard with patrol logs",
+      "walkie-talkie charging station",
+      "takeout food containers"
     ],
     "fx": [
       "blue screen glow illuminating faces",
@@ -778,9 +830,13 @@
       "high-tech atmosphere"
     ],
     "time": [
-      "night shift"
+      "night shift",
+      "quiet weekend shift",
+      "emergency alert status"
     ],
     "aliases": [
+      "monitor room",
+      "security room",
       "surveillance room"
     ]
   },
@@ -927,6 +983,8 @@
       "evening check-in"
     ],
     "aliases": [
+      "grand entrance",
+      "hotel lobby",
       "luxury hotel lobby"
     ]
   },
@@ -958,7 +1016,9 @@
       "friday night"
     ],
     "aliases": [
-      "karaoke bar"
+      "karaoke bar",
+      "karaoke room",
+      "ktv"
     ]
   },
   "messy_kitchen": {
@@ -990,6 +1050,8 @@
       "busy morning"
     ],
     "aliases": [
+      "cluttered kitchen",
+      "dirty kitchen",
       "messy kitchen"
     ]
   },
@@ -1070,17 +1132,21 @@
       "minimalist zen dojo"
     ],
     "core": [
-      "smooth clean wooden floor",
-      "large floor-to-ceiling windows"
+      "bioluminescent giant flora",
+      "floating rock formations",
+      "twin moons in the sky",
+      "crystalline jagged peaks",
+      "strange alien ruins"
     ],
     "texture": [
-      "natural polished wood",
-      "woven bamboo mats"
+      "purple mossy ground",
+      "iridescent liquid pools",
+      "spongy fungal soil"
     ],
     "props": [
-      "rolled yoga mats",
-      "incense burner releasing smoke",
-      "lush potted green plants"
+      "unidentified glowing artifact",
+      "crashed probe debris",
+      "strange egg-like pods"
     ],
     "fx": [
       "serene spiritual atmosphere",
@@ -1091,7 +1157,9 @@
       "early morning"
     ],
     "aliases": [
-      "peaceful studio"
+      "dance studio",
+      "peaceful studio",
+      "yoga class"
     ]
   },
   "stadium_court": {
@@ -1123,7 +1191,9 @@
       "match day"
     ],
     "aliases": [
-      "park track"
+      "park track",
+      "running track",
+      "sports field"
     ]
   },
   "concert_stage": {
@@ -1187,7 +1257,9 @@
       "recording session"
     ],
     "aliases": [
-      "recording studio"
+      "music studio",
+      "recording studio",
+      "sound studio"
     ]
   },
   "opera_house": {
@@ -1220,7 +1292,9 @@
       "evening performance"
     ],
     "aliases": [
-      "opera house balcony"
+      "concert hall",
+      "opera house balcony",
+      "theater stage"
     ]
   },
   "burning_battlefield": {
@@ -1232,16 +1306,21 @@
     "core": [
       "deep impact craters",
       "destroyed stone ruins",
-      "tangled barbed wire"
+      "tangled barbed wire",
+      "wrecked armored vehicle",
+      "charred tree stump"
     ],
     "texture": [
       "black scorched earth",
-      "wet mud"
+      "wet mud",
+      "gritty ash-covered ground"
     ],
     "props": [
       "broken swords and weapons",
       "scattered debris",
-      "burning tattered flags"
+      "burning tattered flags",
+      "lost helmet",
+      "unexploded shell"
     ],
     "fx": [
       "thick black smoke plumes",
@@ -1249,7 +1328,8 @@
       "intense heat haze distortion"
     ],
     "time": [
-      "apocalypse"
+      "apocalypse",
+      "dawn after the battle"
     ],
     "aliases": [
       "burning battlefield",
@@ -1326,16 +1406,22 @@
       "mountain peak nest"
     ],
     "core": [
-      "massive hoard of gold treasure",
-      "sharp jagged rocks"
+      "stone sarcophagus with carvings",
+      "iron chandeliers with unlit candles",
+      "cobweb-covered archways",
+      "pile of ancient bones",
+      "heavy iron barred gate"
     ],
     "texture": [
-      "dark basalt rock",
-      "glittering gold coins"
+      "cold damp stone",
+      "rough hewn rock",
+      "moldy brickwork"
     ],
     "props": [
-      "large dragon eggs",
-      "scattered animal bones"
+      "rusty iron chains",
+      "broken clay pottery",
+      "flickering torch on wall",
+      "ancient scroll dust"
     ],
     "fx": [
       "hissing sulfuric steam",
@@ -1346,7 +1432,9 @@
       "any"
     ],
     "aliases": [
-      "dragon's jaw"
+      "dragon cave",
+      "dragon's jaw",
+      "treasure hoard"
     ]
   },
   "shinto_shrine": {
@@ -1356,17 +1444,22 @@
       "stone paved path leading to hall"
     ],
     "core": [
-      "vermilion torii gate",
-      "sacred main hall (honden)"
+      "sacred main hall (honden)",
+      "purification fountain (temizuya)",
+      "guardian lion-dog statues (komainu)",
+      "vermilion fence",
+      "large sacred tree (shinboku)"
     ],
     "texture": [
       "white gravel ground",
-      "weathered vermilion wood"
+      "weathered vermilion wood",
+      "mossy stone base"
     ],
     "props": [
       "wooden ema plaques hanging",
       "white paper streamers (shide)",
-      "mossy stone lanterns"
+      "mossy stone lanterns",
+      "fortune slip (omikuji) tied to branch"
     ],
     "fx": [
       "falling pink cherry blossoms",
@@ -1377,7 +1470,9 @@
       "quiet daytime"
     ],
     "aliases": [
-      "shinto shrine"
+      "sacred place",
+      "shinto shrine",
+      "shrine grounds"
     ]
   },
   "bamboo_forest": {
@@ -1387,16 +1482,21 @@
       "arashiyama style forest path"
     ],
     "core": [
-      "soaring tall bamboo stalks",
-      "bamboo fenced path"
+      "dense towering bamboo stalks",
+      "narrow dirt path winding through",
+      "stone lantern covered in moss",
+      "small bamboo fence",
+      "sunlight filtering through leaves"
     ],
     "texture": [
-      "smooth green bamboo",
-      "packed dirt path"
+      "smooth green bamboo skin",
+      "soft earth with fallen leaves",
+      "rough stone surface"
     ],
     "props": [
-      "fallen dry bamboo leaves",
-      "weathered stone roadside marker"
+      "fallen bamboo leaves",
+      "small stone jizo statue",
+      "bamboo shoots sprouting"
     ],
     "fx": [
       "wind rustling through leaves",
@@ -1407,7 +1507,9 @@
       "early morning"
     ],
     "aliases": [
-      "bamboo forest"
+      "arashiyama",
+      "bamboo forest",
+      "bamboo grove"
     ]
   },
   "winter_street": {
@@ -1485,16 +1587,21 @@
       "surfer's view inside the tube"
     ],
     "core": [
-      "curving wall of translucent water",
-      "misty spray"
+      "inside the curling wave tube",
+      "wall of rushing blue water",
+      "bright sunlight at the tunnel end",
+      "spray of white foam",
+      "distant shoreline view"
     ],
     "texture": [
-      "glassy smooth water surface",
-      "churning white foam"
+      "glassy transparent water",
+      "churning white foam",
+      "liquid motion blur"
     ],
     "props": [
-      "surfboard nose visible",
-      "flying water droplets"
+      "surfboard nose cutting water",
+      "droplets suspended in air",
+      "driftwood floating nearby"
     ],
     "fx": [
       "intense motion blur",
@@ -1505,7 +1612,9 @@
       "daytime"
     ],
     "aliases": [
-      "inside a wave barrel"
+      "inside a wave",
+      "inside a wave barrel",
+      "surfing tube"
     ]
   },
   "poolside_resort": {
@@ -1537,7 +1646,10 @@
       "sunny day",
       "sunset"
     ],
-    "aliases": []
+    "aliases": [
+      "hotel pool",
+      "resort pool"
+    ]
   },
   "antique_shop": {
     "label": "骨董品店",
@@ -1570,7 +1682,9 @@
       "evening"
     ],
     "aliases": [
-      "antique shop shelf"
+      "antique shop shelf",
+      "curio shop",
+      "vintage store"
     ]
   },
   "illuminated_park": {
@@ -1600,7 +1714,10 @@
     "time": [
       "holiday night"
     ],
-    "aliases": []
+    "aliases": [
+      "night park",
+      "winter illumination"
+    ]
   },
   "street_cafe": {
     "label": "オープンカフェ",
@@ -1647,7 +1764,9 @@
       "cloudy afternoon"
     ],
     "aliases": [
-      "cafe"
+      "cafe",
+      "sidewalk cafe",
+      "terrace"
     ]
   },
   "cozy_bookstore": {
@@ -1694,7 +1813,10 @@
       "sound of rain outside",
       "sunbeam through dust"
     ],
-    "aliases": []
+    "aliases": [
+      "bookshop",
+      "old bookstore"
+    ]
   },
   "shopping_mall_atrium": {
     "label": "ショッピングモール",
@@ -1741,6 +1863,8 @@
       "night sky through glass roof"
     ],
     "aliases": [
+      "department store",
+      "shopping mall",
       "shopping_mall"
     ]
   },
@@ -1776,7 +1900,9 @@
       "daytime"
     ],
     "aliases": [
-      "boutique"
+      "boutique",
+      "clothing store",
+      "designer shop"
     ]
   },
   "picnic_park": {
@@ -1810,7 +1936,10 @@
       "sunny spring day",
       "golden hour"
     ],
-    "aliases": []
+    "aliases": [
+      "grassy park",
+      "public park"
+    ]
   },
   "botanical_garden": {
     "label": "植物園",
@@ -1844,6 +1973,7 @@
       "daytime"
     ],
     "aliases": [
+      "conservatory",
       "greenhouse"
     ]
   },
@@ -1879,7 +2009,9 @@
       "deep space time"
     ],
     "aliases": [
-      "spaceship"
+      "command center",
+      "spaceship",
+      "starship bridge"
     ]
   },
   "cyber_lab": {
@@ -1914,7 +2046,9 @@
       "any"
     ],
     "aliases": [
-      "lab"
+      "lab",
+      "research facility",
+      "tech lab"
     ]
   },
   "airship_deck": {
@@ -1950,7 +2084,9 @@
       "bright daytime"
     ],
     "aliases": [
-      "airship"
+      "airship",
+      "observation deck",
+      "sky deck"
     ]
   },
   "clockwork_workshop": {
@@ -1985,7 +2121,10 @@
       "daytime",
       "night work"
     ],
-    "aliases": []
+    "aliases": [
+      "inventor's lab",
+      "steampunk workshop"
+    ]
   },
   "aquarium": {
     "label": "水族館",
@@ -2020,7 +2159,9 @@
       "night aquarium event"
     ],
     "aliases": [
-      "aquarium"
+      "aquarium",
+      "fish tank",
+      "underwater tunnel"
     ]
   }
 }
