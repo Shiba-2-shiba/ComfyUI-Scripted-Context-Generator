@@ -119,189 +119,261 @@
     "mouth slightly open"
   ],
   "MOOD_POOLS": {
-    "universal": [
-      "calm expression",
-      "composed look",
-      "neutral face",
-      "stoic expression",
-      "soft gaze",
-      "looking straight ahead",
-      "closed mouth",
-      "relaxed lips",
-      "posture relaxed",
-      "peaceful demeanor"
-    ],
-    "joy": [
-      "radiant eyes",
-      "eyes crinkling",
-      "sparkling eyes",
-      "happy tears",
-      "radiant smile",
-      "big smile",
-      "laughing",
-      "grinning",
-      "showing teeth",
-      "cheerfulness",
-      "bouncing with energy",
-      "glowing with happiness",
-      "head tilted happily"
-    ],
-    "sadness": [
-      "melancholic gaze",
-      "teary eyes",
-      "redrimmed eyes",
-      "downcast eyes",
-      "looking down",
-      "downturned lips",
-      "quivering lips",
-      "slight frown",
-      "faint frown",
-      "slumped shoulders",
-      "sorrowful atmosphere",
-      "hugging self",
-      "wiping a tear"
-    ],
-    "anger": [
-      "intense glare",
-      "furrowed brows",
-      "sharp gaze",
-      "burning eyes",
-      "scowling",
-      "clenched jaw",
-      "snarling",
-      "teeth gritted",
-      "clenched fists",
-      "tensed muscles",
-      "aggressive stance",
-      "shaking with rage"
-    ],
-    "surprise": [
-      "wide-eyed",
-      "pupils dilated",
-      "staring in shock",
-      "eyes popping",
-      "mouth agape",
-      "gasping",
-      "jaw dropped",
-      "covering mouth with hand",
-      "jumping back",
-      "hand on chest",
-      "taken aback",
-      "frozen in surprise"
-    ],
-    "allure": [
-      "alluring gaze",
-      "half-lidded eyes",
-      "seductive look",
-      "looking up through lashes",
-      "bedroom eyes",
-      "biting lip",
-      "parted lips",
-      "flirtatious smile",
-      "tongue licking lips",
-      "playing with hair",
-      "tilting head",
-      "leaning forward",
-      "soft flush"
-    ],
-    "focused": [
-      "focused gaze",
-      "narrowed eyes",
-      "concentrating",
-      "steady gaze",
-      "sharp eyes",
-      "pursed lips",
-      "tight-lipped",
-      "tongue slightly out (focus)",
-      "serious mouth",
-      "stillness",
-      "leaning in",
-      "ignoring surroundings",
-      "furrowed brow"
-    ],
-    "curious": [
-      "curious expression",
-      "wide eyes",
-      "sparkling with curiosity",
-      "observant gaze",
-      "mouth slightly open",
-      "pouted lips (thinking)",
-      "soft smile",
-      "tilted head",
-      "leaning closer",
-      "tiptoeing",
-      "peering forward",
-      "finger on chin"
-    ],
-    "fear": [
-      "wide terrified eyes",
-      "darting eyes",
-      "pupils dilated",
-      "teary eyes from fear",
-      "trembling lips",
-      "mouth open in scream",
-      "covering mouth",
-      "biting nails",
-      "pale face",
-      "trembling",
-      "shrinking back",
-      "cold sweat",
-      "hair standing on end"
-    ],
-    "playful": [
-      "winking",
-      "mischievous eyes",
-      "playful glance",
-      "looking sideways",
-      "sticking tongue out",
-      "playful smile",
-      "smirk",
-      "suppressed laughter",
-      "peace sign",
-      "finger on lips",
-      "skipping",
-      "energetic pose"
-    ],
-    "relaxed": [
-      "soft gaze",
-      "closed eyes",
-      "heavy eyelids",
-      "dreamy eyes",
-      "gentle smile",
-      "faint smile",
-      "relaxed jaw",
-      "sighing happily",
-      "loose shoulders",
-      "leaning back",
-      "stretching",
-      "calm atmosphere"
-    ],
-    "mysterious": [
-      "shadowed eyes",
-      "mysterious gaze",
-      "looking from shadows",
-      "unreadable expression",
-      "slight smirk",
-      "neutral mouth",
-      "hiding mouth",
-      "face partially shaded",
-      "standing in shadow",
-      "finger to lips",
-      "hooded figure"
-    ],
-    "creepy": [
-      "hollow eyes",
-      "staring intensely",
-      "unblinking stare",
-      "shadowed face",
-      "twisted smile",
-      "unnatural grin",
-      "emotionless mouth",
-      "unsettling aura",
-      "tilting head unnaturally",
-      "lurking",
-      "hands twitching"
-    ]
+    "joy": {
+      "mild": [
+        "content expression",
+        "faint smile",
+        "gentle look",
+        "soft smile"
+      ],
+      "medium": [
+        "beaming",
+        "bouncing with energy",
+        "cheerful",
+        "cheerfulness",
+        "eyes crinkling",
+        "glowing with happiness",
+        "grinning",
+        "happy tears",
+        "head tilted happily",
+        "radiant",
+        "radiant eyes",
+        "radiant smile",
+        "showing teeth",
+        "smile",
+        "sparkling eyes",
+        "visible happiness"
+      ],
+      "strong": [
+        "big smile",
+        "ecstatic",
+        "grinning widely",
+        "laughing",
+        "tears of joy"
+      ]
+    },
+    "playful": {
+      "mild": [
+        "curious look",
+        "energetic pose",
+        "finger on lips",
+        "looking sideways",
+        "mischievous eyes",
+        "mischievous glint",
+        "peace sign",
+        "playful glance",
+        "playful smile",
+        "skipping",
+        "smirk",
+        "suppressed laughter"
+      ],
+      "medium": [
+        "finger on lips",
+        "mischievous smile",
+        "peace sign",
+        "winking"
+      ],
+      "strong": [
+        "excited gesture",
+        "laughing playfully",
+        "sticking tongue out",
+        "tongue out",
+        "yelling happily"
+      ]
+    },
+    "anger": {
+      "mild": [
+        "aggressive stance",
+        "annoyed expression",
+        "burning eyes",
+        "clenched fists",
+        "clenched jaw",
+        "furrowed brow",
+        "furrowed brows",
+        "scowling",
+        "serious look",
+        "sharp gaze",
+        "snarling",
+        "stern face",
+        "teeth gritted",
+        "tensed muscles"
+      ],
+      "medium": [
+        "angry eyes",
+        "clenched jaw",
+        "frowning",
+        "glaring",
+        "intense glare",
+        "scowl"
+      ],
+      "strong": [
+        "clenched teeth",
+        "furious scream",
+        "rage",
+        "shaking with rage",
+        "shouting",
+        "veins popping"
+      ]
+    },
+    "sadness": {
+      "mild": [
+        "downcast eyes",
+        "downturned lips",
+        "hugging self",
+        "looking down",
+        "melancholic gaze",
+        "pout",
+        "quivering lips",
+        "redrimmed eyes",
+        "slumped shoulders",
+        "sorrowful atmosphere",
+        "wistful look"
+      ],
+      "medium": [
+        "faint frown",
+        "looking down",
+        "quivering lips",
+        "sad face",
+        "slight frown",
+        "teary eyes"
+      ],
+      "strong": [
+        "covering face",
+        "crying",
+        "despair",
+        "sobbing",
+        "streaming tears",
+        "teary eyes",
+        "wiping a tear"
+      ]
+    },
+    "relax": {
+      "mild": [
+        "calm expression",
+        "posture relaxed",
+        "relaxed lips",
+        "soft gaze"
+      ],
+      "medium": [
+        "calm atmosphere",
+        "closed eyes",
+        "dreamy eyes",
+        "eyes closed",
+        "faint smile",
+        "gentle smile",
+        "heavy eyelids",
+        "leaning back",
+        "loose shoulders",
+        "relaxed jaw",
+        "sighing happily",
+        "soft gaze",
+        "stretching"
+      ],
+      "strong": [
+        "deep sleep",
+        "dozing off",
+        "drooling slightly",
+        "slouching",
+        "totally limp"
+      ]
+    },
+    "focus": {
+      "mild": [
+        "alert look",
+        "closed mouth",
+        "composed look",
+        "looking straight ahead",
+        "neutral face",
+        "peaceful demeanor",
+        "serious expression",
+        "steady gaze",
+        "stoic expression"
+      ],
+      "medium": [
+        "brows knit",
+        "concentrating",
+        "focused gaze",
+        "furrowed brow",
+        "ignoring surroundings",
+        "intense stare",
+        "leaning in",
+        "narrowed eyes",
+        "pursed lips",
+        "serious mouth",
+        "sharp eyes",
+        "steady gaze",
+        "stillness",
+        "tight-lipped",
+        "tongue slightly out (focus)"
+      ],
+      "strong": [
+        "ignoring everything else",
+        "trance-like focus",
+        "tunnel vision",
+        "unblinking stare"
+      ]
+    },
+    "care": {
+      "mild": [
+        "gentle eyes",
+        "kind expression",
+        "soft smile",
+        "warm gaze"
+      ],
+      "medium": [
+        "affectionate gaze",
+        "doting look",
+        "patting head",
+        "soothing expression"
+      ],
+      "strong": [
+        "filled with love",
+        "hugging tightly",
+        "loving gaze",
+        "protective embrace"
+      ]
+    },
+    "impatience": {
+      "mild": [
+        "fidgeting",
+        "glancing at watch",
+        "restless gaze",
+        "tapping foot"
+      ],
+      "medium": [
+        "checking phone rapidly",
+        "frowning impatiently",
+        "restless pose",
+        "sighing heavily"
+      ],
+      "strong": [
+        "frantic expression",
+        "hair disheveled",
+        "panic",
+        "sweating",
+        "yelling to hurry"
+      ]
+    },
+    "moved": {
+      "mild": [
+        "gentle awe",
+        "hand on chest",
+        "soft eyes",
+        "touched expression"
+      ],
+      "medium": [
+        "emotional gaze",
+        "misty eyes",
+        "teary smile",
+        "touched deeply"
+      ],
+      "strong": [
+        "bawling happy tears",
+        "overwhelmed",
+        "speechless",
+        "weeping with joy"
+      ]
+    }
   },
   "EFFECTS_UNIVERSAL": [
     "detailed texture",
