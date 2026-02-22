@@ -108,3 +108,14 @@ python tools/fix_workflows_widgets.py C:\path\to\workflows
 python tools/simulate_widgets_values_migration.py
 ```
 レポート: `tools/widgets_values_simulation_report.json`
+
+## 運用ルール（再発防止）
+forceInput と seed/noise_seed を持つノードは、
+`widgets_values` を「想定長さにピッタリ一致させない」こと。
+
+理由:
+- migrate が長さ一致時に「先頭はダミー」と判断して削除するため
+
+手順:
+- `tools/simulate_widgets_values_migration.py` で事前チェック
+- もし一致していれば `widgets_values` を短く調整する
