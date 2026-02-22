@@ -1,15 +1,15 @@
 {
   "id": "bcfe4622-791d-4ec3-ab1c-23ce1c7d38d2",
   "revision": 0,
-  "last_node_id": 10,
-  "last_link_id": 22,
+  "last_node_id": 12,
+  "last_link_id": 27,
   "nodes": [
     {
       "id": 1,
       "type": "PackParser",
       "pos": [
-        -1877.0904007011422,
-        -3358.448848741004
+        -2000,
+        -3350
       ],
       "size": [
         400,
@@ -57,7 +57,9 @@
         {
           "name": "meta_style",
           "type": "STRING",
-          "links": []
+          "links": [
+            27
+          ]
         },
         {
           "name": "scene_tags",
@@ -77,19 +79,331 @@
       },
       "widgets_values": [
         "{}",
-        238851725321907
+        0,
+        "randomize"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "GarnishSampler",
+      "pos": [
+        -600,
+        -3300
+      ],
+      "size": [
+        311,
+        230
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "action_text",
+          "type": "STRING",
+          "link": 8
+        },
+        {
+          "name": "meta_mood_key",
+          "type": "STRING",
+          "link": 9
+        },
+        {
+          "name": "context_loc",
+          "type": "STRING",
+          "link": 10
+        },
+        {
+          "name": "context_costume",
+          "type": "STRING",
+          "link": 11
+        },
+        {
+          "name": "scene_tags",
+          "shape": 7,
+          "type": "STRING",
+          "link": 12
+        },
+        {
+          "name": "personality",
+          "shape": 7,
+          "type": "STRING",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "garnish_string",
+          "type": "STRING",
+          "links": [
+            23
+          ]
+        },
+        {
+          "name": "debug_info",
+          "type": "DICT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GarnishSampler",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        0,
+        "randomize",
+        3,
+        false
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CharacterProfileNode",
+      "pos": [
+        -2000,
+        -3700
+      ],
+      "size": [
+        281.92734375,
+        210
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "subj_prompt",
+          "type": "STRING",
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "hair_color",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "eye_color",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "personality",
+          "type": "STRING",
+          "links": [
+            13
+          ]
+        },
+        {
+          "name": "color_palette_str",
+          "type": "STRING",
+          "links": [
+            6
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CharacterProfileNode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "random",
+        "Aiko (Quiet)",
+        0,
+        "randomize"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "DictionaryExpand",
+      "pos": [
+        -900,
+        -3060
+      ],
+      "size": [
+        273,
+        130
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "key",
+          "type": "STRING",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "expanded_text",
+          "type": "STRING",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DictionaryExpand",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "mood_map.json",
+        "",
+        0,
+        "randomize"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "SimpleTemplateBuilder",
+      "pos": [
+        0,
+        -3400
+      ],
+      "size": [
+        400,
+        280
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "subj",
+          "shape": 7,
+          "type": "STRING",
+          "link": 16
+        },
+        {
+          "name": "costume",
+          "shape": 7,
+          "type": "STRING",
+          "link": 17
+        },
+        {
+          "name": "loc",
+          "shape": 7,
+          "type": "STRING",
+          "link": 18
+        },
+        {
+          "name": "action",
+          "shape": 7,
+          "type": "STRING",
+          "link": 24
+        },
+        {
+          "name": "garnish",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "meta_mood",
+          "shape": 7,
+          "type": "STRING",
+          "link": 21
+        },
+        {
+          "name": "meta_style",
+          "shape": 7,
+          "type": "STRING",
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "name": "built_prompt",
+          "type": "STRING",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SimpleTemplateBuilder",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "",
+        false,
+        0,
+        "randomize"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "ThemeLocationExpander",
+      "pos": [
+        -900,
+        -3420
+      ],
+      "size": [
+        311,
+        130
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "loc_tag",
+          "type": "STRING",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "location_prompt",
+          "type": "STRING",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ThemeLocationExpander",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        0,
+        "randomize",
+        "detailed"
       ]
     },
     {
       "id": 2,
       "type": "SceneVariator",
       "pos": [
-        -1072.208480497728,
-        -3932.2096878598313
+        -1350,
+        -3600
       ],
       "size": [
         311,
-        210
+        190
       ],
       "flags": {},
       "order": 3,
@@ -145,7 +459,7 @@
           "type": "STRING",
           "links": [
             8,
-            19
+            22
           ]
         },
         {
@@ -166,7 +480,8 @@
         }
       },
       "widgets_values": [
-        136150746294151,
+        0,
+        "randomize",
         "full"
       ]
     },
@@ -174,15 +489,15 @@
       "id": 3,
       "type": "ThemeClothingExpander",
       "pos": [
-        -1043.0747536254703,
-        -3665.8875341642474
+        -900,
+        -3780
       ],
       "size": [
         311,
         150
       ],
       "flags": {},
-      "order": 5,
+      "order": 4,
       "mode": 0,
       "inputs": [
         {
@@ -215,382 +530,89 @@
         }
       },
       "widgets_values": [
-        21756712426619,
+        0,
+        "randomize",
         "random",
         0.3
       ]
     },
     {
-      "id": 4,
-      "type": "ThemeLocationExpander",
+      "id": 11,
+      "type": "ActionMerge",
       "pos": [
-        -1031.2054574923282,
-        -3448.1215919224346
+        -350,
+        -3300
       ],
       "size": [
-        311,
-        130
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "loc_tag",
-          "type": "STRING",
-          "link": 7
-        }
-      ],
-      "outputs": [
-        {
-          "name": "location_prompt",
-          "type": "STRING",
-          "links": [
-            18
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ThemeLocationExpander",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.6.2",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        922979485680841,
-        "detailed"
-      ]
-    },
-    {
-      "id": 5,
-      "type": "GarnishSampler",
-      "pos": [
-        -1022.5732421227697,
-        -3249.8085072430563
-      ],
-      "size": [
-        311,
-        230
+        260,
+        120
       ],
       "flags": {},
       "order": 7,
       "mode": 0,
       "inputs": [
         {
-          "name": "action_text",
+          "name": "original_action",
           "type": "STRING",
-          "link": 8
+          "link": 22
         },
         {
-          "name": "meta_mood_key",
+          "name": "garnish",
           "type": "STRING",
-          "link": 9
-        },
-        {
-          "name": "context_loc",
-          "type": "STRING",
-          "link": 10
-        },
-        {
-          "name": "context_costume",
-          "type": "STRING",
-          "link": 11
-        },
-        {
-          "name": "scene_tags",
-          "shape": 7,
-          "type": "STRING",
-          "link": 12
-        },
-        {
-          "name": "personality",
-          "shape": 7,
-          "type": "STRING",
-          "link": 13
+          "link": 23
         }
       ],
       "outputs": [
         {
-          "name": "garnish_string",
+          "name": "merged_action",
           "type": "STRING",
           "links": [
-            20
-          ]
-        },
-        {
-          "name": "debug_info",
-          "type": "DICT",
-          "links": null
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "GarnishSampler",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.6.2",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        718539542251738,
-        3,
-        false
-      ]
-    },
-    {
-      "id": 6,
-      "type": "CharacterProfileNode",
-      "pos": [
-        -1835.1220377293398,
-        -3650.5095486146215
-      ],
-      "size": [
-        281.92734375,
-        210
-      ],
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "subj_prompt",
-          "type": "STRING",
-          "links": [
-            1
-          ]
-        },
-        {
-          "name": "hair_color",
-          "type": "STRING",
-          "links": null
-        },
-        {
-          "name": "eye_color",
-          "type": "STRING",
-          "links": null
-        },
-        {
-          "name": "personality",
-          "type": "STRING",
-          "links": [
-            13
-          ]
-        },
-        {
-          "name": "color_palette_str",
-          "type": "STRING",
-          "links": [
-            6
+            24
           ]
         }
       ],
       "properties": {
-        "Node name for S&R": "CharacterProfileNode",
+        "Node name for S&R": "ActionMerge",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
           "version": "7.6.2"
         }
       },
-      "widgets_values": [
-        "random",
-        "Aiko (Quiet)",
-        396529697478397
-      ]
+      "widgets_values": []
     },
     {
-      "id": 7,
-      "type": "DictionaryExpand",
+      "id": 12,
+      "type": "PromptCleaner",
       "pos": [
-        -1432.203269365009,
-        -3467.631333307552
+        500,
+        -3400
       ],
       "size": [
-        273,
-        130
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "key",
-          "type": "STRING",
-          "link": 14
-        }
-      ],
-      "outputs": [
-        {
-          "name": "expanded_text",
-          "type": "STRING",
-          "links": [
-            15,
-            21
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "DictionaryExpand",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        "mood_map.json",
-        "",
-        412214272551386
-      ]
-    },
-    {
-      "id": 8,
-      "type": "PreviewAny",
-      "pos": [
-        -1387.018542627391,
-        -3722.291808794207
-      ],
-      "size": [
-        210,
-        166
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "source",
-          "type": "*",
-          "link": 15
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "Node name for S&R": "PreviewAny",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.6.2",
-          "input_ue_unconnectable": {}
-        },
-        "cnr_id": "comfy-core",
-        "ver": "0.13.0"
-      },
-      "widgets_values": [
-        null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 10,
-      "type": "PreviewAny",
-      "pos": [
-        -554.3491938003438,
-        -3667.718888743147
-      ],
-      "size": [
-        414,
-        163
+        280,
+        150
       ],
       "flags": {},
       "order": 9,
       "mode": 0,
       "inputs": [
         {
-          "name": "source",
-          "type": "*",
-          "link": 22
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "Node name for S&R": "PreviewAny",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.6.2",
-          "input_ue_unconnectable": {}
-        },
-        "cnr_id": "comfy-core",
-        "ver": "0.13.0"
-      },
-      "widgets_values": [
-        null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 9,
-      "type": "SimpleTemplateBuilder",
-      "pos": [
-        -579.7386266140595,
-        -3411.1618549976674
-      ],
-      "size": [
-        400,
-        280
-      ],
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "subj",
-          "shape": 7,
+          "name": "text",
           "type": "STRING",
-          "link": 16
-        },
-        {
-          "name": "costume",
-          "shape": 7,
-          "type": "STRING",
-          "link": 17
-        },
-        {
-          "name": "loc",
-          "shape": 7,
-          "type": "STRING",
-          "link": 18
-        },
-        {
-          "name": "action",
-          "shape": 7,
-          "type": "STRING",
-          "link": 19
-        },
-        {
-          "name": "garnish",
-          "shape": 7,
-          "type": "STRING",
-          "link": 20
-        },
-        {
-          "name": "meta_mood",
-          "shape": 7,
-          "type": "STRING",
-          "link": 21
-        },
-        {
-          "name": "meta_style",
-          "shape": 7,
-          "type": "STRING",
-          "link": null
+          "link": 25
         }
       ],
       "outputs": [
         {
-          "name": "built_prompt",
+          "name": "clean_text",
           "type": "STRING",
           "links": [
-            22
+            26
           ]
         }
       ],
       "properties": {
-        "Node name for S&R": "SimpleTemplateBuilder",
+        "Node name for S&R": "PromptCleaner",
         "ue_properties": {
           "widget_ue_connectable": {},
           "input_ue_unconnectable": {},
@@ -598,9 +620,8 @@
         }
       },
       "widgets_values": [
-        "",
-        869292960516911,
-        374739743728174
+        "nl",
+        true
       ]
     }
   ],
@@ -718,14 +739,6 @@
       "STRING"
     ],
     [
-      15,
-      7,
-      0,
-      8,
-      0,
-      "STRING"
-    ],
-    [
       16,
       2,
       0,
@@ -750,22 +763,6 @@
       "STRING"
     ],
     [
-      19,
-      2,
-      3,
-      9,
-      3,
-      "STRING"
-    ],
-    [
-      20,
-      5,
-      0,
-      9,
-      4,
-      "STRING"
-    ],
-    [
       21,
       7,
       0,
@@ -775,10 +772,42 @@
     ],
     [
       22,
+      2,
+      3,
+      11,
+      0,
+      "STRING"
+    ],
+    [
+      23,
+      5,
+      0,
+      11,
+      1,
+      "STRING"
+    ],
+    [
+      24,
+      11,
+      0,
+      9,
+      3,
+      "STRING"
+    ],
+    [
+      25,
       9,
       0,
-      10,
+      12,
       0,
+      "STRING"
+    ],
+    [
+      27,
+      1,
+      5,
+      9,
+      6,
       "STRING"
     ]
   ],
@@ -788,13 +817,13 @@
     "workflowRendererVersion": "LG",
     "ue_links": [],
     "ds": {
-      "scale": 1.1050581221432194,
+      "scale": 1.6418135314348703,
       "offset": [
-        1282.5395419650486,
-        3988.612761399975
+        877.5794867551813,
+        3599.7304352376377
       ]
     },
-    "frontendVersion": "1.38.14"
+    "frontendVersion": "1.39.14"
   },
   "version": 0.4
 }

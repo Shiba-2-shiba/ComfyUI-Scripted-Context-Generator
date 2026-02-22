@@ -1,0 +1,144 @@
+[
+  {
+    "id": 7,
+    "type": "DictionaryExpand",
+    "input_specs": [
+      {
+        "name": "key",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "json_path",
+        "type": "STRING",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "default_value",
+        "type": "STRING",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "seed",
+        "type": "INT",
+        "forceInput": false,
+        "control_after_generate": null
+      }
+    ],
+    "widget_names": [
+      "json_path",
+      "default_value",
+      "seed",
+      "control_after_generate"
+    ],
+    "widgets_values_before": [
+      "mood_map.json",
+      "",
+      0
+    ],
+    "widgets_values_after": [
+      "mood_map.json",
+      "",
+      0
+    ],
+    "assigned_widgets": {
+      "json_path": "mood_map.json",
+      "default_value": "",
+      "seed": 0
+    }
+  },
+  {
+    "id": 4,
+    "type": "ThemeLocationExpander",
+    "input_specs": [
+      {
+        "name": "loc_tag",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "seed",
+        "type": "INT",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "mode",
+        "type": [
+          "detailed",
+          "simple"
+        ],
+        "forceInput": false,
+        "control_after_generate": null
+      }
+    ],
+    "widget_names": [
+      "seed",
+      "control_after_generate",
+      "mode"
+    ],
+    "widgets_values_before": [
+      0,
+      "randomize"
+    ],
+    "widgets_values_after": [
+      0,
+      "randomize"
+    ],
+    "assigned_widgets": {
+      "seed": 0,
+      "control_after_generate": "randomize"
+    }
+  },
+  {
+    "id": 12,
+    "type": "PromptCleaner",
+    "input_specs": [
+      {
+        "name": "text",
+        "type": "STRING",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "mode",
+        "type": [
+          "safe",
+          "nl"
+        ],
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "drop_empty_lines",
+        "type": "BOOLEAN",
+        "forceInput": false,
+        "control_after_generate": null
+      }
+    ],
+    "widget_names": [
+      "text",
+      "mode",
+      "drop_empty_lines"
+    ],
+    "widgets_values_before": [
+      "",
+      "nl",
+      true
+    ],
+    "widgets_values_after": [
+      "",
+      "nl",
+      true
+    ],
+    "assigned_widgets": {
+      "text": "",
+      "mode": "nl",
+      "drop_empty_lines": true
+    }
+  }
+]

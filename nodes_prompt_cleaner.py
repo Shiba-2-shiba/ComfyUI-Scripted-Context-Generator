@@ -143,6 +143,9 @@ class PromptCleaner:
     def clean(self, text, mode="nl", drop_empty_lines=True):
         if text is None: text = ""
         s = str(text)
+        if mode not in ["safe", "nl"]:
+            mode = "nl"
+        drop_empty_lines = bool(drop_empty_lines)
 
         # Pipeline
         s = self.normalize_newlines(s)
