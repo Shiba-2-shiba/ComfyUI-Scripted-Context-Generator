@@ -87,7 +87,7 @@ class SceneVariator:
                 "costume": ("STRING", {"forceInput": True}),
                 "loc":   ("STRING", {"forceInput": True}),
                 "action": ("STRING", {"forceInput": True}),
-                "seed":  ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "seed":  ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "control_after_generate": True}),
                 "variation_mode": (["original", "genre_only", "full"],),
             }
         }

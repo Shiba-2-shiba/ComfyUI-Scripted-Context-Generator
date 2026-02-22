@@ -101,7 +101,7 @@ class ThemeClothingExpander:
         return {
             "required": {
                 "theme_key": ("STRING", {"multiline": False, "default": "office_lady", "forceInput": True}),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "control_after_generate": True}),
                 "outfit_mode": (outfit_modes, {"default": "random"}),
                 "outerwear_chance": ("FLOAT", {"default": 0.3, "min": 0.0, "max": 1.0, "step": 0.05}),
             },
@@ -301,7 +301,7 @@ class ThemeLocationExpander:
         return {
             "required": {
                 "loc_tag": ("STRING", {"multiline": False, "default": "classroom", "forceInput": True}),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "control_after_generate": True}),
                 "mode": (["detailed", "simple"], {"default": "detailed"}),
             }
         }
