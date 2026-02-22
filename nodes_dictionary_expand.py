@@ -52,6 +52,12 @@ class DictionaryExpand:
     CATEGORY = "prompt_builder"
 
     def expand(self, key, json_path, default_value, seed):
+        # Defensive coercions to avoid UI/widget misalignment issues
+        try:
+            seed = int(seed)
+        except Exception:
+            seed = 0
+
         # Default to mood_map.json if path is empty
         if not json_path or json_path.strip() == "":
             json_path = "mood_map.json"
@@ -110,6 +116,20 @@ class ThemeClothingExpander:
     CATEGORY = "prompt_builder"
 
     def expand_clothing(self, theme_key, seed, outfit_mode, outerwear_chance, character_palette=""):
+        try:
+            seed = int(seed)
+        except Exception:
+            seed = 0
+
+        if outfit_mode not in [
+            "random",
+            "dresses",
+            "separates",
+            "outerwear_only",
+            "no_outerwear",
+        ]:
+            outfit_mode = "random"
+
         if not clothing_vocab:
             return ("[ERR: clothing_vocab.py not found]",)
 
@@ -292,6 +312,14 @@ class ThemeLocationExpander:
     CATEGORY = "prompt_builder"
 
     def expand_location(self, loc_tag, seed, mode):
+        try:
+            seed = int(seed)
+        except Exception:
+            seed = 0
+
+        if mode not in ["detailed", "simple"]:
+            mode = "detailed"
+
         if not background_vocab:
             return ("[ERR: background_vocab.py not found]",)
 
