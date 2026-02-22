@@ -1,10 +1,10 @@
 """
-Garnish logic module.
-Re-implements the core logic for sampling garnish tags based on mood, action, and context.
+Garnish logic module (v2.0).
+Implements Action-consistent sampling with 9 emotion categories and intensity levels.
 """
 import random
 import re
-from typing import List, Dict, Optional, Any, Set
+from typing import List, Dict, Optional, Any, Set, Tuple
 
 from .utils import normalize, _dedupe, _merge_unique
 from .base_vocab import (
@@ -26,67 +26,219 @@ from .base_vocab import (
 )
 from .micro_actions import MICRO_ACTION_CONCEPTS, EXCLUSIVE_TAG_GROUPS
 
+# -------------------------------------------------------------------------
+# Constants & Configuration
+# -------------------------------------------------------------------------
+
+EMOTION_CATEGORIES = [
+    "joy", "playful", "anger", "sadness", "relax", "focus", "care", "impatience", "moved"
+]
+
+INTENSITIES = ["mild", "medium", "strong"]
+
+# Action Load Keywords
+LOAD_KEYWORDS = {
+    "intimate": ["hugging", "holding hands", "kissing", "cuddling", "bed", "bedroom", "bath", "soaking"],
+    "tense": ["fighting", "arguing", "hiding", "sneaking", "battle", "danger", "crying", "scared", "frustration", "rage"],
+    "active": ["running", "walking", "dancing", "jumping", "flying", "playing", "cleaning", "cooking", "sweeping", "exercising", "lifting"],
+    "calm": ["sitting", "standing", "lying", "reading", "sleeping", "waiting", "looking", "watching", "listening"] # Fallback
+}
+
+# Compatibility Matrix (Emotion vs Load)
+# True = Allowed, False = Forbidden (simplified from O/△/X for logic)
+# We can restrain intensity separately if needed.
+COMPATIBILITY = {
+    "calm":       {"joy","playful","anger","sadness","relax","focus","care","impatience","moved"},
+    "active":     {"joy","playful","anger","focus","impatience"}, # sadness/relax/care/moved restricted
+    "tense":      {"anger","focus","impatience"}, # joy/playful/relax/care/moved/sadness restricted (sadness maybe ok but let's restrict for consistency)
+    "intimate":   {"joy","playful","sadness","relax","moved","care"} # anger/focus/impatience restricted
+}
+
+# Legacy Mapping
+LEGACY_MAP = {
+    "energetic_joy": ("joy", "strong"),
+    "whimsical_playful": ("playful", "medium"),
+    "intense_anger": ("anger", "strong"),
+    "melancholic_sadness": ("sadness", "medium"),
+    "peaceful_relaxed": ("relax", "medium"),
+    # "neutral": ("relax", "mild"), # Removed to allow auto-sampling
+    "energetic": ("joy", "medium"),
+    "whimsical": ("playful", "mild"),
+    "intense": ("anger", "medium"),
+    "melancholic": ("sadness", "mild"),
+    "peaceful": ("relax", "mild"),
+}
+
+# -------------------------------------------------------------------------
+# Helper Functions
+# -------------------------------------------------------------------------
+
+def _guess_action_load(action_text: str) -> str:
+    """Determine the emotional load of an action."""
+    if not action_text:
+        return "calm"
+    
+    text = action_text.lower()
+    
+    for k in LOAD_KEYWORDS["intimate"]:
+        if k in text: return "intimate"
+    for k in LOAD_KEYWORDS["tense"]:
+        if k in text: return "tense"
+    for k in LOAD_KEYWORDS["active"]:
+        if k in text: return "active"
+    
+    return "calm"
+
+def _is_compatible(category: str, load: str) -> bool:
+    """Check if category is allowed for the load."""
+    allowed = COMPATIBILITY.get(load, COMPATIBILITY["calm"])
+    return category in allowed
+
+def _select_category_weighted(load: str, rng: random.Random) -> str:
+    """
+    Select an emotion category based on load and weights.
+    Goal: Joy/Playful dominance where possible.
+    """
+    allowed = COMPATIBILITY.get(load, COMPATIBILITY["calm"])
+    
+    # Custom weights logic
+    weights = {}
+    
+    if load == "tense":
+        # Tense situation: Anger/Focus/Impatience dominance
+        weights = {"anger": 40, "focus": 30, "impatience": 30}
+    else:
+        # Balanced dominance for Positive/Neutral (Total ~90%)
+        # Joy, Playful, Relax, Focus, Care, Moved -> ~15% each
+        weights["joy"] = 15
+        weights["playful"] = 15
+        weights["relax"] = 15
+        weights["focus"] = 15
+        weights["care"] = 15
+        weights["moved"] = 15
+        
+        # Low frequency for Negative (Total ~10%)
+        # Anger, Sadness, Impatience -> ~3-4% each
+        weights["anger"] = 3
+        weights["sadness"] = 3
+        weights["impatience"] = 4
+
+    # Filter by allowed and flatten
+    valid_cats = []
+    valid_weights = []
+    
+    for cat, w in weights.items():
+        if cat in allowed:
+            valid_cats.append(cat)
+            valid_weights.append(w)
+            
+    if not valid_cats:
+        return "focus" # Fallback
+        
+    return rng.choices(valid_cats, weights=valid_weights, k=1)[0]
+
+def _resolve_target_emotion(meta_mood: str, load: str, rng: random.Random, log: Dict) -> Tuple[str, str]:
+    """
+    Resolve (Category, Intensity).
+    Honors meta_mood if compatible, else samples new.
+    """
+    category = "relax"
+    intensity = "mild"
+    
+    # 1. Parse Input
+    req_cat = None
+    req_int = None
+    
+    # Normalize input
+    m = meta_mood.lower().replace(" ", "_")
+    
+    # Check legacy
+    if m in LEGACY_MAP:
+        req_cat, req_int = LEGACY_MAP[m]
+    elif "_" in m:
+        # Try to parse "joy_strong"
+        parts = m.split("_")
+        if parts[0] in EMOTION_CATEGORIES:
+            req_cat = parts[0]
+            if len(parts) > 1 and parts[1] in INTENSITIES:
+                req_int = parts[1]
+    elif m in EMOTION_CATEGORIES:
+        req_cat = m
+        
+    # 2. Compatibility Check
+    is_valid_request = False
+    if req_cat:
+        if _is_compatible(req_cat, load):
+            is_valid_request = True
+            category = req_cat
+            # If intensity not specified, sample?
+            if not req_int:
+               req_int = rng.choice(INTENSITIES)
+            intensity = req_int
+        else:
+            log["mood_conflict"] = f"Requested {req_cat} incompatible with {load}"
+            
+    # 3. Sampling (if no valid request)
+    if not is_valid_request:
+        if req_cat and not _is_compatible(req_cat, load):
+             # Was specific but forbidden -> Sampling new
+             pass 
+        elif m in ["neutral", "random", "", "auto"]:
+             # Explicitly asking for auto
+             pass
+        else:
+             # Unknown key, treat as auto
+             pass
+             
+        category = _select_category_weighted(load, rng)
+        intensity = rng.choice(INTENSITIES) # Random intensity for now
+        
+        # Adjustment for Joy/Playful: bias towards mild/medium for calm actions?
+        # Let's keep it simple random for intensity for now, ensuring variety.
+        
+    # 4. Final adjustments
+    # If intensity missing in data, fallback will happen in sampling phrase
+    
+    log["res_category"] = category
+    log["res_intensity"] = intensity
+    return category, intensity
+
+# -------------------------------------------------------------------------
+# Main Logic
+# -------------------------------------------------------------------------
+
+def _get_action_anchors(action_text: str) -> List[str]:
+    """Identify micro-action concepts."""
+    if not action_text:
+        return []
+    found = []
+    text_lower = action_text.lower()
+    if isinstance(MICRO_ACTION_CONCEPTS, dict):
+        for k, data in MICRO_ACTION_CONCEPTS.items():
+            if isinstance(data, dict):
+                for trig in data.get("triggers", []):
+                    if trig in text_lower:
+                        found.append(k); break
+    return found
+
+def _resolve_micro_actions(concepts: List[str], mood: str, rng: random.Random) -> List[str]:
+    """Resolve micro-action tags."""
+    tags = []
+    if not isinstance(MICRO_ACTION_CONCEPTS, dict): return tags
+    for concept in concepts:
+        c_data = MICRO_ACTION_CONCEPTS.get(concept)
+        if not c_data or not isinstance(c_data, dict): continue
+        variants = c_data.get("variants", {})
+        cand = variants.get(mood, []) or variants.get("default", []) or variants.get("neutral", []) or c_data.get("tags", [])
+        if cand and isinstance(cand, list): tags.append(rng.choice(cand))
+    return tags
+
 def _is_out_of_context(tag: str, context_loc: str, context_costume: str) -> bool:
     """
     Check if a tag conflicts with the current location or costume context.
     Placeholder implementation - can be expanded with specific rules.
     """
     return False
-
-def _get_action_anchors(action_text: str) -> List[str]:
-    """
-    Identify micro-action concepts present in the action text.
-    Returns a list of concept keys (e.g. 'read', 'drink').
-    """
-    if not action_text:
-        return []
-    
-    found_concepts = []
-    text_lower = action_text.lower()
-    
-    # Try to match concepts
-    if isinstance(MICRO_ACTION_CONCEPTS, dict):
-        for concept_key, data in MICRO_ACTION_CONCEPTS.items():
-            if isinstance(data, dict):
-                triggers = data.get("triggers", [])
-                for trigger in triggers:
-                    if trigger in text_lower:
-                        found_concepts.append(concept_key)
-                        break
-            # Handle if MICRO_ACTION_CONCEPTS is simple dict or list (unlikely based on usage but safe)
-    
-    return found_concepts
-
-def _resolve_micro_actions(concepts: List[str], mood: str, rng: random.Random) -> List[str]:
-    """
-    Resolve concept keys into specific tags suitable for the given mood.
-    """
-    tags = []
-    if not isinstance(MICRO_ACTION_CONCEPTS, dict):
-        return tags
-
-    for concept in concepts:
-        concept_data = MICRO_ACTION_CONCEPTS.get(concept)
-        if not concept_data or not isinstance(concept_data, dict):
-            continue
-            
-        variants = concept_data.get("variants", {})
-        
-        # 1. Try mood-specific variants
-        candidates = variants.get(mood, [])
-        
-        # 2. Fallback to 'default' or 'neutral'
-        if not candidates:
-            candidates = variants.get("default", []) or variants.get("neutral", [])
-            
-        # 3. If still nothing, check if there's a generic list in 'tags' (if schema differs)
-        if not candidates:
-             candidates = concept_data.get("tags", [])
-
-        if candidates and isinstance(candidates, list):
-            tags.append(rng.choice(candidates))
-            
-    return tags
 
 def sample_garnish(
     seed: int,
@@ -100,83 +252,77 @@ def sample_garnish(
     personality: str = "",
     debug_log: Dict = None
 ) -> List[str]:
-    """
-    Main entry point for generating garnish tags.
-    """
-    if debug_log is None:
-        debug_log = {} # Mutating local ref only
-        
+    
+    if debug_log is None: debug_log = {}
     rng = random.Random(seed)
     
-    mood_key = meta_mood.split("_")[0] if "_" in meta_mood else meta_mood
+    # 1. Determine Context
+    action_load = _guess_action_load(action_text)
+    debug_log["action_load"] = action_load
     
-    # Validation of mood_key against MOOD_POOLS
-    # If MOOD_POOLS doesn't have it, fallback
-    if isinstance(MOOD_POOLS, dict) and mood_key not in MOOD_POOLS:
-         mood_key = "neutral" 
-         if "neutral" not in MOOD_POOLS and MOOD_POOLS: 
-             mood_key = next(iter(MOOD_POOLS)) # Ultimate fallback
-        
-    debug_log["mood_resolved"] = mood_key
+    # 2. Resolve Emotion
+    category, intensity = _resolve_target_emotion(meta_mood, action_load, rng, debug_log)
     
     garnish_pool = []
     
-    # 1. Micro-Actions
-    action_concepts = _get_action_anchors(action_text)
-    # debug_log["action_concepts"] = action_concepts # caller might check this dict
-    micro_action_tags = _resolve_micro_actions(action_concepts, mood_key, rng)
-    garnish_pool.extend(micro_action_tags)
-    
-    # 2. Mood-based Atmosphere
+    # 3. Fetch Emotion Tags
+    # Verify structure of MOOD_POOLS
     if isinstance(MOOD_POOLS, dict):
-        mood_data = MOOD_POOLS.get(mood_key, {})
-        if isinstance(mood_data, list):
-             garnish_pool.extend(rng.sample(mood_data, min(len(mood_data), 2)))
-        elif isinstance(mood_data, dict):
-            emotions = mood_data.get("emotions", [])
-            if emotions: garnish_pool.append(rng.choice(emotions))
+        cat_data = MOOD_POOLS.get(category)
+        if isinstance(cat_data, dict):
+            # New Schema: dict of intensities
+            int_tags = cat_data.get(intensity, [])
+            if not int_tags:
+                # Fallback to any intensity
+                all_tags = []
+                for v in cat_data.values():
+                    if isinstance(v, list): all_tags.extend(v)
+                if all_tags: garnish_pool.extend(rng.sample(all_tags, min(len(all_tags), 2)))
+            else:
+                garnish_pool.extend(rng.sample(int_tags, min(len(int_tags), 2)))
+        elif isinstance(cat_data, list):
+            # Legacy Schema support (should not happen if migrated, but safe)
+            garnish_pool.extend(rng.sample(cat_data, min(len(cat_data), 2)))
             
-            effects = mood_data.get("effects", [])
-            if effects: garnish_pool.append(rng.choice(effects))
+    # 4. Micro Actions
+    anchors = _get_action_anchors(action_text)
+    ma_tags = _resolve_micro_actions(anchors, category, rng) # Use category as mood key
+    garnish_pool.extend(ma_tags)
     
-    # 3. Camera (Optional)
+    # 5. Global Effects (Simplified)
+    # Bright: joy, playful, care, moved
+    # Dark: anger, sadness, impatience
+    # Neutral: relax, focus
+    if category in ["joy", "playful", "care", "moved"]:
+        if EFFECTS_BRIGHT and isinstance(EFFECTS_BRIGHT, list): garnish_pool.append(rng.choice(EFFECTS_BRIGHT))
+    elif category in ["anger", "sadness", "impatience"]:
+        if EFFECTS_DARK and isinstance(EFFECTS_DARK, list): garnish_pool.append(rng.choice(EFFECTS_DARK))
+    else:
+        if EFFECTS_UNIVERSAL and isinstance(EFFECTS_UNIVERSAL, list) and rng.random() > 0.7:
+             garnish_pool.append(rng.choice(EFFECTS_UNIVERSAL))
+
+    # 6. Camera
     if include_camera:
         if VIEW_FRAMING and isinstance(VIEW_FRAMING, list) and rng.random() > 0.5:
             garnish_pool.append(rng.choice(VIEW_FRAMING))
         if VIEW_ANGLES and isinstance(VIEW_ANGLES, list) and rng.random() > 0.5:
-            garnish_pool.append(rng.choice(VIEW_ANGLES))
-
-    # 4. Global Effects
-    if mood_key in ["energetic", "joyful", "happy"]:
-         if EFFECTS_BRIGHT and isinstance(EFFECTS_BRIGHT, list): garnish_pool.append(rng.choice(EFFECTS_BRIGHT))
-    elif mood_key in ["dark", "gloom", "sad"]:
-         if EFFECTS_DARK and isinstance(EFFECTS_DARK, list): garnish_pool.append(rng.choice(EFFECTS_DARK))
-    else:
-         if EFFECTS_UNIVERSAL and isinstance(EFFECTS_UNIVERSAL, list) and rng.random() > 0.7:
-             garnish_pool.append(rng.choice(EFFECTS_UNIVERSAL))
-
-    # 5. Pose Adjustments
+             garnish_pool.append(rng.choice(VIEW_ANGLES))
+             
+    # 7. Pose (if no action text)
     if not action_text:
-        # Pick a base pose
         all_poses = []
         if isinstance(POSE_STANDING, list): all_poses.extend(POSE_STANDING)
         if isinstance(POSE_SITTING, list): all_poses.extend(POSE_SITTING)
-        if isinstance(POSE_LYING, list): all_poses.extend(POSE_LYING)
+        if all_poses: garnish_pool.append(rng.choice(all_poses))
         
-        if all_poses:
-            garnish_pool.append(rng.choice(all_poses))
-            
-    if rng.random() > 0.7 and HAND_GESTURES and isinstance(HAND_GESTURES, list):
-         garnish_pool.append(rng.choice(HAND_GESTURES))
-    if rng.random() > 0.8 and EYES_BASE and isinstance(EYES_BASE, list):
-         garnish_pool.append(rng.choice(EYES_BASE))
+    # 8. Extra (Eyes/Hands) - Only if pool is small
+    if len(garnish_pool) < max_items:
+         if rng.random() > 0.7 and HAND_GESTURES: garnish_pool.append(rng.choice(HAND_GESTURES))
+         if rng.random() > 0.8 and EYES_BASE: garnish_pool.append(rng.choice(EYES_BASE))
 
     rng.shuffle(garnish_pool)
     final_tags = _dedupe(garnish_pool)
-    
-    # ensure max_items
     if len(final_tags) > max_items:
         final_tags = final_tags[:max_items]
-
-    # debug_log["final_tags"] = final_tags
+        
     return final_tags

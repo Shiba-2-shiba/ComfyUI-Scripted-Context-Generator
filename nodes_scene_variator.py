@@ -192,7 +192,14 @@ class SceneVariator:
             # _comment キーを除外
             pool = [a for a in pool if not isinstance(a, str) or not a.startswith("_")]
             if pool:
-                new_action = rng.choice(pool)
+                new_action_item = rng.choice(pool)
+                # Parse dict if new schema (Phase 3+), else string
+                if isinstance(new_action_item, dict):
+                    new_action = new_action_item.get("text", "")
+                    decision_log["action_load"] = new_action_item.get("load")
+                else:
+                    new_action = str(new_action_item)
+                
                 decision_log["action_updated"] = True
                 decision_log["new_action"] = new_action
         

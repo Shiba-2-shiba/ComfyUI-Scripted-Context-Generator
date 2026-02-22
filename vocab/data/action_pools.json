@@ -1,658 +1,2206 @@
 {
     "_comment": "loc別のアクションプール。互換性マトリクスで新しいloc×キャラの組み合わせが生成された際に使用。",
-    "schema_version": "1.0",
+    "schema_version": "2.0",
     "school_classroom": [
-        "sitting at a desk, looking down with focused expression",
-        "standing at the blackboard writing notes",
-        "sitting and reading a textbook quietly",
-        "standing by the window gazing outside",
-        "chatting with friends during a break",
-        "hurriedly packing bag after the bell",
-        "erasing the blackboard",
-        "cleaning the classroom after school"
+        {
+            "text": "sitting at a desk, looking down with focused expression",
+            "load": "calm"
+        },
+        {
+            "text": "standing at the blackboard writing notes",
+            "load": "calm"
+        },
+        {
+            "text": "sitting and reading a textbook quietly",
+            "load": "calm"
+        },
+        {
+            "text": "standing by the window gazing outside",
+            "load": "calm"
+        },
+        {
+            "text": "chatting with friends during a break",
+            "load": "calm"
+        },
+        {
+            "text": "hurriedly packing bag after the bell",
+            "load": "calm"
+        },
+        {
+            "text": "erasing the blackboard",
+            "load": "calm"
+        },
+        {
+            "text": "cleaning the classroom after school",
+            "load": "active"
+        }
     ],
     "school_rooftop": [
-        "leaning on the fence, looking at the sky",
-        "sitting on the ground with knees up",
-        "standing with arms stretched, feeling the wind",
-        "leaning against the wall, lost in thought",
-        "sitting on a bench eating lunch",
-        "walking towards the fence with a smile"
+        {
+            "text": "leaning on the fence, looking at the sky",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on the ground with knees up",
+            "load": "calm"
+        },
+        {
+            "text": "standing with arms stretched, feeling the wind",
+            "load": "calm"
+        },
+        {
+            "text": "leaning against the wall, lost in thought",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a bench eating lunch",
+            "load": "calm"
+        },
+        {
+            "text": "walking towards the fence with a smile",
+            "load": "active"
+        }
     ],
     "school_library": [
-        "standing and reaching for a book on the shelf",
-        "sitting at a table reading quietly",
-        "standing between bookshelves browsing titles",
-        "sitting with a stack of books, studying",
-        "walking quietly carrying a book",
-        "standing at the counter checking out a book"
+        {
+            "text": "standing and reaching for a book on the shelf",
+            "load": "calm"
+        },
+        {
+            "text": "sitting at a table reading quietly",
+            "load": "calm"
+        },
+        {
+            "text": "standing between bookshelves browsing titles",
+            "load": "calm"
+        },
+        {
+            "text": "sitting with a stack of books, studying",
+            "load": "calm"
+        },
+        {
+            "text": "walking quietly carrying a book",
+            "load": "active"
+        },
+        {
+            "text": "standing at the counter checking out a book",
+            "load": "calm"
+        }
     ],
     "school_gym_hall": [
-        "sitting in seiza posture on the floor",
-        "standing in the center of the gym",
-        "sitting on a bench watching others",
-        "standing near the stage, looking up",
-        "stretching arms before exercise",
-        "walking across the polished floor"
+        {
+            "text": "sitting in seiza posture on the floor",
+            "load": "calm"
+        },
+        {
+            "text": "standing in the center of the gym",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a bench watching others",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the stage, looking up",
+            "load": "calm"
+        },
+        {
+            "text": "stretching arms before exercise",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the polished floor",
+            "load": "active"
+        }
     ],
     "modern_office": [
-        "sitting and working at a desk",
-        "standing by the window holding a cup of coffee",
-        "walking through the office hallway",
-        "sitting in a chair, taking a break",
-        "checking a document while on a call",
-        "typing furiously to meet a deadline",
-        "standing at the printer, waiting",
-        "drinking coffee in the break room"
+        {
+            "text": "sitting and working at a desk",
+            "load": "calm"
+        },
+        {
+            "text": "standing by the window holding a cup of coffee",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the office hallway",
+            "load": "active"
+        },
+        {
+            "text": "sitting in a chair, taking a break",
+            "load": "calm"
+        },
+        {
+            "text": "checking a document while on a call",
+            "load": "calm"
+        },
+        {
+            "text": "typing furiously to meet a deadline",
+            "load": "calm"
+        },
+        {
+            "text": "standing at the printer, waiting",
+            "load": "calm"
+        },
+        {
+            "text": "drinking coffee in the break room",
+            "load": "calm"
+        }
     ],
     "boardroom": [
-        "standing by the window looking out at the city",
-        "sitting at the head of a long table",
-        "standing and holding documents",
-        "leaning against the table, arms crossed",
-        "watching a presentation on the screen",
-        "arguing over a detail in the contract"
+        {
+            "text": "standing by the window looking out at the city",
+            "load": "calm"
+        },
+        {
+            "text": "sitting at the head of a long table",
+            "load": "calm"
+        },
+        {
+            "text": "standing and holding documents",
+            "load": "calm"
+        },
+        {
+            "text": "leaning against the table, arms crossed",
+            "load": "calm"
+        },
+        {
+            "text": "watching a presentation on the screen",
+            "load": "calm"
+        },
+        {
+            "text": "arguing over a detail in the contract",
+            "load": "tense"
+        }
     ],
     "office_elevator": [
-        "standing and checking her watch",
-        "leaning against the elevator wall",
-        "standing and looking at phone",
-        "standing with arms holding a bag",
-        "holding the door open for someone",
-        "checking reflection in the mirrored wall"
+        {
+            "text": "standing and checking her watch",
+            "load": "calm"
+        },
+        {
+            "text": "leaning against the elevator wall",
+            "load": "calm"
+        },
+        {
+            "text": "standing and looking at phone",
+            "load": "calm"
+        },
+        {
+            "text": "standing with arms holding a bag",
+            "load": "calm"
+        },
+        {
+            "text": "holding the door open for someone",
+            "load": "calm"
+        },
+        {
+            "text": "checking reflection in the mirrored wall",
+            "load": "calm"
+        }
     ],
     "surveillance_room": [
-        "sitting and typing on multiple keyboards",
-        "standing and staring at monitor screens",
-        "sitting with headphones on",
-        "leaning forward, focused on a screen",
-        "zooming in on a suspicious figure",
-        "eating a donut while watching screens"
+        {
+            "text": "sitting and typing on multiple keyboards",
+            "load": "calm"
+        },
+        {
+            "text": "standing and staring at monitor screens",
+            "load": "calm"
+        },
+        {
+            "text": "sitting with headphones on",
+            "load": "calm"
+        },
+        {
+            "text": "leaning forward, focused on a screen",
+            "load": "calm"
+        },
+        {
+            "text": "zooming in on a suspicious figure",
+            "load": "calm"
+        },
+        {
+            "text": "eating a donut while watching screens",
+            "load": "calm"
+        }
     ],
     "messy_copy_room": [
-        "standing near the copier, waiting",
-        "sitting on a box, taking a break",
-        "crouching and searching through supplies",
-        "standing and organizing papers",
-        "kicking the copier in frustration",
-        "standing and reading a notice on the wall"
+        {
+            "text": "standing near the copier, waiting",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a box, taking a break",
+            "load": "calm"
+        },
+        {
+            "text": "crouching and searching through supplies",
+            "load": "calm"
+        },
+        {
+            "text": "standing and organizing papers",
+            "load": "calm"
+        },
+        {
+            "text": "kicking the copier in frustration",
+            "load": "tense"
+        },
+        {
+            "text": "standing and reading a notice on the wall",
+            "load": "calm"
+        }
     ],
     "neon_city_street": [
-        "standing and waiting under a neon sign",
-        "walking through the neon-lit street",
-        "leaning against a wall, looking at the crowd",
-        "standing at a crosswalk, looking up at signs",
-        "looking up at a holographic billboard",
-        "standing in the rain looking at reflections",
-        "looking at a hologram advertisement",
-        "standing near a vending machine"
+        {
+            "text": "standing and waiting under a neon sign",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the neon-lit street",
+            "load": "active"
+        },
+        {
+            "text": "leaning against a wall, looking at the crowd",
+            "load": "calm"
+        },
+        {
+            "text": "standing at a crosswalk, looking up at signs",
+            "load": "calm"
+        },
+        {
+            "text": "looking up at a holographic billboard",
+            "load": "calm"
+        },
+        {
+            "text": "standing in the rain looking at reflections",
+            "load": "calm"
+        },
+        {
+            "text": "looking at a hologram advertisement",
+            "load": "calm"
+        },
+        {
+            "text": "standing near a vending machine",
+            "load": "calm"
+        }
     ],
     "rainy_alley": [
-        "standing under an overhang, avoiding the rain",
-        "walking through a narrow alley",
-        "leaning against a brick wall",
-        "standing and holding an umbrella",
-        "walking quickly to avoid puddles",
-        "standing under a leaky awning",
-        "splashing in a puddle (playfully)",
-        "checking a map under a streetlight"
+        {
+            "text": "standing under an overhang, avoiding the rain",
+            "load": "calm"
+        },
+        {
+            "text": "walking through a narrow alley",
+            "load": "active"
+        },
+        {
+            "text": "leaning against a brick wall",
+            "load": "calm"
+        },
+        {
+            "text": "standing and holding an umbrella",
+            "load": "calm"
+        },
+        {
+            "text": "walking quickly to avoid puddles",
+            "load": "active"
+        },
+        {
+            "text": "standing under a leaky awning",
+            "load": "calm"
+        },
+        {
+            "text": "splashing in a puddle (playfully)",
+            "load": "calm"
+        },
+        {
+            "text": "checking a map under a streetlight",
+            "load": "calm"
+        }
     ],
     "commuter_transport": [
-        "standing in the train, holding a strap",
-        "sitting by the window, looking outside",
-        "standing and checking phone",
-        "sitting with a bag on lap, dozing off",
-        "reading a book while the train moves",
-        "checking the transit map near the door",
-        "listening to a podcast with earbuds",
-        "holding a bag on lap tightly",
-        "balancing while the train turns",
-        "glancing at the route map above the door"
+        {
+            "text": "standing in the train, holding a strap",
+            "load": "calm"
+        },
+        {
+            "text": "sitting by the window, looking outside",
+            "load": "calm"
+        },
+        {
+            "text": "standing and checking phone",
+            "load": "calm"
+        },
+        {
+            "text": "sitting with a bag on lap, dozing off",
+            "load": "calm"
+        },
+        {
+            "text": "reading a book while the train moves",
+            "load": "calm"
+        },
+        {
+            "text": "checking the transit map near the door",
+            "load": "calm"
+        },
+        {
+            "text": "listening to a podcast with earbuds",
+            "load": "calm"
+        },
+        {
+            "text": "holding a bag on lap tightly",
+            "load": "calm"
+        },
+        {
+            "text": "balancing while the train turns",
+            "load": "calm"
+        },
+        {
+            "text": "glancing at the route map above the door",
+            "load": "calm"
+        }
     ],
     "luxury_hotel_lobby": [
-        "sitting on a sofa, relaxing elegantly",
-        "standing near the reception desk",
-        "walking through the grand lobby",
-        "sitting and sipping tea",
-        "checking in at the reception desk",
-        "standing near a large flower arrangement"
+        {
+            "text": "sitting on a sofa, relaxing elegantly",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the reception desk",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the grand lobby",
+            "load": "active"
+        },
+        {
+            "text": "sitting and sipping tea",
+            "load": "calm"
+        },
+        {
+            "text": "checking in at the reception desk",
+            "load": "calm"
+        },
+        {
+            "text": "standing near a large flower arrangement",
+            "load": "calm"
+        }
     ],
     "karaoke_bar": [
-        "sitting on a sofa humming softly",
-        "standing and holding a microphone",
-        "sitting with a drink, looking relaxed",
-        "standing and choosing a song on the screen",
-        "standing and singing passionately",
-        "clapping hands to the rhythm",
-        "cheering for a friend singing",
-        "pasting a song into the queue"
+        {
+            "text": "sitting on a sofa humming softly",
+            "load": "calm"
+        },
+        {
+            "text": "standing and holding a microphone",
+            "load": "calm"
+        },
+        {
+            "text": "sitting with a drink, looking relaxed",
+            "load": "calm"
+        },
+        {
+            "text": "standing and choosing a song on the screen",
+            "load": "calm"
+        },
+        {
+            "text": "standing and singing passionately",
+            "load": "calm"
+        },
+        {
+            "text": "clapping hands to the rhythm",
+            "load": "calm"
+        },
+        {
+            "text": "cheering for a friend singing",
+            "load": "calm"
+        },
+        {
+            "text": "pasting a song into the queue",
+            "load": "calm"
+        }
     ],
     "messy_kitchen": [
-        "standing and cooking with a frying pan",
-        "sitting at the kitchen table eating",
-        "standing at the counter chopping vegetables",
-        "leaning against the counter, holding a mug",
-        "opening the refrigerator looking inside",
-        "washing dishes at the sink",
-        "wiping the counter with a cloth",
-        "tasting soup from a spoon",
-        "organizing spices in a rack",
-        "checking a recipe on a phone"
+        {
+            "text": "standing and cooking with a frying pan",
+            "load": "active"
+        },
+        {
+            "text": "sitting at the kitchen table eating",
+            "load": "calm"
+        },
+        {
+            "text": "standing at the counter chopping vegetables",
+            "load": "calm"
+        },
+        {
+            "text": "leaning against the counter, holding a mug",
+            "load": "calm"
+        },
+        {
+            "text": "opening the refrigerator looking inside",
+            "load": "calm"
+        },
+        {
+            "text": "washing dishes at the sink",
+            "load": "calm"
+        },
+        {
+            "text": "wiping the counter with a cloth",
+            "load": "calm"
+        },
+        {
+            "text": "tasting soup from a spoon",
+            "load": "calm"
+        },
+        {
+            "text": "organizing spices in a rack",
+            "load": "calm"
+        },
+        {
+            "text": "checking a recipe on a phone",
+            "load": "calm"
+        }
     ],
     "bedroom_boudoir": [
-        "lying on bed hugging a pillow",
-        "sitting on the edge of the bed",
-        "standing by the mirror, adjusting clothes",
-        "lying down reading a book",
-        "waking up and stretching arms",
-        "sitting on the floor organizing a jewelry box",
-        "brushing hair in front of a mirror",
-        "writing in a diary at the desk",
-        "choosing an outfit for tomorrow",
-        "fluffing a pillow on the bed"
+        {
+            "text": "lying on bed hugging a pillow",
+            "load": "intimate"
+        },
+        {
+            "text": "sitting on the edge of the bed",
+            "load": "intimate"
+        },
+        {
+            "text": "standing by the mirror, adjusting clothes",
+            "load": "calm"
+        },
+        {
+            "text": "lying down reading a book",
+            "load": "calm"
+        },
+        {
+            "text": "waking up and stretching arms",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on the floor organizing a jewelry box",
+            "load": "calm"
+        },
+        {
+            "text": "brushing hair in front of a mirror",
+            "load": "calm"
+        },
+        {
+            "text": "writing in a diary at the desk",
+            "load": "calm"
+        },
+        {
+            "text": "choosing an outfit for tomorrow",
+            "load": "calm"
+        },
+        {
+            "text": "fluffing a pillow on the bed",
+            "load": "intimate"
+        }
     ],
     "fitness_gym": [
-        "stretching on the floor",
-        "standing and holding dumbbells",
-        "sitting on a bench, resting between sets",
-        "standing in front of the mirror",
-        "walking on the treadmill",
-        "sitting on an exercise ball",
-        "wiping down equipment",
-        "drinking a protein shake",
-        "lifting weights with effort",
-        "doing crunches on a mat",
-        "running on the elliptical machine",
-        "checking form in the mirror"
+        {
+            "text": "stretching on the floor",
+            "load": "calm"
+        },
+        {
+            "text": "standing and holding dumbbells",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a bench, resting between sets",
+            "load": "calm"
+        },
+        {
+            "text": "standing in front of the mirror",
+            "load": "calm"
+        },
+        {
+            "text": "walking on the treadmill",
+            "load": "active"
+        },
+        {
+            "text": "sitting on an exercise ball",
+            "load": "calm"
+        },
+        {
+            "text": "wiping down equipment",
+            "load": "calm"
+        },
+        {
+            "text": "drinking a protein shake",
+            "load": "calm"
+        },
+        {
+            "text": "lifting weights with effort",
+            "load": "active"
+        },
+        {
+            "text": "doing crunches on a mat",
+            "load": "calm"
+        },
+        {
+            "text": "running on the elliptical machine",
+            "load": "active"
+        },
+        {
+            "text": "checking form in the mirror",
+            "load": "calm"
+        }
     ],
     "yoga_studio": [
-        "sitting in meditation pose",
-        "standing in a yoga pose",
-        "lying on a yoga mat, stretching",
-        "sitting cross-legged, eyes closed",
-        "standing on one leg in tree pose",
-        "lying on back in savasana"
+        {
+            "text": "sitting in meditation pose",
+            "load": "calm"
+        },
+        {
+            "text": "standing in a yoga pose",
+            "load": "calm"
+        },
+        {
+            "text": "lying on a yoga mat, stretching",
+            "load": "calm"
+        },
+        {
+            "text": "sitting cross-legged, eyes closed",
+            "load": "calm"
+        },
+        {
+            "text": "standing on one leg in tree pose",
+            "load": "calm"
+        },
+        {
+            "text": "lying on back in savasana",
+            "load": "calm"
+        }
     ],
     "stadium_court": [
-        "running down the track",
-        "standing at the starting line",
-        "walking briskly around the track",
-        "sitting on the sideline bench, resting",
-        "drinking water from a bottle",
-        "wiping sweat with a towel",
-        "tying shoelaces near the track",
-        "warming up with high knees"
+        {
+            "text": "running down the track",
+            "load": "active"
+        },
+        {
+            "text": "standing at the starting line",
+            "load": "calm"
+        },
+        {
+            "text": "walking briskly around the track",
+            "load": "active"
+        },
+        {
+            "text": "sitting on the sideline bench, resting",
+            "load": "calm"
+        },
+        {
+            "text": "drinking water from a bottle",
+            "load": "calm"
+        },
+        {
+            "text": "wiping sweat with a towel",
+            "load": "calm"
+        },
+        {
+            "text": "tying shoelaces near the track",
+            "load": "calm"
+        },
+        {
+            "text": "warming up with high knees",
+            "load": "calm"
+        }
     ],
     "concert_stage": [
-        "singing on stage, dynamic pose",
-        "standing and playing an instrument",
-        "standing at the microphone, eyes closed",
-        "walking across the stage dramatically",
-        "waving to the audience with a smile",
-        "adjusting the microphone stand",
-        "bowing deeply to the crowd",
-        "pointing to a fan in the front row"
+        {
+            "text": "singing on stage, dynamic pose",
+            "load": "calm"
+        },
+        {
+            "text": "standing and playing an instrument",
+            "load": "active"
+        },
+        {
+            "text": "standing at the microphone, eyes closed",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the stage dramatically",
+            "load": "active"
+        },
+        {
+            "text": "waving to the audience with a smile",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting the microphone stand",
+            "load": "calm"
+        },
+        {
+            "text": "bowing deeply to the crowd",
+            "load": "calm"
+        },
+        {
+            "text": "pointing to a fan in the front row",
+            "load": "calm"
+        }
     ],
     "recording_studio": [
-        "sitting and adjusting headphones",
-        "standing in front of the microphone",
-        "sitting at the mixing console",
-        "standing and tuning an instrument",
-        "adjusting the microphone stand",
-        "signaling 'OK' from the booth"
+        {
+            "text": "sitting and adjusting headphones",
+            "load": "calm"
+        },
+        {
+            "text": "standing in front of the microphone",
+            "load": "calm"
+        },
+        {
+            "text": "sitting at the mixing console",
+            "load": "calm"
+        },
+        {
+            "text": "standing and tuning an instrument",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting the microphone stand",
+            "load": "calm"
+        },
+        {
+            "text": "signaling 'OK' from the booth",
+            "load": "calm"
+        }
     ],
     "opera_house": [
-        "standing on stage singing dramatically",
-        "sitting in the audience seats",
-        "standing in the balcony, looking down",
-        "standing backstage, preparing"
+        {
+            "text": "standing on stage singing dramatically",
+            "load": "calm"
+        },
+        {
+            "text": "sitting in the audience seats",
+            "load": "calm"
+        },
+        {
+            "text": "standing in the balcony, looking down",
+            "load": "calm"
+        },
+        {
+            "text": "standing backstage, preparing",
+            "load": "calm"
+        }
     ],
     "fantasy_forest": [
-        "standing ready for battle, warrior pose",
-        "walking along a mystical forest path",
-        "sitting on a mossy rock, resting",
-        "standing and looking at a glowing light"
+        {
+            "text": "standing ready for battle, warrior pose",
+            "load": "tense"
+        },
+        {
+            "text": "walking along a mystical forest path",
+            "load": "active"
+        },
+        {
+            "text": "sitting on a mossy rock, resting",
+            "load": "calm"
+        },
+        {
+            "text": "standing and looking at a glowing light",
+            "load": "calm"
+        }
     ],
     "burning_battlefield": [
-        "standing ready for battle, knight pose",
-        "running through the smoke and fire",
-        "standing with a weapon, surveying the field",
-        "crouching behind cover",
-        "crawling through the mud",
-        "signaling to advance"
+        {
+            "text": "standing ready for battle, knight pose",
+            "load": "tense"
+        },
+        {
+            "text": "running through the smoke and fire",
+            "load": "active"
+        },
+        {
+            "text": "standing with a weapon, surveying the field",
+            "load": "calm"
+        },
+        {
+            "text": "crouching behind cover",
+            "load": "calm"
+        },
+        {
+            "text": "crawling through the mud",
+            "load": "calm"
+        },
+        {
+            "text": "signaling to advance",
+            "load": "calm"
+        }
     ],
     "dungeon_crypt": [
-        "sitting against a wall, resting",
-        "standing in the darkness, looking alert",
-        "walking cautiously through the corridor",
-        "standing and holding a torch",
-        "deciphering runes on the wall",
-        "listening to distant echoes"
+        {
+            "text": "sitting against a wall, resting",
+            "load": "calm"
+        },
+        {
+            "text": "standing in the darkness, looking alert",
+            "load": "calm"
+        },
+        {
+            "text": "walking cautiously through the corridor",
+            "load": "active"
+        },
+        {
+            "text": "standing and holding a torch",
+            "load": "calm"
+        },
+        {
+            "text": "deciphering runes on the wall",
+            "load": "calm"
+        },
+        {
+            "text": "listening to distant echoes",
+            "load": "calm"
+        }
     ],
     "alien_planet": [
-        "standing and looking at the alien landscape",
-        "walking across strange terrain",
-        "standing and holding a bouquet, pointing at a strange plant",
-        "crouching and examining the ground",
-        "collecting a soil sample",
-        "watching the twin moons rise"
+        {
+            "text": "standing and looking at the alien landscape",
+            "load": "calm"
+        },
+        {
+            "text": "walking across strange terrain",
+            "load": "active"
+        },
+        {
+            "text": "standing and holding a bouquet, pointing at a strange plant",
+            "load": "calm"
+        },
+        {
+            "text": "crouching and examining the ground",
+            "load": "calm"
+        },
+        {
+            "text": "collecting a soil sample",
+            "load": "calm"
+        },
+        {
+            "text": "watching the twin moons rise",
+            "load": "calm"
+        }
     ],
     "dragon_lair": [
-        "standing and hiding behind a rock",
-        "crouching with a weapon ready",
-        "standing at the entrance, looking in",
-        "sitting and tending to wounds",
-        "shielding eyes from the heat",
-        "spotting a shiny gem on the floor"
+        {
+            "text": "standing and hiding behind a rock",
+            "load": "tense"
+        },
+        {
+            "text": "crouching with a weapon ready",
+            "load": "calm"
+        },
+        {
+            "text": "standing at the entrance, looking in",
+            "load": "calm"
+        },
+        {
+            "text": "sitting and tending to wounds",
+            "load": "calm"
+        },
+        {
+            "text": "shielding eyes from the heat",
+            "load": "calm"
+        },
+        {
+            "text": "spotting a shiny gem on the floor",
+            "load": "calm"
+        }
     ],
     "shinto_shrine": [
-        "standing and sweeping leaves with a broom",
-        "walking slowly along the stone path",
-        "standing and praying at the shrine",
-        "sitting on the shrine steps, resting",
-        "standing calmly under a tree",
-        "clapping hands twice in prayer"
+        {
+            "text": "standing and sweeping leaves with a broom",
+            "load": "active"
+        },
+        {
+            "text": "walking slowly along the stone path",
+            "load": "active"
+        },
+        {
+            "text": "standing and praying at the shrine",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on the shrine steps, resting",
+            "load": "calm"
+        },
+        {
+            "text": "standing calmly under a tree",
+            "load": "calm"
+        },
+        {
+            "text": "clapping hands twice in prayer",
+            "load": "calm"
+        }
     ],
     "bamboo_forest": [
-        "walking slowly along the path",
-        "standing among the bamboo, looking up",
-        "sitting on a rock by the path",
-        "standing with arms behind back, enjoying the view",
-        "listening to the wind in the leaves",
-        "spotting a bamboo shoot"
+        {
+            "text": "walking slowly along the path",
+            "load": "active"
+        },
+        {
+            "text": "standing among the bamboo, looking up",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a rock by the path",
+            "load": "calm"
+        },
+        {
+            "text": "standing with arms behind back, enjoying the view",
+            "load": "calm"
+        },
+        {
+            "text": "listening to the wind in the leaves",
+            "load": "calm"
+        },
+        {
+            "text": "spotting a bamboo shoot",
+            "load": "calm"
+        }
     ],
     "winter_street": [
-        "standing in winter, breathing into cold hands",
-        "walking through the snowy street",
-        "standing and looking at a shop window",
-        "walking with arms wrapped around self",
-        "standing and catching a snowflake",
-        "holding a hot drink with both hands",
-        "adjusting a scarf around neck",
-        "stomping snow off boots",
-        "looking at holiday decorations",
-        "breathing visible vapor into the air"
+        {
+            "text": "standing in winter, breathing into cold hands",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the snowy street",
+            "load": "active"
+        },
+        {
+            "text": "standing and looking at a shop window",
+            "load": "calm"
+        },
+        {
+            "text": "walking with arms wrapped around self",
+            "load": "active"
+        },
+        {
+            "text": "standing and catching a snowflake",
+            "load": "calm"
+        },
+        {
+            "text": "holding a hot drink with both hands",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting a scarf around neck",
+            "load": "calm"
+        },
+        {
+            "text": "stomping snow off boots",
+            "load": "calm"
+        },
+        {
+            "text": "looking at holiday decorations",
+            "load": "calm"
+        },
+        {
+            "text": "breathing visible vapor into the air",
+            "load": "calm"
+        }
     ],
     "tropical_beach": [
-        "walking along the shoreline",
-        "standing and looking at the ocean",
-        "sitting on the sand, relaxing",
-        "standing with feet in the water"
+        {
+            "text": "walking along the shoreline",
+            "load": "active"
+        },
+        {
+            "text": "standing and looking at the ocean",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on the sand, relaxing",
+            "load": "calm"
+        },
+        {
+            "text": "standing with feet in the water",
+            "load": "calm"
+        }
     ],
     "wave_barrel": [
-        "standing on a surfboard",
-        "crouching on the surfboard in the wave",
-        "standing at the water's edge with a surfboard",
-        "sitting on the beach watching the waves",
-        "dragging hand in the water wall",
-        "adjusting balance on the board"
+        {
+            "text": "standing on a surfboard",
+            "load": "calm"
+        },
+        {
+            "text": "crouching on the surfboard in the wave",
+            "load": "calm"
+        },
+        {
+            "text": "standing at the water's edge with a surfboard",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on the beach watching the waves",
+            "load": "calm"
+        },
+        {
+            "text": "dragging hand in the water wall",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting balance on the board",
+            "load": "calm"
+        }
     ],
     "poolside_resort": [
-        "lying on a deck chair, relaxing",
-        "sitting at the pool edge, feet in water",
-        "standing by the pool, sipping a drink",
-        "walking around the pool area",
-        "applying sunscreen on arms",
-        "adjusting sunglasses on head"
+        {
+            "text": "lying on a deck chair, relaxing",
+            "load": "calm"
+        },
+        {
+            "text": "sitting at the pool edge, feet in water",
+            "load": "calm"
+        },
+        {
+            "text": "standing by the pool, sipping a drink",
+            "load": "calm"
+        },
+        {
+            "text": "walking around the pool area",
+            "load": "active"
+        },
+        {
+            "text": "applying sunscreen on arms",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting sunglasses on head",
+            "load": "calm"
+        }
     ],
     "antique_shop": [
-        "browsing antiques, looking for rare items",
-        "standing and holding a vintage item",
-        "sitting and examining an old clock",
-        "standing near a shelf, peering at objects",
-        "dusting a shelf with a feather duster",
-        "holding a magnifying glass examining an item"
+        {
+            "text": "browsing antiques, looking for rare items",
+            "load": "calm"
+        },
+        {
+            "text": "standing and holding a vintage item",
+            "load": "calm"
+        },
+        {
+            "text": "sitting and examining an old clock",
+            "load": "calm"
+        },
+        {
+            "text": "standing near a shelf, peering at objects",
+            "load": "calm"
+        },
+        {
+            "text": "dusting a shelf with a feather duster",
+            "load": "calm"
+        },
+        {
+            "text": "holding a magnifying glass examining an item",
+            "load": "calm"
+        }
     ],
     "illuminated_park": [
-        "standing in the snow, looking up at the lights",
-        "walking along the illuminated path",
-        "sitting on a bench, enjoying the lights",
-        "standing under a tree of lights",
-        "standing with a sparkler in hand",
-        "taking a selfie with the lights",
-        "admiring the colorful light display",
-        "walking hand in hand with a smile",
-        "taking a panoramic photo",
-        "sipping hot cocoa from a cup"
+        {
+            "text": "standing in the snow, looking up at the lights",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the illuminated path",
+            "load": "active"
+        },
+        {
+            "text": "sitting on a bench, enjoying the lights",
+            "load": "calm"
+        },
+        {
+            "text": "standing under a tree of lights",
+            "load": "calm"
+        },
+        {
+            "text": "standing with a sparkler in hand",
+            "load": "calm"
+        },
+        {
+            "text": "taking a selfie with the lights",
+            "load": "calm"
+        },
+        {
+            "text": "admiring the colorful light display",
+            "load": "calm"
+        },
+        {
+            "text": "walking hand in hand with a smile",
+            "load": "active"
+        },
+        {
+            "text": "taking a panoramic photo",
+            "load": "calm"
+        },
+        {
+            "text": "sipping hot cocoa from a cup",
+            "load": "calm"
+        }
     ],
     "street_cafe": [
-        "sitting at a round table, sipping coffee",
-        "standing outside looking at the menu",
-        "sitting and reading a book at the table",
-        "sitting and looking at her phone",
-        "enjoying a pastry while people watching",
-        "waving to a friend approaching the cafe",
-        "checking messages on a tablet",
-        "laughing at a friend's joke",
-        "stirring sugar into coffee",
-        "watching pedestrians walk by"
+        {
+            "text": "sitting at a round table, sipping coffee",
+            "load": "calm"
+        },
+        {
+            "text": "standing outside looking at the menu",
+            "load": "calm"
+        },
+        {
+            "text": "sitting and reading a book at the table",
+            "load": "calm"
+        },
+        {
+            "text": "sitting and looking at her phone",
+            "load": "calm"
+        },
+        {
+            "text": "enjoying a pastry while people watching",
+            "load": "calm"
+        },
+        {
+            "text": "waving to a friend approaching the cafe",
+            "load": "calm"
+        },
+        {
+            "text": "checking messages on a tablet",
+            "load": "calm"
+        },
+        {
+            "text": "laughing at a friend's joke",
+            "load": "calm"
+        },
+        {
+            "text": "stirring sugar into coffee",
+            "load": "calm"
+        },
+        {
+            "text": "watching pedestrians walk by",
+            "load": "calm"
+        }
     ],
     "cozy_bookstore": [
-        "standing between shelves, browsing books",
-        "sitting in a corner, reading",
-        "standing and holding a stack of books",
-        "crouching and looking at books on a low shelf",
-        "reaching for a book on a high shelf",
-        "smelling the pages of an old book",
-        "recommending a book to someone",
-        "stacking new arrivals on a table",
-        "reading the back cover of a novel",
-        "sitting in a comfy chair with a coffee"
+        {
+            "text": "standing between shelves, browsing books",
+            "load": "calm"
+        },
+        {
+            "text": "sitting in a corner, reading",
+            "load": "calm"
+        },
+        {
+            "text": "standing and holding a stack of books",
+            "load": "calm"
+        },
+        {
+            "text": "crouching and looking at books on a low shelf",
+            "load": "calm"
+        },
+        {
+            "text": "reaching for a book on a high shelf",
+            "load": "calm"
+        },
+        {
+            "text": "smelling the pages of an old book",
+            "load": "calm"
+        },
+        {
+            "text": "recommending a book to someone",
+            "load": "calm"
+        },
+        {
+            "text": "stacking new arrivals on a table",
+            "load": "calm"
+        },
+        {
+            "text": "reading the back cover of a novel",
+            "load": "calm"
+        },
+        {
+            "text": "sitting in a comfy chair with a coffee",
+            "load": "calm"
+        }
     ],
     "shopping_mall_atrium": [
-        "walking and holding shopping bags",
-        "standing and looking at a store window",
-        "sitting on a bench, taking a break",
-        "walking up the escalator",
-        "checking a store directory map",
-        "waiting for a friend near the fountain",
-        "looking at a map directory",
-        "window shopping at a jewelry store",
-        "riding the glass elevator up",
-        "sitting near a fountain listening to water"
+        {
+            "text": "walking and holding shopping bags",
+            "load": "active"
+        },
+        {
+            "text": "standing and looking at a store window",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a bench, taking a break",
+            "load": "calm"
+        },
+        {
+            "text": "walking up the escalator",
+            "load": "active"
+        },
+        {
+            "text": "checking a store directory map",
+            "load": "calm"
+        },
+        {
+            "text": "waiting for a friend near the fountain",
+            "load": "calm"
+        },
+        {
+            "text": "looking at a map directory",
+            "load": "calm"
+        },
+        {
+            "text": "window shopping at a jewelry store",
+            "load": "calm"
+        },
+        {
+            "text": "riding the glass elevator up",
+            "load": "calm"
+        },
+        {
+            "text": "sitting near a fountain listening to water",
+            "load": "calm"
+        }
     ],
     "fashion_boutique": [
-        "standing in front of a mirror, trying on clothes",
-        "holding up a dress, examining it",
-        "browsing through a rack of clothes",
-        "standing at the counter, making a purchase",
-        "looking at a price tag with a frown",
-        "walking out with a shopping bag",
-        "holding two dresses, comparing them",
-        "adjusting a hat in the mirror"
+        {
+            "text": "standing in front of a mirror, trying on clothes",
+            "load": "calm"
+        },
+        {
+            "text": "holding up a dress, examining it",
+            "load": "calm"
+        },
+        {
+            "text": "browsing through a rack of clothes",
+            "load": "calm"
+        },
+        {
+            "text": "standing at the counter, making a purchase",
+            "load": "calm"
+        },
+        {
+            "text": "looking at a price tag with a frown",
+            "load": "calm"
+        },
+        {
+            "text": "walking out with a shopping bag",
+            "load": "active"
+        },
+        {
+            "text": "holding two dresses, comparing them",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting a hat in the mirror",
+            "load": "calm"
+        }
     ],
     "picnic_park": [
-        "sitting on grass, relaxing in nature",
-        "lying on a picnic blanket",
-        "sitting under a tree, reading",
-        "standing and stretching arms toward the sky",
-        "eating a sandwich from a basket",
-        "standing and flying a kite",
-        "watching clouds drift by",
-        "playing with a dog nearby",
-        "sketching the landscape in a book",
-        "sipping lemonade from a thermos"
+        {
+            "text": "sitting on grass, relaxing in nature",
+            "load": "calm"
+        },
+        {
+            "text": "lying on a picnic blanket",
+            "load": "calm"
+        },
+        {
+            "text": "sitting under a tree, reading",
+            "load": "calm"
+        },
+        {
+            "text": "standing and stretching arms toward the sky",
+            "load": "calm"
+        },
+        {
+            "text": "eating a sandwich from a basket",
+            "load": "calm"
+        },
+        {
+            "text": "standing and flying a kite",
+            "load": "active"
+        },
+        {
+            "text": "watching clouds drift by",
+            "load": "calm"
+        },
+        {
+            "text": "playing with a dog nearby",
+            "load": "active"
+        },
+        {
+            "text": "sketching the landscape in a book",
+            "load": "calm"
+        },
+        {
+            "text": "sipping lemonade from a thermos",
+            "load": "calm"
+        }
     ],
     "botanical_garden": [
-        "standing and smelling a flower",
-        "walking along the greenhouse path",
-        "sitting on a bench surrounded by flowers",
-        "standing and taking a photo of a plant",
-        "reading a label on a rare tree",
-        "walking under a flower archway",
-        "sitting by a koi pond, relaxing",
-        "sketching a plant in a notebook",
-        "standing in the mist of a tropical house",
-        "looking up at a tall palm tree"
+        {
+            "text": "standing and smelling a flower",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the greenhouse path",
+            "load": "active"
+        },
+        {
+            "text": "sitting on a bench surrounded by flowers",
+            "load": "calm"
+        },
+        {
+            "text": "standing and taking a photo of a plant",
+            "load": "calm"
+        },
+        {
+            "text": "reading a label on a rare tree",
+            "load": "calm"
+        },
+        {
+            "text": "walking under a flower archway",
+            "load": "active"
+        },
+        {
+            "text": "sitting by a koi pond, relaxing",
+            "load": "calm"
+        },
+        {
+            "text": "sketching a plant in a notebook",
+            "load": "calm"
+        },
+        {
+            "text": "standing in the mist of a tropical house",
+            "load": "calm"
+        },
+        {
+            "text": "looking up at a tall palm tree",
+            "load": "calm"
+        }
     ],
     "spaceship_bridge": [
-        "standing on the bridge, looking at stars",
-        "sitting in the captain's chair",
-        "standing at the console, pressing buttons",
-        "standing by the viewport, arms behind back"
+        {
+            "text": "standing on the bridge, looking at stars",
+            "load": "calm"
+        },
+        {
+            "text": "sitting in the captain's chair",
+            "load": "calm"
+        },
+        {
+            "text": "standing at the console, pressing buttons",
+            "load": "calm"
+        },
+        {
+            "text": "standing by the viewport, arms behind back",
+            "load": "calm"
+        }
     ],
     "cyber_lab": [
-        "standing in front of holo-displays",
-        "sitting at a workstation, typing rapidly",
-        "standing and examining a glowing device",
-        "leaning over a table of circuit boards"
+        {
+            "text": "standing in front of holo-displays",
+            "load": "calm"
+        },
+        {
+            "text": "sitting at a workstation, typing rapidly",
+            "load": "calm"
+        },
+        {
+            "text": "standing and examining a glowing device",
+            "load": "calm"
+        },
+        {
+            "text": "leaning over a table of circuit boards",
+            "load": "calm"
+        }
     ],
     "airship_deck": [
-        "standing at the railing, looking at the clouds",
-        "sitting on a crate, wind blowing hair",
-        "standing at the helm, steering",
-        "leaning against the mast, relaxing"
+        {
+            "text": "standing at the railing, looking at the clouds",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a crate, wind blowing hair",
+            "load": "calm"
+        },
+        {
+            "text": "standing at the helm, steering",
+            "load": "calm"
+        },
+        {
+            "text": "leaning against the mast, relaxing",
+            "load": "calm"
+        }
     ],
     "japanese_bath": [
-        "soaking in the hot water",
-        "sitting on the edge of the bath",
-        "relaxing with a towel on head",
-        "pouring water over shoulder",
-        "washing hair with a bucket",
-        "sitting on a small stool scrubbing back"
+        {
+            "text": "soaking in the hot water",
+            "load": "intimate"
+        },
+        {
+            "text": "sitting on the edge of the bath",
+            "load": "intimate"
+        },
+        {
+            "text": "relaxing with a towel on head",
+            "load": "calm"
+        },
+        {
+            "text": "pouring water over shoulder",
+            "load": "calm"
+        },
+        {
+            "text": "washing hair with a bucket",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a small stool scrubbing back",
+            "load": "calm"
+        }
     ],
     "clockwork_workshop": [
-        "sitting at a workbench, assembling gears",
-        "standing and examining a clockwork device",
-        "working on a machine with tools",
-        "standing surrounded by ticking clocks"
+        {
+            "text": "sitting at a workbench, assembling gears",
+            "load": "calm"
+        },
+        {
+            "text": "standing and examining a clockwork device",
+            "load": "calm"
+        },
+        {
+            "text": "working on a machine with tools",
+            "load": "calm"
+        },
+        {
+            "text": "standing surrounded by ticking clocks",
+            "load": "calm"
+        }
     ],
     "castle_hall": [
-        "standing on the red carpet, looking regal",
-        "sitting on a velvet chair, deep in thought",
-        "walking past armor suits in the hallway",
-        "standing by the stained glass window",
-        "bowing respectfully to a noble",
-        "standing guard with a serious expression",
-        "dancing alone in the center of the hall",
-        "looking up at the high vaulted ceiling"
+        {
+            "text": "standing on the red carpet, looking regal",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a velvet chair, deep in thought",
+            "load": "calm"
+        },
+        {
+            "text": "walking past armor suits in the hallway",
+            "load": "active"
+        },
+        {
+            "text": "standing by the stained glass window",
+            "load": "calm"
+        },
+        {
+            "text": "bowing respectfully to a noble",
+            "load": "calm"
+        },
+        {
+            "text": "standing guard with a serious expression",
+            "load": "calm"
+        },
+        {
+            "text": "dancing alone in the center of the hall",
+            "load": "active"
+        },
+        {
+            "text": "looking up at the high vaulted ceiling",
+            "load": "calm"
+        }
     ],
     "enchanted_lake": [
-        "sitting by the water's edge, glowing lights nearby",
-        "standing on a stone bridge, looking at reflections",
-        "walking through the mist covering the lake",
-        "kneeling and touching the glowing water",
-        "standing under a willow tree, mysterious atmosphere",
-        "casting a small spell over the water",
-        "sitting on a floating log, relaxed",
-        "gazing at the moon reflected in the lake"
+        {
+            "text": "sitting by the water's edge, glowing lights nearby",
+            "load": "calm"
+        },
+        {
+            "text": "standing on a stone bridge, looking at reflections",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the mist covering the lake",
+            "load": "active"
+        },
+        {
+            "text": "kneeling and touching the glowing water",
+            "load": "calm"
+        },
+        {
+            "text": "standing under a willow tree, mysterious atmosphere",
+            "load": "calm"
+        },
+        {
+            "text": "casting a small spell over the water",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a floating log, relaxed",
+            "load": "calm"
+        },
+        {
+            "text": "gazing at the moon reflected in the lake",
+            "load": "calm"
+        }
     ],
     "magic_academy_library": [
-        "standing and reading a floating book",
-        "sitting at a desk with a glowing orb",
-        "climbing a ladder to reach a high scroll",
-        "walking while reading a thick grimoire",
-        "standing and casting a light spell to read",
-        "sitting on a pile of books, studying",
-        "whispering to a magical creature on a shelf",
-        "looking at a map of the stars"
+        {
+            "text": "standing and reading a floating book",
+            "load": "calm"
+        },
+        {
+            "text": "sitting at a desk with a glowing orb",
+            "load": "calm"
+        },
+        {
+            "text": "climbing a ladder to reach a high scroll",
+            "load": "calm"
+        },
+        {
+            "text": "walking while reading a thick grimoire",
+            "load": "active"
+        },
+        {
+            "text": "standing and casting a light spell to read",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a pile of books, studying",
+            "load": "calm"
+        },
+        {
+            "text": "whispering to a magical creature on a shelf",
+            "load": "calm"
+        },
+        {
+            "text": "looking at a map of the stars",
+            "load": "calm"
+        }
     ],
     "japanese_garden": [
-        "standing on a red bridge, feeding koi fish",
-        "walking slowly along the stone path",
-        "sitting on a bench admiring the cherry blossoms",
-        "standing by a stone lantern, peaceful",
-        "sweeping fallen leaves with a bamboo broom",
-        "sitting in seiza on a wooden deck",
-        "looking at the rock garden pattern",
-        "holding a paper umbrella in the rain"
+        {
+            "text": "standing on a red bridge, feeding koi fish",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly along the stone path",
+            "load": "active"
+        },
+        {
+            "text": "sitting on a bench admiring the cherry blossoms",
+            "load": "calm"
+        },
+        {
+            "text": "standing by a stone lantern, peaceful",
+            "load": "calm"
+        },
+        {
+            "text": "sweeping fallen leaves with a bamboo broom",
+            "load": "active"
+        },
+        {
+            "text": "sitting in seiza on a wooden deck",
+            "load": "calm"
+        },
+        {
+            "text": "looking at the rock garden pattern",
+            "load": "calm"
+        },
+        {
+            "text": "holding a paper umbrella in the rain",
+            "load": "calm"
+        }
     ],
     "tea_room": [
-        "sitting in seiza, preparing matcha tea",
-        "kneeling and offering a tea cup",
-        "sitting quietly, enjoying the aroma",
-        "standing and arranging flowers in the alcove",
-        "wiping the tatami mat with a cloth",
-        "sitting and chatting with a guest",
-        "looking out the window at the garden",
-        "holding a tea bowl with both hands"
+        {
+            "text": "sitting in seiza, preparing matcha tea",
+            "load": "calm"
+        },
+        {
+            "text": "kneeling and offering a tea cup",
+            "load": "calm"
+        },
+        {
+            "text": "sitting quietly, enjoying the aroma",
+            "load": "calm"
+        },
+        {
+            "text": "standing and arranging flowers in the alcove",
+            "load": "calm"
+        },
+        {
+            "text": "wiping the tatami mat with a cloth",
+            "load": "calm"
+        },
+        {
+            "text": "sitting and chatting with a guest",
+            "load": "calm"
+        },
+        {
+            "text": "looking out the window at the garden",
+            "load": "calm"
+        },
+        {
+            "text": "holding a tea bowl with both hands",
+            "load": "calm"
+        }
     ],
     "starship_quarters": [
-        "sitting on the bunk bed, looking at a hologram",
-        "standing by the viewport, stars streak by",
-        "typing on a personal datapad",
-        "lying down and staring at the metal ceiling",
-        "standing and organizing a uniform in the locker",
-        "eating a nutrient pack at a small table",
-        "exercising in the small space",
-        "checking life support indicators on the wall"
+        {
+            "text": "sitting on the bunk bed, looking at a hologram",
+            "load": "intimate"
+        },
+        {
+            "text": "standing by the viewport, stars streak by",
+            "load": "calm"
+        },
+        {
+            "text": "typing on a personal datapad",
+            "load": "calm"
+        },
+        {
+            "text": "lying down and staring at the metal ceiling",
+            "load": "calm"
+        },
+        {
+            "text": "standing and organizing a uniform in the locker",
+            "load": "calm"
+        },
+        {
+            "text": "eating a nutrient pack at a small table",
+            "load": "calm"
+        },
+        {
+            "text": "exercising in the small space",
+            "load": "active"
+        },
+        {
+            "text": "checking life support indicators on the wall",
+            "load": "calm"
+        }
     ],
     "high_tech_medbay": [
-        "lying on a scanner bed, undergoing analysis",
-        "standing and checking medical holographic charts",
-        "sitting in a waiting chair, looking anxious",
-        "mixing chemicals in a glowing vial",
-        "checking the vitals monitor",
-        "standing with arms crossed, observing a patient",
-        "adjusting a robotic surgical arm",
-        "typing notes into a medical terminal"
+        {
+            "text": "lying on a scanner bed, undergoing analysis",
+            "load": "intimate"
+        },
+        {
+            "text": "standing and checking medical holographic charts",
+            "load": "calm"
+        },
+        {
+            "text": "sitting in a waiting chair, looking anxious",
+            "load": "calm"
+        },
+        {
+            "text": "mixing chemicals in a glowing vial",
+            "load": "calm"
+        },
+        {
+            "text": "checking the vitals monitor",
+            "load": "calm"
+        },
+        {
+            "text": "standing with arms crossed, observing a patient",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting a robotic surgical arm",
+            "load": "calm"
+        },
+        {
+            "text": "typing notes into a medical terminal",
+            "load": "calm"
+        }
     ],
     "art_gallery": [
-        "standing with arms folded, critiquing a painting",
-        "walking slowly through the gallery hall",
-        "sitting on a bench, admiring a sculpture",
-        "standing close to a canvas, examining brushstrokes",
-        "reading a plaque next to an artwork",
-        "sketching in a notebook, inspired by the art",
-        "standing back to view a large installation",
-        "discussing art quietly with a companion",
-        "leaning in to read a tiny label",
-        "walking quietly to the next room"
+        {
+            "text": "standing with arms folded, critiquing a painting",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly through the gallery hall",
+            "load": "active"
+        },
+        {
+            "text": "sitting on a bench, admiring a sculpture",
+            "load": "calm"
+        },
+        {
+            "text": "standing close to a canvas, examining brushstrokes",
+            "load": "calm"
+        },
+        {
+            "text": "reading a plaque next to an artwork",
+            "load": "calm"
+        },
+        {
+            "text": "sketching in a notebook, inspired by the art",
+            "load": "calm"
+        },
+        {
+            "text": "standing back to view a large installation",
+            "load": "calm"
+        },
+        {
+            "text": "discussing art quietly with a companion",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in to read a tiny label",
+            "load": "calm"
+        },
+        {
+            "text": "walking quietly to the next room",
+            "load": "active"
+        }
     ],
     "museum_hall": [
-        "standing under a dinosaur skeleton",
-        "walking past ancient artifacts",
-        "reading information on a display case",
-        "standing in awe of a historical exhibit",
-        "leaning forward to see details of a relic",
-        "sitting on a bench in the grand hall",
-        "taking notes on a clipboard",
-        "looking up at the high domed ceiling",
-        "listening to an audio guide",
-        "looking at a map of the museum"
+        {
+            "text": "standing under a dinosaur skeleton",
+            "load": "calm"
+        },
+        {
+            "text": "walking past ancient artifacts",
+            "load": "active"
+        },
+        {
+            "text": "reading information on a display case",
+            "load": "calm"
+        },
+        {
+            "text": "standing in awe of a historical exhibit",
+            "load": "calm"
+        },
+        {
+            "text": "leaning forward to see details of a relic",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a bench in the grand hall",
+            "load": "calm"
+        },
+        {
+            "text": "taking notes on a clipboard",
+            "load": "calm"
+        },
+        {
+            "text": "looking up at the high domed ceiling",
+            "load": "calm"
+        },
+        {
+            "text": "listening to an audio guide",
+            "load": "calm"
+        },
+        {
+            "text": "looking at a map of the museum",
+            "load": "calm"
+        }
     ],
     "underground_bar": [
-        "sitting at the counter, swirling a drink",
-        "standing by the jukebox, selecting a song",
-        "leaning against the wall in the dim light",
-        "playing darts with focus",
-        "chatting with the bartender",
-        "sitting in a booth, looking mysterious",
-        "raising a glass for a toast",
-        "listening to live jazz music",
-        "checking the time on a watch",
-        "adjusting a coaster on the table"
+        {
+            "text": "sitting at the counter, swirling a drink",
+            "load": "calm"
+        },
+        {
+            "text": "standing by the jukebox, selecting a song",
+            "load": "calm"
+        },
+        {
+            "text": "leaning against the wall in the dim light",
+            "load": "calm"
+        },
+        {
+            "text": "playing darts with focus",
+            "load": "active"
+        },
+        {
+            "text": "chatting with the bartender",
+            "load": "calm"
+        },
+        {
+            "text": "sitting in a booth, looking mysterious",
+            "load": "calm"
+        },
+        {
+            "text": "raising a glass for a toast",
+            "load": "calm"
+        },
+        {
+            "text": "listening to live jazz music",
+            "load": "calm"
+        },
+        {
+            "text": "checking the time on a watch",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting a coaster on the table",
+            "load": "calm"
+        }
     ],
     "aquarium": [
-        "standing in the underwater tunnel, looking up",
-        "watching jellyfish float in a tank",
-        "sitting on a bench watching the large tank",
-        "pointing at a shark swimming by",
-        "reading about deep sea creatures",
-        "walking slowly through the dark corridor",
-        "standing face to face with a fish at the glass",
-        "taking a photo of a colorful coral reef",
-        "looking at a starfish in the touch pool",
-        "standing in awe of a giant stingray"
+        {
+            "text": "standing in the underwater tunnel, looking up",
+            "load": "calm"
+        },
+        {
+            "text": "watching jellyfish float in a tank",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a bench watching the large tank",
+            "load": "calm"
+        },
+        {
+            "text": "pointing at a shark swimming by",
+            "load": "calm"
+        },
+        {
+            "text": "reading about deep sea creatures",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly through the dark corridor",
+            "load": "active"
+        },
+        {
+            "text": "standing face to face with a fish at the glass",
+            "load": "calm"
+        },
+        {
+            "text": "taking a photo of a colorful coral reef",
+            "load": "calm"
+        },
+        {
+            "text": "looking at a starfish in the touch pool",
+            "load": "calm"
+        },
+        {
+            "text": "standing in awe of a giant stingray",
+            "load": "calm"
+        }
     ],
     "abandoned_shrine": [
-        "standing before the rotting main hall",
-        "sitting on the broken stone steps",
-        "walking through the tall overgrown grass",
-        "looking at a mossy stone statue",
-        "holding a rusted bell cord",
-        "feeling the eerie atmosphere in silence",
-        "clasping hands in prayer despite the ruin",
-        "brushing away spiderwebs"
+        {
+            "text": "standing before the rotting main hall",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on the broken stone steps",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the tall overgrown grass",
+            "load": "active"
+        },
+        {
+            "text": "looking at a mossy stone statue",
+            "load": "calm"
+        },
+        {
+            "text": "holding a rusted bell cord",
+            "load": "calm"
+        },
+        {
+            "text": "feeling the eerie atmosphere in silence",
+            "load": "calm"
+        },
+        {
+            "text": "clasping hands in prayer despite the ruin",
+            "load": "calm"
+        },
+        {
+            "text": "brushing away spiderwebs",
+            "load": "calm"
+        }
     ],
     "rainy_bus_stop": [
-        "sitting on the bench waiting for a bus",
-        "standing under the shelter watching the rain",
-        "checking the faded timetable",
-        "holding an umbrella against the wind",
-        "looking down the empty wet road",
-        "wiping mist from the glass panel",
-        "shaking water off a raincoat",
-        "huddling for warmth"
+        {
+            "text": "sitting on the bench waiting for a bus",
+            "load": "calm"
+        },
+        {
+            "text": "standing under the shelter watching the rain",
+            "load": "calm"
+        },
+        {
+            "text": "checking the faded timetable",
+            "load": "calm"
+        },
+        {
+            "text": "holding an umbrella against the wind",
+            "load": "calm"
+        },
+        {
+            "text": "looking down the empty wet road",
+            "load": "calm"
+        },
+        {
+            "text": "wiping mist from the glass panel",
+            "load": "calm"
+        },
+        {
+            "text": "shaking water off a raincoat",
+            "load": "calm"
+        },
+        {
+            "text": "huddling for warmth",
+            "load": "calm"
+        }
     ],
     "elegant_dining_room": [
-        "sitting at the head of the table",
-        "arranging silverware on the tablecloth",
-        "standing and proposing a toast",
-        "sipping wine from a crystal glass",
-        "lighting the centerpiece candles",
-        "folding a napkin into a shape",
-        "waiting for the main course",
-        "admiring the chandelier above"
+        {
+            "text": "sitting at the head of the table",
+            "load": "calm"
+        },
+        {
+            "text": "arranging silverware on the tablecloth",
+            "load": "calm"
+        },
+        {
+            "text": "standing and proposing a toast",
+            "load": "calm"
+        },
+        {
+            "text": "sipping wine from a crystal glass",
+            "load": "calm"
+        },
+        {
+            "text": "lighting the centerpiece candles",
+            "load": "calm"
+        },
+        {
+            "text": "folding a napkin into a shape",
+            "load": "calm"
+        },
+        {
+            "text": "waiting for the main course",
+            "load": "calm"
+        },
+        {
+            "text": "admiring the chandelier above",
+            "load": "calm"
+        }
     ],
     "cyberpunk_street": [
-        "leaning against a graffiti-covered wall",
-        "walking through the neon haze",
-        "checking a holographic message",
-        "standing under a flickering street light",
-        "looking at a drone flying overhead",
-        "pulling up a hood to hide face",
-        "dodging a steam vent on the ground",
-        "buying a drink from a futuristic vending machine"
+        {
+            "text": "leaning against a graffiti-covered wall",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the neon haze",
+            "load": "active"
+        },
+        {
+            "text": "checking a holographic message",
+            "load": "calm"
+        },
+        {
+            "text": "standing under a flickering street light",
+            "load": "calm"
+        },
+        {
+            "text": "looking at a drone flying overhead",
+            "load": "active"
+        },
+        {
+            "text": "pulling up a hood to hide face",
+            "load": "calm"
+        },
+        {
+            "text": "dodging a steam vent on the ground",
+            "load": "calm"
+        },
+        {
+            "text": "buying a drink from a futuristic vending machine",
+            "load": "calm"
+        }
     ],
     "luxury_hotel_room": [
-        "lying on the king-sized bed",
-        "standing by the window looking at the city view",
-        "sitting in the lounge chair reading",
-        "opening a bottle of champagne",
-        "walking across the plush carpet",
-        "adjusting the room lighting controls",
-        "unpacking a suitcase",
-        "relaxing in a bathrobe"
+        {
+            "text": "lying on the king-sized bed",
+            "load": "intimate"
+        },
+        {
+            "text": "standing by the window looking at the city view",
+            "load": "calm"
+        },
+        {
+            "text": "sitting in the lounge chair reading",
+            "load": "calm"
+        },
+        {
+            "text": "opening a bottle of champagne",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the plush carpet",
+            "load": "active"
+        },
+        {
+            "text": "adjusting the room lighting controls",
+            "load": "calm"
+        },
+        {
+            "text": "unpacking a suitcase",
+            "load": "calm"
+        },
+        {
+            "text": "relaxing in a bathrobe",
+            "load": "intimate"
+        }
     ],
     "steampunk_airship": [
-        "standing at the railing looking at clouds",
-        "checking the pressure gauge on a pipe",
-        "polishing a brass rail",
-        "looking through a telescope",
-        "walking carefully on the wooden deck",
-        "holding a map against the wind",
-        "listening to the hum of the engine",
-        "adjusting leather aviator goggles"
+        {
+            "text": "standing at the railing looking at clouds",
+            "load": "calm"
+        },
+        {
+            "text": "checking the pressure gauge on a pipe",
+            "load": "calm"
+        },
+        {
+            "text": "polishing a brass rail",
+            "load": "calm"
+        },
+        {
+            "text": "looking through a telescope",
+            "load": "calm"
+        },
+        {
+            "text": "walking carefully on the wooden deck",
+            "load": "active"
+        },
+        {
+            "text": "holding a map against the wind",
+            "load": "calm"
+        },
+        {
+            "text": "listening to the hum of the engine",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting leather aviator goggles",
+            "load": "calm"
+        }
     ],
     "clean_modern_kitchen": [
-        "standing at the island chopping vegetables",
-        "opening the stainless steel fridge",
-        "sitting at the breakfast nook with coffee",
-        "wiping down the marble counter",
-        "arranging flowers in a vase",
-        "scrolling a tablet for recipes",
-        "tasting sauce from a spoon",
-        "loading the dishwasher"
+        {
+            "text": "standing at the island chopping vegetables",
+            "load": "calm"
+        },
+        {
+            "text": "opening the stainless steel fridge",
+            "load": "calm"
+        },
+        {
+            "text": "sitting at the breakfast nook with coffee",
+            "load": "calm"
+        },
+        {
+            "text": "wiping down the marble counter",
+            "load": "calm"
+        },
+        {
+            "text": "arranging flowers in a vase",
+            "load": "calm"
+        },
+        {
+            "text": "scrolling a tablet for recipes",
+            "load": "calm"
+        },
+        {
+            "text": "tasting sauce from a spoon",
+            "load": "calm"
+        },
+        {
+            "text": "loading the dishwasher",
+            "load": "calm"
+        }
     ],
     "luxury_bathroom": [
-        "soaking in the freestanding tub",
-        "standing in front of the large mirror",
-        "wrapping up in a fluffy towel",
-        "lighting aromatic candles",
-        "testing the water temperature",
-        "applying skincare products",
-        "stepping out of the glass shower",
-        "relaxing with eyes closed"
+        {
+            "text": "soaking in the freestanding tub",
+            "load": "intimate"
+        },
+        {
+            "text": "standing in front of the large mirror",
+            "load": "calm"
+        },
+        {
+            "text": "wrapping up in a fluffy towel",
+            "load": "calm"
+        },
+        {
+            "text": "lighting aromatic candles",
+            "load": "calm"
+        },
+        {
+            "text": "testing the water temperature",
+            "load": "calm"
+        },
+        {
+            "text": "applying skincare products",
+            "load": "calm"
+        },
+        {
+            "text": "stepping out of the glass shower",
+            "load": "calm"
+        },
+        {
+            "text": "relaxing with eyes closed",
+            "load": "calm"
+        }
     ],
     "cozy_living_room": [
-        "curled up on the sofa with a book",
-        "sitting on the floor playing a game",
-        "standing and stretching near the window",
-        "adjusting cushions on the couch",
-        "watching TV with a remote in hand",
-        "sipping hot cocoa by the coffee table",
-        "petting a cat (imaginary) on the rug",
-        "dozing off under a blanket"
+        {
+            "text": "curled up on the sofa with a book",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on the floor playing a game",
+            "load": "active"
+        },
+        {
+            "text": "standing and stretching near the window",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting cushions on the couch",
+            "load": "calm"
+        },
+        {
+            "text": "watching TV with a remote in hand",
+            "load": "calm"
+        },
+        {
+            "text": "sipping hot cocoa by the coffee table",
+            "load": "calm"
+        },
+        {
+            "text": "petting a cat (imaginary) on the rug",
+            "load": "calm"
+        },
+        {
+            "text": "dozing off under a blanket",
+            "load": "calm"
+        }
     ],
     "rural_town_street": [
-        "walking slowly down the quiet street",
-        "standing by a vending machine",
-        "looking at the distant mountains",
-        "sitting on a guardrail resting",
-        "listening to the cicadas (imaginary)",
-        "waving to a neighbor (imaginary)",
-        "carrying a grocery bag",
-        "inspecting a roadside flower"
+        {
+            "text": "walking slowly down the quiet street",
+            "load": "active"
+        },
+        {
+            "text": "standing by a vending machine",
+            "load": "calm"
+        },
+        {
+            "text": "looking at the distant mountains",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a guardrail resting",
+            "load": "calm"
+        },
+        {
+            "text": "listening to the cicadas (imaginary)",
+            "load": "calm"
+        },
+        {
+            "text": "waving to a neighbor (imaginary)",
+            "load": "calm"
+        },
+        {
+            "text": "carrying a grocery bag",
+            "load": "calm"
+        },
+        {
+            "text": "inspecting a roadside flower",
+            "load": "calm"
+        }
     ],
     "suburban_neighborhood": [
-        "walking a dog (imaginary) down the sidewalk",
-        "standing by the mailbox checking mail",
-        "watering the front lawn",
-        "sitting on the front porch steps",
-        "washing a car (imaginary) in the driveway",
-        "waving to a car passing by",
-        "looking at the sunset over the houses",
-        "jogging slowly down the street"
+        {
+            "text": "walking a dog (imaginary) down the sidewalk",
+            "load": "active"
+        },
+        {
+            "text": "standing by the mailbox checking mail",
+            "load": "calm"
+        },
+        {
+            "text": "watering the front lawn",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on the front porch steps",
+            "load": "calm"
+        },
+        {
+            "text": "washing a car (imaginary) in the driveway",
+            "load": "calm"
+        },
+        {
+            "text": "waving to a car passing by",
+            "load": "calm"
+        },
+        {
+            "text": "looking at the sunset over the houses",
+            "load": "calm"
+        },
+        {
+            "text": "jogging slowly down the street",
+            "load": "calm"
+        }
     ],
     "mountain_resort": [
-        "sitting in a rocking chair on the deck",
-        "standing and breathing the fresh air",
-        "wrapping a blanket tight around shoulders",
-        "drinking hot coffee while looking at mountains",
-        "warming hands by the outdoor fireplace",
-        "reading a book in the quiet atmosphere",
-        "watching the stars (if night)",
-        "leaning on the wooden railing"
+        {
+            "text": "sitting in a rocking chair on the deck",
+            "load": "calm"
+        },
+        {
+            "text": "standing and breathing the fresh air",
+            "load": "calm"
+        },
+        {
+            "text": "wrapping a blanket tight around shoulders",
+            "load": "calm"
+        },
+        {
+            "text": "drinking hot coffee while looking at mountains",
+            "load": "calm"
+        },
+        {
+            "text": "warming hands by the outdoor fireplace",
+            "load": "calm"
+        },
+        {
+            "text": "reading a book in the quiet atmosphere",
+            "load": "calm"
+        },
+        {
+            "text": "watching the stars (if night)",
+            "load": "calm"
+        },
+        {
+            "text": "leaning on the wooden railing",
+            "load": "calm"
+        }
     ]
 }
