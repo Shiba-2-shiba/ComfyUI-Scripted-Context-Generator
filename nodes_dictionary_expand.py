@@ -42,7 +42,7 @@ class DictionaryExpand:
                 "key": ("STRING", {"multiline": False, "default": "", "forceInput": True}),
                 "json_path": ("STRING", {"multiline": False, "default": "mood_map.json"}),
                 "default_value": ("STRING", {"multiline": False, "default": ""}),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "control_after_generate": True}),
             }
         }
 
