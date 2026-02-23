@@ -36,7 +36,7 @@ class GarnishSampler:
                 # Mood Key: "quiet", "energetic" などのキー（展開前の短い文字列）
                 "meta_mood_key": ("STRING", {"multiline": False, "default": "neutral", "forceInput": True}),
                 
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "control_after_generate": True}),
                 "max_items": ("INT", {"default": 3, "min": 1, "max": 10}),
                 "include_camera": ("BOOLEAN", {"default": False, "label_on": "Enable", "label_off": "Disable"}),
                 # Context info (Optional) for filtering out-of-place items

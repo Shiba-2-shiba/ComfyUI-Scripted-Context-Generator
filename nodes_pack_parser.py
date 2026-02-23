@@ -6,7 +6,7 @@ class PackParser:
         return {
             "required": {
                 "json_string": ("STRING", {"multiline": True, "default": "{}"}),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "control_after_generate": True}),
             }
         }
 

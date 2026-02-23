@@ -7,7 +7,11 @@ import sys
 
 TARGET_TYPES = {
     "DictionaryExpand",
+    "ThemeClothingExpander",
     "ThemeLocationExpander",
+    "SceneVariator",
+    "SimpleTemplateBuilder",
+    "GarnishSampler",
     "PromptCleaner",
 }
 
@@ -30,6 +34,9 @@ def load_node_mappings(repo_root: Path) -> Dict[str, Any]:
     mappings: Dict[str, Any] = {}
     target_files = [
         repo_root / "nodes_dictionary_expand.py",
+        repo_root / "nodes_scene_variator.py",
+        repo_root / "nodes_simple_template.py",
+        repo_root / "nodes_garnish.py",
         repo_root / "nodes_prompt_cleaner.py",
     ]
     for path in target_files:

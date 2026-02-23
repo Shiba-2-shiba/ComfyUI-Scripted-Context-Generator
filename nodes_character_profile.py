@@ -46,7 +46,7 @@ class CharacterProfileNode:
             "required": {
                 "mode": (["random", "fixed"], {"default": "random"}),
                 "character_name": (character_names, {"default": character_names[0]}),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "control_after_generate": True}),
             }
         }
 

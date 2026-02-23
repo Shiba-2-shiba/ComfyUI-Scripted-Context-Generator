@@ -21,7 +21,7 @@ class SimpleTemplateBuilder:
                 # デフォルト例: "A {meta_style} of {subj} wearing {costume}. She is {action}, {garnish}. The background is {loc}, with {meta_mood}."
                 "template": ("STRING", {"multiline": True, "default": "A {meta_style} of {subj} wearing {costume}. She is {action}, {garnish}. The background is {loc}, with {meta_mood}."}),
                 "composition_mode": ("BOOLEAN", {"default": False}), # New input
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "control_after_generate": True}),
             },
             "optional": {
                 "subj": ("STRING", {"forceInput": True, "default": ""}),

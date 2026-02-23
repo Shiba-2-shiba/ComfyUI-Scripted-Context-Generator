@@ -1,5 +1,89 @@
 [
   {
+    "id": 5,
+    "type": "GarnishSampler",
+    "input_specs": [
+      {
+        "name": "action_text",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "meta_mood_key",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "seed",
+        "type": "INT",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "max_items",
+        "type": "INT",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "include_camera",
+        "type": "BOOLEAN",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "context_loc",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "context_costume",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "scene_tags",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "personality",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      }
+    ],
+    "widget_names": [
+      "seed",
+      "control_after_generate",
+      "max_items",
+      "include_camera"
+    ],
+    "widgets_values_before": [
+      0,
+      "randomize",
+      3,
+      false
+    ],
+    "widgets_values_after": [
+      0,
+      "randomize",
+      3,
+      false
+    ],
+    "assigned_widgets": {
+      "seed": 0,
+      "control_after_generate": "randomize",
+      "max_items": 3,
+      "include_camera": false
+    }
+  },
+  {
     "id": 7,
     "type": "DictionaryExpand",
     "input_specs": [
@@ -51,6 +135,96 @@
     }
   },
   {
+    "id": 9,
+    "type": "SimpleTemplateBuilder",
+    "input_specs": [
+      {
+        "name": "template",
+        "type": "STRING",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "composition_mode",
+        "type": "BOOLEAN",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "seed",
+        "type": "INT",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "subj",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "costume",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "loc",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "action",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "garnish",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "meta_mood",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "meta_style",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      }
+    ],
+    "widget_names": [
+      "template",
+      "composition_mode",
+      "seed",
+      "control_after_generate"
+    ],
+    "widgets_values_before": [
+      "",
+      false,
+      0,
+      "randomize"
+    ],
+    "widgets_values_after": [
+      "",
+      false,
+      0,
+      "randomize"
+    ],
+    "assigned_widgets": {
+      "template": "",
+      "composition_mode": false,
+      "seed": 0,
+      "control_after_generate": "randomize"
+    }
+  },
+  {
     "id": 4,
     "type": "ThemeLocationExpander",
     "input_specs": [
@@ -92,6 +266,138 @@
     "assigned_widgets": {
       "seed": 0,
       "control_after_generate": "randomize"
+    }
+  },
+  {
+    "id": 2,
+    "type": "SceneVariator",
+    "input_specs": [
+      {
+        "name": "subj",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "costume",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "loc",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "action",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "seed",
+        "type": "INT",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "variation_mode",
+        "type": [
+          "original",
+          "genre_only",
+          "full"
+        ],
+        "forceInput": false,
+        "control_after_generate": null
+      }
+    ],
+    "widget_names": [
+      "seed",
+      "control_after_generate",
+      "variation_mode"
+    ],
+    "widgets_values_before": [
+      0,
+      "randomize",
+      "full"
+    ],
+    "widgets_values_after": [
+      0,
+      "randomize",
+      "full"
+    ],
+    "assigned_widgets": {
+      "seed": 0,
+      "control_after_generate": "randomize",
+      "variation_mode": "full"
+    }
+  },
+  {
+    "id": 3,
+    "type": "ThemeClothingExpander",
+    "input_specs": [
+      {
+        "name": "theme_key",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      },
+      {
+        "name": "seed",
+        "type": "INT",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "outfit_mode",
+        "type": [
+          "random",
+          "dresses",
+          "separates",
+          "outerwear_only",
+          "no_outerwear"
+        ],
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "outerwear_chance",
+        "type": "FLOAT",
+        "forceInput": false,
+        "control_after_generate": null
+      },
+      {
+        "name": "character_palette",
+        "type": "STRING",
+        "forceInput": true,
+        "control_after_generate": null
+      }
+    ],
+    "widget_names": [
+      "seed",
+      "control_after_generate",
+      "outfit_mode",
+      "outerwear_chance"
+    ],
+    "widgets_values_before": [
+      0,
+      "randomize",
+      "random",
+      0.3
+    ],
+    "widgets_values_after": [
+      0,
+      "randomize",
+      "random",
+      0.3
+    ],
+    "assigned_widgets": {
+      "seed": 0,
+      "control_after_generate": "randomize",
+      "outfit_mode": "random",
+      "outerwear_chance": 0.3
     }
   },
   {
