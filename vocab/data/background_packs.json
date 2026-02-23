@@ -45,6 +45,13 @@
     "aliases": [
       "classroom",
       "lecture hall"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "school_rooftop": {
@@ -79,6 +86,13 @@
       "fenced rooftop",
       "school roof",
       "school rooftop"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "modern_office": {
@@ -129,6 +143,13 @@
       "corporate office",
       "office",
       "open plan office"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "fantasy_forest": {
@@ -165,6 +186,13 @@
     "aliases": [
       "ancient forest",
       "mystical woods"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "cyberpunk_street": {
@@ -203,6 +231,13 @@
     "aliases": [
       "neon city",
       "future slums"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "abandoned_shrine": {
@@ -240,6 +275,13 @@
     "aliases": [
       "haunted shrine",
       "ruined shrine"
+    ],
+    "lighting": [
+      "magical glow",
+      "bioluminescent",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
     ]
   },
   "rainy_bus_stop": {
@@ -275,6 +317,13 @@
     "aliases": [
       "bus stop",
       "waiting shelter"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "luxury_hotel_room": {
@@ -312,6 +361,12 @@
     "aliases": [
       "five star suite",
       "hotel room"
+    ],
+    "lighting": [
+      "bright retail lighting",
+      "spotlight display",
+      "neon signs",
+      "warm ambient commercial"
     ]
   },
   "steampunk_airship": {
@@ -350,6 +405,13 @@
     "aliases": [
       "airship deck",
       "flying ship"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "clean_modern_kitchen": {
@@ -388,6 +450,13 @@
       "chef's kitchen",
       "kitchen",
       "modern kitchen"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "elegant_dining_room": {
@@ -425,6 +494,13 @@
       "banquet hall",
       "dining room",
       "formal dining room"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "luxury_bathroom": {
@@ -463,6 +539,13 @@
       "bathroom",
       "modern bathroom",
       "spa bathroom"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "japanese_bath": {
@@ -498,6 +581,13 @@
     "aliases": [
       "onsen",
       "bath"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "cozy_living_room": {
@@ -535,6 +625,13 @@
     "aliases": [
       "living room",
       "lounge"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "rural_town_street": {
@@ -572,6 +669,13 @@
     "aliases": [
       "rural street",
       "countryside"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "suburban_neighborhood": {
@@ -609,6 +713,13 @@
     "aliases": [
       "quiet street",
       "residential area"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "mountain_resort": {
@@ -646,6 +757,13 @@
     "aliases": [
       "mountain lodge",
       "ski resort"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "school_library": {
@@ -679,6 +797,13 @@
     "aliases": [
       "library shelves",
       "reading room"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "school_gym_hall": {
@@ -713,6 +838,13 @@
       "assembly hall",
       "assembly hall podium",
       "school gym"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "boardroom": {
@@ -755,6 +887,13 @@
     "aliases": [
       "conference room",
       "meeting room"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "office_elevator": {
@@ -795,6 +934,13 @@
     "aliases": [
       "elevator",
       "lift"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "surveillance_room": {
@@ -838,6 +984,13 @@
       "monitor room",
       "security room",
       "surveillance room"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "messy_copy_room": {
@@ -871,6 +1024,13 @@
       "garage",
       "gear-filled workshop",
       "messy copy room"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "rainy_alley": {
@@ -905,6 +1065,13 @@
       "foggy london street",
       "graffiti wall",
       "rainy alley"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "commuter_transport": {
@@ -951,6 +1118,13 @@
       "commuter train",
       "crowded train",
       "departing bus"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "luxury_hotel_lobby": {
@@ -986,6 +1160,12 @@
       "grand entrance",
       "hotel lobby",
       "luxury hotel lobby"
+    ],
+    "lighting": [
+      "bright retail lighting",
+      "spotlight display",
+      "neon signs",
+      "warm ambient commercial"
     ]
   },
   "karaoke_bar": {
@@ -1019,6 +1199,13 @@
       "karaoke bar",
       "karaoke room",
       "ktv"
+    ],
+    "lighting": [
+      "neon glow",
+      "streetlight",
+      "moonlight",
+      "dim ambient",
+      "city lights"
     ]
   },
   "messy_kitchen": {
@@ -1053,6 +1240,13 @@
       "cluttered kitchen",
       "dirty kitchen",
       "messy kitchen"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "bedroom_boudoir": {
@@ -1089,6 +1283,13 @@
     "aliases": [
       "bedroom",
       "candlelit boudoir"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "fitness_gym": {
@@ -1123,6 +1324,13 @@
     "aliases": [
       "fitness gym",
       "treadmill"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "yoga_studio": {
@@ -1160,6 +1368,13 @@
       "dance studio",
       "peaceful studio",
       "yoga class"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "stadium_court": {
@@ -1194,6 +1409,13 @@
       "park track",
       "running track",
       "sports field"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "concert_stage": {
@@ -1227,6 +1449,13 @@
     "aliases": [
       "explosive stage",
       "rock_concert"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "recording_studio": {
@@ -1260,6 +1489,13 @@
       "music studio",
       "recording studio",
       "sound studio"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "opera_house": {
@@ -1295,6 +1531,13 @@
       "concert hall",
       "opera house balcony",
       "theater stage"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "burning_battlefield": {
@@ -1334,6 +1577,13 @@
     "aliases": [
       "burning battlefield",
       "mecha pilot"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "dungeon_crypt": {
@@ -1366,6 +1616,13 @@
     "aliases": [
       "crypt",
       "dungeon"
+    ],
+    "lighting": [
+      "magical glow",
+      "bioluminescent",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
     ]
   },
   "alien_planet": {
@@ -1397,6 +1654,13 @@
     "aliases": [
       "alien planet surface",
       "desert highway"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "dragon_lair": {
@@ -1435,6 +1699,13 @@
       "dragon cave",
       "dragon's jaw",
       "treasure hoard"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "shinto_shrine": {
@@ -1473,6 +1744,13 @@
       "sacred place",
       "shinto shrine",
       "shrine grounds"
+    ],
+    "lighting": [
+      "magical glow",
+      "bioluminescent",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
     ]
   },
   "bamboo_forest": {
@@ -1510,6 +1788,13 @@
       "arashiyama",
       "bamboo forest",
       "bamboo grove"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "winter_street": {
@@ -1544,6 +1829,13 @@
       "frozen pond",
       "snow fort",
       "snowy street"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "tropical_beach": {
@@ -1578,6 +1870,13 @@
       "shallow water",
       "sunset beach",
       "tropical beach"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "wave_barrel": {
@@ -1615,6 +1914,13 @@
       "inside a wave",
       "inside a wave barrel",
       "surfing tube"
+    ],
+    "lighting": [
+      "neon glow",
+      "streetlight",
+      "moonlight",
+      "dim ambient",
+      "city lights"
     ]
   },
   "poolside_resort": {
@@ -1649,6 +1955,13 @@
     "aliases": [
       "hotel pool",
       "resort pool"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "antique_shop": {
@@ -1685,6 +1998,12 @@
       "antique shop shelf",
       "curio shop",
       "vintage store"
+    ],
+    "lighting": [
+      "bright retail lighting",
+      "spotlight display",
+      "neon signs",
+      "warm ambient commercial"
     ]
   },
   "illuminated_park": {
@@ -1717,6 +2036,13 @@
     "aliases": [
       "night park",
       "winter illumination"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "street_cafe": {
@@ -1767,6 +2093,13 @@
       "cafe",
       "sidewalk cafe",
       "terrace"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "cozy_bookstore": {
@@ -1816,6 +2149,12 @@
     "aliases": [
       "bookshop",
       "old bookstore"
+    ],
+    "lighting": [
+      "bright retail lighting",
+      "spotlight display",
+      "neon signs",
+      "warm ambient commercial"
     ]
   },
   "shopping_mall_atrium": {
@@ -1866,6 +2205,12 @@
       "department store",
       "shopping mall",
       "shopping_mall"
+    ],
+    "lighting": [
+      "bright retail lighting",
+      "spotlight display",
+      "neon signs",
+      "warm ambient commercial"
     ]
   },
   "fashion_boutique": {
@@ -1903,6 +2248,12 @@
       "boutique",
       "clothing store",
       "designer shop"
+    ],
+    "lighting": [
+      "bright retail lighting",
+      "spotlight display",
+      "neon signs",
+      "warm ambient commercial"
     ]
   },
   "picnic_park": {
@@ -1939,6 +2290,13 @@
     "aliases": [
       "grassy park",
       "public park"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "botanical_garden": {
@@ -1975,6 +2333,13 @@
     "aliases": [
       "conservatory",
       "greenhouse"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "spaceship_bridge": {
@@ -2012,6 +2377,13 @@
       "command center",
       "spaceship",
       "starship bridge"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
     ]
   },
   "cyber_lab": {
@@ -2049,6 +2421,13 @@
       "lab",
       "research facility",
       "tech lab"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "airship_deck": {
@@ -2087,6 +2466,13 @@
       "airship",
       "observation deck",
       "sky deck"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   },
   "clockwork_workshop": {
@@ -2124,6 +2510,12 @@
     "aliases": [
       "inventor's lab",
       "steampunk workshop"
+    ],
+    "lighting": [
+      "bright retail lighting",
+      "spotlight display",
+      "neon signs",
+      "warm ambient commercial"
     ]
   },
   "aquarium": {
@@ -2162,6 +2554,13 @@
       "aquarium",
       "fish tank",
       "underwater tunnel"
+    ],
+    "lighting": [
+      "soft indoor light",
+      "fluorescent white",
+      "warm ambient",
+      "desk lamp glow",
+      "window light"
     ]
   }
 }
