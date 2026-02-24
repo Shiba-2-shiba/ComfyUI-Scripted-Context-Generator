@@ -1,9 +1,166 @@
 {
   "id": "bcfe4622-791d-4ec3-ab1c-23ce1c7d38d2",
   "revision": 0,
-  "last_node_id": 13,
-  "last_link_id": 30,
+  "last_node_id": 12,
+  "last_link_id": 27,
   "nodes": [
+    {
+      "id": 1,
+      "type": "PackParser",
+      "pos": [
+        -2000,
+        -3350
+      ],
+      "size": [
+        400,
+        256
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "subj",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "costume",
+          "type": "STRING",
+          "links": [
+            2
+          ]
+        },
+        {
+          "name": "loc",
+          "type": "STRING",
+          "links": [
+            3
+          ]
+        },
+        {
+          "name": "action",
+          "type": "STRING",
+          "links": [
+            4
+          ]
+        },
+        {
+          "name": "meta_mood",
+          "type": "STRING",
+          "links": [
+            9,
+            14
+          ]
+        },
+        {
+          "name": "meta_style",
+          "type": "STRING",
+          "links": [
+            27
+          ]
+        },
+        {
+          "name": "scene_tags",
+          "type": "STRING",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PackParser",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "{}",
+        0,
+        "randomize"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "GarnishSampler",
+      "pos": [
+        -600,
+        -3300
+      ],
+      "size": [
+        311,
+        230
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "action_text",
+          "type": "STRING",
+          "link": 8
+        },
+        {
+          "name": "meta_mood_key",
+          "type": "STRING",
+          "link": 9
+        },
+        {
+          "name": "context_loc",
+          "type": "STRING",
+          "link": 10
+        },
+        {
+          "name": "context_costume",
+          "type": "STRING",
+          "link": 11
+        },
+        {
+          "name": "scene_tags",
+          "shape": 7,
+          "type": "STRING",
+          "link": 12
+        },
+        {
+          "name": "personality",
+          "shape": 7,
+          "type": "STRING",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "garnish_string",
+          "type": "STRING",
+          "links": [
+            23
+          ]
+        },
+        {
+          "name": "debug_info",
+          "type": "DICT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GarnishSampler",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        0,
+        "randomize",
+        3,
+        false,
+        "random"
+      ]
+    },
     {
       "id": 6,
       "type": "CharacterProfileNode",
@@ -16,7 +173,7 @@
         210
       ],
       "flags": {},
-      "order": 0,
+      "order": 1,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -53,8 +210,6 @@
         }
       ],
       "properties": {
-        "aux_id": "Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
-        "ver": "8074f4ede2aec0d4b6d69bb9f176684d76101e7d",
         "Node name for S&R": "CharacterProfileNode",
         "ue_properties": {
           "widget_ue_connectable": {},
@@ -65,7 +220,7 @@
       "widgets_values": [
         "random",
         "Aiko (Quiet)",
-        92462434385409,
+        0,
         "randomize"
       ]
     },
@@ -78,10 +233,10 @@
       ],
       "size": [
         273,
-        150
+        130
       ],
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "inputs": [
         {
@@ -97,18 +252,9 @@
           "links": [
             21
           ]
-        },
-        {
-          "name": "staging_tags",
-          "type": "STRING",
-          "links": [
-            30
-          ]
         }
       ],
       "properties": {
-        "aux_id": "Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
-        "ver": "8074f4ede2aec0d4b6d69bb9f176684d76101e7d",
         "Node name for S&R": "DictionaryExpand",
         "ue_properties": {
           "widget_ue_connectable": {},
@@ -119,7 +265,7 @@
       "widgets_values": [
         "mood_map.json",
         "",
-        912296966575587,
+        0,
         "randomize"
       ]
     },
@@ -135,7 +281,7 @@
         163
       ],
       "flags": {},
-      "order": 10,
+      "order": 8,
       "mode": 0,
       "inputs": [
         {
@@ -145,21 +291,103 @@
         }
       ],
       "outputs": [],
-      "title": "\u8a69\u96c6\u51fa\u529b",
+      "title": "詩集出力",
       "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.13.0",
         "Node name for S&R": "PreviewAny",
         "ue_properties": {
           "widget_ue_connectable": {},
           "version": "7.6.2",
           "input_ue_unconnectable": {}
-        }
+        },
+        "cnr_id": "comfy-core",
+        "ver": "0.13.0"
       },
       "widgets_values": [
         null,
         null,
         null
+      ]
+    },
+    {
+      "id": 9,
+      "type": "SimpleTemplateBuilder",
+      "pos": [
+        0,
+        -3400
+      ],
+      "size": [
+        400,
+        280
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "subj",
+          "shape": 7,
+          "type": "STRING",
+          "link": 16
+        },
+        {
+          "name": "costume",
+          "shape": 7,
+          "type": "STRING",
+          "link": 17
+        },
+        {
+          "name": "loc",
+          "shape": 7,
+          "type": "STRING",
+          "link": 18
+        },
+        {
+          "name": "action",
+          "shape": 7,
+          "type": "STRING",
+          "link": 22
+        },
+        {
+          "name": "garnish",
+          "shape": 7,
+          "type": "STRING",
+          "link": 23
+        },
+        {
+          "name": "meta_mood",
+          "shape": 7,
+          "type": "STRING",
+          "link": 21
+        },
+        {
+          "name": "meta_style",
+          "shape": 7,
+          "type": "STRING",
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "name": "built_prompt",
+          "type": "STRING",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SimpleTemplateBuilder",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "",
+        false,
+        0,
+        "randomize"
       ]
     },
     {
@@ -193,8 +421,6 @@
         }
       ],
       "properties": {
-        "aux_id": "Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
-        "ver": "8074f4ede2aec0d4b6d69bb9f176684d76101e7d",
         "Node name for S&R": "ThemeLocationExpander",
         "ue_properties": {
           "widget_ue_connectable": {},
@@ -203,7 +429,7 @@
         }
       },
       "widgets_values": [
-        981489565684845,
+        0,
         "randomize",
         "detailed",
         "auto"
@@ -221,7 +447,7 @@
         190
       ],
       "flags": {},
-      "order": 2,
+      "order": 3,
       "mode": 0,
       "inputs": [
         {
@@ -284,8 +510,6 @@
         }
       ],
       "properties": {
-        "aux_id": "Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
-        "ver": "8074f4ede2aec0d4b6d69bb9f176684d76101e7d",
         "Node name for S&R": "SceneVariator",
         "ue_properties": {
           "widget_ue_connectable": {
@@ -297,7 +521,7 @@
         }
       },
       "widgets_values": [
-        1069450192976647,
+        0,
         "randomize",
         "full"
       ]
@@ -339,8 +563,6 @@
         }
       ],
       "properties": {
-        "aux_id": "Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
-        "ver": "8074f4ede2aec0d4b6d69bb9f176684d76101e7d",
         "Node name for S&R": "ThemeClothingExpander",
         "ue_properties": {
           "widget_ue_connectable": {},
@@ -349,7 +571,7 @@
         }
       },
       "widgets_values": [
-        499163295645451,
+        0,
         "randomize",
         "random",
         0.3
@@ -373,9 +595,6 @@
         {
           "name": "text",
           "type": "STRING",
-          "widget": {
-            "name": "text"
-          },
           "link": 25
         }
       ],
@@ -389,8 +608,6 @@
         }
       ],
       "properties": {
-        "aux_id": "Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
-        "ver": "8074f4ede2aec0d4b6d69bb9f176684d76101e7d",
         "Node name for S&R": "PromptCleaner",
         "ue_properties": {
           "widget_ue_connectable": {},
@@ -399,346 +616,9 @@
         }
       },
       "widgets_values": [
-        "",
         "nl",
         true
       ]
-    },
-    {
-      "id": 11,
-      "type": "ActionMerge",
-      "pos": [
-        -513.1897244926482,
-        -3437.4749649357623
-      ],
-      "size": [
-        260,
-        120
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "original_action",
-          "type": "STRING",
-          "link": 22
-        },
-        {
-          "name": "garnish",
-          "type": "STRING",
-          "link": 23
-        }
-      ],
-      "outputs": [
-        {
-          "name": "merged_action",
-          "type": "STRING",
-          "links": [
-            24
-          ]
-        }
-      ],
-      "properties": {
-        "aux_id": "Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
-        "ver": "8074f4ede2aec0d4b6d69bb9f176684d76101e7d",
-        "Node name for S&R": "ActionMerge",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": []
-    },
-    {
-      "id": 5,
-      "type": "GarnishSampler",
-      "pos": [
-        -457.6655089855867,
-        -3245.889344801316
-      ],
-      "size": [
-        311,
-        250
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "action_text",
-          "type": "STRING",
-          "link": 8
-        },
-        {
-          "name": "meta_mood_key",
-          "type": "STRING",
-          "link": 9
-        },
-        {
-          "name": "context_loc",
-          "type": "STRING",
-          "link": 10
-        },
-        {
-          "name": "context_costume",
-          "type": "STRING",
-          "link": 11
-        },
-        {
-          "name": "scene_tags",
-          "shape": 7,
-          "type": "STRING",
-          "link": 12
-        },
-        {
-          "name": "personality",
-          "shape": 7,
-          "type": "STRING",
-          "link": 13
-        },
-        {
-          "name": "emotion_nuance",
-          "shape": 7,
-          "type": "STRING",
-          "link": 29
-        }
-      ],
-      "outputs": [
-        {
-          "name": "garnish_string",
-          "type": "STRING",
-          "links": [
-            23,
-            28
-          ]
-        },
-        {
-          "name": "debug_info",
-          "type": "DICT",
-          "links": null
-        }
-      ],
-      "properties": {
-        "aux_id": "Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
-        "ver": "8074f4ede2aec0d4b6d69bb9f176684d76101e7d",
-        "Node name for S&R": "GarnishSampler",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.6.2",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        694953374288019,
-        "randomize",
-        3,
-        false
-      ]
-    },
-    {
-      "id": 9,
-      "type": "SimpleTemplateBuilder",
-      "pos": [
-        0,
-        -3400
-      ],
-      "size": [
-        400,
-        280
-      ],
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "subj",
-          "shape": 7,
-          "type": "STRING",
-          "link": 16
-        },
-        {
-          "name": "costume",
-          "shape": 7,
-          "type": "STRING",
-          "link": 17
-        },
-        {
-          "name": "loc",
-          "shape": 7,
-          "type": "STRING",
-          "link": 18
-        },
-        {
-          "name": "action",
-          "shape": 7,
-          "type": "STRING",
-          "link": 24
-        },
-        {
-          "name": "garnish",
-          "shape": 7,
-          "type": "STRING",
-          "link": 28
-        },
-        {
-          "name": "meta_mood",
-          "shape": 7,
-          "type": "STRING",
-          "link": 21
-        },
-        {
-          "name": "meta_style",
-          "shape": 7,
-          "type": "STRING",
-          "link": 27
-        },
-        {
-          "name": "staging_tags",
-          "shape": 7,
-          "type": "STRING",
-          "link": 30
-        }
-      ],
-      "outputs": [
-        {
-          "name": "built_prompt",
-          "type": "STRING",
-          "links": [
-            25
-          ]
-        }
-      ],
-      "properties": {
-        "aux_id": "Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
-        "ver": "8074f4ede2aec0d4b6d69bb9f176684d76101e7d",
-        "Node name for S&R": "SimpleTemplateBuilder",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        "",
-        true,
-        786605336743643,
-        "randomize"
-      ]
-    },
-    {
-      "id": 1,
-      "type": "PackParser",
-      "pos": [
-        -2000,
-        -3350
-      ],
-      "size": [
-        400,
-        256
-      ],
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "subj",
-          "type": "STRING",
-          "links": []
-        },
-        {
-          "name": "costume",
-          "type": "STRING",
-          "links": [
-            2
-          ]
-        },
-        {
-          "name": "loc",
-          "type": "STRING",
-          "links": [
-            3
-          ]
-        },
-        {
-          "name": "action",
-          "type": "STRING",
-          "links": [
-            4
-          ]
-        },
-        {
-          "name": "meta_mood",
-          "type": "STRING",
-          "links": [
-            9,
-            14
-          ]
-        },
-        {
-          "name": "meta_style",
-          "type": "STRING",
-          "links": [
-            27
-          ]
-        },
-        {
-          "name": "scene_tags",
-          "type": "STRING",
-          "links": [
-            12
-          ]
-        }
-      ],
-      "properties": {
-        "aux_id": "Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
-        "ver": "8074f4ede2aec0d4b6d69bb9f176684d76101e7d",
-        "Node name for S&R": "PackParser",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        "{}",
-        809295637148533,
-        "randomize"
-      ]
-    },
-    {
-      "id": 13,
-      "type": "PrimitiveNode",
-      "pos": [
-        -900,
-        -3240
-      ],
-      "size": [
-        300,
-        100
-      ],
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            29
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PrimitiveNode"
-      },
-      "widgets_values": [
-        "tense"
-      ],
-      "title": "emotion_nuance (String)"
     }
   ],
   "links": [
@@ -890,24 +770,16 @@
       22,
       2,
       3,
-      11,
-      0,
+      9,
+      3,
       "STRING"
     ],
     [
       23,
       5,
       0,
-      11,
-      1,
-      "STRING"
-    ],
-    [
-      24,
-      11,
-      0,
       9,
-      3,
+      4,
       "STRING"
     ],
     [
@@ -933,30 +805,6 @@
       9,
       6,
       "STRING"
-    ],
-    [
-      28,
-      5,
-      0,
-      9,
-      4,
-      "STRING"
-    ],
-    [
-      29,
-      13,
-      0,
-      5,
-      6,
-      "STRING"
-    ],
-    [
-      30,
-      7,
-      1,
-      9,
-      7,
-      "STRING"
     ]
   ],
   "groups": [],
@@ -965,14 +813,13 @@
     "workflowRendererVersion": "LG",
     "ue_links": [],
     "ds": {
-      "scale": 1.2818403793488649,
+      "scale": 1.6418135314348703,
       "offset": [
-        -175.79380829384755,
-        3595.1467527065192
+        877.5794867551813,
+        3599.7304352376377
       ]
     },
-    "frontendVersion": "1.39.14",
-    "links_added_by_ue": []
+    "frontendVersion": "1.39.14"
   },
   "version": 0.4
 }

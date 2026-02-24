@@ -157,7 +157,8 @@
         0,
         "randomize",
         3,
-        false
+        false,
+        "random"
       ]
     },
     {
@@ -305,13 +306,13 @@
           "name": "action",
           "shape": 7,
           "type": "STRING",
-          "link": 24
+          "link": 22
         },
         {
           "name": "garnish",
           "shape": 7,
           "type": "STRING",
-          "link": null
+          "link": 23
         },
         {
           "name": "meta_mood",
@@ -537,51 +538,6 @@
       ]
     },
     {
-      "id": 11,
-      "type": "ActionMerge",
-      "pos": [
-        -350,
-        -3300
-      ],
-      "size": [
-        260,
-        120
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "original_action",
-          "type": "STRING",
-          "link": 22
-        },
-        {
-          "name": "garnish",
-          "type": "STRING",
-          "link": 23
-        }
-      ],
-      "outputs": [
-        {
-          "name": "merged_action",
-          "type": "STRING",
-          "links": [
-            24
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ActionMerge",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": []
-    },
-    {
       "id": 12,
       "type": "PromptCleaner",
       "pos": [
@@ -774,24 +730,16 @@
       22,
       2,
       3,
-      11,
-      0,
+      9,
+      3,
       "STRING"
     ],
     [
       23,
       5,
       0,
-      11,
-      1,
-      "STRING"
-    ],
-    [
-      24,
-      11,
-      0,
       9,
-      3,
+      4,
       "STRING"
     ],
     [

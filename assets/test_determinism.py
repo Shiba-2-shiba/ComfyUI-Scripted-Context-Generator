@@ -14,7 +14,7 @@ import test_bootstrap  # noqa: F401 — パッケージコンテキストを自�
 from nodes_pack_parser import PackParser
 from nodes_dictionary_expand import DictionaryExpand, ThemeClothingExpander, ThemeLocationExpander
 from nodes_simple_template import SimpleTemplateBuilder
-from nodes_garnish import GarnishSampler, ActionMerge
+from nodes_garnish import GarnishSampler
 
 class TestDeterminism(unittest.TestCase):
     def setUp(self):
@@ -22,10 +22,9 @@ class TestDeterminism(unittest.TestCase):
         self.cloth  = ThemeClothingExpander()
         self.locexp = ThemeLocationExpander()
         self.gar    = GarnishSampler()
-        self.merge  = ActionMerge()
         self.dictex = DictionaryExpand()
         self.tmpl   = SimpleTemplateBuilder()
-        self.template = "A of {subj} wearing {costume}. She is {action}. The background is {loc}, with {meta_mood}."
+        self.template = "A of {subj} wearing {costume}. She is {action}, {garnish}. The background is {loc}, with {meta_mood}."
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.mood_map = os.path.join(base_dir, "mood_map.json")
         
@@ -54,7 +53,6 @@ class TestDeterminism(unittest.TestCase):
             context_loc=loc_tag,
             context_costume=costume_key,
         )[0]
-        action_merged = self.merge.merge(original_action=action_raw, garnish=garnish)[0]
         final = self.tmpl.build(
             template=self.template,
             composition_mode=False,
@@ -62,8 +60,8 @@ class TestDeterminism(unittest.TestCase):
             subj=subj,
             costume=costume,
             loc=loc,
-            action=action_merged,
-            garnish="",
+            action=action_raw,
+            garnish=garnish,
             meta_mood=meta_mood,
             meta_style=meta_style
         )[0]

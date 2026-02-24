@@ -4,7 +4,7 @@
 Prompt Builder Evaluation Script Final (The Robust Benchmark)
 ----------------------------------------------------------
 Features:
-1. Correct Pipeline: Uses 'action_merged' for final prompt generation.
+1. Correct Pipeline: Uses action + garnish separately for final prompt generation.
 2. Robust Normalization: Core Unique logic to strip stopwords/symbols.
 3. Semantic Checks: Separates Tech Anachronism from Semantic Mood Conflicts.
 4. Deep Stats (v2 revived): Top-N Share, Entropy, N-gram Repetition.
@@ -26,7 +26,7 @@ try:
     from nodes_pack_parser import PackParser
     from nodes_dictionary_expand import DictionaryExpand, ThemeClothingExpander, ThemeLocationExpander
     from nodes_simple_template import SimpleTemplateBuilder
-    from nodes_garnish import GarnishSampler, ActionMerge
+    from nodes_garnish import GarnishSampler
 except ImportError as e:
     print(f"[Fatal Error] Failed to import nodes: {e}")
     exit(1)
@@ -48,6 +48,14 @@ DEFAULT_WATCH_MAP = {
     "loc": ["classroom", "ruins", "forest"],
     "final": ["phone", "gun", "sword"]
 }
+
+def merge_action_garnish(action_raw: str, garnish: str) -> str:
+    parts = []
+    if action_raw:
+        parts.append(action_raw)
+    if garnish:
+        parts.append(garnish)
+    return ", ".join(parts)
 
 # --- GoalScore (v4) defaults ---
 # Evaluation-side heuristics for the refactor goals:
@@ -1119,7 +1127,6 @@ def main():
     cloth  = ThemeClothingExpander()
     locexp = ThemeLocationExpander()
     gar    = GarnishSampler()
-    merge  = ActionMerge()
     dictex = DictionaryExpand()
     tmpl   = SimpleTemplateBuilder()
 
@@ -1149,7 +1156,7 @@ def main():
                 loc = locexp.expand_location(loc_tag=loc_tag, seed=seed, mode="detailed")[0]
                 meta_mood = dictex.expand(key=meta_mood_key, json_path=args.mood_map, default_value=meta_mood_key, seed=seed)[0]
 
-                # Garnish & Merge
+                # Garnish
                 garnish = gar.sample(
                     action_text=action_raw,
                     meta_mood_key=meta_mood_key,
@@ -1159,7 +1166,7 @@ def main():
                     context_loc=loc_tag,
                     context_costume=costume_key,
                 )[0]
-                action_merged = merge.merge(original_action=action_raw, garnish=garnish)[0]
+                action_merged = merge_action_garnish(action_raw, garnish)
 
                 # Final Build
                 final = tmpl.build(
@@ -1167,8 +1174,8 @@ def main():
                     subj=subj,
                     costume=costume,
                     loc=loc,
-                    action=action_merged,
-                    garnish="", # Garnish is already merged into action_merged
+                    action=action_raw,
+                    garnish=garnish,
                     meta_mood=meta_mood,
                     meta_style=meta_style
                 )[0]
