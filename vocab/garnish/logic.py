@@ -69,6 +69,85 @@ LEGACY_MAP = {
     "peaceful": ("relax", "mild"),
 }
 
+# Personality -> Garnish Bias Mapping
+# prefer: tags added first (random selection if multiple)
+# avoid_pools: pool names to exclude one tag from
+# prefer_category: emotion category bias if no specific meta_mood
+PERSONALITY_GARNISH_BIAS: Dict[str, Dict] = {
+    "shy": {
+        "prefer": ["looking away", "looking down", "downcast eyes",
+                   "fidgeting", "cheeks flushed"],
+        "avoid_pools": ["POSE_DYNAMIC", "EFFECTS_BRIGHT"],
+        "prefer_category": "care",
+    },
+    "confident": {
+        "prefer": ["looking at viewer", "chin up", "hands on hips"],
+        "avoid_pools": [],
+        "prefer_category": "joy",
+    },
+    "energetic": {
+        "prefer": ["dynamic pose", "bright smile", "pumping fist"],
+        "avoid_pools": [],
+        "prefer_category": "joy",
+    },
+    "gloomy": {
+        "prefer": ["downcast eyes", "distant gaze", "slouched"],
+        "avoid_pools": ["EFFECTS_BRIGHT"],
+        "prefer_category": "sadness",
+    },
+    "faithful": {
+        "prefer": ["gentle smile", "clasped hands", "warm gaze"],
+        "avoid_pools": [],
+        "prefer_category": "care",
+    },
+    "aggressive": {
+        "prefer": ["sharp gaze", "clenched fists", "glaring"],
+        "avoid_pools": ["EFFECTS_BRIGHT"],
+        "prefer_category": "anger",
+    },
+    "mysterious": {
+        "prefer": ["sideways glance", "half-turned", "shadowed face"],
+        "avoid_pools": ["EFFECTS_BRIGHT"],
+        "prefer_category": "focus",
+    },
+    "cheerful": {
+        "prefer": ["beaming smile", "eyes closed happy", "hands waving"],
+        "avoid_pools": ["EFFECTS_DARK"],
+        "prefer_category": "playful",
+    },
+    "serious": {
+        "prefer": ["focused gaze", "firm expression", "arms crossed"],
+        "avoid_pools": [],
+        "prefer_category": "focus",
+    },
+    "gentle": {
+        "prefer": ["soft smile", "gentle eyes", "open palms"],
+        "avoid_pools": ["POSE_DYNAMIC", "EFFECTS_DARK"],
+        "prefer_category": "care",
+    },
+    "neutral": {
+        "prefer": [],
+        "avoid_pools": [],
+        "prefer_category": None,
+    },
+    "": {
+        "prefer": [],
+        "avoid_pools": [],
+        "prefer_category": None,
+    },
+}
+
+# Pool name -> actual list (for avoid_pools lookup)
+_POOL_NAME_MAP: Dict[str, str] = {
+    "POSE_DYNAMIC":   "POSE_DYNAMIC",
+    "EFFECTS_BRIGHT": "EFFECTS_BRIGHT",
+    "EFFECTS_DARK":   "EFFECTS_DARK",
+    "EFFECTS_DYNAMIC": "EFFECTS_DYNAMIC",
+    "EYES_BASE":      "EYES_BASE",
+    "HAND_GESTURES":  "HAND_GESTURES",
+}
+
+
 # -------------------------------------------------------------------------
 # Helper Functions
 # -------------------------------------------------------------------------
@@ -250,6 +329,7 @@ def sample_garnish(
     context_costume: str = "",
     scene_tags: Dict = None,
     personality: str = "",
+    emotion_nuance: str = "",
     debug_log: Dict = None
 ) -> List[str]:
     
@@ -264,7 +344,26 @@ def sample_garnish(
     category, intensity = _resolve_target_emotion(meta_mood, action_load, rng, debug_log)
     
     garnish_pool = []
-    
+
+    # 2a. Emotion Nuance Bias (from scene_axis.json)
+    # Load emotion_nuance data lazily to avoid circular imports
+    if emotion_nuance:
+        import os as _os, json as _json
+        _data_dir = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.dirname(
+            _os.path.abspath(__file__)))), "vocab", "data")
+        _scene_axis_path = _os.path.join(_data_dir, "scene_axis.json")
+        try:
+            with open(_scene_axis_path, encoding="utf-8") as _f:
+                _axis = _json.load(_f)
+            _en_data = _axis.get("emotion_nuance", {}).get(emotion_nuance.lower(), {})
+            _en_bias = _en_data.get("garnish_bias", [])
+            if _en_bias:
+                chosen_en = rng.choice(_en_bias)
+                garnish_pool.append(chosen_en)
+                debug_log["emotion_nuance_tag"] = chosen_en
+        except Exception as _e:
+            debug_log["emotion_nuance_error"] = str(_e)
+
     # 3. Fetch Emotion Tags
     # Verify structure of MOOD_POOLS
     if isinstance(MOOD_POOLS, dict):
@@ -322,7 +421,40 @@ def sample_garnish(
 
     rng.shuffle(garnish_pool)
     final_tags = _dedupe(garnish_pool)
+
+    # 9. Personality Bias
+    if personality:
+        p_key = personality.lower().strip()
+        bias = PERSONALITY_GARNISH_BIAS.get(p_key)
+        if bias is None:
+            # Unknown personality: no-op
+            bias = PERSONALITY_GARNISH_BIAS[""]
+
+        # 9a. Remove tags from avoid_pools
+        if bias.get("avoid_pools"):
+            pool_map = {
+                "POSE_DYNAMIC":   POSE_DYNAMIC,
+                "EFFECTS_BRIGHT": EFFECTS_BRIGHT,
+                "EFFECTS_DARK":   EFFECTS_DARK,
+                "EFFECTS_DYNAMIC": EFFECTS_DYNAMIC,
+                "EYES_BASE":      EYES_BASE,
+                "HAND_GESTURES":  HAND_GESTURES,
+            }
+            avoid_tags: Set[str] = set()
+            for pool_name in bias["avoid_pools"]:
+                pool = pool_map.get(pool_name, [])
+                if isinstance(pool, list):
+                    avoid_tags.update(pool)
+            final_tags = [t for t in final_tags if t not in avoid_tags]
+
+        # 9b. Prepend prefer tags (pick 1 randomly)
+        prefer = bias.get("prefer", [])
+        if prefer and len(final_tags) < max_items:
+            chosen = rng.choice(prefer)
+            if chosen not in final_tags:
+                final_tags.insert(0, chosen)
+
     if len(final_tags) > max_items:
         final_tags = final_tags[:max_items]
-        
+
     return final_tags

@@ -46,6 +46,7 @@ class GarnishSampler:
             "optional": {
                 "scene_tags": ("STRING", {"multiline": False, "default": "{}", "forceInput": True}),
                 "personality": ("STRING", {"multiline": False, "default": "", "forceInput": True}),
+                "emotion_nuance": ("STRING", {"multiline": False, "default": "", "forceInput": True}),
             }
         }
 
@@ -54,7 +55,7 @@ class GarnishSampler:
     FUNCTION = "sample"
     CATEGORY = "prompt_builder/garnish"
 
-    def sample(self, action_text, meta_mood_key, seed, max_items, include_camera, context_loc="", context_costume="", scene_tags="{}", personality=""):
+    def sample(self, action_text, meta_mood_key, seed, max_items, include_camera, context_loc="", context_costume="", scene_tags="{}", personality="", emotion_nuance=""):
         if not vocab_module:
             return ("", {})
 
@@ -101,6 +102,7 @@ class GarnishSampler:
                 context_costume=ctx.costume,
                 scene_tags=ctx.meta.tags,
                 personality=personality,
+                emotion_nuance=emotion_nuance,
                 debug_log=local_debug
             )
             

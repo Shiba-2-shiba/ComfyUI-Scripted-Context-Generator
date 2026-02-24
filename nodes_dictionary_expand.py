@@ -46,8 +46,8 @@ class DictionaryExpand:
             }
         }
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("expanded_text",)
+    RETURN_TYPES = ("STRING", "STRING")
+    RETURN_NAMES = ("expanded_text", "staging_tags")
     FUNCTION = "expand"
     CATEGORY = "prompt_builder"
 
@@ -82,7 +82,22 @@ class DictionaryExpand:
         
         result = data_lower.get(key_lower, default_value)
 
-        # Randomize if result is a list
+        staging_text = ""
+
+        # New format: dict with 'description' and 'staging_tags' fields
+        if isinstance(result, dict):
+            rng = random.Random(seed)
+            desc_list = result.get("description", [])
+            if isinstance(desc_list, list) and desc_list:
+                description_text = rng.choice(desc_list)
+            else:
+                description_text = str(result.get("description", default_value))
+            staging_list = result.get("staging_tags", [])
+            if isinstance(staging_list, list):
+                staging_text = ", ".join(staging_list)
+            return (description_text, staging_text)
+
+        # Legacy format: list of strings
         if isinstance(result, list):
             rng = random.Random(seed)
             if len(result) > 0:
@@ -90,7 +105,7 @@ class DictionaryExpand:
             else:
                 result = default_value
 
-        return (str(result),)
+        return (str(result), staging_text)
 
 
 class ThemeClothingExpander:
@@ -303,6 +318,7 @@ class ThemeLocationExpander:
                 "loc_tag": ("STRING", {"multiline": False, "default": "classroom", "forceInput": True}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "control_after_generate": True}),
                 "mode": (["detailed", "simple"], {"default": "detailed"}),
+                "lighting_mode": (["auto", "off"], {"default": "auto"}),
             }
         }
 
@@ -311,7 +327,7 @@ class ThemeLocationExpander:
     FUNCTION = "expand_location"
     CATEGORY = "prompt_builder"
 
-    def expand_location(self, loc_tag, seed, mode):
+    def expand_location(self, loc_tag, seed, mode, lighting_mode="auto"):
         try:
             seed = int(seed)
         except Exception:
@@ -417,7 +433,13 @@ class ThemeLocationExpander:
         # 8. 順序をランダムシャッフル
         rng.shuffle(segments)
         
-        # 9. 最終的な文字列を生成
+        # 9. 光源タグ (lighting_mode)
+        if lighting_mode == "auto":
+            lighting_opts = pack_data.get("lighting", [])
+            if lighting_opts:
+                segments.append(rng.choice(lighting_opts))
+        
+        # 10. 最終的な文字列を生成
         final_prompt = ", ".join([env_part] + segments) if segments else env_part
         return (final_prompt,)
 
