@@ -31,6 +31,7 @@ class SimpleTemplateBuilder:
                 "garnish": ("STRING", {"forceInput": True, "default": ""}), # 新規追加: ポーズや表情の微細な描写
                 "meta_mood": ("STRING", {"forceInput": True, "default": ""}),
                 "meta_style": ("STRING", {"forceInput": True, "default": ""}),
+                "staging_tags": ("STRING", {"forceInput": True, "default": ""}),
             }
         }
 
@@ -39,9 +40,9 @@ class SimpleTemplateBuilder:
     FUNCTION = "build"
     CATEGORY = "prompt_builder"
 
-    def build(self, template, composition_mode, seed, subj="", costume="", loc="", action="", garnish="", meta_mood="", meta_style=""):
+    def build(self, template, composition_mode, seed, subj="", costume="", loc="", action="", garnish="", meta_mood="", meta_style="", staging_tags=""):
         logger.info(f"--- SimpleTemplateBuilder Build Start (Seed: {seed}) ---")
-        logger.debug(f"Inputs - Subj: {subj}, Costume: {costume}, Loc: {loc}, Action: {action}, Garnish: {garnish}, Mood: {meta_mood}, Style: {meta_style}")
+        logger.debug(f"Inputs - Subj: {subj}, Costume: {costume}, Loc: {loc}, Action: {action}, Garnish: {garnish}, Mood: {meta_mood}, Style: {meta_style}, Staging: {staging_tags}")
         logger.debug(f"Composition Mode: {composition_mode}")
 
         # Helper to load lines from file
@@ -121,7 +122,7 @@ class SimpleTemplateBuilder:
                     # Define context values for consistency check
                     # Note: We use the original 'loc' key in context_vals which is fine for now,
                     # but we also want to ensure the expanded parts are consistent with EACH OTHER and INPUTS.
-                    context_vals = [subj, costume, loc, action, garnish, meta_mood, meta_style]
+                    context_vals = [subj, costume, loc, action, garnish, meta_mood, meta_style, staging_tags]
 
                     def pick_consistent(candidates):
                         if not candidates: return None
@@ -183,7 +184,7 @@ class SimpleTemplateBuilder:
             ends = load_lines("vocab/templates_end.txt")
             
             # Context values for checking - NOW INCLUDES EXPANDED LOC
-            context_vals = [subj, costume, loc, action, garnish, meta_mood, meta_style]
+            context_vals = [subj, costume, loc, action, garnish, meta_mood, meta_style, staging_tags]
             
             def select_part(candidates, default, part_name="part"):
                 if not candidates:
@@ -229,6 +230,17 @@ class SimpleTemplateBuilder:
         result = result.replace("{garnish}", str(garnish) if garnish is not None else "") # 追加
         result = result.replace("{meta_mood}", str(meta_mood) if meta_mood is not None else "")
         result = result.replace("{meta_style}", str(meta_style) if meta_style is not None else "")
+        
+        # Append staging_tags at the end if present, since template might not have a placeholder for it
+        if staging_tags and isinstance(staging_tags, str) and staging_tags.strip():
+            # Only append if it wasn't replaced by a placeholder
+            if "{staging_tags}" in result:
+                result = result.replace("{staging_tags}", staging_tags)
+            else:
+                # Add to the very end
+                result = f"{result}, {staging_tags}"
+        else:
+             result = result.replace("{staging_tags}", "") # clean up unused placeholders
         
         logger.info(f"Final Prompt: {result}")
         return (result,)
