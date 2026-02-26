@@ -6,8 +6,8 @@ class PackParser:
         return {
             "required": {
                 "json_string": ("STRING", {"multiline": True, "default": "{}"}),
-                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff),
-                "control_after_generate" ("STRING", {"default": rondamized}),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+                "control_after_generate": ("STRING", {"default": "randomize"}),
             }
         }
 
@@ -69,4 +69,5 @@ class PackParser:
             context.meta.style,
             json.dumps(context.meta.tags, ensure_ascii=False),
         )
+
 
