@@ -71,4 +71,5 @@ except ImportError as e:
     log_import_error("CharacterProfileNode", e)
     print("\033[93m[ComfyUI-Nodes] Warning: nodes_character_profile.py import failed.\033[0m")
 
-__all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]
+WEB_DIRECTORY = "./js"
+__all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]
