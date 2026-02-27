@@ -1,0 +1,17 @@
+You are evaluating an agent output for CLARITY.
+
+Score 1-5 on each dimension:
+1. Precision: Are statements unambiguous? (no "maybe", "probably", "I think")
+2. Evidence: Are claims backed by references to files, lines, or data?
+3. Actionability: Can the user act on the output without asking follow-up questions?
+
+Respond in this format:
+Precision: <score> — <one-line reason>
+Evidence: <score> — <one-line reason>
+Actionability: <score> — <one-line reason>
+Overall: <average score>
+
+Agent output to evaluate:
+---
+{output}
+---

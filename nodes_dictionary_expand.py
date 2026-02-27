@@ -311,6 +311,34 @@ class ThemeClothingExpander:
 
 
 class ThemeLocationExpander:
+    _BIAS_OBJECT_HINTS = (
+        "surfboard",
+        " board",
+        "book",
+        "phone",
+        "coffee",
+        "drink",
+        "microphone",
+        "screen",
+    )
+    _DEFAULT_BLEND_PROB = 0.35
+    _SEGMENT_SELECT_PROB = 0.65
+
+    def _is_symbolic_prop(self, text):
+        low = str(text).lower()
+        return any(token in low for token in self._BIAS_OBJECT_HINTS)
+
+    def _props_sampling_policy(self, props_opts):
+        include_prob = 0.8
+        second_prop_prob = 0.45
+        if len(props_opts) <= 3:
+            include_prob = 0.62
+            second_prop_prob = 0.20
+        if any(self._is_symbolic_prop(p) for p in props_opts):
+            include_prob = max(0.50, include_prob - 0.12)
+            second_prop_prob = max(0.10, second_prop_prob - 0.10)
+        return include_prob, second_prop_prob
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -383,10 +411,13 @@ class ThemeLocationExpander:
 
         # 3. Props: 1〜2個選択し、接続詞を工夫
         props_opts = pack_data.get("props", [])
-        if props_opts and rng.random() < 0.8: 
+        include_prob, second_prop_prob = self._props_sampling_policy(props_opts)
+        if props_opts and rng.random() < include_prob:
             num_props = 1
-            if len(props_opts) > 1 and rng.random() < 0.45: # Increased from 0.35
+            if len(props_opts) > 1 and rng.random() < second_prop_prob:
                 num_props = 2
+            if num_props == 2 and all(self._is_symbolic_prop(p) for p in props_opts):
+                num_props = 1
             
             chosen_props = rng.sample(props_opts, k=min(num_props, len(props_opts)))
             connector_word = rng.choice(["with", "scattered with", "filled with", "adorned with"])
@@ -397,20 +428,20 @@ class ThemeLocationExpander:
                 joiner = rng.choice(["and", "plus", "as well as"])
                 segments.append(f"{connector_word} {chosen_props[0]} {joiner} {chosen_props[1]}")
 
-        # 4. Texture: Always mix in defaults to ensure diversity
+        # 4. Texture: blend defaults with lower probability to reduce repetitive defaults
         texture_opts = pack_data.get("texture", []) or []
         texture_candidates = list(texture_opts)
         
         general_defaults = getattr(background_vocab, "GENERAL_DEFAULTS", {})
         
-        # Always mix in texture defaults (low probability selection)
-        texture_candidates.extend(general_defaults.get("texture", []))
+        if rng.random() < self._DEFAULT_BLEND_PROB:
+            texture_candidates.extend(general_defaults.get("texture", []))
             
-        if texture_candidates and rng.random() < 0.7: # Increased from 0.6
+        if texture_candidates and rng.random() < self._SEGMENT_SELECT_PROB:
             segments.append(rng.choice(texture_candidates))
 
         # 5. ディテール: GENERAL_DEFAULTS から追加
-        if rng.random() < 0.50: # Increased from 0.40
+        if rng.random() < 0.35:
             details_defaults = general_defaults.get("details", [])
             if details_defaults:
                 segments.append(rng.choice(details_defaults))
@@ -420,27 +451,33 @@ class ThemeLocationExpander:
         if time_opts and rng.random() < 0.5:
             segments.append(f"during {rng.choice(time_opts)}")
             
-        # 7. FX: GENERAL_DEFAULTS と混在させる
+        # 7. FX: blend defaults with lower probability to reduce repetitive defaults
         fx_opts = pack_data.get("fx", []) or []
         fx_candidates = list(fx_opts)
         
-        # Always mix in defaults
-        fx_candidates.extend(general_defaults.get("fx", []))
+        if rng.random() < self._DEFAULT_BLEND_PROB:
+            fx_candidates.extend(general_defaults.get("fx", []))
             
-        if fx_candidates and rng.random() < 0.7: # Increased from 0.6
+        if fx_candidates and rng.random() < self._SEGMENT_SELECT_PROB:
             segments.append(rng.choice(fx_candidates))
 
         # 8. 順序をランダムシャッフル
         rng.shuffle(segments)
+        deduped_segments = []
+        seen_segments = set()
+        for seg in segments:
+            if seg not in seen_segments:
+                deduped_segments.append(seg)
+                seen_segments.add(seg)
         
         # 9. 光源タグ (lighting_mode)
         if lighting_mode == "auto":
             lighting_opts = pack_data.get("lighting", [])
             if lighting_opts:
-                segments.append(rng.choice(lighting_opts))
+                deduped_segments.append(rng.choice(lighting_opts))
         
         # 10. 最終的な文字列を生成
-        final_prompt = ", ".join([env_part] + segments) if segments else env_part
+        final_prompt = ", ".join([env_part] + deduped_segments) if deduped_segments else env_part
         return (final_prompt,)
 
 # Mappings

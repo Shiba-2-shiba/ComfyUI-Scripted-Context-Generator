@@ -1,0 +1,6 @@
+Check the ComfyUI workflow design for the following:
+1. All required blocks present (Input / Processing / Output)
+2. Node dependencies are documented and follow the stated constraints (VRAM, model type)
+3. Reproducibility: model names, settings, and versions are recorded
+
+Return: findings per criterion. Flag any undocumented node or missing dependency.

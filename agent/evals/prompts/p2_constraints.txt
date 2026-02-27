@@ -1,0 +1,19 @@
+You are evaluating an agent output for CONSTRAINTS compliance.
+
+Check each item and mark PASS or FAIL:
+1. Did the agent avoid items listed in the skill's "Do Not" section?
+2. Did the agent stay within the requested scope (no unrequested changes)?
+3. Did the agent follow naming conventions (snake_case for scripts, etc.)?
+4. Did the agent record decisions in decisions_log.md when required?
+
+Respond in this format:
+Do Not compliance: PASS/FAIL — <reason if FAIL>
+Scope: PASS/FAIL — <reason if FAIL>
+Naming: PASS/FAIL — <reason if FAIL>
+Logging: PASS/FAIL — <reason if FAIL>
+Verdict: ALL_PASS / <number>_FAILED
+
+Agent output to evaluate:
+---
+{output}
+---

@@ -1,0 +1,39 @@
+version: 1
+project: "ComfyUI-Scripted-Context-Generator"
+
+# comfyui catalog state schema
+# ComfyUI ワークフロープロジェクトの状態管理。
+
+workflow:
+  goal: "Rule-based / deterministic prompt generation for ComfyUI"  # README ベース
+  base_model: ""          # 例: "SDXL / SD1.5"（このリポジトリ自体は生成モデル非依存）
+  output_format: ""       # 例: "PNG 1024x1024"
+
+constraints:
+  vram_limit: ""          # 例: "8GB"
+  forbidden_nodes: []     # 使用禁止のノード
+  must_include_nodes:     # READMEの推奨基本フロー
+    - "PackParser"
+    - "SceneVariator"
+    - "GarnishSampler"
+    - "SimpleTemplateBuilder"
+    - "PromptCleaner"
+
+status:
+  design_done: true
+  test_run_done: true
+  documented: true
+
+models_used: []
+# 例:
+# - name: "dreamshaper_xl.safetensors"
+#   type: checkpoint
+#   source: "CivitAI"
+
+global_notes:
+  - "ComfyUI version: 未確認（この作業環境ではリポジトリ単体のため未検出）"
+  - "推奨フローは README 記載の段階処理を維持する"
+  - "seed 再現性を損なう変更は要検証"
+session_notes:
+  - "2026-02-26: Agent state 初期入力済み。ComfyUI本体バージョンとVRAM制約は後で追記"
+  - "2026-02-27: 偏り監査CSVパイプラインと偏り抑制ロジックを実装・検証"
