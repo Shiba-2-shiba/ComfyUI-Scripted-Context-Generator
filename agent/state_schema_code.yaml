@@ -1,0 +1,37 @@
+version: 1
+project: "ComfyUI-Scripted-Context-Generator"
+
+# code catalog state schema
+# コードベース保守・機能追加プロジェクトの状態管理。
+
+repo:
+  path: "C:/Users/inott/Downloads/ComfyUI-Scripted-Context-Generator"
+  language: "Python"
+  framework: "ComfyUI custom node"
+  test_command: "python assets/runner.py all"
+
+constraints:
+  python_version: "3.12.10 (local shell detected on 2026-02-26)"
+  must_not_break: []      # 保護すべき既存インターフェース
+  forbidden:
+    - "外部LLM依存の前提追加（README方針と不整合）"
+
+current_task:
+  description: "偏り監査基盤の追加とロケーション/アクション偏り抑制の実装"
+  target_files:
+    - "assets/eval_promptbuilder_v5.py"
+    - "tools/run_bias_audit.py"
+    - "nodes_dictionary_expand.py"
+    - "nodes_scene_variator.py"
+    - "vocab/data/scene_compatibility.json"
+    - "vocab/data/background_packs.json"
+    - "vocab/data/action_pools.json"
+    - "assets/test_bias_controls.py"
+  status: "done"   # planning / in_progress / done
+
+global_notes:
+  - "標準チェック入口は assets/runner.py（mode: all/unit/integrity）"
+  - "ComfyUI本体バージョンはこのリポジトリ単体からは判定不可"
+session_notes:
+  - "2026-02-26: Python 3.12.10 をローカルシェルで検出"
+  - "2026-02-27: bias audit run_id=20260227_bias_a01 を実行し、8種CSVを出力"

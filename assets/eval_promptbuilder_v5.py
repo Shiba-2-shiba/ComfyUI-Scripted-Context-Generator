@@ -15,7 +15,7 @@ Features:
 """
 
 from __future__ import annotations
-import argparse, csv, json, os, re, math, statistics
+import argparse, csv, json, os, re, math, statistics, sys
 from dataclasses import dataclass, asdict
 from collections import Counter, defaultdict
 from typing import Dict, List, Tuple, Any, Set
@@ -1141,7 +1141,15 @@ def main():
         
         for pack_idx, pack in enumerate(packs):
             js = json.dumps(pack, ensure_ascii=False)
-            subj, costume_key, loc_tag, action_raw, meta_mood_key, raw_meta_style = parser.parse(js)
+            (
+                subj,
+                costume_key,
+                loc_tag,
+                action_raw,
+                meta_mood_key,
+                raw_meta_style,
+                scene_tags,
+            ) = parser.parse(js, 0)
 
             # Force Clear Meta Style if requested
             meta_style = "" if args.force_no_style else raw_meta_style
@@ -1165,12 +1173,15 @@ def main():
                     include_camera=args.include_camera,
                     context_loc=loc_tag,
                     context_costume=costume_key,
+                    scene_tags=scene_tags,
                 )[0]
                 action_merged = merge_action_garnish(action_raw, garnish)
 
                 # Final Build
                 final = tmpl.build(
                     template=current_template,
+                    composition_mode=False,
+                    seed=seed,
                     subj=subj,
                     costume=costume,
                     loc=loc,
