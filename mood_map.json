@@ -3,8 +3,8 @@
         "description": [
             "soft natural lighting, calm atmosphere, silence, serene environment, muted colors, low contrast",
             "morning mist, cool color palette, stillness, soft rays of light, peaceful solitude, clean air",
-            "filtered sunlight through windows, dust motes dancing in light, studious atmosphere, hush, gentle shadows",
-            "library atmosphere, dust floating in sunbeams, scent of old paper visualized, quiet solitude, soft shadows",
+            "filtered sunlight through windows, gentle light shafts, studious atmosphere, hush, gentle shadows",
+            "library atmosphere, soft sunlight across bookshelves, scent of old paper visualized, quiet solitude, soft shadows",
             "dim ambient light, focused spotlight effect, stillness, cool color tones, sharp details",
             "ambient occlusion, neutral lighting, tranquil space, motionless air, soft edges"
         ],
@@ -14,10 +14,10 @@
     },
     "energetic_joy": {
         "description": [
-            "bright sunlight, vibrant colors, high saturation, clear blue sky, dynamic lighting, lively atmosphere, sparkling air",
+            "bright sunlight, vibrant colors, high saturation, clear blue sky, dynamic lighting, lively atmosphere, crisp air",
             "pop art colors, festival atmosphere, warm sunlight, colorful background, sharp focus, high key lighting",
-            "dazzling sunshine, vivid contrast, summer vibes, energetic aura, lens flare (subtle)",
-            "confetti in the air, rainbow lens flare, high energy atmosphere, saturated colors, motion blur usage (background only)",
+            "dazzling sunshine, vivid contrast, summer vibes, energetic aura, sunlit highlights",
+            "colorful festival streamers in the distance, high energy atmosphere, saturated colors, motion blur usage (background only)",
             "summer festival vibes, bright lanterns, warm glowing lights, lively crowd atmosphere (blurred background)",
             "cheerfulness visualized, prismatic light leaks, blooming light, fresh and airy"
         ],
@@ -79,7 +79,7 @@
     },
     "romantic_allure": {
         "description": [
-            "warm sunset lighting, soft focus, sparkles, intimate atmosphere, dreamy bokeh, cinematic romance, lens flare",
+            "warm sunset lighting, soft focus, shimmering highlights, intimate atmosphere, dreamy depth, cinematic romance",
             "shimmering light, pink and orange tones, magical glow, evening light, emotional lighting",
             "candlelight ambiance, rose-tinted hues, love atmosphere, soft diffusion, enchanting night",
             "boudoir lighting, satin texture reflections, soft pink vignette, intimate mood, perfume mist visualized",
@@ -93,7 +93,7 @@
     "creepy_fear": {
         "description": [
             "shadowy, unsettling lighting, cold green tones, heavy vignette, horror atmosphere, noise texture, flickering light",
-            "claustrophobic darkness, harsh artificial light, uncanny shadows, dust particles, gloom",
+            "claustrophobic darkness, harsh artificial light, uncanny shadows, stale air, gloom",
             "abyssal darkness, spotlight effect, grimy texture, unnerving silence visualized, cold sweat atmosphere",
             "abandoned hospital vibe, green fluorescent hum visualized, grime and rust textures, unease, dark corners",
             "forest at night, twisting branches shadows, cold fog, pale moonlight, unseen presence atmosphere",
@@ -105,15 +105,15 @@
     },
     "whimsical_playful": {
         "description": [
-            "pastel colors, soft glow, sparkles, dreamlike atmosphere, floating bubbles, rainbow light leaks, magical aura",
+            "pastel colors, soft glow, soft highlights, dreamlike atmosphere, floating bubbles, rainbow light leaks, magical aura",
             "bright primary colors, surreal lighting, fluffy textures, soft white vignette, fantasy glow",
-            "candy colors, fairy tale lighting, glittering air, soft edges, wonderland vibe",
+            "candy colors, fairy tale lighting, glowing atmosphere, soft edges, wonderland vibe",
             "storybook illustration style, paper cutout textures, soft pastel vignette, childhood dream vibe",
             "zero gravity atmosphere, floating objects, bright candy colors, soft focus, joyful chaos",
             "marshmallow tones, joyful radiance, fantasy particles, dreamscape lighting"
         ],
         "staging_tags": [
-            "sparkle overlay", "playful expression", "finger up (idea)", "skipping motion", "bubbly smile"
+            "light overlay", "playful expression", "finger up (idea)", "skipping motion", "bubbly smile"
         ]
     }
 }
