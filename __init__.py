@@ -46,11 +46,9 @@ except ImportError as e:
 
 # GarnishNodes
 try:
-    from .nodes_garnish import GarnishSampler, ActionMerge
+    from .nodes_garnish import GarnishSampler
     NODE_CLASS_MAPPINGS["GarnishSampler"] = GarnishSampler
-    NODE_CLASS_MAPPINGS["ActionMerge"] = ActionMerge
     NODE_DISPLAY_NAME_MAPPINGS["GarnishSampler"] = "Garnish Sampler (Mood & Pose)"
-    NODE_DISPLAY_NAME_MAPPINGS["ActionMerge"] = "Action Merge (Add Garnish)"
 except ImportError as e:
     log_import_error("GarnishNodes", e)
     print("\033[93m[ComfyUI-Nodes] Warning: nodes_garnish.py import failed.\033[0m")

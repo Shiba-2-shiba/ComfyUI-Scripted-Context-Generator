@@ -39,6 +39,10 @@ class GarnishSampler:
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "control_after_generate": True}),
                 "max_items": ("INT", {"default": 3, "min": 1, "max": 10}),
                 "include_camera": ("BOOLEAN", {"default": False, "label_on": "Enable", "label_off": "Disable"}),
+                "emotion_nuance": ("STRING", {
+                    "default": "random",
+                    "choices": ["random", "tense", "absorbed", "relieved", "awkward", "content", "bored"]
+                }),
                 # Context info (Optional) for filtering out-of-place items
                 "context_loc": ("STRING", {"multiline": False, "default": "", "forceInput": True}),
                 "context_costume": ("STRING", {"multiline": False, "default": "", "forceInput": True}),
@@ -46,7 +50,6 @@ class GarnishSampler:
             "optional": {
                 "scene_tags": ("STRING", {"multiline": False, "default": "{}", "forceInput": True}),
                 "personality": ("STRING", {"multiline": False, "default": "", "forceInput": True}),
-                "emotion_nuance": ("STRING", {"multiline": False, "default": "", "forceInput": True}),
             }
         }
 
@@ -55,7 +58,7 @@ class GarnishSampler:
     FUNCTION = "sample"
     CATEGORY = "prompt_builder/garnish"
 
-    def sample(self, action_text, meta_mood_key, seed, max_items, include_camera, context_loc="", context_costume="", scene_tags="{}", personality="", emotion_nuance=""):
+    def sample(self, action_text, meta_mood_key, seed, max_items, include_camera, emotion_nuance="random", context_loc="", context_costume="", scene_tags="{}", personality=""):
         if not vocab_module:
             return ("", {})
 
@@ -92,6 +95,8 @@ class GarnishSampler:
         
         try:
             # Call Vocab Module with debug_log
+            if not emotion_nuance or str(emotion_nuance).strip().lower() in {"random", "none"}:
+                emotion_nuance = ""
             tags = vocab_module.sample_garnish(
                 seed=seed,
                 meta_mood=ctx.meta.mood,
@@ -167,11 +172,9 @@ class ActionMerge:
 
 # ノード登録
 NODE_CLASS_MAPPINGS = {
-    "GarnishSampler": GarnishSampler,
-    "ActionMerge": ActionMerge
+    "GarnishSampler": GarnishSampler
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "GarnishSampler": "Garnish Sampler (Improved)",
-    "ActionMerge": "Action Merge"
+    "GarnishSampler": "Garnish Sampler (Improved)"
 }

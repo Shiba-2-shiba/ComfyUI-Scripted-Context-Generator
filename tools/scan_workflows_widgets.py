@@ -147,7 +147,7 @@ def main():
     from nodes_pack_parser import PackParser
     from nodes_scene_variator import SceneVariator
     from nodes_dictionary_expand import DictionaryExpand, ThemeClothingExpander, ThemeLocationExpander
-    from nodes_garnish import GarnishSampler, ActionMerge
+    from nodes_garnish import GarnishSampler
     from nodes_simple_template import SimpleTemplateBuilder
     from nodes_prompt_cleaner import PromptCleaner
     from nodes_character_profile import CharacterProfileNode
@@ -159,7 +159,6 @@ def main():
         "ThemeClothingExpander": ThemeClothingExpander,
         "ThemeLocationExpander": ThemeLocationExpander,
         "GarnishSampler": GarnishSampler,
-        "ActionMerge": ActionMerge,
         "SimpleTemplateBuilder": SimpleTemplateBuilder,
         "PromptCleaner": PromptCleaner,
         "CharacterProfileNode": CharacterProfileNode,

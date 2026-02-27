@@ -123,9 +123,8 @@ def test_theme_location():
 
 
 def test_garnish_and_merge():
-    from nodes_garnish import GarnishSampler, ActionMerge
+    from nodes_garnish import GarnishSampler
     gnode = GarnishSampler()
-    mnode = ActionMerge()
 
     scene_tags = json.dumps({"time": "morning"})
     garnish, debug = gnode.sample(
@@ -139,11 +138,8 @@ def test_garnish_and_merge():
         scene_tags=scene_tags,
         personality="shy"
     )
-    assert_true(isinstance(garnish, str), "GarnishSampler: garnish_string not string")
     assert_true(isinstance(debug, dict), "GarnishSampler: debug_info not dict")
-
-    merged = mnode.merge("walking through a hallway", garnish)[0]
-    assert_true(isinstance(merged, str), "ActionMerge: merged_action not string")
+    assert_true(isinstance(garnish, str), "GarnishSampler: garnish_string not string")
 
 
 def test_template_builder_and_cleaner():
@@ -192,7 +188,7 @@ def test_full_flow_smoke():
     from nodes_pack_parser import PackParser
     from nodes_scene_variator import SceneVariator
     from nodes_dictionary_expand import ThemeClothingExpander, ThemeLocationExpander, DictionaryExpand
-    from nodes_garnish import GarnishSampler, ActionMerge
+    from nodes_garnish import GarnishSampler
     from nodes_simple_template import SimpleTemplateBuilder
     from nodes_prompt_cleaner import PromptCleaner
 
@@ -204,7 +200,6 @@ def test_full_flow_smoke():
     loc_exp = ThemeLocationExpander()
     dict_exp = DictionaryExpand()
     garnish = GarnishSampler()
-    merge = ActionMerge()
     tmpl = SimpleTemplateBuilder()
     clean = PromptCleaner()
 
@@ -227,8 +222,6 @@ def test_full_flow_smoke():
         scene_tags=scene_tags,
         personality=personality
     )
-    merged_action = merge.merge(action, garnish_str)[0]
-
     prompt = tmpl.build(
         template="",
         composition_mode=False,
@@ -236,8 +229,8 @@ def test_full_flow_smoke():
         subj=subj,
         costume=clothing,
         loc=location,
-        action=merged_action,
-        garnish="",
+        action=action,
+        garnish=garnish_str,
         meta_mood=mood,
         meta_style=meta_style
     )[0]

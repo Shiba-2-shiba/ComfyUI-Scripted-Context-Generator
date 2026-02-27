@@ -12,6 +12,10 @@ class PromptCleaner:
             }
         }
 
+    @classmethod
+    def VALIDATE_INPUTS(s, **kwargs):
+        return True
+
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("clean_text",)
     FUNCTION = "clean"

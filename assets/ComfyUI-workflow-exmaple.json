@@ -145,7 +145,8 @@
           "type": "STRING",
           "links": [
             8,
-            19
+            19,
+            22
           ]
         },
         {
@@ -316,7 +317,8 @@
           "name": "garnish_string",
           "type": "STRING",
           "links": [
-            20
+            20,
+            23
           ]
         },
         {
@@ -336,7 +338,8 @@
       "widgets_values": [
         718539542251738,
         3,
-        false
+        false,
+        "random"
       ]
     },
     {
@@ -559,13 +562,13 @@
           "name": "action",
           "shape": 7,
           "type": "STRING",
-          "link": 19
+          "link": 22
         },
         {
           "name": "garnish",
           "shape": 7,
           "type": "STRING",
-          "link": 20
+          "link": 23
         },
         {
           "name": "meta_mood",
@@ -775,10 +778,10 @@
     ],
     [
       22,
+      2,
+      3,
       9,
-      0,
-      10,
-      0,
+      3,
       "STRING"
     ]
   ],

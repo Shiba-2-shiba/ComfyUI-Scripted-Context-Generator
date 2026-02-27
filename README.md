@@ -68,8 +68,8 @@ This custom-node pack generates natural-language prompts via deterministic/rule-
 - `ThemeClothingExpander` / `ThemeLocationExpander`  
   テーマキー・場所キーを詳細表現へ展開（`vocab/data` を参照）。
 
-- `GarnishSampler` / `ActionMerge`  
-  ムード・ポーズ・微動作などの補助描写を生成し、既存 action と統合。
+- `GarnishSampler`  
+  ムード・ポーズ・微動作などの補助描写を生成し、`SimpleTemplateBuilder` の `garnish` 入力へ渡します。
 
 - `SimpleTemplateBuilder`  
   プレースホルダを使って自然文を構築。未指定時は `templates.txt` を利用。
