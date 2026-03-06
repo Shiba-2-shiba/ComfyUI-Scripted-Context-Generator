@@ -1,18 +1,10 @@
-The location is {loc}, {meta_mood}.
-The background depicts {loc}, featuring {meta_mood}.
-The setting is {loc}, with an atmosphere of {meta_mood}.
-She is situated in {loc}, characterized by {meta_mood}.
-The scene is {loc}, {meta_mood}.
-The environment is {loc}, bathed in {meta_mood}.
-The background is {loc}, {meta_mood}.
-The location is {loc}, with {meta_mood}.
-The setting is {loc}, {meta_mood}.
-The background is {loc}, creating a {meta_mood} atmosphere.
-The background is {loc}, {meta_mood}.
-The setting is {loc}, featuring {meta_mood}.
-{loc}, {meta_mood}.
-The scene is {loc}, with {meta_mood} lighting.
-The location is {loc}, {meta_mood}.
-The surrounding area is {loc}, {meta_mood}.
-The background describes {loc}, with {meta_mood}.
-She is in {loc}, surrounded by {meta_mood}.
+{scene_clause}
+in {loc}, {meta_mood}
+against {loc}, {meta_mood}
+with {meta_mood} settling through {loc}
+the background opening into {loc}, {meta_mood}
+the rest of the frame held by {loc}, {meta_mood}
+everything around her staying in {loc}, {meta_mood}
+{meta_mood}, all of it set in {loc}
+the scene widening into {loc}, {meta_mood}
+the moment resting in {loc}, {meta_mood}

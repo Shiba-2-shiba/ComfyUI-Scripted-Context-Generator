@@ -1,13 +1,6 @@
-{action}. {garnish}.
-She is {action}, {garnish}.
-{action}, with {garnish}.
-{action}. Note: {garnish}.
-{action}. {garnish} adds detail.
-Currently {action}. {garnish}.
-{action} while {garnish}.
-{action}, enjoying the warm sun. {garnish}.
-{action}, under the blue sky. {garnish}.
-{action} on this hot day. {garnish}.
-{action} in the cold wind. {garnish}.
-{action} under the moonlight. {garnish}.
-{action} on the dry ground. {garnish}.
+{action_clause}
+{action}, with {garnish}
+{action}, {garnish}
+{garnish} while {action}
+{action} as {garnish}
+{garnish}, and {action}

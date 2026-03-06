@@ -28,12 +28,20 @@ class PromptCleaner:
         }
         self.fx_allowlist_phrases = ("sparkling eyes", "snowflakes", "snowflake")
         self.fx_deny_patterns = (
+            re.compile(r"\bimaginary\b", re.IGNORECASE),
             re.compile(r"\bconfetti\b", re.IGNORECASE),
             re.compile(r"\bfloating dust particles?\b", re.IGNORECASE),
             re.compile(r"\bsparkling air\b", re.IGNORECASE),
             re.compile(r"\bsparkles?\b", re.IGNORECASE),
             re.compile(r"\bglittering air\b", re.IGNORECASE),
             re.compile(r"\bbokeh\b", re.IGNORECASE),
+            re.compile(r"\bfilm grain\b", re.IGNORECASE),
+            re.compile(r"\bbloom\b", re.IGNORECASE),
+            re.compile(r"\bambient occlusion\b", re.IGNORECASE),
+            re.compile(r"\bvolumetric lighting?\b", re.IGNORECASE),
+            re.compile(r"\bprismatic light leaks?\b", re.IGNORECASE),
+            re.compile(r"\blight leaks?\b", re.IGNORECASE),
+            re.compile(r"\bchromatic aberration\b", re.IGNORECASE),
             re.compile(r"\blens flares?\b", re.IGNORECASE),
             re.compile(r"\bdust motes?\b", re.IGNORECASE),
             re.compile(r"\bdust particles?\b", re.IGNORECASE),

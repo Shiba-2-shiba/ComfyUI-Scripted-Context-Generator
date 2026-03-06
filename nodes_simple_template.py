@@ -2,6 +2,7 @@ import logging
 import os
 import random
 import json
+import re
 
 # Logging Setup
 logger = logging.getLogger("SimpleTemplateBuilder")
@@ -12,14 +13,18 @@ handler.setFormatter(formatter)
 if not logger.handlers:
     logger.addHandler(handler)
 
+DEFAULT_GENERATION_MODE = "scene_emotion_priority"
+DEFAULT_TEMPLATE = "{subject_clause}, {action_clause}, {scene_clause}."
+DEFAULT_END_TEMPLATE = "{scene_clause}"
+
 class SimpleTemplateBuilder:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 # garnishを追加し、デフォルトを自然言語構成に変更
-                # デフォルト例: "A {meta_style} of {subj} wearing {costume}. She is {action}, {garnish}. The background is {loc}, with {meta_mood}."
-                "template": ("STRING", {"multiline": True, "default": "A {meta_style} of {subj} wearing {costume}. She is {action}, {garnish}. The background is {loc}, with {meta_mood}."}),
+                # 既定モードは style 任意・scene/emotion 優先
+                "template": ("STRING", {"multiline": True, "default": DEFAULT_TEMPLATE}),
                 "composition_mode": ("BOOLEAN", {"default": False}), # New input
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff, "control_after_generate": True}),
             },
@@ -42,6 +47,7 @@ class SimpleTemplateBuilder:
 
     def build(self, template, composition_mode, seed, subj="", costume="", loc="", action="", garnish="", meta_mood="", meta_style="", staging_tags=""):
         logger.info(f"--- SimpleTemplateBuilder Build Start (Seed: {seed}) ---")
+        logger.debug(f"Generation Mode: {DEFAULT_GENERATION_MODE}")
         logger.debug(f"Inputs - Subj: {subj}, Costume: {costume}, Loc: {loc}, Action: {action}, Garnish: {garnish}, Mood: {meta_mood}, Style: {meta_style}, Staging: {staging_tags}")
         logger.debug(f"Composition Mode: {composition_mode}")
 
@@ -62,6 +68,53 @@ class SimpleTemplateBuilder:
             return []
 
         rng = random.Random(seed)
+
+        def join_nonempty(parts, sep=", "):
+            cleaned = []
+            for part in parts:
+                if part is None:
+                    continue
+                text = str(part).strip().strip(",")
+                if text:
+                    cleaned.append(text)
+            return sep.join(cleaned)
+
+        def strip_clause_punctuation(text):
+            if text is None:
+                return ""
+            return re.sub(r"[\s,.;:]+$", "", str(text).strip())
+
+        def compose_visual_sentence(*parts):
+            clauses = []
+            for part in parts:
+                clean = strip_clause_punctuation(part)
+                if clean:
+                    clauses.append(clean)
+            if not clauses:
+                return ""
+            return ", ".join(clauses) + "."
+
+        def normalize_prompt(text):
+            if text is None:
+                return ""
+            text = str(text)
+            text = re.sub(r"\s+", " ", text)
+            text = re.sub(r"\s+([,.;:])", r"\1", text)
+            text = re.sub(r",\s*,+", ", ", text)
+            text = re.sub(r"\.\s*\.+", ".", text)
+            text = re.sub(r",\s*\.", ".", text)
+            text = re.sub(r"\s+", " ", text).strip()
+            return text
+
+        subject_clause = join_nonempty([
+            subj,
+            f"in {costume}" if costume else "",
+        ], " ")
+        action_clause = join_nonempty([action, garnish])
+        scene_clause = join_nonempty([
+            f"in {loc}" if loc else "",
+            meta_mood,
+        ])
         
         # Helper to load consistency rules
         def load_rules():
@@ -199,16 +252,16 @@ class SimpleTemplateBuilder:
                 # Fallback to random if no consistent part found (or all conflict)
                 return rng.choice(candidates)
 
-            p_intro = select_part(intros, "{subj} wearing {costume}.", "intro")
-            p_body = select_part(bodies, "{action}, {garnish}.", "body")
-            p_end = select_part(ends, "In {loc}, {meta_mood}.", "end")
-            
-            template = f"{p_intro} {p_body} {p_end}"
+            p_intro = select_part(intros, "{subject_clause}", "intro")
+            p_body = select_part(bodies, "{action_clause}", "body")
+            p_end = select_part(ends, DEFAULT_END_TEMPLATE, "end")
+
+            template = compose_visual_sentence(p_intro, p_body, p_end)
             logger.debug(f"Composed Template: {template}")
         else:
             # Legacy/Single Template Mode
             logger.info("Using Legacy/Single Template Mode")
-            default_template = "A {meta_style} of {subj} wearing {costume}. She is {action}, {garnish}. The background is {loc}, with {meta_mood}."
+            default_template = DEFAULT_TEMPLATE
             use_default_file = False
             
             if not template or template.strip() == "" or template == default_template:
@@ -221,6 +274,9 @@ class SimpleTemplateBuilder:
                     template = rng.choice(lines)
         
         result = template
+        result = result.replace("{subject_clause}", subject_clause)
+        result = result.replace("{action_clause}", action_clause)
+        result = result.replace("{scene_clause}", scene_clause)
         # テンプレート内のプレースホルダーを順次置換
         # 入力がNoneの場合は空文字として扱う安全策
         result = result.replace("{subj}", str(subj) if subj is not None else "")
@@ -241,7 +297,8 @@ class SimpleTemplateBuilder:
                 result = f"{result}, {staging_tags}"
         else:
              result = result.replace("{staging_tags}", "") # clean up unused placeholders
-        
+
+        result = normalize_prompt(result)
         logger.info(f"Final Prompt: {result}")
         return (result,)
 

@@ -73,6 +73,9 @@
   "neon city street": [
     "cyberpunk_street"
   ],
+  "neon_city_street": [
+    "cyberpunk_street"
+  ],
   "neon-lit alleyway": [
     "cyberpunk_street",
     "rainy_alley"

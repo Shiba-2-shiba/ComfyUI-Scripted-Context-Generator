@@ -9,7 +9,6 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 import background_vocab
 from nodes_dictionary_expand import ThemeLocationExpander
-from nodes_garnish import GarnishSampler
 
 
 def _disallowed_hits(text):
@@ -24,6 +23,12 @@ def _disallowed_hits(text):
         "sparkling_air": re.compile(r"\bsparkling air\b"),
         "sparkles_family": re.compile(r"\bsparkles?\b|\bglittering air\b"),
         "bokeh_family": re.compile(r"\bbokeh\b"),
+        "film_grain": re.compile(r"\bfilm grain\b"),
+        "bloom": re.compile(r"\bbloom\b"),
+        "ambient_occlusion": re.compile(r"\bambient occlusion\b"),
+        "volumetric_lighting": re.compile(r"\bvolumetric lighting?\b"),
+        "light_leaks": re.compile(r"\bprismatic light leaks?\b|\blight leaks?\b"),
+        "chromatic_aberration": re.compile(r"\bchromatic aberration\b"),
         "lens_flare_family": re.compile(r"\blens flares?\b"),
         "dust_family": re.compile(r"\bdust motes?\b|\bdust particles?\b|\bfloating dust\b"),
         "sparkling_family": re.compile(r"\bsparkling\w*\b"),
@@ -79,19 +84,11 @@ class TestFxCleanup(unittest.TestCase):
         loc_out = loc_node.expand_location("frozen lake", 15, "detailed", "auto")[0].lower()
         self.assertIn("snowflake", loc_out)
 
-        garnish = GarnishSampler()
-        garnish_out = garnish.sample(
-            action_text="standing",
-            meta_mood_key="peaceful_relaxed",
-            seed=210,
-            max_items=3,
-            include_camera=False,
-            context_loc="winter_street",
-            context_costume="",
-            scene_tags="",
-            personality="",
-        )[0].lower()
-        self.assertIn("sparkling eyes", garnish_out)
+        cleaner = __import__("nodes_prompt_cleaner").PromptCleaner()
+        cleaned = cleaner.clean("sparkling eyes, sparkles, bokeh", mode="nl", drop_empty_lines=True)[0].lower()
+        self.assertIn("sparkling eyes", cleaned)
+        self.assertNotIn("sparkles", cleaned)
+        self.assertNotIn("bokeh", cleaned)
 
 
 if __name__ == "__main__":

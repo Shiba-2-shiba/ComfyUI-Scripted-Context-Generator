@@ -4,10 +4,16 @@
     "street_cafe",
     "commuter_transport",
     "bedroom_boudoir",
+    "cozy_living_room",
+    "clean_modern_kitchen",
     "picnic_park",
     "cozy_bookstore",
+    "school_library",
     "winter_street",
     "illuminated_park",
+    "rainy_bus_stop",
+    "suburban_neighborhood",
+    "rural_town_street",
     "art_gallery",
     "museum_hall",
     "shopping_mall_atrium",
@@ -563,7 +569,8 @@
         "space pilot"
       ],
       "denied_locs": [
-        "picnic_park"
+        "picnic_park",
+        "botanical_garden"
       ]
     },
     {
@@ -577,6 +584,40 @@
         "shopping_mall_atrium"
       ]
     }
+  ],
+  "daily_life_tags": [
+    "school",
+    "office",
+    "urban",
+    "domestic",
+    "suburban",
+    "resort",
+    "japanese"
+  ],
+  "daily_life_locs": [
+    "school_classroom",
+    "school_rooftop",
+    "school_library",
+    "modern_office",
+    "boardroom",
+    "office_elevator",
+    "commuter_transport",
+    "street_cafe",
+    "cozy_bookstore",
+    "shopping_mall_atrium",
+    "fashion_boutique",
+    "bedroom_boudoir",
+    "messy_kitchen",
+    "clean_modern_kitchen",
+    "cozy_living_room",
+    "rainy_bus_stop",
+    "suburban_neighborhood",
+    "rural_town_street",
+    "picnic_park",
+    "illuminated_park",
+    "winter_street",
+    "japanese_garden",
+    "tea_room"
   ],
   "priority_weights": {
     "existing": 50,

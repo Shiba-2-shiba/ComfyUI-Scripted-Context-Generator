@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "thresholds": {
+    "default_conditional_rate": 0.4,
+    "anchor_conditional_rate": 0.6,
+    "default_quality_gate": 0.55,
+    "true_bias_quality_gate": 0.45,
+    "anchor_quality_gate": 0.6
+  },
+  "content_redistribution": {
+    "background": {
+      "boardroom": {
+        "core_weights": {
+          "credenza with coffee service": 0.15
+        }
+      },
+      "concert_stage": {
+        "props_weights": {
+          "microphone stands": 0.2
+        }
+      },
+      "karaoke_bar": {
+        "core_weights": {
+          "large monitor screen displaying lyrics": 0.18
+        }
+      },
+      "street_cafe": {
+        "environment_weights": {
+          "cozy coffee shop terrace": 0.3
+        },
+        "fx_weights": {
+          "steam rising from coffee": 0.4
+        }
+      },
+      "tropical_beach": {
+        "props_weights": {
+          "leaning surfboard": 0.2
+        }
+      }
+    },
+    "action": {
+      "concert_stage": {
+        "action_weights": {
+          "standing at the microphone, eyes closed": 0.35,
+          "adjusting the microphone stand": 0.35
+        }
+      },
+      "commuter_transport": {
+        "action_weights": {
+          "standing and checking phone": 0.25
+        }
+      }
+    }
+  },
+  "true_bias_background": {
+    "karaoke_bar": ["screen"],
+    "street_cafe": ["coffee"],
+    "tropical_beach": ["surfboard"]
+  },
+  "true_bias_action": {
+    "commuter_transport": ["phone"]
+  },
+  "thematic_anchor": {
+    "school_library": {
+      "book": {
+        "threshold": 0.6,
+        "notes": "library scenes naturally tolerate book presence"
+      }
+    },
+    "magic_academy_library": {
+      "book": {
+        "threshold": 0.65,
+        "notes": "grimoire and floating book motifs are location anchors"
+      }
+    },
+    "wave_barrel": {
+      "surfboard": {
+        "threshold": 0.6,
+        "notes": "surfboard presence is a natural surf-scene anchor"
+      }
+    }
+  },
+  "audit_artifact": {
+    "antique_shop": ["screen"],
+    "cozy_bookstore": ["screen"],
+    "fashion_boutique": ["screen"],
+    "shopping_mall_atrium": ["screen"],
+    "cozy_living_room": ["coffee"]
+  },
+  "audit_normalization": {
+    "screen": {
+      "exclude_phrases": [
+        "display cart",
+        "display counter",
+        "display cabinet",
+        "display cabinets",
+        "display case",
+        "storefront displays"
+      ]
+    },
+    "coffee": {
+      "exclude_phrases": [
+        "coffee table"
+      ]
+    }
+  }
+}

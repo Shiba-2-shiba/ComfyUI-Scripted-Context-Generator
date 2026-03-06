@@ -24,7 +24,7 @@
     },
     "commute": {
       "tags": ["in transit", "on the move"],
-      "micro_actions": ["gripping strap", "checking route on phone", "swaying with train"]
+      "micro_actions": ["gripping strap", "checking the route strip above the door", "swaying with train"]
     },
     "rest": {
       "tags": ["idle", "relaxing"],
@@ -36,7 +36,7 @@
     },
     "wait": {
       "tags": ["anticipation", "idle time"],
-      "micro_actions": ["fidgeting with phone", "tapping foot", "glancing at clock"]
+      "micro_actions": ["fidgeting with sleeve", "tapping foot", "glancing at clock"]
     }
   },
   "social_distance": {
@@ -68,13 +68,13 @@
     },
     "wrapping_up": {
       "tags": ["finishing", "almost done"],
-      "micro_actions": ["packing up belongings", "last sip of coffee", "pushing back chair", "closing laptop"]
+      "micro_actions": ["packing up belongings", "last sip from the cup", "pushing back chair", "closing laptop"]
     }
   },
   "obstacle": {
     "delay": {
       "tags": ["waiting longer", "stuck"],
-      "micro_actions": ["checking phone anxiously", "tapping foot impatiently", "sighing deeply", "looking at watch again"]
+      "micro_actions": ["scanning the area anxiously", "tapping foot impatiently", "sighing deeply", "looking at watch again"]
     },
     "spill": {
       "tags": ["minor accident", "oops"],

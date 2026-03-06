@@ -377,8 +377,8 @@
   },
   "EFFECTS_UNIVERSAL": [
     "detailed texture",
-    "volumetric lighting",
-    "atmospheric perspective"
+    "subtle atmosphere",
+    "layered depth"
   ],
   "EFFECTS_BRIGHT": [
     "soft lighting",
@@ -386,7 +386,6 @@
     "sunlight",
     "bright atmosphere",
     "natural lighting",
-    "bloom",
     "glowing light"
   ],
   "EFFECTS_DARK": [
@@ -403,7 +402,7 @@
     "motion lines",
     "wind effects",
     "dynamic lighting",
-    "flying debris",
+    "scattered leaves",
     "sparks"
   ]
 }

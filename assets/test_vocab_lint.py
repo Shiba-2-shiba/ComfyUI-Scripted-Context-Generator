@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import sys
 
 import test_bootstrap  # noqa: F401 — パッケージコンテキストを自動解決
@@ -61,7 +62,20 @@ def check_referential_integrity():
 def check_vocab_cleanliness():
     print("\n--- Checking Vocab Cleanliness ---")
     
-    banned_words = ["meta_style", "art style", "illustration", "oil painting", "digital art"]
+    banned_patterns = {
+        "meta_style": re.compile(r"\bmeta_style\b"),
+        "art style": re.compile(r"\bart style\b"),
+        "illustration": re.compile(r"\billustration\b"),
+        "oil painting": re.compile(r"\boil painting\b"),
+        "digital art": re.compile(r"\bdigital art\b"),
+        "film grain": re.compile(r"\bfilm grain\b"),
+        "ambient occlusion": re.compile(r"\bambient occlusion\b"),
+        "volumetric lighting": re.compile(r"\bvolumetric lighting\b"),
+        "bloom": re.compile(r"\bbloom\b"),
+        "light leaks": re.compile(r"\blight leaks\b"),
+        "prismatic light leaks": re.compile(r"\bprismatic light leaks\b"),
+        "chromatic aberration": re.compile(r"\bchromatic aberration\b"),
+    }
     
     def check_obj(obj, name, path=""):
         violations = []
@@ -76,10 +90,11 @@ def check_vocab_cleanliness():
                         violations.append(f"{path}[{i}] is empty/whitespace")
                     
                     # Banned check
-                    for bw in banned_words:
-                        if bw in item.lower():
+                    item_lower = item.lower()
+                    for bw, pat in banned_patterns.items():
+                        if pat.search(item_lower):
                              # Exception: "art museum", "art gallery"
-                             if "art" in bw and ("museum" in item.lower() or "gallery" in item.lower()):
+                             if "art" in bw and ("museum" in item_lower or "gallery" in item_lower):
                                  continue
                              violations.append(f"{path}[{i}] contains banned '{bw}': '{item}'")
                 else:
@@ -94,6 +109,46 @@ def check_vocab_cleanliness():
     v2.extend(check_obj(improved_pose_emotion_vocab.MOOD_POOLS, "pose_vocab", "MOOD_POOLS"))
     
     all_violations = v1 + v2
+
+    allow_dirty_packs = {
+        "rainy_alley",
+        "cyberpunk_street",
+        "burning_battlefield",
+        "alien_planet",
+        "dragon_lair",
+        "abandoned_shrine",
+    }
+
+    for pack_name, pack_data in background_vocab.CONCEPT_PACKS.items():
+        if pack_name in allow_dirty_packs:
+            continue
+        for field in ("core", "props", "fx"):
+            for item in pack_data.get(field, []):
+                low = str(item).lower()
+                if "trash" in low or "debris" in low:
+                    all_violations.append(
+                        f"background_vocab.CONCEPT_PACKS.{pack_name}.{field} contains unwanted noun: '{item}'"
+                    )
+
+    prompts_path = os.path.join("vocab", "data", "action_pools.json")
+    if os.path.exists(prompts_path):
+        with open(prompts_path, "r", encoding="utf-8") as f:
+            action_pools = json.load(f)
+        for loc, items in action_pools.items():
+            if loc.startswith("_") or loc == "schema_version":
+                continue
+            for idx, item in enumerate(items):
+                text = item.get("text", "") if isinstance(item, dict) else str(item)
+                low = text.lower()
+                if "imaginary" in low:
+                    all_violations.append(
+                        f"action_pools.{loc}[{idx}] contains banned 'imaginary': '{text}'"
+                    )
+                if loc not in allow_dirty_packs and ("trash" in low or "debris" in low):
+                    all_violations.append(
+                        f"action_pools.{loc}[{idx}] contains unwanted noun: '{text}'"
+                    )
+
     if all_violations:
         print(f"[FAIL] Found {len(all_violations)} vocab violations:")
         for v in all_violations[:10]:

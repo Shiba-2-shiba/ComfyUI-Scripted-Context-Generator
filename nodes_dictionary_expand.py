@@ -31,6 +31,22 @@ except ImportError:
         background_vocab = None
         print("\033[93m[ThemeExpander] Warning: background_vocab.py not found.\033[0m")
 
+DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "vocab", "data")
+
+_object_concentration_policy_cache = None
+
+
+def _load_object_concentration_policy():
+    global _object_concentration_policy_cache
+    if _object_concentration_policy_cache is None:
+        path = os.path.join(DATA_DIR, "object_concentration_policy.json")
+        if not os.path.exists(path):
+            _object_concentration_policy_cache = {}
+        else:
+            with open(path, "r", encoding="utf-8") as f:
+                _object_concentration_policy_cache = json.load(f)
+    return _object_concentration_policy_cache
+
 # --------------------------------------------------------------------------------
 # Nodes
 # --------------------------------------------------------------------------------
@@ -312,6 +328,31 @@ class ThemeClothingExpander:
 
 
 class ThemeLocationExpander:
+    _DAILY_LIFE_LOCS = {
+        "school_classroom",
+        "school_rooftop",
+        "school_library",
+        "modern_office",
+        "boardroom",
+        "office_elevator",
+        "commuter_transport",
+        "street_cafe",
+        "cozy_bookstore",
+        "shopping_mall_atrium",
+        "fashion_boutique",
+        "bedroom_boudoir",
+        "messy_kitchen",
+        "clean_modern_kitchen",
+        "cozy_living_room",
+        "rainy_bus_stop",
+        "suburban_neighborhood",
+        "rural_town_street",
+        "picnic_park",
+        "illuminated_park",
+        "winter_street",
+        "japanese_garden",
+        "tea_room",
+    }
     _BIAS_OBJECT_HINTS = (
         "surfboard",
         " board",
@@ -382,6 +423,36 @@ class ThemeLocationExpander:
             seen.add(item_text)
         return filtered
 
+    def _object_policy_for_loc(self, loc_tag):
+        policy = _load_object_concentration_policy()
+        background_policy = policy.get("content_redistribution", {}).get("background", {})
+        return background_policy.get(str(loc_tag).lower().strip(), {})
+
+    def _segment_weight_map(self, loc_tag, section_name):
+        loc_policy = self._object_policy_for_loc(loc_tag)
+        return loc_policy.get(f"{section_name}_weights", {})
+
+    def _weighted_choice(self, options, rng, loc_tag, section_name):
+        if not options:
+            return ""
+        weights_map = self._segment_weight_map(loc_tag, section_name)
+        weights = [max(0.01, float(weights_map.get(str(option), 1.0))) for option in options]
+        return rng.choices(list(options), weights=weights, k=1)[0]
+
+    def _weighted_sample(self, options, rng, k, loc_tag, section_name):
+        available = list(options)
+        selected = []
+        while available and len(selected) < k:
+            weights_map = self._segment_weight_map(loc_tag, section_name)
+            weights = [max(0.01, float(weights_map.get(str(option), 1.0))) for option in available]
+            chosen = rng.choices(available, weights=weights, k=1)[0]
+            selected.append(chosen)
+            available.remove(chosen)
+        return selected
+
+    def _is_daily_life_loc(self, loc_tag):
+        return str(loc_tag).lower().strip() in self._DAILY_LIFE_LOCS
+
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -430,7 +501,7 @@ class ThemeLocationExpander:
         # Phase1: バリエーション増強のための改修
         # 1. 基本環境
         env_options = pack_data.get("environment", [])
-        env_part = rng.choice(env_options) if env_options else cleaned_tag
+        env_part = self._weighted_choice(env_options, rng, selected_pack_key, "environment") if env_options else cleaned_tag
         
         if mode == "simple":
             return (env_part,)
@@ -444,7 +515,7 @@ class ThemeLocationExpander:
             if len(core_opts) > 1 and rng.random() < 0.50: # Increased from 0.40
                 num_core = 2
             
-            chosen_core = rng.sample(core_opts, k=min(num_core, len(core_opts)))
+            chosen_core = self._weighted_sample(core_opts, rng, min(num_core, len(core_opts)), selected_pack_key, "core")
             
             if len(chosen_core) == 1:
                 segments.append(f"featuring {chosen_core[0]}")
@@ -462,7 +533,7 @@ class ThemeLocationExpander:
             if num_props == 2 and all(self._is_symbolic_prop(p) for p in props_opts):
                 num_props = 1
             
-            chosen_props = rng.sample(props_opts, k=min(num_props, len(props_opts)))
+            chosen_props = self._weighted_sample(props_opts, rng, min(num_props, len(props_opts)), selected_pack_key, "props")
             connector_word = rng.choice(["with", "scattered with", "filled with", "adorned with"])
             
             if len(chosen_props) == 1:
@@ -489,12 +560,23 @@ class ThemeLocationExpander:
             if details_defaults:
                 segments.append(rng.choice(details_defaults))
 
-        # 6. 時間帯: オリジナルと同様
+        is_daily_life = self._is_daily_life_loc(cleaned_tag)
+
+        # 6. 時間帯: daily-life loc ではやや強めに採用
         time_opts = pack_data.get("time", [])
-        if time_opts and rng.random() < 0.5:
+        if time_opts and rng.random() < (0.72 if is_daily_life else 0.5):
             segments.append(f"during {rng.choice(time_opts)}")
+
+        # 7. Weather / Crowd: scene axis として loc 差分を出す
+        weather_opts = pack_data.get("weather", [])
+        if weather_opts and rng.random() < (0.62 if is_daily_life else 0.35):
+            segments.append(rng.choice(weather_opts))
+
+        crowd_opts = pack_data.get("crowd", [])
+        if crowd_opts and rng.random() < (0.58 if is_daily_life else 0.30):
+            segments.append(rng.choice(crowd_opts))
             
-        # 7. FX: strict cap and denylist filtering to avoid particle overuse.
+        # 8. FX: strict cap and denylist filtering to avoid particle overuse.
         fx_opts = pack_data.get("fx", []) or []
         fx_candidates = self._filter_fx_candidates(fx_opts)
 
@@ -509,10 +591,10 @@ class ThemeLocationExpander:
             and fx_segments_added < self._MAX_FX_SEGMENTS
             and rng.random() < self._FX_SEGMENT_SELECT_PROB
         ):
-            segments.append(rng.choice(fx_candidates))
+            segments.append(self._weighted_choice(fx_candidates, rng, selected_pack_key, "fx"))
             fx_segments_added += 1
 
-        # 8. 順序をランダムシャッフル
+        # 9. 順序をランダムシャッフル
         rng.shuffle(segments)
         deduped_segments = []
         seen_segments = set()
@@ -521,13 +603,13 @@ class ThemeLocationExpander:
                 deduped_segments.append(seg)
                 seen_segments.add(seg)
         
-        # 9. 光源タグ (lighting_mode)
+        # 10. 光源タグ (lighting_mode)
         if lighting_mode == "auto":
             lighting_opts = pack_data.get("lighting", [])
             if lighting_opts:
                 deduped_segments.append(rng.choice(lighting_opts))
         
-        # 10. 最終的な文字列を生成
+        # 11. 最終的な文字列を生成
         final_prompt = ", ".join([env_part] + deduped_segments) if deduped_segments else env_part
         return (final_prompt,)
 

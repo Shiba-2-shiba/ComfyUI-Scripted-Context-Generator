@@ -14,3 +14,45 @@ Format:
 - 2026-02-27: Reduced object concentration via both logic and data changes (ThemeLocationExpander/SceneVariator + vocab pools).
   - Rationale: Lower repeated surfboard/book/phone-style object bursts without breaking deterministic generation.
   - Impacted Files: `nodes_dictionary_expand.py`, `nodes_scene_variator.py`, `vocab/data/scene_compatibility.json`, `vocab/data/background_packs.json`, `vocab/data/action_pools.json`
+- 2026-03-06: Adopted a phased refactoring plan centered on scene description and emotion as primary axes, while preserving daily-life dominance.
+  - Rationale: The project should keep its intended daily-life bias, but reduce sameness through scene-axis variation and emotion embodiment instead of adding more style/effect wording.
+  - Impacted Files: `assets/scene_emotion_priority_spec.md`, `assets/実装チェックリスト版.md`, `assets/進捗.md`
+- 2026-03-06: Fixed the default generation policy around `scene_emotion_priority` and made `meta_style` optional in practice rather than required in default output.
+  - Rationale: Default prompts should spend budget on scene description and emotion embodiment, not style terms.
+  - Impacted Files: `nodes_simple_template.py`, `templates.txt`, `vocab/templates_end.txt`, `tools/run_bias_audit.py`
+- 2026-03-06: Promoted emotion from garnish to a physical-expression model with context filtering.
+  - Rationale: Emotion needed to drive gaze, posture, hands, and micro-behavior directly while preserving seed determinism and node I/O compatibility.
+  - Impacted Files: `vocab/garnish/logic.py`
+- 2026-03-06: Expanded daily-life variation via scene-axis enrichment instead of reducing daily-life share.
+  - Rationale: The sameness problem is better solved by varying purpose/progress/social distance/time/weather within daily-life scenes than by pushing the distribution away from daily-life.
+  - Impacted Files: `nodes_scene_variator.py`, `nodes_dictionary_expand.py`, `vocab/data/scene_compatibility.json`, `vocab/data/background_packs.json`, `vocab/data/action_pools.json`
+- 2026-03-06: Enforced unwanted noun / FX suppression in both runtime cleaning and source vocab linting.
+  - Rationale: Removing `imaginary`, daily-life `trash/debris`, and render-processing terms at multiple layers reduces regressions better than relying on one post-processing step.
+  - Impacted Files: `nodes_prompt_cleaner.py`, `vocab/data/background_packs.json`, `vocab/data/action_pools.json`, `vocab/data/garnish_base_vocab.json`, `assets/test_fx_cleanup.py`, `assets/test_vocab_lint.py`, `vocab/data/background_loc_tag_map.json`, `vocab/data/background_alias_overrides.json`
+- 2026-03-06: Rebuilt template assembly around `subject_clause` / `action_clause` / `scene_clause` and comma-joined visual sentences.
+  - Rationale: P5 required the prompt to read like one visible moment instead of separate explanatory statements, while keeping node I/O and seed-based selection deterministic.
+  - Impacted Files: `nodes_simple_template.py`, `templates.txt`, `vocab/templates_intro.txt`, `vocab/templates_body.txt`, `vocab/templates_end.txt`
+- 2026-03-06: Defined P6 audit gates on full prompts instead of location/action fragments only.
+  - Rationale: `emotion_embodiment_rate`, `abstract_style_term_rate`, `unwanted_noun_rate`, and FX checks are only meaningful after garnish/template/cleaner have run, so the audit needed to measure the final prompt path directly.
+  - Impacted Files: `tools/run_bias_audit.py`, `assets/test_bias_audit_metrics.py`
+- 2026-03-06: Treated `trash/debris` as context-dependent unwanted nouns and excluded gritty/backstreet/ruined exception scenes from the global failure metric.
+  - Rationale: P4 explicitly allowed those nouns in gritty exception packs, so a global unconditional noun counter would misreport compliant prompts as failures.
+  - Impacted Files: `tools/run_bias_audit.py`
+- 2026-03-06: Replaced `glass of sparkling water` with `glass of chilled water` in background vocab.
+  - Rationale: `sparkling water` was a legitimate prop but collided with the FX deny regex family and caused false positives in cleanup/audit checks.
+  - Impacted Files: `vocab/data/background_packs.json`, `assets/test_fx_cleanup.py`, `tools/run_bias_audit.py`
+- 2026-03-06: Classified object-concentration hotspots into `true_bias_background`, `true_bias_action`, `thematic_anchor`, and `audit_artifact` before drafting the next refactor spec.
+  - Rationale: The new refactor should not rewrite content to compensate for audit normalization artifacts like `display -> screen` or `coffee table -> coffee`, and anchor-heavy locations need different thresholds from generic daily-life scenes.
+  - Impacted Files: `assets/object_concentration_refactor_evaluation.md`, `agent/memory/session_notes.md`
+- 2026-03-06: Excluded `audit_alerts.csv` `high_location_bias` rows from the next object-concentration spec scope.
+  - Rationale: Those alerts mainly describe deterministic location mapping and top3 concentration, not repeated object tokens inside prompts, so they would create false work for the new object-focused refactor.
+  - Impacted Files: `assets/object_concentration_refactor_evaluation.md`
+- 2026-03-06: Introduced `object_concentration_policy.json` as the shared policy layer for background redistribution, action redistribution, thematic anchors, and audit artifacts.
+  - Rationale: The refactor needed one data-driven control surface so content-side bias fixes and audit-side normalization changes could stay responsibility-separated without hardcoding location-specific logic across multiple modules.
+  - Impacted Files: `vocab/data/object_concentration_policy.json`, `nodes_dictionary_expand.py`, `nodes_scene_variator.py`, `tools/run_bias_audit.py`
+- 2026-03-06: Switched object audit normalization to phrase-aware matching and added policy-aware classification/thresholds.
+  - Rationale: `display cart`, `display counter`, `storefront displays`, `coffee table`, and `blackboard` style phrases were inflating object-concentration metrics and needed to be excluded before judging prompt content quality.
+  - Impacted Files: `tools/run_bias_audit.py`, `assets/test_bias_audit_metrics.py`, `assets/object_concentration_refactor_verification.md`
+- 2026-03-06: Kept thematic anchors as threshold-managed exceptions instead of forcing them down to general-location levels.
+  - Rationale: Library books and surf-scene surfboards are natural scene anchors, so the acceptance gate now separately reports `max_object_concentration_true_bias` while keeping raw object metrics for observability.
+  - Impacted Files: `vocab/data/object_concentration_policy.json`, `tools/run_bias_audit.py`, `assets/object_concentration_refactor_spec.md`, `assets/object_concentration_refactor_verification.md`

@@ -63,7 +63,7 @@
     ],
     "school_library": [
         {
-            "text": "standing and reaching for a book on the shelf",
+            "text": "standing and reaching for a study folder on the shelf",
             "load": "calm"
         },
         {
@@ -75,15 +75,19 @@
             "load": "calm"
         },
         {
-            "text": "sitting with a stack of books, studying",
+            "text": "sitting with highlighted notes spread across the table",
             "load": "calm"
         },
         {
-            "text": "walking quietly carrying a book",
+            "text": "walking quietly carrying a return cart slip",
             "load": "active"
         },
         {
-            "text": "standing at the counter checking out a book",
+            "text": "standing at the counter whispering to the librarian",
+            "load": "calm"
+        },
+        {
+            "text": "sorting returned materials onto a cart",
             "load": "calm"
         }
     ],
@@ -119,7 +123,7 @@
             "load": "calm"
         },
         {
-            "text": "standing by the window holding a cup of coffee",
+            "text": "standing by the window straightening a stack of printouts",
             "load": "calm"
         },
         {
@@ -143,7 +147,11 @@
             "load": "calm"
         },
         {
-            "text": "drinking coffee in the break room",
+            "text": "pinning a sticky note beside her monitor",
+            "load": "calm"
+        },
+        {
+            "text": "stretching her shoulders beside the copier",
             "load": "calm"
         }
     ],
@@ -165,12 +173,16 @@
             "load": "calm"
         },
         {
-            "text": "watching a presentation on the screen",
+            "text": "reviewing the agenda printed in front of her",
             "load": "calm"
         },
         {
             "text": "arguing over a detail in the contract",
             "load": "tense"
+        },
+        {
+            "text": "rearranging name cards before everyone arrives",
+            "load": "calm"
         }
     ],
     "office_elevator": [
@@ -183,7 +195,7 @@
             "load": "calm"
         },
         {
-            "text": "standing and looking at phone",
+            "text": "standing and watching the floor numbers change",
             "load": "calm"
         },
         {
@@ -196,6 +208,10 @@
         },
         {
             "text": "checking reflection in the mirrored wall",
+            "load": "calm"
+        },
+        {
+            "text": "straightening an ID badge before the doors open",
             "load": "calm"
         }
     ],
@@ -329,7 +345,7 @@
             "load": "calm"
         },
         {
-            "text": "standing and checking phone",
+            "text": "standing and following the station names overhead",
             "load": "calm"
         },
         {
@@ -1065,7 +1081,7 @@
     ],
     "street_cafe": [
         {
-            "text": "sitting at a round table, sipping coffee",
+            "text": "sitting at a round table, unfolding a receipt and napkin",
             "load": "calm"
         },
         {
@@ -1073,11 +1089,11 @@
             "load": "calm"
         },
         {
-            "text": "sitting and reading a book at the table",
+            "text": "sitting and watching the street from the terrace",
             "load": "calm"
         },
         {
-            "text": "sitting and looking at her phone",
+            "text": "sitting and adjusting the strap of her tote bag",
             "load": "calm"
         },
         {
@@ -1089,7 +1105,7 @@
             "load": "calm"
         },
         {
-            "text": "checking messages on a tablet",
+            "text": "moving aside to let the server pass",
             "load": "calm"
         },
         {
@@ -1097,17 +1113,21 @@
             "load": "calm"
         },
         {
-            "text": "stirring sugar into coffee",
+            "text": "brushing pastry crumbs from the table",
             "load": "calm"
         },
         {
             "text": "watching pedestrians walk by",
             "load": "calm"
+        },
+        {
+            "text": "closing a small notebook after writing a few lines",
+            "load": "calm"
         }
     ],
     "cozy_bookstore": [
         {
-            "text": "standing between shelves, browsing books",
+            "text": "standing between shelves, browsing staff picks",
             "load": "calm"
         },
         {
@@ -1115,15 +1135,15 @@
             "load": "calm"
         },
         {
-            "text": "standing and holding a stack of books",
+            "text": "standing and holding a canvas tote against her side",
             "load": "calm"
         },
         {
-            "text": "crouching and looking at books on a low shelf",
+            "text": "crouching and checking the lower shelf labels",
             "load": "calm"
         },
         {
-            "text": "reaching for a book on a high shelf",
+            "text": "reaching for an item on a high shelf",
             "load": "calm"
         },
         {
@@ -1131,7 +1151,7 @@
             "load": "calm"
         },
         {
-            "text": "recommending a book to someone",
+            "text": "comparing handwritten recommendation cards",
             "load": "calm"
         },
         {
@@ -1139,11 +1159,11 @@
             "load": "calm"
         },
         {
-            "text": "reading the back cover of a novel",
+            "text": "checking the handwritten shelf labels",
             "load": "calm"
         },
         {
-            "text": "sitting in a comfy chair with a coffee",
+            "text": "waiting near the register with a folded tote bag",
             "load": "calm"
         }
     ],
@@ -1220,6 +1240,14 @@
         },
         {
             "text": "adjusting a hat in the mirror",
+            "load": "calm"
+        },
+        {
+            "text": "stepping out from the fitting room curtain to check the hem",
+            "load": "calm"
+        },
+        {
+            "text": "smoothing a sleeve while waiting for a second opinion",
             "load": "calm"
         }
     ],
@@ -2109,7 +2137,7 @@
             "load": "calm"
         },
         {
-            "text": "petting a cat (imaginary) on the rug",
+            "text": "petting a cat on the rug",
             "load": "calm"
         },
         {
@@ -2135,11 +2163,11 @@
             "load": "calm"
         },
         {
-            "text": "listening to the cicadas (imaginary)",
+            "text": "listening to the cicadas outside",
             "load": "calm"
         },
         {
-            "text": "waving to a neighbor (imaginary)",
+            "text": "waving to a neighbor across the street",
             "load": "calm"
         },
         {
@@ -2153,7 +2181,7 @@
     ],
     "suburban_neighborhood": [
         {
-            "text": "walking a dog (imaginary) down the sidewalk",
+            "text": "walking a dog down the sidewalk",
             "load": "active"
         },
         {
@@ -2169,7 +2197,7 @@
             "load": "calm"
         },
         {
-            "text": "washing a car (imaginary) in the driveway",
+            "text": "washing a car in the driveway",
             "load": "calm"
         },
         {

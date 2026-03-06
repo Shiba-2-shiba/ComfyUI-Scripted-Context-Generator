@@ -103,7 +103,7 @@
     ],
     "core": [
       "sleek glass partitions dividing the room",
-      "rows of white office desks with dual monitors",
+      "rows of white office desks with pinned notes and task trays",
       "black ergonomic mesh chairs",
       "water cooler with bubbling blue water",
       "metal filing cabinet"
@@ -114,8 +114,9 @@
     ],
     "props": [
       "stacks of organized documents",
-      "ceramic coffee mugs with logos",
-      "whiteboards covered in brainstorming notes"
+      "lanyards and ID cards hanging from a rack",
+      "whiteboards covered in brainstorming notes",
+      "stacked lunch containers beside a tote bag"
     ],
     "fx": [
       "busy professional atmosphere",
@@ -206,7 +207,7 @@
       "steam rising from street vents",
       "tangled bundles of cables overhead",
       "vending machines selling strange liquids",
-      "trash cans overflowing with tech debris"
+      "service crates stacked beside a repair stall"
     ],
     "texture": [
       "wet reflective asphalt",
@@ -222,7 +223,7 @@
       "heavy rain creating puddles",
       "neon reflections on wet surfaces",
       "thick smog and steam",
-      "chromatic aberration"
+      "color bleeding from neon reflections"
     ],
     "time": [
       "perpetual night",
@@ -773,7 +774,7 @@
       "studious library with tall shelves"
     ],
     "core": [
-      "endless rows of bookshelves filled with colorful spines",
+      "endless rows of shelves lined with colorful spines",
       "large wooden study tables",
       "rolling ladder for high shelves"
     ],
@@ -782,9 +783,9 @@
       "smell of old paper visualized"
     ],
     "props": [
-      "towers of stacked books",
+      "return cart waiting by the aisle",
       "green reading lamps",
-      "open encyclopedia"
+      "labeled study folders"
     ],
     "fx": [
       "hushed silence atmosphere",
@@ -855,7 +856,7 @@
     ],
     "core": [
       "long polished mahogany conference table",
-      "large presentation screen showing charts",
+      "large framed agenda board near the wall",
       "whiteboard covered in strategy diagrams",
       "video conferencing camera system",
       "credenza with coffee service"
@@ -872,7 +873,7 @@
       "laser pointer on table",
       "pitch deck printouts",
       "stainless steel pitcher",
-      "open laptop with presentation"
+      "name cards laid out for the meeting"
     ],
     "fx": [
       "tense business atmosphere",
@@ -905,7 +906,7 @@
     "core": [
       "shining metallic sliding doors",
       "illuminated floor button panel",
-      "LCD information screen",
+      "arrival chime panel above the doors",
       "security card reader panel",
       "emergency phone hatch"
     ],
@@ -1010,7 +1011,7 @@
     "props": [
       "scattered papers on floor",
       "empty toner cartridges",
-      "overflowing trash bin"
+      "overflow tray of misprinted pages"
     ],
     "fx": [
       "chaotic clutter everywhere",
@@ -1176,7 +1177,10 @@
     ],
     "core": [
       "large monitor screen displaying lyrics",
-      "comfortable u-shaped leather sofa"
+      "comfortable u-shaped leather sofa",
+      "touch-song console built into the low table",
+      "soundproof wall panels with colored trim",
+      "stack of song request booklets and remotes"
     ],
     "texture": [
       "shiny black leather",
@@ -1340,21 +1344,21 @@
       "minimalist zen dojo"
     ],
     "core": [
-      "bioluminescent giant flora",
-      "floating rock formations",
-      "twin moons in the sky",
-      "crystalline jagged peaks",
-      "strange alien ruins"
+      "rows of rolled yoga mats by the wall",
+      "full-height mirrors reflecting the room",
+      "low wooden shelf with folded blankets",
+      "potted plants near the window",
+      "small speaker for guided breathing"
     ],
     "texture": [
-      "purple mossy ground",
-      "iridescent liquid pools",
-      "spongy fungal soil"
+      "smooth wooden floorboards",
+      "woven meditation cushions",
+      "soft cotton mat texture"
     ],
     "props": [
-      "unidentified glowing artifact",
-      "crashed probe debris",
-      "strange egg-like pods"
+      "foam blocks stacked neatly",
+      "folded towels by the corner shelf",
+      "water bottles lined beside the mats"
     ],
     "fx": [
       "serene spiritual atmosphere",
@@ -2057,19 +2061,20 @@
     ],
     "core": [
       "striped parasol",
-      "small round table with latte",
+      "small round table with a folded napkin and receipt tray",
       "handwritten chalkboard menu",
       "wooden flower box"
     ],
     "texture": [
       "cobblestone street",
       "painted wooden chair",
-      "creamy latte art froth"
+      "sun-warmed tabletop"
     ],
     "props": [
       "buttery croissant on plate",
-      "lifestyle magazine",
-      "smartphone on table"
+      "glass of chilled water",
+      "canvas tote resting by the chair",
+      "folded newspaper beside the menu"
     ],
     "fx": [
       "sunlight filtering through street trees",
@@ -2116,7 +2121,7 @@
       "floor-to-ceiling bookshelves",
       "rolling wooden ladder",
       "comfortable reading nook armchair",
-      "unsteady stacks of books"
+      "wooden display cart of staff picks"
     ],
     "texture": [
       "yellowed aged paper",
@@ -2124,9 +2129,10 @@
       "cracked leather binding"
     ],
     "props": [
-      "open book on lap",
       "reading glasses",
-      "cat sleeping on top shelf"
+      "cat sleeping on top shelf",
+      "handwritten recommendation cards",
+      "canvas book tote hanging from a hook"
     ],
     "fx": [
       "solitary light beam cutting through haze",
@@ -2180,8 +2186,9 @@
     ],
     "props": [
       "colorful paper shopping bags",
-      "glowing digital signage",
-      "rest benches"
+      "seasonal hanging banners",
+      "rest benches",
+      "potted indoor trees near the fountain"
     ],
     "fx": [
       "bright artificial overhead light",
@@ -2237,8 +2244,9 @@
     ],
     "props": [
       "wooden hangers",
-      "fashion magazines",
-      "velvet jewelry tray"
+      "velvet jewelry tray",
+      "folded gift boxes",
+      "tailor measuring tape on the counter"
     ],
     "fx": [
       "warm flattering spotlighting",

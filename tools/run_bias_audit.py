@@ -3,13 +3,15 @@
 """
 Bias audit runner for ThemeLocationExpander / SceneVariator pipeline.
 
-Outputs 8 CSV files:
+Outputs CSV files including:
   - audit_run_meta.csv
   - audit_location_distribution.csv
   - audit_object_distribution.csv
   - audit_object_rate_by_location.csv
   - audit_cooccurrence.csv
   - audit_stage_sampling.csv
+  - audit_prompt_quality.csv
+  - audit_quality_metrics.csv
   - audit_data_quality.csv
   - audit_alerts.csv
 """
@@ -34,32 +36,109 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from nodes_dictionary_expand import ThemeLocationExpander  # noqa: E402
+from nodes_dictionary_expand import DictionaryExpand, ThemeClothingExpander, ThemeLocationExpander  # noqa: E402
+from nodes_garnish import GarnishSampler  # noqa: E402
 from nodes_pack_parser import PackParser  # noqa: E402
+from nodes_prompt_cleaner import PromptCleaner  # noqa: E402
 from nodes_scene_variator import SceneVariator  # noqa: E402
+from nodes_simple_template import SimpleTemplateBuilder  # noqa: E402
+from vocab.garnish.logic import _has_physical_expression  # noqa: E402
 from vocab.seed_utils import mix_seed  # noqa: E402
 import background_vocab  # noqa: E402
 
 
-KEYWORD_RULE_VERSION = "object_norm_v1_20260227"
-OBJECT_RULES: Dict[str, List[str]] = {
-    "surfboard": [r"\bsurfboard\b", r"\bboard\b"],
-    "book": [r"\bbook\b", r"\bbooks\b", r"\bnotebook\b", r"\bnovel\b", r"\btextbook\b"],
-    "phone": [r"\bphone\b", r"\bsmartphone\b", r"\bmobile\b"],
-    "coffee": [r"\bcoffee\b", r"\blatte\b", r"\bespresso\b", r"\bcappuccino\b"],
-    "drink": [r"\bdrink\b", r"\bdrinks\b", r"\bbeverage\b", r"\bsipping\b"],
-    "microphone": [r"\bmicrophone\b", r"\bmic\b"],
-    "screen": [r"\bscreen\b", r"\bmonitor\b", r"\bdisplay\b"],
+KEYWORD_RULE_VERSION = "object_norm_v2_20260306"
+DEFAULT_GENERATION_MODE = "scene_emotion_priority"
+DAILY_LIFE_SHARE_TARGET_MIN = 0.60
+DAILY_LIFE_SHARE_TARGET_MAX = 0.75
+OBJECT_RULES: Dict[str, Dict[str, List[str]]] = {
+    "surfboard": {
+        "include": [r"\bsurfboard\b"],
+        "exclude": [],
+    },
+    "book": {
+        "include": [r"\bbook\b", r"\bbooks\b", r"\bnotebook\b", r"\bnovel\b", r"\btextbook\b"],
+        "exclude": [],
+    },
+    "phone": {
+        "include": [r"\bphone\b", r"\bsmartphone\b", r"\bmobile\b"],
+        "exclude": [],
+    },
+    "coffee": {
+        "include": [r"\bcoffee\b", r"\blatte\b", r"\bespresso\b", r"\bcappuccino\b"],
+        "exclude": [],
+    },
+    "drink": {
+        "include": [r"\bdrink\b", r"\bdrinks\b", r"\bbeverage\b", r"\bsipping\b"],
+        "exclude": [],
+    },
+    "microphone": {
+        "include": [r"\bmicrophone\b", r"\bmic\b"],
+        "exclude": [],
+    },
+    "screen": {
+        "include": [r"\bscreen\b", r"\bmonitor\b", r"\bdisplay\b"],
+        "exclude": [],
+    },
 }
+
+BROAD_SCENE_PRIORITY = [
+    "fantasy",
+    "scifi",
+    "nature",
+    "music",
+    "sport",
+    "craft",
+    "steampunk",
+    "luxury",
+]
+ABSTRACT_STYLE_PATTERNS: Dict[str, re.Pattern[str]] = {
+    "anime_style": re.compile(r"\banime(?:\s+style|\s+illustration)?\b", re.IGNORECASE),
+    "illustration": re.compile(r"\billustration\b", re.IGNORECASE),
+    "photographic": re.compile(r"\bphotographic\b|\bphotoreal(?:istic)?\b", re.IGNORECASE),
+    "cinematic": re.compile(r"\bcinematic\b", re.IGNORECASE),
+    "masterpiece": re.compile(r"\bmasterpiece\b", re.IGNORECASE),
+    "best_quality": re.compile(r"\bbest quality\b", re.IGNORECASE),
+    "high_quality": re.compile(r"\bhigh quality\b", re.IGNORECASE),
+    "ultra_detailed": re.compile(r"\bultra detailed\b", re.IGNORECASE),
+    "stylized": re.compile(r"\bstylized\b", re.IGNORECASE),
+    "render": re.compile(r"\brender(?:ed|ing)?\b", re.IGNORECASE),
+}
+UNWANTED_NOUN_PATTERNS: Dict[str, re.Pattern[str]] = {
+    "imaginary": re.compile(r"\bimaginary\b", re.IGNORECASE),
+    "trash": re.compile(r"\btrash\b", re.IGNORECASE),
+    "debris": re.compile(r"\bdebris\b", re.IGNORECASE),
+    "garbage": re.compile(r"\bgarbage\b", re.IGNORECASE),
+    "rubbish": re.compile(r"\brubbish\b", re.IGNORECASE),
+}
+UNWANTED_NOUN_EXCEPTION_PATTERNS: Tuple[re.Pattern[str], ...] = (
+    re.compile(r"\bbackstreet\b", re.IGNORECASE),
+    re.compile(r"\balleyway\b", re.IGNORECASE),
+    re.compile(r"\bbattlefield\b", re.IGNORECASE),
+    re.compile(r"\bcrashed spaceship\b", re.IGNORECASE),
+    re.compile(r"\bruined\b", re.IGNORECASE),
+    re.compile(r"\bwrecked\b", re.IGNORECASE),
+)
+UNWANTED_NOUN_EXCEPTION_LOCS = {
+    "rainy_alley",
+    "burning_battlefield",
+    "alien_planet",
+}
+
+_object_policy_cache: Dict[str, Any] | None = None
 
 
 @dataclass
 class SampleRow:
     seed: int
     subj: str
+    costume_key: str
+    costume_prompt: str
     input_loc: str
     input_loc_tag: str
     selected_loc: str
+    broad_scene: str
+    is_daily_life: int
     selected_source: str
     selected_action: str
     action_pool_loc: str
@@ -67,7 +146,16 @@ class SampleRow:
     props_included: int
     props_count: int
     selected_props: List[str]
+    meta_mood_key: str
+    meta_mood_text: str
+    garnish: str
+    emotion_embodied: int
+    abstract_style_hits: List[str]
+    unwanted_noun_hits: List[str]
+    disallowed_fx_hits: List[str]
     location_prompt: str
+    raw_prompt: str
+    final_prompt: str
     objects_bg_norm: List[str]
     objects_action_norm: List[str]
     objects_final_norm: List[str]
@@ -86,6 +174,26 @@ def write_csv(path: Path, rows: List[Dict[str, Any]], headers: Sequence[str]) ->
             writer.writerow(row)
 
 
+def load_object_concentration_policy() -> Dict[str, Any]:
+    global _object_policy_cache
+    if _object_policy_cache is None:
+        path = ROOT / "vocab" / "data" / "object_concentration_policy.json"
+        if not path.exists():
+            _object_policy_cache = {}
+        else:
+            _object_policy_cache = json.loads(path.read_text(encoding="utf-8"))
+    return _object_policy_cache
+
+
+def get_policy_threshold(name: str, default: float) -> float:
+    policy = load_object_concentration_policy()
+    thresholds = policy.get("thresholds", {})
+    try:
+        return float(thresholds.get(name, default))
+    except (TypeError, ValueError):
+        return float(default)
+
+
 def entropy_from_counts(counts: Iterable[int]) -> float:
     values = [c for c in counts if c > 0]
     total = sum(values)
@@ -98,19 +206,155 @@ def entropy_from_counts(counts: Iterable[int]) -> float:
     return ent
 
 
+def _normalized_exclude_phrases(norm: str) -> List[str]:
+    policy = load_object_concentration_policy()
+    normalization = policy.get("audit_normalization", {}).get(norm, {})
+    phrases = normalization.get("exclude_phrases", [])
+    return [str(phrase).lower() for phrase in phrases]
+
+
+def _match_object_rule(text: str, norm: str) -> str:
+    lowered = (text or "").lower()
+    for phrase in _normalized_exclude_phrases(norm):
+        if phrase and phrase in lowered:
+            return ""
+
+    rule = OBJECT_RULES.get(norm, {})
+    for pat in rule.get("exclude", []):
+        if re.search(pat, lowered):
+            return ""
+    for pat in rule.get("include", []):
+        m = re.search(pat, lowered)
+        if m:
+            return m.group(0)
+    return ""
+
+
 def detect_objects(text: str) -> Tuple[List[str], Dict[str, str]]:
-    s = (text or "").lower()
     detected: List[str] = []
     raw_map: Dict[str, str] = {}
-    for norm, patterns in OBJECT_RULES.items():
-        for pat in patterns:
-            m = re.search(pat, s)
-            if m:
-                detected.append(norm)
-                raw_map[norm] = m.group(0)
-                break
+    for norm in OBJECT_RULES:
+        match_text = _match_object_rule(text, norm)
+        if match_text:
+            detected.append(norm)
+            raw_map[norm] = match_text
     detected = sorted(set(detected))
     return detected, raw_map
+
+
+def classify_object_hotspot(location_name: str, object_token: str) -> str:
+    policy = load_object_concentration_policy()
+    loc = str(location_name)
+    token = str(object_token)
+    if token in policy.get("audit_artifact", {}).get(loc, []):
+        return "audit_artifact"
+    if token in policy.get("true_bias_background", {}).get(loc, []):
+        return "true_bias_background"
+    if token in policy.get("true_bias_action", {}).get(loc, []):
+        return "true_bias_action"
+    if token in policy.get("thematic_anchor", {}).get(loc, {}):
+        return "thematic_anchor"
+    return "general"
+
+
+def get_effective_object_threshold(location_name: str, object_token: str) -> float:
+    policy = load_object_concentration_policy()
+    classification = classify_object_hotspot(location_name, object_token)
+    if classification == "thematic_anchor":
+        anchor_policy = policy.get("thematic_anchor", {}).get(str(location_name), {}).get(str(object_token), {})
+        try:
+            return float(anchor_policy.get("threshold", get_policy_threshold("anchor_conditional_rate", 0.60)))
+        except (TypeError, ValueError):
+            return get_policy_threshold("anchor_conditional_rate", 0.60)
+    return get_policy_threshold("default_conditional_rate", 0.40)
+
+
+def detect_pattern_hits(text: str, pattern_map: Dict[str, re.Pattern[str]]) -> List[str]:
+    s = text or ""
+    return [name for name, pat in pattern_map.items() if pat.search(s)]
+
+
+def load_scene_compatibility() -> Dict[str, Any]:
+    path = ROOT / "vocab" / "data" / "scene_compatibility.json"
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def get_loc_tags(loc: str, compat: Dict[str, Any]) -> List[str]:
+    tags: List[str] = []
+    for tag, locs in compat.get("loc_tags", {}).items():
+        if loc in locs:
+            tags.append(tag)
+    return tags
+
+
+def is_daily_life_loc(loc: str, compat: Dict[str, Any]) -> bool:
+    if loc in set(compat.get("daily_life_locs", [])):
+        return True
+    daily_tags = set(compat.get("daily_life_tags", []))
+    return bool(daily_tags.intersection(get_loc_tags(loc, compat)))
+
+
+def infer_broad_scene(loc: str, compat: Dict[str, Any]) -> str:
+    tags = get_loc_tags(loc, compat)
+    if is_daily_life_loc(loc, compat):
+        return "daily_life"
+    for tag in BROAD_SCENE_PRIORITY:
+        if tag in tags:
+            return tag
+    if tags:
+        return sorted(tags)[0]
+    return "other"
+
+
+def detect_disallowed_fx_hits(text: str, cleaner: PromptCleaner) -> List[str]:
+    s = text or ""
+    hits: List[str] = []
+    for pat in cleaner.fx_deny_patterns:
+        match = pat.search(s)
+        if match:
+            hits.append(match.group(0).lower())
+    return sorted(set(hits))
+
+
+def detect_unwanted_noun_hits(text: str, is_daily_life: bool, selected_loc: str = "") -> List[str]:
+    raw_hits = detect_pattern_hits(text, UNWANTED_NOUN_PATTERNS)
+    has_exception_context = (
+        selected_loc in UNWANTED_NOUN_EXCEPTION_LOCS
+        or any(p.search(text or "") for p in UNWANTED_NOUN_EXCEPTION_PATTERNS)
+    )
+    filtered: List[str] = []
+    for hit in raw_hits:
+        if hit == "imaginary":
+            filtered.append(hit)
+            continue
+        if is_daily_life and not has_exception_context:
+            filtered.append(hit)
+    return filtered
+
+
+def has_emotion_embodiment(prompt_text: str, garnish_text: str) -> bool:
+    garnish_tags = [part.strip() for part in (garnish_text or "").split(",") if part.strip()]
+    if garnish_tags and _has_physical_expression(garnish_tags):
+        return True
+    prompt_lower = (prompt_text or "").lower()
+    physical_hints = (
+        "eyes",
+        "gaze",
+        "smile",
+        "mouth",
+        "jaw",
+        "brow",
+        "shoulders",
+        "hands",
+        "fingers",
+        "posture",
+        "stance",
+        "breathing",
+        "leaning",
+        "glance",
+        "lips",
+    )
+    return any(hint in prompt_lower for hint in physical_hints)
 
 
 def _simulate_location_expand(
@@ -245,37 +489,80 @@ def generate_samples(
 ) -> List[SampleRow]:
     parser = PackParser()
     scene = SceneVariator()
+    cloth_exp = ThemeClothingExpander()
     loc_exp = ThemeLocationExpander()
+    dict_exp = DictionaryExpand()
+    garnish_node = GarnishSampler()
+    template_node = SimpleTemplateBuilder()
+    cleaner = PromptCleaner()
+    compat = load_scene_compatibility()
 
     rows: List[SampleRow] = []
 
     for i in range(sample_count):
         seed = seed_start + i
-        subj, costume, loc, action, _, _, _ = parser.parse("{}", seed)
+        subj, costume, loc, action, meta_mood_key, meta_style, scene_tags = parser.parse("{}", seed)
 
-        subj2, _, selected_loc, selected_action, debug_info = scene.variate(
+        subj2, costume2, selected_loc, selected_action, debug_info = scene.variate(
             subj, costume, loc, action, seed, variation_mode
         )
         decision = debug_info.get("decision", {}) if isinstance(debug_info, dict) else {}
         selected_source = str(decision.get("selected_source", "original"))
         action_pool_loc = selected_loc if (selected_loc != loc and decision.get("action_updated")) else ""
 
+        broad_scene = infer_broad_scene(selected_loc, compat)
+        daily_life_flag = 1 if is_daily_life_loc(selected_loc, compat) else 0
+
         exp_input = choose_loc_tag_input(selected_loc, input_mode, seed)
         sim = _simulate_location_expand(exp_input, seed, location_mode, lighting_mode)
         loc_prompt = loc_exp.expand_location(exp_input, seed, location_mode, lighting_mode)[0]
         sim["final_prompt"] = loc_prompt
+        costume_prompt = cloth_exp.expand_clothing(costume2, seed, "random", 0.3, "")[0]
+        meta_mood_text = dict_exp.expand(meta_mood_key, "mood_map.json", meta_mood_key, seed)[0]
+        garnish_text, garnish_debug = garnish_node.sample(
+            action_text=selected_action,
+            meta_mood_key=meta_mood_key,
+            seed=seed,
+            max_items=3,
+            include_camera=False,
+            context_loc=selected_loc,
+            context_costume=costume2,
+            scene_tags=scene_tags,
+            personality="",
+        )
+        raw_prompt = template_node.build(
+            template="",
+            composition_mode=True,
+            seed=seed,
+            subj=subj2,
+            costume=costume_prompt,
+            loc=loc_prompt,
+            action=selected_action,
+            garnish=garnish_text,
+            meta_mood=meta_mood_text,
+            meta_style=meta_style,
+        )[0]
+        final_prompt = cleaner.clean(raw_prompt, mode="nl", drop_empty_lines=True)[0]
 
         obj_bg, _ = detect_objects(loc_prompt)
         obj_action, _ = detect_objects(selected_action)
-        obj_final, raw_map = detect_objects(f"{loc_prompt}, {selected_action}")
+        obj_final, raw_map = detect_objects(final_prompt)
+        style_hits = detect_pattern_hits(final_prompt, ABSTRACT_STYLE_PATTERNS)
+        unwanted_hits = detect_unwanted_noun_hits(final_prompt, bool(daily_life_flag), selected_loc)
+        fx_hits = detect_disallowed_fx_hits(final_prompt, cleaner)
+        embodied = 1 if has_emotion_embodiment(final_prompt, garnish_text) else 0
 
         rows.append(
             SampleRow(
                 seed=seed,
                 subj=subj2,
+                costume_key=costume2,
+                costume_prompt=costume_prompt,
                 input_loc=loc,
                 input_loc_tag=exp_input,
                 selected_loc=selected_loc,
+                broad_scene=broad_scene,
+                is_daily_life=daily_life_flag,
                 selected_source=selected_source,
                 selected_action=selected_action,
                 action_pool_loc=action_pool_loc,
@@ -283,7 +570,16 @@ def generate_samples(
                 props_included=int(sim["props_included"]),
                 props_count=len(sim["selected_props"]),
                 selected_props=[str(x) for x in sim["selected_props"]],
+                meta_mood_key=meta_mood_key,
+                meta_mood_text=meta_mood_text,
+                garnish=garnish_text,
+                emotion_embodied=embodied,
+                abstract_style_hits=style_hits,
+                unwanted_noun_hits=unwanted_hits,
+                disallowed_fx_hits=fx_hits,
                 location_prompt=loc_prompt,
+                raw_prompt=raw_prompt,
+                final_prompt=final_prompt,
                 objects_bg_norm=obj_bg,
                 objects_action_norm=obj_action,
                 objects_final_norm=obj_final,
@@ -492,6 +788,8 @@ def build_object_rate_by_location_rows(run_id: str, samples: List[SampleRow]) ->
                     top_action_for_token[token][s.selected_action] += 1
             for rank, (token, hits) in enumerate(cnt.most_common(), start=1):
                 top_action = top_action_for_token[token].most_common(1)[0][0]
+                classification = classify_object_hotspot(loc, token)
+                effective_threshold = get_effective_object_threshold(loc, token)
                 rows.append(
                     {
                         "run_id": run_id,
@@ -503,6 +801,9 @@ def build_object_rate_by_location_rows(run_id: str, samples: List[SampleRow]) ->
                         "conditional_rate": round(hits / n, 6),
                         "rank_in_location": rank,
                         "top_cooccurring_action": top_action,
+                        "classification": classification,
+                        "effective_threshold": round(effective_threshold, 6),
+                        "policy_source": classification if classification != "general" else "",
                         "remarks": "",
                     }
                 )
@@ -570,8 +871,208 @@ def build_stage_sampling_rows(run_id: str, samples: List[SampleRow]) -> List[Dic
                 "action_pool_loc": s.action_pool_loc,
                 "selected_action": s.selected_action,
                 "objects_detected_final": "|".join(sorted(set(s.objects_final_norm))),
+                "broad_scene": s.broad_scene,
+                "is_daily_life": s.is_daily_life,
+                "meta_mood_key": s.meta_mood_key,
+                "garnish": s.garnish,
+                "final_prompt": s.final_prompt,
             }
         )
+    return rows
+
+
+def build_prompt_quality_rows(run_id: str, samples: List[SampleRow]) -> List[Dict[str, Any]]:
+    rows: List[Dict[str, Any]] = []
+    for s in samples:
+        rows.append(
+            {
+                "run_id": run_id,
+                "seed": s.seed,
+                "subj": s.subj,
+                "selected_loc": s.selected_loc,
+                "broad_scene": s.broad_scene,
+                "is_daily_life": s.is_daily_life,
+                "meta_mood_key": s.meta_mood_key,
+                "emotion_embodied": s.emotion_embodied,
+                "abstract_style_hits": "|".join(s.abstract_style_hits),
+                "unwanted_noun_hits": "|".join(s.unwanted_noun_hits),
+                "disallowed_fx_hits": "|".join(s.disallowed_fx_hits),
+                "final_prompt": s.final_prompt,
+            }
+        )
+    return rows
+
+
+def _metric_row(
+    run_id: str,
+    metric_name: str,
+    metric_value: float,
+    target_min: Any = "",
+    target_max: Any = "",
+    status: str = "info",
+    notes: str = "",
+) -> Dict[str, Any]:
+    return {
+        "run_id": run_id,
+        "metric_name": metric_name,
+        "metric_value": round(metric_value, 6),
+        "target_min": target_min,
+        "target_max": target_max,
+        "status": status,
+        "notes": notes,
+    }
+
+
+def build_quality_metric_rows(
+    run_id: str,
+    samples: List[SampleRow],
+    object_rate_rows: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    rows: List[Dict[str, Any]] = []
+    if not samples:
+        return rows
+
+    sample_count = len(samples)
+    daily_life_share = sum(s.is_daily_life for s in samples) / sample_count
+    broad_scene_counts = Counter(s.broad_scene for s in samples)
+    broad_scene_entropy = entropy_from_counts(broad_scene_counts.values())
+    broad_scene_top1 = broad_scene_counts.most_common(1)[0]
+    broad_scene_top1_share = broad_scene_top1[1] / sample_count
+    emotion_embodiment_rate = sum(s.emotion_embodied for s in samples) / sample_count
+    abstract_style_term_rate = sum(1 for s in samples if s.abstract_style_hits) / sample_count
+    unwanted_noun_rate = sum(1 for s in samples if s.unwanted_noun_hits) / sample_count
+    disallowed_fx_rate = sum(1 for s in samples if s.disallowed_fx_hits) / sample_count
+
+    qualified_object_rows = [
+        r for r in object_rate_rows
+        if r["scope"] == "final_prompt" and int(r["count_location_samples"]) >= 5
+    ]
+    qualified_true_bias_rows = [
+        r for r in qualified_object_rows
+        if r.get("classification") in {"true_bias_background", "true_bias_action"}
+    ]
+    max_object_concentration = max(
+        (float(r["conditional_rate"]) for r in qualified_object_rows),
+        default=0.0,
+    )
+    max_true_bias_concentration = max(
+        (float(r["conditional_rate"]) for r in qualified_true_bias_rows),
+        default=0.0,
+    )
+
+    daily_status = (
+        "pass"
+        if DAILY_LIFE_SHARE_TARGET_MIN <= daily_life_share <= DAILY_LIFE_SHARE_TARGET_MAX
+        else "fail"
+    )
+    emotion_status = "pass" if emotion_embodiment_rate >= 0.85 else "fail"
+    unwanted_status = "pass" if unwanted_noun_rate == 0 else "fail"
+    fx_status = "pass" if disallowed_fx_rate == 0 else "fail"
+    style_status = "pass" if abstract_style_term_rate == 0 else "warn"
+    raw_object_gate = get_policy_threshold("default_quality_gate", 0.55)
+    true_bias_gate = get_policy_threshold("true_bias_quality_gate", 0.45)
+    object_status = "pass" if max_object_concentration <= raw_object_gate else "warn"
+    true_bias_status = "pass" if max_true_bias_concentration <= true_bias_gate else "warn"
+
+    rows.append(
+        _metric_row(
+            run_id,
+            "daily_life_share",
+            daily_life_share,
+            DAILY_LIFE_SHARE_TARGET_MIN,
+            DAILY_LIFE_SHARE_TARGET_MAX,
+            daily_status,
+            "share of selected locations classified as daily-life",
+        )
+    )
+    rows.append(
+        _metric_row(
+            run_id,
+            "broad_scene_entropy",
+            broad_scene_entropy,
+            "",
+            "",
+            "info",
+            f"top1={broad_scene_top1[0]}:{round(broad_scene_top1_share, 6)}",
+        )
+    )
+    rows.append(
+        _metric_row(
+            run_id,
+            "broad_scene_top1_share",
+            broad_scene_top1_share,
+            "",
+            "",
+            "info",
+            f"top1_scene={broad_scene_top1[0]}",
+        )
+    )
+    rows.append(
+        _metric_row(
+            run_id,
+            "emotion_embodiment_rate",
+            emotion_embodiment_rate,
+            0.85,
+            "",
+            emotion_status,
+            "rate of final prompts containing physical emotional expression",
+        )
+    )
+    rows.append(
+        _metric_row(
+            run_id,
+            "abstract_style_term_rate",
+            abstract_style_term_rate,
+            "",
+            0,
+            style_status,
+            "rate of final prompts containing abstract style wording",
+        )
+    )
+    rows.append(
+        _metric_row(
+            run_id,
+            "unwanted_noun_rate",
+            unwanted_noun_rate,
+            "",
+            0,
+            unwanted_status,
+            "rate of final prompts containing imaginary / trash / debris family terms",
+        )
+    )
+    rows.append(
+        _metric_row(
+            run_id,
+            "disallowed_fx_rate",
+            disallowed_fx_rate,
+            "",
+            0,
+            fx_status,
+            "rate of final prompts containing denied FX or render-processing terms",
+        )
+    )
+    rows.append(
+        _metric_row(
+            run_id,
+            "max_object_concentration_final_prompt",
+            max_object_concentration,
+            "",
+            raw_object_gate,
+            object_status,
+            "max conditional object rate across locations with >=5 samples",
+        )
+    )
+    rows.append(
+        _metric_row(
+            run_id,
+            "max_object_concentration_true_bias",
+            max_true_bias_concentration,
+            "",
+            true_bias_gate,
+            true_bias_status,
+            "max conditional object rate across true-bias locations only with audit artifacts excluded",
+        )
+    )
     return rows
 
 
@@ -691,6 +1192,7 @@ def build_alert_rows(
     location_rows: List[Dict[str, Any]],
     object_rows: List[Dict[str, Any]],
     object_rate_rows: List[Dict[str, Any]],
+    quality_metric_rows: List[Dict[str, Any]],
     data_quality_rows: List[Dict[str, Any]],
 ) -> List[Dict[str, Any]]:
     rows: List[Dict[str, Any]] = []
@@ -759,21 +1261,29 @@ def build_alert_rows(
             )
 
     for r in object_rate_rows:
-        if float(r["conditional_rate"]) > 0.40:
+        threshold = float(r.get("effective_threshold", get_policy_threshold("default_conditional_rate", 0.40)))
+        classification = r.get("classification", "general")
+        if float(r["conditional_rate"]) > threshold:
+            if classification == "audit_artifact":
+                alert_type = "audit_artifact"
+            elif classification == "thematic_anchor":
+                alert_type = "anchor_object_bias"
+            else:
+                alert_type = "high_object_bias"
             rows.append(
                 {
                     "run_id": run_id,
-                    "alert_type": "high_object_bias",
+                    "alert_type": alert_type,
                     "scope": r["scope"],
                     "input_condition_key": "location_name",
                     "input_condition_value": r["location_name"],
                     "target_name": r["object_token"],
                     "metric_name": "conditional_rate",
                     "metric_value": r["conditional_rate"],
-                    "threshold": 0.40,
+                    "threshold": threshold,
                     "triggered": 1,
                     "severity": "high" if float(r["conditional_rate"]) > 0.60 else "medium",
-                    "remarks": "",
+                    "remarks": classification,
                 }
             )
 
@@ -795,6 +1305,26 @@ def build_alert_rows(
                     "remarks": r.get("remarks", ""),
                 }
             )
+
+    for r in quality_metric_rows:
+        if r["status"] not in {"fail", "warn"}:
+            continue
+        rows.append(
+            {
+                "run_id": run_id,
+                "alert_type": "quality_gate",
+                "scope": "prompt_quality",
+                "input_condition_key": "metric_name",
+                "input_condition_value": r["metric_name"],
+                "target_name": r["metric_name"],
+                "metric_name": r["metric_name"],
+                "metric_value": r["metric_value"],
+                "threshold": r["target_min"] if r["target_min"] != "" else r["target_max"],
+                "triggered": 1,
+                "severity": "high" if r["status"] == "fail" else "medium",
+                "remarks": r.get("notes", ""),
+            }
+        )
     return rows
 
 
@@ -838,13 +1368,23 @@ def main() -> None:
     object_rate_rows = build_object_rate_by_location_rows(run_id, samples)
     cooccur_rows = build_cooccurrence_rows(run_id, samples)
     stage_rows = build_stage_sampling_rows(run_id, samples)
+    prompt_quality_rows = build_prompt_quality_rows(run_id, samples)
+    quality_metric_rows = build_quality_metric_rows(run_id, samples, object_rate_rows)
     data_quality_rows = build_data_quality_rows(run_id)
-    alert_rows = build_alert_rows(run_id, location_rows, object_rows, object_rate_rows, data_quality_rows)
+    alert_rows = build_alert_rows(
+        run_id,
+        location_rows,
+        object_rows,
+        object_rate_rows,
+        quality_metric_rows,
+        data_quality_rows,
+    )
 
     run_meta_rows = [
         {
             "run_id": run_id,
             "run_date": run_date,
+            "generation_mode": DEFAULT_GENERATION_MODE,
             "sample_count": args.sample_count,
             "seed_start": args.seed_start,
             "seed_end": seed_end,
@@ -854,6 +1394,8 @@ def main() -> None:
             "lighting_mode": args.lighting_mode,
             "input_mode": args.input_mode,
             "target_scope": args.target_scope,
+            "daily_life_share_target_min": DAILY_LIFE_SHARE_TARGET_MIN,
+            "daily_life_share_target_max": DAILY_LIFE_SHARE_TARGET_MAX,
             "notes": args.notes,
         }
     ]
@@ -864,6 +1406,7 @@ def main() -> None:
         [
             "run_id",
             "run_date",
+            "generation_mode",
             "sample_count",
             "seed_start",
             "seed_end",
@@ -873,6 +1416,8 @@ def main() -> None:
             "lighting_mode",
             "input_mode",
             "target_scope",
+            "daily_life_share_target_min",
+            "daily_life_share_target_max",
             "notes",
         ],
     )
@@ -928,6 +1473,9 @@ def main() -> None:
             "conditional_rate",
             "rank_in_location",
             "top_cooccurring_action",
+            "classification",
+            "effective_threshold",
+            "policy_source",
             "remarks",
         ],
     )
@@ -968,6 +1516,42 @@ def main() -> None:
             "action_pool_loc",
             "selected_action",
             "objects_detected_final",
+            "broad_scene",
+            "is_daily_life",
+            "meta_mood_key",
+            "garnish",
+            "final_prompt",
+        ],
+    )
+    write_csv(
+        out_dir / "audit_prompt_quality.csv",
+        prompt_quality_rows,
+        [
+            "run_id",
+            "seed",
+            "subj",
+            "selected_loc",
+            "broad_scene",
+            "is_daily_life",
+            "meta_mood_key",
+            "emotion_embodied",
+            "abstract_style_hits",
+            "unwanted_noun_hits",
+            "disallowed_fx_hits",
+            "final_prompt",
+        ],
+    )
+    write_csv(
+        out_dir / "audit_quality_metrics.csv",
+        quality_metric_rows,
+        [
+            "run_id",
+            "metric_name",
+            "metric_value",
+            "target_min",
+            "target_max",
+            "status",
+            "notes",
         ],
     )
     write_csv(
@@ -1007,7 +1591,20 @@ def main() -> None:
 
     print(f"[OK] audit complete: {out_dir}")
     print(f"  samples={len(samples)} variation_mode={args.variation_mode} location_mode={args.location_mode}")
+    quality_summary = ", ".join(
+        f"{row['metric_name']}={row['metric_value']}"
+        for row in quality_metric_rows
+        if row["metric_name"] in {
+            "daily_life_share",
+            "emotion_embodiment_rate",
+            "abstract_style_term_rate",
+            "unwanted_noun_rate",
+            "disallowed_fx_rate",
+            "max_object_concentration_true_bias",
+        }
+    )
     print(f"  alerts={len(alert_rows)} data_quality_issues={len(data_quality_rows)}")
+    print(f"  quality_metrics: {quality_summary}")
 
 
 if __name__ == "__main__":

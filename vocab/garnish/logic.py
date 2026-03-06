@@ -1,67 +1,68 @@
 """
-Garnish logic module (v2.0).
-Implements Action-consistent sampling with 9 emotion categories and intensity levels.
+Garnish logic module.
+Builds emotion-led physical expression tags while preserving deterministic seed behavior.
 """
-import random
-import re
-from typing import List, Dict, Optional, Any, Set, Tuple
 
-from .utils import normalize, _dedupe, _merge_unique
+import random
+from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
+
+from .utils import _dedupe
 from .base_vocab import (
-    MOOD_POOLS,
     VIEW_ANGLES,
     VIEW_FRAMING,
     POSE_STANDING,
     POSE_SITTING,
     POSE_LYING,
     POSE_DYNAMIC,
-    HAND_POSITIONS,
     HAND_GESTURES,
     EYES_BASE,
     MOUTH_BASE,
     EFFECTS_UNIVERSAL,
     EFFECTS_BRIGHT,
     EFFECTS_DARK,
-    EFFECTS_DYNAMIC,
 )
-from .micro_actions import MICRO_ACTION_CONCEPTS, EXCLUSIVE_TAG_GROUPS
+from .micro_actions import MICRO_ACTION_CONCEPTS
 
-# -------------------------------------------------------------------------
-# Constants & Configuration
-# -------------------------------------------------------------------------
 
 EMOTION_CATEGORIES = [
-    "joy", "playful", "anger", "sadness", "relax", "focus", "care", "impatience", "moved"
+    "joy",
+    "playful",
+    "anger",
+    "sadness",
+    "relax",
+    "focus",
+    "care",
+    "impatience",
+    "moved",
 ]
 
 INTENSITIES = ["mild", "medium", "strong"]
 
-# Action Load Keywords
 LOAD_KEYWORDS = {
     "intimate": ["hugging", "holding hands", "kissing", "cuddling", "bed", "bedroom", "bath", "soaking"],
     "tense": ["fighting", "arguing", "hiding", "sneaking", "battle", "danger", "crying", "scared", "frustration", "rage"],
     "active": ["running", "walking", "dancing", "jumping", "flying", "playing", "cleaning", "cooking", "sweeping", "exercising", "lifting"],
-    "calm": ["sitting", "standing", "lying", "reading", "sleeping", "waiting", "looking", "watching", "listening"] # Fallback
+    "calm": ["sitting", "standing", "lying", "reading", "sleeping", "waiting", "looking", "watching", "listening"],
 }
 
-# Compatibility Matrix (Emotion vs Load)
-# True = Allowed, False = Forbidden (simplified from O/△/X for logic)
-# We can restrain intensity separately if needed.
 COMPATIBILITY = {
-    "calm":       {"joy","playful","anger","sadness","relax","focus","care","impatience","moved"},
-    "active":     {"joy","playful","anger","focus","impatience"}, # sadness/relax/care/moved restricted
-    "tense":      {"anger","focus","impatience"}, # joy/playful/relax/care/moved/sadness restricted (sadness maybe ok but let's restrict for consistency)
-    "intimate":   {"joy","playful","sadness","relax","moved","care"} # anger/focus/impatience restricted
+    "calm": {"joy", "playful", "anger", "sadness", "relax", "focus", "care", "impatience", "moved"},
+    "active": {"joy", "playful", "anger", "focus", "impatience", "moved"},
+    "tense": {"anger", "focus", "impatience", "sadness"},
+    "intimate": {"joy", "playful", "sadness", "relax", "moved", "care"},
 }
 
-# Legacy Mapping
 LEGACY_MAP = {
+    "quiet": ("focus", "mild"),
+    "quiet_focused": ("focus", "medium"),
     "energetic_joy": ("joy", "strong"),
     "whimsical_playful": ("playful", "medium"),
     "intense_anger": ("anger", "strong"),
     "melancholic_sadness": ("sadness", "medium"),
     "peaceful_relaxed": ("relax", "medium"),
-    # "neutral": ("relax", "mild"), # Removed to allow auto-sampling
+    "mysterious_curious": ("focus", "medium"),
+    "romantic_allure": ("care", "medium"),
+    "creepy_fear": ("impatience", "strong"),
     "energetic": ("joy", "medium"),
     "whimsical": ("playful", "mild"),
     "intense": ("anger", "medium"),
@@ -69,255 +70,450 @@ LEGACY_MAP = {
     "peaceful": ("relax", "mild"),
 }
 
-# Personality -> Garnish Bias Mapping
-# prefer: tags added first (random selection if multiple)
-# avoid_pools: pool names to exclude one tag from
-# prefer_category: emotion category bias if no specific meta_mood
-PERSONALITY_GARNISH_BIAS: Dict[str, Dict] = {
+EMOTION_NUANCE_MAP = {
+    "tense": ("impatience", "strong"),
+    "absorbed": ("focus", "strong"),
+    "relieved": ("relax", "mild"),
+    "awkward": ("impatience", "mild"),
+    "content": ("joy", "mild"),
+    "bored": ("sadness", "mild"),
+}
+
+PERSONALITY_GARNISH_BIAS: Dict[str, Dict[str, Any]] = {
     "shy": {
-        "prefer": ["looking away", "looking down", "downcast eyes",
-                   "fidgeting", "cheeks flushed"],
-        "avoid_pools": ["POSE_DYNAMIC", "EFFECTS_BRIGHT"],
+        "prefer": ["looking away", "looking down", "fidgeting with her sleeve", "holding her bag close"],
         "prefer_category": "care",
     },
     "confident": {
-        "prefer": ["looking at viewer", "chin up", "hands on hips"],
-        "avoid_pools": [],
+        "prefer": ["looking at viewer", "chin lifted slightly", "steady stance"],
         "prefer_category": "joy",
     },
     "energetic": {
-        "prefer": ["dynamic pose", "bright smile", "pumping fist"],
-        "avoid_pools": [],
+        "prefer": ["bright smile", "leaning forward", "hands moving as she talks"],
         "prefer_category": "joy",
     },
     "gloomy": {
-        "prefer": ["downcast eyes", "distant gaze", "slouched"],
-        "avoid_pools": ["EFFECTS_BRIGHT"],
+        "prefer": ["downcast eyes", "slumped shoulders", "hands tucked close"],
         "prefer_category": "sadness",
     },
     "faithful": {
-        "prefer": ["gentle smile", "clasped hands", "warm gaze"],
-        "avoid_pools": [],
+        "prefer": ["warm gaze", "gentle smile", "hands held carefully together"],
         "prefer_category": "care",
     },
     "aggressive": {
-        "prefer": ["sharp gaze", "clenched fists", "glaring"],
-        "avoid_pools": ["EFFECTS_BRIGHT"],
+        "prefer": ["sharp gaze", "clenched jaw", "fists tightening"],
         "prefer_category": "anger",
     },
     "mysterious": {
-        "prefer": ["sideways glance", "half-turned", "shadowed face"],
-        "avoid_pools": ["EFFECTS_BRIGHT"],
+        "prefer": ["sideways glance", "half-hidden expression", "still posture"],
         "prefer_category": "focus",
     },
     "cheerful": {
-        "prefer": ["beaming smile", "eyes closed happy", "hands waving"],
-        "avoid_pools": ["EFFECTS_DARK"],
+        "prefer": ["wide smile", "eyes brightening", "open posture"],
         "prefer_category": "playful",
     },
     "serious": {
-        "prefer": ["focused gaze", "firm expression", "arms crossed"],
-        "avoid_pools": [],
+        "prefer": ["focused gaze", "firm mouth", "composed posture"],
         "prefer_category": "focus",
     },
     "gentle": {
-        "prefer": ["soft smile", "gentle eyes", "open palms"],
-        "avoid_pools": ["POSE_DYNAMIC", "EFFECTS_DARK"],
+        "prefer": ["soft smile", "gentle eyes", "loose hands"],
         "prefer_category": "care",
     },
-    "neutral": {
-        "prefer": [],
-        "avoid_pools": [],
-        "prefer_category": None,
+    "neutral": {"prefer": [], "prefer_category": None},
+    "": {"prefer": [], "prefer_category": None},
+}
+
+EMOTION_MODEL: Dict[str, Dict[str, List[str]]] = {
+    "joy": {
+        "expression": ["bright smile", "eyes crinkling softly", "cheeks lifting with a smile"],
+        "gaze": ["warm gaze", "eyes brightening", "looking up with expectation"],
+        "mouth": ["smiling to herself", "soft grin", "slightly parted smile"],
+        "posture": ["light posture", "shoulders opening up", "standing a little taller"],
+        "hands": ["fingers tapping lightly", "hands moving with excitement", "one hand lifted mid-gesture"],
+        "behavior": ["bouncing lightly on her heels", "leaning into the moment", "holding herself with easy energy"],
+        "effects": ["soft lighting", "natural lighting"],
     },
-    "": {
-        "prefer": [],
-        "avoid_pools": [],
-        "prefer_category": None,
+    "playful": {
+        "expression": ["mischievous smile", "playful expression", "suppressed laughter"],
+        "gaze": ["sideways glance", "teasing look", "curious eyes"],
+        "mouth": ["crooked smile", "small laugh at the corner of her mouth", "wry grin"],
+        "posture": ["loose playful posture", "tilting her head", "weight shifted to one side"],
+        "hands": ["finger raised as if an idea just hit", "fingers brushing her lips", "one hand swinging lightly"],
+        "behavior": ["shifting in place as if ready to move", "playing with a loose strand of hair", "holding back a laugh"],
+        "effects": ["bright atmosphere"],
+    },
+    "anger": {
+        "expression": ["clenched jaw", "furrowed brow", "hard stare"],
+        "gaze": ["sharp gaze", "glaring straight ahead", "eyes narrowed with tension"],
+        "mouth": ["lips pressed thin", "teeth set", "tight mouth"],
+        "posture": ["tense posture", "shoulders held rigid", "leaning forward aggressively"],
+        "hands": ["fists tightening", "hands rigid at her sides", "knuckles whitening"],
+        "behavior": ["breathing hard through her nose", "holding herself ready to snap", "tension running through her arms"],
+        "effects": ["dim lighting"],
+    },
+    "sadness": {
+        "expression": ["downcast eyes", "faint frown", "tired expression"],
+        "gaze": ["distant gaze", "looking down", "eyes glossed with feeling"],
+        "mouth": ["lips trembling slightly", "mouth drawn small", "quietly pressed lips"],
+        "posture": ["slumped shoulders", "folded-in posture", "chin lowered"],
+        "hands": ["hands held close to her chest", "fingers tightening around her sleeve", "one hand brushing at her face"],
+        "behavior": ["holding herself small", "lingering in stillness", "wiping at the corner of one eye"],
+        "effects": ["low key lighting"],
+    },
+    "relax": {
+        "expression": ["calm expression", "gentle smile", "soft eyes"],
+        "gaze": ["easy gaze", "half-lidded eyes", "quiet look around her"],
+        "mouth": ["relaxed lips", "faint smile", "contented mouth"],
+        "posture": ["relaxed posture", "loose shoulders", "settled stance"],
+        "hands": ["loose hands", "fingers resting lightly", "hands folded without tension"],
+        "behavior": ["breathing evenly", "moving at an unhurried pace", "leaning back comfortably"],
+        "effects": ["soft lighting"],
+    },
+    "focus": {
+        "expression": ["focused expression", "brows knit in concentration", "composed face"],
+        "gaze": ["steady gaze", "eyes fixed on what she is doing", "attention locked forward"],
+        "mouth": ["closed mouth", "lips set in concentration", "subtle pursed lips"],
+        "posture": ["still posture", "upright posture", "body held carefully still"],
+        "hands": ["fingers working with care", "one hand paused mid-task", "hands kept precise and controlled"],
+        "behavior": ["leaning in slightly", "ignoring the rest of the room", "keeping every movement deliberate"],
+        "effects": ["natural lighting"],
+    },
+    "care": {
+        "expression": ["gentle expression", "soft smile", "kind eyes"],
+        "gaze": ["warm gaze", "attentive eyes", "looking at someone with care"],
+        "mouth": ["small reassuring smile", "softened mouth", "quiet smile"],
+        "posture": ["open posture", "slight forward lean", "careful stance"],
+        "hands": ["hands held gently", "fingers curled around something with care", "one hand near her chest"],
+        "behavior": ["moving with deliberate gentleness", "keeping close without crowding", "holding still so the moment can settle"],
+        "effects": ["soft lighting"],
+    },
+    "impatience": {
+        "expression": ["restless expression", "strained look", "uneasy face"],
+        "gaze": ["quick darting glance", "checking the room again", "eyes flicking toward the exit"],
+        "mouth": ["impatient sigh", "lips pressed together", "jaw set with nerves"],
+        "posture": ["restless posture", "weight shifting from foot to foot", "shoulders held tight"],
+        "hands": ["fingers drumming", "gripping a strap too tightly", "hands fidgeting"],
+        "behavior": ["checking the time again", "pacing in a small space", "holding tension in every small movement"],
+        "effects": ["dim lighting"],
+    },
+    "moved": {
+        "expression": ["touched expression", "misty eyes", "softly stunned face"],
+        "gaze": ["lingering gaze", "eyes shining with emotion", "looking up as if taking it in"],
+        "mouth": ["teary smile", "parted lips in surprise", "breath caught in a small smile"],
+        "posture": ["stilled posture", "hand drawn to her chest", "shoulders softening all at once"],
+        "hands": ["fingers pressing lightly to her lips", "hand over her heart", "hands held still with feeling"],
+        "behavior": ["pausing as the feeling sinks in", "breathing out slowly", "holding the moment instead of moving on"],
+        "effects": ["soft lighting"],
     },
 }
 
-# Pool name -> actual list (for avoid_pools lookup)
-_POOL_NAME_MAP: Dict[str, str] = {
-    "POSE_DYNAMIC":   "POSE_DYNAMIC",
-    "EFFECTS_BRIGHT": "EFFECTS_BRIGHT",
-    "EFFECTS_DARK":   "EFFECTS_DARK",
-    "EFFECTS_DYNAMIC": "EFFECTS_DYNAMIC",
-    "EYES_BASE":      "EYES_BASE",
-    "HAND_GESTURES":  "HAND_GESTURES",
+INTENSITY_INDEX = {"mild": 0, "medium": 1, "strong": 2}
+PHYSICAL_TAG_HINTS = (
+    "eyes",
+    "gaze",
+    "smile",
+    "mouth",
+    "jaw",
+    "brow",
+    "shoulders",
+    "hands",
+    "fingers",
+    "posture",
+    "stance",
+    "breathing",
+    "leaning",
+    "glance",
+    "lips",
+)
+GAZE_CONFLICTS = {
+    "looking at viewer": {"looking down", "looking away", "looking aside"},
+    "looking down": {"looking at viewer", "looking up"},
+    "looking up": {"looking down"},
+    "sideways glance": {"looking straight ahead"},
+    "steady gaze": {"eyes flicking toward the exit"},
 }
 
-
-# -------------------------------------------------------------------------
-# Helper Functions
-# -------------------------------------------------------------------------
 
 def _guess_action_load(action_text: str) -> str:
-    """Determine the emotional load of an action."""
     if not action_text:
         return "calm"
-    
     text = action_text.lower()
-    
-    for k in LOAD_KEYWORDS["intimate"]:
-        if k in text: return "intimate"
-    for k in LOAD_KEYWORDS["tense"]:
-        if k in text: return "tense"
-    for k in LOAD_KEYWORDS["active"]:
-        if k in text: return "active"
-    
+    for keyword in LOAD_KEYWORDS["intimate"]:
+        if keyword in text:
+            return "intimate"
+    for keyword in LOAD_KEYWORDS["tense"]:
+        if keyword in text:
+            return "tense"
+    for keyword in LOAD_KEYWORDS["active"]:
+        if keyword in text:
+            return "active"
     return "calm"
 
+
 def _is_compatible(category: str, load: str) -> bool:
-    """Check if category is allowed for the load."""
+    return category in COMPATIBILITY.get(load, COMPATIBILITY["calm"])
+
+
+def _select_category_weighted(load: str, rng: random.Random, prefer_category: Optional[str] = None) -> str:
     allowed = COMPATIBILITY.get(load, COMPATIBILITY["calm"])
-    return category in allowed
+    weights = {
+        "joy": 16,
+        "playful": 15,
+        "relax": 15,
+        "focus": 17,
+        "care": 11,
+        "moved": 8,
+        "anger": 6 if load != "tense" else 28,
+        "sadness": 4 if load not in {"tense", "active"} else 8,
+        "impatience": 8 if load != "tense" else 24,
+    }
+    if prefer_category in allowed:
+        weights[prefer_category] = weights.get(prefer_category, 10) + 12
+    valid_categories = [cat for cat in EMOTION_CATEGORIES if cat in allowed]
+    valid_weights = [weights.get(cat, 1) for cat in valid_categories]
+    return rng.choices(valid_categories, weights=valid_weights, k=1)[0]
 
-def _select_category_weighted(load: str, rng: random.Random) -> str:
-    """
-    Select an emotion category based on load and weights.
-    Goal: Joy/Playful dominance where possible.
-    """
-    allowed = COMPATIBILITY.get(load, COMPATIBILITY["calm"])
-    
-    # Custom weights logic
-    weights = {}
-    
-    if load == "tense":
-        # Tense situation: Anger/Focus/Impatience dominance
-        weights = {"anger": 40, "focus": 30, "impatience": 30}
-    else:
-        # Balanced dominance for Positive/Neutral (Total ~90%)
-        # Joy, Playful, Relax, Focus, Care, Moved -> ~15% each
-        weights["joy"] = 15
-        weights["playful"] = 15
-        weights["relax"] = 15
-        weights["focus"] = 15
-        weights["care"] = 15
-        weights["moved"] = 15
-        
-        # Low frequency for Negative (Total ~10%)
-        # Anger, Sadness, Impatience -> ~3-4% each
-        weights["anger"] = 3
-        weights["sadness"] = 3
-        weights["impatience"] = 4
 
-    # Filter by allowed and flatten
-    valid_cats = []
-    valid_weights = []
-    
-    for cat, w in weights.items():
-        if cat in allowed:
-            valid_cats.append(cat)
-            valid_weights.append(w)
-            
-    if not valid_cats:
-        return "focus" # Fallback
-        
-    return rng.choices(valid_cats, weights=valid_weights, k=1)[0]
+def _resolve_target_emotion(
+    meta_mood: str,
+    load: str,
+    rng: random.Random,
+    log: Dict[str, Any],
+    prefer_category: Optional[str] = None,
+    emotion_nuance: str = "",
+) -> Tuple[str, str]:
+    category = None
+    intensity = None
+    mood_key = (meta_mood or "").strip().lower().replace(" ", "_")
+    nuance_key = (emotion_nuance or "").strip().lower()
 
-def _resolve_target_emotion(meta_mood: str, load: str, rng: random.Random, log: Dict) -> Tuple[str, str]:
-    """
-    Resolve (Category, Intensity).
-    Honors meta_mood if compatible, else samples new.
-    """
-    category = "relax"
-    intensity = "mild"
-    
-    # 1. Parse Input
-    req_cat = None
-    req_int = None
-    
-    # Normalize input
-    m = meta_mood.lower().replace(" ", "_")
-    
-    # Check legacy
-    if m in LEGACY_MAP:
-        req_cat, req_int = LEGACY_MAP[m]
-    elif "_" in m:
-        # Try to parse "joy_strong"
-        parts = m.split("_")
-        if parts[0] in EMOTION_CATEGORIES:
-            req_cat = parts[0]
+    if mood_key in LEGACY_MAP:
+        category, intensity = LEGACY_MAP[mood_key]
+    elif mood_key in EMOTION_CATEGORIES:
+        category = mood_key
+        intensity = "medium"
+    elif "_" in mood_key:
+        parts = [part for part in mood_key.split("_") if part]
+        if parts and parts[0] in EMOTION_CATEGORIES:
+            category = parts[0]
             if len(parts) > 1 and parts[1] in INTENSITIES:
-                req_int = parts[1]
-    elif m in EMOTION_CATEGORIES:
-        req_cat = m
-        
-    # 2. Compatibility Check
-    is_valid_request = False
-    if req_cat:
-        if _is_compatible(req_cat, load):
-            is_valid_request = True
-            category = req_cat
-            # If intensity not specified, sample?
-            if not req_int:
-               req_int = rng.choice(INTENSITIES)
-            intensity = req_int
+                intensity = parts[1]
+
+    if nuance_key in EMOTION_NUANCE_MAP and category is None:
+        category, intensity = EMOTION_NUANCE_MAP[nuance_key]
+
+    if category and not _is_compatible(category, load):
+        log["mood_conflict"] = f"requested={category} load={load}"
+        category = None
+        intensity = None
+
+    if category is None:
+        category = _select_category_weighted(load, rng, prefer_category=prefer_category)
+
+    if intensity is None:
+        if nuance_key in EMOTION_NUANCE_MAP and EMOTION_NUANCE_MAP[nuance_key][0] == category:
+            intensity = EMOTION_NUANCE_MAP[nuance_key][1]
+        elif load == "tense":
+            intensity = rng.choices(INTENSITIES, weights=[1, 3, 4], k=1)[0]
+        elif load == "calm":
+            intensity = rng.choices(INTENSITIES, weights=[4, 4, 1], k=1)[0]
         else:
-            log["mood_conflict"] = f"Requested {req_cat} incompatible with {load}"
-            
-    # 3. Sampling (if no valid request)
-    if not is_valid_request:
-        if req_cat and not _is_compatible(req_cat, load):
-             # Was specific but forbidden -> Sampling new
-             pass 
-        elif m in ["neutral", "random", "", "auto"]:
-             # Explicitly asking for auto
-             pass
-        else:
-             # Unknown key, treat as auto
-             pass
-             
-        category = _select_category_weighted(load, rng)
-        intensity = rng.choice(INTENSITIES) # Random intensity for now
-        
-        # Adjustment for Joy/Playful: bias towards mild/medium for calm actions?
-        # Let's keep it simple random for intensity for now, ensuring variety.
-        
-    # 4. Final adjustments
-    # If intensity missing in data, fallback will happen in sampling phrase
-    
-    log["res_category"] = category
-    log["res_intensity"] = intensity
+            intensity = rng.choices(INTENSITIES, weights=[2, 4, 2], k=1)[0]
+
+    log["emotion_core"] = category
+    log["emotion_intensity"] = intensity
     return category, intensity
 
-# -------------------------------------------------------------------------
-# Main Logic
-# -------------------------------------------------------------------------
 
 def _get_action_anchors(action_text: str) -> List[str]:
-    """Identify micro-action concepts."""
     if not action_text:
         return []
-    found = []
     text_lower = action_text.lower()
-    if isinstance(MICRO_ACTION_CONCEPTS, dict):
-        for k, data in MICRO_ACTION_CONCEPTS.items():
-            if isinstance(data, dict):
-                for trig in data.get("triggers", []):
-                    if trig in text_lower:
-                        found.append(k); break
+    found: List[str] = []
+    for concept, data in MICRO_ACTION_CONCEPTS.items():
+        if not isinstance(data, dict):
+            continue
+        for trigger in data.get("triggers", []):
+            if trigger in text_lower:
+                found.append(concept)
+                break
     return found
 
+
 def _resolve_micro_actions(concepts: List[str], mood: str, rng: random.Random) -> List[str]:
-    """Resolve micro-action tags."""
-    tags = []
-    if not isinstance(MICRO_ACTION_CONCEPTS, dict): return tags
+    tags: List[str] = []
     for concept in concepts:
-        c_data = MICRO_ACTION_CONCEPTS.get(concept)
-        if not c_data or not isinstance(c_data, dict): continue
-        variants = c_data.get("variants", {})
-        cand = variants.get(mood, []) or variants.get("default", []) or variants.get("neutral", []) or c_data.get("tags", [])
-        if cand and isinstance(cand, list): tags.append(rng.choice(cand))
+        concept_data = MICRO_ACTION_CONCEPTS.get(concept)
+        if not isinstance(concept_data, dict):
+            continue
+        variants = concept_data.get("variants", {})
+        candidates = (
+            variants.get(mood, [])
+            or variants.get("default", [])
+            or variants.get("neutral", [])
+            or concept_data.get("tags", [])
+        )
+        if candidates:
+            tags.append(rng.choice(candidates))
     return tags
 
-def _is_out_of_context(tag: str, context_loc: str, context_costume: str) -> bool:
-    """
-    Check if a tag conflicts with the current location or costume context.
-    Placeholder implementation - can be expanded with specific rules.
-    """
+
+def _contains_any(text: str, keywords: Sequence[str]) -> bool:
+    return any(keyword in text for keyword in keywords)
+
+
+def _is_out_of_context(
+    tag: str,
+    context_loc: str,
+    context_costume: str,
+    action_text: str = "",
+    existing_tags: Optional[Sequence[str]] = None,
+) -> bool:
+    tag_lower = (tag or "").lower()
+    loc_lower = (context_loc or "").lower()
+    costume_lower = (context_costume or "").lower()
+    action_lower = (action_text or "").lower()
+    existing_lower = [item.lower() for item in existing_tags or []]
+
+    if not tag_lower:
+        return True
+
+    if _contains_any(action_lower, ["sleep", "lying", "lying on", "nap", "bed", "sofa"]) and _contains_any(
+        tag_lower, ["standing", "leaning forward aggressively", "pacing", "bouncing", "on her heels"]
+    ):
+        return True
+
+    if _contains_any(action_lower, ["sitting", "seated", "desk", "chair", "bench", "train seat"]) and _contains_any(
+        tag_lower, ["standing a little taller", "steady stance", "standing tall"]
+    ):
+        return True
+
+    if _contains_any(action_lower, ["running", "sprinting", "jumping", "dancing"]) and _contains_any(
+        tag_lower, ["relaxed posture", "leaning back comfortably", "settled stance"]
+    ):
+        return True
+
+    if _contains_any(action_lower, ["reading", "typing", "writing", "holding", "carrying", "using", "playing", "sweeping", "checking"]) and _contains_any(
+        tag_lower, ["hands on hips", "arms crossed", "hands behind back", "hands held carefully together"]
+    ):
+        return True
+
+    if _contains_any(action_lower, ["looking down"]) and _contains_any(tag_lower, ["looking up", "looking at viewer"]):
+        return True
+    if _contains_any(action_lower, ["looking up"]) and "looking down" in tag_lower:
+        return True
+    if _contains_any(action_lower, ["looking away", "looking aside"]) and "looking at viewer" in tag_lower:
+        return True
+
+    if _contains_any(loc_lower, ["train", "bus", "commuter", "elevator", "crowd"]) and _contains_any(
+        tag_lower, ["arms spread", "wide gesture", "pacing in a small space"]
+    ):
+        return True
+
+    if _contains_any(loc_lower, ["classroom", "library", "office", "study"]) and _contains_any(
+        tag_lower, ["furious scream", "shouting", "ready to snap"]
+    ):
+        return True
+
+    if "kimono" in costume_lower and "hands in pockets" in tag_lower:
+        return True
+
+    for existing in existing_lower:
+        conflicts = GAZE_CONFLICTS.get(existing)
+        if conflicts and tag_lower in conflicts:
+            return True
+        conflicts = GAZE_CONFLICTS.get(tag_lower)
+        if conflicts and existing in conflicts:
+            return True
+
     return False
+
+
+def _pick_first_valid(
+    candidates: Sequence[str],
+    rng: random.Random,
+    context_loc: str,
+    context_costume: str,
+    action_text: str,
+    existing_tags: Sequence[str],
+) -> Optional[str]:
+    items = [candidate for candidate in candidates if candidate]
+    if not items:
+        return None
+    ordered = list(items)
+    rng.shuffle(ordered)
+    for candidate in ordered:
+        if not _is_out_of_context(candidate, context_loc, context_costume, action_text, existing_tags):
+            return candidate
+    return None
+
+
+def _emotion_profile_tags(
+    category: str,
+    intensity: str,
+    rng: random.Random,
+    context_loc: str,
+    context_costume: str,
+    action_text: str,
+    debug_log: Dict[str, Any],
+) -> List[str]:
+    model = EMOTION_MODEL.get(category, EMOTION_MODEL["focus"])
+    chosen: List[str] = []
+    expression = _pick_first_valid(model["expression"], rng, context_loc, context_costume, action_text, chosen)
+    if expression:
+        chosen.append(expression)
+
+    gaze = _pick_first_valid(model["gaze"], rng, context_loc, context_costume, action_text, chosen)
+    if gaze:
+        chosen.append(gaze)
+
+    behavior_candidates = list(model["posture"]) + list(model["hands"]) + list(model["behavior"])
+    rng.shuffle(behavior_candidates)
+    behavior = _pick_first_valid(behavior_candidates, rng, context_loc, context_costume, action_text, chosen)
+    if behavior:
+        chosen.append(behavior)
+
+    if intensity == "strong":
+        extra_candidates = list(model["mouth"]) + list(model["hands"]) + list(model["behavior"])
+        extra = _pick_first_valid(extra_candidates, rng, context_loc, context_costume, action_text, chosen)
+        if extra:
+            chosen.append(extra)
+    elif intensity == "mild":
+        soft_candidates = list(model["mouth"]) + list(model["posture"])
+        soft = _pick_first_valid(soft_candidates, rng, context_loc, context_costume, action_text, chosen)
+        if soft and len(chosen) < 3:
+            chosen.append(soft)
+
+    debug_log["emotion_expression"] = expression or ""
+    debug_log["emotion_behavior"] = [tag for tag in chosen if tag != expression]
+    return chosen
+
+
+def _choose_effect_tag(category: str, rng: random.Random) -> Optional[str]:
+    model = EMOTION_MODEL.get(category, {})
+    effect_candidates = list(model.get("effects", []))
+    if category in {"joy", "playful", "relax", "care", "moved"}:
+        effect_candidates.extend([tag for tag in EFFECTS_BRIGHT if tag in {"soft lighting", "natural lighting"}])
+    elif category in {"anger", "sadness", "impatience"}:
+        effect_candidates.extend([tag for tag in EFFECTS_DARK if tag in {"dim lighting", "low key lighting"}])
+    else:
+        effect_candidates.extend([tag for tag in EFFECTS_UNIVERSAL if tag in {"detailed texture"}])
+    effect_candidates = _dedupe(effect_candidates)
+    if not effect_candidates:
+        return None
+    return rng.choice(effect_candidates)
+
+
+def _has_physical_expression(tags: Sequence[str]) -> bool:
+    return any(any(hint in tag.lower() for hint in PHYSICAL_TAG_HINTS) for tag in tags)
+
+
+def _fallback_physical_tag(category: str, rng: random.Random) -> str:
+    model = EMOTION_MODEL.get(category, EMOTION_MODEL["focus"])
+    fallback_pool = model["expression"] + model["gaze"] + model["posture"] + model["hands"]
+    return rng.choice(fallback_pool)
+
 
 def sample_garnish(
     seed: int,
@@ -327,134 +523,118 @@ def sample_garnish(
     include_camera: bool = False,
     context_loc: str = "",
     context_costume: str = "",
-    scene_tags: Dict = None,
+    scene_tags: Dict[str, Any] = None,
     personality: str = "",
     emotion_nuance: str = "",
-    debug_log: Dict = None
+    debug_log: Dict[str, Any] = None,
 ) -> List[str]:
-    
-    if debug_log is None: debug_log = {}
+    if debug_log is None:
+        debug_log = {}
+
     rng = random.Random(seed)
-    
-    # 1. Determine Context
+    scene_tags = scene_tags or {}
+    personality_key = (personality or "").lower().strip()
+    personality_bias = PERSONALITY_GARNISH_BIAS.get(personality_key, PERSONALITY_GARNISH_BIAS[""])
+
     action_load = _guess_action_load(action_text)
     debug_log["action_load"] = action_load
-    
-    # 2. Resolve Emotion
-    category, intensity = _resolve_target_emotion(meta_mood, action_load, rng, debug_log)
-    
-    garnish_pool = []
+    debug_log["generation_mode"] = "scene_emotion_priority"
 
-    # 2a. Emotion Nuance Bias (from scene_axis.json)
-    # Load emotion_nuance data lazily to avoid circular imports
-    if emotion_nuance:
-        import os as _os, json as _json
-        _data_dir = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.dirname(
-            _os.path.abspath(__file__)))), "vocab", "data")
-        _scene_axis_path = _os.path.join(_data_dir, "scene_axis.json")
-        try:
-            with open(_scene_axis_path, encoding="utf-8") as _f:
-                _axis = _json.load(_f)
-            _en_data = _axis.get("emotion_nuance", {}).get(emotion_nuance.lower(), {})
-            _en_bias = _en_data.get("garnish_bias", [])
-            if _en_bias:
-                chosen_en = rng.choice(_en_bias)
-                garnish_pool.append(chosen_en)
-                debug_log["emotion_nuance_tag"] = chosen_en
-        except Exception as _e:
-            debug_log["emotion_nuance_error"] = str(_e)
+    category, intensity = _resolve_target_emotion(
+        meta_mood=meta_mood,
+        load=action_load,
+        rng=rng,
+        log=debug_log,
+        prefer_category=personality_bias.get("prefer_category"),
+        emotion_nuance=emotion_nuance,
+    )
 
-    # 3. Fetch Emotion Tags
-    # Verify structure of MOOD_POOLS
-    if isinstance(MOOD_POOLS, dict):
-        cat_data = MOOD_POOLS.get(category)
-        if isinstance(cat_data, dict):
-            # New Schema: dict of intensities
-            int_tags = cat_data.get(intensity, [])
-            if not int_tags:
-                # Fallback to any intensity
-                all_tags = []
-                for v in cat_data.values():
-                    if isinstance(v, list): all_tags.extend(v)
-                if all_tags: garnish_pool.extend(rng.sample(all_tags, min(len(all_tags), 2)))
-            else:
-                garnish_pool.extend(rng.sample(int_tags, min(len(int_tags), 2)))
-        elif isinstance(cat_data, list):
-            # Legacy Schema support (should not happen if migrated, but safe)
-            garnish_pool.extend(rng.sample(cat_data, min(len(cat_data), 2)))
-            
-    # 4. Micro Actions
+    garnish_pool: List[str] = []
+
+    prefer_tags = personality_bias.get("prefer", [])
+    preferred = _pick_first_valid(prefer_tags, rng, context_loc, context_costume, action_text, garnish_pool)
+    if preferred:
+        garnish_pool.append(preferred)
+        debug_log["personality_preferred"] = preferred
+
+    emotion_tags = _emotion_profile_tags(
+        category=category,
+        intensity=intensity,
+        rng=rng,
+        context_loc=context_loc,
+        context_costume=context_costume,
+        action_text=action_text,
+        debug_log=debug_log,
+    )
+    garnish_pool.extend(emotion_tags)
+
     anchors = _get_action_anchors(action_text)
-    ma_tags = _resolve_micro_actions(anchors, category, rng) # Use category as mood key
-    garnish_pool.extend(ma_tags)
-    
-    # 5. Global Effects (Simplified)
-    # Bright: joy, playful, care, moved
-    # Dark: anger, sadness, impatience
-    # Neutral: relax, focus
-    if category in ["joy", "playful", "care", "moved"]:
-        if EFFECTS_BRIGHT and isinstance(EFFECTS_BRIGHT, list): garnish_pool.append(rng.choice(EFFECTS_BRIGHT))
-    elif category in ["anger", "sadness", "impatience"]:
-        if EFFECTS_DARK and isinstance(EFFECTS_DARK, list): garnish_pool.append(rng.choice(EFFECTS_DARK))
-    else:
-        if EFFECTS_UNIVERSAL and isinstance(EFFECTS_UNIVERSAL, list) and rng.random() > 0.7:
-             garnish_pool.append(rng.choice(EFFECTS_UNIVERSAL))
+    debug_log["action_anchors"] = anchors
+    micro_tags = _resolve_micro_actions(anchors, category, rng)
+    for tag in micro_tags:
+        if not _is_out_of_context(tag, context_loc, context_costume, action_text, garnish_pool):
+            garnish_pool.append(tag)
 
-    # 6. Camera
-    if include_camera:
-        if VIEW_FRAMING and isinstance(VIEW_FRAMING, list) and rng.random() > 0.5:
-            garnish_pool.append(rng.choice(VIEW_FRAMING))
-        if VIEW_ANGLES and isinstance(VIEW_ANGLES, list) and rng.random() > 0.5:
-             garnish_pool.append(rng.choice(VIEW_ANGLES))
-             
-    # 7. Pose (if no action text)
+    nuance_key = (emotion_nuance or "").strip().lower()
+    nuance_bias = scene_tags.get("emotion_nuance") or nuance_key
+    if nuance_bias and nuance_bias in EMOTION_NUANCE_MAP:
+        nuance_cat = EMOTION_NUANCE_MAP[nuance_bias][0]
+        nuance_model = EMOTION_MODEL.get(nuance_cat, {})
+        nuance_tag = _pick_first_valid(
+            nuance_model.get("behavior", []),
+            rng,
+            context_loc,
+            context_costume,
+            action_text,
+            garnish_pool,
+        )
+        if nuance_tag:
+            garnish_pool.append(nuance_tag)
+            debug_log["emotion_nuance_tag"] = nuance_tag
+
     if not action_text:
-        all_poses = []
-        if isinstance(POSE_STANDING, list): all_poses.extend(POSE_STANDING)
-        if isinstance(POSE_SITTING, list): all_poses.extend(POSE_SITTING)
-        if all_poses: garnish_pool.append(rng.choice(all_poses))
-        
-    # 8. Extra (Eyes/Hands) - Only if pool is small
-    if len(garnish_pool) < max_items:
-         if rng.random() > 0.7 and HAND_GESTURES: garnish_pool.append(rng.choice(HAND_GESTURES))
-         if rng.random() > 0.8 and EYES_BASE: garnish_pool.append(rng.choice(EYES_BASE))
+        pose_pool = list(POSE_STANDING) + list(POSE_SITTING) + list(POSE_LYING)
+        pose = _pick_first_valid(pose_pool, rng, context_loc, context_costume, action_text, garnish_pool)
+        if pose:
+            garnish_pool.append(pose)
 
-    rng.shuffle(garnish_pool)
+    if len(garnish_pool) < max_items and include_camera:
+        framing = _pick_first_valid(VIEW_FRAMING, rng, context_loc, context_costume, action_text, garnish_pool)
+        if framing:
+            garnish_pool.append(framing)
+        if len(garnish_pool) < max_items:
+            angle = _pick_first_valid(VIEW_ANGLES, rng, context_loc, context_costume, action_text, garnish_pool)
+            if angle:
+                garnish_pool.append(angle)
+
+    if len(garnish_pool) < max_items and rng.random() < 0.25:
+        effect_tag = _choose_effect_tag(category, rng)
+        if effect_tag and not _is_out_of_context(effect_tag, context_loc, context_costume, action_text, garnish_pool):
+            garnish_pool.append(effect_tag)
+
+    if len(garnish_pool) < max_items and rng.random() < 0.20:
+        fallback_detail = _pick_first_valid(
+            list(EYES_BASE) + list(MOUTH_BASE) + list(HAND_GESTURES) + list(POSE_DYNAMIC),
+            rng,
+            context_loc,
+            context_costume,
+            action_text,
+            garnish_pool,
+        )
+        if fallback_detail:
+            garnish_pool.append(fallback_detail)
+
     final_tags = _dedupe(garnish_pool)
+    filtered_tags: List[str] = []
+    for tag in final_tags:
+        if not _is_out_of_context(tag, context_loc, context_costume, action_text, filtered_tags):
+            filtered_tags.append(tag)
 
-    # 9. Personality Bias
-    if personality:
-        p_key = personality.lower().strip()
-        bias = PERSONALITY_GARNISH_BIAS.get(p_key)
-        if bias is None:
-            # Unknown personality: no-op
-            bias = PERSONALITY_GARNISH_BIAS[""]
+    if not _has_physical_expression(filtered_tags):
+        filtered_tags.insert(0, _fallback_physical_tag(category, rng))
 
-        # 9a. Remove tags from avoid_pools
-        if bias.get("avoid_pools"):
-            pool_map = {
-                "POSE_DYNAMIC":   POSE_DYNAMIC,
-                "EFFECTS_BRIGHT": EFFECTS_BRIGHT,
-                "EFFECTS_DARK":   EFFECTS_DARK,
-                "EFFECTS_DYNAMIC": EFFECTS_DYNAMIC,
-                "EYES_BASE":      EYES_BASE,
-                "HAND_GESTURES":  HAND_GESTURES,
-            }
-            avoid_tags: Set[str] = set()
-            for pool_name in bias["avoid_pools"]:
-                pool = pool_map.get(pool_name, [])
-                if isinstance(pool, list):
-                    avoid_tags.update(pool)
-            final_tags = [t for t in final_tags if t not in avoid_tags]
+    if len(filtered_tags) > max_items:
+        filtered_tags = filtered_tags[:max_items]
 
-        # 9b. Prepend prefer tags (pick 1 randomly)
-        prefer = bias.get("prefer", [])
-        if prefer and len(final_tags) < max_items:
-            chosen = rng.choice(prefer)
-            if chosen not in final_tags:
-                final_tags.insert(0, chosen)
-
-    if len(final_tags) > max_items:
-        final_tags = final_tags[:max_items]
-
-    return final_tags
+    debug_log["final_tags"] = filtered_tags
+    return filtered_tags
