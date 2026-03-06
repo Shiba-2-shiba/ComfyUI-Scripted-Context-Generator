@@ -67,5 +67,9 @@ class TestPromptCleaner(unittest.TestCase):
         # 9. whitespace -> "an apple, red."
         self.assertEqual(self.clean(raw), "an apple, red.")
 
+    def test_fx_guardrail(self):
+        raw = "sparkling eyes, snowflakes, confetti in the air, beautiful bokeh lights, lens flare, magical sparkles floating in air"
+        self.assertEqual(self.clean(raw), "sparkling eyes, snowflakes")
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,6 +1,7 @@
 import json
 import os
 import random
+import re
 try:
     from .vocab.seed_utils import mix_seed
 except ImportError:
@@ -321,8 +322,24 @@ class ThemeLocationExpander:
         "microphone",
         "screen",
     )
-    _DEFAULT_BLEND_PROB = 0.35
-    _SEGMENT_SELECT_PROB = 0.65
+    _TEXTURE_DEFAULT_BLEND_PROB = 0.25
+    _TEXTURE_SEGMENT_SELECT_PROB = 0.55
+    _FX_DEFAULT_BLEND_PROB = 0.10
+    _FX_SEGMENT_SELECT_PROB = 0.20
+    _MAX_FX_SEGMENTS = 1
+    _FX_DENY_PATTERNS = (
+        re.compile(r"\bconfetti\b", re.IGNORECASE),
+        re.compile(r"\bfloating dust particles?\b", re.IGNORECASE),
+        re.compile(r"\bsparkling air\b", re.IGNORECASE),
+        re.compile(r"\bsparkles?\b", re.IGNORECASE),
+        re.compile(r"\bglittering air\b", re.IGNORECASE),
+        re.compile(r"\bbokeh\b", re.IGNORECASE),
+        re.compile(r"\blens flares?\b", re.IGNORECASE),
+        re.compile(r"\bdust motes?\b", re.IGNORECASE),
+        re.compile(r"\bdust particles?\b", re.IGNORECASE),
+        re.compile(r"\bfloating dust\b", re.IGNORECASE),
+        re.compile(r"\bsparkling(?!\s+eyes\b)\w*\b", re.IGNORECASE),
+    )
 
     def _is_symbolic_prop(self, text):
         low = str(text).lower()
@@ -338,6 +355,32 @@ class ThemeLocationExpander:
             include_prob = max(0.50, include_prob - 0.12)
             second_prop_prob = max(0.10, second_prop_prob - 0.10)
         return include_prob, second_prop_prob
+
+    def _is_disallowed_fx_segment(self, text):
+        low = str(text).lower()
+        # Keep explicit allowlist exceptions.
+        if "snowflake" in low:
+            return False
+        if "sparkling eyes" in low:
+            return False
+        return any(p.search(low) for p in self._FX_DENY_PATTERNS)
+
+    def _filter_fx_candidates(self, options):
+        if not options:
+            return []
+        filtered = []
+        seen = set()
+        for item in options:
+            if not item:
+                continue
+            item_text = str(item)
+            if self._is_disallowed_fx_segment(item_text):
+                continue
+            if item_text in seen:
+                continue
+            filtered.append(item_text)
+            seen.add(item_text)
+        return filtered
 
     @classmethod
     def INPUT_TYPES(s):
@@ -428,16 +471,16 @@ class ThemeLocationExpander:
                 joiner = rng.choice(["and", "plus", "as well as"])
                 segments.append(f"{connector_word} {chosen_props[0]} {joiner} {chosen_props[1]}")
 
-        # 4. Texture: blend defaults with lower probability to reduce repetitive defaults
+        # 4. Texture: blend defaults conservatively to reduce repetitive defaults.
         texture_opts = pack_data.get("texture", []) or []
         texture_candidates = list(texture_opts)
         
         general_defaults = getattr(background_vocab, "GENERAL_DEFAULTS", {})
         
-        if rng.random() < self._DEFAULT_BLEND_PROB:
+        if rng.random() < self._TEXTURE_DEFAULT_BLEND_PROB:
             texture_candidates.extend(general_defaults.get("texture", []))
             
-        if texture_candidates and rng.random() < self._SEGMENT_SELECT_PROB:
+        if texture_candidates and rng.random() < self._TEXTURE_SEGMENT_SELECT_PROB:
             segments.append(rng.choice(texture_candidates))
 
         # 5. ディテール: GENERAL_DEFAULTS から追加
@@ -451,15 +494,23 @@ class ThemeLocationExpander:
         if time_opts and rng.random() < 0.5:
             segments.append(f"during {rng.choice(time_opts)}")
             
-        # 7. FX: blend defaults with lower probability to reduce repetitive defaults
+        # 7. FX: strict cap and denylist filtering to avoid particle overuse.
         fx_opts = pack_data.get("fx", []) or []
-        fx_candidates = list(fx_opts)
-        
-        if rng.random() < self._DEFAULT_BLEND_PROB:
-            fx_candidates.extend(general_defaults.get("fx", []))
-            
-        if fx_candidates and rng.random() < self._SEGMENT_SELECT_PROB:
+        fx_candidates = self._filter_fx_candidates(fx_opts)
+
+        if rng.random() < self._FX_DEFAULT_BLEND_PROB:
+            fx_candidates.extend(
+                self._filter_fx_candidates(general_defaults.get("fx", []))
+            )
+
+        fx_segments_added = 0
+        if (
+            fx_candidates
+            and fx_segments_added < self._MAX_FX_SEGMENTS
+            and rng.random() < self._FX_SEGMENT_SELECT_PROB
+        ):
             segments.append(rng.choice(fx_candidates))
+            fx_segments_added += 1
 
         # 8. 順序をランダムシャッフル
         rng.shuffle(segments)

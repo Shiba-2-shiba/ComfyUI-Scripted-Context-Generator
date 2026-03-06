@@ -13,10 +13,8 @@
     "highly detailed textures"
   ],
   "fx": [
-    "floating dust particles",
     "cinematic blur",
     "subtle haze",
-    "dynamic motion lines",
-    "sparkling air"
+    "dynamic motion lines"
   ]
 }
