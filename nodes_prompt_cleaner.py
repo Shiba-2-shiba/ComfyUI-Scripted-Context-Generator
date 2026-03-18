@@ -19,7 +19,7 @@ class PromptCleaner:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("clean_text",)
     FUNCTION = "clean"
-    CATEGORY = "prompt_builder"
+    CATEGORY = "prompt_builder/utility"
     
     def __init__(self):
         self.article_exceptions = {
@@ -271,4 +271,13 @@ class PromptCleaner:
             out_lines.append(line)
             
         return ("\n".join(out_lines).strip(),)
+
+
+NODE_CLASS_MAPPINGS = {
+    "PromptCleaner": PromptCleaner,
+}
+
+NODE_DISPLAY_NAME_MAPPINGS = {
+    "PromptCleaner": "Prompt Cleaner",
+}
 

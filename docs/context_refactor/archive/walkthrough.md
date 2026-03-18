@@ -1,5 +1,9 @@
 # リファクタリング実装 ウォークスルー
 
+> Historical note:
+> この文書は旧 refactor フェーズ時点の walkthrough です。
+> 現在の live baseline は context-only で、`assets/runner.py` も archive 側へ移動済みです。
+
 ## 概要
 
 ComfyUI-Scripted-Context-Generatorのリファクタリングが完了しました。  
@@ -53,7 +57,7 @@ PERSONALITY_GARNISH_BIAS = {
 | ファイル | 変更内容 |
 |---|---|
 | [mood_map.json](file:///c:/Users/inott/Downloads/ComfyUI-Scripted-Context-Generator/mood_map.json) | 全9ムードキーを新フォーマット `{description: [...], staging_tags: [...]}` に変換 |
-| [nodes_dictionary_expand.py](file:///c:/Users/inott/Downloads/ComfyUI-Scripted-Context-Generator/nodes_dictionary_expand.py) | [DictionaryExpand](file:///c:/Users/inott/Downloads/ComfyUI-Scripted-Context-Generator/nodes_dictionary_expand.py#37-109) を2出力対応に拡張（`expanded_text` + `staging_tags`）、旧フォーマット（リスト）後方互換 |
+| [nodes_dictionary_expand.py](file:///c:/Users/inott/Downloads/ComfyUI-Scripted-Context-Generator/nodes_dictionary_expand.py) | mood expander helper を2出力対応に拡張（`expanded_text` + `staging_tags`）、旧フォーマット（リスト）後方互換 |
 
 **例（quiet_focused）:**
 ```json

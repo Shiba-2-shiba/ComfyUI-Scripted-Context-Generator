@@ -1,0 +1,21 @@
+{
+  "gates": [
+    {
+      "id": "context_feature_parity",
+      "description": "The context-first surface covers the required behavior before the old node is removed."
+    },
+    {
+      "id": "migration_docs_complete",
+      "description": "Migration guidance exists for replacing the old node or workflow path."
+    },
+    {
+      "id": "verification_green",
+      "description": "Python workflow checks, frontend CPU-only checks, and GUI round-trip checks are green after the cutover."
+    },
+    {
+      "id": "compat_sample_not_required",
+      "description": "The compat workflow sample is no longer required as the primary user-migration regression baseline."
+    }
+  ],
+  "nodes": []
+}

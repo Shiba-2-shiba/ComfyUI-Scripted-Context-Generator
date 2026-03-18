@@ -6,17 +6,14 @@ import random
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, current_dir)
 
-from nodes_character_profile import CharacterProfileNode
-from nodes_dictionary_expand import ThemeClothingExpander
-from nodes_garnish import GarnishSampler
+from pipeline.character_profile_pipeline import build_character_profile, load_character_profiles
+from pipeline.content_pipeline import expand_clothing_prompt
+from pipeline.context_pipeline import sample_garnish_fields
 
 def test_integrated_flow():
     print("=== Starting Phase 4 Verification: Integrated Flow ===")
     
-    # Instantiate Nodes
-    char_node = CharacterProfileNode()
-    cloth_node = ThemeClothingExpander()
-    garnish_node = GarnishSampler()
+    profiles = load_character_profiles()
     
     seed = 2024
     
@@ -36,24 +33,20 @@ def test_integrated_flow():
         
         # 1. Get Character Profile
         # args: mode, character_name, seed
-        char_res = char_node.get_profile("fixed", char_name, seed)
-        # return: (subj_prompt, hair_color, eye_color, personality, color_palette_str)
+        char_res = build_character_profile(seed, "fixed", char_name, profiles)
         
-        print(f"  Character Output Raw: {len(char_res)} items")
+        print("  Character Output Raw: shared profile payload")
         
-        subject_prompt = char_res[0]
-        # hair_color = char_res[1]
-        # eye_color = char_res[2]
-        personality = char_res[3]
-        color_palette = char_res[4]
+        subject_prompt = char_res["subj_prompt"]
+        personality = char_res["personality"]
+        color_palette = char_res["color_palette_str"]
 
         print(f"  > Palette: {color_palette}")
         print(f"  > Personality: {personality}")
         
         # 2. Expand Clothing (Color Injection)
         # expanding: theme_key, seed, outfit_mode, outerwear_chance, character_palette
-        cloth_res = cloth_node.expand_clothing(theme, seed, "random", 0.5, color_palette)
-        clothing_prompt = cloth_res[0]
+        clothing_prompt = expand_clothing_prompt(theme, seed, "random", 0.5, color_palette)
         print(f"  > Clothing: {clothing_prompt}")
         
         # Check Color Injection
@@ -71,7 +64,7 @@ def test_integrated_flow():
 
         # 3. Garnish Generation (Personality Interaction)
         # sample: action_text, meta_mood, seed, max, cam, loc, cos, scene, personality
-        garnish_res = garnish_node.sample(
+        garnish_res = sample_garnish_fields(
             "standing", "neutral", seed, 4, False, "", "", "{}", personality
         )
         garnish_prompt = garnish_res[0]

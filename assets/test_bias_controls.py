@@ -5,50 +5,50 @@ import random
 import re
 import unittest
 
-from nodes_dictionary_expand import ThemeLocationExpander
-from nodes_scene_variator import _choose_action_with_bias_guard, _get_compatible_locs
-from nodes_scene_variator import _build_exclusion_set, _load_compatibility
+from pipeline.context_pipeline import (
+    _build_exclusion_set,
+    _choose_action_with_bias_guard,
+    _get_compatible_locs,
+    _load_compatibility,
+)
+from pipeline.content_pipeline import expand_location_prompt
 from tools.run_bias_audit import detect_objects
 
 
 class TestBiasControls(unittest.TestCase):
     def test_theme_location_surfboard_rate_reduced(self):
-        node = ThemeLocationExpander()
         n = 600
         hits = 0
         for seed in range(n):
-            out = node.expand_location("wave_barrel", seed, "detailed", "auto")[0].lower()
+            out = expand_location_prompt("wave_barrel", seed, "detailed", "auto").lower()
             if re.search(r"\bsurfboard\b|\bboard\b", out):
                 hits += 1
         # Guardrail: keep board/surfboard occurrence for wave_barrel below 25%
         self.assertLess(hits / n, 0.25)
 
     def test_theme_location_karaoke_screen_rate_reduced(self):
-        node = ThemeLocationExpander()
         n = 400
         hits = 0
         for seed in range(n):
-            out = node.expand_location("karaoke_bar", seed, "detailed", "auto")[0]
+            out = expand_location_prompt("karaoke_bar", seed, "detailed", "auto")
             if "screen" in detect_objects(out)[0]:
                 hits += 1
         self.assertLess(hits / n, 0.45)
 
     def test_theme_location_street_cafe_coffee_rate_reduced(self):
-        node = ThemeLocationExpander()
         n = 400
         hits = 0
         for seed in range(n):
-            out = node.expand_location("street_cafe", seed, "detailed", "auto")[0]
+            out = expand_location_prompt("street_cafe", seed, "detailed", "auto")
             if "coffee" in detect_objects(out)[0]:
                 hits += 1
         self.assertLess(hits / n, 0.35)
 
     def test_theme_location_tropical_beach_surfboard_rate_reduced(self):
-        node = ThemeLocationExpander()
         n = 400
         hits = 0
         for seed in range(n):
-            out = node.expand_location("tropical_beach", seed, "detailed", "auto")[0]
+            out = expand_location_prompt("tropical_beach", seed, "detailed", "auto")
             if "surfboard" in detect_objects(out)[0]:
                 hits += 1
         self.assertLess(hits / n, 0.20)

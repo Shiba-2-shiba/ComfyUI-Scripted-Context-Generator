@@ -10,11 +10,10 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(current_dir)
 sys.path.insert(0, project_root)
 
-# Import Nodes
-from nodes_pack_parser import PackParser
-from nodes_scene_variator import SceneVariator
-from nodes_garnish import GarnishSampler
-from nodes_simple_template import SimpleTemplateBuilder
+from core.context_ops import patch_context
+from pipeline.content_pipeline import build_prompt_text
+from pipeline.context_pipeline import apply_scene_variation, sample_garnish_fields
+from pipeline.source_pipeline import parse_prompt_source_fields
 
 def ensure_dir(path):
     if not os.path.exists(path):
@@ -40,40 +39,33 @@ def generate_baseline():
     
     print(f"Loaded {len(inputs)} inputs.")
     
-    # Instantiate Nodes
-    parser_node = PackParser()
-    scene_node = SceneVariator()
-    garnish_node = GarnishSampler()
-    template_node = SimpleTemplateBuilder()
-    
     results = []
     
     for i, data in enumerate(inputs):
         # Use a fixed seed strategy for reproducibility (e.g., input index + constant)
         seed = 1000 + i
         
-        # 1. PackParser
+        # 1. Source parsing
         # Input: json_string (re-dump data), seed
         json_str = json.dumps(data)
         # Returns: (subj, costume, loc, action, meta_mood, meta_style, scene_tags)
-        p_res = parser_node.parse(json_str, seed)
+        p_res = parse_prompt_source_fields(json_str, seed)
         subj, costume, loc, action, meta_mood, meta_style, scene_tags = p_res
         
-        # 2. SceneVariator
-        # Input: subj, costume, loc, action, seed, variation_mode
-        # Using "full" to test the logic fully
-        sv_res = scene_node.variate(subj, costume, loc, action, seed, "full")
-        # Handle 5-tuple return (added debug_info in Phase 2)
-        if len(sv_res) == 5:
-            subj_v, costume_v, loc_v, action_v, debug_info = sv_res
-        else:
-            # Fallback for backward compatibility if needed, though we just updated the node
-            subj_v, costume_v, loc_v, action_v = sv_res[:4]
-            debug_info = {}
+        # 2. Context scene stage
+        scene_context = patch_context(
+            {},
+            updates={"subj": subj, "costume": costume, "loc": loc, "action": action, "seed": seed},
+        )
+        scene_context, debug_info = apply_scene_variation(scene_context, seed, "full")
+        subj_v = scene_context.subj
+        costume_v = scene_context.costume
+        loc_v = scene_context.loc
+        action_v = scene_context.action
+        debug_info = debug_info.to_dict()
         
-        # 3. GarnishSampler
-        # Input: action_text, meta_mood_key, seed, max_items, include_camera, context_loc, context_costume, scene_tags, personality
-        garnish_res = garnish_node.sample(
+        # 3. Context garnish stage
+        garnish_res = sample_garnish_fields(
             action_text=action_v,
             meta_mood_key=meta_mood,
             seed=seed,
@@ -91,15 +83,7 @@ def generate_baseline():
         else:
             garnish = garnish_res[0]
         
-        # 4. SimpleTemplateBuilder
-        # Input: template, seed, subj, costume, loc, action, garnish, meta_mood, meta_style
-        # Using default template (passed as empty string to trigger default logic?? 
-        # Actually SimpleTemplateBuilder code checks for empty string or default string.
-        # Let's pass the default string explicitly or just use the node's method default if possible.
-        # The node method signature is: build(self, template, seed, ...)
-        # We will parse a specific template string to be sure, or rely on auto-load.
-        # Let's assume auto-load from templates.txt is desired.
-        tb_res = template_node.build(
+        raw_prompt = build_prompt_text(
             template="", # Trigger auto-load
             composition_mode=True,
             seed=seed,
@@ -111,7 +95,6 @@ def generate_baseline():
             meta_mood=meta_mood,
             meta_style=meta_style
         )
-        raw_prompt = tb_res[0]
         
         # 5. PromptCleaner (Simulated)
         # Assuming user adds PromptCleaner node after simple template
@@ -123,7 +106,7 @@ def generate_baseline():
         # Record Result
         # Aggregate debug info
         all_debug = []
-        if debug_info: # SceneVariator debug
+        if debug_info:
             all_debug.append(debug_info)
         if garnish_debug:
             all_debug.append(garnish_debug)

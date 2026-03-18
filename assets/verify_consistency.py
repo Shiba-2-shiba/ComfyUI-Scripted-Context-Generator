@@ -5,7 +5,7 @@ import os
 # Add parent dir to path
 # Add parent dir to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from nodes_simple_template import SimpleTemplateBuilder
+from pipeline.content_pipeline import build_prompt_text
 
 def load_inputs(path):
     with open(path, 'r', encoding='utf-8') as f:
@@ -49,7 +49,6 @@ def run():
     inputs_path = os.path.join(script_dir, "fixtures", "benchmark_inputs.jsonl")
     inputs = load_inputs(inputs_path)
     rules = load_rules()
-    builder = SimpleTemplateBuilder()
     
     errors = 0
     total = 0
@@ -70,7 +69,7 @@ def run():
         
         # Run builder in composition mode
         try:
-            res = builder.build(
+            prompt = build_prompt_text(
                 template="", 
                 composition_mode=True,
                 seed=seed,
@@ -82,7 +81,6 @@ def run():
                 meta_mood=meta_mood, 
                 meta_style=meta_style
             )
-            prompt = res[0]
             
             conflict = check_conflict(prompt, rules, {"subj": subj, "loc": loc, "meta_mood": meta_mood})
             if conflict:

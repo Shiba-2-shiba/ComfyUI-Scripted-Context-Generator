@@ -192,7 +192,7 @@ def main():
                         "issues": issues,
                     })
 
-    out_path = ROOT / "tools" / "widgets_values_report.json"
+    out_path = Path(__file__).resolve().parent / "widgets_values_report.json"
     out_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 
     if report:

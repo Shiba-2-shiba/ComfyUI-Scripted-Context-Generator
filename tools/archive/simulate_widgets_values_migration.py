@@ -183,7 +183,7 @@ def main():
         node_cls = node_mappings[node_type]
         results.append(summarize_node(node, node_cls))
 
-    report_path = repo_root / "tools" / "widgets_values_simulation_report.json"
+    report_path = Path(__file__).resolve().parent / "widgets_values_simulation_report.json"
     report_path.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
 
     for entry in results:

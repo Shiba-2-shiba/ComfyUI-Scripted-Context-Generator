@@ -23,10 +23,14 @@ from typing import Dict, List, Tuple, Any, Set
 # --- Import Nodes ---
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 try:
-    from nodes_pack_parser import PackParser
-    from nodes_dictionary_expand import DictionaryExpand, ThemeClothingExpander, ThemeLocationExpander
-    from nodes_simple_template import SimpleTemplateBuilder
-    from nodes_garnish import GarnishSampler
+    from pipeline.content_pipeline import (
+        build_prompt_text,
+        expand_clothing_prompt,
+        expand_dictionary_value,
+        expand_location_prompt,
+    )
+    from pipeline.context_pipeline import sample_garnish_fields
+    from pipeline.source_pipeline import parse_prompt_source_fields
 except ImportError as e:
     print(f"[Fatal Error] Failed to import nodes: {e}")
     exit(1)
@@ -1122,14 +1126,6 @@ def main():
         if f not in eval_fields:
             print(f"[Warn] watch field '{f}' is not in --eval_fields, so it won't appear in per-field watch_rate.")
 
-    # Node Init
-    parser = PackParser()
-    cloth  = ThemeClothingExpander()
-    locexp = ThemeLocationExpander()
-    gar    = GarnishSampler()
-    dictex = DictionaryExpand()
-    tmpl   = SimpleTemplateBuilder()
-
     all_run_samples: Dict[int, List[Sample]] = {}
 
     print(f"Generating {len(packs) * args.n * args.runs} samples ({args.runs} runs)...")
@@ -1149,7 +1145,7 @@ def main():
                 meta_mood_key,
                 raw_meta_style,
                 scene_tags,
-            ) = parser.parse(js, 0)
+            ) = parse_prompt_source_fields(js, 0)
 
             # Force Clear Meta Style if requested
             meta_style = "" if args.force_no_style else raw_meta_style
@@ -1160,12 +1156,17 @@ def main():
                 seed = args.seed0 + i + (pack_idx * 10000) + (run_id * 1000000)
 
                 # Expansion
-                costume = cloth.expand_clothing(theme_key=costume_key, seed=seed, outfit_mode="random", outerwear_chance=0.3)[0]
-                loc = locexp.expand_location(loc_tag=loc_tag, seed=seed, mode="detailed")[0]
-                meta_mood = dictex.expand(key=meta_mood_key, json_path=args.mood_map, default_value=meta_mood_key, seed=seed)[0]
+                costume = expand_clothing_prompt(costume_key, seed, "random", 0.3)
+                loc = expand_location_prompt(loc_tag, seed, "detailed")
+                meta_mood = expand_dictionary_value(
+                    key=meta_mood_key,
+                    json_path=args.mood_map,
+                    default_value=meta_mood_key,
+                    seed=seed,
+                )[0]
 
                 # Garnish
-                garnish = gar.sample(
+                garnish = sample_garnish_fields(
                     action_text=action_raw,
                     meta_mood_key=meta_mood_key,
                     seed=seed,
@@ -1178,7 +1179,7 @@ def main():
                 action_merged = merge_action_garnish(action_raw, garnish)
 
                 # Final Build
-                final = tmpl.build(
+                final = build_prompt_text(
                     template=current_template,
                     composition_mode=False,
                     seed=seed,
@@ -1189,7 +1190,7 @@ def main():
                     garnish=garnish,
                     meta_mood=meta_mood,
                     meta_style=meta_style
-                )[0]
+                )
 
                 # Violation Checks
                 v_tech = 0

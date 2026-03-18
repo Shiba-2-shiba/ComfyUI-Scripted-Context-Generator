@@ -51,8 +51,9 @@ def collect_upstream(nodes_by_id: dict, link_by_id: dict, origin_by_link: dict, 
 
 
 def main():
-    src_path = Path("ComfyUI-workflow-exmaple.json")
-    dst_path = Path("workflow_repro_widgets_values.json")
+    repo_root = Path(__file__).resolve().parents[2]
+    src_path = repo_root / "ComfyUI-workflow-exmaple.json"
+    dst_path = Path(__file__).resolve().parent / "workflow_repro_widgets_values.json"
 
     workflow = load_workflow(src_path)
     nodes = workflow.get("nodes", [])

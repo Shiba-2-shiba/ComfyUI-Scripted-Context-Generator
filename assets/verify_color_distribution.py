@@ -5,12 +5,10 @@ import os
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, current_dir)
 
-from nodes_dictionary_expand import ThemeClothingExpander
+from pipeline.content_pipeline import expand_clothing_prompt
 
 def test_color_injection():
     print("=== Starting Phase 2 Verification: Color Palette Styling ===")
-    
-    node = ThemeClothingExpander()
     
     # Needs actual clothing_vocab loaded, which happens in the module
     # We must ensure clothing_vocab is available
@@ -30,8 +28,7 @@ def test_color_injection():
     for i in range(trials):
         # expand_clothing(theme_key, seed, outfit_mode, outerwear_chance, character_palette)
         # Note: arguments must match the signature
-        result = node.expand_clothing(theme, seed + i, "random", 0.5, test_palette)
-        prompt = result[0]
+        prompt = expand_clothing_prompt(theme, seed + i, "random", 0.5, test_palette)
         
         # Check if any color from palette is in prompt
         # Note: "crimson" might appear as "crimson"

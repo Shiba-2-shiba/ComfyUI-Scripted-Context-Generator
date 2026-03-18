@@ -1,14 +1,12 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from nodes_simple_template import SimpleTemplateBuilder
+from pipeline.content_pipeline import build_prompt_text
 import unittest
 
 class TestComposition(unittest.TestCase):
     def test_composition_mode(self):
-        builder = SimpleTemplateBuilder()
-        # Mock inputs
-        res = builder.build(
+        res = build_prompt_text(
             template="", 
             composition_mode=True, 
             seed=42, 
@@ -19,7 +17,7 @@ class TestComposition(unittest.TestCase):
             garnish="smiling", 
             meta_mood="sunny", 
             meta_style="photo"
-        )[0]
+        )
         
         print(f"Result: {res}")
         

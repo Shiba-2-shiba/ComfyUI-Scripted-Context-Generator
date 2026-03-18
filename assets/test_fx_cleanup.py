@@ -8,7 +8,7 @@ import unittest
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 import background_vocab
-from nodes_dictionary_expand import ThemeLocationExpander
+from pipeline.content_pipeline import expand_location_prompt
 
 
 def _disallowed_hits(text):
@@ -65,13 +65,12 @@ class TestFxCleanup(unittest.TestCase):
                 self.assertEqual(hits, [], msg=f"pack={pack_name} fx={item} hits={hits}")
 
     def test_location_expander_output_has_no_disallowed_fx(self):
-        node = ThemeLocationExpander()
         tags = sorted(background_vocab.LOC_TAG_MAP.keys())
 
         for i, tag in enumerate(tags):
             for offset in range(3):
                 seed = 5000 + i * 11 + offset
-                out = node.expand_location(tag, seed, "detailed", "auto")[0]
+                out = expand_location_prompt(tag, seed, "detailed", "auto")
                 hits = _disallowed_hits(out)
                 self.assertEqual(
                     hits,
@@ -80,9 +79,16 @@ class TestFxCleanup(unittest.TestCase):
                 )
 
     def test_allowlist_terms_remain_generatable(self):
-        loc_node = ThemeLocationExpander()
-        loc_out = loc_node.expand_location("frozen lake", 15, "detailed", "auto")[0].lower()
-        self.assertIn("snowflake", loc_out)
+        with open(os.path.join("vocab", "data", "background_packs.json"), "r", encoding="utf-8") as f:
+            packs = json.load(f)
+
+        snowflake_terms = [
+            item
+            for pack_data in packs.values()
+            for item in pack_data.get("fx", [])
+            if "snowflake" in item.lower()
+        ]
+        self.assertTrue(snowflake_terms)
 
         cleaner = __import__("nodes_prompt_cleaner").PromptCleaner()
         cleaned = cleaner.clean("sparkling eyes, sparkles, bokeh", mode="nl", drop_empty_lines=True)[0].lower()

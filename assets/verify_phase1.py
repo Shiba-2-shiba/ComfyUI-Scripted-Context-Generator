@@ -5,17 +5,21 @@ import os
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, current_dir)
 
-from nodes_character_profile import CharacterProfileNode
+from pipeline.character_profile_pipeline import build_character_profile, load_character_profiles
 
 def test_character_profile():
     print("=== Starting Phase 1 Verification: Character Profile Node ===")
     
-    node = CharacterProfileNode()
+    profiles = load_character_profiles()
     
     # 1. Test specific character loading
     print("\n[Test 1] Fixed Mode (Aiko (Quiet))...")
-    result = node.get_profile("fixed", "Aiko (Quiet)", 123)
-    subj, hair, eye, personality, palette = result
+    result = build_character_profile(123, "fixed", "Aiko (Quiet)", profiles)
+    subj = result["subj_prompt"]
+    hair = result["hair_color"]
+    eye = result["eye_color"]
+    personality = result["personality"]
+    palette = result["color_palette_str"]
     
     print(f"  Input: Aiko (Quiet)")
     print(f"  Output Subj: {subj}")
@@ -48,8 +52,8 @@ def test_character_profile():
     
     results = set()
     for i in range(5):
-        res = node.get_profile("random", "", i)
-        results.add(res[0]) # Add subj string
+        res = build_character_profile(i, "random", "", profiles)
+        results.add(res["subj_prompt"])
         
     print(f"  Generated {len(results)} unique profiles in 5 runs with different seeds.")
     if len(results) > 1:
@@ -60,10 +64,10 @@ def test_character_profile():
 
     # 4. Test Schema Consistency
     print("\n[Test 4] Output Schema consistency...")
-    if len(result) == 5:
-        print("  -> OK: Returns 5 elements as expected.")
+    if all(key in result for key in ("subj_prompt", "hair_color", "eye_color", "personality", "color_palette_str")):
+        print("  -> OK: Shared profile payload includes expected fields.")
     else:
-        print(f"  -> FAIL: Expected 5 return values, got {len(result)}.")
+        print("  -> FAIL: Shared profile payload is missing expected fields.")
 
     print("\n=== Verification Complete ===")
 

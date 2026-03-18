@@ -38,3 +38,6 @@ ENV/
 assets/results/
 users/
 *.log
+test_logs/
+ComfyUI/
+ComfyUI_frontend/
