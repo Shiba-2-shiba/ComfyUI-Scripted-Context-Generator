@@ -13,7 +13,12 @@ class TestPromptCleaner(unittest.TestCase):
 
     def clean(self, text, mode="nl"):
         # The node returns a tuple (string,)
-        return self.cleaner.clean(text, mode=mode)[0]
+        return self.cleaner.clean(mode=mode, text=text)[0]
+
+    def test_text_input_is_optional_for_layout_stability(self):
+        specs = PromptCleaner.INPUT_TYPES()
+        self.assertNotIn("text", specs.get("required", {}))
+        self.assertIn("text", specs.get("optional", {}))
 
     def test_basic_cleaning(self):
         # Basic whitespace and punctuation

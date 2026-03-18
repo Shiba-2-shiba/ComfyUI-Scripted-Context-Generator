@@ -6,9 +6,11 @@ class PromptCleaner:
         modes = ["safe", "nl"]  # safe: 最小修正 / nl: 英文テンプレ向けに少し整える
         return {
             "required": {
-                "text": ("STRING", {"multiline": True, "default": ""}),
                 "mode": (modes, {"default": "nl"}),  # 今回の templates.txt なら nl 推奨
                 "drop_empty_lines": ("BOOLEAN", {"default": True}),
+            },
+            "optional": {
+                "text": ("STRING", {"multiline": True, "default": ""}),
             }
         }
 
@@ -206,7 +208,7 @@ class PromptCleaner:
         s = re.sub(r",\s*", ", ", s)
         return s
 
-    def clean(self, text, mode="nl", drop_empty_lines=True):
+    def clean(self, mode="nl", drop_empty_lines=True, text=""):
         if text is None: text = ""
         s = str(text)
         if mode not in ["safe", "nl"]:
