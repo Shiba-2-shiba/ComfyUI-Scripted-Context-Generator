@@ -91,7 +91,7 @@ class TestFxCleanup(unittest.TestCase):
         self.assertTrue(snowflake_terms)
 
         cleaner = __import__("nodes_prompt_cleaner").PromptCleaner()
-        cleaned = cleaner.clean("sparkling eyes, sparkles, bokeh", mode="nl", drop_empty_lines=True)[0].lower()
+        cleaned = cleaner.clean(mode="nl", drop_empty_lines=True, text="sparkling eyes, sparkles, bokeh")[0].lower()
         self.assertIn("sparkling eyes", cleaned)
         self.assertNotIn("sparkles", cleaned)
         self.assertNotIn("bokeh", cleaned)

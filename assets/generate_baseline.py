@@ -100,7 +100,7 @@ def generate_baseline():
         # Assuming user adds PromptCleaner node after simple template
         from nodes_prompt_cleaner import PromptCleaner
         cleaner = PromptCleaner()
-        cleaned_res = cleaner.clean(raw_prompt, mode="nl") # Use 'nl' mode as per default
+        cleaned_res = cleaner.clean(mode="nl", text=raw_prompt) # Use 'nl' mode as per default
         final_prompt = cleaned_res[0]
         
         # Record Result

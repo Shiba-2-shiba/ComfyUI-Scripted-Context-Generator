@@ -463,5 +463,233 @@
   ],
   "aquarium": [
     "aquarium"
+  ],
+  "university_campus_courtyard": [
+    "university_campus_courtyard"
+  ],
+  "campus courtyard": [
+    "university_campus_courtyard"
+  ],
+  "college quad": [
+    "university_campus_courtyard"
+  ],
+  "train_station_platform": [
+    "train_station_platform"
+  ],
+  "station platform": [
+    "train_station_platform"
+  ],
+  "train platform": [
+    "train_station_platform"
+  ],
+  "convenience_store": [
+    "convenience_store"
+  ],
+  "convenience store": [
+    "convenience_store"
+  ],
+  "corner shop": [
+    "convenience_store"
+  ],
+  "food_court": [
+    "food_court"
+  ],
+  "food court": [
+    "food_court"
+  ],
+  "food hall": [
+    "food_court"
+  ],
+  "riverside_walk": [
+    "riverside_walk"
+  ],
+  "river walk": [
+    "riverside_walk"
+  ],
+  "riverside path": [
+    "riverside_walk"
+  ],
+  "laundromat": [
+    "laundromat"
+  ],
+  "coin laundry": [
+    "laundromat"
+  ],
+  "coworking_space": [
+    "coworking_space"
+  ],
+  "coworking space": [
+    "coworking_space"
+  ],
+  "shared office": [
+    "coworking_space"
+  ],
+  "apartment_balcony": [
+    "apartment_balcony"
+  ],
+  "apartment balcony": [
+    "apartment_balcony"
+  ],
+  "bus_terminal": [
+    "bus_terminal"
+  ],
+  "bus terminal": [
+    "bus_terminal"
+  ],
+  "station bus plaza": [
+    "bus_terminal"
+  ],
+  "subway_ticket_gate": [
+    "subway_ticket_gate"
+  ],
+  "subway ticket gate": [
+    "subway_ticket_gate"
+  ],
+  "station gate": [
+    "subway_ticket_gate"
+  ],
+  "neighborhood_crosswalk": [
+    "neighborhood_crosswalk"
+  ],
+  "neighborhood crosswalk": [
+    "neighborhood_crosswalk"
+  ],
+  "residential crosswalk": [
+    "neighborhood_crosswalk"
+  ],
+  "shopping_arcade": [
+    "shopping_arcade"
+  ],
+  "covered shopping street": [
+    "shopping_arcade"
+  ],
+  "bakery_shop": [
+    "bakery_shop"
+  ],
+  "bakery": [
+    "bakery_shop"
+  ],
+  "supermarket_aisle": [
+    "supermarket_aisle"
+  ],
+  "supermarket aisle": [
+    "supermarket_aisle"
+  ],
+  "grocery aisle": [
+    "supermarket_aisle"
+  ],
+  "drugstore_aisle": [
+    "drugstore_aisle"
+  ],
+  "drugstore aisle": [
+    "drugstore_aisle"
+  ],
+  "drugstore": [
+    "drugstore_aisle"
+  ],
+  "family_restaurant": [
+    "family_restaurant"
+  ],
+  "family restaurant": [
+    "family_restaurant"
+  ],
+  "casual diner": [
+    "family_restaurant"
+  ],
+  "cinema_lobby": [
+    "cinema_lobby"
+  ],
+  "cinema lobby": [
+    "cinema_lobby"
+  ],
+  "movie theater lobby": [
+    "cinema_lobby"
+  ],
+  "game_arcade": [
+    "game_arcade"
+  ],
+  "arcade": [
+    "game_arcade"
+  ],
+  "campus_hallway": [
+    "campus_hallway"
+  ],
+  "campus hallway": [
+    "campus_hallway"
+  ],
+  "university hallway": [
+    "campus_hallway"
+  ],
+  "campus_cafeteria": [
+    "campus_cafeteria"
+  ],
+  "campus cafeteria": [
+    "campus_cafeteria"
+  ],
+  "student cafeteria": [
+    "campus_cafeteria"
+  ],
+  "school_clubroom": [
+    "school_clubroom"
+  ],
+  "clubroom": [
+    "school_clubroom"
+  ],
+  "school clubroom": [
+    "school_clubroom"
+  ],
+  "community_center": [
+    "community_center"
+  ],
+  "community center": [
+    "community_center"
+  ],
+  "community hall": [
+    "community_center"
+  ],
+  "public_library_lobby": [
+    "public_library_lobby"
+  ],
+  "public library lobby": [
+    "public_library_lobby"
+  ],
+  "library lobby": [
+    "public_library_lobby"
+  ],
+  "apartment_entryway": [
+    "apartment_entryway"
+  ],
+  "apartment entryway": [
+    "apartment_entryway"
+  ],
+  "home foyer": [
+    "apartment_entryway"
+  ],
+  "rooftop_laundry_area": [
+    "rooftop_laundry_area"
+  ],
+  "rooftop laundry area": [
+    "rooftop_laundry_area"
+  ],
+  "rooftop clothesline": [
+    "rooftop_laundry_area"
+  ],
+  "neighborhood_playground": [
+    "neighborhood_playground"
+  ],
+  "neighborhood playground": [
+    "neighborhood_playground"
+  ],
+  "residential park": [
+    "neighborhood_playground"
+  ],
+  "local_market_street": [
+    "local_market_street"
+  ],
+  "local market street": [
+    "local_market_street"
+  ],
+  "market lane": [
+    "local_market_street"
   ]
 }

@@ -42,6 +42,11 @@ class TestContextNodes(unittest.TestCase):
         payload = json.loads(context_json)
         self.assertEqual(payload["subj"], "girl")
         self.assertEqual(payload["seed"], 1)
+        self.assertEqual(payload["extras"]["source_subj_key"], "girl")
+
+    def test_location_expander_defaults_to_lighting_off(self):
+        specs = ContextLocationExpander.INPUT_TYPES()
+        self.assertEqual(specs["required"]["lighting_mode"][1]["default"], "off")
 
     def test_context_inspector_outputs_strings(self):
         node = ContextInspector()

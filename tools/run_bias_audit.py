@@ -541,7 +541,7 @@ def generate_samples(
             meta_mood=meta_mood_text,
             meta_style=meta_style,
         )
-        final_prompt = cleaner.clean(raw_prompt, mode="nl", drop_empty_lines=True)[0]
+        final_prompt = cleaner.clean(mode="nl", drop_empty_lines=True, text=raw_prompt)[0]
 
         obj_bg, _ = detect_objects(loc_prompt)
         obj_action, _ = detect_objects(selected_action)

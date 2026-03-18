@@ -86,13 +86,13 @@ def test_context_scene_stage():
     }, ensure_ascii=False)
 
     # original
-    context_json = node.variate_context(base_context, 100, "original")[0]
+    context_json = node.variate_context(100, "original", base_context)[0]
     ctx = context_from_json(context_json, default_seed=100)
     assert_true(ctx.loc == loc, "context scene stage: original loc changed")
     assert_true(ctx.action == action, "context scene stage: original action changed")
 
     # full (may or may not change)
-    out2 = node.variate_context(base_context, 101, "full")[0]
+    out2 = node.variate_context(101, "full", base_context)[0]
     ctx2 = context_from_json(out2, default_seed=101)
     assert_true(isinstance(ctx2.loc, str), "context scene stage: loc not string")
     assert_true(isinstance(ctx2.action, str), "context scene stage: action not string")
@@ -190,7 +190,7 @@ def test_template_builder_and_cleaner():
     )
     assert_true(isinstance(built2, str) and built2 != "", "prompt assembly: composition build failed")
 
-    cleaned = cnode.clean("A  apple , , in park .", mode="nl", drop_empty_lines=True)[0]
+    cleaned = cnode.clean(mode="nl", drop_empty_lines=True, text="A  apple , , in park .")[0]
     assert_true("  " not in cleaned, "PromptCleaner: whitespace not collapsed")
 
 
@@ -248,7 +248,7 @@ def test_full_flow_smoke():
         meta_mood=mood,
         meta_style=meta_style
     )
-    final_prompt = clean.clean(prompt, mode="nl", drop_empty_lines=True)[0]
+    final_prompt = clean.clean(mode="nl", drop_empty_lines=True, text=prompt)[0]
     assert_true(isinstance(final_prompt, str) and final_prompt != "", "Full flow: final prompt empty")
 
 

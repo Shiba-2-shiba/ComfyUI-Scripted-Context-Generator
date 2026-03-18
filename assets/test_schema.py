@@ -77,6 +77,7 @@ class TestSchema(unittest.TestCase):
             }
         })
         self.assertEqual(ctx.extras["garnish"], "soft smile")
+        self.assertEqual(ctx.extras["source_subj_key"], "")
         self.assertEqual(ctx.extras["raw_loc_tag"], "")
         self.assertEqual(ctx.extras["custom_key"], "keep_me")
 
@@ -101,6 +102,7 @@ class TestSchema(unittest.TestCase):
         extras = default_extras()
         self.assertEqual(extras["character_name"], "")
         self.assertEqual(extras["color_palette"], [])
+        self.assertEqual(extras["source_subj_key"], "")
 
 if __name__ == '__main__':
     unittest.main()

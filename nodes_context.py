@@ -95,6 +95,8 @@ class ContextSource:
             root_dir=ROOT_DIR,
         )
         ctx = patch_context(payload, updates={"seed": seed})
+        if not ctx.extras.get("source_subj_key") and ctx.subj:
+            ctx.extras["source_subj_key"] = ctx.subj
         if not ctx.extras.get("raw_costume_key") and ctx.costume:
             ctx.extras["raw_costume_key"] = ctx.costume
         if not ctx.extras.get("raw_loc_tag") and ctx.loc:
@@ -183,7 +185,7 @@ class ContextLocationExpander:
     def INPUT_TYPES(s):
         return _context_stage_input_types({
             "mode": (["detailed", "simple"], {"default": "detailed"}),
-            "lighting_mode": (["auto", "off"], {"default": "auto"}),
+            "lighting_mode": (["auto", "off"], {"default": "off"}),
         })
 
     RETURN_TYPES = ("STRING",)

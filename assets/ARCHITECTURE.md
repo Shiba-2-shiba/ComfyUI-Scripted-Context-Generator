@@ -46,6 +46,7 @@ root/
 ├── tools/
 │   ├── verify_full_flow.py
 │   ├── check_widgets_values.py
+│   ├── analyze_context_workflow_diversity.py
 │   ├── run_frontend_workflow_validation.ps1
 │   └── run_custom_workflow_roundtrip.ps1
 ├── nodes_context.py           # context-native node family

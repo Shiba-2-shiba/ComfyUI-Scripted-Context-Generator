@@ -96,6 +96,9 @@ FX_DENY_PATTERNS = (
     re.compile(r"\bfloating dust\b", re.IGNORECASE),
     re.compile(r"\bsparkling(?!\s+eyes\b)\w*\b", re.IGNORECASE),
 )
+_TIME_DARK_HINTS = ("night", "midnight", "twilight", "dusk", "late night", "stormy", "holiday night")
+_WEATHER_RARE_HINTS = ("rain", "snow", "storm", "fog", "acid", "winter")
+_LIGHTING_HINTS = ("light", "glow", "fluorescent", "ambient", "sun", "spotlight", "daylight", "hour")
 
 
 def _load_object_concentration_policy():
@@ -206,12 +209,15 @@ def _build_item_description(rng, concept_data, char_colors=None):
     embellishments = palette.get("embellishments", [])
     opt_details = concept_data.get("optional_details", [])
     details_list = []
-    if embellishments and rng.random() < 0.55:
+    embellishment_prob = max(0.70, float(getattr(clothing_vocab, "EMBELLISHMENT_DETAIL_PROBABILITY", 0.55)))
+    optional_detail_prob = max(0.60, float(getattr(clothing_vocab, "OPTIONAL_DETAIL_PROBABILITY", 0.45)))
+    state_detail_prob = max(0.38, float(getattr(clothing_vocab, "STATE_DETAIL_PROBABILITY", 0.30)))
+    if embellishments and rng.random() < embellishment_prob:
         details_list.append(rng.choice(embellishments))
-    if opt_details and rng.random() < 0.45:
+    if opt_details and rng.random() < optional_detail_prob:
         details_list.append(rng.choice(opt_details))
     states = concept_data.get("states", [])
-    if states and rng.random() < 0.3:
+    if states and rng.random() < state_detail_prob:
         details_list.append(rng.choice(states))
 
     adjectives = [x for x in [color, pattern, material, style] if x]
@@ -261,7 +267,8 @@ def expand_clothing_prompt(theme_key, seed, outfit_mode, outerwear_chance, chara
         elif outfit_mode == "no_outerwear":
             should_add_outer = False
         else:
-            should_add_outer = rng.random() < outerwear_chance
+            outerwear_floor = float(getattr(clothing_vocab, "OUTERWEAR_SELECTION_PROBABILITY", 0.25))
+            should_add_outer = rng.random() < max(float(outerwear_chance), min(0.45, outerwear_floor + 0.12))
 
     if should_add_outer:
         outer_name = rng.choice(packs_map["outerwear"])
@@ -377,6 +384,44 @@ def _is_daily_life_loc(loc_tag):
     return str(loc_tag).lower().strip() in DAILY_LIFE_LOCS
 
 
+def _prefer_bright_time_options(options):
+    if not options:
+        return []
+    preferred = [
+        option for option in options
+        if not any(token in str(option).lower() for token in _TIME_DARK_HINTS)
+    ]
+    return preferred or list(options)
+
+
+def _split_weather_options(options):
+    if not options:
+        return [], []
+    normal = []
+    rare = []
+    for option in options:
+        option_text = str(option).lower()
+        if any(token in option_text for token in _WEATHER_RARE_HINTS):
+            rare.append(option)
+        else:
+            normal.append(option)
+    return normal, rare
+
+
+def _contains_lighting_hint(text):
+    lowered = str(text).lower()
+    return any(token in lowered for token in _LIGHTING_HINTS)
+
+
+def _filter_off_mode_options(options, fallback_all=True):
+    if not options:
+        return []
+    filtered = [option for option in options if not _contains_lighting_hint(option)]
+    if filtered:
+        return filtered
+    return list(options) if fallback_all else []
+
+
 def expand_location_prompt(loc_tag, seed, mode, lighting_mode="auto"):
     try:
         seed = int(seed)
@@ -431,28 +476,42 @@ def expand_location_prompt(loc_tag, seed, mode, lighting_mode="auto"):
     general_defaults = getattr(background_vocab, "GENERAL_DEFAULTS", {})
     if rng.random() < TEXTURE_DEFAULT_BLEND_PROB:
         texture_candidates.extend(general_defaults.get("texture", []))
+    if lighting_mode == "off":
+        texture_candidates = _filter_off_mode_options(texture_candidates, fallback_all=False)
     if texture_candidates and rng.random() < TEXTURE_SEGMENT_SELECT_PROB:
         segments.append(rng.choice(texture_candidates))
 
     if rng.random() < 0.35:
         details_defaults = general_defaults.get("details", [])
+        if lighting_mode == "off":
+            details_defaults = _filter_off_mode_options(details_defaults, fallback_all=False)
         if details_defaults:
             segments.append(rng.choice(details_defaults))
 
     is_daily_life = _is_daily_life_loc(cleaned_tag)
     time_opts = pack_data.get("time", [])
+    if lighting_mode == "off":
+        time_opts = _filter_off_mode_options(time_opts, fallback_all=False)
     if time_opts and rng.random() < (0.72 if is_daily_life else 0.5):
-        segments.append(f"during {rng.choice(time_opts)}")
+        segments.append(f"during {rng.choice(_prefer_bright_time_options(time_opts))}")
     weather_opts = pack_data.get("weather", [])
-    if weather_opts and rng.random() < (0.62 if is_daily_life else 0.35):
-        segments.append(rng.choice(weather_opts))
+    preferred_weather, rare_weather = _split_weather_options(weather_opts)
+    weather_probability = 0.18 if is_daily_life else 0.12
+    if preferred_weather and rng.random() < weather_probability:
+        segments.append(rng.choice(preferred_weather))
+    elif rare_weather and rng.random() < 0.03:
+        segments.append(rng.choice(rare_weather))
     crowd_opts = pack_data.get("crowd", [])
     if crowd_opts and rng.random() < (0.58 if is_daily_life else 0.30):
         segments.append(rng.choice(crowd_opts))
 
     fx_candidates = _filter_fx_candidates(pack_data.get("fx", []) or [])
+    if lighting_mode == "off":
+        fx_candidates = _filter_off_mode_options(fx_candidates, fallback_all=False)
     if rng.random() < FX_DEFAULT_BLEND_PROB:
         fx_candidates.extend(_filter_fx_candidates(general_defaults.get("fx", [])))
+    if lighting_mode == "off":
+        fx_candidates = _filter_off_mode_options(fx_candidates, fallback_all=False)
     fx_segments_added = 0
     if fx_candidates and fx_segments_added < MAX_FX_SEGMENTS and rng.random() < FX_SEGMENT_SELECT_PROB:
         segments.append(_weighted_choice(fx_candidates, rng, selected_pack_key, "fx"))
@@ -469,7 +528,9 @@ def expand_location_prompt(loc_tag, seed, mode, lighting_mode="auto"):
     if lighting_mode == "auto":
         lighting_opts = pack_data.get("lighting", [])
         if lighting_opts:
-            deduped_segments.append(rng.choice(lighting_opts))
+            chosen_lighting = rng.choice(lighting_opts)
+            if not any(_contains_lighting_hint(segment) for segment in deduped_segments):
+                deduped_segments.append(chosen_lighting)
 
     return ", ".join([env_part] + deduped_segments) if deduped_segments else env_part
 

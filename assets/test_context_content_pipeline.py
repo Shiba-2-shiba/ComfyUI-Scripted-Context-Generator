@@ -33,6 +33,14 @@ class TestContextContentPipeline(unittest.TestCase):
         self.assertIsInstance(location_prompt, str)
         self.assertEqual(updated.extras["location_prompt"], location_prompt)
 
+    def test_apply_location_expansion_off_avoids_lighting_segments(self):
+        ctx = patch_context({}, updates={"loc": "street_cafe", "seed": 12}, extras={"raw_loc_tag": "street_cafe"})
+        updated, location_prompt = apply_location_expansion(ctx, 12, "detailed", "off")
+        self.assertEqual(updated.extras["location_prompt"], location_prompt)
+        self.assertNotIn("golden hour", location_prompt.lower())
+        self.assertNotIn("bright daylight", location_prompt.lower())
+        self.assertNotIn("warm ambient", location_prompt.lower())
+
     def test_build_prompt_from_context_prefers_expanded_fields(self):
         ctx = patch_context(
             {},

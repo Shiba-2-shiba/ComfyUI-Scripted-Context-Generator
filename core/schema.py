@@ -18,6 +18,7 @@ def default_extras() -> Dict[str, Any]:
         "location_prompt": "",
         "garnish": "",
         "staging_tags": "",
+        "source_subj_key": "",
         "raw_costume_key": "",
         "raw_loc_tag": "",
     }

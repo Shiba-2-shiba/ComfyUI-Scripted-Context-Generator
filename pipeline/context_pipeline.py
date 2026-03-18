@@ -260,6 +260,94 @@ def _get_compatible_locs(subj, compat, excluded, mode="full"):
     return result
 
 
+def _normalize_compat_subject_key(value):
+    return str(value or "").strip()
+
+
+def _resolve_compat_subject_key(ctx, compat):
+    characters = compat.get("characters", {})
+    normalized_characters = {
+        key.casefold(): key
+        for key in characters.keys()
+    }
+    candidates = [
+        ctx.extras.get("source_subj_key", ""),
+        ctx.extras.get("character_name", ""),
+        ctx.subj,
+    ]
+    for candidate in candidates:
+        normalized = _normalize_compat_subject_key(candidate)
+        if not normalized:
+            continue
+        if normalized in characters:
+            return normalized
+        matched = normalized_characters.get(normalized.casefold())
+        if matched:
+            return matched
+    return _normalize_compat_subject_key(candidates[0] if candidates else "")
+
+
+def _scene_candidate_family(source):
+    source = str(source)
+    if source.startswith("tag:"):
+        return "tag"
+    return source
+
+
+def _build_scene_candidate_weights(
+    candidates,
+    existing_weight,
+    tag_weight,
+    universal_weight,
+    daily_life_weight,
+    seed,
+    compat,
+):
+    family_totals = {
+        "existing": float(existing_weight),
+        "tag": float(tag_weight),
+        "universal": float(universal_weight),
+        "daily_life": float(daily_life_weight),
+    }
+    grouped = {"existing": [], "tag": [], "universal": [], "daily_life": []}
+    for index, (source, loc) in enumerate(candidates):
+        family = _scene_candidate_family(source)
+        grouped.setdefault(family, []).append((index, source, loc))
+
+    allocated = [0.0] * len(candidates)
+    for family, items in grouped.items():
+        if not items:
+            continue
+        base_weights = []
+        for _index, _source, loc in items:
+            jitter_rng = random.Random(mix_seed(seed, f"scene_candidate:{family}:{loc}"))
+            jitter = 0.92 + (jitter_rng.random() * 0.16)
+            base_weights.append(jitter)
+        base_total = sum(base_weights) or 1.0
+        family_total = family_totals.get(family, 1.0)
+        for item, base_weight in zip(items, base_weights):
+            index = item[0]
+            allocated[index] = family_total * (base_weight / base_total)
+    return allocated
+
+
+def _get_daily_life_bonus_locs(compat_subject_key, compat, excluded, existing_locs):
+    bonus = []
+    seen = set(existing_locs)
+    for loc in compat.get("daily_life_locs", []):
+        loc_name = str(loc)
+        lowered = loc_name.lower()
+        if loc_name in seen:
+            continue
+        if (compat_subject_key, loc_name) in excluded:
+            continue
+        if "rainy" in lowered or "winter" in lowered:
+            continue
+        bonus.append((loc_name, "daily_life"))
+        seen.add(loc_name)
+    return bonus
+
+
 def _action_text(item):
     if isinstance(item, dict):
         return str(item.get("text", ""))
@@ -429,7 +517,9 @@ def apply_scene_variation(context: Any, seed: int, variation_mode: str):
     excluded = _build_exclusion_set(compat)
     rng = random.Random(mix_seed(seed, "scene_var"))
 
-    compatible = _get_compatible_locs(ctx.subj, compat, excluded, mode=variation_mode)
+    compat_subject_key = _resolve_compat_subject_key(ctx, compat)
+    decision_log["compat_subject_key"] = compat_subject_key
+    compatible = _get_compatible_locs(compat_subject_key, compat, excluded, mode=variation_mode)
     decision_log["compatible_unique_count"] = len(compatible)
     if not compatible:
         decision_log["warnings"] = ["No compatible locations found"]
@@ -439,22 +529,64 @@ def apply_scene_variation(context: Any, seed: int, variation_mode: str):
         return ctx, debug_info
 
     weights = compat.get("priority_weights", {})
+    existing_weight = float(weights.get("existing", 50))
+    tag_weight = float(weights.get("genre_gated", 35))
+    universal_weight = float(weights.get("universal", 15))
+    daily_life_weight = 0.0
+    if variation_mode == "full":
+        # Full mode prioritizes scene diversity over keeping the original location.
+        existing_weight = max(4.0, existing_weight * 0.22)
+        tag_weight = max(tag_weight * 1.05, existing_weight * 3.0)
+        universal_weight = max(universal_weight * 3.40, tag_weight * 1.35)
+        daily_life_weight = max(universal_weight * 0.90, tag_weight * 1.15)
+
     candidates = [("existing", ctx.loc)]
-    candidate_weights = [weights.get("existing", 50)]
     for compat_loc, source in compatible:
         if compat_loc == ctx.loc:
             continue
         candidates.append((source, compat_loc))
-        candidate_weights.append(weights.get("genre_gated", 35) if source.startswith("tag:") else weights.get("universal", 15))
+    if variation_mode == "full":
+        extra_daily_life = _get_daily_life_bonus_locs(
+            compat_subject_key,
+            compat,
+            excluded,
+            {loc for _source, loc in candidates},
+        )
+        for compat_loc, source in extra_daily_life:
+            candidates.append((source, compat_loc))
+    candidate_weights = _build_scene_candidate_weights(
+        candidates,
+        existing_weight,
+        tag_weight,
+        universal_weight,
+        daily_life_weight,
+        seed,
+        compat,
+    )
 
     decision_log["candidates_count"] = len(candidates)
     decision_log["candidates_preview"] = [f"{c[1]} ({c[0]})" for c in candidates]
+    decision_log["candidate_source_counts"] = {
+        "existing": sum(1 for source, _loc in candidates if _scene_candidate_family(source) == "existing"),
+        "tag": sum(1 for source, _loc in candidates if _scene_candidate_family(source) == "tag"),
+        "universal": sum(1 for source, _loc in candidates if _scene_candidate_family(source) == "universal"),
+        "daily_life": sum(1 for source, _loc in candidates if _scene_candidate_family(source) == "daily_life"),
+    }
+    decision_log["candidate_weight_profile"] = {
+        "existing": existing_weight,
+        "tag": tag_weight,
+        "universal": universal_weight,
+        "daily_life": daily_life_weight,
+    }
     chosen_source, chosen_loc = rng.choices(candidates, weights=candidate_weights, k=1)[0]
     decision_log["selected_source"] = chosen_source
     decision_log["selected_loc"] = chosen_loc
 
     new_action = ctx.action
-    if chosen_loc != ctx.loc:
+    should_refresh_action = chosen_loc != ctx.loc or (
+        variation_mode == "full" and chosen_loc == ctx.loc and rng.random() < 0.55
+    )
+    if should_refresh_action:
         pool = [a for a in action_pools.get(chosen_loc, []) if not isinstance(a, str) or not a.startswith("_")]
         if pool:
             new_action_item, dominant_objects, object_hits = _choose_action_with_bias_guard(pool, rng, chosen_loc)
@@ -468,6 +600,7 @@ def apply_scene_variation(context: Any, seed: int, variation_mode: str):
                 decision_log["action_pool_dominant_objects"] = sorted(dominant_objects)
             decision_log["action_pool_object_hits"] = {k: v for k, v in object_hits.items() if v > 0}
             decision_log["action_updated"] = True
+            decision_log["action_refresh_reason"] = "location_changed" if chosen_loc != ctx.loc else "same_location_diversity"
             decision_log["new_action"] = new_action
 
     enriched_action = _enrich_daily_life_action(new_action, chosen_loc, compat, scene_axes, rng, decision_log)
