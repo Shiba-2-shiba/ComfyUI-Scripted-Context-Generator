@@ -5,11 +5,409 @@
   "last_link_id": 10,
   "nodes": [
     {
+      "id": 3,
+      "type": "ContextSceneVariator",
+      "pos": [
+        -1703.5363011907666,
+        -3626.173800421198
+      ],
+      "size": [
+        430,
+        230
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "context_json",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "context_json"
+          },
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "context_json",
+          "type": "STRING",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ContextSceneVariator",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        237401713067320,
+        "randomize",
+        "full",
+        ""
+      ]
+    },
+    {
+      "id": 4,
+      "type": "ContextClothingExpander",
+      "pos": [
+        -1690.633949830708,
+        -3343.5825510246455
+      ],
+      "size": [
+        430,
+        250
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "context_json",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "context_json"
+          },
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "context_json",
+          "type": "STRING",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ContextClothingExpander",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        633671356419006,
+        "randomize",
+        "random",
+        0.3,
+        ""
+      ]
+    },
+    {
+      "id": 5,
+      "type": "ContextLocationExpander",
+      "pos": [
+        -1682.8473072227548,
+        -3016.1780589557184
+      ],
+      "size": [
+        430,
+        250
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "context_json",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "context_json"
+          },
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "context_json",
+          "type": "STRING",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ContextLocationExpander",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        70389435678359,
+        "randomize",
+        "detailed",
+        "auto",
+        ""
+      ]
+    },
+    {
+      "id": 7,
+      "type": "ContextGarnish",
+      "pos": [
+        -1182.2592210919643,
+        -3346.719855647716
+      ],
+      "size": [
+        430,
+        250
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "context_json",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "context_json"
+          },
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "context_json",
+          "type": "STRING",
+          "links": [
+            7,
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ContextGarnish",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        324140539159747,
+        "randomize",
+        3,
+        false,
+        "random",
+        ""
+      ]
+    },
+    {
+      "id": 8,
+      "type": "ContextPromptBuilder",
+      "pos": [
+        -1183.2000242528875,
+        -3027.467508721655
+      ],
+      "size": [
+        430,
+        250
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "context_json",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "context_json"
+          },
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt_text",
+          "type": "STRING",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ContextPromptBuilder",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "",
+        false,
+        608828014318920,
+        "randomize",
+        ""
+      ]
+    },
+    {
+      "id": 10,
+      "type": "ContextInspector",
+      "pos": [
+        -1186.6606519881766,
+        -2701.4112047344174
+      ],
+      "size": [
+        430,
+        180
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "context_json",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "context_json"
+          },
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pretty_json",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "summary_text",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ContextInspector",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 9,
+      "type": "PromptCleaner",
+      "pos": [
+        -677.4004547451985,
+        -3140.148457818127
+      ],
+      "size": [
+        350,
+        180
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "clean_text",
+          "type": "STRING",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PromptCleaner",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "nl",
+        "nl",
+        true
+      ]
+    },
+    {
+      "id": 6,
+      "type": "ContextMoodExpander",
+      "pos": [
+        -1181.1112090421782,
+        -3656.0759402507906
+      ],
+      "size": [
+        430,
+        250
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "context_json",
+          "shape": 7,
+          "type": "STRING",
+          "widget": {
+            "name": "context_json"
+          },
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "context_json",
+          "type": "STRING",
+          "links": [
+            6
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ContextMoodExpander",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        2367500613762,
+        "randomize",
+        "mood_map.json",
+        "",
+        ""
+      ]
+    },
+    {
       "id": 1,
       "type": "ContextSource",
       "pos": [
-        -2200,
-        -3300
+        -2194.8847707877253,
+        -3432.996486373521
       ],
       "size": [
         430,
@@ -38,7 +436,7 @@
       },
       "widgets_values": [
         "{}",
-        0,
+        1024271525000335,
         "randomize",
         "auto"
       ]
@@ -47,8 +445,8 @@
       "id": 2,
       "type": "ContextCharacterProfile",
       "pos": [
-        -1700,
-        -3300
+        -2192.1407214735555,
+        -3095.089349604932
       ],
       "size": [
         430,
@@ -60,7 +458,11 @@
       "inputs": [
         {
           "name": "context_json",
+          "shape": 7,
           "type": "STRING",
+          "widget": {
+            "name": "context_json"
+          },
           "link": 1
         }
       ],
@@ -84,377 +486,21 @@
       "widgets_values": [
         "random",
         "Aiko (Quiet)",
-        0,
-        "randomize"
-      ]
-    },
-    {
-      "id": 3,
-      "type": "ContextSceneVariator",
-      "pos": [
-        -1200,
-        -3300
-      ],
-      "size": [
-        430,
-        230
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "link": 2
-        }
-      ],
-      "outputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "links": [
-            3
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ContextSceneVariator",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        0,
+        5544002269372,
         "randomize",
-        "full"
-      ]
-    },
-    {
-      "id": 4,
-      "type": "ContextClothingExpander",
-      "pos": [
-        -700,
-        -3450
-      ],
-      "size": [
-        430,
-        250
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "link": 3
-        }
-      ],
-      "outputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "links": [
-            4
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ContextClothingExpander",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        0,
-        "randomize",
-        "random",
-        0.3
-      ]
-    },
-    {
-      "id": 5,
-      "type": "ContextLocationExpander",
-      "pos": [
-        -700,
-        -3120
-      ],
-      "size": [
-        430,
-        250
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "link": 4
-        }
-      ],
-      "outputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "links": [
-            5
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ContextLocationExpander",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        0,
-        "randomize",
-        "detailed",
-        "auto"
-      ]
-    },
-    {
-      "id": 6,
-      "type": "ContextMoodExpander",
-      "pos": [
-        -220,
-        -3300
-      ],
-      "size": [
-        430,
-        250
-      ],
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "link": 5
-        }
-      ],
-      "outputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "links": [
-            6
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ContextMoodExpander",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        0,
-        "randomize",
-        "mood_map.json",
         ""
       ]
-    },
-    {
-      "id": 7,
-      "type": "ContextGarnish",
-      "pos": [
-        260,
-        -3300
-      ],
-      "size": [
-        430,
-        250
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "link": 6
-        }
-      ],
-      "outputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "links": [
-            7,
-            8
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ContextGarnish",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        0,
-        "randomize",
-        3,
-        false,
-        "random"
-      ]
-    },
-    {
-      "id": 8,
-      "type": "ContextPromptBuilder",
-      "pos": [
-        760,
-        -3300
-      ],
-      "size": [
-        430,
-        250
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "link": 7
-        }
-      ],
-      "outputs": [
-        {
-          "name": "prompt_text",
-          "type": "STRING",
-          "links": [
-            9
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ContextPromptBuilder",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        "",
-        false,
-        0,
-        "randomize"
-      ]
-    },
-    {
-      "id": 9,
-      "type": "PromptCleaner",
-      "pos": [
-        1260,
-        -3300
-      ],
-      "size": [
-        350,
-        180
-      ],
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 9
-        }
-      ],
-      "outputs": [
-        {
-          "name": "clean_text",
-          "type": "STRING",
-          "links": [
-            10
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PromptCleaner",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        "nl",
-        true
-      ]
-    },
-    {
-      "id": 10,
-      "type": "ContextInspector",
-      "pos": [
-        760,
-        -2980
-      ],
-      "size": [
-        430,
-        180
-      ],
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "context_json",
-          "type": "STRING",
-          "link": 8
-        }
-      ],
-      "outputs": [
-        {
-          "name": "pretty_json",
-          "type": "STRING",
-          "links": []
-        },
-        {
-          "name": "summary_text",
-          "type": "STRING",
-          "links": []
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ContextInspector",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": []
     },
     {
       "id": 11,
       "type": "PreviewAny",
       "pos": [
-        1760,
-        -3300
+        -270.75366593124517,
+        -3158.0517893307806
       ],
       "size": [
-        320,
-        130
+        299.76230790084855,
+        197.00923344818193
       ],
       "flags": {},
       "order": 10,
@@ -568,12 +614,14 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.7561436672967864,
+      "scale": 0.521317106913156,
       "offset": [
-        2330.5,
-        3560.2
+        2727.3597377612746,
+        3916.303597966443
       ]
-    }
+    },
+    "workflowRendererVersion": "LG",
+    "frontendVersion": "1.41.20"
   },
   "version": 0.4
 }
