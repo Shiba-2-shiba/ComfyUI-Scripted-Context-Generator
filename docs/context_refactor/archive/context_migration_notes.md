@@ -9,7 +9,7 @@ Related documents:
 - [Spec](../context_v2_spec.md)
 - [Task Plan](../context_v2_tasks.md)
 - [Bridge Workflow Note](../context_bridge_workflow.md)
-- [Cutover Plan](../context_cutover_plan.md)
+- [Cutover Plan](./context_cutover_plan.md)
 
 ## Destination Architecture
 

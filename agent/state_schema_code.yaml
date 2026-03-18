@@ -8,30 +8,33 @@ repo:
   path: "C:/Users/inott/Downloads/ComfyUI-Scripted-Context-Generator"
   language: "Python"
   framework: "ComfyUI custom node"
-  test_command: "python assets/runner.py all"
+  test_command: "python -m unittest assets.test_node_registry assets.test_workflow_samples"
 
 constraints:
   python_version: "3.12.10 (local shell detected on 2026-02-26)"
-  must_not_break: []      # 保護すべき既存インターフェース
+  must_not_break:
+    - "Context* ノードの workflow 保存互換性"
+    - "PromptCleaner の現行入出力"
   forbidden:
     - "外部LLM依存の前提追加（README方針と不整合）"
+    - "退役済み compat / bridge surface の再導入"
 
 current_task:
-  description: "偏り監査基盤の追加とロケーション/アクション偏り抑制の実装"
+  description: "context-only 基盤の整理完了後、不要資産整理と新機能追加前の地ならし"
   target_files:
-    - "assets/eval_promptbuilder_v5.py"
-    - "tools/run_bias_audit.py"
-    - "nodes_dictionary_expand.py"
-    - "nodes_scene_variator.py"
-    - "vocab/data/scene_compatibility.json"
-    - "vocab/data/background_packs.json"
-    - "vocab/data/action_pools.json"
-    - "assets/test_bias_controls.py"
+    - "nodes_context.py"
+    - "nodes_prompt_cleaner.py"
+    - "pipeline/"
+    - "workflow_samples.json"
+    - "verification/"
+    - "docs/context_refactor/"
+    - "agent/"
   status: "done"   # planning / in_progress / done
 
 global_notes:
-  - "標準チェック入口は assets/runner.py（mode: all/unit/integrity）"
-  - "ComfyUI本体バージョンはこのリポジトリ単体からは判定不可"
+  - "標準 baseline は context-only workflow sample と registry/widget 検証"
+  - "frontend / GUI 検証は verification/ を source-of-truth として同期実行する"
+  - "ComfyUI本体バージョンは差し替え前提で固定しない"
 session_notes:
   - "2026-02-26: Python 3.12.10 をローカルシェルで検出"
-  - "2026-02-27: bias audit run_id=20260227_bias_a01 を実行し、8種CSVを出力"
+  - "2026-03-18: context-only 公開面、context-only workflow baseline、repo-local verification へ更新済み"

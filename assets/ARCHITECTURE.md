@@ -47,7 +47,6 @@ root/
 │   ├── verify_full_flow.py
 │   ├── check_widgets_values.py
 │   ├── run_frontend_workflow_validation.ps1
-│   ├── report_cutover_readiness.py
 │   └── run_custom_workflow_roundtrip.ps1
 ├── nodes_context.py           # context-native node family
 ├── nodes_*.py                 # public node entry points

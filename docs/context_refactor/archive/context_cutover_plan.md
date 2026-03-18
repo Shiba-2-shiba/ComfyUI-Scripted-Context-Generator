@@ -11,7 +11,7 @@ Related documents:
 - [Progress Log](./context_v2_progress.md)
 
 The machine-readable source of truth is:
-- `cutover_plan.json`
+- `tools/archive/cutover_plan.json`
 
 ## Removal Gates
 
@@ -71,7 +71,7 @@ completed.
 
 Use:
 
-`python tools/report_cutover_readiness.py`
+`python tools/archive/report_cutover_readiness.py`
 
 This now reports that no active compat or transition nodes remain in the live
 cutover inventory.

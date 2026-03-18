@@ -2,10 +2,10 @@ import sys
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from cutover_plan import load_cutover_plan
+from tools.archive.cutover_plan import load_cutover_plan
 from workflow_widget_validation import load_workflow
 from workflow_samples import load_workflow_samples
 

@@ -56,3 +56,12 @@ Format:
 - 2026-03-06: Kept thematic anchors as threshold-managed exceptions instead of forcing them down to general-location levels.
   - Rationale: Library books and surf-scene surfboards are natural scene anchors, so the acceptance gate now separately reports `max_object_concentration_true_bias` while keeping raw object metrics for observability.
   - Impacted Files: `vocab/data/object_concentration_policy.json`, `tools/run_bias_audit.py`, `assets/object_concentration_refactor_spec.md`, `assets/object_concentration_refactor_verification.md`
+- 2026-03-18: Fixed the public architecture on context-first nodes only and treated compat / transition / bridge surfaces as retired history.
+  - Rationale: The repository goal shifted from long-term compatibility maintenance to full replacement by `context_json`-centered flow, so the active surface needed to reflect that unambiguously.
+  - Impacted Files: `__init__.py`, `nodes_context.py`, `workflow_samples.json`, `README.md`, `docs/context_refactor/context_migration_notes.md`
+- 2026-03-18: Kept custom frontend/browser verification in this repository and synced it into upstream `ComfyUI_frontend` only at execution time.
+  - Rationale: `ComfyUI` and `ComfyUI_frontend` are expected to be replaced frequently, so verification ownership had to move out of those upstream trees to avoid repeated manual patching.
+  - Impacted Files: `verification/`, `tools/sync_upstream_verification_assets.ps1`, `tools/run_frontend_workflow_validation.ps1`, `tools/run_custom_workflow_roundtrip.ps1`
+- 2026-03-18: Archived completed migration assets once they stopped contributing to the active context-only baseline.
+  - Rationale: Historical specs, cutover inventory, legacy workflow fixtures, and one-off salvage tools are still useful as reference, but they should not remain mixed into the live maintenance surface.
+  - Impacted Files: `assets/archive/`, `tools/archive/`, `docs/context_refactor/archive/`, `.gitignore`, `docs/context_refactor/context_v2_progress.md`

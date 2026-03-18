@@ -8,7 +8,7 @@ node conversion guide moves to the archive appendix.
 Related documents:
 - [Spec](./context_v2_spec.md)
 - [Task Plan](./context_v2_tasks.md)
-- [Cutover Plan](./context_cutover_plan.md)
+- [Archived Cutover Plan](./archive/context_cutover_plan.md)
 - [Archived Detailed Notes](./archive/context_migration_notes.md)
 
 ## Live Policy
@@ -21,8 +21,8 @@ Related documents:
 
 ## Active Guidance
 
-For exact successor mapping, retirement waves, and removal gates, use the
-[Cutover Plan](./context_cutover_plan.md).
+For the completed retirement waves and removal-gate record, use the archived
+[Cutover Plan](./archive/context_cutover_plan.md).
 
 For historical mixed-mode examples, use the bridge appendix referenced from
 [Bridge Workflow Note](./context_bridge_workflow.md).

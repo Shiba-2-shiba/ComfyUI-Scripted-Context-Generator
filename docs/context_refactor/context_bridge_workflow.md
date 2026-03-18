@@ -12,7 +12,7 @@ Current status:
 
 Related documents:
 - [Migration Note](./context_migration_notes.md)
-- [Cutover Plan](./context_cutover_plan.md)
+- [Archived Cutover Plan](./archive/context_cutover_plan.md)
 - [Progress Log](./context_v2_progress.md)
 
 ## Operational Rule

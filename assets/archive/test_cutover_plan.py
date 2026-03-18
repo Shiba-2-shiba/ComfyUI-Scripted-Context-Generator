@@ -4,11 +4,11 @@ import sys
 import unittest
 
 
-ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 sys.path.append(ROOT)
 
 import __init__ as package_registry
-from cutover_plan import gate_map, load_cutover_plan, node_map
+from tools.archive.cutover_plan import gate_map, load_cutover_plan, node_map
 from workflow_samples import load_workflow_samples
 
 

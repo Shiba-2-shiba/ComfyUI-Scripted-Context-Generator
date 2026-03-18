@@ -2344,3 +2344,62 @@ Related documents:
    context-only architecture is established.
 2. Archive tooling should keep its own historical fixtures nearby, instead of
    depending on obsolete files that still sit at repo root and look active.
+
+## 2026-03-18 Historical workflow fixture cleanup
+
+### Summary
+
+- Moved the retired Wave 2 compat fixture out of repo root into `tools/archive/`.
+- Moved the duplicate legacy example workflow out of `assets/` so the live
+  tree no longer presents old node-era workflow JSON as an active asset.
+
+### Files Touched
+
+- `docs/context_refactor/context_v2_progress.md`
+- `tools/archive/README.md`
+- moved: `ComfyUI-workflow-compat-leaf.json` -> `tools/archive/ComfyUI-workflow-compat-leaf.json`
+- moved: `assets/ComfyUI-workflow-exmaple.json` -> `tools/archive/assets-ComfyUI-workflow-exmaple.json`
+
+### Decisions Made
+
+1. Once a workflow fixture leaves the active sample manifest, it should either
+   be archived with the migration tooling or removed; it should not stay in the
+   live root and look like a supported baseline.
+2. Historical workflow JSON belongs next to the archival tools and notes that
+   explain it, not mixed into the active runtime/documentation surface.
+
+## 2026-03-18 Completed cutover tooling cleanup
+
+### Summary
+
+- Archived the machine-readable cutover inventory, readiness-report script, and
+  cutover-specific unit test after the compat/transition inventory reached
+  zero.
+- Moved the dedicated cutover-plan note into the docs archive and switched the
+  remaining live migration notes to archived references.
+- Reduced the active architecture surface so current operational commands no
+  longer list cutover-only tooling.
+
+### Files Touched
+
+- `assets/ARCHITECTURE.md`
+- `assets/archive/README.md`
+- `docs/context_refactor/context_bridge_workflow.md`
+- `docs/context_refactor/context_migration_notes.md`
+- `docs/context_refactor/context_v2_progress.md`
+- `tools/archive/README.md`
+- `tools/archive/report_cutover_readiness.py`
+- `assets/archive/test_cutover_plan.py`
+- moved: `cutover_plan.json` -> `tools/archive/cutover_plan.json`
+- moved: `cutover_plan.py` -> `tools/archive/cutover_plan.py`
+- moved: `tools/report_cutover_readiness.py` -> `tools/archive/report_cutover_readiness.py`
+- moved: `assets/test_cutover_plan.py` -> `assets/archive/test_cutover_plan.py`
+- moved: `docs/context_refactor/context_cutover_plan.md` -> `docs/context_refactor/archive/context_cutover_plan.md`
+
+### Decisions Made
+
+1. Once all compat and transition retirements are complete, cutover inventory
+   management is historical maintenance data rather than an active operational
+   surface.
+2. Live migration notes should point to archived cutover records instead of
+   keeping dedicated cutover management files at repo root.
