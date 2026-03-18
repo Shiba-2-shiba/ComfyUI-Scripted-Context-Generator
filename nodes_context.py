@@ -48,12 +48,19 @@ def _context_json_input(default=""):
     return ("STRING", {"multiline": True, "default": default})
 
 
-def _context_stage_input_types(extra_required):
+def _context_stage_input_types(extra_required, context_optional=True):
     required = {
-        "context_json": _context_json_input(),
         "seed": _seed_input(),
     }
     required.update(extra_required)
+    if context_optional:
+        return {
+            "required": required,
+            "optional": {
+                "context_json": _context_json_input(),
+            },
+        }
+    required["context_json"] = _context_json_input()
     return {"required": required}
 
 
@@ -150,7 +157,7 @@ class ContextSceneVariator:
     FUNCTION = "variate_context"
     CATEGORY = CONTEXT_CATEGORY
 
-    def variate_context(self, context_json, seed, variation_mode):
+    def variate_context(self, seed, variation_mode, context_json=""):
         return _run_context_stage(context_json, seed, apply_scene_variation, variation_mode)
 
 
@@ -167,7 +174,7 @@ class ContextClothingExpander:
     FUNCTION = "expand_clothing_context"
     CATEGORY = CONTEXT_CATEGORY
 
-    def expand_clothing_context(self, context_json, seed, outfit_mode, outerwear_chance):
+    def expand_clothing_context(self, seed, outfit_mode, outerwear_chance, context_json=""):
         return _run_context_stage(context_json, seed, apply_clothing_expansion, outfit_mode, outerwear_chance)
 
 
@@ -184,7 +191,7 @@ class ContextLocationExpander:
     FUNCTION = "expand_location_context"
     CATEGORY = CONTEXT_CATEGORY
 
-    def expand_location_context(self, context_json, seed, mode, lighting_mode="auto"):
+    def expand_location_context(self, seed, mode, lighting_mode="auto", context_json=""):
         return _run_context_stage(context_json, seed, apply_location_expansion, mode, lighting_mode)
 
 
@@ -201,7 +208,7 @@ class ContextMoodExpander:
     FUNCTION = "expand_mood_context"
     CATEGORY = CONTEXT_CATEGORY
 
-    def expand_mood_context(self, context_json, seed, json_path, default_value):
+    def expand_mood_context(self, seed, json_path, default_value, context_json=""):
         return _run_context_stage(context_json, seed, apply_mood_expansion, json_path, default_value)
 
 
@@ -222,7 +229,7 @@ class ContextGarnish:
     FUNCTION = "garnish_context"
     CATEGORY = CONTEXT_CATEGORY
 
-    def garnish_context(self, context_json, seed, max_items, include_camera, emotion_nuance="random"):
+    def garnish_context(self, seed, max_items, include_camera, emotion_nuance="random", context_json=""):
         return _run_context_stage(
             context_json,
             seed,
@@ -238,10 +245,12 @@ class ContextPromptBuilder:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "context_json": _context_json_input(),
                 "template": ("STRING", {"multiline": True, "default": ""}),
                 "composition_mode": ("BOOLEAN", {"default": False}),
                 "seed": _seed_input(),
+            },
+            "optional": {
+                "context_json": _context_json_input(),
             }
         }
 
@@ -250,7 +259,7 @@ class ContextPromptBuilder:
     FUNCTION = "build_prompt_context"
     CATEGORY = CONTEXT_CATEGORY
 
-    def build_prompt_context(self, context_json, template, composition_mode, seed):
+    def build_prompt_context(self, template, composition_mode, seed, context_json=""):
         ctx = context_from_json(context_json, default_seed=int(seed))
         _updated_ctx, prompt = build_prompt_from_context(ctx, template, composition_mode, int(seed))
         return (prompt,)
@@ -260,7 +269,7 @@ class ContextInspector:
     @classmethod
     def INPUT_TYPES(s):
         return {
-            "required": {
+            "optional": {
                 "context_json": _context_json_input(),
             }
         }
@@ -270,7 +279,7 @@ class ContextInspector:
     FUNCTION = "inspect_context"
     CATEGORY = CONTEXT_CATEGORY
 
-    def inspect_context(self, context_json):
+    def inspect_context(self, context_json=""):
         ctx = context_from_json(context_json)
         pretty = json.dumps(ctx.to_dict(), ensure_ascii=False, indent=2)
         summary = "; ".join([

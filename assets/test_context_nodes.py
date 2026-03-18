@@ -19,6 +19,23 @@ from nodes_context import (
 
 
 class TestContextNodes(unittest.TestCase):
+    def test_downstream_context_input_is_optional_for_layout_stability(self):
+        downstream = (
+            ContextSceneVariator,
+            ContextClothingExpander,
+            ContextLocationExpander,
+            ContextMoodExpander,
+            ContextGarnish,
+            ContextPromptBuilder,
+            ContextInspector,
+        )
+
+        for node_cls in downstream:
+            with self.subTest(node=node_cls.__name__):
+                specs = node_cls.INPUT_TYPES()
+                self.assertNotIn("context_json", specs.get("required", {}))
+                self.assertIn("context_json", specs.get("optional", {}))
+
     def test_context_source_builds_context(self):
         node = ContextSource()
         context_json = node.build_context('{"subj":"girl","costume":"office_lady","loc":"classroom","action":"reading","meta":{"mood":"quiet"}}', 1, 'auto')[0]
@@ -45,12 +62,12 @@ class TestContextNodes(unittest.TestCase):
 
         ctx = source.build_context("{}", seed, "auto")[0]
         ctx = profile.apply_profile("random", "None", seed, ctx)[0]
-        ctx = scene.variate_context(ctx, seed, "full")[0]
-        ctx = cloth.expand_clothing_context(ctx, seed, "random", 0.3)[0]
-        ctx = loc.expand_location_context(ctx, seed, "detailed", "auto")[0]
-        ctx = mood.expand_mood_context(ctx, seed, "mood_map.json", "")[0]
-        ctx = garnish.garnish_context(ctx, seed, 3, False, "random")[0]
-        prompt = build.build_prompt_context(ctx, "", False, seed)[0]
+        ctx = scene.variate_context(seed, "full", ctx)[0]
+        ctx = cloth.expand_clothing_context(seed, "random", 0.3, ctx)[0]
+        ctx = loc.expand_location_context(seed, "detailed", "auto", ctx)[0]
+        ctx = mood.expand_mood_context(seed, "mood_map.json", "", ctx)[0]
+        ctx = garnish.garnish_context(seed, 3, False, "random", ctx)[0]
+        prompt = build.build_prompt_context("", False, seed, ctx)[0]
 
         self.assertIsInstance(prompt, str)
         self.assertTrue(prompt.strip())
