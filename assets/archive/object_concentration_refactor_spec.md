@@ -3,9 +3,9 @@
 更新日: 2026-03-06
 
 参照:
-- `assets/object_concentration_refactor_evaluation.md`
+- `object_concentration_refactor_evaluation.md`
 - `assets/results/audit/object_eval_20260306/`
-- `assets/scene_emotion_priority_spec.md`
+- `scene_emotion_priority_spec.md`
 
 ---
 
@@ -19,7 +19,7 @@
 
 ## 2. 現状整理
 
-`assets/object_concentration_refactor_evaluation.md` と `assets/results/audit/object_eval_20260306/` の結果を前提に、現状は次の 4 類型に分かれる。
+`object_concentration_refactor_evaluation.md` と `assets/results/audit/object_eval_20260306/` の結果を前提に、現状は次の 4 類型に分かれる。
 
 1. `true_bias_background`
    - `karaoke_bar / screen`

@@ -2306,3 +2306,41 @@ Related documents:
 2. The boundary with upstream repos should be a small sync step plus black-box
    validation commands, rather than persistent hand-maintained patches inside
    `ComfyUI_frontend/`.
+
+## 2026-03-18 Historical spec and fixture cleanup
+
+### Summary
+
+- Moved superseded design reviews and refactor-spec markdown files out of the
+  live `assets/` surface into `assets/archive/`.
+- Moved the old legacy workflow fixture and its extracted repro workflow JSON
+  into `tools/archive/`, so archival widget-migration material no longer
+  occupies the repo root.
+- Removed the duplicate top-level `generate_docs.py` entry point and treated
+  old generated outputs such as `simple_template_debug.log` and
+  `current_resources.md` as ignorable local artifacts.
+
+### Files Touched
+
+- `.gitignore`
+- `assets/archive/README.md`
+- `docs/context_refactor/context_v2_progress.md`
+- `tools/archive/README.md`
+- `tools/archive/extract_repro_workflow.py`
+- `tools/archive/simulate_widgets_values_migration.py`
+- deleted: `generate_docs.py`
+- moved: `assets/variation_expansion_plan_review.md` -> `assets/archive/variation_expansion_plan_review.md`
+- moved: `assets/scene_emotion_priority_spec.md` -> `assets/archive/scene_emotion_priority_spec.md`
+- moved: `assets/object_concentration_refactor_spec.md` -> `assets/archive/object_concentration_refactor_spec.md`
+- moved: `assets/object_concentration_refactor_evaluation.md` -> `assets/archive/object_concentration_refactor_evaluation.md`
+- moved: `assets/object_concentration_refactor_verification.md` -> `assets/archive/object_concentration_refactor_verification.md`
+- moved: `ComfyUI-workflow-exmaple.json` -> `tools/archive/ComfyUI-workflow-exmaple.json`
+- moved: `workflow_repro_widgets_values.json` -> `tools/archive/workflow_repro_widgets_values.json`
+
+### Decisions Made
+
+1. Completed specs, reviews, and legacy fixtures should stay available for
+   reference, but they should not remain in the live top-level surface once the
+   context-only architecture is established.
+2. Archive tooling should keep its own historical fixtures nearby, instead of
+   depending on obsolete files that still sit at repo root and look active.

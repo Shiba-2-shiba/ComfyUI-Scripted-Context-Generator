@@ -6,3 +6,6 @@ context-only validation flow.
 
 Historical planning/checklist documents are also archived here when they no
 longer describe the live context-only operating model.
+
+This archive also contains superseded design reviews and refactor specs that
+document earlier phases but no longer act as live implementation guidance.

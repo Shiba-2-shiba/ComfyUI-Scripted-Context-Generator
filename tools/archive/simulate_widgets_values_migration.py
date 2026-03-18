@@ -169,7 +169,7 @@ def summarize_node(node: Dict[str, Any], node_cls: Any) -> Dict[str, Any]:
 
 def main():
     repo_root = Path(".")
-    workflow_path = repo_root / "ComfyUI-workflow-exmaple.json"
+    workflow_path = Path(__file__).resolve().parent / "ComfyUI-workflow-exmaple.json"
     workflow = json.loads(workflow_path.read_text(encoding="utf-8"))
     node_mappings = load_node_mappings(repo_root)
 

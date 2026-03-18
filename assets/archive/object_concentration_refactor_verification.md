@@ -3,8 +3,8 @@
 更新日: 2026-03-06
 
 参照:
-- `assets/object_concentration_refactor_spec.md`
-- `assets/object_concentration_refactor_evaluation.md`
+- `object_concentration_refactor_spec.md`
+- `object_concentration_refactor_evaluation.md`
 - `assets/results/audit/object_eval_20260306/`
 - `assets/results/audit/object_refactor_20260306_r2/`
 
@@ -21,9 +21,9 @@
 
 ## 2. ファイル単位サマリ
 
-- `assets/object_concentration_refactor_spec.md`
+- `object_concentration_refactor_spec.md`
   - object concentration 専用の新規仕様書を追加
-- `assets/object_concentration_refactor_verification.md`
+- `object_concentration_refactor_verification.md`
   - 段階検証と before/after を記録
 - `vocab/data/object_concentration_policy.json`
   - background/action/audit/anchor を分離した policy layer を追加
