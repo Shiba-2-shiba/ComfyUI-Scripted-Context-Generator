@@ -6,12 +6,10 @@ import random
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, current_dir)
 
-from nodes_garnish import GarnishSampler
+from pipeline.context_pipeline import sample_garnish_fields
 
 def test_personality_injection():
     print("=== Starting Phase 3 Verification: Personality Based Interaction ===")
-    
-    node = GarnishSampler()
     seed = 100
     
     # Test Cases
@@ -31,7 +29,7 @@ def test_personality_injection():
         for i in range(trials):
             # args: action_text, meta_mood_key, seed, max_items, include_camera, ... personality
             # We use "daily life" triggers in action_text to allow many micro-actions
-            result = node.sample(
+            result = sample_garnish_fields(
                 "relaxing in room", # action_text 
                 "neutral",          # meta_mood_key (neutral, so personality should dominate)
                 seed + i,           # seed

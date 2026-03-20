@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Bias audit runner for ThemeLocationExpander / SceneVariator pipeline.
+Bias audit runner for shared location expansion / context scene-stage pipeline.
 
 Outputs CSV files including:
   - audit_run_meta.csv
@@ -36,12 +36,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from nodes_dictionary_expand import DictionaryExpand, ThemeClothingExpander, ThemeLocationExpander  # noqa: E402
-from nodes_garnish import GarnishSampler  # noqa: E402
-from nodes_pack_parser import PackParser  # noqa: E402
+from core.context_ops import patch_context  # noqa: E402
 from nodes_prompt_cleaner import PromptCleaner  # noqa: E402
-from nodes_scene_variator import SceneVariator  # noqa: E402
-from nodes_simple_template import SimpleTemplateBuilder  # noqa: E402
+from pipeline.content_pipeline import build_prompt_text, expand_clothing_prompt, expand_dictionary_value, expand_location_prompt  # noqa: E402
+from pipeline.context_pipeline import apply_scene_variation, sample_garnish_fields  # noqa: E402
+from pipeline.source_pipeline import parse_prompt_source_fields  # noqa: E402
 from vocab.garnish.logic import _has_physical_expression  # noqa: E402
 from vocab.seed_utils import mix_seed  # noqa: E402
 import background_vocab  # noqa: E402
@@ -487,13 +486,6 @@ def generate_samples(
     lighting_mode: str,
     input_mode: str,
 ) -> List[SampleRow]:
-    parser = PackParser()
-    scene = SceneVariator()
-    cloth_exp = ThemeClothingExpander()
-    loc_exp = ThemeLocationExpander()
-    dict_exp = DictionaryExpand()
-    garnish_node = GarnishSampler()
-    template_node = SimpleTemplateBuilder()
     cleaner = PromptCleaner()
     compat = load_scene_compatibility()
 
@@ -501,11 +493,18 @@ def generate_samples(
 
     for i in range(sample_count):
         seed = seed_start + i
-        subj, costume, loc, action, meta_mood_key, meta_style, scene_tags = parser.parse("{}", seed)
+        subj, costume, loc, action, meta_mood_key, meta_style, scene_tags = parse_prompt_source_fields("{}", seed)
 
-        subj2, costume2, selected_loc, selected_action, debug_info = scene.variate(
-            subj, costume, loc, action, seed, variation_mode
+        scene_context = patch_context(
+            {},
+            updates={"subj": subj, "costume": costume, "loc": loc, "action": action, "seed": seed},
         )
+        scene_context, debug_info = apply_scene_variation(scene_context, seed, variation_mode)
+        subj2 = scene_context.subj
+        costume2 = scene_context.costume
+        selected_loc = scene_context.loc
+        selected_action = scene_context.action
+        debug_info = debug_info.to_dict()
         decision = debug_info.get("decision", {}) if isinstance(debug_info, dict) else {}
         selected_source = str(decision.get("selected_source", "original"))
         action_pool_loc = selected_loc if (selected_loc != loc and decision.get("action_updated")) else ""
@@ -515,11 +514,11 @@ def generate_samples(
 
         exp_input = choose_loc_tag_input(selected_loc, input_mode, seed)
         sim = _simulate_location_expand(exp_input, seed, location_mode, lighting_mode)
-        loc_prompt = loc_exp.expand_location(exp_input, seed, location_mode, lighting_mode)[0]
+        loc_prompt = expand_location_prompt(exp_input, seed, location_mode, lighting_mode)
         sim["final_prompt"] = loc_prompt
-        costume_prompt = cloth_exp.expand_clothing(costume2, seed, "random", 0.3, "")[0]
-        meta_mood_text = dict_exp.expand(meta_mood_key, "mood_map.json", meta_mood_key, seed)[0]
-        garnish_text, garnish_debug = garnish_node.sample(
+        costume_prompt = expand_clothing_prompt(costume2, seed, "random", 0.3, "")
+        meta_mood_text = expand_dictionary_value(meta_mood_key, "mood_map.json", meta_mood_key, seed)[0]
+        garnish_text, garnish_debug = sample_garnish_fields(
             action_text=selected_action,
             meta_mood_key=meta_mood_key,
             seed=seed,
@@ -530,7 +529,7 @@ def generate_samples(
             scene_tags=scene_tags,
             personality="",
         )
-        raw_prompt = template_node.build(
+        raw_prompt = build_prompt_text(
             template="",
             composition_mode=True,
             seed=seed,
@@ -541,8 +540,8 @@ def generate_samples(
             garnish=garnish_text,
             meta_mood=meta_mood_text,
             meta_style=meta_style,
-        )[0]
-        final_prompt = cleaner.clean(raw_prompt, mode="nl", drop_empty_lines=True)[0]
+        )
+        final_prompt = cleaner.clean(mode="nl", drop_empty_lines=True, text=raw_prompt)[0]
 
         obj_bg, _ = detect_objects(loc_prompt)
         obj_action, _ = detect_objects(selected_action)
@@ -1097,7 +1096,7 @@ def build_data_quality_rows(run_id: str) -> List[Dict[str, Any]]:
                     "issue_type": "duplicate_in_list",
                     "duplicate_count": c,
                     "severity": "high",
-                    "remarks": "duplicates increase effective weight in SceneVariator",
+                    "remarks": "duplicates increase effective weight in the scene variation stage",
                 }
             )
 
@@ -1116,7 +1115,7 @@ def build_data_quality_rows(run_id: str) -> List[Dict[str, Any]]:
                         "issue_type": "duplicate_in_list",
                         "duplicate_count": c,
                         "severity": "high",
-                        "remarks": "duplicates increase effective weight in SceneVariator",
+                        "remarks": "duplicates increase effective weight in the scene variation stage",
                     }
                 )
 

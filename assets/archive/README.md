@@ -1,0 +1,13 @@
+Historical one-off scripts kept only for reference.
+
+They are not part of the active context-first test or verification baseline.
+This includes the old `runner.py` entry point that predated the current
+context-only validation flow.
+
+Historical planning/checklist documents are also archived here when they no
+longer describe the live context-only operating model.
+
+This archive also contains superseded design reviews and refactor specs that
+document earlier phases but no longer act as live implementation guidance.
+Historical tests that only guarded retired migration/cutover inventory may also
+be kept here once they stop contributing to the active context-only baseline.

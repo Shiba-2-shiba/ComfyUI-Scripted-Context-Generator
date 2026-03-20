@@ -38,3 +38,8 @@ ENV/
 assets/results/
 users/
 *.log
+test_logs/
+simple_template_debug.log
+current_resources.md
+ComfyUI/
+ComfyUI_frontend/

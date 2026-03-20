@@ -23,10 +23,12 @@ TEST_ACTION = "standing in a room"
 TEST_MOOD = "neutral"
 
 
-def collect_tags(node, personality, seeds):
+def collect_tags(personality, seeds):
+    from pipeline.context_pipeline import sample_garnish_fields
+
     tags_all = []
     for seed in seeds:
-        garnish, _ = node.sample(
+        garnish, _ = sample_garnish_fields(
             action_text=TEST_ACTION,
             meta_mood_key=TEST_MOOD,
             seed=seed,
@@ -42,9 +44,6 @@ def collect_tags(node, personality, seeds):
 
 
 def main(check_diversity=False):
-    from nodes_garnish import GarnishSampler
-    node = GarnishSampler()
-
     print("=" * 60)
     print("  verify_personality_variation.py")
     print("  personality 別 garnish tag 分布チェック")
@@ -52,7 +51,7 @@ def main(check_diversity=False):
 
     distribution = {}
     for personality in PERSONALITIES:
-        tags = collect_tags(node, personality, TEST_SEEDS)
+        tags = collect_tags(personality, TEST_SEEDS)
         counter = Counter(tags)
         top5 = [tag for tag, _ in counter.most_common(5)]
         distribution[personality] = {

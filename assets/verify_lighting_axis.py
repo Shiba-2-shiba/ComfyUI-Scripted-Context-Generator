@@ -3,8 +3,9 @@
 verify_lighting_axis.py — 光源・時間帯軸の検証スクリプト
 
 Phase 0: background_packs.json に lighting フィールドが存在しないことを記録。
-Phase 3実装後: 各パックにlightingフィールドが存在し、ThemeLocationExpanderが
-              lighting_modeパラメータで光源情報を出力に含めることを確認する。
+Phase 3実装後: 各パックにlightingフィールドが存在し、shared location
+              expansion helper が lighting_mode パラメータで光源情報を
+              出力に含めることを確認する。
 
 Usage:
     python assets/verify_lighting_axis.py
@@ -70,17 +71,16 @@ def check_lighting_field_in_packs(c):
 
 
 def check_location_expander_lighting_mode(c):
-    """ThemeLocationExpanderがlighting_modeパラメータを受け付けるか確認"""
-    print("\n=== 2. ThemeLocationExpander lighting_mode パラメータチェック ===")
+    """shared location expansion helper が lighting_mode を受け付けるか確認"""
+    print("\n=== 2. shared location expansion lighting_mode パラメータチェック ===")
 
-    from nodes_dictionary_expand import ThemeLocationExpander
-    node = ThemeLocationExpander()
+    from pipeline.content_pipeline import expand_location_prompt
 
-    sig = inspect.signature(node.expand_location)
+    sig = inspect.signature(expand_location_prompt)
     params = list(sig.parameters.keys())
 
     if "lighting_mode" in params:
-        c.ok(f"ThemeLocationExpander.expand_location() に lighting_mode パラメータあり")
+        c.ok("shared location expansion helper に lighting_mode パラメータあり")
 
         from background_vocab import LOC_TAG_MAP
         test_locs = [loc for loc in TEST_LOC_TAGS if loc in LOC_TAG_MAP][:3]
@@ -88,16 +88,15 @@ def check_location_expander_lighting_mode(c):
         for loc in test_locs:
             outputs = set()
             for seed in range(5):
-                out = node.expand_location(loc_tag=loc, seed=seed,
-                                           mode="detailed", lighting_mode="auto")
-                outputs.add(out[0])
+                out = expand_location_prompt(loc_tag=loc, seed=seed, mode="detailed", lighting_mode="auto")
+                outputs.add(out)
             if len(outputs) > 1:
                 c.ok(f"  {loc}: lighting_mode=auto で複数バリエーションあり ({len(outputs)} 種)")
             else:
                 c.warn(f"  {loc}: lighting_mode=auto でも出力が単一 — lightingフィールド要確認")
         return True
     else:
-        c.warn(f"ThemeLocationExpander.expand_location() に lighting_mode パラメータなし [Phase 3で対応予定]")
+        c.warn("shared location expansion helper に lighting_mode パラメータなし [Phase 3で対応予定]")
         c.warn(f"  現在のパラメータ: {params}")
         return False
 
@@ -106,10 +105,9 @@ def check_lighting_variation(c):
     """光源モードによる出力バリエーションを確認（Phase 3実装後のみ有意）"""
     print("\n=== 3. 光源バリエーション確認 ===")
 
-    from nodes_dictionary_expand import ThemeLocationExpander
-    node = ThemeLocationExpander()
+    from pipeline.content_pipeline import expand_location_prompt
 
-    sig = inspect.signature(node.expand_location)
+    sig = inspect.signature(expand_location_prompt)
     if "lighting_mode" not in sig.parameters:
         c.warn("lighting_mode パラメータ未実装のためスキップ [Phase 3待ち]")
         return True
@@ -118,10 +116,8 @@ def check_lighting_variation(c):
     test_locs = [loc for loc in TEST_LOC_TAGS if loc in LOC_TAG_MAP][:3]
 
     for loc in test_locs:
-        out_auto = node.expand_location(loc_tag=loc, seed=42,
-                                        mode="detailed", lighting_mode="auto")[0]
-        out_off = node.expand_location(loc_tag=loc, seed=42,
-                                       mode="detailed", lighting_mode="off")[0]
+        out_auto = expand_location_prompt(loc_tag=loc, seed=42, mode="detailed", lighting_mode="auto")
+        out_off = expand_location_prompt(loc_tag=loc, seed=42, mode="detailed", lighting_mode="off")
         if out_auto != out_off:
             c.ok(f"  {loc}: auto vs off で出力が異なる（光源情報が付加されている）")
         else:

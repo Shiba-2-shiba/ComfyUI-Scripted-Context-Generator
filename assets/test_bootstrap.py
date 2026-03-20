@@ -35,12 +35,7 @@ _MODULE_MAP = {
     "improved_pose_emotion_vocab":  f"{_pkg_name}.improved_pose_emotion_vocab",
 
     # ノードモジュール
-    "nodes_pack_parser":            f"{_pkg_name}.nodes_pack_parser",
-    "nodes_dictionary_expand":      f"{_pkg_name}.nodes_dictionary_expand",
-    "nodes_simple_template":        f"{_pkg_name}.nodes_simple_template",
-    "nodes_garnish":                f"{_pkg_name}.nodes_garnish",
     "nodes_prompt_cleaner":         f"{_pkg_name}.nodes_prompt_cleaner",
-    "nodes_scene_variator":         f"{_pkg_name}.nodes_scene_variator",
 }
 
 _loaded = 0

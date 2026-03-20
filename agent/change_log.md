@@ -21,3 +21,11 @@ Format:
   - Files: `assets/object_concentration_refactor_evaluation.md`, `agent/memory/session_notes.md`, `agent/decisions_log.md`, `agent/change_log.md`
 - 2026-03-06: Implemented the object-concentration refactor with policy-based redistribution, phrase-aware audit normalization, and staged verification.
   - Files: `assets/object_concentration_refactor_spec.md`, `assets/object_concentration_refactor_verification.md`, `vocab/data/object_concentration_policy.json`, `nodes_dictionary_expand.py`, `nodes_scene_variator.py`, `tools/run_bias_audit.py`, `vocab/data/background_packs.json`, `vocab/data/action_pools.json`, `vocab/data/scene_axis.json`, `assets/test_bias_audit_metrics.py`, `assets/test_bias_controls.py`, `agent/memory/session_notes.md`, `agent/decisions_log.md`, `agent/change_log.md`
+- 2026-03-18: Completed the context-first replacement, retired compat/bridge surfaces, and moved the public node surface to `nodes_context.py` plus `nodes_prompt_cleaner.py`.
+  - Files: `__init__.py`, `nodes_context.py`, `nodes_prompt_cleaner.py`, `pipeline/`, `workflow_samples.json`, `ComfyUI-workflow-context.json`, `docs/context_refactor/*`
+- 2026-03-18: Moved frontend/browser validation source assets to repo-local `verification/` and switched wrappers to sync into replaceable upstream checkouts before running.
+  - Files: `verification/`, `tools/sync_upstream_verification_assets.ps1`, `tools/run_frontend_workflow_validation.ps1`, `tools/run_custom_workflow_roundtrip.ps1`, `docs/context_refactor/context_migration_notes.md`, `assets/ARCHITECTURE.md`
+- 2026-03-18: Archived old workflow-repair tools, historical specs, cutover-only tooling, and legacy workflow fixtures to reduce the active maintenance surface.
+  - Files: `assets/archive/`, `tools/archive/`, `docs/context_refactor/archive/`, `.gitignore`, `docs/context_refactor/context_v2_progress.md`
+- 2026-03-18: Refreshed `agent/` metadata to match the context-only architecture and current validation flow.
+  - Files: `agent/memory/global_notes.md`, `agent/memory/session_notes.md`, `agent/state_schema_code.yaml`, `agent/state_schema_comfyui.yaml`, `agent/change_log.md`, `agent/decisions_log.md`

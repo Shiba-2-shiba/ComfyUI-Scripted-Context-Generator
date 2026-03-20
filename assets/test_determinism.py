@@ -9,21 +9,22 @@ import os
 import json
 import unittest
 
-import test_bootstrap  # noqa: F401 — パッケージコンテキストを自動解決
+ASSETS_DIR = os.path.dirname(os.path.abspath(__file__))
+if ASSETS_DIR not in sys.path:
+    sys.path.insert(0, ASSETS_DIR)
 
-from nodes_pack_parser import PackParser
-from nodes_dictionary_expand import DictionaryExpand, ThemeClothingExpander, ThemeLocationExpander
-from nodes_simple_template import SimpleTemplateBuilder
-from nodes_garnish import GarnishSampler
+import test_bootstrap  # noqa: F401 — パッケージコンテキストを自動解決
+from pipeline.content_pipeline import (
+    build_prompt_text,
+    expand_clothing_prompt,
+    expand_dictionary_value,
+    expand_location_prompt,
+)
+from pipeline.context_pipeline import sample_garnish_fields
+from pipeline.source_pipeline import parse_prompt_source_fields
 
 class TestDeterminism(unittest.TestCase):
     def setUp(self):
-        self.parser = PackParser()
-        self.cloth  = ThemeClothingExpander()
-        self.locexp = ThemeLocationExpander()
-        self.gar    = GarnishSampler()
-        self.dictex = DictionaryExpand()
-        self.tmpl   = SimpleTemplateBuilder()
         self.template = "A of {subj} wearing {costume}. She is {action}, {garnish}. The background is {loc}, with {meta_mood}."
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.mood_map = os.path.join(base_dir, "mood_map.json")
@@ -37,14 +38,19 @@ class TestDeterminism(unittest.TestCase):
 
     def generate_once(self, seed):
         js = json.dumps(self.pack, ensure_ascii=False)
-        subj, costume_key, loc_tag, action_raw, meta_mood_key, raw_meta_style, scene_tags = self.parser.parse(js, seed)
+        subj, costume_key, loc_tag, action_raw, meta_mood_key, raw_meta_style, scene_tags = parse_prompt_source_fields(js, seed)
         meta_style = raw_meta_style
 
-        costume = self.cloth.expand_clothing(theme_key=costume_key, seed=seed, outfit_mode="random", outerwear_chance=0.3)[0]
-        loc = self.locexp.expand_location(loc_tag=loc_tag, seed=seed, mode="detailed")[0]
-        meta_mood = self.dictex.expand(key=meta_mood_key, json_path=self.mood_map, default_value=meta_mood_key, seed=seed)[0]
+        costume = expand_clothing_prompt(costume_key, seed, "random", 0.3)
+        loc = expand_location_prompt(loc_tag, seed, "detailed")
+        meta_mood = expand_dictionary_value(
+            key=meta_mood_key,
+            json_path=self.mood_map,
+            default_value=meta_mood_key,
+            seed=seed,
+        )[0]
 
-        garnish = self.gar.sample(
+        garnish = sample_garnish_fields(
             action_text=action_raw,
             meta_mood_key=meta_mood_key,
             seed=seed,
@@ -53,7 +59,7 @@ class TestDeterminism(unittest.TestCase):
             context_loc=loc_tag,
             context_costume=costume_key,
         )[0]
-        final = self.tmpl.build(
+        final = build_prompt_text(
             template=self.template,
             composition_mode=False,
             seed=seed,
@@ -64,7 +70,7 @@ class TestDeterminism(unittest.TestCase):
             garnish=garnish,
             meta_mood=meta_mood,
             meta_style=meta_style
-        )[0]
+        )
         return final
 
     def test_same_seed_produces_identical_output(self):

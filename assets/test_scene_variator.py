@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Test script for SceneVariator logic"""
+"""Test script for context scene variation logic."""
 import json
 import os
 import random

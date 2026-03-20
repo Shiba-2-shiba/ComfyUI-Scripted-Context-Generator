@@ -5,18 +5,17 @@ project: "ComfyUI-Scripted-Context-Generator"
 # ComfyUI ワークフロープロジェクトの状態管理。
 
 workflow:
-  goal: "Rule-based / deterministic prompt generation for ComfyUI"  # README ベース
-  base_model: ""          # 例: "SDXL / SD1.5"（このリポジトリ自体は生成モデル非依存）
-  output_format: ""       # 例: "PNG 1024x1024"
+  goal: "Rule-based / deterministic prompt generation for ComfyUI"
+  base_model: ""
+  output_format: ""
 
 constraints:
-  vram_limit: ""          # 例: "8GB"
-  forbidden_nodes: []     # 使用禁止のノード
-  must_include_nodes:     # READMEの推奨基本フロー
-    - "PackParser"
-    - "SceneVariator"
-    - "GarnishSampler"
-    - "SimpleTemplateBuilder"
+  vram_limit: ""
+  forbidden_nodes: []
+  must_include_nodes:
+    - "ContextSource"
+    - "ContextPromptBuilder"
+    - "ContextInspector"
     - "PromptCleaner"
 
 status:
@@ -25,15 +24,14 @@ status:
   documented: true
 
 models_used: []
-# 例:
-# - name: "dreamshaper_xl.safetensors"
-#   type: checkpoint
-#   source: "CivitAI"
 
 global_notes:
-  - "ComfyUI version: 未確認（この作業環境ではリポジトリ単体のため未検出）"
-  - "推奨フローは README 記載の段階処理を維持する"
+  - "ComfyUI version: 未確認（この作業環境では upstream checkout を差し替え前提で扱う）"
+  - "推奨フローは Context* end-to-end + PromptCleaner"
   - "seed 再現性を損なう変更は要検証"
+  - "active workflow sample は ComfyUI-workflow-context.json のみ"
+  - "frontend/browser 検証資産は verification/ に置き、upstream frontend へ同期して使う"
 session_notes:
   - "2026-02-26: Agent state 初期入力済み。ComfyUI本体バージョンとVRAM制約は後で追記"
-  - "2026-02-27: 偏り監査CSVパイプラインと偏り抑制ロジックを実装・検証"
+  - "2026-03-18: compat / bridge / legacy node surface は退役済み"
+  - "2026-03-18: CPU-only でも frontend schema / GUI round-trip 検証が可能"

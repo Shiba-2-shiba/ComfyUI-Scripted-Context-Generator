@@ -352,12 +352,8 @@ def check_seed_determinism() -> None:
     """同一seed → 同一出力 を検証"""
     print("\n=== 3. Seed Determinism ===")
 
-    from nodes_dictionary_expand import ThemeClothingExpander, ThemeLocationExpander
-    from nodes_garnish import GarnishSampler
-
-    cloth = ThemeClothingExpander()
-    loc_exp = ThemeLocationExpander()
-    garnish = GarnishSampler()
+    from pipeline.content_pipeline import expand_clothing_prompt, expand_location_prompt
+    from pipeline.context_pipeline import sample_garnish_fields
 
     test_seeds = [0, 42, 12345, 99999, 2**32 - 1]
 
@@ -368,16 +364,16 @@ def check_seed_determinism() -> None:
     clothing_ok = True
     for seed in test_seeds:
         for tk in theme_keys:
-            r1 = cloth.expand_clothing(theme_key=tk, seed=seed, outfit_mode="random", outerwear_chance=0.3)
-            r2 = cloth.expand_clothing(theme_key=tk, seed=seed, outfit_mode="random", outerwear_chance=0.3)
+            r1 = expand_clothing_prompt(tk, seed, "random", 0.3)
+            r2 = expand_clothing_prompt(tk, seed, "random", 0.3)
             if r1 != r2:
-                _fail(f"ThemeClothingExpander non-deterministic: seed={seed}, theme={tk}")
+                _fail(f"clothing expansion non-deterministic: seed={seed}, theme={tk}")
                 clothing_ok = False
                 break
         if not clothing_ok:
             break
     if clothing_ok:
-        _ok(f"ThemeClothingExpander deterministic across {len(test_seeds)} seeds × {len(theme_keys)} themes")
+        _ok(f"clothing expansion deterministic across {len(test_seeds)} seeds × {len(theme_keys)} themes")
 
     # Test location expander
     import background_vocab as bg
@@ -386,39 +382,39 @@ def check_seed_determinism() -> None:
     location_ok = True
     for seed in test_seeds:
         for lt in loc_tags:
-            r1 = loc_exp.expand_location(loc_tag=lt, seed=seed, mode="detailed")
-            r2 = loc_exp.expand_location(loc_tag=lt, seed=seed, mode="detailed")
+            r1 = expand_location_prompt(lt, seed, "detailed")
+            r2 = expand_location_prompt(lt, seed, "detailed")
             if r1 != r2:
-                _fail(f"ThemeLocationExpander non-deterministic: seed={seed}, loc={lt}")
+                _fail(f"location expansion non-deterministic: seed={seed}, loc={lt}")
                 location_ok = False
                 break
         if not location_ok:
             break
     if location_ok:
-        _ok(f"ThemeLocationExpander deterministic across {len(test_seeds)} seeds × {len(loc_tags)} tags")
+        _ok(f"location expansion deterministic across {len(test_seeds)} seeds × {len(loc_tags)} tags")
 
-    # Test garnish sampler
+    # Test context garnish helper
     garnish_ok = True
     test_actions = ["sitting reading a book", "running", "singing on stage"]
     test_moods = ["joy", "sadness", "neutral"]
     for seed in test_seeds:
         for action, mood in zip(test_actions, test_moods):
-            r1 = garnish.sample(
+            r1 = sample_garnish_fields(
                 action_text=action, meta_mood_key=mood, seed=seed,
                 max_items=3, include_camera=False, context_loc="classroom", context_costume="school_uniform"
             )
-            r2 = garnish.sample(
+            r2 = sample_garnish_fields(
                 action_text=action, meta_mood_key=mood, seed=seed,
                 max_items=3, include_camera=False, context_loc="classroom", context_costume="school_uniform"
             )
             if r1 != r2:
-                _fail(f"GarnishSampler non-deterministic: seed={seed}, action={action}")
+                _fail(f"Context garnish helper non-deterministic: seed={seed}, action={action}")
                 garnish_ok = False
                 break
         if not garnish_ok:
             break
     if garnish_ok:
-        _ok(f"GarnishSampler deterministic across {len(test_seeds)} seeds × {len(test_actions)} actions")
+        _ok(f"Context garnish helper deterministic across {len(test_seeds)} seeds × {len(test_actions)} actions")
 
 
 # =========================================================================

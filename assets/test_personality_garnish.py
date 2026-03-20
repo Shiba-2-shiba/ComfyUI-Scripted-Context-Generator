@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-test_personality_garnish.py — GarnishSampler personality連動ユニットテスト
+test_personality_garnish.py — context garnish stage personality連動ユニットテスト
 
 Phase 0: テストを先行作成（現状はpersonalityが未接続なので分布テストはスキップ）
 Phase 1実装後: PERSONALITY_DIVERSITYテストがPASSになることを確認する
 
 Usage:
     python assets/test_personality_garnish.py
-    # またはrunner.py経由
-    python assets/runner.py unit
 """
 import sys
 import os
@@ -18,12 +16,12 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 
 
-class TestGarnishSamplerPersonality(unittest.TestCase):
-    """GarnishSampler の personality 引数が正しく動作するかを検証"""
+class TestContextGarnishPersonality(unittest.TestCase):
+    """context garnish stage の personality 引数が正しく動作するかを検証"""
 
     def setUp(self):
-        from nodes_garnish import GarnishSampler
-        self.node = GarnishSampler()
+        from pipeline.context_pipeline import sample_garnish_fields
+        self.sample_garnish = sample_garnish_fields
         self.personalities = [
             "shy", "confident", "energetic", "gloomy",
             "aggressive", "mysterious", "neutral", ""
@@ -39,7 +37,7 @@ class TestGarnishSamplerPersonality(unittest.TestCase):
         """全personalityで出力がstr型かつ非空であることを確認"""
         for personality in self.personalities:
             with self.subTest(personality=personality):
-                garnish, debug = self.node.sample(
+                garnish, debug = self.sample_garnish(
                     action_text="walking through a hallway",
                     meta_mood_key="quiet",
                     seed=42,
@@ -68,14 +66,14 @@ class TestGarnishSamplerPersonality(unittest.TestCase):
                     scene_tags="{}",
                     personality=personality,
                 )
-                r1 = self.node.sample(**args)
-                r2 = self.node.sample(**args)
+                r1 = self.sample_garnish(**args)
+                r2 = self.sample_garnish(**args)
                 self.assertEqual(r1[0], r2[0],
                     f"personality={personality!r}: non-deterministic output")
 
     def test_no_crash_with_unknown_personality(self):
         """未知のpersonalityでクラッシュしないこと"""
-        garnish, debug = self.node.sample(
+        garnish, debug = self.sample_garnish(
             action_text="running",
             meta_mood_key="energetic_joy",
             seed=99,
@@ -92,7 +90,7 @@ class TestGarnishSamplerPersonality(unittest.TestCase):
         """max_itemsの上限が守られること"""
         for max_items in [1, 2, 3, 5]:
             with self.subTest(max_items=max_items):
-                garnish, _ = self.node.sample(
+                garnish, _ = self.sample_garnish(
                     action_text="dancing",
                     meta_mood_key="energetic_joy",
                     seed=100,
@@ -118,8 +116,8 @@ class TestPersonalityDiversityPhase1(unittest.TestCase):
     PHASE1_IMPLEMENTED = True  # Phase 1実装完了
 
     def setUp(self):
-        from nodes_garnish import GarnishSampler
-        self.node = GarnishSampler()
+        from pipeline.context_pipeline import sample_garnish_fields
+        self.sample_garnish = sample_garnish_fields
 
     @unittest.skipIf(not PHASE1_IMPLEMENTED, "Phase 1未実装: personality→garnishバイアス未接続")
     def test_shy_vs_confident_tag_distribution(self):
@@ -132,7 +130,7 @@ class TestPersonalityDiversityPhase1(unittest.TestCase):
         def collect_tags(personality, seeds=range(10)):
             tags_all = []
             for seed in seeds:
-                garnish, _ = self.node.sample(
+                garnish, _ = self.sample_garnish(
                     action_text="standing",
                     meta_mood_key="neutral",
                     seed=seed,
@@ -158,7 +156,7 @@ class TestPersonalityDiversityPhase1(unittest.TestCase):
                        "bright atmosphere", "natural lighting", "bloom", "glowing light"}
         found_bright = []
         for seed in range(20):
-            garnish, _ = self.node.sample(
+            garnish, _ = self.sample_garnish(
                 action_text="standing",
                 meta_mood_key="melancholic_sadness",
                 seed=seed,

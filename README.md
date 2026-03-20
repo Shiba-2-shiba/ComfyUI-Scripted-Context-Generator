@@ -15,14 +15,16 @@ This custom-node pack generates natural-language prompts via deterministic/rule-
 
 ---
 
-## このノードの現在地（強化ポイント）
+## このリポジトリの現在地
 
 従来の「テンプレート置換」中心から、以下のように強化されています。
 
-- **構造化フロー化**: `PackParser` → `SceneVariator` → `GarnishSampler` → `SimpleTemplateBuilder` → `PromptCleaner` の段階処理で文生成を安定化。
+- **context-first を主系として確立**: `context_json` を中心に受け渡す新ノード群を正式系として扱い、今後の機能追加先もここに集約します。
+- **legacy/bridge は退役済み**: 旧来の compat ノードと bridge ノードは active surface から外れ、現在の公開面は context-first のみです。
+- **検証 baseline も context-only**: active workflow sample と frontend / GUI round-trip の検証対象は `ComfyUI-workflow-context.json` のみです。
 - **語彙モジュール分離**: `vocab/` 配下に衣装・背景・ガーニッシュ語彙を分割し、データ差し替えで拡張しやすい構成。
 - **検証資産の整備**: `assets/` にユニットテスト、整合性検証、分布検証、ベースライン生成を集約。
-- **再現性の担保**: 各ノードの seed 入力により、同条件で同一出力を再現可能。
+- **全面移行の準備完了**: schema, workflow asset, frontend save/reload, GUI round-trip まで検証済みで、以後は新規系に寄せて改修を進める段階です。
 
 ---
 
@@ -59,37 +61,59 @@ This custom-node pack generates natural-language prompts via deterministic/rule-
 
 ## 主なノード
 
-- `PackParser`  
-  `prompts.jsonl`（または入力 JSON）から `subj / costume / loc / action / meta_*` を抽出。
+### Primary Nodes
 
-- `SceneVariator`  
-  `scene_compatibility.json` と `action_pools.json` を使ってロケーション・行動候補の整合性を補強。
+- `ContextSource`  
+  `prompts.jsonl` または JSON 文字列から `context_json` を生成する、context-first 系の起点ノードです。
 
-- `ThemeClothingExpander` / `ThemeLocationExpander`  
-  テーマキー・場所キーを詳細表現へ展開（`vocab/data` を参照）。
+- `ContextCharacterProfile`  
+  キャラ外見・性格・パレットを `context_json` に反映します。
 
-- `GarnishSampler`  
-  ムード・ポーズ・微動作などの補助描写を生成し、`SimpleTemplateBuilder` の `garnish` 入力へ渡します。
+- `ContextSceneVariator` / `ContextClothingExpander` / `ContextLocationExpander` / `ContextMoodExpander` / `ContextGarnish`  
+  シーン変化、衣装展開、場所展開、ムード展開、補助描写追加をすべて `context_json` 上で行います。
 
-- `SimpleTemplateBuilder`  
-  プレースホルダを使って自然文を構築。未指定時は `templates.txt` を利用。
+- `ContextPromptBuilder` / `ContextInspector`  
+  `context_json` から最終プロンプトを組み立てるノードと、中身を確認するデバッグノードです。
 
 - `PromptCleaner`  
   句読点、空白、不要区切りなどをルールベースで整形。
 
-- `CharacterProfileNode`  
-  キャラプロファイルから外見・性格・カラーパレットを取り出し、文生成に供給。
+---
+
+## 基本フロー
+
+### 新規開発フロー
+
+新規 workflow は `Context*` 系のみを使う前提で構成してください。
+
+1. `ContextSource` で `context_json` を生成
+2. `ContextCharacterProfile` でキャラクター情報を追加
+3. `ContextSceneVariator` でシーン整合性を調整
+4. `ContextClothingExpander` / `ContextLocationExpander` / `ContextMoodExpander` / `ContextGarnish` で描写を拡張
+5. `ContextPromptBuilder` で自然言語文に組み立て
+6. `PromptCleaner` で最終整形
+
+推奨サンプル:
+- `ComfyUI-workflow-context.json`
+
+### 最終方針
+
+このリポジトリは、最終的に旧来の field-by-field 系から `context_json` 中心の新規設計へ全面移行する想定です。
+
+1. 新機能は `Context*` 系と shared `pipeline/` にのみ追加します。
+2. compat ノードは退役済みで、以後は再導入しません。
+3. bridge ノードも退役済みで、今後の移行導線は historical note としてのみ保持します。
+4. workflow baseline と round-trip 検証は `ComfyUI-workflow-context.json` のみです。
 
 ---
 
-## 基本フロー（推奨）
+## 移行ロードマップ
 
-1. `PackParser` でベース要素を抽出（空入力時は `prompts.jsonl`）
-2. `SceneVariator` でシーン整合性を調整
-3. `ThemeClothingExpander` / `ThemeLocationExpander` で描写を具体化
-4. `GarnishSampler` で補助描写を追加
-5. `SimpleTemplateBuilder` で自然言語文に組み立て
-6. `PromptCleaner` で最終整形
+1. `Context*` 系をこのリポジトリの正式 API として固定する
+2. 既存 workflow は historical reference とし、新規運用は `context_json` ベースへ統一する
+3. README・sample workflow・検証導線を新規系中心に保つ
+4. transition/compat の historical note は archive と docs に限定する
+5. その後の機能追加は新規設計版の上で継続する
 
 ---
 
