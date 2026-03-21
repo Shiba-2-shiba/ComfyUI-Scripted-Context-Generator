@@ -11,17 +11,16 @@ else:
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 DATA_DIR = os.path.join(ROOT_DIR, "vocab", "data")
 
-_PREFERRED_BASE_MOODS = {
-    "quiet_focused",
-    "energetic_joy",
-    "peaceful_relaxed",
-    "whimsical_playful",
-    "romantic_allure",
-}
-_DISCOURAGED_BASE_MOODS = {
-    "melancholic_sadness",
-    "intense_anger",
-    "creepy_fear",
+_MOOD_SOURCE_SCORE = {
+    "energetic_joy": 4,
+    "whimsical_playful": 3,
+    "romantic_allure": 2,
+    "mysterious_curious": 1,
+    "quiet_focused": 0,
+    "peaceful_relaxed": 0,
+    "melancholic_sadness": -4,
+    "intense_anger": -5,
+    "creepy_fear": -5,
 }
 _RARE_WEATHER_LOC_HINTS = {
     "rainy_alley",
@@ -76,10 +75,7 @@ def _source_payload_score(payload, daily_life_locs):
     elif loc:
         score -= 2
 
-    if mood in _PREFERRED_BASE_MOODS:
-        score += 4
-    elif mood in _DISCOURAGED_BASE_MOODS:
-        score -= 6
+    score += _MOOD_SOURCE_SCORE.get(mood, 0)
 
     if purpose in {"study", "rest", "shop", "work", "commute", "wait"}:
         score += 1

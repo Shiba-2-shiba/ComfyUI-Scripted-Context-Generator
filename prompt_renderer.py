@@ -8,10 +8,20 @@ import re
 from typing import Callable
 
 if __package__:
+    from .core.semantic_families import (
+        filter_semantic_family_tags,
+        semantic_families_for_text,
+        split_semantic_tags,
+    )
     from .core.semantic_policy import filter_candidate_strings, sanitize_text
     from .location_service import load_background_packs, resolve_location_key
     from .pipeline.action_generator import action_verb as normalize_action_verb
 else:
+    from core.semantic_families import (
+        filter_semantic_family_tags,
+        semantic_families_for_text,
+        split_semantic_tags,
+    )
     from core.semantic_policy import filter_candidate_strings, sanitize_text
     from location_service import load_background_packs, resolve_location_key
     from pipeline.action_generator import action_verb as normalize_action_verb
@@ -371,6 +381,44 @@ def _normalize_prompt(text):
     return sanitize_text(str(text))
 
 
+def _apply_semantic_family_budget(action, garnish, meta_mood, staging_tags):
+    action_text = sanitize_text(str(action or "").strip())
+    garnish_tags = split_semantic_tags(garnish)
+    meta_mood_text = sanitize_text(str(meta_mood or "").strip())
+    staging_tag_items = split_semantic_tags(staging_tags)
+
+    base_families = semantic_families_for_text(action_text) | semantic_families_for_text(meta_mood_text)
+    filtered_garnish_tags, dropped_garnish_tags, garnish_families = filter_semantic_family_tags(
+        garnish_tags,
+        blocked_families=base_families,
+        per_family_limit=1,
+    )
+    filtered_staging_tags, dropped_staging_tags, staging_families = filter_semantic_family_tags(
+        staging_tag_items,
+        blocked_families=base_families | garnish_families,
+        per_family_limit=1,
+    )
+
+    return {
+        "action": action_text,
+        "garnish": sanitize_text(", ".join(filtered_garnish_tags)),
+        "meta_mood": meta_mood_text,
+        "staging_tags": sanitize_text(", ".join(filtered_staging_tags)),
+        "debug": {
+            "base_families": sorted(base_families),
+            "garnish_input_tags": garnish_tags,
+            "garnish_kept_tags": filtered_garnish_tags,
+            "garnish_dropped_tags": dropped_garnish_tags,
+            "garnish_kept_families": sorted(garnish_families),
+            "staging_input_tags": staging_tag_items,
+            "staging_kept_tags": filtered_staging_tags,
+            "staging_dropped_tags": dropped_staging_tags,
+            "staging_kept_families": sorted(staging_families),
+            "final_families": sorted(base_families | garnish_families | staging_families),
+        },
+    }
+
+
 def _make_consistency_checker(rules, context_values):
     def is_consistent(template_part):
         for rule in rules:
@@ -476,6 +524,11 @@ def build_prompt_text(
 
     template_entries_fn = template_entries_fn or _template_entries
     rng = random.Random(seed)
+    semantic_layers = _apply_semantic_family_budget(action, garnish, meta_mood, staging_tags)
+    action = semantic_layers["action"]
+    garnish = semantic_layers["garnish"]
+    meta_mood = semantic_layers["meta_mood"]
+    staging_tags = semantic_layers["staging_tags"]
     subject_clause = sanitize_text(_join_nonempty([subj, f"in {costume}" if costume else ""], " "))
     action_clause = sanitize_text(_join_nonempty([action, garnish]))
     scene_clause = sanitize_text(_join_nonempty([f"in {loc}" if loc else "", meta_mood]))
@@ -581,6 +634,7 @@ def build_prompt_text(
         debug_payload = {
             "template_key": selected_template_key or str(template),
             "composition_mode": bool(composition_mode),
+            "semantic_family_budget": semantic_layers["debug"],
         }
         if composition_mode:
             debug_payload.update(

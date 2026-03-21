@@ -11,7 +11,7 @@
     "palette": "navy, cream",
     "nuance": "absorbed",
     "personality": "gentle",
-    "expected_prompt": "A solo girl with silver hair in forest green solid pleated skirt pleated pinafore dress, with school crest, white blouse worn underneath, right where her attention settles, reviewing notes at her desk before class, with gentle eyes, focused expression, attention locked forward, everything else widening into sun-drenched school classroom in late afternoon, teacher supervising, featuring bulletin board filled with colorful notices, smooth desk surfaces with graffiti, after classes end"
+    "expected_prompt": "A solo girl with silver hair in forest green solid pleated skirt pleated pinafore dress, with school crest, white blouse worn underneath, right where her attention settles, reviewing notes at her desk before class, with gentle eyes, attention locked forward, keeping every movement deliberate, everything else widening into sun-drenched school classroom in late afternoon, teacher supervising, featuring bulletin board filled with colorful notices, smooth desk surfaces with graffiti, after classes end"
   },
   {
     "name": "office_daily_life",
@@ -25,7 +25,7 @@
     "palette": "navy, white",
     "nuance": "absorbed",
     "personality": "serious",
-    "expected_prompt": "A solo girl with black hair in navy wool knee-length tucked-in button-down shirt and pressed tailored trousers, keeping to the edge of the moment, checking what needs to be handled next, focused gaze, brows knit in concentration, eyes fixed on what she is doing, in spacious modern open-plan office, clear city view, during early monday morning, scattered with stacked lunch containers beside a tote bag plus lanyards and ID cards hanging from a rack, featuring rows of white office desks with pinned notes and task trays, during a lunch break"
+    "expected_prompt": "A solo girl with black hair in navy wool knee-length tucked-in button-down shirt and pressed tailored trousers, keeping to the edge of the moment, checking what needs to be handled next, focused gaze, brows knit in concentration, ignoring the rest of the room, in spacious modern open-plan office, clear city view, during early monday morning, scattered with stacked lunch containers beside a tote bag plus lanyards and ID cards hanging from a rack, featuring rows of white office desks with pinned notes and task trays, during a lunch break"
   },
   {
     "name": "suburban_daily_life",
@@ -39,7 +39,7 @@
     "palette": "beige, moss green",
     "nuance": "content",
     "personality": "gentle",
-    "expected_prompt": "A solo girl with chestnut hair in moss green solid cashmere long-sleeve warm turtleneck sweater dress, with ribbed texture, covered in snow, wearing a moss green warm wool coat over it, turned toward the next exchange, in the middle of walking home with a small grocery bag, soft smile, cheeks lifting with a smile, looking up with expectation, carrying the moment forward, the rest of the moment opening into peaceful suburban residential street, featuring paved driveway plus street trees, during evening dog walk, with parked family car, during a walk home"
+    "expected_prompt": "A solo girl with chestnut hair in moss green solid cashmere long-sleeve warm turtleneck sweater dress, with ribbed texture, covered in snow, wearing a moss green warm wool coat over it, turned toward the next exchange, in the middle of walking home with a small grocery bag, soft smile, looking up with expectation, carrying the moment forward, the rest of the moment opening into peaceful suburban residential street, featuring paved driveway plus street trees, during evening dog walk, with parked family car, during a walk home"
   },
   {
     "name": "japanese_scene",
@@ -53,7 +53,7 @@
     "palette": "crimson, white",
     "nuance": "content",
     "personality": "gentle",
-    "expected_prompt": "A solo shrine maiden with long black hair in crimson cotton long-sleeve traditional kimono, with floral hair ornament, sweeping fallen leaves into a neat pile, gentle eyes, eyes crinkling softly, looking up with expectation, the moment gathering around her, in stone paved path leading to hall, adorned with white paper streamers (shide), falling pink cherry blossoms, during quiet daytime, featuring purification fountain (temizuya) featuring large sacred tree (shinboku), during morning shrine duties"
+    "expected_prompt": "A solo shrine maiden with long black hair in crimson cotton long-sleeve traditional kimono, with floral hair ornament, sweeping fallen leaves into a neat pile, gentle eyes, the moment gathering around her, in stone paved path leading to hall, adorned with white paper streamers (shide), falling pink cherry blossoms, during quiet daytime, featuring purification fountain (temizuya) featuring large sacred tree (shinboku), during morning shrine duties"
   },
   {
     "name": "fantasy_scene",
@@ -81,6 +81,6 @@
     "palette": "white, cobalt blue",
     "nuance": "absorbed",
     "personality": "serious",
-    "expected_prompt": "A solo space pilot with short blue hair in cobalt blue PVC high-neck tactical techwear mini dress, with buckles, translucent headpiece, checking a route display before departure, composed posture, focused expression, steady gaze, her attention fixed on it, with the world around her settling into futuristic sci-fi cockpit, scattered with digital tablet datapad, brushed metal surfaces, featuring touch control consoles featuring holographic 3d star map, during deep space time, before departure"
+    "expected_prompt": "A solo space pilot with short blue hair in cobalt blue PVC high-neck tactical techwear mini dress, with buckles, translucent headpiece, checking a route display before departure, composed posture, focused expression, ignoring the rest of the room, her attention fixed on it, with the world around her settling into futuristic sci-fi cockpit, scattered with digital tablet datapad, brushed metal surfaces, featuring touch control consoles featuring holographic 3d star map, during deep space time, before departure"
   }
 ]

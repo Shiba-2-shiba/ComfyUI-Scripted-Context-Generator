@@ -2,8 +2,8 @@
 
 ## How to use this board
 
-Use this as the single board for the post-M13 maintenance refactor.
-The repository is already green; this board tracks cleanup that improves operational safety and maintainability without reopening large feature work.
+Use this as the single board for the prompt-repetition refactor.
+The repository baseline is green; this board tracks work that reduces repeated semantics without regressing prompt safety, determinism, or workflow compatibility.
 
 States:
 - Backlog
@@ -21,40 +21,38 @@ Track these after each merged PR.
 
 | KPI | Baseline | Current | Target | Notes |
 |---|---:|---:|---:|---|
-| `python -m pytest assets -q` | 210 passed / 161 subtests / 1 warning | 222 passed / 161 subtests / 0 warnings | pass | Latest full run on 2026-03-21 after `TASK-M17-01` |
+| `python -m pytest assets -q` | 222 passed / 161 subtests / 0 warnings | 240 passed / 161 subtests / 0 warnings | pass | Latest full run on 2026-03-21 after `TASK-M20-02` |
 | `asset_validator.validate_assets()` warnings | 0 | 0 | 0 | Must stay clean during this refactor |
 | official workflow analyzer warning count | 0 / 32 runs | 0 / 32 runs | 0 / 32 runs | `python tools/analyze_context_workflow_diversity.py --runs 32 --seed-start 0` |
-| default prompt-renderer file logging | on | off | off | `prompt_renderer.py` now requires explicit opt-in to attach a file handler |
-| repo-local pytest cache warning count | 1 | 0 | 0 | Stabilized via repo `pytest.ini` |
-| repo-owned imports using `pipeline.content_pipeline` | 1 | 1 | 1 | Compatibility guard only; keep stable |
+| active prompt rows with breath-family language in end-to-end reconstruction | 62 / 105 | 8 / 105 | lower than baseline | Recomputed with the current runtime at 1 sample per active-source row on 2026-03-21 after the `mood_map` rebalance |
+| active prompt rows with `calm breathing` | 27 / 105 | 0 / 105 | 0 forced by construction | `quiet_focused` no longer carries the phrase in high-frequency staging |
+| active prompt rows with `slow breath` | 28 / 105 | 1 / 105 | 0 forced by construction | The remaining occurrence is no longer coming from `peaceful_relaxed` staging |
+| dominant calm-heavy moods in prompt source | `quiet_focused = 27`, `peaceful_relaxed = 28` | source data unchanged, but no longer bonus-weighted by default source selection | review and reduce only if still needed after runtime controls | `prompts.jsonl` distribution stays the same, but `pipeline/source_pipeline.py` no longer promotes these moods above brighter defaults |
+| fixed staging mode | full list appended | sampled deterministic subset | sampled deterministic subset | `apply_mood_expansion()` now uses the staged subset helper |
+| moods with forced staging tags in repetition audit | 9 / 9 moods | 0 / 9 moods | 0 / 9 moods | Refreshed artifact `prompt_repetition_active_source_8.json` remains clean after `TASK-M19-02` |
 
 ---
 
 ## Milestone dashboard
 
-### M14. Runtime side-effect and hygiene cleanup
-- [x] Remove default prompt-renderer file logging
-- [x] Stabilize pytest cache behavior
-- [x] Add regression coverage and update repo config
+### M18. Repetition observability and guardrails
+- [x] Add repetition audit for staging, garnish, and final prompts
+- [x] Add deterministic staging-selection regression coverage
 
-### M15. Registry and service-boundary cleanup
-- [x] Reduce implementation ownership inside `registry.py`
-- [x] Guard the intended compatibility surface with focused tests
+### M19. Runtime repetition controls
+- [x] Sample `staging_tags` instead of appending full fixed lists
+- [x] Add cross-layer semantic-family dedupe and budgets
 
-### M16. Shared heuristic consolidation
-- [x] Centralize object-focus helpers and policy access
-- [x] Reduce duplicated runtime classification logic
-
-### M17. Text normalization boundary cleanup
-- [x] Clarify sanitization vs final cleaning ownership
-- [x] Add regression coverage for the cleaned boundary
+### M20. Vocabulary and source-data rebalance
+- [x] Rework high-frequency `mood_map` staging and descriptions
+- [x] Review calm-heavy source defaults outside `mood_map`
 
 ---
 
 ## Task board
 
 ### Backlog
-- _(empty)_
+- TASK-M21-01 Revisit template-catalog weighting only if repetition remains template-driven
 
 ### Ready
 - _(empty)_
@@ -66,6 +64,12 @@ Track these after each merged PR.
 - _(empty)_
 
 ### Done
+- TASK-M20-02 Review calm-heavy source defaults outside `mood_map`
+- TASK-M20-01 Rework high-frequency `mood_map` staging and descriptions
+- TASK-M19-02 Add cross-layer semantic-family dedupe and budgets
+- TASK-M19-01 Sample `staging_tags` instead of appending full fixed lists
+- TASK-M18-02 Add focused regression coverage for deterministic staging selection
+- TASK-M18-01 Add a repetition audit for staging, garnish, and final prompts
 - TASK-M17-01 Clarify shared sanitization versus final cleaning
 - TASK-M16-01 Centralize object-focus helpers and policy access
 - TASK-M15-02 Add regression coverage for service-boundary expectations
@@ -98,10 +102,9 @@ Minimum checks for touched work:
 
 Additional checks by milestone:
 
-- M14: default import/logging behavior checks plus full `assets` pytest run
-- M15: focused registry/service tests plus full `assets` pytest run
-- M16: focused helper tests plus full `assets` pytest run
-- M17: focused normalization tests plus full `assets` pytest run
+- M18: run the new repetition audit and capture the baseline
+- M19: rerun the repetition audit after runtime controls and compare against baseline
+- M20: rerun the repetition audit, full `assets` pytest, and the workflow diversity analyzer
 
 ---
 
@@ -127,19 +130,19 @@ At the end of each session, update:
 ### Latest session
 
 Start:
-- Current milestone: M17 Text normalization boundary cleanup
-- Current task: `TASK-M17-01 Clarify shared sanitization versus final cleaning`
-- Dependencies cleared: `TASK-M16-01` centralized duplicated object-focus helpers, so the next cleanup target was the overlapping text-normalization logic across `semantic_policy`, prompt assembly, and `PromptCleaner`
+- Current milestone: M20 Vocabulary and source-data rebalance
+- Current task: `TASK-M20-02 Review calm-heavy source defaults outside mood_map`
+- Dependencies cleared: `TASK-M20-01` already removed the highest-frequency breath cues from `mood_map`, so this pass could focus on the remaining calm-heavy defaults in `garnish`, `action_pools`, and source selection
 - Risk level: medium
-- Expected file set: `core/semantic_policy.py`, `prompt_renderer.py`, `nodes_prompt_cleaner.py`, focused tests under `assets/`, `リファクタリング/codex_progress_board.md`, `リファクタリング/codex_temporary_exceptions.md`, `リファクタリング/codex_operating_notes.md`
-- Test plan for this session: centralize shared fragment sanitization in `semantic_policy`, make prompt assembly delegate to that shared cleanup, keep `PromptCleaner` focused on final user-facing polish, add focused regression tests, then rerun focused pytest, the full `assets` suite, `asset_validator`, and the workflow diversity analyzer
+- Expected file set: `vocab/garnish/logic.py`, `vocab/data/action_pools.json`, `pipeline/source_pipeline.py`, focused tests and fixtures under `assets/`, refreshed audit artifacts under `assets/results/`, and `リファクタリング/codex_progress_board.md`
+- Test plan for this session: reduce calm-heavy source weighting outside `mood_map`, cap calm-load garnish face-forward stacking, neutralize the most explicit body-cue action-pool entries, refresh audit/snapshot artifacts, then rerun full `assets`, asset validation, and the workflow diversity analyzer
 
 End:
 - Status moved to: Done
-- What passed: `python -m py_compile core/semantic_policy.py prompt_renderer.py nodes_prompt_cleaner.py assets/test_semantic_policy.py assets/test_prompt_renderer.py assets/test_prompt_cleaner.py`, `python -m pytest assets/test_semantic_policy.py assets/test_prompt_renderer.py assets/test_prompt_cleaner.py assets/test_policy_alignment.py assets/test_policy_drift.py assets/test_fx_cleanup.py -q`, `python -m pytest assets -q`, `python -c "from asset_validator import validate_assets; print(validate_assets())"`, and `python tools/analyze_context_workflow_diversity.py --runs 32 --seed-start 0`
-- What failed: none
-- New findings: the text cleanup boundary is easier to maintain when `semantic_policy` owns compact fragment sanitization and banned-term removal, prompt assembly only delegates to that shared cleanup after composition, and `PromptCleaner` stays responsible for final user-facing polish such as article fixes, deduplication, and sentence shaping. That split removed overlapping punctuation cleanup without changing policy behavior.
-- Follow-up task created: none
+- What passed: `python -m py_compile vocab/garnish/logic.py pipeline/source_pipeline.py assets/test_calm_bias_controls.py assets/test_source_pipeline.py`, `python -m pytest assets/test_calm_bias_controls.py assets/test_source_pipeline.py assets/test_personality_garnish.py assets/test_prompt_repetition_audit.py assets/test_determinism.py -q`, `python tools/audit_prompt_repetition.py --samples-per-row 8 --enforce-thresholds`, `python tools/audit_template_diversity.py --seed-count 32 --seed-start 0 --output assets/results/template_diversity_32.json`, `python -m pytest assets -q`, `python -c "from asset_validator import validate_assets; print(validate_assets())"`, and `python tools/analyze_context_workflow_diversity.py --runs 32 --seed-start 0`
+- What failed: full `assets` initially surfaced snapshot and template-diversity artifact drift after the runtime changes; expectations were refreshed and the final validation pass was green
+- New findings: calm-heavy defaults outside `mood_map` were being amplified by three places at once: `source_pipeline` bonus-weighted `quiet_focused` and `peaceful_relaxed`, calm-load garnish always emitted multiple face-forward tags, and several common action-pool entries baked in `focused/gaze/breath` cues. Removing those bonuses and neutralizing the most explicit action/garnish defaults kept workflow warnings at `0 / 32`, moved the workflow analyzer toward more playful/energetic moods, and preserved a green full `assets` suite.
+- Follow-up task created: none; M20 is complete and only deferred `TASK-M21-01` remains in backlog if repetition still proves template-driven later
 
 ---
 

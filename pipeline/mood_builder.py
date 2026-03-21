@@ -8,6 +8,7 @@ else:
     from core.context_ops import ensure_context, patch_context
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+DEFAULT_STAGING_TAG_LIMIT = 2
 
 
 def _resolve_json_path(json_path: str) -> str:
@@ -18,7 +19,33 @@ def _resolve_json_path(json_path: str) -> str:
     return json_path
 
 
-def expand_dictionary_value(key, json_path, default_value, seed):
+def _normalize_staging_tags(staging_list):
+    normalized = []
+    for item in staging_list or []:
+        text = str(item or "").strip()
+        if text:
+            normalized.append(text)
+    return normalized
+
+
+def select_staging_tags(staging_list, seed, max_items=0):
+    normalized = _normalize_staging_tags(staging_list)
+    try:
+        max_items = int(max_items or 0)
+    except Exception:
+        max_items = 0
+    if max_items <= 0 or max_items >= len(normalized):
+        return normalized
+    rng = random.Random(int(seed))
+    selected_indexes = sorted(rng.sample(range(len(normalized)), k=max_items))
+    return [normalized[index] for index in selected_indexes]
+
+
+def serialize_staging_tags(staging_list):
+    return ", ".join(_normalize_staging_tags(staging_list))
+
+
+def expand_dictionary_value(key, json_path, default_value, seed, staging_tag_limit=0):
     try:
         seed = int(seed)
     except Exception:
@@ -49,7 +76,9 @@ def expand_dictionary_value(key, json_path, default_value, seed):
             description_text = str(result.get("description", default_value))
         staging_list = result.get("staging_tags", [])
         if isinstance(staging_list, list):
-            staging_text = ", ".join(staging_list)
+            staging_text = serialize_staging_tags(
+                select_staging_tags(staging_list, seed, max_items=staging_tag_limit)
+            )
         return str(description_text), staging_text
 
     if isinstance(result, list):
@@ -59,10 +88,16 @@ def expand_dictionary_value(key, json_path, default_value, seed):
     return str(result), staging_text
 
 
-def apply_mood_expansion(context, seed, json_path, default_value):
+def apply_mood_expansion(context, seed, json_path, default_value, staging_tag_limit=DEFAULT_STAGING_TAG_LIMIT):
     ctx = ensure_context(context, default_seed=int(seed))
     key = ctx.meta.mood
-    expanded_text, staging_text = expand_dictionary_value(key, json_path, default_value, seed)
+    expanded_text, staging_text = expand_dictionary_value(
+        key,
+        json_path,
+        default_value,
+        seed,
+        staging_tag_limit=staging_tag_limit,
+    )
     extras = {}
     if staging_text:
         extras["staging_tags"] = staging_text

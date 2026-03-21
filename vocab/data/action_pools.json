@@ -3,7 +3,7 @@
     "schema_version": "2.0",
     "school_classroom": [
         {
-            "text": "sitting at a desk, looking down with focused expression",
+            "text": "sitting at a desk with notes spread in front of her",
             "load": "calm"
         },
         {
@@ -15,7 +15,7 @@
             "load": "calm"
         },
         {
-            "text": "standing by the window gazing outside",
+            "text": "standing by the window between tasks",
             "load": "calm"
         },
         {
@@ -37,7 +37,7 @@
     ],
     "school_rooftop": [
         {
-            "text": "leaning on the fence, looking at the sky",
+            "text": "leaning on the fence and taking in the rooftop air",
             "load": "calm"
         },
         {
@@ -93,7 +93,7 @@
     ],
     "school_gym_hall": [
         {
-            "text": "sitting in seiza posture on the floor",
+            "text": "sitting neatly on the gym floor",
             "load": "calm"
         },
         {
@@ -101,11 +101,11 @@
             "load": "calm"
         },
         {
-            "text": "sitting on a bench watching others",
+            "text": "sitting on a bench between drills",
             "load": "calm"
         },
         {
-            "text": "standing near the stage, looking up",
+            "text": "standing near the stage waiting for instruction",
             "load": "calm"
         },
         {
@@ -157,7 +157,7 @@
     ],
     "boardroom": [
         {
-            "text": "standing by the window looking out at the city",
+            "text": "standing by the window with the city below",
             "load": "calm"
         },
         {
@@ -195,7 +195,7 @@
             "load": "calm"
         },
         {
-            "text": "standing and watching the floor numbers change",
+            "text": "standing as the elevator passes each floor",
             "load": "calm"
         },
         {
@@ -221,7 +221,7 @@
             "load": "calm"
         },
         {
-            "text": "standing and staring at monitor screens",
+            "text": "standing in front of the monitor wall",
             "load": "calm"
         },
         {
@@ -229,7 +229,7 @@
             "load": "calm"
         },
         {
-            "text": "leaning forward, focused on a screen",
+            "text": "leaning toward a screen to check a detail",
             "load": "calm"
         },
         {
@@ -849,7 +849,7 @@
             "load": "calm"
         },
         {
-            "text": "standing calmly under a tree",
+            "text": "standing under the shrine tree in the shade",
             "load": "calm"
         },
         {
@@ -863,7 +863,7 @@
             "load": "active"
         },
         {
-            "text": "standing among the bamboo, looking up",
+            "text": "standing among the bamboo listening to the leaves",
             "load": "calm"
         },
         {
@@ -885,7 +885,7 @@
     ],
     "winter_street": [
         {
-            "text": "standing in winter, breathing into cold hands",
+            "text": "standing in winter with cold hands tucked close",
             "load": "calm"
         },
         {

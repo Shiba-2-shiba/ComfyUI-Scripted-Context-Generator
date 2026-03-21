@@ -7,8 +7,10 @@ import random
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
 if __package__ and __package__.count(".") >= 2:
+    from ...core.semantic_families import semantic_families_for_text
     from ...core.semantic_policy import sanitize_sequence
 else:
+    from core.semantic_families import semantic_families_for_text
     from core.semantic_policy import sanitize_sequence
 
 from .utils import _dedupe
@@ -224,6 +226,8 @@ GAZE_CONFLICTS = {
     "sideways glance": {"looking straight ahead"},
     "steady gaze": {"eyes flicking toward the exit"},
 }
+FACE_FORWARD_FAMILIES = {"gaze", "expression", "smile_mouth"}
+CALM_FACE_CAP_CATEGORIES = {"focus", "relax", "care", "joy", "playful", "moved"}
 
 
 def _guess_action_load(action_text: str) -> str:
@@ -491,6 +495,21 @@ def _fallback_physical_tag(category: str, rng: random.Random) -> str:
     return rng.choice(fallback_pool)
 
 
+def _limit_face_forward_tags(tags: Sequence[str], max_face_tags: int = 1) -> Tuple[List[str], List[str]]:
+    kept: List[str] = []
+    dropped: List[str] = []
+    face_tag_count = 0
+    for tag in tags:
+        families = semantic_families_for_text(tag)
+        if families & FACE_FORWARD_FAMILIES:
+            if face_tag_count >= max_face_tags:
+                dropped.append(tag)
+                continue
+            face_tag_count += 1
+        kept.append(tag)
+    return kept, dropped
+
+
 def sample_garnish(
     seed: int,
     meta_mood: str,
@@ -594,6 +613,11 @@ def sample_garnish(
     for tag in final_tags:
         if not _is_out_of_context(tag, context_loc, context_costume, action_text, filtered_tags):
             filtered_tags.append(tag)
+
+    if action_load == "calm" and category in CALM_FACE_CAP_CATEGORIES:
+        filtered_tags, dropped_face_forward_tags = _limit_face_forward_tags(filtered_tags, max_face_tags=1)
+        if dropped_face_forward_tags:
+            debug_log["calm_face_forward_budget_dropped"] = dropped_face_forward_tags
 
     if not _has_physical_expression(filtered_tags):
         filtered_tags.insert(0, _fallback_physical_tag(category, rng))
