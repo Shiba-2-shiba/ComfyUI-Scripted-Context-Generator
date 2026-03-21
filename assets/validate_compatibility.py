@@ -17,6 +17,8 @@ from collections import defaultdict
 import math
 import statistics
 
+from registry import resolve_location_alias_map
+
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "vocab", "data")
 
 
@@ -38,8 +40,7 @@ def load_prompts() -> list:
 
 
 def load_aliases() -> dict:
-    data = load_json("loc_aliases.json")
-    return data.get("aliases", {})
+    return resolve_location_alias_map()
 
 
 def get_canonical_loc(loc: str, aliases: dict) -> str:

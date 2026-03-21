@@ -3,7 +3,7 @@ import os
 import unittest
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from pipeline.content_pipeline import build_prompt_text
+from pipeline.prompt_orchestrator import build_prompt_text
 
 class TestConsistency(unittest.TestCase):
     def test_winter_conflict(self):

@@ -1,0 +1,15 @@
+{
+  "schema_version": "2.0",
+  "layer": "canonical",
+  "_comment": "Canonical normalization aliases only. Use for spelling or synonym normalization that should not change scene semantics.",
+  "aliases": {
+    "shopping_mall": "shopping_mall_atrium",
+    "spaceship": "spaceship_bridge",
+    "workshop": "clockwork_workshop"
+  },
+  "notes": {
+    "shopping_mall": "Generic shorthand for the existing mall-atrium scene.",
+    "spaceship": "Generic shorthand for the existing spaceship bridge scene.",
+    "workshop": "Generic shorthand for the existing clockwork workshop scene."
+  }
+}

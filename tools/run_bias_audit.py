@@ -38,7 +38,10 @@ if str(ROOT) not in sys.path:
 
 from core.context_ops import patch_context  # noqa: E402
 from nodes_prompt_cleaner import PromptCleaner  # noqa: E402
-from pipeline.content_pipeline import build_prompt_text, expand_clothing_prompt, expand_dictionary_value, expand_location_prompt  # noqa: E402
+from pipeline.clothing_builder import expand_clothing_prompt  # noqa: E402
+from pipeline.location_builder import expand_location_prompt  # noqa: E402
+from pipeline.mood_builder import expand_dictionary_value  # noqa: E402
+from pipeline.prompt_orchestrator import build_prompt_text  # noqa: E402
 from pipeline.context_pipeline import apply_scene_variation, sample_garnish_fields  # noqa: E402
 from pipeline.source_pipeline import parse_prompt_source_fields  # noqa: E402
 from vocab.garnish.logic import _has_physical_expression  # noqa: E402
@@ -493,7 +496,7 @@ def generate_samples(
 
     for i in range(sample_count):
         seed = seed_start + i
-        subj, costume, loc, action, meta_mood_key, meta_style, scene_tags = parse_prompt_source_fields("{}", seed)
+        subj, costume, loc, action, meta_mood_key, _legacy_style, scene_tags = parse_prompt_source_fields("{}", seed)
 
         scene_context = patch_context(
             {},
@@ -539,7 +542,6 @@ def generate_samples(
             action=selected_action,
             garnish=garnish_text,
             meta_mood=meta_mood_text,
-            meta_style=meta_style,
         )
         final_prompt = cleaner.clean(mode="nl", drop_empty_lines=True, text=raw_prompt)[0]
 

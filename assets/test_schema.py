@@ -6,7 +6,7 @@ import sys
 # Add project root to sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
-from core.schema import CONTEXT_VERSION, DebugInfo, PromptContext, MetaInfo, default_extras
+from core.schema import CONTEXT_VERSION, DebugInfo, PromptContext, MetaInfo, default_extras, LEGACY_STYLE_NOTE
 
 class TestSchema(unittest.TestCase):
     
@@ -23,6 +23,7 @@ class TestSchema(unittest.TestCase):
         self.assertEqual(ctx.subj, "")
         self.assertEqual(ctx.costume, "")
         self.assertIsInstance(ctx.meta, MetaInfo)
+        self.assertEqual(ctx.notes, [])
         self.assertEqual(ctx.warnings, [])
         self.assertEqual(ctx.extras["garnish"], "")
 
@@ -55,6 +56,7 @@ class TestSchema(unittest.TestCase):
         self.assertEqual(loaded_ctx.subj, "boy")
         self.assertEqual(loaded_ctx.action, "run")
         self.assertEqual(loaded_ctx.meta.mood, "excited")
+        self.assertEqual(loaded_ctx.notes, [])
         self.assertEqual(loaded_ctx.warnings, ["test-warning"])
 
     def test_nested_tags(self):
@@ -68,6 +70,17 @@ class TestSchema(unittest.TestCase):
         }
         ctx = PromptContext.from_dict(data)
         self.assertEqual(ctx.meta.tags["place"], "school")
+
+    def test_style_field_emits_legacy_note(self):
+        ctx = PromptContext.from_dict({
+            "meta": {
+                "mood": "quiet",
+                "style": "photo",
+            }
+        })
+        self.assertEqual(ctx.meta.style, "photo")
+        self.assertIn(LEGACY_STYLE_NOTE, ctx.notes)
+        self.assertEqual(ctx.warnings, [])
 
     def test_extras_defaults_are_merged(self):
         ctx = PromptContext.from_dict({

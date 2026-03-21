@@ -6,10 +6,13 @@ Builds emotion-led physical expression tags while preserving deterministic seed 
 import random
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
+try:
+    from ...core.semantic_policy import sanitize_sequence
+except ImportError:
+    from core.semantic_policy import sanitize_sequence
+
 from .utils import _dedupe
 from .base_vocab import (
-    VIEW_ANGLES,
-    VIEW_FRAMING,
     POSE_STANDING,
     POSE_SITTING,
     POSE_LYING,
@@ -17,9 +20,6 @@ from .base_vocab import (
     HAND_GESTURES,
     EYES_BASE,
     MOUTH_BASE,
-    EFFECTS_UNIVERSAL,
-    EFFECTS_BRIGHT,
-    EFFECTS_DARK,
 )
 from .micro_actions import MICRO_ACTION_CONCEPTS
 
@@ -132,7 +132,6 @@ EMOTION_MODEL: Dict[str, Dict[str, List[str]]] = {
         "posture": ["light posture", "shoulders opening up", "standing a little taller"],
         "hands": ["fingers tapping lightly", "hands moving with excitement", "one hand lifted mid-gesture"],
         "behavior": ["bouncing lightly on her heels", "leaning into the moment", "holding herself with easy energy"],
-        "effects": ["soft lighting", "natural lighting"],
     },
     "playful": {
         "expression": ["mischievous smile", "playful expression", "suppressed laughter"],
@@ -141,7 +140,6 @@ EMOTION_MODEL: Dict[str, Dict[str, List[str]]] = {
         "posture": ["loose playful posture", "tilting her head", "weight shifted to one side"],
         "hands": ["finger raised as if an idea just hit", "fingers brushing her lips", "one hand swinging lightly"],
         "behavior": ["shifting in place as if ready to move", "playing with a loose strand of hair", "holding back a laugh"],
-        "effects": ["bright atmosphere"],
     },
     "anger": {
         "expression": ["clenched jaw", "furrowed brow", "hard stare"],
@@ -150,7 +148,6 @@ EMOTION_MODEL: Dict[str, Dict[str, List[str]]] = {
         "posture": ["tense posture", "shoulders held rigid", "leaning forward aggressively"],
         "hands": ["fists tightening", "hands rigid at her sides", "knuckles whitening"],
         "behavior": ["breathing hard through her nose", "holding herself ready to snap", "tension running through her arms"],
-        "effects": ["dim lighting"],
     },
     "sadness": {
         "expression": ["downcast eyes", "faint frown", "tired expression"],
@@ -159,7 +156,6 @@ EMOTION_MODEL: Dict[str, Dict[str, List[str]]] = {
         "posture": ["slumped shoulders", "folded-in posture", "chin lowered"],
         "hands": ["hands held close to her chest", "fingers tightening around her sleeve", "one hand brushing at her face"],
         "behavior": ["holding herself small", "lingering in stillness", "wiping at the corner of one eye"],
-        "effects": ["low key lighting"],
     },
     "relax": {
         "expression": ["calm expression", "gentle smile", "soft eyes"],
@@ -168,7 +164,6 @@ EMOTION_MODEL: Dict[str, Dict[str, List[str]]] = {
         "posture": ["relaxed posture", "loose shoulders", "settled stance"],
         "hands": ["loose hands", "fingers resting lightly", "hands folded without tension"],
         "behavior": ["breathing evenly", "moving at an unhurried pace", "leaning back comfortably"],
-        "effects": ["soft lighting"],
     },
     "focus": {
         "expression": ["focused expression", "brows knit in concentration", "composed face"],
@@ -177,7 +172,6 @@ EMOTION_MODEL: Dict[str, Dict[str, List[str]]] = {
         "posture": ["still posture", "upright posture", "body held carefully still"],
         "hands": ["fingers working with care", "one hand paused mid-task", "hands kept precise and controlled"],
         "behavior": ["leaning in slightly", "ignoring the rest of the room", "keeping every movement deliberate"],
-        "effects": ["natural lighting"],
     },
     "care": {
         "expression": ["gentle expression", "soft smile", "kind eyes"],
@@ -186,7 +180,6 @@ EMOTION_MODEL: Dict[str, Dict[str, List[str]]] = {
         "posture": ["open posture", "slight forward lean", "careful stance"],
         "hands": ["hands held gently", "fingers curled around something with care", "one hand near her chest"],
         "behavior": ["moving with deliberate gentleness", "keeping close without crowding", "holding still so the moment can settle"],
-        "effects": ["soft lighting"],
     },
     "impatience": {
         "expression": ["restless expression", "strained look", "uneasy face"],
@@ -195,7 +188,6 @@ EMOTION_MODEL: Dict[str, Dict[str, List[str]]] = {
         "posture": ["restless posture", "weight shifting from foot to foot", "shoulders held tight"],
         "hands": ["fingers drumming", "gripping a strap too tightly", "hands fidgeting"],
         "behavior": ["checking the time again", "pacing in a small space", "holding tension in every small movement"],
-        "effects": ["dim lighting"],
     },
     "moved": {
         "expression": ["touched expression", "misty eyes", "softly stunned face"],
@@ -204,7 +196,6 @@ EMOTION_MODEL: Dict[str, Dict[str, List[str]]] = {
         "posture": ["stilled posture", "hand drawn to her chest", "shoulders softening all at once"],
         "hands": ["fingers pressing lightly to her lips", "hand over her heart", "hands held still with feeling"],
         "behavior": ["pausing as the feeling sinks in", "breathing out slowly", "holding the moment instead of moving on"],
-        "effects": ["soft lighting"],
     },
 }
 
@@ -490,21 +481,6 @@ def _emotion_profile_tags(
     return chosen
 
 
-def _choose_effect_tag(category: str, rng: random.Random) -> Optional[str]:
-    model = EMOTION_MODEL.get(category, {})
-    effect_candidates = list(model.get("effects", []))
-    if category in {"joy", "playful", "relax", "care", "moved"}:
-        effect_candidates.extend([tag for tag in EFFECTS_BRIGHT if tag in {"soft lighting", "natural lighting"}])
-    elif category in {"anger", "sadness", "impatience"}:
-        effect_candidates.extend([tag for tag in EFFECTS_DARK if tag in {"dim lighting", "low key lighting"}])
-    else:
-        effect_candidates.extend([tag for tag in EFFECTS_UNIVERSAL if tag in {"detailed texture"}])
-    effect_candidates = _dedupe(effect_candidates)
-    if not effect_candidates:
-        return None
-    return rng.choice(effect_candidates)
-
-
 def _has_physical_expression(tags: Sequence[str]) -> bool:
     return any(any(hint in tag.lower() for hint in PHYSICAL_TAG_HINTS) for tag in tags)
 
@@ -598,19 +574,8 @@ def sample_garnish(
         if pose:
             garnish_pool.append(pose)
 
-    if len(garnish_pool) < max_items and include_camera:
-        framing = _pick_first_valid(VIEW_FRAMING, rng, context_loc, context_costume, action_text, garnish_pool)
-        if framing:
-            garnish_pool.append(framing)
-        if len(garnish_pool) < max_items:
-            angle = _pick_first_valid(VIEW_ANGLES, rng, context_loc, context_costume, action_text, garnish_pool)
-            if angle:
-                garnish_pool.append(angle)
-
-    if len(garnish_pool) < max_items and rng.random() < 0.25:
-        effect_tag = _choose_effect_tag(category, rng)
-        if effect_tag and not _is_out_of_context(effect_tag, context_loc, context_costume, action_text, garnish_pool):
-            garnish_pool.append(effect_tag)
+    if include_camera:
+        debug_log["include_camera_ignored"] = True
 
     if len(garnish_pool) < max_items and rng.random() < 0.20:
         fallback_detail = _pick_first_valid(
@@ -624,7 +589,7 @@ def sample_garnish(
         if fallback_detail:
             garnish_pool.append(fallback_detail)
 
-    final_tags = _dedupe(garnish_pool)
+    final_tags = sanitize_sequence(_dedupe(garnish_pool))
     filtered_tags: List[str] = []
     for tag in final_tags:
         if not _is_out_of_context(tag, context_loc, context_costume, action_text, filtered_tags):

@@ -76,5 +76,9 @@ class TestPromptCleaner(unittest.TestCase):
         raw = "sparkling eyes, snowflakes, confetti in the air, beautiful bokeh lights, lens flare, magical sparkles floating in air"
         self.assertEqual(self.clean(raw), "sparkling eyes, snowflakes")
 
+    def test_shared_banned_domain_terms_are_removed(self):
+        cleaned = self.clean("close-up, soft lighting, highly detailed textures, anime illustration, classroom")
+        self.assertEqual(cleaned, "classroom")
+
 if __name__ == '__main__':
     unittest.main()

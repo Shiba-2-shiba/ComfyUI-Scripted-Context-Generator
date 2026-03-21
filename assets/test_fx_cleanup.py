@@ -8,7 +8,7 @@ import unittest
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 import background_vocab
-from pipeline.content_pipeline import expand_location_prompt
+from pipeline.location_builder import expand_location_prompt
 
 
 def _disallowed_hits(text):

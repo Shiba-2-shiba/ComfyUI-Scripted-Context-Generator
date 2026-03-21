@@ -7,7 +7,7 @@ current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, current_dir)
 
 from pipeline.character_profile_pipeline import build_character_profile, load_character_profiles
-from pipeline.content_pipeline import expand_clothing_prompt
+from pipeline.clothing_builder import expand_clothing_prompt
 from pipeline.context_pipeline import sample_garnish_fields
 
 def test_integrated_flow():

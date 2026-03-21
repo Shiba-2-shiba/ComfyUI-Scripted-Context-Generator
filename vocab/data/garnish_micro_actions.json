@@ -43,7 +43,7 @@
         "scrolling with thumb",
         "looking at phone screen",
         "tapping screen",
-        "taking a selfie",
+        "holding the phone up with a quick smile",
         "smiling at screen"
       ],
       "phone": [
@@ -118,7 +118,7 @@
         "smartphone": [
           "looking at smartphone",
           "checking messages",
-          "taking a selfie"
+          "holding the phone up with a quick smile"
         ],
         "idling": [
           "looking out window",
@@ -287,9 +287,9 @@
     ],
     "specific": {
       "camera": [
-        "holding a camera",
-        "adjusting camera lens",
-        "looking through viewfinder"
+        "holding a compact recorder",
+        "adjusting the shoulder strap",
+        "checking the controls quietly"
       ],
       "binoculars": [
         "looking through binoculars",
@@ -314,7 +314,7 @@
         ],
         "record": [
           "taking notes in notebook",
-          "holding a camera",
+          "holding a compact recorder",
           "recording voice memo"
         ],
         "search": [
@@ -330,7 +330,7 @@
       }
     },
     "generic": [
-      "looking suspicious",
+      "keeping a guarded expression",
       "hiding behind cover",
       "checking watch nervously",
       "tiptoeing"
@@ -510,7 +510,7 @@
         "leaning forward",
         "hair blown back hard",
         "intense expression",
-        "high speed"
+        "full sprint"
       ],
       "dash": [
         "explosive start",
@@ -650,11 +650,11 @@
       ]
     },
     "generic": [
-      "floating particles",
-      "glowing aura",
+      "small motes drifting nearby",
+      "magic gathering around her",
       "whispering incantation",
       "levitating slightly",
-      "eyes glowing",
+      "eyes bright with spellwork",
       "wind gathering"
     ]
   },

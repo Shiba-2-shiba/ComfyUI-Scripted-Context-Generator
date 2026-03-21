@@ -47,11 +47,11 @@
       "lecture hall"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "school_rooftop": {
@@ -88,11 +88,11 @@
       "school rooftop"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "modern_office": {
@@ -146,11 +146,11 @@
       "open plan office"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "fantasy_forest": {
@@ -320,11 +320,11 @@
       "waiting shelter"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "luxury_hotel_room": {
@@ -338,7 +338,7 @@
       "floor-to-ceiling glass windows",
       "designer lounge chair",
       "marble bedside table",
-      "modern art abstract painting"
+      "modern abstract wall piece"
     ],
     "texture": [
       "plush high-pile carpet",
@@ -351,7 +351,7 @@
       "room service trolley"
     ],
     "fx": [
-      "warm ambient lighting",
+      "warm room atmosphere",
       "vivid night city lights outside",
       "romantic intimate atmosphere"
     ],
@@ -364,10 +364,10 @@
       "hotel room"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "steampunk_airship": {
@@ -408,11 +408,11 @@
       "flying ship"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "clean_modern_kitchen": {
@@ -453,11 +453,11 @@
       "modern kitchen"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "elegant_dining_room": {
@@ -497,11 +497,11 @@
       "formal dining room"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "luxury_bathroom": {
@@ -542,11 +542,11 @@
       "spa bathroom"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "japanese_bath": {
@@ -584,11 +584,11 @@
       "bath"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "cozy_living_room": {
@@ -628,11 +628,11 @@
       "lounge"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "rural_town_street": {
@@ -716,11 +716,11 @@
       "residential area"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "mountain_resort": {
@@ -800,11 +800,11 @@
       "reading room"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "school_gym_hall": {
@@ -841,11 +841,11 @@
       "school gym"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "boardroom": {
@@ -890,11 +890,11 @@
       "meeting room"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "office_elevator": {
@@ -937,11 +937,11 @@
       "lift"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "surveillance_room": {
@@ -987,11 +987,11 @@
       "surveillance room"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "messy_copy_room": {
@@ -1027,11 +1027,11 @@
       "messy copy room"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "rainy_alley": {
@@ -1121,11 +1121,11 @@
       "departing bus"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "luxury_hotel_lobby": {
@@ -1163,10 +1163,10 @@
       "luxury hotel lobby"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "karaoke_bar": {
@@ -1246,11 +1246,11 @@
       "messy kitchen"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "bedroom_boudoir": {
@@ -1289,11 +1289,11 @@
       "candlelit boudoir"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "fitness_gym": {
@@ -1330,11 +1330,11 @@
       "treadmill"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "yoga_studio": {
@@ -1374,11 +1374,11 @@
       "yoga class"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "stadium_court": {
@@ -1415,11 +1415,11 @@
       "sports field"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "concert_stage": {
@@ -1455,11 +1455,11 @@
       "rock_concert"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "recording_studio": {
@@ -1495,11 +1495,11 @@
       "sound studio"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "opera_house": {
@@ -1537,11 +1537,11 @@
       "theater stage"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "burning_battlefield": {
@@ -1660,11 +1660,11 @@
       "desert highway"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "dragon_lair": {
@@ -1705,11 +1705,11 @@
       "treasure hoard"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "shinto_shrine": {
@@ -1965,11 +1965,11 @@
       "resort pool"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "antique_shop": {
@@ -2008,10 +2008,10 @@
       "vintage store"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "illuminated_park": {
@@ -2161,10 +2161,10 @@
       "old bookstore"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "shopping_mall_atrium": {
@@ -2218,10 +2218,10 @@
       "shopping_mall"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "fashion_boutique": {
@@ -2262,10 +2262,10 @@
       "designer shop"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "picnic_park": {
@@ -2435,11 +2435,11 @@
       "tech lab"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "airship_deck": {
@@ -2480,11 +2480,11 @@
       "sky deck"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "clockwork_workshop": {
@@ -2524,10 +2524,10 @@
       "steampunk workshop"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "aquarium": {
@@ -2568,11 +2568,11 @@
       "underwater tunnel"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "university_campus_courtyard": {
@@ -2617,11 +2617,11 @@
       "university campus"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "train_station_platform": {
@@ -2665,11 +2665,11 @@
       "train platform"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "convenience_store": {
@@ -2713,10 +2713,10 @@
       "corner shop"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "food_court": {
@@ -2760,10 +2760,10 @@
       "food hall"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "riverside_walk": {
@@ -2855,11 +2855,11 @@
       "coin laundry"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "coworking_space": {
@@ -2903,11 +2903,11 @@
       "shared office"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "apartment_balcony": {
@@ -2999,11 +2999,11 @@
       "station bus plaza"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "subway_ticket_gate": {
@@ -3047,11 +3047,11 @@
       "station gate"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "neighborhood_crosswalk": {
@@ -3143,10 +3143,10 @@
       "covered shopping street"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "bakery_shop": {
@@ -3190,10 +3190,10 @@
       "bakery shop"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "supermarket_aisle": {
@@ -3237,10 +3237,10 @@
       "grocery aisle"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "drugstore_aisle": {
@@ -3284,10 +3284,10 @@
       "drugstore"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "family_restaurant": {
@@ -3331,11 +3331,11 @@
       "casual diner"
     ],
     "lighting": [
-      "warm ambient",
-      "soft indoor light",
-      "fluorescent white",
-      "desk lamp glow",
-      "window light"
+      "settled indoor warmth",
+      "quiet room air",
+      "rows of overhead fixtures",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "cinema_lobby": {
@@ -3379,11 +3379,11 @@
       "movie theater lobby"
     ],
     "lighting": [
-      "warm ambient",
-      "soft indoor light",
-      "fluorescent white",
-      "desk lamp glow",
-      "window light"
+      "settled indoor warmth",
+      "quiet room air",
+      "rows of overhead fixtures",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "game_arcade": {
@@ -3427,10 +3427,10 @@
       "arcade"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
     ]
   },
   "campus_hallway": {
@@ -3474,11 +3474,11 @@
       "university hallway"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "campus_cafeteria": {
@@ -3522,11 +3522,11 @@
       "student cafeteria"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "school_clubroom": {
@@ -3570,11 +3570,11 @@
       "school clubroom"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "community_center": {
@@ -3618,11 +3618,11 @@
       "community hall"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "public_library_lobby": {
@@ -3666,11 +3666,11 @@
       "library lobby"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "apartment_entryway": {
@@ -3714,11 +3714,11 @@
       "home foyer"
     ],
     "lighting": [
-      "soft indoor light",
-      "fluorescent white",
-      "warm ambient",
-      "desk lamp glow",
-      "window light"
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
     ]
   },
   "rooftop_laundry_area": {
@@ -3858,10 +3858,103 @@
       "market lane"
     ],
     "lighting": [
-      "bright retail lighting",
-      "spotlight display",
-      "neon signs",
-      "warm ambient commercial"
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "japanese_garden": {
+    "label": "日本庭園",
+    "environment": [
+      "quiet japanese garden with a winding stone path",
+      "carefully kept garden space with a pond and trimmed pines"
+    ],
+    "core": [
+      "stepping stones leading past low shrubs",
+      "small wooden bridge crossing a shallow pond",
+      "raked gravel and moss around the garden edge"
+    ],
+    "texture": [
+      "moss-covered stone and damp garden earth",
+      "smooth wood darkened by recent moisture"
+    ],
+    "props": [
+      "folded umbrella resting beside a bench",
+      "small handbag held close at her side",
+      "paper charm tucked into a sleeve"
+    ],
+    "fx": [
+      "soft movement of leaves in the garden air",
+      "gentle quiet settling over the path"
+    ],
+    "time": [
+      "late afternoon in the garden",
+      "during a calm morning visit"
+    ],
+    "crowd": [
+      "few visitors passing at a respectful distance",
+      "quiet corners away from the main path"
+    ],
+    "weather": [
+      "light rain lingering on the stones",
+      "clear air moving gently through the pines"
+    ],
+    "aliases": [
+      "japanese garden",
+      "zen garden path"
+    ],
+    "lighting": [
+      "overcast diffuse",
+      "blue hour",
+      "bright daylight"
+    ]
+  },
+  "tea_room": {
+    "label": "茶室",
+    "environment": [
+      "traditional tea room prepared for a quiet visit",
+      "simple tatami tea room with a low table and open alcove"
+    ],
+    "core": [
+      "tatami floor with neatly arranged cushions",
+      "low wooden table set near a tea tray",
+      "tokonoma alcove with a hanging scroll and small flower arrangement"
+    ],
+    "texture": [
+      "woven tatami texture and smooth wooden trim",
+      "paper sliding door panels with soft wear at the edges"
+    ],
+    "props": [
+      "tea bowl resting on a folded cloth",
+      "small tray with sweets beside the table",
+      "carefully placed handbag near the doorway"
+    ],
+    "fx": [
+      "still indoor quiet with a measured sense of routine",
+      "faint sound of water and kettle movement from nearby"
+    ],
+    "time": [
+      "during a quiet afternoon visit",
+      "late in the day as the room settles down"
+    ],
+    "crowd": [
+      "just enough room for a calm shared moment",
+      "otherwise empty except for one waiting guest"
+    ],
+    "weather": [
+      "rain tapping softly beyond the eaves",
+      "a mild breeze moving outside the sliding door"
+    ],
+    "aliases": [
+      "tea room",
+      "traditional tea room"
+    ],
+    "lighting": [
+      "overcast diffuse",
+      "quiet room air",
+      "bright daylight"
     ]
   }
 }
+

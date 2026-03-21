@@ -74,7 +74,7 @@ def check_location_expander_lighting_mode(c):
     """shared location expansion helper が lighting_mode を受け付けるか確認"""
     print("\n=== 2. shared location expansion lighting_mode パラメータチェック ===")
 
-    from pipeline.content_pipeline import expand_location_prompt
+    from pipeline.location_builder import expand_location_prompt
 
     sig = inspect.signature(expand_location_prompt)
     params = list(sig.parameters.keys())
@@ -105,7 +105,7 @@ def check_lighting_variation(c):
     """光源モードによる出力バリエーションを確認（Phase 3実装後のみ有意）"""
     print("\n=== 3. 光源バリエーション確認 ===")
 
-    from pipeline.content_pipeline import expand_location_prompt
+    from pipeline.location_builder import expand_location_prompt
 
     sig = inspect.signature(expand_location_prompt)
     if "lighting_mode" not in sig.parameters:

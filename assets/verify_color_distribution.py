@@ -5,7 +5,7 @@ import os
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, current_dir)
 
-from pipeline.content_pipeline import expand_clothing_prompt
+from pipeline.clothing_builder import expand_clothing_prompt
 
 def test_color_injection():
     print("=== Starting Phase 2 Verification: Color Palette Styling ===")

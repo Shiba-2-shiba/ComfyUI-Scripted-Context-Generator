@@ -352,7 +352,8 @@ def check_seed_determinism() -> None:
     """同一seed → 同一出力 を検証"""
     print("\n=== 3. Seed Determinism ===")
 
-    from pipeline.content_pipeline import expand_clothing_prompt, expand_location_prompt
+    from pipeline.clothing_builder import expand_clothing_prompt
+    from pipeline.location_builder import expand_location_prompt
     from pipeline.context_pipeline import sample_garnish_fields
 
     test_seeds = [0, 42, 12345, 99999, 2**32 - 1]

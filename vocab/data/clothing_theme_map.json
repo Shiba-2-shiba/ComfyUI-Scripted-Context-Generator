@@ -1,26 +1,32 @@
 {
   "office_lady": {
     "dresses": [
-      "executive_pencil_dress"
+      "executive_pencil_dress",
+      "structured_day_dress"
     ],
     "separates": [
-      "modern_office_attire"
+      "modern_office_attire",
+      "commuter_office_layers"
     ],
     "outerwear": [
       "tailored_blazer",
-      "rainproof_trench"
+      "rainproof_trench",
+      "city_long_coat"
     ]
   },
   "beach_resort": {
     "dresses": [
       "romantic_garden_party",
-      "boho_maxi_dress"
+      "boho_maxi_dress",
+      "coastal_cover_dress"
     ],
     "separates": [
-      "beach_resort_coord"
+      "beach_resort_coord",
+      "coastal_linen_set"
     ],
     "outerwear": [
-      "romantic_lace_shawl"
+      "romantic_lace_shawl",
+      "light_resort_coverup"
     ]
   },
   "rainy_day": {
@@ -72,14 +78,17 @@
   },
   "school_uniform": {
     "dresses": [
-      "classic_jumper_uniform"
+      "classic_jumper_uniform",
+      "academy_cardigan_uniform"
     ],
     "separates": [
-      "preppy_school_uniform"
+      "preppy_school_uniform",
+      "academy_cardigan_set"
     ],
     "outerwear": [
       "tailored_blazer",
-      "cozy_wool_coat"
+      "cozy_wool_coat",
+      "campus_duffle_coat"
     ]
   },
   "gothic_lolita": {
@@ -109,13 +118,17 @@
   },
   "winter_date": {
     "dresses": [
-      "winter_knit_dress"
+      "winter_knit_dress",
+      "apres_ski_sweater_dress"
     ],
     "separates": [
-      "winter_layered_knit"
+      "winter_layered_knit",
+      "cold_weather_date_layers"
     ],
     "outerwear": [
-      "cozy_wool_coat"
+      "cozy_wool_coat",
+      "city_long_coat",
+      "campus_duffle_coat"
     ]
   },
   "secret_agent": {
@@ -134,13 +147,16 @@
   },
   "gym_workout": {
     "dresses": [
-      "athletic_bodysuit"
+      "athletic_bodysuit",
+      "court_sport_dress"
     ],
     "separates": [
-      "athleisure_training_set"
+      "athleisure_training_set",
+      "studio_training_layers"
     ],
     "outerwear": [
-      "sporty_track_jacket"
+      "sporty_track_jacket",
+      "warmup_zip_hoodie"
     ]
   },
   "cozy_cafe": {
@@ -158,15 +174,18 @@
   },
   "urban_shopping": {
     "dresses": [
-      "executive_pencil_dress"
+      "executive_pencil_dress",
+      "structured_day_dress"
     ],
     "separates": [
       "shopping_casual_chic",
-      "modern_office_attire"
+      "modern_office_attire",
+      "commuter_office_layers"
     ],
     "outerwear": [
       "tailored_blazer",
-      "rainproof_trench"
+      "rainproof_trench",
+      "city_long_coat"
     ]
   },
   "mori_natural": {
@@ -202,6 +221,93 @@
     "outerwear": [
       "tailored_blazer",
       "edgy_biker_jacket"
+    ]
+  },
+  "sleek_evening_gown": {
+    "dresses": [
+      "sleek_evening_gown"
+    ],
+    "separates": [
+      "secret_agent_suit"
+    ],
+    "outerwear": [
+      "tailored_blazer",
+      "romantic_lace_shawl"
+    ]
+  },
+  "idols_stage": {
+    "dresses": [
+      "cyberpunk_bodycon_dress",
+      "sleek_evening_gown"
+    ],
+    "separates": [
+      "punk_rock_stagewear"
+    ],
+    "outerwear": [
+      "edgy_biker_jacket"
+    ]
+  },
+  "exotic_dancer": {
+    "dresses": [
+      "boho_maxi_dress",
+      "sleek_evening_gown"
+    ],
+    "separates": [
+      "beach_resort_coord"
+    ],
+    "outerwear": [
+      "romantic_lace_shawl"
+    ]
+  },
+  "steampunk_inventor": {
+    "dresses": [
+      "victorian_gothic_dress"
+    ],
+    "separates": [
+      "steampunk_inventor"
+    ],
+    "outerwear": [
+      "tailored_blazer",
+      "edgy_biker_jacket"
+    ]
+  },
+  "street_casual": {
+    "dresses": [
+      "winter_knit_dress"
+    ],
+    "separates": [
+      "street_denim_layer",
+      "shopping_casual_chic"
+    ],
+    "outerwear": [
+      "edgy_biker_jacket",
+      "rainproof_trench"
+    ]
+  },
+  "library_girl": {
+    "dresses": [
+      "classic_jumper_uniform",
+      "winter_knit_dress"
+    ],
+    "separates": [
+      "preppy_school_uniform",
+      "casual_chic_date"
+    ],
+    "outerwear": [
+      "cozy_wool_coat",
+      "tailored_blazer"
+    ]
+  },
+  "room_loungewear": {
+    "dresses": [
+      "winter_knit_dress"
+    ],
+    "separates": [
+      "casual_chic_date",
+      "winter_layered_knit"
+    ],
+    "outerwear": [
+      "cozy_wool_coat"
     ]
   }
 }
