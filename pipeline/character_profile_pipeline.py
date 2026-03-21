@@ -2,9 +2,11 @@ import json
 import os
 import random
 
-try:
+if __package__ and "." in __package__:
+    from ..character_service import resolve_character
     from ..vocab.seed_utils import mix_seed
-except ImportError:
+else:
+    from character_service import resolve_character
     from vocab.seed_utils import mix_seed
 
 
@@ -74,20 +76,24 @@ def build_character_profile(seed, mode, character_name, profiles):
     if not selected_name:
         return {
             "selected_name": None,
+            "character_id": "",
+            "compatibility_key": "",
+            "compatibility_tags": [],
+            "default_costume": "",
             "subj_prompt": "",
             "hair_color": "",
             "eye_color": "",
             "personality": "",
             "color_palette_str": "",
             "color_palette": [],
+            "warnings": [],
         }
 
-    profile = profiles[selected_name]
-    visuals = profile.get("visual_traits", {})
-    hair_color = visuals.get("hair_color", "")
-    hair_style = visuals.get("hair_style", "")
-    eye_color = visuals.get("eye_color", "")
-    personality = profile.get("personality", "neutral")
+    resolved = resolve_character(selected_name, character_name=selected_name)
+    hair_color = resolved.get("hair_color", "")
+    hair_style = resolved.get("hair_style", "")
+    eye_color = resolved.get("eye_color", "")
+    personality = resolved.get("personality", "neutral")
 
     hair_desc = ""
     if hair_style and hair_color:
@@ -108,13 +114,18 @@ def build_character_profile(seed, mode, character_name, profiles):
         else:
             subj_prompt += eye_desc
 
-    color_palette = profile.get("color_palette", [])
+    color_palette = list(resolved.get("palette", []))
     return {
         "selected_name": selected_name,
+        "character_id": str(resolved.get("character_id", "")),
+        "compatibility_key": str(resolved.get("compatibility_key", "")),
+        "compatibility_tags": list(resolved.get("compatibility_tags", [])),
+        "default_costume": str(resolved.get("default_costume", "")),
         "subj_prompt": subj_prompt,
         "hair_color": hair_color,
         "eye_color": eye_color,
         "personality": personality,
         "color_palette_str": ", ".join(color_palette),
         "color_palette": color_palette,
+        "warnings": list(resolved.get("warnings", [])),
     }

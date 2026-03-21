@@ -2,37 +2,33 @@ import json
 import os
 import random
 
-try:
+if __package__:
     from .core.context_codec import context_from_json, context_to_json
-    from .core.context_ops import patch_context
+    from .core.context_ops import add_warning, patch_context
     from .pipeline.character_profile_pipeline import (
         build_character_profile,
         character_profile_input_types,
         load_character_profiles,
     )
     from .pipeline.context_pipeline import apply_garnish, apply_scene_variation
-    from .pipeline.content_pipeline import (
-        apply_clothing_expansion,
-        apply_location_expansion,
-        apply_mood_expansion,
-        build_prompt_from_context,
-    )
+    from .pipeline.clothing_builder import apply_clothing_expansion
+    from .pipeline.location_builder import apply_location_expansion
+    from .pipeline.mood_builder import apply_mood_expansion
+    from .pipeline.prompt_orchestrator import build_prompt_from_context
     from .pipeline.source_pipeline import load_prompt_source_payload
-except ImportError:
+else:
     from core.context_codec import context_from_json, context_to_json
-    from core.context_ops import patch_context
+    from core.context_ops import add_warning, patch_context
     from pipeline.character_profile_pipeline import (
         build_character_profile,
         character_profile_input_types,
         load_character_profiles,
     )
     from pipeline.context_pipeline import apply_garnish, apply_scene_variation
-    from pipeline.content_pipeline import (
-        apply_clothing_expansion,
-        apply_location_expansion,
-        apply_mood_expansion,
-        build_prompt_from_context,
-    )
+    from pipeline.clothing_builder import apply_clothing_expansion
+    from pipeline.location_builder import apply_location_expansion
+    from pipeline.mood_builder import apply_mood_expansion
+    from pipeline.prompt_orchestrator import build_prompt_from_context
     from pipeline.source_pipeline import load_prompt_source_payload
 
 
@@ -132,18 +128,26 @@ class ContextCharacterProfile:
             return (context_to_json(ctx),)
 
         result = build_character_profile(int(seed), mode, character_name, self.profiles)
+        extras = {
+            "character_name": result["selected_name"] or "",
+            "character_id": result.get("character_id", ""),
+            "hair_color": result["hair_color"],
+            "eye_color": result["eye_color"],
+            "personality": result["personality"],
+            "character_palette_str": result["color_palette_str"],
+            "color_palette": result["color_palette"],
+        }
+        if not ctx.extras.get("source_subj_key") and result.get("compatibility_key"):
+            extras["source_subj_key"] = result["compatibility_key"]
+        if not ctx.extras.get("raw_costume_key") and result.get("default_costume"):
+            extras["raw_costume_key"] = result["default_costume"]
         ctx = patch_context(
             ctx,
             updates={"subj": result["subj_prompt"], "seed": seed},
-            extras={
-                "character_name": result["selected_name"] or "",
-                "hair_color": result["hair_color"],
-                "eye_color": result["eye_color"],
-                "personality": result["personality"],
-                "character_palette_str": result["color_palette_str"],
-                "color_palette": result["color_palette"],
-            },
+            extras=extras,
         )
+        for warning in result.get("warnings", []):
+            ctx = add_warning(ctx, warning)
         return (context_to_json(ctx),)
 
 
@@ -219,7 +223,6 @@ class ContextGarnish:
     def INPUT_TYPES(s):
         return _context_stage_input_types({
             "max_items": ("INT", {"default": 3, "min": 1, "max": 10}),
-            "include_camera": ("BOOLEAN", {"default": False, "label_on": "Enable", "label_off": "Disable"}),
             "emotion_nuance": ("STRING", {
                 "default": "random",
                 "choices": ["random", "tense", "absorbed", "relieved", "awkward", "content", "bored"]
@@ -231,7 +234,9 @@ class ContextGarnish:
     FUNCTION = "garnish_context"
     CATEGORY = CONTEXT_CATEGORY
 
-    def garnish_context(self, seed, max_items, include_camera, emotion_nuance="random", context_json=""):
+    def garnish_context(self, seed, max_items, emotion_nuance="random", context_json="", include_camera=False):
+        # `include_camera` stays as a hidden legacy argument so old workflows can
+        # still deserialize, but the public node UI no longer advertises it.
         return _run_context_stage(
             context_json,
             seed,
@@ -290,7 +295,9 @@ class ContextInspector:
             f"loc={ctx.loc or '-'}",
             f"action={ctx.action or '-'}",
             f"mood={ctx.meta.mood or '-'}",
-            f"style={ctx.meta.style or '-'}",
+            f"style(legacy-read-only)={ctx.meta.style or '-'}",
+            "include_camera=no-op(deprecated)",
+            f"notes={len(ctx.notes)}",
             f"warnings={len(ctx.warnings)}",
             f"history={len(ctx.history)}",
         ])

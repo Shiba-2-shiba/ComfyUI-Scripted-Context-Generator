@@ -50,7 +50,7 @@ def test_pack_parser():
     # default (prompts.jsonl)
     out = parse_prompt_source_fields("{}", 42)
     assert_true(len(out) == 7, "prompt source fields: output length mismatch")
-    subj, costume, loc, action, meta_mood, meta_style, scene_tags = out
+    subj, costume, loc, action, meta_mood, _legacy_style, scene_tags = out
     assert_true(isinstance(scene_tags, str), "prompt source fields: scene_tags not string")
     assert_true(subj is not None, "prompt source fields: subj is None")
     assert_true(loc is not None, "prompt source fields: loc is None")
@@ -99,7 +99,7 @@ def test_context_scene_stage():
 
 
 def test_dictionary_expand():
-    from pipeline.content_pipeline import expand_dictionary_value
+    from pipeline.mood_builder import expand_dictionary_value
     data = load_json(ROOT / "mood_map.json")
 
     key_list, _ = pick_key_by_type(data, want_list=True)
@@ -118,7 +118,7 @@ def test_dictionary_expand():
 
 
 def test_theme_clothing():
-    from pipeline.content_pipeline import expand_clothing_prompt
+    from pipeline.clothing_builder import expand_clothing_prompt
 
     out = expand_clothing_prompt("office_lady", 5, "random", 0.3, "")
     assert_true(isinstance(out, str) and out != "", "clothing expansion: random failed")
@@ -129,7 +129,7 @@ def test_theme_clothing():
 
 
 def test_theme_location():
-    from pipeline.content_pipeline import expand_location_prompt
+    from pipeline.location_builder import expand_location_prompt
 
     out_simple = expand_location_prompt("classroom", 1, "simple")
     out_detailed = expand_location_prompt("classroom", 1, "detailed")
@@ -158,7 +158,7 @@ def test_garnish_and_merge():
 
 def test_template_builder_and_cleaner():
     from nodes_prompt_cleaner import PromptCleaner
-    from pipeline.content_pipeline import build_prompt_text
+    from pipeline.prompt_orchestrator import build_prompt_text
 
     cnode = PromptCleaner()
 
@@ -172,7 +172,6 @@ def test_template_builder_and_cleaner():
         action="walking",
         garnish="smiling",
         meta_mood="quiet",
-        meta_style="photo"
     )
     assert_true(isinstance(built, str) and built != "", "prompt assembly: default build failed")
 
@@ -186,7 +185,6 @@ def test_template_builder_and_cleaner():
         action="walking",
         garnish="smiling",
         meta_mood="quiet",
-        meta_style="photo"
     )
     assert_true(isinstance(built2, str) and built2 != "", "prompt assembly: composition build failed")
 
@@ -196,7 +194,10 @@ def test_template_builder_and_cleaner():
 
 def test_full_flow_smoke():
     from pipeline.character_profile_pipeline import build_character_profile, load_character_profiles
-    from pipeline.content_pipeline import build_prompt_text, expand_clothing_prompt, expand_dictionary_value, expand_location_prompt
+    from pipeline.clothing_builder import expand_clothing_prompt
+    from pipeline.location_builder import expand_location_prompt
+    from pipeline.mood_builder import expand_dictionary_value
+    from pipeline.prompt_orchestrator import build_prompt_text
     from pipeline.source_pipeline import parse_prompt_source_fields
     from core.context_ops import patch_context
     from pipeline.context_pipeline import apply_scene_variation, sample_garnish_fields
@@ -210,7 +211,7 @@ def test_full_flow_smoke():
     subj = profile_result["subj_prompt"]
     personality = profile_result["personality"]
     palette = profile_result["color_palette_str"]
-    _, costume, loc, action, meta_mood, meta_style, scene_tags = parse_prompt_source_fields("{}", seed)
+    _, costume, loc, action, meta_mood, _legacy_style, scene_tags = parse_prompt_source_fields("{}", seed)
     scene_ctx = patch_context(
         {},
         updates={"subj": subj, "costume": costume, "loc": loc, "action": action, "seed": seed},
@@ -246,7 +247,6 @@ def test_full_flow_smoke():
         action=action,
         garnish=garnish_str,
         meta_mood=mood,
-        meta_style=meta_style
     )
     final_prompt = clean.clean(mode="nl", drop_empty_lines=True, text=prompt)[0]
     assert_true(isinstance(final_prompt, str) and final_prompt != "", "Full flow: final prompt empty")

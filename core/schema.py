@@ -4,6 +4,8 @@ import json
 
 
 CONTEXT_VERSION = "2.0"
+LEGACY_STYLE_NOTE = "meta.style is legacy read-only compatibility metadata and ignored by prompt generation"
+LEGACY_STYLE_WARNING = LEGACY_STYLE_NOTE
 
 
 def default_extras() -> Dict[str, Any]:
@@ -38,7 +40,7 @@ def _coerce_str_list(value: Any) -> list[str]:
 
 @dataclass
 class MetaInfo:
-    """Metadata for the prompt context, affecting style and mood."""
+    """Metadata for prompt context. `style` is legacy compatibility only."""
 
     mood: str = ""
     style: str = ""
@@ -105,6 +107,7 @@ class PromptContext:
     meta: MetaInfo = field(default_factory=MetaInfo)
     extras: Dict[str, Any] = field(default_factory=default_extras)
     history: list[DebugInfo] = field(default_factory=list)
+    notes: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
 
     @classmethod
@@ -150,8 +153,12 @@ class PromptContext:
             meta=MetaInfo.from_dict(meta_data),
             extras=extras,
             history=history,
+            notes=_coerce_str_list(data.get("notes", [])),
             warnings=_coerce_str_list(data.get("warnings", [])),
         )
+
+        if ctx.meta.style and LEGACY_STYLE_NOTE not in ctx.notes:
+            ctx.notes.append(LEGACY_STYLE_NOTE)
 
         if strict:
             # Placeholder hook for future schema validation.

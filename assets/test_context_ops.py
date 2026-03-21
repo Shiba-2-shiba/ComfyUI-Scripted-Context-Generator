@@ -5,7 +5,8 @@ import unittest
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
-from core.context_ops import add_warning, append_history, ensure_context, merge_context, patch_context
+from core.context_ops import add_note, add_warning, append_history, ensure_context, merge_context, patch_context
+from core.schema import LEGACY_STYLE_NOTE
 from core.schema import DebugInfo
 
 
@@ -18,14 +19,17 @@ class TestContextOps(unittest.TestCase):
         ctx = patch_context(
             {},
             updates={"subj": "runner", "seed": "9"},
-            meta={"mood": "calm", "tags": {"time": "morning"}},
+            meta={"mood": "calm", "style": "soft light", "tags": {"time": "morning"}},
             extras={"garnish": "soft smile"},
         )
         self.assertEqual(ctx.subj, "runner")
         self.assertEqual(ctx.seed, 9)
         self.assertEqual(ctx.meta.mood, "calm")
+        self.assertEqual(ctx.meta.style, "soft light")
         self.assertEqual(ctx.meta.tags["time"], "morning")
         self.assertEqual(ctx.extras["garnish"], "soft smile")
+        self.assertIn(LEGACY_STYLE_NOTE, ctx.notes)
+        self.assertEqual(ctx.warnings, [])
 
     def test_merge_context_prefers_overlay_non_empty_values(self):
         merged = merge_context(
@@ -36,6 +40,8 @@ class TestContextOps(unittest.TestCase):
         self.assertEqual(merged.loc, "classroom")
         self.assertEqual(merged.meta.mood, "quiet")
         self.assertEqual(merged.meta.style, "soft light")
+        self.assertIn(LEGACY_STYLE_NOTE, merged.notes)
+        self.assertEqual(merged.warnings, [])
 
     def test_append_history_accepts_dict_and_debuginfo(self):
         ctx = append_history({}, {"node": "ContextSceneVariator", "seed": 1})
@@ -47,6 +53,10 @@ class TestContextOps(unittest.TestCase):
     def test_add_warning_returns_updated_context(self):
         ctx = add_warning({}, "warn")
         self.assertEqual(ctx.warnings, ["warn"])
+
+    def test_add_note_returns_updated_context(self):
+        ctx = add_note({}, "note")
+        self.assertEqual(ctx.notes, ["note"])
 
 
 if __name__ == "__main__":

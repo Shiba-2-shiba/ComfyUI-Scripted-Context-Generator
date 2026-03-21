@@ -6,10 +6,13 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from pipeline.context_pipeline import (
     _build_scene_candidate_weights,
+    can_generate_action_for_location,
     apply_garnish,
     apply_scene_variation,
 )
-from core.context_ops import patch_context
+from core.context_ops import append_history, patch_context
+from core.schema import DebugInfo
+from pipeline.location_builder import apply_location_expansion
 
 
 class TestContextPipeline(unittest.TestCase):
@@ -62,6 +65,26 @@ class TestContextPipeline(unittest.TestCase):
         self.assertGreater(debug.decision["compatible_unique_count"], 0)
         self.assertFalse(updated.warnings)
 
+    def test_apply_scene_variation_bridges_named_profile_without_source_subject_key(self):
+        ctx = patch_context(
+            {},
+            updates={
+                "subj": "A solo girl with long curly hair",
+                "costume": "mori_natural",
+                "loc": "cozy_bookstore",
+                "action": "checking a small stack of books",
+                "seed": 101,
+            },
+            extras={
+                "character_name": "Fiona (Nature)",
+            },
+        )
+        updated, debug = apply_scene_variation(ctx, 101, "full")
+        self.assertEqual(debug.node, "ContextSceneVariator")
+        self.assertEqual(debug.decision["compat_subject_key"], "mori girl")
+        self.assertGreater(debug.decision["compatible_unique_count"], 0)
+        self.assertTrue(updated.loc)
+
     def test_scene_candidate_weights_use_family_totals_not_candidate_count(self):
         candidates = [
             ("existing", "modern_office"),
@@ -105,6 +128,74 @@ class TestContextPipeline(unittest.TestCase):
         self.assertEqual(updated.extras["garnish"], garnish_text)
         if debug:
             self.assertGreaterEqual(len(updated.history), 1)
+
+    def test_scene_variation_uses_fallback_action_for_missing_action_pool(self):
+        ctx = patch_context(
+            {},
+            updates={
+                "subj": "business girl",
+                "loc": "modern_office",
+                "action": "writing at a desk",
+                "seed": 101,
+            },
+            extras={"source_subj_key": "business girl"},
+        )
+        ctx = append_history(
+            ctx,
+            DebugInfo(node="ContextSceneVariator", seed=100, decision={"selected_loc": "modern_office", "new_action": "writing at a desk"}),
+        )
+        updated, debug = apply_scene_variation(ctx, 101, "full")
+        self.assertNotEqual(updated.loc, "modern_office")
+        self.assertTrue(can_generate_action_for_location(updated.loc))
+        self.assertTrue(debug.decision.get("action_refresh_reason") in {"compositional_fallback", "location_changed"})
+        self.assertIsInstance(updated.action, str)
+        self.assertTrue(updated.action)
+        if debug.decision.get("action_refresh_reason") == "compositional_fallback":
+            self.assertEqual(debug.decision.get("generator_mode"), "compositional")
+            self.assertIn("slots", debug.decision)
+            self.assertIn("slot_sources", debug.decision)
+            self.assertEqual(debug.decision.get("normalized_action"), updated.action)
+
+    def test_scene_variation_penalizes_recent_location_history(self):
+        ctx = patch_context(
+            {},
+            updates={
+                "subj": "business girl",
+                "loc": "modern_office",
+                "action": "writing at a desk",
+                "seed": 101,
+            },
+            extras={"source_subj_key": "business girl"},
+        )
+        ctx = append_history(
+            ctx,
+            DebugInfo(node="ContextSceneVariator", seed=100, decision={"selected_loc": "modern_office", "new_action": "writing at a desk"}),
+        )
+        updated, debug = apply_scene_variation(ctx, 101, "full")
+        self.assertIn("recent_loc_penalty", debug.decision)
+        self.assertEqual(debug.decision["recent_loc_penalty"], ["modern_office"])
+        self.assertNotEqual(updated.loc, "modern_office")
+
+    def test_scene_variation_updates_raw_loc_tag_for_downstream_location_expansion(self):
+        ctx = patch_context(
+            {},
+            updates={
+                "subj": "business girl",
+                "loc": "modern_office",
+                "action": "writing at a desk",
+                "seed": 101,
+            },
+            extras={"source_subj_key": "business girl", "raw_loc_tag": "modern_office"},
+        )
+        ctx = append_history(
+            ctx,
+            DebugInfo(node="ContextSceneVariator", seed=100, decision={"selected_loc": "modern_office", "new_action": "writing at a desk"}),
+        )
+        updated, debug = apply_scene_variation(ctx, 101, "full")
+        self.assertEqual(updated.extras["raw_loc_tag"], updated.loc)
+        expanded, _location_prompt = apply_location_expansion(updated, 101, "detailed", "off")
+        self.assertEqual(expanded.loc, updated.loc)
+        self.assertEqual(debug.decision["selected_loc"], updated.loc)
 
 
 if __name__ == "__main__":

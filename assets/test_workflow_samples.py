@@ -22,6 +22,11 @@ from workflow_samples import (
     get_recommended_workflow_sample,
     load_workflow_samples,
 )
+from tools.capture_workflow_fixture_status import (
+    build_workflow_fixture_status_text,
+    capture_workflow_fixture_status,
+    collect_workflow_fixture_status,
+)
 from workflow_widget_validation import load_workflow, validate_workflow_roundtrip, validate_workflow_widgets
 
 
@@ -68,6 +73,18 @@ class TestWorkflowSamples(unittest.TestCase):
     def test_context_workflow_is_the_only_active_sample(self):
         self.assertEqual([sample.id for sample in self.workflow_samples], ["context"])
         self.assertTrue(all(sample.surface == "primary" for sample in self.workflow_samples))
+
+    def test_capture_workflow_fixture_status_writes_repeatable_artifact(self):
+        output_path = ROOT / "assets" / "results" / "test_workflow_fixture_status.txt"
+        self.addCleanup(lambda: output_path.unlink(missing_ok=True))
+
+        written_path = capture_workflow_fixture_status(output_path)
+
+        self.assertEqual(written_path, output_path)
+        self.assertEqual(
+            output_path.read_text(encoding="utf-8"),
+            build_workflow_fixture_status_text(collect_workflow_fixture_status()),
+        )
 
 
 if __name__ == "__main__":

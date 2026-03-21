@@ -1,28 +1,28 @@
 {
   "VIEW_ANGLES": [
-    "front view",
+    "facing forward",
     "three-quarter view",
-    "profile view",
+    "side-facing",
     "back view",
     "from above",
     "from below",
     "dutch angle",
     "worm's-eye view",
-    "bird's-eye view",
+    "high vantage",
     "wide angle",
-    "cinematic angle",
+    "dramatic emphasis",
     "dramatic angle"
   ],
   "VIEW_FRAMING": [
     "medium shot",
-    "medium close-up",
-    "close-up",
-    "extreme close-up",
-    "cowboy shot",
+    "upper-body focus",
+    "face emphasis",
+    "intimate detail",
+    "mid-body framing",
     "waist shot",
     "bust shot",
     "face shot",
-    "depth of field",
+    "foreground separation",
     "soft background blur"
   ],
   "POSE_STANDING": [
@@ -376,26 +376,26 @@
     }
   },
   "EFFECTS_UNIVERSAL": [
-    "detailed texture",
+    "surface variation",
     "subtle atmosphere",
     "layered depth"
   ],
   "EFFECTS_BRIGHT": [
-    "soft lighting",
-    "cinematic lighting",
+    "soft daylight",
+    "clear daylight",
     "sunlight",
-    "bright atmosphere",
-    "natural lighting",
+    "uplifted atmosphere",
+    "daylit surroundings",
     "glowing light"
   ],
   "EFFECTS_DARK": [
-    "cinematic lighting",
-    "dim lighting",
+    "dramatic shadows",
+    "muted shadows",
     "rim light",
     "shadows",
     "dark atmosphere",
     "creepy lighting",
-    "low key lighting",
+    "shadow-heavy mood",
     "noir lighting"
   ],
   "EFFECTS_DYNAMIC": [

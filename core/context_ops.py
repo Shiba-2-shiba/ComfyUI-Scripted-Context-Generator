@@ -1,7 +1,7 @@
 from typing import Any, Dict, Optional
 
 from .context_codec import normalize_context_data
-from .schema import DebugInfo, PromptContext
+from .schema import DebugInfo, PromptContext, LEGACY_STYLE_NOTE
 
 
 TOP_LEVEL_TEXT_FIELDS = {"subj", "costume", "loc", "action", "context_version"}
@@ -28,6 +28,8 @@ def patch_context(
                 setattr(ctx, key, int(value))
             except Exception:
                 setattr(ctx, key, 0)
+        elif key == "notes" and isinstance(value, list):
+            ctx.notes = [str(item) for item in value]
         elif key == "warnings" and isinstance(value, list):
             ctx.warnings = [str(item) for item in value]
 
@@ -36,6 +38,8 @@ def patch_context(
             ctx.meta.mood = "" if meta["mood"] is None else str(meta["mood"])
         if "style" in meta:
             ctx.meta.style = "" if meta["style"] is None else str(meta["style"])
+            if ctx.meta.style and LEGACY_STYLE_NOTE not in ctx.notes:
+                ctx.notes.append(LEGACY_STYLE_NOTE)
         if "tags" in meta and isinstance(meta["tags"], dict):
             ctx.meta.tags = dict(meta["tags"])
 
@@ -64,13 +68,20 @@ def merge_context(base: Any, overlay: Any) -> PromptContext:
 
     if overlay_ctx.meta.mood:
         merged.meta.mood = overlay_ctx.meta.mood
-    if overlay_ctx.meta.style:
+    if not merged.meta.style and overlay_ctx.meta.style:
         merged.meta.style = overlay_ctx.meta.style
+        if LEGACY_STYLE_NOTE not in merged.notes:
+            merged.notes.append(LEGACY_STYLE_NOTE)
+    elif merged.meta.style and overlay_ctx.meta.style and merged.meta.style != overlay_ctx.meta.style:
+        note = "meta.style is legacy read-only; overlay style is not prioritized"
+        if note not in merged.notes:
+            merged.notes.append(note)
     if overlay_ctx.meta.tags:
         merged.meta.tags.update(overlay_ctx.meta.tags)
 
     merged.extras.update(overlay_ctx.extras)
     merged.history.extend(overlay_ctx.history)
+    merged.notes.extend(overlay_ctx.notes)
     merged.warnings.extend(overlay_ctx.warnings)
     return merged
 
@@ -88,4 +99,11 @@ def add_warning(context: Any, warning: str) -> PromptContext:
     ctx = ensure_context(context)
     if warning:
         ctx.warnings.append(str(warning))
+    return ctx
+
+
+def add_note(context: Any, note: str) -> PromptContext:
+    ctx = ensure_context(context)
+    if note:
+        ctx.notes.append(str(note))
     return ctx

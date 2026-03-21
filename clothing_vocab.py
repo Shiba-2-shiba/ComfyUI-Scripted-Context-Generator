@@ -6,7 +6,7 @@ All data has been moved to ``vocab/clothing/``.
 This file re-exports every public symbol for backward compatibility.
 """
 
-try:
+if __package__:
     from .vocab.clothing import (  # noqa: F401
         CONCEPT_PACKS,
         THEME_TO_PACKS,
@@ -18,7 +18,7 @@ try:
         OUTERWEAR_SELECTION_PROBABILITY,
         EMBELLISHMENT_DETAIL_PROBABILITY,
     )
-except ImportError:
+else:
     from vocab.clothing import (  # noqa: F401
         CONCEPT_PACKS,
         THEME_TO_PACKS,

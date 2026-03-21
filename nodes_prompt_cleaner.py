@@ -1,5 +1,10 @@
 import re
 
+if __package__:
+    from .core.semantic_policy import normalize_fragment_text, remove_banned_terms
+else:
+    from core.semantic_policy import normalize_fragment_text, remove_banned_terms
+
 class PromptCleaner:
     @classmethod
     def INPUT_TYPES(s):
@@ -100,25 +105,10 @@ class PromptCleaner:
         return s
 
     def fix_punctuation_spacing(self, s: str) -> str:
-        # "word ." -> "word."
-        s = re.sub(r"[ \t]+([,.;:!?])", r"\1", s)
-        # "., " -> ". "
-        s = re.sub(r"([.?!])\s*,\s*", r"\1 ", s)
-        return s
+        return normalize_fragment_text(s)
         
     def fix_consecutive_punctuation(self, s: str) -> str:
-        # ", ." -> ""
-        s = re.sub(r",(?=\s*[.?!])", "", s)
-        # ", , ," -> ", "
-        s = re.sub(r",\s*,+", ", ", s)
-        # ". ." -> "." (but keep "...")
-        # To strictly follow previous logic: re.sub(r"\.\s*\.+", ".", s)
-        # But maybe we want to keep ellipsis? The previous logic collapsed them.
-        # Let's keep previous behavior for consistency, or improve it.
-        # Plan says "overlap removal", but maybe ellipsis is fine in creative writing.
-        # Let's collapse for now to be safe as per previous code.
-        s = re.sub(r"\.\s*\.+", ".", s)
-        return s
+        return normalize_fragment_text(s)
 
     def remove_dangling_words(self, s: str) -> str:
         # "and .", "with ," etc.
@@ -191,10 +181,19 @@ class PromptCleaner:
                 new_parts = []
                 for p in parts:
                     if not p: continue # skip empty
-                    p_lower = p.lower()
+                    p_lower = re.sub(r"[.?!]+$", "", p.lower()).strip()
+                    trailing_punctuation = re.search(r"[.?!]+$", p)
                     if p_lower not in seen:
                         seen.add(p_lower)
                         new_parts.append(p)
+                        continue
+                    if (
+                        trailing_punctuation
+                        and new_parts
+                        and re.sub(r"[.?!]+$", "", new_parts[-1].lower()).strip() == p_lower
+                        and not re.search(r"[.?!]+$", new_parts[-1])
+                    ):
+                        new_parts[-1] = f"{new_parts[-1]}{trailing_punctuation.group(0)}"
                 new_lines.append(", ".join(new_parts))
             else:
                 new_lines.append(line)
@@ -234,28 +233,22 @@ class PromptCleaner:
             # 1. Basic Structure
             line = self.remove_empty_brackets(line)
             line = self.remove_disallowed_fx_terms(line)
+            line = remove_banned_terms(line)
             # print(f"DEBUG 1 brackets: '{line}'")
             
-            # 2. Words & Articles
-            line = self.fix_punctuation_spacing(line)
-            # print(f"DEBUG 2 punct: '{line}'")
-            
-            # 3. Articles
+            # 2. Articles
             line = self.fix_articles(line)
             # print(f"DEBUG 3 articles: '{line}'")
             
-            # 4. Deduplication
+            # 3. Deduplication
             line = self.remove_duplicates(line)
             # print(f"DEBUG 4 dedupe: '{line}'")
             
-            # 5. Cleanup
-            line = self.fix_consecutive_punctuation(line)
-            # print(f"DEBUG 5 consec: '{line}'")
+            # 4. Cleanup
             line = self.remove_dangling_words(line)
             # print(f"DEBUG 6 dangling: '{line}'")
             
-            # Re-run punctuation spacing to fix artifacts (e.g. "word .")
-            line = self.fix_punctuation_spacing(line)
+            line = normalize_fragment_text(line)
             
             line = self.ensure_sentence_spacing(line)
             # print(f"DEBUG 7 spacing: '{line}'")

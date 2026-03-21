@@ -14,12 +14,10 @@ if ASSETS_DIR not in sys.path:
     sys.path.insert(0, ASSETS_DIR)
 
 import test_bootstrap  # noqa: F401 — パッケージコンテキストを自動解決
-from pipeline.content_pipeline import (
-    build_prompt_text,
-    expand_clothing_prompt,
-    expand_dictionary_value,
-    expand_location_prompt,
-)
+from pipeline.clothing_builder import expand_clothing_prompt
+from pipeline.location_builder import expand_location_prompt
+from pipeline.mood_builder import expand_dictionary_value
+from pipeline.prompt_orchestrator import build_prompt_text
 from pipeline.context_pipeline import sample_garnish_fields
 from pipeline.source_pipeline import parse_prompt_source_fields
 
@@ -38,8 +36,7 @@ class TestDeterminism(unittest.TestCase):
 
     def generate_once(self, seed):
         js = json.dumps(self.pack, ensure_ascii=False)
-        subj, costume_key, loc_tag, action_raw, meta_mood_key, raw_meta_style, scene_tags = parse_prompt_source_fields(js, seed)
-        meta_style = raw_meta_style
+        subj, costume_key, loc_tag, action_raw, meta_mood_key, _legacy_style, scene_tags = parse_prompt_source_fields(js, seed)
 
         costume = expand_clothing_prompt(costume_key, seed, "random", 0.3)
         loc = expand_location_prompt(loc_tag, seed, "detailed")
@@ -69,7 +66,6 @@ class TestDeterminism(unittest.TestCase):
             action=action_raw,
             garnish=garnish,
             meta_mood=meta_mood,
-            meta_style=meta_style
         )
         return final
 

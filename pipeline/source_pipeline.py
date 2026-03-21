@@ -2,9 +2,9 @@ import json
 import os
 import random
 
-try:
+if __package__ and "." in __package__:
     from ..core.schema import PromptContext
-except ImportError:
+else:
     from core.schema import PromptContext
 
 
@@ -23,25 +23,6 @@ _DISCOURAGED_BASE_MOODS = {
     "intense_anger",
     "creepy_fear",
 }
-_STYLE_POSITIVE_HINTS = (
-    "illustration",
-    "anime",
-    "watercolor",
-    "cel shading",
-    "lineart",
-    "line art",
-    "pastel",
-    "painting",
-    "sketch",
-)
-_STYLE_NEGATIVE_HINTS = (
-    "movie concept art",
-    "concept art",
-    "noir",
-    "gritty",
-    "dark fantasy",
-    "high contrast",
-)
 _RARE_WEATHER_LOC_HINTS = {
     "rainy_alley",
     "rainy_bus_stop",
@@ -87,7 +68,6 @@ def _source_payload_score(payload, daily_life_locs):
     score = 0
     loc = str(payload.get("loc", "")).strip()
     mood = str(payload.get("meta", {}).get("mood", "")).strip()
-    style = str(payload.get("meta", {}).get("style", "")).strip().lower()
     tags = payload.get("meta", {}).get("tags", {})
     purpose = str(tags.get("purpose", "")).strip().lower() if isinstance(tags, dict) else ""
 
@@ -100,11 +80,6 @@ def _source_payload_score(payload, daily_life_locs):
         score += 4
     elif mood in _DISCOURAGED_BASE_MOODS:
         score -= 6
-
-    if any(token in style for token in _STYLE_POSITIVE_HINTS):
-        score += 2
-    if any(token in style for token in _STYLE_NEGATIVE_HINTS):
-        score -= 2
 
     if purpose in {"study", "rest", "shop", "work", "commute", "wait"}:
         score += 1

@@ -23,12 +23,10 @@ from typing import Dict, List, Tuple, Any, Set
 # --- Import Nodes ---
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 try:
-    from pipeline.content_pipeline import (
-        build_prompt_text,
-        expand_clothing_prompt,
-        expand_dictionary_value,
-        expand_location_prompt,
-    )
+    from pipeline.clothing_builder import expand_clothing_prompt
+    from pipeline.location_builder import expand_location_prompt
+    from pipeline.mood_builder import expand_dictionary_value
+    from pipeline.prompt_orchestrator import build_prompt_text
     from pipeline.context_pipeline import sample_garnish_fields
     from pipeline.source_pipeline import parse_prompt_source_fields
 except ImportError as e:
@@ -1051,15 +1049,14 @@ def main():
     ap.add_argument("--eval_fields", default="loc,costume,action_raw,garnish,action_merged,final",
                     help="Comma-separated Sample fields to evaluate (unique/entropy/watch).")
     
-    # Phase 2 Goal: Remove {meta_style} from default. Done here in Phase 1 for checking.
-    # Updated default to REMOVE {meta_style} as requested
+    # Legacy style placeholder cleanup remains for old custom templates.
     ap.add_argument("--template", default="A of {subj} wearing {costume}. She is {action}. The background is {loc}, with {meta_mood}.")
     ap.add_argument("--garnish_max", type=int, default=3)
     ap.add_argument("--include_camera", action="store_true")
     ap.add_argument("--watch", action="append", default=[], help='Additional watch terms "field:term,term"')
     ap.add_argument("--watch_any", action="append", default=[],
                     help='Watch terms applied to ALL eval_fields: "term,term" (or use --watch "*:term,term")')
-    ap.add_argument("--force_no_style", action="store_true", default=True, help="Force meta_style to empty string to test 0-violation goal")
+    ap.add_argument("--force_no_style", action="store_true", default=True, help="Strip the legacy style placeholder from custom templates")
 
     # GoalScore (v4)
     ap.add_argument("--goal_cfg", default=None, help="Optional JSON file to override GoalScore lexicons/rules")
@@ -1076,12 +1073,10 @@ def main():
     # Parse eval fields once (used for watch attribution + metrics)
     eval_fields = [x.strip() for x in args.eval_fields.split(',') if x.strip()]
 
-    # 1. Template Cleaning (Simulating Phase 2 Node Default)
-    # If user didn't specify a custom template, use the clean one (without {meta_style} if we are serious)
-    # But for now, let's just strip it if force_no_style is ON and template is default-ish
+    # 1. Template cleanup for old custom templates that still contain the legacy style placeholder.
     current_template = args.template
     if args.force_no_style and "{meta_style}" in current_template:
-        print("[Info] --force_no_style is ON. Removing {meta_style} from template.")
+        print("[Info] --force_no_style is ON. Removing the legacy {meta_style} placeholder from template.")
         current_template = current_template.replace("A {meta_style} of ", "A ").replace("{meta_style}", "")
 
     packs = read_jsonl(args.jsonl)
@@ -1143,12 +1138,9 @@ def main():
                 loc_tag,
                 action_raw,
                 meta_mood_key,
-                raw_meta_style,
+                _legacy_style,
                 scene_tags,
             ) = parse_prompt_source_fields(js, 0)
-
-            # Force Clear Meta Style if requested
-            meta_style = "" if args.force_no_style else raw_meta_style
 
             for i in range(args.n):
                 # Deterministic Seed Strategy for Multi-Run
@@ -1189,7 +1181,6 @@ def main():
                     action=action_raw,
                     garnish=garnish,
                     meta_mood=meta_mood,
-                    meta_style=meta_style
                 )
 
                 # Violation Checks

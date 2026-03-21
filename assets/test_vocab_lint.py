@@ -3,11 +3,24 @@ import os
 import re
 import sys
 
+ASSETS_DIR = os.path.dirname(os.path.abspath(__file__))
+if ASSETS_DIR not in sys.path:
+    sys.path.insert(0, ASSETS_DIR)
+ROOT = os.path.dirname(ASSETS_DIR)
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+
 import test_bootstrap  # noqa: F401 — パッケージコンテキストを自動解決
 
 import background_vocab
 import clothing_vocab
 import improved_pose_emotion_vocab
+from registry import resolve_clothing_theme, resolve_location_key
+
+try:
+    from vocab.garnish.logic import LEGACY_MAP
+except ImportError:
+    LEGACY_MAP = {}
 
 def check_referential_integrity():
     print("--- Checking Referential Integrity ---")
@@ -33,21 +46,16 @@ def check_referential_integrity():
         
         # Loc Check
         # Normalize as the node does: lower().strip()
-        loc_key = loc.lower().strip()
-        if loc_key and loc_key not in background_vocab.LOC_TAG_MAP:
-            missing_locs.add(loc_key)
+        raw_loc_key = loc.lower().strip()
+        loc_key = resolve_location_key(raw_loc_key)
+        if loc and not loc_key:
+            missing_locs.add(raw_loc_key)
 
         # Costume Check
         # Normalize: key lookup in THEME_TO_PACKS
-        theme_key = costume.lower().strip()
-        # The node has an alias_map, but we should check if the key translates to a valid pack map
-        # Ideally, we check if it is in THEME_TO_PACKS directly or via alias
-        # For this lint, let's check basic existence in THEME_TO_PACKS
-        if theme_key and theme_key not in clothing_vocab.THEME_TO_PACKS:
-             # Basic check failed, but maybe it's in the alias map inside the node?
-             # Since we can't easily access the internal alias_map of the class instance without instantiating,
-             # we will just warn for now.
-             missing_costumes.add(theme_key)
+        theme_key = resolve_clothing_theme(costume.lower().strip())
+        if costume and not theme_key:
+             missing_costumes.add(costume.lower().strip())
 
     if missing_locs:
         print(f"[FAIL] Prompts use locations not in LOC_TAG_MAP: {missing_locs}")
@@ -197,11 +205,16 @@ def check_extended_rules():
     # 2. Emotion Pool Coverage
     # Check if the 'emotion' part of the mood tag (e.g. 'surreal_dream_blue' -> 'blue'?? No, logic was split('_')[-1])
     # test.py logic: parts = mood_key.lower().split("_"); return parts[-1]
-    def emotion_token(mood_key: str) -> str:
-        parts = mood_key.lower().split("_")
-        return parts[-1] if parts else mood_key.lower()
+    def normalize_emotion_token(mood_key: str) -> str:
+        key = mood_key.lower().strip()
+        if key in LEGACY_MAP:
+            return LEGACY_MAP[key][0]
+        parts = [part for part in key.split("_") if part]
+        if parts and parts[0] in getattr(improved_pose_emotion_vocab, "MOOD_POOLS", {}):
+            return parts[0]
+        return key
 
-    emotion_tokens = sorted({emotion_token(m) for m in moods if m})
+    emotion_tokens = sorted({normalize_emotion_token(m) for m in moods if m})
     # MOOD_POOLS is in improved_pose_emotion_vocab
     # We need to access MOOD_POOLS. In test.py it was import improved_pose_emotion_vocab as garnish_vocab
     # In this file it is imported as improved_pose_emotion_vocab
@@ -222,16 +235,43 @@ def check_extended_rules():
         print("[SKIP] improved_pose_emotion_vocab.MOOD_POOLS not found")
 
     # 3. Anchor Check
-    anchor_words = ["sitting","standing","walking","running","lying","sleeping","holding", "wearing", "carrying"] # Expanded slightly? No keep original for fidelity
-    # Original: ["sitting","standing","walking","running","lying","sleeping","holding"]
-    anchor_words = ["sitting","standing","walking","running","lying","sleeping","holding"]
+    anchor_words = {
+        "browsing",
+        "checking",
+        "comparing",
+        "dancing",
+        "gripping",
+        "holding",
+        "kneeling",
+        "leaning",
+        "lying",
+        "moving",
+        "organizing",
+        "pausing",
+        "pinning",
+        "resting",
+        "reviewing",
+        "running",
+        "settling",
+        "singing",
+        "sitting",
+        "slipping",
+        "sorting",
+        "staying",
+        "standing",
+        "stretching",
+        "walking",
+        "watching",
+        "working",
+    }
     
     actions = [p.get("action", "") for p in prompts]
     anchor_missing = []
     for a in actions:
         if not a: continue
-        t = a.lower()
-        if not any(w in t for w in anchor_words):
+        words = re.findall(r"[A-Za-z']+", a.lower())
+        first_word = words[0] if words else ""
+        if first_word not in anchor_words:
             anchor_missing.append(a)
             
     if anchor_missing:

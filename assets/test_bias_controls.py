@@ -11,7 +11,7 @@ from pipeline.context_pipeline import (
     _get_compatible_locs,
     _load_compatibility,
 )
-from pipeline.content_pipeline import expand_location_prompt
+from pipeline.location_builder import expand_location_prompt
 from tools.run_bias_audit import detect_objects
 
 

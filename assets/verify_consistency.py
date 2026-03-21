@@ -5,7 +5,7 @@ import os
 # Add parent dir to path
 # Add parent dir to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from pipeline.content_pipeline import build_prompt_text
+from pipeline.prompt_orchestrator import build_prompt_text
 
 def load_inputs(path):
     with open(path, 'r', encoding='utf-8') as f:
@@ -65,8 +65,6 @@ def run():
         # garnish and meta are deeper or need unpacking, here simplifying
         meta = data.get("meta", {})
         meta_mood = meta.get("mood", "")
-        meta_style = meta.get("style", "")
-        
         # Run builder in composition mode
         try:
             prompt = build_prompt_text(
@@ -78,8 +76,7 @@ def run():
                 loc=loc,
                 action=action,
                 garnish="", # skipping for this test
-                meta_mood=meta_mood, 
-                meta_style=meta_style
+                meta_mood=meta_mood,
             )
             
             conflict = check_conflict(prompt, rules, {"subj": subj, "loc": loc, "meta_mood": meta_mood})

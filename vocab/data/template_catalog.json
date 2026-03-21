@@ -1,0 +1,165 @@
+{
+  "intro": [
+    {
+      "key": "intro_plain_subject",
+      "text": "{subject_clause}",
+      "roles": ["neutral", "focused", "quiet", "transition", "social"]
+    },
+    {
+      "key": "intro_pause_subject",
+      "text": "{subject_clause}, caught in a brief pause",
+      "roles": ["quiet", "focused", "neutral"]
+    },
+    {
+      "key": "intro_in_motion",
+      "text": "{subject_clause}, moving with the next part of the day",
+      "roles": ["transition", "social"]
+    },
+    {
+      "key": "intro_attention_settled",
+      "text": "{subject_clause}, right where her attention settles",
+      "roles": ["focused", "quiet"]
+    },
+    {
+      "key": "intro_midstream",
+      "text": "{subject_clause}, already in the middle of things",
+      "roles": ["social", "transition", "neutral"]
+    },
+    {
+      "key": "intro_social_turn",
+      "text": "{subject_clause}, turned toward the next exchange",
+      "roles": ["social"]
+    },
+    {
+      "key": "intro_edge_of_moment",
+      "text": "{subject_clause}, keeping to the edge of the moment",
+      "roles": ["quiet", "focused"]
+    },
+    {
+      "key": "intro_readying",
+      "text": "{subject_clause}, gathering herself for what comes next",
+      "roles": ["transition", "focused"]
+    }
+  ],
+  "body": [
+    {
+      "key": "body_direct_clause",
+      "text": "{action_clause}",
+      "roles": ["neutral", "focused", "quiet", "transition", "social"],
+      "preferred_surfaces": ["fragment", "gerund", "clause"]
+    },
+    {
+      "key": "body_action_with_garnish",
+      "text": "{action}, with {garnish}",
+      "roles": ["neutral", "social", "transition"],
+      "needs_garnish": true,
+      "preferred_surfaces": ["gerund", "clause"],
+      "avoid_surfaces": ["fragment"]
+    },
+    {
+      "key": "body_action_then_garnish",
+      "text": "{action}, {garnish}",
+      "roles": ["neutral", "focused"],
+      "needs_garnish": true,
+      "preferred_surfaces": ["fragment", "gerund", "clause"]
+    },
+    {
+      "key": "body_garnish_while_action",
+      "text": "{garnish} while {action}",
+      "roles": ["quiet", "focused"],
+      "needs_garnish": true,
+      "preferred_surfaces": ["gerund", "clause"],
+      "avoid_surfaces": ["fragment"],
+      "max_action_words": 8
+    },
+    {
+      "key": "body_action_as_garnish",
+      "text": "{action} as {garnish}",
+      "roles": ["social", "transition"],
+      "needs_garnish": true,
+      "preferred_surfaces": ["gerund", "clause"],
+      "avoid_surfaces": ["fragment"],
+      "max_action_words": 7
+    },
+    {
+      "key": "body_staying_with_action",
+      "text": "{action_clause}, the moment staying with her",
+      "roles": ["quiet", "focused"],
+      "preferred_surfaces": ["fragment", "gerund"]
+    },
+    {
+      "key": "body_carrying_action",
+      "text": "{action_clause}, carrying the moment forward",
+      "roles": ["transition"],
+      "preferred_surfaces": ["gerund", "clause"],
+      "avoid_surfaces": ["fragment"]
+    },
+    {
+      "key": "body_attention_on_action",
+      "text": "{action_clause}, her attention fixed on it",
+      "roles": ["focused"],
+      "preferred_surfaces": ["gerund", "clause"],
+      "avoid_surfaces": ["fragment"]
+    },
+    {
+      "key": "body_room_for_action",
+      "text": "{action_clause}, leaving room for the rest of the scene",
+      "roles": ["social", "quiet"],
+      "preferred_surfaces": ["gerund", "clause"],
+      "avoid_surfaces": ["fragment"]
+    },
+    {
+      "key": "body_gathering_action",
+      "text": "{action_clause}, the moment gathering around her",
+      "roles": ["quiet", "transition"],
+      "preferred_surfaces": ["fragment", "gerund"]
+    }
+  ],
+  "end": [
+    {
+      "key": "end_scene_direct",
+      "text": "{scene_clause}",
+      "roles": ["neutral", "focused", "quiet", "transition", "social"]
+    },
+    {
+      "key": "end_scene_settling",
+      "text": "with the world around her settling into {scene_anchor_clause}",
+      "roles": ["quiet"]
+    },
+    {
+      "key": "end_scene_opening",
+      "text": "the rest of the moment opening into {scene_anchor_clause}",
+      "roles": ["transition"]
+    },
+    {
+      "key": "end_scene_grounded",
+      "text": "everything around her grounded in {scene_anchor_clause}",
+      "roles": ["focused", "quiet"]
+    },
+    {
+      "key": "end_scene_waiting",
+      "text": "with the next part of the day waiting in {scene_anchor_clause}",
+      "roles": ["transition", "social"]
+    },
+    {
+      "key": "end_scene_holding",
+      "text": "with the scene around her staying in {scene_anchor_clause}",
+      "roles": ["social", "neutral"]
+    },
+    {
+      "key": "end_scene_lingering",
+      "text": "the moment lingering in {scene_anchor_clause}",
+      "roles": ["quiet"]
+    },
+    {
+      "key": "end_scene_room",
+      "text": "and the room around her staying in {scene_anchor_clause}",
+      "roles": ["focused", "quiet"]
+    },
+    {
+      "key": "end_scene_widening",
+      "text": "everything else widening into {scene_anchor_clause}",
+      "roles": ["transition"]
+    }
+  ]
+}

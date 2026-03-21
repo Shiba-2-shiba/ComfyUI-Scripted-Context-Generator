@@ -8,14 +8,14 @@ This file re-exports every public symbol so that existing imports
 continue to work without modification.
 """
 
-try:
+if __package__:
     from .vocab.background import (  # noqa: F401
         CONCEPT_PACKS,
         GENERAL_DEFAULTS,
         LOC_TAG_MAP,
         THEME_CHOICES,
     )
-except ImportError:
+else:
     from vocab.background import (  # noqa: F401
         CONCEPT_PACKS,
         GENERAL_DEFAULTS,

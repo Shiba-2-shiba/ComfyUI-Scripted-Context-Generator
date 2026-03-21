@@ -1,6 +1,10 @@
-"""Background vocabulary — Location Tag Map & Theme Choices (loaded from JSON)."""
+"""Background vocabulary — auto-built location alias map with legacy fallback."""
 
-from ..loader import load_json
+if __package__ and __package__.count(".") >= 2:
+    from ...registry import resolve_location_alias_map
+else:
+    from registry import resolve_location_alias_map
 
-LOC_TAG_MAP = load_json("background_loc_tag_map.json")
+
+LOC_TAG_MAP = resolve_location_alias_map()
 THEME_CHOICES = ["none"] + sorted(list(LOC_TAG_MAP.keys()))

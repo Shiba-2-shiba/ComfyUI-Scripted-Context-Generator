@@ -11,7 +11,9 @@ project_root = os.path.dirname(current_dir)
 sys.path.insert(0, project_root)
 
 from core.context_ops import patch_context
-from pipeline.content_pipeline import build_prompt_text
+from pipeline.clothing_builder import apply_clothing_expansion
+from pipeline.location_builder import apply_location_expansion
+from pipeline.prompt_orchestrator import build_prompt_from_context
 from pipeline.context_pipeline import apply_scene_variation, sample_garnish_fields
 from pipeline.source_pipeline import parse_prompt_source_fields
 
@@ -48,9 +50,9 @@ def generate_baseline():
         # 1. Source parsing
         # Input: json_string (re-dump data), seed
         json_str = json.dumps(data)
-        # Returns: (subj, costume, loc, action, meta_mood, meta_style, scene_tags)
+        # Returns: (subj, costume, loc, action, meta_mood, legacy_style, scene_tags)
         p_res = parse_prompt_source_fields(json_str, seed)
-        subj, costume, loc, action, meta_mood, meta_style, scene_tags = p_res
+        subj, costume, loc, action, meta_mood, _legacy_style, scene_tags = p_res
         
         # 2. Context scene stage
         scene_context = patch_context(
@@ -58,6 +60,8 @@ def generate_baseline():
             updates={"subj": subj, "costume": costume, "loc": loc, "action": action, "seed": seed},
         )
         scene_context, debug_info = apply_scene_variation(scene_context, seed, "full")
+        scene_context, clothing_prompt = apply_clothing_expansion(scene_context, seed, "random", 0.3)
+        scene_context, location_prompt = apply_location_expansion(scene_context, seed, "detailed", "off")
         subj_v = scene_context.subj
         costume_v = scene_context.costume
         loc_v = scene_context.loc
@@ -83,17 +87,20 @@ def generate_baseline():
         else:
             garnish = garnish_res[0]
         
-        raw_prompt = build_prompt_text(
-            template="", # Trigger auto-load
+        scene_context = patch_context(
+            scene_context,
+            extras={
+                "garnish": garnish,
+                "clothing_prompt": clothing_prompt,
+                "location_prompt": location_prompt,
+            },
+            meta={"mood": meta_mood},
+        )
+        scene_context, raw_prompt = build_prompt_from_context(
+            scene_context,
+            template="",
             composition_mode=True,
             seed=seed,
-            subj=subj_v,
-            costume=costume_v,
-            loc=loc_v,
-            action=action_v,
-            garnish=garnish,
-            meta_mood=meta_mood,
-            meta_style=meta_style
         )
         
         # 5. PromptCleaner (Simulated)
@@ -121,6 +128,8 @@ def generate_baseline():
                 "loc": loc_v,
                 "action": action_v,
                 "garnish": garnish,
+                "clothing_prompt": clothing_prompt,
+                "location_prompt": location_prompt,
                 "final_prompt": final_prompt,
                 "debug_info": all_debug
             }

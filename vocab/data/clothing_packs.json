@@ -62,7 +62,7 @@
             "tailored"
           ],
           [
-            "bodycon dress",
+            "sheath dress",
             "sleek"
           ]
         ]
@@ -182,9 +182,9 @@
           "ombre"
         ],
         "styles": [
-          "backless",
-          "thigh-high slit",
-          "mermaid silhouette"
+          "open-back detail",
+          "side slit",
+          "column silhouette"
         ],
         "embellishments": [
           "sequins",
@@ -206,7 +206,7 @@
       "choices": {
         "dresses": [
           [
-            "bodycon dress",
+            "tech sheath dress",
             "futuristic"
           ],
           [
@@ -233,17 +233,17 @@
         ],
         "styles": [
           "high-neck",
-          "cutout panels",
+          "paneled seams",
           "asymmetric hem"
         ],
         "embellishments": [
-          "glowing piping",
+          "accent piping",
           "buckles",
           "metal hardware"
         ]
       },
       "optional_details": [
-        "holographic visor",
+        "translucent headpiece",
         "fingerless gloves"
       ],
       "states": []
@@ -333,7 +333,7 @@
         ],
         "styles": [
           "long-sleeve",
-          "fitted silhouette",
+          "soft knit silhouette",
           "knee-length"
         ],
         "embellishments": [
@@ -491,7 +491,7 @@
         ],
         "styles": [
           "structured skirt",
-          "high slit",
+          "split hem",
           "layered plates"
         ],
         "embellishments": [
@@ -554,6 +554,257 @@
         "ribbon tie"
       ],
       "states": []
+    },
+    "structured_day_dress": {
+      "core": [
+        "city-smart polish",
+        "weekday ease"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "wrap dress",
+            "structured"
+          ],
+          [
+            "shirt dress",
+            "belted"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "navy blue",
+          "stone beige",
+          "charcoal",
+          "soft olive"
+        ],
+        "materials": [
+          "cotton twill",
+          "crepe",
+          "wool blend"
+        ],
+        "patterns": [
+          "solid",
+          "windowpane check"
+        ],
+        "styles": [
+          "midi-length",
+          "rolled sleeves",
+          "defined waist"
+        ],
+        "embellishments": [
+          "covered placket",
+          "subtle pleats"
+        ]
+      },
+      "optional_details": [
+        "thin leather belt",
+        "structured tote strap"
+      ],
+      "states": []
+    },
+    "academy_cardigan_uniform": {
+      "core": [
+        "soft campus uniform",
+        "layered schoolwear"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "uniform dress",
+            "cardigan-layered"
+          ],
+          [
+            "pleated dress",
+            "academy"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "navy",
+          "cream",
+          "charcoal",
+          "deep burgundy"
+        ],
+        "materials": [
+          "cotton",
+          "wool blend",
+          "jersey knit"
+        ],
+        "patterns": [
+          "solid",
+          "micro plaid"
+        ],
+        "styles": [
+          "long-sleeve",
+          "knee-length",
+          "layered collar"
+        ],
+        "embellishments": [
+          "school crest",
+          "contrast piping"
+        ]
+      },
+      "optional_details": [
+        "soft knit cardigan",
+        "striped ribbon"
+      ],
+      "states": []
+    },
+    "apres_ski_sweater_dress": {
+      "core": [
+        "cold-weather date look",
+        "warm knit silhouette"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "sweater dress",
+            "rib-knit"
+          ],
+          [
+            "mock-neck dress",
+            "cozy"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "cream",
+          "dusty mauve",
+          "cocoa brown",
+          "pine green"
+        ],
+        "materials": [
+          "cashmere",
+          "wool",
+          "brushed knit"
+        ],
+        "patterns": [
+          "solid",
+          "fair isle"
+        ],
+        "styles": [
+          "midi-length",
+          "long-sleeve",
+          "soft drape"
+        ],
+        "embellishments": [
+          "cable knit texture",
+          "rolled cuffs"
+        ]
+      },
+      "optional_details": [
+        "soft scarf",
+        "thermal tights"
+      ],
+      "states": [
+        "covered in snow"
+      ]
+    },
+    "court_sport_dress": {
+      "core": [
+        "active one-piece",
+        "training-ready"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "sport dress",
+            "performance"
+          ],
+          [
+            "tennis dress",
+            "pleated"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "white",
+          "teal",
+          "coral",
+          "midnight navy"
+        ],
+        "materials": [
+          "stretch jersey",
+          "performance knit",
+          "nylon"
+        ],
+        "patterns": [
+          "solid",
+          "color-block"
+        ],
+        "styles": [
+          "sleeveless",
+          "zip-front",
+          "built-in shorts"
+        ],
+        "embellishments": [
+          "contrast piping",
+          "supportive waistband"
+        ]
+      },
+      "optional_details": [
+        "sports smartwatch",
+        "visor cap"
+      ],
+      "states": [
+        "sweaty"
+      ]
+    },
+    "coastal_cover_dress": {
+      "core": [
+        "resort cover look",
+        "breezy shoreline ease"
+      ],
+      "choices": {
+        "dresses": [
+          [
+            "cover dress",
+            "breezy"
+          ],
+          [
+            "slip dress",
+            "resort"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "seafoam",
+          "sand",
+          "sunny yellow",
+          "coral"
+        ],
+        "materials": [
+          "linen",
+          "gauze",
+          "cotton voile"
+        ],
+        "patterns": [
+          "solid",
+          "tropical-print"
+        ],
+        "styles": [
+          "side slit",
+          "open-back tie",
+          "relaxed drape"
+        ],
+        "embellishments": [
+          "shell buttons",
+          "woven trim"
+        ]
+      },
+      "optional_details": [
+        "beaded anklet",
+        "straw sun hat"
+      ],
+      "states": [
+        "sun-kissed glow"
+      ]
     }
   },
   "separates": {
@@ -604,7 +855,7 @@
           "pinstripe"
         ],
         "styles": [
-          "waist-cinched",
+          "belted",
           "knee-length",
           "structured"
         ],
@@ -758,7 +1009,7 @@
       "choices": {
         "tops": [
           [
-            "sports bra",
+            "training top",
             "supportive"
           ],
           [
@@ -798,7 +1049,7 @@
           "ombre"
         ],
         "styles": [
-          "bodycon",
+          "streamlined",
           "crop length",
           "supportive waistband"
         ],
@@ -838,7 +1089,7 @@
         "bottoms": [
           [
             "leather pants",
-            "skin-tight"
+            "sleek"
           ],
           [
             "mini skirt",
@@ -867,7 +1118,7 @@
           "checkered"
         ],
         "styles": [
-          "bodycon",
+          "streamlined",
           "high-waist",
           "asymmetric hem"
         ],
@@ -928,7 +1179,7 @@
         ],
         "styles": [
           "long-sleeve",
-          "corseted waist",
+          "structured bodice",
           "layered"
         ],
         "embellishments": [
@@ -955,12 +1206,12 @@
             "breezy"
           ],
           [
-            "bandeau top",
+            "strapless resort top",
             "ruched"
           ],
           [
-            "bikini top",
-            "halter"
+            "halter swim top",
+            "resort"
           ]
         ],
         "bottoms": [
@@ -1097,7 +1348,7 @@
           ],
           [
             "chainmail shirt",
-            "glimmering"
+            "etched"
           ]
         ],
         "bottoms": [
@@ -1133,7 +1384,7 @@
         ],
         "styles": [
           "cinched waist",
-          "high slit",
+          "split hem",
           "structured panels"
         ],
         "embellishments": [
@@ -1170,7 +1421,7 @@
         "bottoms": [
           [
             "tailored trousers",
-            "slim-fit"
+            "tapered"
           ],
           [
             "sleek pencil skirt",
@@ -1194,8 +1445,8 @@
           "subtle herringbone"
         ],
         "styles": [
-          "bodycon",
-          "high slit",
+          "streamlined",
+          "split hem",
           "structured"
         ],
         "embellishments": [
@@ -1519,7 +1770,7 @@
         ]
       },
       "optional_details": [
-        "large sunglasses",
+        "structured tote bag",
         "shopping bags",
         "hoop earrings"
       ],
@@ -1639,12 +1890,12 @@
           "hex comb"
         ],
         "styles": [
-          "skin-tight",
+          "close-fitting",
           "aerodynamic",
           "modular"
         ],
         "embellishments": [
-          "glowing lines",
+          "signal lines",
           "connection ports",
           "badges"
         ]
@@ -1726,6 +1977,323 @@
       "states": [
         "grease stained"
       ]
+    },
+    "commuter_office_layers": {
+      "core": [
+        "commuter polish",
+        "layered weekday outfit"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "fine-knit shell",
+            "sleek"
+          ],
+          [
+            "soft blouse",
+            "draped"
+          ],
+          [
+            "mock-neck knit",
+            "streamlined"
+          ]
+        ],
+        "bottoms": [
+          [
+            "cropped trousers",
+            "tailored"
+          ],
+          [
+            "column skirt",
+            "clean-line"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "ink navy",
+          "taupe",
+          "charcoal",
+          "soft white"
+        ],
+        "materials": [
+          "crepe",
+          "merino wool",
+          "cotton sateen"
+        ],
+        "patterns": [
+          "solid",
+          "pinstripe"
+        ],
+        "styles": [
+          "cropped hem",
+          "streamlined",
+          "office-ready"
+        ],
+        "embellishments": [
+          "minimal hardware",
+          "pressed crease"
+        ]
+      },
+      "optional_details": [
+        "structured shoulder bag",
+        "silk neck scarf"
+      ],
+      "states": []
+    },
+    "academy_cardigan_set": {
+      "core": [
+        "smart student layers",
+        "soft uniform mix"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "cardigan",
+            "button-front"
+          ],
+          [
+            "school blouse",
+            "crisp"
+          ],
+          [
+            "sweater vest",
+            "academy"
+          ]
+        ],
+        "bottoms": [
+          [
+            "pleated skirt",
+            "knee-length"
+          ],
+          [
+            "check skirt",
+            "classic"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "navy",
+          "cream",
+          "gray",
+          "burgundy"
+        ],
+        "materials": [
+          "cotton",
+          "wool blend",
+          "soft knit"
+        ],
+        "patterns": [
+          "solid",
+          "plaid"
+        ],
+        "styles": [
+          "layered",
+          "collared",
+          "neat pleats"
+        ],
+        "embellishments": [
+          "crest patch",
+          "contrast trim"
+        ]
+      },
+      "optional_details": [
+        "ribbon tie",
+        "knee socks"
+      ],
+      "states": []
+    },
+    "cold_weather_date_layers": {
+      "core": [
+        "winter outing layers",
+        "soft seasonal texture"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "turtleneck sweater",
+            "soft"
+          ],
+          [
+            "wrap knit top",
+            "cozy"
+          ]
+        ],
+        "bottoms": [
+          [
+            "wool midi skirt",
+            "pleated"
+          ],
+          [
+            "warm trousers",
+            "tailored"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "cream",
+          "rose brown",
+          "forest green",
+          "stone gray"
+        ],
+        "materials": [
+          "cashmere",
+          "wool",
+          "brushed jersey"
+        ],
+        "patterns": [
+          "solid",
+          "herringbone"
+        ],
+        "styles": [
+          "layered",
+          "soft tuck",
+          "cold-weather"
+        ],
+        "embellishments": [
+          "knit texture",
+          "wrapped belt"
+        ]
+      },
+      "optional_details": [
+        "wool beret",
+        "knit gloves"
+      ],
+      "states": [
+        "covered in snow"
+      ]
+    },
+    "studio_training_layers": {
+      "core": [
+        "studio workout layers",
+        "mobility focused"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "training tee",
+            "quick-dry"
+          ],
+          [
+            "long-sleeve top",
+            "performance"
+          ],
+          [
+            "tank top",
+            "layered"
+          ]
+        ],
+        "bottoms": [
+          [
+            "training shorts",
+            "lightweight"
+          ],
+          [
+            "track pants",
+            "tapered"
+          ],
+          [
+            "leggings",
+            "performance"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "white",
+          "charcoal",
+          "teal",
+          "coral"
+        ],
+        "materials": [
+          "mesh knit",
+          "nylon",
+          "performance jersey"
+        ],
+        "patterns": [
+          "solid",
+          "color-block"
+        ],
+        "styles": [
+          "breathable",
+          "layered",
+          "easy movement"
+        ],
+        "embellishments": [
+          "reflective piping",
+          "elastic waistband"
+        ]
+      },
+      "optional_details": [
+        "sports towel",
+        "ankle socks"
+      ],
+      "states": [
+        "sweaty"
+      ]
+    },
+    "coastal_linen_set": {
+      "core": [
+        "coastal resort separates",
+        "easy vacation layers"
+      ],
+      "choices": {
+        "tops": [
+          [
+            "linen shirt",
+            "open-collar"
+          ],
+          [
+            "cami top",
+            "breezy"
+          ]
+        ],
+        "bottoms": [
+          [
+            "drawstring shorts",
+            "linen"
+          ],
+          [
+            "flowing pants",
+            "wide-leg"
+          ]
+        ]
+      },
+      "palette": {
+        "colors": [
+          "sand",
+          "white",
+          "seafoam",
+          "coral"
+        ],
+        "materials": [
+          "linen",
+          "cotton",
+          "gauze"
+        ],
+        "patterns": [
+          "solid",
+          "palm print"
+        ],
+        "styles": [
+          "lightweight",
+          "sun-washed",
+          "relaxed fit"
+        ],
+        "embellishments": [
+          "shell trim",
+          "woven tie"
+        ]
+      },
+      "optional_details": [
+        "straw tote",
+        "shell bracelet"
+      ],
+      "states": [
+        "sun-kissed glow"
+      ]
     }
   },
   "outerwear": {
@@ -1751,7 +2319,7 @@
           "cotton blend"
         ],
         "styles": [
-          "waist-cinched",
+          "belted",
           "double-breasted",
           "sleek lapels"
         ],
@@ -1876,13 +2444,13 @@
           "modular"
         ],
         "embellishments": [
-          "glowing piping",
+          "accent piping",
           "utility straps",
           "zippered pockets"
         ]
       },
       "optional_details": [
-        "tech visor",
+        "utility hood insert",
         "cybernetic armband"
       ],
       "states": []
@@ -2081,6 +2649,168 @@
         "obi-inspired belt"
       ],
       "states": []
+    },
+    "city_long_coat": {
+      "core": [
+        "city overcoat"
+      ],
+      "choices": {
+        "outerwear": [
+          "long wool coat",
+          "single-breasted city coat",
+          "soft belted overcoat"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "camel",
+          "charcoal",
+          "navy",
+          "stone gray"
+        ],
+        "materials": [
+          "wool",
+          "cashmere blend",
+          "brushed twill"
+        ],
+        "styles": [
+          "midi-length",
+          "clean lapels",
+          "belted"
+        ],
+        "embellishments": [
+          "welt pockets",
+          "tone buttons"
+        ]
+      },
+      "optional_details": [
+        "soft scarf",
+        "structured tote"
+      ],
+      "states": []
+    },
+    "campus_duffle_coat": {
+      "core": [
+        "campus cold-weather layer"
+      ],
+      "choices": {
+        "outerwear": [
+          "duffle coat",
+          "school coat",
+          "hooded wool coat"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "navy",
+          "cream",
+          "forest green",
+          "camel"
+        ],
+        "materials": [
+          "wool",
+          "melton",
+          "cotton blend"
+        ],
+        "styles": [
+          "hooded",
+          "mid-length",
+          "toggle-front"
+        ],
+        "embellishments": [
+          "toggle closures",
+          "patch pockets"
+        ]
+      },
+      "optional_details": [
+        "knit muffler",
+        "gloves tucked into pocket"
+      ],
+      "states": [
+        "covered in snow"
+      ]
+    },
+    "warmup_zip_hoodie": {
+      "core": [
+        "warm-up layer"
+      ],
+      "choices": {
+        "outerwear": [
+          "zip hoodie",
+          "warm-up jacket",
+          "light training jacket"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "white",
+          "charcoal",
+          "teal",
+          "coral"
+        ],
+        "materials": [
+          "performance fleece",
+          "cotton blend",
+          "jersey knit"
+        ],
+        "styles": [
+          "zip-front",
+          "hooded",
+          "easy fit"
+        ],
+        "embellishments": [
+          "contrast zipper",
+          "striped cuff trim"
+        ]
+      },
+      "optional_details": [
+        "drawcord hood",
+        "thumb hole cuffs"
+      ],
+      "states": [
+        "sweaty"
+      ]
+    },
+    "light_resort_coverup": {
+      "core": [
+        "resort layer"
+      ],
+      "choices": {
+        "outerwear": [
+          "open-front cover-up",
+          "cropped beach cardigan",
+          "sheer resort wrap"
+        ]
+      },
+      "palette": {
+        "colors": [
+          "white",
+          "sand",
+          "seafoam",
+          "coral"
+        ],
+        "materials": [
+          "gauze",
+          "linen blend",
+          "cotton voile"
+        ],
+        "styles": [
+          "open-front",
+          "airy drape",
+          "three-quarter sleeve"
+        ],
+        "embellishments": [
+          "woven trim",
+          "shell toggle"
+        ]
+      },
+      "optional_details": [
+        "sun hat cord",
+        "beaded anklet"
+      ],
+      "states": [
+        "sun-kissed glow"
+      ]
     }
   }
 }

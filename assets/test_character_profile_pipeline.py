@@ -24,6 +24,8 @@ class TestCharacterProfilePipeline(unittest.TestCase):
         result = build_character_profile(123, "fixed", "Aiko (Quiet)", self.profiles)
         self.assertIn("A solo girl", result["subj_prompt"])
         self.assertEqual(result["selected_name"], "Aiko (Quiet)")
+        self.assertEqual(result["compatibility_key"], "student")
+        self.assertEqual(result["default_costume"], "school_uniform")
         self.assertIsInstance(result["personality"], str)
         self.assertIsInstance(result["color_palette_str"], str)
         self.assertIsInstance(result["color_palette"], list)

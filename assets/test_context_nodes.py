@@ -48,11 +48,29 @@ class TestContextNodes(unittest.TestCase):
         specs = ContextLocationExpander.INPUT_TYPES()
         self.assertEqual(specs["required"]["lighting_mode"][1]["default"], "off")
 
+    def test_character_profile_backfills_compat_subject_and_costume_hints(self):
+        node = ContextCharacterProfile()
+        context_json = node.apply_profile("fixed", "Fiona (Nature)", 7, "")[0]
+        payload = json.loads(context_json)
+        self.assertEqual(payload["extras"]["character_name"], "Fiona (Nature)")
+        self.assertEqual(payload["extras"]["source_subj_key"], "mori girl")
+        self.assertEqual(payload["extras"]["raw_costume_key"], "mori_natural")
+
     def test_context_inspector_outputs_strings(self):
         node = ContextInspector()
         pretty, summary = node.inspect_context('{"subj":"girl"}')
         self.assertIn('"subj": "girl"', pretty)
         self.assertIsInstance(summary, str)
+
+    def test_context_inspector_separates_notes_from_warnings(self):
+        node = ContextInspector()
+        pretty, summary = node.inspect_context('{"context_version":"2.0","subj":"girl","meta":{"style":"photo"}}')
+
+        self.assertIn('"style": "photo"', pretty)
+        self.assertIn('"notes": [', pretty)
+        self.assertIn("style(legacy-read-only)=photo", summary)
+        self.assertIn("notes=1", summary)
+        self.assertIn("warnings=0", summary)
 
     def test_full_context_flow_smoke(self):
         seed = 2026

@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from workflow_class_map import build_class_map_for_workflows
-from workflow_widget_validation import collect_input_specs, is_number_type, load_workflow
+from workflow_widget_validation import build_widget_plan, collect_input_specs, load_workflow
 
 
 RESULTS_ROOT = ROOT / "assets" / "results" / "workflow_diversity"
@@ -49,34 +49,27 @@ def linked_input_sources(node: dict, link_lookup: dict) -> dict[str, tuple[int, 
     return sources
 
 
-def resolve_widget_inputs(node: dict, input_specs, run_seed: int) -> tuple[dict, dict]:
-    widget_values = list(node.get("widgets_values") or [])
-    widget_index = 0
+def resolve_widget_inputs(node: dict, node_cls, run_seed: int) -> tuple[dict, dict]:
+    plan = build_widget_plan(node, node_cls)
+    widget_values = list(plan["widgets_values"] or [])
+    widget_seq = list(plan["widget_seq"] or [])
     resolved = {}
     controls = {}
 
-    for name, type_spec, options in input_specs:
-        if options.get("forceInput", False):
-            continue
+    for widget_index, (name, _type_spec, _options) in enumerate(widget_seq):
         if widget_index >= len(widget_values):
             continue
 
         value = widget_values[widget_index]
-        widget_index += 1
-
-        control_value = None
-        if is_number_type(type_spec) and (
-            options.get("control_after_generate") or name in SEED_INPUT_NAMES
-        ):
-            if widget_index < len(widget_values):
-                control_value = widget_values[widget_index]
-                widget_index += 1
-                controls[name] = control_value
-
-        if name in SEED_INPUT_NAMES and control_value == "randomize":
-            value = derive_randomized_seed(run_seed, int(node["id"]), name)
+        if str(name).endswith("__control"):
+            controls[name.split("__control", 1)[0]] = value
+            continue
 
         resolved[name] = value
+
+    for name in SEED_INPUT_NAMES:
+        if name in resolved and controls.get(name) == "randomize":
+            resolved[name] = derive_randomized_seed(run_seed, int(node["id"]), name)
 
     return resolved, controls
 
@@ -98,7 +91,7 @@ def execute_custom_workflow(workflow: dict, run_seed: int) -> dict:
         function = getattr(node_instance, function_name)
         input_specs = collect_input_specs(node_cls)
         linked_sources = linked_input_sources(node, link_lookup)
-        widget_inputs, widget_controls = resolve_widget_inputs(node, input_specs, run_seed)
+        widget_inputs, widget_controls = resolve_widget_inputs(node, node_cls, run_seed)
 
         kwargs = {}
         for name, _type_spec, options in input_specs:

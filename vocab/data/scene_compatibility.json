@@ -352,6 +352,29 @@
       ],
       "default_costume": "gothic_lolita"
     },
+    "noble lady": {
+      "tags": [
+        "luxury",
+        "urban",
+        "resort"
+      ],
+      "default_costume": "sleek_evening_gown"
+    },
+    "idol performer": {
+      "tags": [
+        "music",
+        "urban"
+      ],
+      "default_costume": "idols_stage"
+    },
+    "dancer girl": {
+      "tags": [
+        "music",
+        "urban",
+        "resort"
+      ],
+      "default_costume": "exotic_dancer"
+    },
     "fitness model": {
       "tags": [
         "sport"
@@ -538,12 +561,35 @@
       ],
       "default_costume": "scifi_space"
     },
+    "steampunk inventor": {
+      "tags": [
+        "craft",
+        "scifi",
+        "steampunk"
+      ],
+      "default_costume": "steampunk_inventor"
+    },
     "stargazer": {
       "tags": [
         "scifi",
         "nature"
       ],
       "default_costume": "scifi_space"
+    },
+    "street girl": {
+      "tags": [
+        "urban",
+        "suburban"
+      ],
+      "default_costume": "street_casual"
+    },
+    "quiet reader": {
+      "tags": [
+        "school",
+        "suburban",
+        "domestic"
+      ],
+      "default_costume": "library_girl"
     },
     "clockwork artisan": {
       "tags": [
