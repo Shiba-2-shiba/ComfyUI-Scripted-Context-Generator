@@ -75,7 +75,7 @@ def test_context_scene_stage():
     node = ContextSceneVariator()
     subj = "A solo girl with long hair"
     costume = "office_lady"
-    loc = "office"
+    loc = "modern_office"
     action = "writing at a desk"
     base_context = json.dumps({
         "subj": subj,
