@@ -2,9 +2,9 @@ import json
 import os
 import random
 
-try:
+if __package__ and "." in __package__:
     from ..core.schema import PromptContext
-except ImportError:
+else:
     from core.schema import PromptContext
 
 

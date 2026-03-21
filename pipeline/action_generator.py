@@ -4,7 +4,7 @@ import random
 import re
 from typing import Any, Dict, List, Sequence, Tuple
 
-try:
+if __package__ and "." in __package__:
     from ..location_service import resolve_location_key
     from ..object_focus_service import (
         OBJECT_TOKENS,
@@ -14,7 +14,7 @@ try:
         slot_object_policy_weight,
         summarize_slot_object_focus,
     )
-except ImportError:
+else:
     from location_service import resolve_location_key
     from object_focus_service import (
         OBJECT_TOKENS,

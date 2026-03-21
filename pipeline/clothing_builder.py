@@ -1,6 +1,6 @@
 import random
 
-try:
+if __package__ and "." in __package__:
     from ..clothing_service import resolve_clothing_theme
     from ..core.context_state import generation_state_from_context
     from ..core.context_ops import append_history, ensure_context, patch_context
@@ -15,7 +15,7 @@ try:
         recent_outerwear_packs,
     )
     from ..vocab.seed_utils import mix_seed
-except ImportError:
+else:
     from clothing_service import resolve_clothing_theme
     from core.context_state import generation_state_from_context
     from core.context_ops import append_history, ensure_context, patch_context
@@ -31,13 +31,10 @@ except ImportError:
     )
     from vocab.seed_utils import mix_seed
 
-try:
+if __package__ and "." in __package__:
     from .. import clothing_vocab
-except ImportError:
-    try:
-        import clothing_vocab
-    except ImportError:
-        clothing_vocab = None
+else:
+    import clothing_vocab
 
 VALID_OUTFIT_MODES = ("random", "dresses", "separates", "outerwear_only", "no_outerwear")
 CLOTHING_CANDIDATE_ATTEMPTS = 5

@@ -1,8 +1,8 @@
 import re
 
-try:
+if __package__:
     from .core.semantic_policy import normalize_fragment_text, remove_banned_terms
-except ImportError:
+else:
     from core.semantic_policy import normalize_fragment_text, remove_banned_terms
 
 class PromptCleaner:

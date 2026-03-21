@@ -6,7 +6,7 @@ All data and logic has been moved to ``vocab/garnish/``.
 This file re-exports every public symbol for backward compatibility.
 """
 
-try:
+if __package__:
     from .vocab.garnish import (  # noqa: F401
         sample_garnish,
         normalize,
@@ -31,7 +31,7 @@ try:
         _resolve_micro_actions,
         _is_out_of_context,
     )
-except ImportError:
+else:
     from vocab.garnish import (  # noqa: F401
         sample_garnish,
         normalize,

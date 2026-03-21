@@ -4,7 +4,7 @@ import os
 import random
 from typing import Any
 
-try:
+if __package__ and "." in __package__:
     from ..character_service import resolve_character
     from ..core.context_state import generation_state_from_context
     from ..core.context_ops import add_warning, append_history, ensure_context, patch_context
@@ -18,7 +18,7 @@ try:
         generate_action_for_location,
     )
     from ..vocab.seed_utils import mix_seed
-except ImportError:
+else:
     from character_service import resolve_character
     from core.context_state import generation_state_from_context
     from core.context_ops import add_warning, append_history, ensure_context, patch_context
@@ -46,17 +46,14 @@ def _load_garnish_vocab_module():
     global _garnish_vocab_module
     if _garnish_vocab_module is not None:
         return _garnish_vocab_module
-    try:
+    if __package__ and "." in __package__:
         from .. import improved_pose_emotion_vocab as vocab_module  # type: ignore
         importlib.reload(vocab_module)
         _garnish_vocab_module = vocab_module
-    except ImportError:
-        try:
-            import improved_pose_emotion_vocab as vocab_module  # type: ignore
-            importlib.reload(vocab_module)
-            _garnish_vocab_module = vocab_module
-        except ImportError:
-            _garnish_vocab_module = None
+    else:
+        import improved_pose_emotion_vocab as vocab_module  # type: ignore
+        importlib.reload(vocab_module)
+        _garnish_vocab_module = vocab_module
     return _garnish_vocab_module
 
 

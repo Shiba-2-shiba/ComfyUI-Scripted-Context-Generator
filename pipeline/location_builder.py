@@ -1,7 +1,7 @@
 import random
 import re
 
-try:
+if __package__ and "." in __package__:
     from ..core.context_state import generation_state_from_context
     from ..core.context_ops import append_history, ensure_context, patch_context
     from ..core.schema import DebugInfo
@@ -10,7 +10,7 @@ try:
     from ..object_focus_service import background_weight_map, extract_object_flags, is_symbolic_object_text
     from ..history_service import recent_prompt_objects
     from ..vocab.seed_utils import mix_seed
-except ImportError:
+else:
     from core.context_state import generation_state_from_context
     from core.context_ops import append_history, ensure_context, patch_context
     from core.schema import DebugInfo
@@ -20,13 +20,10 @@ except ImportError:
     from history_service import recent_prompt_objects
     from vocab.seed_utils import mix_seed
 
-try:
+if __package__ and "." in __package__:
     from .. import background_vocab
-except ImportError:
-    try:
-        import background_vocab
-    except ImportError:
-        background_vocab = None
+else:
+    import background_vocab
 
 DAILY_LIFE_LOCS = {
     "school_classroom", "school_rooftop", "school_library", "modern_office",

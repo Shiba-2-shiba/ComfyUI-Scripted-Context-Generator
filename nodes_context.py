@@ -2,7 +2,7 @@ import json
 import os
 import random
 
-try:
+if __package__:
     from .core.context_codec import context_from_json, context_to_json
     from .core.context_ops import add_warning, patch_context
     from .pipeline.character_profile_pipeline import (
@@ -16,7 +16,7 @@ try:
     from .pipeline.mood_builder import apply_mood_expansion
     from .pipeline.prompt_orchestrator import build_prompt_from_context
     from .pipeline.source_pipeline import load_prompt_source_payload
-except ImportError:
+else:
     from core.context_codec import context_from_json, context_to_json
     from core.context_ops import add_warning, patch_context
     from pipeline.character_profile_pipeline import (

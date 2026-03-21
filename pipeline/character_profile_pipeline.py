@@ -2,10 +2,10 @@ import json
 import os
 import random
 
-try:
+if __package__ and "." in __package__:
     from ..character_service import resolve_character
     from ..vocab.seed_utils import mix_seed
-except ImportError:
+else:
     from character_service import resolve_character
     from vocab.seed_utils import mix_seed
 

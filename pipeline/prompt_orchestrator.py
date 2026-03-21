@@ -1,10 +1,10 @@
-try:
+if __package__ and "." in __package__:
     from .. import prompt_renderer
     from ..core.context_state import generation_state_from_context
     from ..core.context_ops import append_history, ensure_context, patch_context
     from ..core.schema import DebugInfo
     from ..history_service import recent_template_history, recent_template_part_history
-except ImportError:
+else:
     import prompt_renderer
     from core.context_state import generation_state_from_context
     from core.context_ops import append_history, ensure_context, patch_context

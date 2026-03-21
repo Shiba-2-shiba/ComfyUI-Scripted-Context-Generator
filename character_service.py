@@ -6,8 +6,12 @@ import re
 from functools import lru_cache
 from typing import Dict, List
 
-from clothing_service import resolve_clothing_theme
-from scene_service import load_scene_compatibility
+if __package__:
+    from .clothing_service import resolve_clothing_theme
+    from .scene_service import load_scene_compatibility
+else:
+    from clothing_service import resolve_clothing_theme
+    from scene_service import load_scene_compatibility
 
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))

@@ -2,9 +2,9 @@ import json
 import os
 import random
 
-try:
+if __package__ and "." in __package__:
     from ..core.context_ops import ensure_context, patch_context
-except ImportError:
+else:
     from core.context_ops import ensure_context, patch_context
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))

@@ -7,11 +7,11 @@ import random
 import re
 from typing import Callable
 
-try:
+if __package__:
     from .core.semantic_policy import filter_candidate_strings, sanitize_text
     from .location_service import load_background_packs, resolve_location_key
     from .pipeline.action_generator import action_verb as normalize_action_verb
-except ImportError:
+else:
     from core.semantic_policy import filter_candidate_strings, sanitize_text
     from location_service import load_background_packs, resolve_location_key
     from pipeline.action_generator import action_verb as normalize_action_verb

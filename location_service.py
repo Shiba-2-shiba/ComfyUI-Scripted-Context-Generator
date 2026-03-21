@@ -5,7 +5,10 @@ import os
 from functools import lru_cache
 from typing import Dict, List
 
-from vocab.loc_tag_builder import build_loc_tag_map
+if __package__:
+    from .vocab.loc_tag_builder import build_loc_tag_map
+else:
+    from vocab.loc_tag_builder import build_loc_tag_map
 
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))

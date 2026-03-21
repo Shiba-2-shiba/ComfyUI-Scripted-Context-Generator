@@ -2,7 +2,10 @@ from __future__ import annotations
 
 from typing import Any
 
-from object_focus_service import extract_object_flags
+if __package__:
+    from .object_focus_service import extract_object_flags
+else:
+    from object_focus_service import extract_object_flags
 
 
 def recent_history_decisions(ctx: Any, node_name: str, limit: int = 4) -> list[dict]:
