@@ -6,9 +6,9 @@ Builds emotion-led physical expression tags while preserving deterministic seed 
 import random
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
-try:
+if __package__ and __package__.count(".") >= 2:
     from ...core.semantic_policy import sanitize_sequence
-except ImportError:
+else:
     from core.semantic_policy import sanitize_sequence
 
 from .utils import _dedupe

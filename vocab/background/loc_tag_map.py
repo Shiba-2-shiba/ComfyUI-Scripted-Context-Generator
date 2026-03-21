@@ -1,8 +1,8 @@
 """Background vocabulary — auto-built location alias map with legacy fallback."""
 
-try:
+if __package__ and __package__.count(".") >= 2:
     from ...registry import resolve_location_alias_map
-except ImportError:
+else:
     from registry import resolve_location_alias_map
 
 
