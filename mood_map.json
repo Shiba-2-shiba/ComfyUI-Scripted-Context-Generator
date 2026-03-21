@@ -1,17 +1,17 @@
 {
     "quiet_focused": {
         "description": [
-            "a quiet room holding still around her, her attention fixed on the task in front of her",
-            "the air staying hushed while her eyes stay on the page and her posture remains steady",
-            "a calm corner of the day, with careful hands and a mind narrowed to one thing",
-            "the scene settling into silence as she keeps her breathing even and her gaze precise",
-            "a studious pause with her shoulders still, her focus sharper than the room around her"
+            "a quiet room holding around her while the task in front of her sets the pace",
+            "the scene narrowing to one line of thought as the rest of the room falls gently aside",
+            "a studious pause where the work in front of her matters more than the noise around it",
+            "the air staying calm while her attention stays with what still needs finishing",
+            "the moment kept deliberate rather than urgent, with everything else held at the edge"
         ],
         "staging_tags": [
-            "downcast gaze",
-            "still posture",
+            "settled concentration",
             "focused expression",
-            "calm breathing",
+            "measured pause",
+            "deliberate pace",
             "careful hands"
         ]
     },
@@ -49,18 +49,18 @@
     },
     "peaceful_relaxed": {
         "description": [
-            "a slow part of the day with loose shoulders, easy hands, and nothing pushing her to hurry",
-            "the scene unfolding gently around her while she settles into an unhurried rhythm",
-            "quiet comfort in the air, with a soft smile and the kind of posture that has finally let go",
-            "a restful moment where her breathing evens out and the space around her feels lived in",
-            "the day softening at the edges while she moves without tension and lets herself stay present"
+            "the day softening into an easy rhythm with nothing asking her to hurry",
+            "a restful stretch of time where the room feels familiar and gently lived in",
+            "quiet comfort settling over the scene as she lets the moment unfold at its own pace",
+            "an unhurried pause that leaves space for small ordinary details to matter again",
+            "the scene easing into calm, with enough room for her to simply stay present"
         ],
         "staging_tags": [
-            "relaxed posture",
             "gentle smile",
-            "loose hands",
-            "soft gaze",
-            "slow breath"
+            "easy presence",
+            "settled warmth",
+            "quiet ease",
+            "soft gaze"
         ]
     },
     "melancholic_sadness": {

@@ -11,15 +11,13 @@ from pipeline.source_pipeline import load_prompt_source_payload, parse_prompt_so
 
 
 class TestSourcePipeline(unittest.TestCase):
-    def test_default_prompt_sampling_prefers_daily_bright_payloads(self):
+    def test_default_prompt_sampling_prefers_non_discouraged_daily_payloads(self):
         payload = load_prompt_source_payload("{}", 42, source_mode="auto")
         self.assertIsInstance(payload, dict)
-        self.assertIn(payload.get("meta", {}).get("mood", ""), {
-            "quiet_focused",
-            "energetic_joy",
-            "peaceful_relaxed",
-            "whimsical_playful",
-            "romantic_allure",
+        self.assertNotIn(payload.get("meta", {}).get("mood", ""), {
+            "melancholic_sadness",
+            "intense_anger",
+            "creepy_fear",
         })
         self.assertNotIn(payload.get("loc", ""), {"rainy_alley", "rainy_bus_stop", "winter_street"})
 
