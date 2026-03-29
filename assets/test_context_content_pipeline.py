@@ -9,7 +9,7 @@ from core.context_ops import append_history, patch_context
 from core.schema import DebugInfo
 from history_service import clothing_signature_from_decision
 from pipeline.mood_builder import apply_mood_expansion
-from pipeline.clothing_builder import apply_clothing_expansion
+from pipeline.clothing_builder import apply_clothing_expansion, expand_clothing_prompt
 from pipeline.location_builder import apply_location_expansion
 from pipeline.prompt_orchestrator import (
     _derive_template_roles,
@@ -34,6 +34,70 @@ class TestContextContentPipeline(unittest.TestCase):
         self.assertEqual(updated.history[-1].node, "ContextClothingExpander")
         self.assertTrue(updated.history[-1].decision.get("signature"))
         self.assertTrue(updated.history[-1].decision.get("base_variant"))
+
+    def test_apply_clothing_expansion_suppresses_outerwear_for_home_locations(self):
+        ctx = patch_context(
+            {},
+            updates={"costume": "office_lady", "loc": "cozy_living_room", "seed": 11},
+            extras={"raw_costume_key": "office_lady", "raw_loc_tag": "cozy_living_room", "character_palette_str": "navy, white"},
+        )
+        updated, clothing_prompt = apply_clothing_expansion(ctx, 11, "random", 1.0)
+        self.assertIsInstance(clothing_prompt, str)
+        self.assertEqual(updated.history[-1].decision.get("outerwear_pack", ""), "")
+        self.assertNotIn("over it", clothing_prompt)
+
+    def test_expand_clothing_prompt_suppresses_outerwear_for_gym_locations(self):
+        clothing_prompt, decision = expand_clothing_prompt(
+            "gym_workout",
+            21,
+            "random",
+            1.0,
+            "gray, black",
+            loc="fitness_gym",
+            return_debug=True,
+        )
+        self.assertIsInstance(clothing_prompt, str)
+        self.assertEqual(decision.get("outerwear_pack", ""), "")
+        self.assertNotIn("over it", clothing_prompt)
+
+    def test_expand_clothing_prompt_suppresses_outerwear_for_apartment_balcony(self):
+        clothing_prompt, decision = expand_clothing_prompt(
+            "office_lady",
+            21,
+            "random",
+            1.0,
+            "navy, white",
+            loc="apartment_balcony",
+            return_debug=True,
+        )
+        self.assertEqual(decision.get("outerwear_pack", ""), "")
+        self.assertNotIn("over it", clothing_prompt)
+
+    def test_expand_clothing_prompt_keeps_outerwear_available_for_apartment_entryway(self):
+        clothing_prompt, decision = expand_clothing_prompt(
+            "office_lady",
+            21,
+            "random",
+            1.0,
+            "navy, white",
+            loc="apartment_entryway",
+            return_debug=True,
+        )
+        self.assertTrue(decision.get("outerwear_pack"))
+        self.assertIn("over it", clothing_prompt)
+
+    def test_expand_clothing_prompt_keeps_outerwear_available_for_non_home_indoor_locations(self):
+        clothing_prompt, decision = expand_clothing_prompt(
+            "office_lady",
+            21,
+            "random",
+            1.0,
+            "navy, white",
+            loc="bakery_shop",
+            return_debug=True,
+        )
+        self.assertTrue(decision.get("outerwear_pack"))
+        self.assertIn("over it", clothing_prompt)
 
     def test_clothing_signature_tracks_variant_details_within_same_pack(self):
         first = clothing_signature_from_decision(

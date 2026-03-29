@@ -33,7 +33,7 @@ root/
 │   ├── context_pipeline.py    # scene / garnish shared logic
 │   └── content_pipeline.py    # clothing / location / mood / prompt shared logic
 ├── docs/
-│   └── context_refactor/      # refactor spec, tasks, progress, migration docs
+│   └── context_refactor/      # summary + extension guidance + archived refactor record
 ├── verification/
 │   ├── frontend/              # repo-local frontend schema / roundtrip tests
 │   └── browser/               # repo-local Playwright GUI roundtrip tests

@@ -13,10 +13,11 @@ Use this only when reviewing historical cutover steps or maintaining the
 remaining dedicated bridge tests.
 
 Related documents:
-- [Current Migration Note](../context_migration_notes.md)
+- [Current Summary](../README.md)
+- [Archived Migration Policy](./context_migration_policy.md)
 - [Archived Detailed Migration Notes](./context_migration_notes.md)
 - [Cutover Plan](./context_cutover_plan.md)
-- [Progress Log](../context_v2_progress.md)
+- [Progress Log](./context_v2_progress.md)
 
 ## Archived Mixed-Mode Flow
 

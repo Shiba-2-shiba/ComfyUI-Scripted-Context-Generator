@@ -1,7 +1,7 @@
 # Session Notes
 
 このファイルには **現セッション以降も参照しやすい形に圧縮した作業メモ** を記録します。
-詳細な履歴は `docs/context_refactor/context_v2_progress.md` と archive 文書を優先し、
+詳細な履歴は `docs/context_refactor/archive/context_v2_progress.md` と archive 文書を優先し、
 ここでは今の repo を扱う上で必要な要点だけを残します。
 
 ---
