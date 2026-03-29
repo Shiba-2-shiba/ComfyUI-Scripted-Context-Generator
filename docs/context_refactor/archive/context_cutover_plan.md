@@ -7,7 +7,7 @@ surfaces after the context-first migration.
 
 Related documents:
 - [Task Plan](./context_v2_tasks.md)
-- [Migration Note](./context_migration_notes.md)
+- [Migration Policy](./context_migration_policy.md)
 - [Progress Log](./context_v2_progress.md)
 
 The machine-readable source of truth is:

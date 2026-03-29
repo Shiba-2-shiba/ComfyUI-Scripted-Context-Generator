@@ -6,9 +6,10 @@ Replace the legacy field-by-field workflow with the new `context_json` based
 workflow, then continue future feature work only on the new architecture.
 
 Related documents:
-- [Spec](../context_v2_spec.md)
-- [Task Plan](../context_v2_tasks.md)
-- [Bridge Workflow Note](../context_bridge_workflow.md)
+- [Current Summary](../README.md)
+- [Spec](./context_v2_spec.md)
+- [Task Plan](./context_v2_tasks.md)
+- [Bridge Workflow Note](./context_bridge_workflow_note.md)
 - [Cutover Plan](./context_cutover_plan.md)
 
 ## Destination Architecture
@@ -80,7 +81,7 @@ assembly has already moved to context-first:
 Use the bridge helper patch step for small structured overrides instead of
 introducing more string sockets.
 
-For the current bridge policy, see [Bridge Workflow Note](../context_bridge_workflow.md).
+For the current historical bridge policy note, see [Bridge Workflow Note](./context_bridge_workflow_note.md).
 If you need the historical mixed-mode wiring appendix, follow the archive link
 from that note.
 

@@ -6,8 +6,8 @@ Keep future feature work aligned with the context-first architecture and avoid
 reintroducing socket sprawl.
 
 Related documents:
-- [Spec](./context_v2_spec.md)
-- [Migration Notes](./context_migration_notes.md)
+- [Context Refactor Summary](./README.md)
+- [Archive Index](./archive/README.md)
 
 ## Rules For New Data
 
@@ -65,5 +65,5 @@ For schema-affecting changes:
 
 1. Add or update unit tests for schema, codec, and pipeline logic.
 2. Add or update workflow sample checks when widget serialization can change.
-3. Record the change in `context_v2_progress.md`.
-4. Update `context_v2_tasks.md` if the change opens or closes follow-up work.
+3. Update the current documentation entry points if the public architecture changed.
+4. Add detailed rationale to `docs/context_refactor/archive/` only when the change needs historical traceability.

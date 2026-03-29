@@ -6,10 +6,11 @@ Keep one short live note for the migration policy while the detailed node-by-
 node conversion guide moves to the archive appendix.
 
 Related documents:
-- [Spec](./context_v2_spec.md)
-- [Task Plan](./context_v2_tasks.md)
-- [Archived Cutover Plan](./archive/context_cutover_plan.md)
-- [Archived Detailed Notes](./archive/context_migration_notes.md)
+- [Current Summary](../README.md)
+- [Archived Spec](./context_v2_spec.md)
+- [Archived Task Plan](./context_v2_tasks.md)
+- [Archived Cutover Plan](./context_cutover_plan.md)
+- [Archived Detailed Notes](./context_migration_notes.md)
 
 ## Live Policy
 
@@ -22,13 +23,13 @@ Related documents:
 ## Active Guidance
 
 For the completed retirement waves and removal-gate record, use the archived
-[Cutover Plan](./archive/context_cutover_plan.md).
+[Cutover Plan](./context_cutover_plan.md).
 
 For historical mixed-mode examples, use the bridge appendix referenced from
-[Bridge Workflow Note](./context_bridge_workflow.md).
+[Bridge Workflow Note](./context_bridge_workflow_note.md).
 
 For the previous detailed stage-by-stage migration walkthrough, use the archive
-appendix at [archive/context_migration_notes.md](./archive/context_migration_notes.md).
+appendix at [context_migration_notes.md](./context_migration_notes.md).
 
 ## Validation Checklist
 

@@ -14,6 +14,7 @@ if __package__ and "." in __package__:
         recent_clothing_types,
         recent_outerwear_packs,
     )
+    from ..location_service import resolve_location_key
     from ..vocab.seed_utils import mix_seed
 else:
     from clothing_service import resolve_clothing_theme
@@ -29,6 +30,7 @@ else:
         recent_clothing_types,
         recent_outerwear_packs,
     )
+    from location_service import resolve_location_key
     from vocab.seed_utils import mix_seed
 
 if __package__ and "." in __package__:
@@ -38,6 +40,15 @@ else:
 
 VALID_OUTFIT_MODES = ("random", "dresses", "separates", "outerwear_only", "no_outerwear")
 CLOTHING_CANDIDATE_ATTEMPTS = 5
+OUTERWEAR_BLOCKED_LOCATION_KEYS = {
+    "apartment_balcony",
+    "bedroom_boudoir",
+    "clean_modern_kitchen",
+    "cozy_living_room",
+    "messy_kitchen",
+    "fitness_gym",
+    "school_gym_hall",
+}
 
 
 def _normalize_signature_part(value):
@@ -125,6 +136,11 @@ def _weighted_recent_choice(options, rng, recent_values=None):
     return rng.choices(values, weights=weights, k=1)[0]
 
 
+def _location_blocks_outerwear(loc):
+    loc_key = resolve_location_key(loc) or str(loc or "").strip().lower()
+    return loc_key in OUTERWEAR_BLOCKED_LOCATION_KEYS
+
+
 def _candidate_repeat_penalty(decision, recent_packs, recent_types, recent_outerwear, recent_signatures):
     penalty = 0
     signature = str(decision.get("signature", "")).strip()
@@ -153,6 +169,7 @@ def _render_clothing_candidate(
     recent_outerwear,
     recent_signatures,
     attempt_index=0,
+    loc="",
 ):
     rng = random.Random(mix_seed(seed, "cloth" if attempt_index == 0 else f"cloth:{attempt_index}"))
     raw_key = str(theme_key).lower().strip()
@@ -200,6 +217,8 @@ def _render_clothing_candidate(
         if outfit_mode == "outerwear_only":
             should_add_outer = True
         elif outfit_mode == "no_outerwear":
+            should_add_outer = False
+        elif _location_blocks_outerwear(loc):
             should_add_outer = False
         else:
             outerwear_floor = float(getattr(clothing_vocab, "OUTERWEAR_SELECTION_PROBABILITY", 0.25))
@@ -254,6 +273,7 @@ def expand_clothing_prompt(
     outfit_mode,
     outerwear_chance,
     character_palette="",
+    loc="",
     recent_packs=None,
     recent_types=None,
     recent_outerwear=None,
@@ -279,6 +299,7 @@ def expand_clothing_prompt(
         outfit_mode,
         outerwear_chance,
         character_palette,
+        loc=loc,
         recent_packs=recent_packs,
         recent_types=recent_types,
         recent_outerwear=recent_outerwear,
@@ -293,6 +314,7 @@ def expand_clothing_prompt(
             outfit_mode,
             outerwear_chance,
             character_palette,
+            loc=loc,
             recent_packs=recent_packs,
             recent_types=recent_types,
             recent_outerwear=recent_outerwear,
@@ -313,6 +335,7 @@ def apply_clothing_expansion(context, seed, outfit_mode, outerwear_chance, chara
     state = generation_state_from_context(ctx)
     raw_theme_key = state.clothing.raw_costume_key or ctx.costume
     theme_key = resolve_clothing_theme(raw_theme_key) or raw_theme_key
+    raw_loc_key = state.location.raw_loc_tag or ctx.loc
     palette_value = character_palette or state.character.palette_text
     clothing_prompt, decision = expand_clothing_prompt(
         theme_key,
@@ -320,6 +343,7 @@ def apply_clothing_expansion(context, seed, outfit_mode, outerwear_chance, chara
         outfit_mode,
         outerwear_chance,
         palette_value,
+        loc=raw_loc_key,
         recent_packs=recent_clothing_packs(ctx),
         recent_types=recent_clothing_types(ctx),
         recent_outerwear=recent_outerwear_packs(ctx),

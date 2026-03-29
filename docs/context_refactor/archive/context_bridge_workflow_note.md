@@ -11,8 +11,9 @@ Current status:
    [archive/context_bridge_workflow.md](./archive/context_bridge_workflow.md).
 
 Related documents:
-- [Migration Note](./context_migration_notes.md)
-- [Archived Cutover Plan](./archive/context_cutover_plan.md)
+- [Current Summary](../README.md)
+- [Migration Policy](./context_migration_policy.md)
+- [Archived Cutover Plan](./context_cutover_plan.md)
 - [Progress Log](./context_v2_progress.md)
 
 ## Operational Rule
