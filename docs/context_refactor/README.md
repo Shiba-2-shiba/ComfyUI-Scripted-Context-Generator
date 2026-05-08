@@ -30,6 +30,8 @@ prompt-surface repetition 調整の要約入口です。
 現在の実装に対して通常参照するのは次です。
 
 - [Current Status](../../CURRENT_STATUS.md)
+- [Expansion Guide](../../EXPANSION_GUIDE.md)
+- [Variation Expansion Workstream](../variation_expansion/README.md)
 - [Context Refactor Summary](./README.md)
 - [Context Schema Extension Guidance](./context_extension_guidance.md)
 
