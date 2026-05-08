@@ -1,0 +1,49 @@
+{
+  "location": "illuminated_park",
+  "actions": [
+    {
+      "text": "standing in the snow, looking up at the lights",
+      "load": "calm"
+    },
+    {
+      "text": "walking along the illuminated path",
+      "load": "active"
+    },
+    {
+      "text": "sitting on a bench, enjoying the lights",
+      "load": "calm"
+    },
+    {
+      "text": "standing under a tree of lights",
+      "load": "calm"
+    },
+    {
+      "text": "standing with a sparkler in hand",
+      "load": "calm"
+    },
+    {
+      "text": "taking a selfie with the lights",
+      "load": "calm"
+    },
+    {
+      "text": "admiring the colorful light display",
+      "load": "calm"
+    },
+    {
+      "text": "walking hand in hand with a smile",
+      "load": "active"
+    },
+    {
+      "text": "taking a panoramic photo",
+      "load": "calm"
+    },
+    {
+      "text": "warming both hands beside a small winter stall",
+      "load": "calm"
+    },
+    {
+      "text": "pausing near a lantern to warm both hands",
+      "load": "calm"
+    }
+  ]
+}

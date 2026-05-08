@@ -68,27 +68,33 @@ Current implementation:
   compares them to `assets/compatibility_review.csv`.
 - `assets/compatibility_review.csv` has been normalized from the generator output.
 - The check now reports `ERROR: []` and no row or pair drift.
-- Current generated rows: `1,565`.
+- Current generated rows: `1,637`.
 - `prompts.jsonl` rows are aligned to the current variation scope.
 
 ### 3. Split Action Pool Authoring Surface
 
-Status: `later`
+Status: `done`
 
-Keep runtime source stable:
+Runtime source remains stable:
 
 - `vocab/data/action_pools.json`
 
-Add an authoring surface only if review pain remains concrete:
+Authoring source:
 
-- candidate path: `vocab/source/action_pools/*.json`
-- candidate builder: `tools/build_action_pools.py`
+- `vocab/source/action_pools/_manifest.json`
+- `vocab/source/action_pools/*.json`
+- `tools/build_action_pools.py`
 
-The runtime loader should not change until generated output is proven stable.
+Current implementation:
+
+- The split source has 79 location files.
+- `tools/build_action_pools.py --check` verifies that split source rebuilds
+  `vocab/data/action_pools.json` exactly.
+- Runtime loaders still read only `vocab/data/action_pools.json`.
 
 ### 4. Expand Remaining Daily-Life Candidates
 
-Status: `later`
+Status: `done`
 
 Candidate locations:
 
@@ -103,14 +109,29 @@ Candidate locations:
 
 Do this after scope validation and compatibility review generation are stable.
 
+P8 result:
+
+- unique locations: `68 -> 76`
+- compatibility rows: `1,565 -> 1,637`
+- base variations: `15,034 -> 15,610`
+- action pools: `79 -> 87`
+- actual delta: `+576`
+
+Detailed execution plan:
+
+- `docs/variation_expansion/next_expansion_wave_plan.md`
+
 ### 5. Expand Subjects
 
-Status: `later`
+Status: `next`
 
 Subject expansion should wait until subject promotion rules are explicit.
 
 Do not add subjects only by making `scene_compatibility.characters` larger.
 Promote subjects by updating `variation_scope.json` and then regenerating/checking `compatibility_review.csv`.
+
+P8 has been measured and documented. P9 should start as an evaluation gate
+before any subject promotion.
 
 ## Acceptance Criteria For This Refactor Lane
 

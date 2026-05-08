@@ -1,0 +1,29 @@
+{
+  "location": "dungeon_crypt",
+  "actions": [
+    {
+      "text": "sitting against a wall, resting",
+      "load": "calm"
+    },
+    {
+      "text": "standing in the darkness, looking alert",
+      "load": "calm"
+    },
+    {
+      "text": "walking cautiously through the corridor",
+      "load": "active"
+    },
+    {
+      "text": "standing and holding a torch",
+      "load": "calm"
+    },
+    {
+      "text": "deciphering runes on the wall",
+      "load": "calm"
+    },
+    {
+      "text": "listening to distant echoes",
+      "load": "calm"
+    }
+  ]
+}

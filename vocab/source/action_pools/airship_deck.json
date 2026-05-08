@@ -1,0 +1,21 @@
+{
+  "location": "airship_deck",
+  "actions": [
+    {
+      "text": "standing at the railing, looking at the clouds",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a crate, wind blowing hair",
+      "load": "calm"
+    },
+    {
+      "text": "standing at the helm, steering",
+      "load": "calm"
+    },
+    {
+      "text": "leaning against the mast, relaxing",
+      "load": "calm"
+    }
+  ]
+}

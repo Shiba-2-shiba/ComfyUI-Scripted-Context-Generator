@@ -2686,5 +2686,277 @@
             "text": "leaning on the wooden railing",
             "load": "calm"
         }
+    ],
+    "food_court": [
+        {
+            "text": "checking menu boards above the counter",
+            "load": "calm"
+        },
+        {
+            "text": "standing in line with a tray held close",
+            "load": "calm"
+        },
+        {
+            "text": "carrying a tray toward an open table",
+            "load": "active"
+        },
+        {
+            "text": "sitting at a shared table arranging a quick meal",
+            "load": "calm"
+        },
+        {
+            "text": "choosing a seat near the edge of the dining area",
+            "load": "calm"
+        },
+        {
+            "text": "reading a receipt while waiting for an order number",
+            "load": "calm"
+        },
+        {
+            "text": "walking past tables while looking for a friend",
+            "load": "active"
+        },
+        {
+            "text": "placing a drink beside the tray before sitting down",
+            "load": "calm"
+        }
+    ],
+    "coworking_space": [
+        {
+            "text": "typing quietly at a shared work table",
+            "load": "calm"
+        },
+        {
+            "text": "checking notes beside an open laptop",
+            "load": "calm"
+        },
+        {
+            "text": "standing near a whiteboard reviewing a task list",
+            "load": "calm"
+        },
+        {
+            "text": "walking toward a small meeting booth",
+            "load": "active"
+        },
+        {
+            "text": "sorting documents beside a charging cable",
+            "load": "calm"
+        },
+        {
+            "text": "sitting with headphones resting around the neck",
+            "load": "calm"
+        },
+        {
+            "text": "holding a mug while scanning the schedule board",
+            "load": "calm"
+        },
+        {
+            "text": "leaning over the table to compare project notes",
+            "load": "calm"
+        }
+    ],
+    "community_center": [
+        {
+            "text": "checking a notice board near the entrance",
+            "load": "calm"
+        },
+        {
+            "text": "standing beside a folding table with flyers",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a stackable chair during a small event",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the multipurpose room carrying forms",
+            "load": "active"
+        },
+        {
+            "text": "sorting handouts before the meeting starts",
+            "load": "calm"
+        },
+        {
+            "text": "holding a clipboard while listening to instructions",
+            "load": "calm"
+        },
+        {
+            "text": "pinning a schedule sheet to the board",
+            "load": "calm"
+        },
+        {
+            "text": "turning a chair toward the discussion circle",
+            "load": "active"
+        }
+    ],
+    "apartment_balcony": [
+        {
+            "text": "standing by the railing looking over the neighborhood",
+            "load": "calm"
+        },
+        {
+            "text": "watering a small potted plant near the corner",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a narrow chair with a cup in hand",
+            "load": "calm"
+        },
+        {
+            "text": "hanging a towel over the balcony rail",
+            "load": "active"
+        },
+        {
+            "text": "checking the sky before stepping back inside",
+            "load": "calm"
+        },
+        {
+            "text": "leaning on the rail during a quiet pause",
+            "load": "calm"
+        },
+        {
+            "text": "folding a light cloth beside the sliding door",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the room as the curtain moves",
+            "load": "active"
+        }
+    ],
+    "apartment_entryway": [
+        {
+            "text": "standing at the genkan while setting down a bag",
+            "load": "calm"
+        },
+        {
+            "text": "checking keys on top of the shoe cabinet",
+            "load": "calm"
+        },
+        {
+            "text": "slipping shoes into place near the doorway",
+            "load": "calm"
+        },
+        {
+            "text": "picking up mail from the narrow shelf",
+            "load": "calm"
+        },
+        {
+            "text": "holding an umbrella while closing the front door",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the hallway after coming inside",
+            "load": "active"
+        },
+        {
+            "text": "placing a tote beside the shoe cabinet",
+            "load": "calm"
+        },
+        {
+            "text": "pausing on the entry step before heading out",
+            "load": "calm"
+        }
+    ],
+    "public_library_lobby": [
+        {
+            "text": "checking a library notice board near the entrance",
+            "load": "calm"
+        },
+        {
+            "text": "standing by the return slot with borrowed books",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a bench while reading an event flyer",
+            "load": "calm"
+        },
+        {
+            "text": "walking toward the information desk with a book tote",
+            "load": "active"
+        },
+        {
+            "text": "holding a library card beside the counter",
+            "load": "calm"
+        },
+        {
+            "text": "reading a floor guide before entering the stacks",
+            "load": "calm"
+        },
+        {
+            "text": "placing returned books into the slot",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the reading area after asking a question",
+            "load": "active"
+        }
+    ],
+    "riverside_walk": [
+        {
+            "text": "walking along the riverside path at an easy pace",
+            "load": "active"
+        },
+        {
+            "text": "standing by the railing watching the water",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a bench with a small bag beside her",
+            "load": "calm"
+        },
+        {
+            "text": "checking the path ahead near the bridge",
+            "load": "calm"
+        },
+        {
+            "text": "holding a folded jacket while pausing by the river",
+            "load": "calm"
+        },
+        {
+            "text": "leaning on the rail during a quiet break",
+            "load": "calm"
+        },
+        {
+            "text": "stepping aside as cyclists pass on the path",
+            "load": "active"
+        },
+        {
+            "text": "looking across the water before continuing downstream",
+            "load": "calm"
+        }
+    ],
+    "laundromat": [
+        {
+            "text": "sorting clothes on a folding table",
+            "load": "calm"
+        },
+        {
+            "text": "standing by a washing machine checking the timer",
+            "load": "calm"
+        },
+        {
+            "text": "placing coins into the payment slot",
+            "load": "calm"
+        },
+        {
+            "text": "carrying a laundry basket toward an open machine",
+            "load": "active"
+        },
+        {
+            "text": "folding a shirt beside the dryer",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a bench while waiting for the cycle",
+            "load": "calm"
+        },
+        {
+            "text": "checking a detergent bottle near the counter",
+            "load": "calm"
+        },
+        {
+            "text": "lifting a warm towel from the dryer",
+            "load": "active"
+        }
     ]
 }

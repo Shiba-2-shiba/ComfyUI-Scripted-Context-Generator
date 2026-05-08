@@ -1,0 +1,49 @@
+{
+  "location": "messy_kitchen",
+  "actions": [
+    {
+      "text": "standing and cooking with a frying pan",
+      "load": "active"
+    },
+    {
+      "text": "sitting at the kitchen table eating",
+      "load": "calm"
+    },
+    {
+      "text": "standing at the counter chopping vegetables",
+      "load": "calm"
+    },
+    {
+      "text": "leaning against the counter, holding a mug",
+      "load": "calm"
+    },
+    {
+      "text": "opening the refrigerator looking inside",
+      "load": "calm"
+    },
+    {
+      "text": "washing dishes at the sink",
+      "load": "calm"
+    },
+    {
+      "text": "wiping the counter with a cloth",
+      "load": "calm"
+    },
+    {
+      "text": "tasting soup from a spoon",
+      "load": "calm"
+    },
+    {
+      "text": "organizing spices in a rack",
+      "load": "calm"
+    },
+    {
+      "text": "checking a recipe on a phone",
+      "load": "calm"
+    },
+    {
+      "text": "placing washed utensils beside the sink",
+      "load": "calm"
+    }
+  ]
+}

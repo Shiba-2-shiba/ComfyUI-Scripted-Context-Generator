@@ -1,0 +1,37 @@
+{
+  "location": "school_classroom",
+  "actions": [
+    {
+      "text": "sitting at a desk with notes spread in front of her",
+      "load": "calm"
+    },
+    {
+      "text": "standing at the blackboard writing notes",
+      "load": "calm"
+    },
+    {
+      "text": "sitting and reading a textbook quietly",
+      "load": "calm"
+    },
+    {
+      "text": "standing by the window between tasks",
+      "load": "calm"
+    },
+    {
+      "text": "chatting with friends during a break",
+      "load": "calm"
+    },
+    {
+      "text": "hurriedly packing bag after the bell",
+      "load": "calm"
+    },
+    {
+      "text": "erasing the blackboard",
+      "load": "calm"
+    },
+    {
+      "text": "cleaning the classroom after school",
+      "load": "active"
+    }
+  ]
+}

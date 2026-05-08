@@ -23,7 +23,7 @@ class TestBuildCompatibilityReview(unittest.TestCase):
         self.assertEqual(report["WARNING"], [])
 
         summary = [item for item in report["INFO"] if item["code"] == "compatibility_review_generation_summary"][0]
-        self.assertEqual(summary["current_row_count"], 1565)
+        self.assertEqual(summary["current_row_count"], 1637)
         self.assertEqual(summary["generated_row_count"], summary["current_row_count"])
         self.assertEqual(summary["missing_current_pairs"], 0)
         self.assertEqual(summary["extra_generated_pairs"], 0)

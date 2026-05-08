@@ -1,0 +1,49 @@
+{
+  "location": "bedroom_boudoir",
+  "actions": [
+    {
+      "text": "lying on bed hugging a pillow",
+      "load": "intimate"
+    },
+    {
+      "text": "sitting on the edge of the bed",
+      "load": "intimate"
+    },
+    {
+      "text": "standing by the mirror, adjusting clothes",
+      "load": "calm"
+    },
+    {
+      "text": "lying down reading a book",
+      "load": "calm"
+    },
+    {
+      "text": "waking up and stretching arms",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on the floor organizing a jewelry box",
+      "load": "calm"
+    },
+    {
+      "text": "brushing hair in front of a mirror",
+      "load": "calm"
+    },
+    {
+      "text": "writing in a diary at the desk",
+      "load": "calm"
+    },
+    {
+      "text": "choosing an outfit for tomorrow",
+      "load": "calm"
+    },
+    {
+      "text": "fluffing a pillow on the bed",
+      "load": "intimate"
+    },
+    {
+      "text": "placing a folded blanket at the foot of the bed",
+      "load": "calm"
+    }
+  ]
+}

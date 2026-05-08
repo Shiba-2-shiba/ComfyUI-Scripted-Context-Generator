@@ -1,0 +1,49 @@
+{
+  "location": "aquarium",
+  "actions": [
+    {
+      "text": "standing in the underwater tunnel, looking up",
+      "load": "calm"
+    },
+    {
+      "text": "watching jellyfish float in a tank",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a bench watching the large tank",
+      "load": "calm"
+    },
+    {
+      "text": "pointing at a shark swimming by",
+      "load": "calm"
+    },
+    {
+      "text": "reading about deep sea creatures",
+      "load": "calm"
+    },
+    {
+      "text": "walking slowly through the dark corridor",
+      "load": "active"
+    },
+    {
+      "text": "standing face to face with a fish at the glass",
+      "load": "calm"
+    },
+    {
+      "text": "taking a photo of a colorful coral reef",
+      "load": "calm"
+    },
+    {
+      "text": "looking at a starfish in the touch pool",
+      "load": "calm"
+    },
+    {
+      "text": "standing in awe of a giant stingray",
+      "load": "calm"
+    },
+    {
+      "text": "following the floor arrows toward the next tank",
+      "load": "active"
+    }
+  ]
+}

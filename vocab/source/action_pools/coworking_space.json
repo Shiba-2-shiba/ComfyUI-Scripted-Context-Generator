@@ -1,0 +1,37 @@
+{
+  "location": "coworking_space",
+  "actions": [
+    {
+      "text": "typing quietly at a shared work table",
+      "load": "calm"
+    },
+    {
+      "text": "checking notes beside an open laptop",
+      "load": "calm"
+    },
+    {
+      "text": "standing near a whiteboard reviewing a task list",
+      "load": "calm"
+    },
+    {
+      "text": "walking toward a small meeting booth",
+      "load": "active"
+    },
+    {
+      "text": "sorting documents beside a charging cable",
+      "load": "calm"
+    },
+    {
+      "text": "sitting with headphones resting around the neck",
+      "load": "calm"
+    },
+    {
+      "text": "holding a mug while scanning the schedule board",
+      "load": "calm"
+    },
+    {
+      "text": "leaning over the table to compare project notes",
+      "load": "calm"
+    }
+  ]
+}

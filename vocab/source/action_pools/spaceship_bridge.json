@@ -1,0 +1,21 @@
+{
+  "location": "spaceship_bridge",
+  "actions": [
+    {
+      "text": "standing on the bridge, looking at stars",
+      "load": "calm"
+    },
+    {
+      "text": "sitting in the captain's chair",
+      "load": "calm"
+    },
+    {
+      "text": "standing at the console, pressing buttons",
+      "load": "calm"
+    },
+    {
+      "text": "standing by the viewport, arms behind back",
+      "load": "calm"
+    }
+  ]
+}

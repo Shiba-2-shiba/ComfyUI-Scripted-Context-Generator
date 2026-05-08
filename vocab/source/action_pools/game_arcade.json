@@ -1,0 +1,37 @@
+{
+  "location": "game_arcade",
+  "actions": [
+    {
+      "text": "standing at a rhythm game cabinet choosing a song",
+      "load": "active"
+    },
+    {
+      "text": "holding a token cup near the prize machines",
+      "load": "calm"
+    },
+    {
+      "text": "leaning forward to watch a claw machine",
+      "load": "calm"
+    },
+    {
+      "text": "checking the score panel after a round",
+      "load": "calm"
+    },
+    {
+      "text": "walking between rows of bright game cabinets",
+      "load": "active"
+    },
+    {
+      "text": "placing a coin into a racing game cabinet",
+      "load": "calm"
+    },
+    {
+      "text": "holding a small prize ticket with a smile",
+      "load": "calm"
+    },
+    {
+      "text": "waiting behind another player for a turn",
+      "load": "calm"
+    }
+  ]
+}

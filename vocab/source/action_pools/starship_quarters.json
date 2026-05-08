@@ -1,0 +1,37 @@
+{
+  "location": "starship_quarters",
+  "actions": [
+    {
+      "text": "sitting on the bunk bed, looking at a hologram",
+      "load": "intimate"
+    },
+    {
+      "text": "standing by the viewport, stars streak by",
+      "load": "calm"
+    },
+    {
+      "text": "typing on a personal datapad",
+      "load": "calm"
+    },
+    {
+      "text": "lying down and staring at the metal ceiling",
+      "load": "calm"
+    },
+    {
+      "text": "standing and organizing a uniform in the locker",
+      "load": "calm"
+    },
+    {
+      "text": "eating a nutrient pack at a small table",
+      "load": "calm"
+    },
+    {
+      "text": "exercising in the small space",
+      "load": "active"
+    },
+    {
+      "text": "checking life support indicators on the wall",
+      "load": "calm"
+    }
+  ]
+}

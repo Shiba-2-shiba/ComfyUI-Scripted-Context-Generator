@@ -1,0 +1,29 @@
+{
+  "location": "japanese_bath",
+  "actions": [
+    {
+      "text": "soaking in the hot water",
+      "load": "intimate"
+    },
+    {
+      "text": "sitting on the edge of the bath",
+      "load": "intimate"
+    },
+    {
+      "text": "relaxing with a towel on head",
+      "load": "calm"
+    },
+    {
+      "text": "pouring water over shoulder",
+      "load": "calm"
+    },
+    {
+      "text": "washing hair with a bucket",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a small stool scrubbing back",
+      "load": "calm"
+    }
+  ]
+}

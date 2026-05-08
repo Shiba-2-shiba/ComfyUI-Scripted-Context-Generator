@@ -1,0 +1,29 @@
+{
+  "location": "school_gym_hall",
+  "actions": [
+    {
+      "text": "sitting neatly on the gym floor",
+      "load": "calm"
+    },
+    {
+      "text": "standing in the center of the gym",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a bench between drills",
+      "load": "calm"
+    },
+    {
+      "text": "standing near the stage waiting for instruction",
+      "load": "calm"
+    },
+    {
+      "text": "stretching arms before exercise",
+      "load": "calm"
+    },
+    {
+      "text": "walking across the polished floor",
+      "load": "active"
+    }
+  ]
+}

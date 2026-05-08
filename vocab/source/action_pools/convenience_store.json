@@ -1,0 +1,37 @@
+{
+  "location": "convenience_store",
+  "actions": [
+    {
+      "text": "checking items near a shelf of daily goods",
+      "load": "calm"
+    },
+    {
+      "text": "standing by the drink case choosing a bottle",
+      "load": "calm"
+    },
+    {
+      "text": "waiting near the register with a small basket",
+      "load": "calm"
+    },
+    {
+      "text": "walking between narrow aisles with a shopping basket",
+      "load": "active"
+    },
+    {
+      "text": "reading a label on a packaged meal",
+      "load": "calm"
+    },
+    {
+      "text": "placing daily items on the checkout counter",
+      "load": "calm"
+    },
+    {
+      "text": "checking a phone memo beside the snack shelf",
+      "load": "calm"
+    },
+    {
+      "text": "stepping aside to let another customer pass",
+      "load": "active"
+    }
+  ]
+}

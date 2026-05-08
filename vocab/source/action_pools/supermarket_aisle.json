@@ -1,0 +1,37 @@
+{
+  "location": "supermarket_aisle",
+  "actions": [
+    {
+      "text": "pushing a small cart down the grocery aisle",
+      "load": "active"
+    },
+    {
+      "text": "checking a shopping list beside the shelves",
+      "load": "calm"
+    },
+    {
+      "text": "reaching for an item on the middle shelf",
+      "load": "calm"
+    },
+    {
+      "text": "comparing two packages before choosing one",
+      "load": "calm"
+    },
+    {
+      "text": "placing vegetables into a shopping basket",
+      "load": "calm"
+    },
+    {
+      "text": "standing near the refrigerated case reading a label",
+      "load": "calm"
+    },
+    {
+      "text": "walking around a cart left in the aisle",
+      "load": "active"
+    },
+    {
+      "text": "checking coupons beside the checkout lane",
+      "load": "calm"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "location": "stadium_court",
+  "actions": [
+    {
+      "text": "running down the track",
+      "load": "active"
+    },
+    {
+      "text": "standing at the starting line",
+      "load": "calm"
+    },
+    {
+      "text": "walking briskly around the track",
+      "load": "active"
+    },
+    {
+      "text": "sitting on the sideline bench, resting",
+      "load": "calm"
+    },
+    {
+      "text": "drinking water from a bottle",
+      "load": "calm"
+    },
+    {
+      "text": "wiping sweat with a towel",
+      "load": "calm"
+    },
+    {
+      "text": "tying shoelaces near the track",
+      "load": "calm"
+    },
+    {
+      "text": "warming up with high knees",
+      "load": "calm"
+    }
+  ]
+}

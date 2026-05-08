@@ -1,0 +1,37 @@
+{
+  "location": "bakery_shop",
+  "actions": [
+    {
+      "text": "standing by the bread trays choosing a pastry",
+      "load": "calm"
+    },
+    {
+      "text": "holding a small tray with tongs in hand",
+      "load": "calm"
+    },
+    {
+      "text": "waiting near the counter with wrapped bread",
+      "load": "calm"
+    },
+    {
+      "text": "reading handwritten labels beside the pastry case",
+      "load": "calm"
+    },
+    {
+      "text": "placing a roll onto a bakery tray",
+      "load": "calm"
+    },
+    {
+      "text": "walking slowly past shelves of fresh bread",
+      "load": "active"
+    },
+    {
+      "text": "checking the day's specials near the entrance",
+      "load": "calm"
+    },
+    {
+      "text": "folding a paper bag after paying at the counter",
+      "load": "calm"
+    }
+  ]
+}

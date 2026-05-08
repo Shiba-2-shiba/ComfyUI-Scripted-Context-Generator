@@ -1,0 +1,49 @@
+{
+  "location": "art_gallery",
+  "actions": [
+    {
+      "text": "standing with arms folded, critiquing a painting",
+      "load": "calm"
+    },
+    {
+      "text": "walking slowly through the gallery hall",
+      "load": "active"
+    },
+    {
+      "text": "sitting on a bench, admiring a sculpture",
+      "load": "calm"
+    },
+    {
+      "text": "standing close to a canvas, examining brushstrokes",
+      "load": "calm"
+    },
+    {
+      "text": "reading a plaque next to an artwork",
+      "load": "calm"
+    },
+    {
+      "text": "sketching in a notebook, inspired by the art",
+      "load": "calm"
+    },
+    {
+      "text": "standing back to view a large installation",
+      "load": "calm"
+    },
+    {
+      "text": "discussing art quietly with a companion",
+      "load": "calm"
+    },
+    {
+      "text": "leaning in to read a tiny label",
+      "load": "calm"
+    },
+    {
+      "text": "walking quietly to the next room",
+      "load": "active"
+    },
+    {
+      "text": "holding a gallery leaflet while comparing two paintings",
+      "load": "calm"
+    }
+  ]
+}

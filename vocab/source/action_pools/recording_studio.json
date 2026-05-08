@@ -1,0 +1,29 @@
+{
+  "location": "recording_studio",
+  "actions": [
+    {
+      "text": "sitting and adjusting headphones",
+      "load": "calm"
+    },
+    {
+      "text": "standing in front of the microphone",
+      "load": "calm"
+    },
+    {
+      "text": "sitting at the mixing console",
+      "load": "calm"
+    },
+    {
+      "text": "standing and tuning an instrument",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting the microphone stand",
+      "load": "calm"
+    },
+    {
+      "text": "signaling 'OK' from the booth",
+      "load": "calm"
+    }
+  ]
+}

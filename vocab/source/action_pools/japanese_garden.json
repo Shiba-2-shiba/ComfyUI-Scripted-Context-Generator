@@ -1,0 +1,37 @@
+{
+  "location": "japanese_garden",
+  "actions": [
+    {
+      "text": "standing on a red bridge, feeding koi fish",
+      "load": "calm"
+    },
+    {
+      "text": "walking slowly along the stone path",
+      "load": "active"
+    },
+    {
+      "text": "sitting on a bench admiring the cherry blossoms",
+      "load": "calm"
+    },
+    {
+      "text": "standing by a stone lantern, peaceful",
+      "load": "calm"
+    },
+    {
+      "text": "sweeping fallen leaves with a bamboo broom",
+      "load": "active"
+    },
+    {
+      "text": "sitting in seiza on a wooden deck",
+      "load": "calm"
+    },
+    {
+      "text": "looking at the rock garden pattern",
+      "load": "calm"
+    },
+    {
+      "text": "holding a paper umbrella in the rain",
+      "load": "calm"
+    }
+  ]
+}

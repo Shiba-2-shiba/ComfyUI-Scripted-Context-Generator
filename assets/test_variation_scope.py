@@ -17,9 +17,9 @@ class TestVariationScope(unittest.TestCase):
 
         summary = [item for item in report["INFO"] if item.get("code") == "variation_scope_summary"][0]
         self.assertEqual(summary["scope_subject_count"], 58)
-        self.assertEqual(summary["scope_location_count"], 68)
-        self.assertEqual(summary["compatibility_review_row_count"], 1565)
-        self.assertEqual(summary["total_base_variations"], 15034)
+        self.assertEqual(summary["scope_location_count"], 76)
+        self.assertEqual(summary["compatibility_review_row_count"], 1637)
+        self.assertEqual(summary["total_base_variations"], 15610)
 
     def test_next_candidate_locations_are_not_already_in_scope(self):
         scope = load_variation_scope()

@@ -15,6 +15,8 @@
 
 現在値は `CURRENT_STATUS.md` と次のコマンドで確認します。
 日常系 location / action pool の具体的な拡張計画は `docs/variation_expansion/README.md` を参照します。
+現在の優先順は、まず `unique locations` を増やし、その後に
+`unique subjects` の昇格を評価する流れです。
 
 ```bash
 python assets/calc_variations.py --json
@@ -172,11 +174,39 @@ The generator reads:
 Current state:
 
 - current generated rows match the checked-in CSV rows
-- current generated/current row count is `1,565`
+- current generated/current row count is `1,637`
 - subject/location pair drift is `0`
 - `prompts.jsonl` rows are expected to stay inside the current variation scope
 
 Use `--write --output assets/compatibility_review.csv` only after `--check` has no row or pair drift.
+
+## Action Pool Authoring
+
+Runtime loading still reads:
+
+- `vocab/data/action_pools.json`
+
+For editing and review, use the split source files:
+
+- `vocab/source/action_pools/_manifest.json`
+- `vocab/source/action_pools/<location>.json`
+
+Check that the split source rebuilds the runtime JSON exactly:
+
+```bash
+python tools/build_action_pools.py --check
+```
+
+After editing split source files, rebuild the runtime file only when `--check`
+is expected to be clean after the write:
+
+```bash
+python tools/build_action_pools.py --write
+python tools/build_action_pools.py --check
+```
+
+Use `--write-source` only to refresh the split source from the current runtime
+file during intentional migration work.
 
 ## Safety Rules
 

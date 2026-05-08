@@ -1,0 +1,37 @@
+{
+  "location": "campus_cafeteria",
+  "actions": [
+    {
+      "text": "standing in line while holding a lunch tray",
+      "load": "calm"
+    },
+    {
+      "text": "sitting at a table with a simple meal",
+      "load": "calm"
+    },
+    {
+      "text": "checking the daily menu near the counter",
+      "load": "calm"
+    },
+    {
+      "text": "carrying a tray toward an open seat",
+      "load": "active"
+    },
+    {
+      "text": "pouring tea from a dispenser beside the counter",
+      "load": "calm"
+    },
+    {
+      "text": "clearing a tray at the return station",
+      "load": "calm"
+    },
+    {
+      "text": "talking quietly with classmates over lunch",
+      "load": "calm"
+    },
+    {
+      "text": "checking a notebook while waiting for a friend",
+      "load": "calm"
+    }
+  ]
+}

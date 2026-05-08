@@ -1,0 +1,37 @@
+{
+  "location": "tea_room",
+  "actions": [
+    {
+      "text": "sitting in seiza, preparing matcha tea",
+      "load": "calm"
+    },
+    {
+      "text": "kneeling and offering a tea cup",
+      "load": "calm"
+    },
+    {
+      "text": "sitting quietly, enjoying the aroma",
+      "load": "calm"
+    },
+    {
+      "text": "standing and arranging flowers in the alcove",
+      "load": "calm"
+    },
+    {
+      "text": "wiping the tatami mat with a cloth",
+      "load": "calm"
+    },
+    {
+      "text": "sitting and chatting with a guest",
+      "load": "calm"
+    },
+    {
+      "text": "looking out the window at the garden",
+      "load": "calm"
+    },
+    {
+      "text": "holding a tea bowl with both hands",
+      "load": "calm"
+    }
+  ]
+}

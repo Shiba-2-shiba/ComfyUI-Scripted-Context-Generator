@@ -1,0 +1,37 @@
+{
+  "location": "apartment_balcony",
+  "actions": [
+    {
+      "text": "standing by the railing looking over the neighborhood",
+      "load": "calm"
+    },
+    {
+      "text": "watering a small potted plant near the corner",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a narrow chair with a cup in hand",
+      "load": "calm"
+    },
+    {
+      "text": "hanging a towel over the balcony rail",
+      "load": "active"
+    },
+    {
+      "text": "checking the sky before stepping back inside",
+      "load": "calm"
+    },
+    {
+      "text": "leaning on the rail during a quiet pause",
+      "load": "calm"
+    },
+    {
+      "text": "folding a light cloth beside the sliding door",
+      "load": "calm"
+    },
+    {
+      "text": "turning toward the room as the curtain moves",
+      "load": "active"
+    }
+  ]
+}

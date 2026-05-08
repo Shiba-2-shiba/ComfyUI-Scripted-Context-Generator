@@ -3,9 +3,9 @@
   "schema_version": "1.0",
   "expected_metrics": {
     "unique_subjects": 58,
-    "unique_locations": 68,
-    "row_count": 1565,
-    "total_base_variations": 15034
+    "unique_locations": 76,
+    "row_count": 1637,
+    "total_base_variations": 15610
   },
   "variation_subjects": [
     "CEO",
@@ -70,6 +70,8 @@
   "variation_locations": [
     "airship_deck",
     "alien_planet",
+    "apartment_balcony",
+    "apartment_entryway",
     "antique_shop",
     "aquarium",
     "art_gallery",
@@ -85,9 +87,11 @@
     "cinema_lobby",
     "clean_modern_kitchen",
     "clockwork_workshop",
+    "community_center",
     "commuter_transport",
     "concert_stage",
     "convenience_store",
+    "coworking_space",
     "cozy_bookstore",
     "cozy_living_room",
     "cyber_lab",
@@ -99,12 +103,14 @@
     "fantasy_forest",
     "fashion_boutique",
     "fitness_gym",
+    "food_court",
     "game_arcade",
     "high_tech_medbay",
     "illuminated_park",
     "japanese_bath",
     "japanese_garden",
     "karaoke_bar",
+    "laundromat",
     "luxury_hotel_lobby",
     "magic_academy_library",
     "messy_copy_room",
@@ -116,8 +122,10 @@
     "opera_house",
     "picnic_park",
     "poolside_resort",
+    "public_library_lobby",
     "rainy_alley",
     "recording_studio",
+    "riverside_walk",
     "school_classroom",
     "school_gym_hall",
     "school_library",
@@ -147,9 +155,7 @@
     "game_arcade",
     "bus_terminal",
     "campus_hallway",
-    "campus_cafeteria"
-  ],
-  "next_candidate_locations": [
+    "campus_cafeteria",
     "food_court",
     "coworking_space",
     "community_center",
@@ -159,6 +165,7 @@
     "riverside_walk",
     "laundromat"
   ],
+  "next_candidate_locations": [],
   "compatibility_review_generation": {
     "canonical_location_overrides": {
       "elegant_dining_room": "street_cafe",

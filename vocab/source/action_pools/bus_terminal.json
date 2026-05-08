@@ -1,0 +1,37 @@
+{
+  "location": "bus_terminal",
+  "actions": [
+    {
+      "text": "checking the departure board near the bus bays",
+      "load": "calm"
+    },
+    {
+      "text": "standing in line with a transit card ready",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a bench with a bag at her feet",
+      "load": "calm"
+    },
+    {
+      "text": "walking toward the marked boarding lane",
+      "load": "active"
+    },
+    {
+      "text": "reading a timetable posted beside the platform",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting a shoulder bag while waiting to board",
+      "load": "calm"
+    },
+    {
+      "text": "holding a folded ticket near the gate",
+      "load": "calm"
+    },
+    {
+      "text": "stepping aside as passengers leave the bus",
+      "load": "active"
+    }
+  ]
+}

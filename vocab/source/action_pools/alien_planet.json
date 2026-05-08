@@ -1,0 +1,29 @@
+{
+  "location": "alien_planet",
+  "actions": [
+    {
+      "text": "standing and looking at the alien landscape",
+      "load": "calm"
+    },
+    {
+      "text": "walking across strange terrain",
+      "load": "active"
+    },
+    {
+      "text": "standing and holding a bouquet, pointing at a strange plant",
+      "load": "calm"
+    },
+    {
+      "text": "crouching and examining the ground",
+      "load": "calm"
+    },
+    {
+      "text": "collecting a soil sample",
+      "load": "calm"
+    },
+    {
+      "text": "watching the twin moons rise",
+      "load": "calm"
+    }
+  ]
+}

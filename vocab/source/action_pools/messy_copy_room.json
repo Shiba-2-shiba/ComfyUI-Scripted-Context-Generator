@@ -1,0 +1,29 @@
+{
+  "location": "messy_copy_room",
+  "actions": [
+    {
+      "text": "standing near the copier, waiting",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a box, taking a break",
+      "load": "calm"
+    },
+    {
+      "text": "crouching and searching through supplies",
+      "load": "calm"
+    },
+    {
+      "text": "standing and organizing papers",
+      "load": "calm"
+    },
+    {
+      "text": "kicking the copier in frustration",
+      "load": "tense"
+    },
+    {
+      "text": "standing and reading a notice on the wall",
+      "load": "calm"
+    }
+  ]
+}

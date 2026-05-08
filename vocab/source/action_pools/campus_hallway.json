@@ -1,0 +1,37 @@
+{
+  "location": "campus_hallway",
+  "actions": [
+    {
+      "text": "walking past classroom doors with books in hand",
+      "load": "active"
+    },
+    {
+      "text": "standing by a notice board reading club flyers",
+      "load": "calm"
+    },
+    {
+      "text": "checking a class schedule beside the lockers",
+      "load": "calm"
+    },
+    {
+      "text": "leaning near the window while waiting between classes",
+      "load": "calm"
+    },
+    {
+      "text": "holding a notebook while talking quietly with a friend",
+      "load": "calm"
+    },
+    {
+      "text": "picking up dropped papers from the hallway floor",
+      "load": "active"
+    },
+    {
+      "text": "standing aside as students pass through the corridor",
+      "load": "calm"
+    },
+    {
+      "text": "walking toward the stairwell after the bell",
+      "load": "active"
+    }
+  ]
+}

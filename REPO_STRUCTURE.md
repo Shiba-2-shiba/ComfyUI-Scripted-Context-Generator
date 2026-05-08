@@ -62,6 +62,8 @@
 │   │   ├── logic.py                         # garnish 生成ロジック
 │   │   ├── micro_actions.py                 # micro action 語彙
 │   │   └── utils.py                         # garnish utility
+│   ├── source/
+│   │   └── action_pools/                    # location 別 action pool authoring source
 │   └── data/
 │       ├── action_pools.json
 │       ├── background_alias_overrides.json

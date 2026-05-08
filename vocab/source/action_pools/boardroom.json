@@ -1,0 +1,33 @@
+{
+  "location": "boardroom",
+  "actions": [
+    {
+      "text": "standing by the window with the city below",
+      "load": "calm"
+    },
+    {
+      "text": "sitting at the head of a long table",
+      "load": "calm"
+    },
+    {
+      "text": "standing and holding documents",
+      "load": "calm"
+    },
+    {
+      "text": "leaning against the table, arms crossed",
+      "load": "calm"
+    },
+    {
+      "text": "reviewing the agenda printed in front of her",
+      "load": "calm"
+    },
+    {
+      "text": "arguing over a detail in the contract",
+      "load": "tense"
+    },
+    {
+      "text": "rearranging name cards before everyone arrives",
+      "load": "calm"
+    }
+  ]
+}

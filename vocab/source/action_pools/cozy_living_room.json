@@ -1,0 +1,49 @@
+{
+  "location": "cozy_living_room",
+  "actions": [
+    {
+      "text": "curled up on the sofa with a book",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on the floor playing a game",
+      "load": "active"
+    },
+    {
+      "text": "standing and stretching near the window",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting cushions on the couch",
+      "load": "calm"
+    },
+    {
+      "text": "watching TV with a remote in hand",
+      "load": "calm"
+    },
+    {
+      "text": "sipping hot cocoa by the coffee table",
+      "load": "calm"
+    },
+    {
+      "text": "petting a cat on the rug",
+      "load": "calm"
+    },
+    {
+      "text": "dozing off under a blanket",
+      "load": "calm"
+    },
+    {
+      "text": "arranging magazines on the coffee table",
+      "load": "calm"
+    },
+    {
+      "text": "standing by the window watering a small plant",
+      "load": "calm"
+    },
+    {
+      "text": "folding a blanket beside the sofa",
+      "load": "calm"
+    }
+  ]
+}

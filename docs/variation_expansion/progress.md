@@ -6,13 +6,14 @@ Last updated: 2026-05-08
 
 Overall status: `verified`
 
-Current phase: `scoped compatibility review generation`
+Current phase: `P8/P9 preparation`
 
 Primary target:
 
 - variation scope を明示して、意図しない subject / location 増加を防ぐ
 - `compatibility_review.csv` の scoped check-only generator で差分を固定する
 - 第2波の daily-life location 追加前にデータ境界を軽くする
+- 次は `unique locations` を増やし、その後 `unique subjects` を評価する
 
 ## Baseline Snapshot
 
@@ -35,17 +36,17 @@ Actual result:
 
 ```text
 unique subjects: 58
-unique locations: 68
-base variations: 15,034
-compatibility rows: 1,565
-action pool count: 79
-dedicated action pool missing candidates: 17
+unique locations: 76
+base variations: 15,610
+compatibility rows: 1,637
+action pool count: 87
+dedicated action pool missing candidates: 9
 ```
 
 Stretch target:
 
 ```text
-unique locations: 68+
+unique locations: 76+
 base variations: 18,000+
 ```
 
@@ -60,7 +61,29 @@ base variations: 18,000+
 | P4 | Full validation and final status update | Done | 0 | 0 |
 | P5 | Define variation scope source of truth | Done | 0 | 0 |
 | P6 | Scoped compatibility review generation | Done | 0 | 0 |
-| P7 | Action pool authoring split evaluation | Not started | 0 | TBD |
+| P7 | Action pool authoring split evaluation | Done | 0 | 0 |
+| P8 | Promote remaining daily-life locations | Done | +576 | +576 |
+| P9 | Evaluate subject expansion | Planned | TBD | TBD |
+
+## Next Direction
+
+P8 increased `unique locations` before any subject promotion.
+
+P8 actual outcome:
+
+```text
+unique subjects: 58 -> 58
+unique locations: 68 -> 76
+compatibility rows: 1,565 -> 1,637
+base variations: 15,034 -> 15,610
+estimated delta: +576
+```
+
+P9 should evaluate `unique subjects` now that P8 is complete. The current
+post-P8 compatibility surface has 33 subject candidates outside
+`variation_scope.variation_subjects`; high-impact candidates are mostly
+office/urban/suburban archetypes, so near-duplicate roles must be filtered
+before promotion.
 
 ## Candidate Tracking
 
@@ -138,11 +161,14 @@ High-coverage existing action additions:
 | 2026-05-08 | `python -m unittest assets.test_build_compatibility_review` | Pass | 3 tests OK |
 | 2026-05-08 | `python tools/check_variation_scope.py` | Pass | `ERROR: []`; `WARNING: []`; all 68 scoped locations have direct background packs |
 | 2026-05-08 | `python -m unittest assets.test_asset_validator assets.test_vocab_lint assets.test_variation_scope assets.test_calc_variations assets.test_data_consistency` | Pass | 23 tests OK |
+| 2026-05-08 | `python tools/build_action_pools.py --check` | Pass | `ERROR: []`; `WARNING: []`; 79 source location files match runtime JSON |
+| 2026-05-08 | `python -m unittest assets.test_build_action_pools` | Pass | 2 tests OK |
 
 ## Open Risks
 
 - Some remaining daily-life candidates still rely on compositional fallback; this is intentional for this wave.
-- `vocab/data/action_pools.json` is larger after this pass; defer format splitting until review pain becomes concrete.
+- `vocab/data/action_pools.json` remains the runtime file; edit `vocab/source/action_pools/*.json`
+  first and verify with `python tools/build_action_pools.py --check`.
 - Future action text must stay semantic-only and avoid object overconcentration.
 - All current variation-scope locations now have direct background packs.
 - Before subject/location promotion, keep `prompts.jsonl`, `variation_scope.json`,

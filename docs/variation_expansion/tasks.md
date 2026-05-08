@@ -141,8 +141,8 @@ python -m unittest assets.test_variation_scope
 
 Current generator state:
 
-- generated rows: `1,565`
-- current rows: `1,565`
+- generated rows: `1,637`
+- current rows: `1,637`
 - missing current pairs: `0`
 - extra generated pairs: `0`
 - row metadata drift: `0`
@@ -158,6 +158,73 @@ python -m unittest assets.test_build_compatibility_review
 
 ## P7: Action Pool Authoring Split Evaluation
 
-- [ ] VE-701 Measure review pain after P6
-- [ ] VE-702 Decide whether `vocab/source/action_pools/*.json` is justified
-- [ ] VE-703 Keep runtime loader unchanged unless generated output is proven stable
+- [x] VE-701 Measure review pain after P6
+- [x] VE-702 Add `vocab/source/action_pools/*.json` authoring source
+- [x] VE-703 Keep runtime loader unchanged while source check proves generated output
+- [x] VE-704 Add `tools/build_action_pools.py --check`
+- [x] VE-705 Add regression test for exact source/runtime rebuild
+
+Current action pool source state:
+
+- runtime file: `vocab/data/action_pools.json`
+- source dir: `vocab/source/action_pools/`
+- source location files: `79`
+- runtime/source drift: `0`
+
+Commands:
+
+```bash
+python tools/build_action_pools.py --check
+python -m unittest assets.test_build_action_pools
+```
+
+## P8: Remaining Daily-Life Location Promotion
+
+- [x] VE-801 Add 8 semantic actions for `food_court`
+- [x] VE-802 Add 8 semantic actions for `coworking_space`
+- [x] VE-803 Add 8 semantic actions for `community_center`
+- [x] VE-804 Add 8 semantic actions for `apartment_balcony`
+- [x] VE-805 Add 8 semantic actions for `apartment_entryway`
+- [x] VE-806 Add 8 semantic actions for `public_library_lobby`
+- [x] VE-807 Add 8 semantic actions for `riverside_walk`
+- [x] VE-808 Add 8 semantic actions for `laundromat`
+- [x] VE-809 Rebuild runtime action pools from split source
+- [x] VE-810 Promote the 8 locations in `variation_scope.json`
+- [x] VE-811 Regenerate `assets/compatibility_review.csv`
+- [x] VE-812 Update expected metrics in `variation_scope.json`
+- [x] VE-813 Run focused expansion checks
+- [x] VE-814 Update docs with actual measured delta
+
+P8 actual outcome:
+
+- unique locations: `68 -> 76`
+- compatibility rows: `1,565 -> 1,637`
+- base variations: `15,034 -> 15,610`
+- estimated delta: `+576`
+
+Commands:
+
+```bash
+python tools/build_action_pools.py --write
+python tools/build_action_pools.py --check
+python tools/build_compatibility_review.py --write --output assets/compatibility_review.csv
+python tools/build_compatibility_review.py --check
+python tools/validate_prompt_data.py
+python tools/check_variation_scope.py
+python assets/calc_variations.py --json
+python -m unittest assets.test_build_action_pools assets.test_action_generator assets.test_action_diversity_audit assets.test_repetition_guard_audit assets.test_variation_scope assets.test_build_compatibility_review
+```
+
+## P9: Subject Expansion Evaluation
+
+- [ ] VE-901 Recompute subject candidate deltas after P8
+- [ ] VE-902 Group candidates by role overlap, tags, and costume reuse
+- [ ] VE-903 Choose a small first subject wave or explicitly defer subject promotion
+- [ ] VE-904 Record accepted/rejected subject candidates in `progress.md`
+- [ ] VE-905 If accepted, update `variation_scope.json` and regenerate/check compatibility CSV
+
+Current post-P8 subject candidate pool:
+
+- compatibility characters outside current variation scope: `33`
+- high-impact current candidates start around `+319` to `+368` base variations each
+- P9 remains evaluation-only until a subject wave is explicitly selected

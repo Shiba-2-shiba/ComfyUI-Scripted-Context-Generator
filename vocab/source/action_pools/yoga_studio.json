@@ -1,0 +1,29 @@
+{
+  "location": "yoga_studio",
+  "actions": [
+    {
+      "text": "sitting in meditation pose",
+      "load": "calm"
+    },
+    {
+      "text": "standing in a yoga pose",
+      "load": "calm"
+    },
+    {
+      "text": "lying on a yoga mat, stretching",
+      "load": "calm"
+    },
+    {
+      "text": "sitting cross-legged, eyes closed",
+      "load": "calm"
+    },
+    {
+      "text": "standing on one leg in tree pose",
+      "load": "calm"
+    },
+    {
+      "text": "lying on back in savasana",
+      "load": "calm"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "location": "clean_modern_kitchen",
+  "actions": [
+    {
+      "text": "standing at the island chopping vegetables",
+      "load": "calm"
+    },
+    {
+      "text": "opening the stainless steel fridge",
+      "load": "calm"
+    },
+    {
+      "text": "sitting at the breakfast nook with coffee",
+      "load": "calm"
+    },
+    {
+      "text": "wiping down the marble counter",
+      "load": "calm"
+    },
+    {
+      "text": "rinsing vegetables in a shallow bowl at the sink",
+      "load": "calm"
+    },
+    {
+      "text": "arranging flowers in a vase",
+      "load": "calm"
+    },
+    {
+      "text": "scrolling a tablet for recipes",
+      "load": "calm"
+    },
+    {
+      "text": "tasting sauce from a spoon",
+      "load": "calm"
+    },
+    {
+      "text": "loading the dishwasher",
+      "load": "calm"
+    },
+    {
+      "text": "setting clean plates beside the island",
+      "load": "calm"
+    },
+    {
+      "text": "checking the oven timer while standing by the counter",
+      "load": "calm"
+    }
+  ]
+}

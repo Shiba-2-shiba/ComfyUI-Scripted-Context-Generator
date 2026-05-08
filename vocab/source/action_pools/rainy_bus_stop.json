@@ -1,0 +1,37 @@
+{
+  "location": "rainy_bus_stop",
+  "actions": [
+    {
+      "text": "sitting on the bench waiting for a bus",
+      "load": "calm"
+    },
+    {
+      "text": "standing under the shelter watching the rain",
+      "load": "calm"
+    },
+    {
+      "text": "checking the faded timetable",
+      "load": "calm"
+    },
+    {
+      "text": "holding an umbrella against the wind",
+      "load": "calm"
+    },
+    {
+      "text": "looking down the empty wet road",
+      "load": "calm"
+    },
+    {
+      "text": "wiping mist from the glass panel",
+      "load": "calm"
+    },
+    {
+      "text": "shaking water off a raincoat",
+      "load": "calm"
+    },
+    {
+      "text": "huddling for warmth",
+      "load": "calm"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "location": "concert_stage",
+  "actions": [
+    {
+      "text": "singing on stage, dynamic pose",
+      "load": "calm"
+    },
+    {
+      "text": "standing and playing an instrument",
+      "load": "active"
+    },
+    {
+      "text": "standing at the microphone, eyes closed",
+      "load": "calm"
+    },
+    {
+      "text": "walking across the stage dramatically",
+      "load": "active"
+    },
+    {
+      "text": "waving to the audience with a smile",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting the microphone stand",
+      "load": "calm"
+    },
+    {
+      "text": "bowing deeply to the crowd",
+      "load": "calm"
+    },
+    {
+      "text": "pointing to a fan in the front row",
+      "load": "calm"
+    }
+  ]
+}

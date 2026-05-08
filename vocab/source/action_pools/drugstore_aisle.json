@@ -1,0 +1,37 @@
+{
+  "location": "drugstore_aisle",
+  "actions": [
+    {
+      "text": "standing by the shelves comparing small bottles",
+      "load": "calm"
+    },
+    {
+      "text": "reading a label on a daily care product",
+      "load": "calm"
+    },
+    {
+      "text": "holding a basket with household items inside",
+      "load": "calm"
+    },
+    {
+      "text": "checking a note near the medicine aisle",
+      "load": "calm"
+    },
+    {
+      "text": "walking past rows of neatly arranged products",
+      "load": "active"
+    },
+    {
+      "text": "placing a small box into a shopping basket",
+      "load": "calm"
+    },
+    {
+      "text": "waiting near the pharmacy counter",
+      "load": "calm"
+    },
+    {
+      "text": "looking up at the aisle sign before turning",
+      "load": "calm"
+    }
+  ]
+}

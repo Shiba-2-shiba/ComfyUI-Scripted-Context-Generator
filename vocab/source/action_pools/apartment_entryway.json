@@ -1,0 +1,37 @@
+{
+  "location": "apartment_entryway",
+  "actions": [
+    {
+      "text": "standing at the genkan while setting down a bag",
+      "load": "calm"
+    },
+    {
+      "text": "checking keys on top of the shoe cabinet",
+      "load": "calm"
+    },
+    {
+      "text": "slipping shoes into place near the doorway",
+      "load": "calm"
+    },
+    {
+      "text": "picking up mail from the narrow shelf",
+      "load": "calm"
+    },
+    {
+      "text": "holding an umbrella while closing the front door",
+      "load": "calm"
+    },
+    {
+      "text": "turning toward the hallway after coming inside",
+      "load": "active"
+    },
+    {
+      "text": "placing a tote beside the shoe cabinet",
+      "load": "calm"
+    },
+    {
+      "text": "pausing on the entry step before heading out",
+      "load": "calm"
+    }
+  ]
+}
