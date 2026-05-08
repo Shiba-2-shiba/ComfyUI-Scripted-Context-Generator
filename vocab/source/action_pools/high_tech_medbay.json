@@ -1,0 +1,37 @@
+{
+  "location": "high_tech_medbay",
+  "actions": [
+    {
+      "text": "lying on a scanner bed, undergoing analysis",
+      "load": "intimate"
+    },
+    {
+      "text": "standing and checking medical holographic charts",
+      "load": "calm"
+    },
+    {
+      "text": "sitting in a waiting chair, looking anxious",
+      "load": "calm"
+    },
+    {
+      "text": "mixing chemicals in a glowing vial",
+      "load": "calm"
+    },
+    {
+      "text": "checking the vitals monitor",
+      "load": "calm"
+    },
+    {
+      "text": "standing with arms crossed, observing a patient",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting a robotic surgical arm",
+      "load": "calm"
+    },
+    {
+      "text": "typing notes into a medical terminal",
+      "load": "calm"
+    }
+  ]
+}

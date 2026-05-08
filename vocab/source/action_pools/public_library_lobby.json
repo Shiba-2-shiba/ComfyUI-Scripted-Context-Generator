@@ -1,0 +1,37 @@
+{
+  "location": "public_library_lobby",
+  "actions": [
+    {
+      "text": "checking a library notice board near the entrance",
+      "load": "calm"
+    },
+    {
+      "text": "standing by the return slot with borrowed books",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a bench while reading an event flyer",
+      "load": "calm"
+    },
+    {
+      "text": "walking toward the information desk with a book tote",
+      "load": "active"
+    },
+    {
+      "text": "holding a library card beside the counter",
+      "load": "calm"
+    },
+    {
+      "text": "reading a floor guide before entering the stacks",
+      "load": "calm"
+    },
+    {
+      "text": "placing returned books into the slot",
+      "load": "calm"
+    },
+    {
+      "text": "turning toward the reading area after asking a question",
+      "load": "active"
+    }
+  ]
+}

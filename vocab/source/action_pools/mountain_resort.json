@@ -1,0 +1,37 @@
+{
+  "location": "mountain_resort",
+  "actions": [
+    {
+      "text": "sitting in a rocking chair on the deck",
+      "load": "calm"
+    },
+    {
+      "text": "standing and breathing the fresh air",
+      "load": "calm"
+    },
+    {
+      "text": "wrapping a blanket tight around shoulders",
+      "load": "calm"
+    },
+    {
+      "text": "drinking hot coffee while looking at mountains",
+      "load": "calm"
+    },
+    {
+      "text": "warming hands by the outdoor fireplace",
+      "load": "calm"
+    },
+    {
+      "text": "reading a book in the quiet atmosphere",
+      "load": "calm"
+    },
+    {
+      "text": "watching the stars (if night)",
+      "load": "calm"
+    },
+    {
+      "text": "leaning on the wooden railing",
+      "load": "calm"
+    }
+  ]
+}

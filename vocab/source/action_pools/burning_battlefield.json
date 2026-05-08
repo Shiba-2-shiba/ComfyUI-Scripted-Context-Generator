@@ -1,0 +1,29 @@
+{
+  "location": "burning_battlefield",
+  "actions": [
+    {
+      "text": "standing ready for battle, knight pose",
+      "load": "tense"
+    },
+    {
+      "text": "running through the smoke and fire",
+      "load": "active"
+    },
+    {
+      "text": "standing with a weapon, surveying the field",
+      "load": "calm"
+    },
+    {
+      "text": "crouching behind cover",
+      "load": "calm"
+    },
+    {
+      "text": "crawling through the mud",
+      "load": "calm"
+    },
+    {
+      "text": "signaling to advance",
+      "load": "calm"
+    }
+  ]
+}

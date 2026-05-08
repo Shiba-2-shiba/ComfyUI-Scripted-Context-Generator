@@ -1,0 +1,49 @@
+{
+  "location": "rainy_alley",
+  "actions": [
+    {
+      "text": "standing under an overhang, avoiding the rain",
+      "load": "calm"
+    },
+    {
+      "text": "walking through a narrow alley",
+      "load": "active"
+    },
+    {
+      "text": "leaning against a brick wall",
+      "load": "calm"
+    },
+    {
+      "text": "standing and holding an umbrella",
+      "load": "calm"
+    },
+    {
+      "text": "walking quickly to avoid puddles",
+      "load": "active"
+    },
+    {
+      "text": "standing under a leaky awning",
+      "load": "calm"
+    },
+    {
+      "text": "splashing in a puddle (playfully)",
+      "load": "calm"
+    },
+    {
+      "text": "checking a map under a streetlight",
+      "load": "calm"
+    },
+    {
+      "text": "shaking rain from an umbrella near the doorway",
+      "load": "calm"
+    },
+    {
+      "text": "stepping carefully along the edge of a puddle",
+      "load": "active"
+    },
+    {
+      "text": "waiting under a sign while checking the street ahead",
+      "load": "calm"
+    }
+  ]
+}

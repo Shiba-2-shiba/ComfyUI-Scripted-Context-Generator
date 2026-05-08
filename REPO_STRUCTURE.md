@@ -62,6 +62,8 @@
 │   │   ├── logic.py                         # garnish 生成ロジック
 │   │   ├── micro_actions.py                 # micro action 語彙
 │   │   └── utils.py                         # garnish utility
+│   ├── source/
+│   │   └── action_pools/                    # location 別 action pool authoring source
 │   └── data/
 │       ├── action_pools.json
 │       ├── background_alias_overrides.json
@@ -162,8 +164,8 @@ active / recommended な workflow sample は `ComfyUI-workflow-context.json` だ
 
 今回の分類では、次は主対象から外しています。
 
-- `docs/`: 設計メモ、移行資料
-- `agent/`: 作業ログやエージェント補助資料
+- `docs/`: 設計メモ、移行資料。書類整理方針は `docs/documentation_cleanup_plan.md`
+- `agent/`: 削除済み。古い agent package / 作業ログは runtime や検証入力ではない
 - `README.md` などの説明文書
 - `simple_template_debug.log` などの生成ログ
 

@@ -1,0 +1,37 @@
+{
+  "location": "cinema_lobby",
+  "actions": [
+    {
+      "text": "standing near the poster wall checking showtimes",
+      "load": "calm"
+    },
+    {
+      "text": "waiting in line with a ticket in hand",
+      "load": "calm"
+    },
+    {
+      "text": "holding a drink cup beside the concession counter",
+      "load": "calm"
+    },
+    {
+      "text": "checking a seat number before entering the hall",
+      "load": "calm"
+    },
+    {
+      "text": "walking across the lobby toward the theater doors",
+      "load": "active"
+    },
+    {
+      "text": "reading a movie flyer near the entrance",
+      "load": "calm"
+    },
+    {
+      "text": "waiting under the lobby clock for a friend",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting a small bag while leaving the ticket gate",
+      "load": "calm"
+    }
+  ]
+}

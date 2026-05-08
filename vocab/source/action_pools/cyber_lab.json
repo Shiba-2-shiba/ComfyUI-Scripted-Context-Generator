@@ -1,0 +1,21 @@
+{
+  "location": "cyber_lab",
+  "actions": [
+    {
+      "text": "standing in front of holo-displays",
+      "load": "calm"
+    },
+    {
+      "text": "sitting at a workstation, typing rapidly",
+      "load": "calm"
+    },
+    {
+      "text": "standing and examining a glowing device",
+      "load": "calm"
+    },
+    {
+      "text": "leaning over a table of circuit boards",
+      "load": "calm"
+    }
+  ]
+}

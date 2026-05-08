@@ -1,0 +1,29 @@
+{
+  "location": "poolside_resort",
+  "actions": [
+    {
+      "text": "lying on a deck chair, relaxing",
+      "load": "calm"
+    },
+    {
+      "text": "sitting at the pool edge, feet in water",
+      "load": "calm"
+    },
+    {
+      "text": "standing by the pool, sipping a drink",
+      "load": "calm"
+    },
+    {
+      "text": "walking around the pool area",
+      "load": "active"
+    },
+    {
+      "text": "applying sunscreen on arms",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting sunglasses on head",
+      "load": "calm"
+    }
+  ]
+}

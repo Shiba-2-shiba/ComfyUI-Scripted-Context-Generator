@@ -1,0 +1,37 @@
+{
+  "location": "neon_city_street",
+  "actions": [
+    {
+      "text": "standing and waiting under a neon sign",
+      "load": "calm"
+    },
+    {
+      "text": "walking through the neon-lit street",
+      "load": "active"
+    },
+    {
+      "text": "leaning against a wall, looking at the crowd",
+      "load": "calm"
+    },
+    {
+      "text": "standing at a crosswalk, looking up at signs",
+      "load": "calm"
+    },
+    {
+      "text": "looking up at a holographic billboard",
+      "load": "calm"
+    },
+    {
+      "text": "standing in the rain looking at reflections",
+      "load": "calm"
+    },
+    {
+      "text": "looking at a hologram advertisement",
+      "load": "calm"
+    },
+    {
+      "text": "standing near a vending machine",
+      "load": "calm"
+    }
+  ]
+}

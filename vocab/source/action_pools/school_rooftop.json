@@ -1,0 +1,29 @@
+{
+  "location": "school_rooftop",
+  "actions": [
+    {
+      "text": "leaning on the fence and taking in the rooftop air",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on the ground with knees up",
+      "load": "calm"
+    },
+    {
+      "text": "standing with arms stretched, feeling the wind",
+      "load": "calm"
+    },
+    {
+      "text": "leaning against the wall, lost in thought",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a bench eating lunch",
+      "load": "calm"
+    },
+    {
+      "text": "walking towards the fence with a smile",
+      "load": "active"
+    }
+  ]
+}

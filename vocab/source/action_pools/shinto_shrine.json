@@ -1,0 +1,29 @@
+{
+  "location": "shinto_shrine",
+  "actions": [
+    {
+      "text": "standing and sweeping leaves with a broom",
+      "load": "active"
+    },
+    {
+      "text": "walking slowly along the stone path",
+      "load": "active"
+    },
+    {
+      "text": "standing and praying at the shrine",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on the shrine steps, resting",
+      "load": "calm"
+    },
+    {
+      "text": "standing under the shrine tree in the shade",
+      "load": "calm"
+    },
+    {
+      "text": "clapping hands twice in prayer",
+      "load": "calm"
+    }
+  ]
+}

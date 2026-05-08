@@ -1,0 +1,49 @@
+{
+  "location": "museum_hall",
+  "actions": [
+    {
+      "text": "standing under a dinosaur skeleton",
+      "load": "calm"
+    },
+    {
+      "text": "walking past ancient artifacts",
+      "load": "active"
+    },
+    {
+      "text": "reading information on a display case",
+      "load": "calm"
+    },
+    {
+      "text": "standing in awe of a historical exhibit",
+      "load": "calm"
+    },
+    {
+      "text": "leaning forward to see details of a relic",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a bench in the grand hall",
+      "load": "calm"
+    },
+    {
+      "text": "taking notes on a clipboard",
+      "load": "calm"
+    },
+    {
+      "text": "looking up at the high domed ceiling",
+      "load": "calm"
+    },
+    {
+      "text": "listening to an audio guide",
+      "load": "calm"
+    },
+    {
+      "text": "looking at a map of the museum",
+      "load": "calm"
+    },
+    {
+      "text": "standing beside an exhibit case while reading notes",
+      "load": "calm"
+    }
+  ]
+}

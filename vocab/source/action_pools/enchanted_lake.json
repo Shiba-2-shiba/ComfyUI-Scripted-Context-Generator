@@ -1,0 +1,37 @@
+{
+  "location": "enchanted_lake",
+  "actions": [
+    {
+      "text": "sitting by the water's edge, glowing lights nearby",
+      "load": "calm"
+    },
+    {
+      "text": "standing on a stone bridge, looking at reflections",
+      "load": "calm"
+    },
+    {
+      "text": "walking through the mist covering the lake",
+      "load": "active"
+    },
+    {
+      "text": "kneeling and touching the glowing water",
+      "load": "calm"
+    },
+    {
+      "text": "standing under a willow tree, mysterious atmosphere",
+      "load": "calm"
+    },
+    {
+      "text": "casting a small spell over the water",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a floating log, relaxed",
+      "load": "calm"
+    },
+    {
+      "text": "gazing at the moon reflected in the lake",
+      "load": "calm"
+    }
+  ]
+}

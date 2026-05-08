@@ -1,0 +1,45 @@
+{
+  "location": "underground_bar",
+  "actions": [
+    {
+      "text": "sitting at the counter, swirling a drink",
+      "load": "calm"
+    },
+    {
+      "text": "standing by the jukebox, selecting a song",
+      "load": "calm"
+    },
+    {
+      "text": "leaning against the wall in the dim light",
+      "load": "calm"
+    },
+    {
+      "text": "playing darts with focus",
+      "load": "active"
+    },
+    {
+      "text": "chatting with the bartender",
+      "load": "calm"
+    },
+    {
+      "text": "sitting in a booth, looking mysterious",
+      "load": "calm"
+    },
+    {
+      "text": "raising a glass for a toast",
+      "load": "calm"
+    },
+    {
+      "text": "listening to live jazz music",
+      "load": "calm"
+    },
+    {
+      "text": "checking the time on a watch",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting a coaster on the table",
+      "load": "calm"
+    }
+  ]
+}

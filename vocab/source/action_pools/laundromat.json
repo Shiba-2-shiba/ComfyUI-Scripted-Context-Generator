@@ -1,0 +1,37 @@
+{
+  "location": "laundromat",
+  "actions": [
+    {
+      "text": "sorting clothes on a folding table",
+      "load": "calm"
+    },
+    {
+      "text": "standing by a washing machine checking the timer",
+      "load": "calm"
+    },
+    {
+      "text": "placing coins into the payment slot",
+      "load": "calm"
+    },
+    {
+      "text": "carrying a laundry basket toward an open machine",
+      "load": "active"
+    },
+    {
+      "text": "folding a shirt beside the dryer",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a bench while waiting for the cycle",
+      "load": "calm"
+    },
+    {
+      "text": "checking a detergent bottle near the counter",
+      "load": "calm"
+    },
+    {
+      "text": "lifting a warm towel from the dryer",
+      "load": "active"
+    }
+  ]
+}

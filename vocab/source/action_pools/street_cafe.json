@@ -1,0 +1,53 @@
+{
+  "location": "street_cafe",
+  "actions": [
+    {
+      "text": "sitting at a round table, unfolding a receipt and napkin",
+      "load": "calm"
+    },
+    {
+      "text": "standing outside looking at the menu",
+      "load": "calm"
+    },
+    {
+      "text": "sitting and watching the street from the terrace",
+      "load": "calm"
+    },
+    {
+      "text": "sitting and adjusting the strap of her tote bag",
+      "load": "calm"
+    },
+    {
+      "text": "enjoying a pastry while people watching",
+      "load": "calm"
+    },
+    {
+      "text": "waving to a friend approaching the cafe",
+      "load": "calm"
+    },
+    {
+      "text": "moving aside to let the server pass",
+      "load": "calm"
+    },
+    {
+      "text": "laughing at a friend's joke",
+      "load": "calm"
+    },
+    {
+      "text": "brushing pastry crumbs from the table",
+      "load": "calm"
+    },
+    {
+      "text": "watching pedestrians walk by",
+      "load": "calm"
+    },
+    {
+      "text": "closing a small notebook after writing a few lines",
+      "load": "calm"
+    },
+    {
+      "text": "checking the bill while waiting near the table",
+      "load": "calm"
+    }
+  ]
+}

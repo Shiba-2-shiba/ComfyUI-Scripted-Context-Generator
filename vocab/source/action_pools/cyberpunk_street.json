@@ -1,0 +1,37 @@
+{
+  "location": "cyberpunk_street",
+  "actions": [
+    {
+      "text": "leaning against a graffiti-covered wall",
+      "load": "calm"
+    },
+    {
+      "text": "walking through the neon haze",
+      "load": "active"
+    },
+    {
+      "text": "checking a holographic message",
+      "load": "calm"
+    },
+    {
+      "text": "standing under a flickering street light",
+      "load": "calm"
+    },
+    {
+      "text": "looking at a drone flying overhead",
+      "load": "active"
+    },
+    {
+      "text": "pulling up a hood to hide face",
+      "load": "calm"
+    },
+    {
+      "text": "dodging a steam vent on the ground",
+      "load": "calm"
+    },
+    {
+      "text": "buying a drink from a futuristic vending machine",
+      "load": "calm"
+    }
+  ]
+}

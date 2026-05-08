@@ -1,0 +1,37 @@
+{
+  "location": "luxury_hotel_room",
+  "actions": [
+    {
+      "text": "lying on the king-sized bed",
+      "load": "intimate"
+    },
+    {
+      "text": "standing by the window looking at the city view",
+      "load": "calm"
+    },
+    {
+      "text": "sitting in the lounge chair reading",
+      "load": "calm"
+    },
+    {
+      "text": "opening a bottle of champagne",
+      "load": "calm"
+    },
+    {
+      "text": "walking across the plush carpet",
+      "load": "active"
+    },
+    {
+      "text": "adjusting the room lighting controls",
+      "load": "calm"
+    },
+    {
+      "text": "unpacking a suitcase",
+      "load": "calm"
+    },
+    {
+      "text": "relaxing in a bathrobe",
+      "load": "intimate"
+    }
+  ]
+}

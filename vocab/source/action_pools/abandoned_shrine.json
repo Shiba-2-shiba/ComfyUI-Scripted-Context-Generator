@@ -1,0 +1,37 @@
+{
+  "location": "abandoned_shrine",
+  "actions": [
+    {
+      "text": "standing before the rotting main hall",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on the broken stone steps",
+      "load": "calm"
+    },
+    {
+      "text": "walking through the tall overgrown grass",
+      "load": "active"
+    },
+    {
+      "text": "looking at a mossy stone statue",
+      "load": "calm"
+    },
+    {
+      "text": "holding a rusted bell cord",
+      "load": "calm"
+    },
+    {
+      "text": "feeling the eerie atmosphere in silence",
+      "load": "calm"
+    },
+    {
+      "text": "clasping hands in prayer despite the ruin",
+      "load": "calm"
+    },
+    {
+      "text": "brushing away spiderwebs",
+      "load": "calm"
+    }
+  ]
+}

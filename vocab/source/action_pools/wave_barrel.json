@@ -1,0 +1,45 @@
+{
+  "location": "wave_barrel",
+  "actions": [
+    {
+      "text": "standing on a surfboard",
+      "load": "calm"
+    },
+    {
+      "text": "leaning into the wave wall with focused posture",
+      "load": "calm"
+    },
+    {
+      "text": "timing the next swell while watching the horizon",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on the beach watching the waves",
+      "load": "calm"
+    },
+    {
+      "text": "dragging hand in the water wall",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting breathing rhythm between sets",
+      "load": "calm"
+    },
+    {
+      "text": "crouching low while cutting through spray",
+      "load": "active"
+    },
+    {
+      "text": "stepping forward as the tunnel opens",
+      "load": "active"
+    },
+    {
+      "text": "holding a stable stance as white foam rushes by",
+      "load": "calm"
+    },
+    {
+      "text": "pushing through choppy water toward deeper line",
+      "load": "calm"
+    }
+  ]
+}

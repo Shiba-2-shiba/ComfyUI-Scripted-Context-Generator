@@ -1,0 +1,37 @@
+{
+  "location": "magic_academy_library",
+  "actions": [
+    {
+      "text": "standing and reading a floating book",
+      "load": "calm"
+    },
+    {
+      "text": "sitting at a desk with a glowing orb",
+      "load": "calm"
+    },
+    {
+      "text": "climbing a ladder to reach a high scroll",
+      "load": "calm"
+    },
+    {
+      "text": "walking while reading a thick grimoire",
+      "load": "active"
+    },
+    {
+      "text": "standing and casting a light spell to read",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a pile of books, studying",
+      "load": "calm"
+    },
+    {
+      "text": "whispering to a magical creature on a shelf",
+      "load": "calm"
+    },
+    {
+      "text": "looking at a map of the stars",
+      "load": "calm"
+    }
+  ]
+}

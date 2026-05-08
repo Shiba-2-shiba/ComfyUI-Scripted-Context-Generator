@@ -1,0 +1,49 @@
+{
+  "location": "shopping_mall_atrium",
+  "actions": [
+    {
+      "text": "walking and holding shopping bags",
+      "load": "active"
+    },
+    {
+      "text": "standing and looking at a store window",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a bench, taking a break",
+      "load": "calm"
+    },
+    {
+      "text": "walking up the escalator",
+      "load": "active"
+    },
+    {
+      "text": "checking a store directory map",
+      "load": "calm"
+    },
+    {
+      "text": "waiting for a friend near the fountain",
+      "load": "calm"
+    },
+    {
+      "text": "looking at a map directory",
+      "load": "calm"
+    },
+    {
+      "text": "window shopping at a jewelry store",
+      "load": "calm"
+    },
+    {
+      "text": "riding the glass elevator up",
+      "load": "calm"
+    },
+    {
+      "text": "sitting near a fountain listening to water",
+      "load": "calm"
+    },
+    {
+      "text": "checking a receipt while standing near the directory",
+      "load": "calm"
+    }
+  ]
+}

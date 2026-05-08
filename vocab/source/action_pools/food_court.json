@@ -1,0 +1,37 @@
+{
+  "location": "food_court",
+  "actions": [
+    {
+      "text": "checking menu boards above the counter",
+      "load": "calm"
+    },
+    {
+      "text": "standing in line with a tray held close",
+      "load": "calm"
+    },
+    {
+      "text": "carrying a tray toward an open table",
+      "load": "active"
+    },
+    {
+      "text": "sitting at a shared table arranging a quick meal",
+      "load": "calm"
+    },
+    {
+      "text": "choosing a seat near the edge of the dining area",
+      "load": "calm"
+    },
+    {
+      "text": "reading a receipt while waiting for an order number",
+      "load": "calm"
+    },
+    {
+      "text": "walking past tables while looking for a friend",
+      "load": "active"
+    },
+    {
+      "text": "placing a drink beside the tray before sitting down",
+      "load": "calm"
+    }
+  ]
+}

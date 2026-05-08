@@ -1,0 +1,37 @@
+{
+  "location": "family_restaurant",
+  "actions": [
+    {
+      "text": "sitting at a booth reading the menu",
+      "load": "calm"
+    },
+    {
+      "text": "placing an order while holding the menu",
+      "load": "calm"
+    },
+    {
+      "text": "pouring water from a table pitcher",
+      "load": "calm"
+    },
+    {
+      "text": "waiting with a numbered receipt on the table",
+      "load": "calm"
+    },
+    {
+      "text": "cutting a meal into smaller bites",
+      "load": "calm"
+    },
+    {
+      "text": "checking the dessert page with interest",
+      "load": "calm"
+    },
+    {
+      "text": "standing near the cashier after the meal",
+      "load": "calm"
+    },
+    {
+      "text": "waving politely to call the server",
+      "load": "calm"
+    }
+  ]
+}

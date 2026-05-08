@@ -1,0 +1,37 @@
+{
+  "location": "community_center",
+  "actions": [
+    {
+      "text": "checking a notice board near the entrance",
+      "load": "calm"
+    },
+    {
+      "text": "standing beside a folding table with flyers",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a stackable chair during a small event",
+      "load": "calm"
+    },
+    {
+      "text": "walking across the multipurpose room carrying forms",
+      "load": "active"
+    },
+    {
+      "text": "sorting handouts before the meeting starts",
+      "load": "calm"
+    },
+    {
+      "text": "holding a clipboard while listening to instructions",
+      "load": "calm"
+    },
+    {
+      "text": "pinning a schedule sheet to the board",
+      "load": "calm"
+    },
+    {
+      "text": "turning a chair toward the discussion circle",
+      "load": "active"
+    }
+  ]
+}

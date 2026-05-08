@@ -7,6 +7,9 @@ Last verified: 2026-05-08
 `docs/context_refactor/README.md` を参照してください。
 subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` を先に参照してください。
 日常系 location / action pool の拡張作業は `docs/variation_expansion/README.md` に計画と進捗があります。
+次の拡張順は P9: 100k target modeling、P10: compatibility taxonomy expansion、P11: action authoring refactor です。
+現在の variation sizing 境界は `vocab/data/variation_scope.json` に固定されています。
+書類整理方針は `docs/documentation_cleanup_plan.md` を参照してください。
 
 ## Runtime Surface
 
@@ -18,6 +21,7 @@ subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` 
 - Main runtime logic: `pipeline/`
 - Schema / context operations / policy: `core/`
 - Data source of truth: `vocab/data/`
+- Action authoring source: `vocab/source/action_pools/`
 
 Retired / compatibility state:
 
@@ -62,17 +66,20 @@ python assets/calc_variations.py --json
 Current semantic-only summary:
 
 - unique subjects: `58`
-- unique locations: `68`
-- base variations: `15,034`
+- unique locations: `76`
+- compatibility review rows: `1,637`
+- base variations: `15,610`
 - actions per location: `min 4 / median 8 / mean 8.03 / max 12`
 - missing action pools: `0`
+- runtime action pools: `87`
+- split action pool source files: `87` location files + `_manifest.json`
 - mood keys: `9`
 - unique mood tags: `172`
 - unique micro actions: `280`
-- unique background context tags: `771`
-- semantic units: `1,223`
-- semantic garnish universe: `11,007`
-- theoretical max: `165,479,238`
+- unique background context tags: `835`
+- semantic units: `1,287`
+- semantic garnish universe: `11,583`
+- theoretical max: `180,810,630`
 
 Legacy-disabled vocabulary still present for audit visibility:
 
@@ -80,6 +87,16 @@ Legacy-disabled vocabulary still present for audit visibility:
 - effect tags: `22`
 
 These legacy-disabled counts are not part of active output-space sizing.
+
+Interpretation:
+
+- `base variations` is calculated from `assets/compatibility_review.csv`
+  rows and dedicated action counts in `vocab/data/action_pools.json`.
+- Current base sizing is stable at `58 subjects × 76 locations` within
+  `vocab/data/variation_scope.json`, producing `15,610` counted base
+  variations.
+- The split files in `vocab/source/action_pools/` are for editing/review only;
+  runtime still reads `vocab/data/action_pools.json`.
 
 ## Verification Snapshot
 
@@ -91,6 +108,8 @@ python -m unittest discover -s assets -p "test_*.py"
 python -m unittest assets.test_context_nodes assets.test_workflow_samples
 python tools/verify_full_flow.py
 python tools/validate_prompt_data.py
+python tools/check_variation_scope.py
+python tools/build_action_pools.py --check
 python -c "from asset_validator import validate_assets; issues=validate_assets(); print('issues', len(issues))"
 python tools/check_widgets_values.py
 python -m py_compile assets/calc_variations.py assets/test_calc_variations.py assets/test_char_profile_nl.py assets/test_scene_variator.py assets/test_vocab_lint.py
@@ -99,10 +118,12 @@ python -m py_compile assets/calc_variations.py assets/test_calc_variations.py as
 Results:
 
 - targeted unittest group: `14 tests OK`
-- assets unittest discovery: `253 tests OK`
+- assets unittest discovery: `260 tests OK`
 - context/workflow smoke tests: `12 tests OK`
 - full flow: `OK`
 - prompt data validator: `ERROR: []`, `WARNING: []`
+- variation scope check: `ERROR: []`
+- action pool source check: `ERROR: []`, `WARNING: []`
 - asset validator: `issues 0`
 - workflow widget validation: `OK`
 - compile check: `OK`
@@ -134,9 +155,22 @@ Recent cleanup:
 Recent expansion:
 
 - 10 daily-life locations were promoted into base variation sizing
+- 8 remaining daily-life locations were promoted in P8
 - dedicated action pools were added for the promoted daily-life locations
 - high-coverage existing locations received additional semantic actions
-- base variations increased from `11,916` to `15,034`
+- base variations increased from `11,916` to `15,610`
+- `vocab/data/variation_scope.json` now records the active 58 subjects / 76 locations boundary
+- `tools/build_compatibility_review.py --check` now verifies scoped CSV regeneration with `ERROR: []`
+- `tools/build_action_pools.py --check` now verifies split action-pool source
+  rebuilds the runtime JSON exactly
+
+Next expansion direction:
+
+- P8 promoted 8 remaining daily-life locations while keeping `unique subjects` at `58`.
+- P8 result: `unique locations 68 -> 76`, rows `1,565 -> 1,637`,
+  base variations `15,034 -> 15,610`.
+- P9 now evaluates subject promotion after the P8 measurement.
+- Detailed P8/P9 plan: `docs/variation_expansion/next_expansion_wave_plan.md`.
 
 ## Refactor Risk Map
 
@@ -185,6 +219,8 @@ Before changing vocabulary assets:
 python -c "from asset_validator import validate_assets; print(validate_assets())"
 python tools/validate_prompt_data.py
 python assets/calc_variations.py --json
+python tools/check_variation_scope.py
+python tools/build_action_pools.py --check
 ```
 
 Optional before/after expansion comparison:
@@ -198,5 +234,15 @@ Before expanding subjects / locations / actions:
 ```bash
 python -m unittest assets.test_data_consistency assets.test_character_resolution assets.test_location_resolution assets.test_action_generator assets.test_calc_variations
 python tools/validate_prompt_data.py
+python tools/check_variation_scope.py
+python tools/build_action_pools.py --check
 python assets/calc_variations.py --json
 ```
+
+Scoped CSV regeneration check:
+
+```bash
+python tools/build_compatibility_review.py --check
+```
+
+Current expected result is `ERROR: []` and `WARNING: []`.

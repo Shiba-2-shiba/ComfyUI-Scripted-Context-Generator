@@ -1,0 +1,29 @@
+{
+  "location": "antique_shop",
+  "actions": [
+    {
+      "text": "browsing antiques, looking for rare items",
+      "load": "calm"
+    },
+    {
+      "text": "standing and holding a vintage item",
+      "load": "calm"
+    },
+    {
+      "text": "sitting and examining an old clock",
+      "load": "calm"
+    },
+    {
+      "text": "standing near a shelf, peering at objects",
+      "load": "calm"
+    },
+    {
+      "text": "dusting a shelf with a feather duster",
+      "load": "calm"
+    },
+    {
+      "text": "holding a magnifying glass examining an item",
+      "load": "calm"
+    }
+  ]
+}

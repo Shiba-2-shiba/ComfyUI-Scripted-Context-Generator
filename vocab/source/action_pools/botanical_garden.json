@@ -1,0 +1,49 @@
+{
+  "location": "botanical_garden",
+  "actions": [
+    {
+      "text": "standing and smelling a flower",
+      "load": "calm"
+    },
+    {
+      "text": "walking along the greenhouse path",
+      "load": "active"
+    },
+    {
+      "text": "sitting on a bench surrounded by flowers",
+      "load": "calm"
+    },
+    {
+      "text": "standing and taking a photo of a plant",
+      "load": "calm"
+    },
+    {
+      "text": "reading a label on a rare tree",
+      "load": "calm"
+    },
+    {
+      "text": "walking under a flower archway",
+      "load": "active"
+    },
+    {
+      "text": "sitting by a koi pond, relaxing",
+      "load": "calm"
+    },
+    {
+      "text": "sketching a plant in a notebook",
+      "load": "calm"
+    },
+    {
+      "text": "standing in the mist of a tropical house",
+      "load": "calm"
+    },
+    {
+      "text": "looking up at a tall palm tree",
+      "load": "calm"
+    },
+    {
+      "text": "brushing a leaf from the path before stepping forward",
+      "load": "calm"
+    }
+  ]
+}

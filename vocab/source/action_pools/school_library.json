@@ -1,0 +1,45 @@
+{
+  "location": "school_library",
+  "actions": [
+    {
+      "text": "standing and reaching for a study folder on the shelf",
+      "load": "calm"
+    },
+    {
+      "text": "sitting at a table reading quietly",
+      "load": "calm"
+    },
+    {
+      "text": "standing between bookshelves browsing titles",
+      "load": "calm"
+    },
+    {
+      "text": "sitting with highlighted notes spread across the table",
+      "load": "calm"
+    },
+    {
+      "text": "walking quietly carrying a return cart slip",
+      "load": "active"
+    },
+    {
+      "text": "standing at the counter whispering to the librarian",
+      "load": "calm"
+    },
+    {
+      "text": "sorting returned materials onto a cart",
+      "load": "calm"
+    },
+    {
+      "text": "checking a study schedule beside a stack of books",
+      "load": "calm"
+    },
+    {
+      "text": "placing a bookmark before closing a reference book",
+      "load": "calm"
+    },
+    {
+      "text": "walking between tables while carrying borrowed books",
+      "load": "active"
+    }
+  ]
+}

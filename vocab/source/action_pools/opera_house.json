@@ -1,0 +1,21 @@
+{
+  "location": "opera_house",
+  "actions": [
+    {
+      "text": "standing on stage singing dramatically",
+      "load": "calm"
+    },
+    {
+      "text": "sitting in the audience seats",
+      "load": "calm"
+    },
+    {
+      "text": "standing in the balcony, looking down",
+      "load": "calm"
+    },
+    {
+      "text": "standing backstage, preparing",
+      "load": "calm"
+    }
+  ]
+}

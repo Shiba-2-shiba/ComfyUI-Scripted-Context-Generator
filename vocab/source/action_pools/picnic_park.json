@@ -1,0 +1,49 @@
+{
+  "location": "picnic_park",
+  "actions": [
+    {
+      "text": "sitting on grass, relaxing in nature",
+      "load": "calm"
+    },
+    {
+      "text": "lying on a picnic blanket",
+      "load": "calm"
+    },
+    {
+      "text": "sitting under a tree, reading",
+      "load": "calm"
+    },
+    {
+      "text": "standing and stretching arms toward the sky",
+      "load": "calm"
+    },
+    {
+      "text": "eating a sandwich from a basket",
+      "load": "calm"
+    },
+    {
+      "text": "standing and flying a kite",
+      "load": "active"
+    },
+    {
+      "text": "watching clouds drift by",
+      "load": "calm"
+    },
+    {
+      "text": "playing with a dog nearby",
+      "load": "active"
+    },
+    {
+      "text": "sketching the landscape in a book",
+      "load": "calm"
+    },
+    {
+      "text": "resting beside a packed lunch on the blanket",
+      "load": "calm"
+    },
+    {
+      "text": "straightening the edge of the picnic blanket",
+      "load": "calm"
+    }
+  ]
+}

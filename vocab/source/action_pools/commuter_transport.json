@@ -1,0 +1,49 @@
+{
+  "location": "commuter_transport",
+  "actions": [
+    {
+      "text": "standing in the train, holding a strap",
+      "load": "calm"
+    },
+    {
+      "text": "sitting by the window, looking outside",
+      "load": "calm"
+    },
+    {
+      "text": "standing and following the station names overhead",
+      "load": "calm"
+    },
+    {
+      "text": "sitting with a bag on lap, dozing off",
+      "load": "calm"
+    },
+    {
+      "text": "reading a book while the train moves",
+      "load": "calm"
+    },
+    {
+      "text": "checking the transit map near the door",
+      "load": "calm"
+    },
+    {
+      "text": "listening to a podcast with earbuds",
+      "load": "calm"
+    },
+    {
+      "text": "holding a bag on lap tightly",
+      "load": "calm"
+    },
+    {
+      "text": "balancing while the train turns",
+      "load": "calm"
+    },
+    {
+      "text": "glancing at the route map above the door",
+      "load": "calm"
+    },
+    {
+      "text": "checking a transit card near the train doors",
+      "load": "calm"
+    }
+  ]
+}

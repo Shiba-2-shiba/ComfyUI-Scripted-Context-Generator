@@ -1,0 +1,21 @@
+{
+  "location": "clockwork_workshop",
+  "actions": [
+    {
+      "text": "sitting at a workbench, assembling gears",
+      "load": "calm"
+    },
+    {
+      "text": "standing and examining a clockwork device",
+      "load": "calm"
+    },
+    {
+      "text": "working on a machine with tools",
+      "load": "calm"
+    },
+    {
+      "text": "standing surrounded by ticking clocks",
+      "load": "calm"
+    }
+  ]
+}

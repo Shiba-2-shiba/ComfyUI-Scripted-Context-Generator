@@ -1,0 +1,21 @@
+{
+  "location": "fantasy_forest",
+  "actions": [
+    {
+      "text": "standing ready for battle, warrior pose",
+      "load": "tense"
+    },
+    {
+      "text": "walking along a mystical forest path",
+      "load": "active"
+    },
+    {
+      "text": "sitting on a mossy rock, resting",
+      "load": "calm"
+    },
+    {
+      "text": "standing and looking at a glowing light",
+      "load": "calm"
+    }
+  ]
+}

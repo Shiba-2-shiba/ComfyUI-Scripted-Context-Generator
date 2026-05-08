@@ -1,0 +1,37 @@
+{
+  "location": "rural_town_street",
+  "actions": [
+    {
+      "text": "walking slowly down the quiet street",
+      "load": "active"
+    },
+    {
+      "text": "standing by a vending machine",
+      "load": "calm"
+    },
+    {
+      "text": "looking at the distant mountains",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a guardrail resting",
+      "load": "calm"
+    },
+    {
+      "text": "listening to the cicadas outside",
+      "load": "calm"
+    },
+    {
+      "text": "waving to a neighbor across the street",
+      "load": "calm"
+    },
+    {
+      "text": "carrying a grocery bag",
+      "load": "calm"
+    },
+    {
+      "text": "inspecting a roadside flower",
+      "load": "calm"
+    }
+  ]
+}

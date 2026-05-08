@@ -1,0 +1,33 @@
+{
+  "location": "office_elevator",
+  "actions": [
+    {
+      "text": "standing and checking her watch",
+      "load": "calm"
+    },
+    {
+      "text": "leaning against the elevator wall",
+      "load": "calm"
+    },
+    {
+      "text": "standing as the elevator passes each floor",
+      "load": "calm"
+    },
+    {
+      "text": "standing with arms holding a bag",
+      "load": "calm"
+    },
+    {
+      "text": "holding the door open for someone",
+      "load": "calm"
+    },
+    {
+      "text": "checking reflection in the mirrored wall",
+      "load": "calm"
+    },
+    {
+      "text": "straightening an ID badge before the doors open",
+      "load": "calm"
+    }
+  ]
+}

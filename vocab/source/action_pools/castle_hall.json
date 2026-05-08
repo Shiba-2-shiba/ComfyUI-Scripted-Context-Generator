@@ -1,0 +1,37 @@
+{
+  "location": "castle_hall",
+  "actions": [
+    {
+      "text": "standing on the red carpet, looking regal",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a velvet chair, deep in thought",
+      "load": "calm"
+    },
+    {
+      "text": "walking past armor suits in the hallway",
+      "load": "active"
+    },
+    {
+      "text": "standing by the stained glass window",
+      "load": "calm"
+    },
+    {
+      "text": "bowing respectfully to a noble",
+      "load": "calm"
+    },
+    {
+      "text": "standing guard with a serious expression",
+      "load": "calm"
+    },
+    {
+      "text": "dancing alone in the center of the hall",
+      "load": "active"
+    },
+    {
+      "text": "looking up at the high vaulted ceiling",
+      "load": "calm"
+    }
+  ]
+}

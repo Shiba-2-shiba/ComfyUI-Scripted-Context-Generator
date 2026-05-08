@@ -1,0 +1,37 @@
+{
+  "location": "riverside_walk",
+  "actions": [
+    {
+      "text": "walking along the riverside path at an easy pace",
+      "load": "active"
+    },
+    {
+      "text": "standing by the railing watching the water",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a bench with a small bag beside her",
+      "load": "calm"
+    },
+    {
+      "text": "checking the path ahead near the bridge",
+      "load": "calm"
+    },
+    {
+      "text": "holding a folded jacket while pausing by the river",
+      "load": "calm"
+    },
+    {
+      "text": "leaning on the rail during a quiet break",
+      "load": "calm"
+    },
+    {
+      "text": "stepping aside as cyclists pass on the path",
+      "load": "active"
+    },
+    {
+      "text": "looking across the water before continuing downstream",
+      "load": "calm"
+    }
+  ]
+}

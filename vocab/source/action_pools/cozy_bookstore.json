@@ -1,0 +1,49 @@
+{
+  "location": "cozy_bookstore",
+  "actions": [
+    {
+      "text": "standing between shelves, browsing staff picks",
+      "load": "calm"
+    },
+    {
+      "text": "sitting in a corner, reading",
+      "load": "calm"
+    },
+    {
+      "text": "standing and holding a canvas tote against her side",
+      "load": "calm"
+    },
+    {
+      "text": "crouching and checking the lower shelf labels",
+      "load": "calm"
+    },
+    {
+      "text": "reaching for an item on a high shelf",
+      "load": "calm"
+    },
+    {
+      "text": "smelling the pages of an old book",
+      "load": "calm"
+    },
+    {
+      "text": "comparing handwritten recommendation cards",
+      "load": "calm"
+    },
+    {
+      "text": "stacking new arrivals on a table",
+      "load": "calm"
+    },
+    {
+      "text": "checking the handwritten shelf labels",
+      "load": "calm"
+    },
+    {
+      "text": "waiting near the register with a folded tote bag",
+      "load": "calm"
+    },
+    {
+      "text": "placing a reserved book on the checkout counter",
+      "load": "calm"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "location": "luxury_hotel_lobby",
+  "actions": [
+    {
+      "text": "sitting on a sofa, relaxing elegantly",
+      "load": "calm"
+    },
+    {
+      "text": "standing near the reception desk",
+      "load": "calm"
+    },
+    {
+      "text": "walking through the grand lobby",
+      "load": "active"
+    },
+    {
+      "text": "sitting and sipping tea",
+      "load": "calm"
+    },
+    {
+      "text": "checking in at the reception desk",
+      "load": "calm"
+    },
+    {
+      "text": "standing near a large flower arrangement",
+      "load": "calm"
+    }
+  ]
+}

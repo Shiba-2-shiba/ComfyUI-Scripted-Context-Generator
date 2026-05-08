@@ -1,0 +1,29 @@
+{
+  "location": "bamboo_forest",
+  "actions": [
+    {
+      "text": "walking slowly along the path",
+      "load": "active"
+    },
+    {
+      "text": "standing among the bamboo listening to the leaves",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a rock by the path",
+      "load": "calm"
+    },
+    {
+      "text": "standing with arms behind back, enjoying the view",
+      "load": "calm"
+    },
+    {
+      "text": "listening to the wind in the leaves",
+      "load": "calm"
+    },
+    {
+      "text": "spotting a bamboo shoot",
+      "load": "calm"
+    }
+  ]
+}

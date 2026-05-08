@@ -1,0 +1,49 @@
+{
+  "location": "winter_street",
+  "actions": [
+    {
+      "text": "standing in winter with cold hands tucked close",
+      "load": "calm"
+    },
+    {
+      "text": "walking through the snowy street",
+      "load": "active"
+    },
+    {
+      "text": "standing and looking at a shop window",
+      "load": "calm"
+    },
+    {
+      "text": "walking with arms wrapped around self",
+      "load": "active"
+    },
+    {
+      "text": "standing and catching a snowflake",
+      "load": "calm"
+    },
+    {
+      "text": "holding a hot drink with both hands",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting a scarf around neck",
+      "load": "calm"
+    },
+    {
+      "text": "stomping snow off boots",
+      "load": "calm"
+    },
+    {
+      "text": "looking at holiday decorations",
+      "load": "calm"
+    },
+    {
+      "text": "breathing visible vapor into the air",
+      "load": "calm"
+    },
+    {
+      "text": "brushing snow from a sleeve near a storefront",
+      "load": "calm"
+    }
+  ]
+}

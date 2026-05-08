@@ -1,0 +1,41 @@
+{
+  "location": "modern_office",
+  "actions": [
+    {
+      "text": "sitting and working at a desk",
+      "load": "calm"
+    },
+    {
+      "text": "standing by the window straightening a stack of printouts",
+      "load": "calm"
+    },
+    {
+      "text": "walking through the office hallway",
+      "load": "active"
+    },
+    {
+      "text": "sitting in a chair, taking a break",
+      "load": "calm"
+    },
+    {
+      "text": "checking a document while on a call",
+      "load": "calm"
+    },
+    {
+      "text": "typing furiously to meet a deadline",
+      "load": "calm"
+    },
+    {
+      "text": "standing at the printer, waiting",
+      "load": "calm"
+    },
+    {
+      "text": "pinning a sticky note beside her monitor",
+      "load": "calm"
+    },
+    {
+      "text": "stretching her shoulders beside the copier",
+      "load": "calm"
+    }
+  ]
+}
