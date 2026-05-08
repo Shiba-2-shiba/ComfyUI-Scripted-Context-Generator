@@ -123,15 +123,40 @@ Detailed execution plan:
 
 ### 5. Expand Subjects
 
-Status: `next`
+Status: `superseded by 100k target planning`
 
-Subject expansion should wait until subject promotion rules are explicit.
+Subject expansion should wait until subject promotion rules are explicit, but
+the new 100k intermediate target means subject promotion alone is no longer
+large enough. Use
+`docs/variation_expansion/base_variations_100k_plan.md` as the current plan.
 
 Do not add subjects only by making `scene_compatibility.characters` larger.
 Promote subjects by updating `variation_scope.json` and then regenerating/checking `compatibility_review.csv`.
 
-P8 has been measured and documented. P9 should start as an evaluation gate
-before any subject promotion.
+P8 has been measured and documented. P9 should now start by adding target
+modeling and scenario measurement before any subject promotion.
+
+### 6. Plan Toward 100k Base Variations
+
+Status: `next`
+
+The next implementation lane should add a read-only target planner, then expand
+compatibility taxonomy and action authoring together.
+
+Current planning finding:
+
+- current scope: `15,610`
+- all known subjects and compatible action-backed locations with current
+  actions: `27,140`
+- all known subjects and compatible action-backed locations with minimum 35
+  actions: `100,835`
+
+Because the minimum-35-actions route risks repetitive action text, the preferred
+target shape is `5,800-6,500` compatibility rows with median `16+` actions.
+
+Detailed plan:
+
+- `docs/variation_expansion/base_variations_100k_plan.md`
 
 ## Acceptance Criteria For This Refactor Lane
 

@@ -215,16 +215,36 @@ python assets/calc_variations.py --json
 python -m unittest assets.test_build_action_pools assets.test_action_generator assets.test_action_diversity_audit assets.test_repetition_guard_audit assets.test_variation_scope assets.test_build_compatibility_review
 ```
 
-## P9: Subject Expansion Evaluation
+## P9: 100k Target Modeling
 
-- [ ] VE-901 Recompute subject candidate deltas after P8
-- [ ] VE-902 Group candidates by role overlap, tags, and costume reuse
-- [ ] VE-903 Choose a small first subject wave or explicitly defer subject promotion
-- [ ] VE-904 Record accepted/rejected subject candidates in `progress.md`
-- [ ] VE-905 If accepted, update `variation_scope.json` and regenerate/check compatibility CSV
+- [ ] VE-901 Add read-only `tools/plan_variation_target.py`
+- [ ] VE-902 Add regression tests for target scenario calculations
+- [ ] VE-903 Report subject candidate deltas after P8
+- [ ] VE-904 Report location candidate deltas after P8
+- [ ] VE-905 Report minimum action-depth scenarios for `--target 100000`
+- [ ] VE-906 Record accepted/rejected subject clusters in `progress.md`
 
-Current post-P8 subject candidate pool:
+Current post-P8 planning facts:
 
 - compatibility characters outside current variation scope: `33`
-- high-impact current candidates start around `+319` to `+368` base variations each
-- P9 remains evaluation-only until a subject wave is explicitly selected
+- all known subjects with current locations: about `25,524` base variations
+- all known subjects and all action-backed compatible locations: about `27,140`
+- minimum 35 actions across that known surface reaches about `100,835`, but this is not the preferred route because it risks repetitive action text
+
+## P10: Compatibility Taxonomy Expansion For 100k
+
+- [ ] VE-1001 Add mid-level compatibility tags such as `retail_service`, `daily_public`, `transit`, `home_life`, `workplace`, `leisure`, and `quiet_indoor`
+- [ ] VE-1002 Promote distinct subject candidates in `variation_scope.json`
+- [ ] VE-1003 Promote 25-35 daily/common locations with background packs
+- [ ] VE-1004 Regenerate `assets/compatibility_review.csv`
+- [ ] VE-1005 Update expected metrics in `variation_scope.json`
+- [ ] VE-1006 Verify compatibility rows are trending toward `5,800-6,500`
+
+## P11: Action Authoring Refactor For 16+ Median Actions
+
+- [ ] VE-1101 Design shared action family source without changing runtime loading
+- [ ] VE-1102 Update `tools/build_action_pools.py` to expand shared authoring data if needed
+- [ ] VE-1103 Raise high-row locations to 18-24 semantic actions
+- [ ] VE-1104 Raise medium-row locations to 14-18 semantic actions
+- [ ] VE-1105 Keep low-row/specialized locations at 10-14 semantic actions
+- [ ] VE-1106 Verify `base variations >= 100,000`

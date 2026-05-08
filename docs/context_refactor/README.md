@@ -35,6 +35,9 @@ prompt-surface repetition 調整の要約入口です。
 - [Context Refactor Summary](./README.md)
 - [Context Schema Extension Guidance](./context_extension_guidance.md)
 
+この2ファイル以外は active plan ではありません。旧ルートの
+`リファクタリング/` redirect は retired です。
+
 ## Archived History
 
 完了済みの planning / progress / migration / Codex 作業メモは
@@ -54,3 +57,4 @@ prompt-surface repetition 調整の要約入口です。
 - 現在の仕様確認は repo root の `CURRENT_STATUS.md`, `README.md`, `REPO_STRUCTURE.md`, `assets/ARCHITECTURE.md` を優先
 - context 拡張時の判断は `context_extension_guidance.md` を優先
 - 過去の判断経緯や cutover 履歴が必要なときだけ archive を参照
+- `archive/` 内の task board / progress log を active implementation plan として再利用しない

@@ -4,6 +4,7 @@
 
 ## Active Documents
 
+- [Base Variations 100k Implementation Plan](./base_variations_100k_plan.md)
 - [Next Refactor Plan](./next_refactor_plan.md)
 - [Next Expansion Wave Plan](./next_expansion_wave_plan.md)
 - [Progress](./progress.md)
@@ -13,13 +14,15 @@
 
 ## Current Scope
 
-第1波、運用面リファクタ、P8 location expansion は完了済みです。現在の次作業は P9 です。
+第1波、運用面リファクタ、P8 location expansion は完了済みです。現在の次作業は、P9 を 100k base variations に向けた測定・設計ゲートへ拡張することです。
 
 1. P8: remaining daily-life location を昇格し、`unique locations` を増やす - Done
-2. P9: P8 完了後に `unique subjects` の昇格候補を評価する - Next
+2. P9: 100k target modeling を追加し、subject / location / action depth の必要量を測る - Next
+3. P10: compatibility taxonomy と variation scope を 100k 向けに拡張する - Planned
+4. P11: action authoring source を 16+ median actions に耐える形へ拡張する - Planned
 
-詳細な候補、想定増分、実行順は
-[`next_expansion_wave_plan.md`](./next_expansion_wave_plan.md) を参照してください。
+10万達成までの再計画は
+[`base_variations_100k_plan.md`](./base_variations_100k_plan.md) を参照してください。
 
 ## Baseline
 
@@ -33,6 +36,14 @@ compatibility rows: 1,637
 actions per location: min 4 / median 8 / mean 8.03 / max 12
 location candidates: 93
 dedicated action pool missing candidates: 9
+```
+
+## Intermediate Target
+
+```text
+target base variations: 100,000
+target shape: 5,800-6,500 compatibility rows with median 16+ actions
+final planning horizon: 500,000 base variations
 ```
 
 ## Source References

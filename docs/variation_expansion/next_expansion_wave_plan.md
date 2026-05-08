@@ -4,15 +4,20 @@ Last updated: 2026-05-08
 
 ## Direction
 
-Proceed in this order:
+This plan records the completed P8 wave and the original P9 subject evaluation.
+For the new `100,000` base variation intermediate target, use
+`docs/variation_expansion/base_variations_100k_plan.md`.
+
+Proceed in this revised order:
 
 1. Increase `unique locations`.
 2. Re-check variation balance and action quality.
-3. Evaluate `unique subjects`.
+3. Add target modeling for `100,000` base variations.
+4. Expand compatibility taxonomy and action authoring together.
 
-Do not promote subjects before the next location wave is complete. Subject
-promotion multiplies against the current location surface, so it should happen
-only after location/action coverage is stable.
+Do not promote subjects as a standalone inflation step. Subject promotion
+multiplies against the current location/action surface, so it should happen
+inside the 100k target model.
 
 ## Current Baseline
 
@@ -109,7 +114,7 @@ P8 acceptance criteria:
 
 ## P9: Evaluate Unique Subjects
 
-Status: `next`
+Status: `superseded by 100k target planning`
 
 Goal: decide whether subject expansion should start after P8. P9 is an
 evaluation gate first, not an automatic subject promotion wave.
@@ -154,6 +159,18 @@ P9 acceptance criteria before subject promotion:
 - Expected base variation increase is documented before writing CSV changes.
 - Rejected near-duplicates are recorded so they are not re-evaluated
   repeatedly.
+
+## P9 Replacement: Target Modeling For 100k
+
+Status: `next`
+
+The previous P9 subject-only gate remains useful as input, but it is too small
+for the new target. The replacement P9 is a read-only target planning tool and
+scenario report.
+
+See:
+
+- `docs/variation_expansion/base_variations_100k_plan.md`
 
 ## Guardrails
 

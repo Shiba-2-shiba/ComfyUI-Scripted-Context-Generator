@@ -6,14 +6,14 @@ Last updated: 2026-05-08
 
 Overall status: `verified`
 
-Current phase: `P8/P9 preparation`
+Current phase: `P9 100k target planning`
 
 Primary target:
 
 - variation scope を明示して、意図しない subject / location 増加を防ぐ
 - `compatibility_review.csv` の scoped check-only generator で差分を固定する
 - 第2波の daily-life location 追加前にデータ境界を軽くする
-- 次は `unique locations` を増やし、その後 `unique subjects` を評価する
+- 次は 100k target planning を追加し、subject / location / action depth を同時に設計する
 
 ## Baseline Snapshot
 
@@ -43,11 +43,13 @@ action pool count: 87
 dedicated action pool missing candidates: 9
 ```
 
-Stretch target:
+Intermediate target:
 
 ```text
-unique locations: 76+
-base variations: 18,000+
+base variations: 100,000
+compatibility rows: 5,800-6,500
+median actions: 16+
+final planning horizon: 500,000
 ```
 
 ## Phase Progress
@@ -63,7 +65,10 @@ base variations: 18,000+
 | P6 | Scoped compatibility review generation | Done | 0 | 0 |
 | P7 | Action pool authoring split evaluation | Done | 0 | 0 |
 | P8 | Promote remaining daily-life locations | Done | +576 | +576 |
-| P9 | Evaluate subject expansion | Planned | TBD | TBD |
+| P9 | Add 100k target modeling | Planned | 0 | TBD |
+| P10 | Expand compatibility taxonomy for 100k | Planned | TBD | TBD |
+| P11 | Refactor action authoring source for 16+ median actions | Planned | TBD | TBD |
+| P12 | Stabilize 100k verification gate | Planned | 0 | TBD |
 
 ## Next Direction
 
@@ -79,11 +84,28 @@ base variations: 15,034 -> 15,610
 estimated delta: +576
 ```
 
-P9 should evaluate `unique subjects` now that P8 is complete. The current
-post-P8 compatibility surface has 33 subject candidates outside
-`variation_scope.variation_subjects`; high-impact candidates are mostly
-office/urban/suburban archetypes, so near-duplicate roles must be filtered
-before promotion.
+P9 should now start with target modeling for the 100k intermediate goal. The
+current post-P8 compatibility surface has 33 subject candidates outside
+`variation_scope.variation_subjects`, but promoting every known subject only
+raises the current location surface to about `25,524` base variations. The 100k
+path needs compatibility rows and action depth to increase together.
+
+Current planning scenarios:
+
+| Scenario | Base variations |
+| --- | ---: |
+| current scope | 15,610 |
+| all known subjects, current locations | 25,524 |
+| all known subjects, all action-backed compatible locations | 27,140 |
+| all known subjects/locations, minimum 24 actions per location | 69,144 |
+| all known subjects/locations, minimum 35 actions per location | 100,835 |
+
+Preferred 100k shape:
+
+- `105-120` subjects
+- `105-115` locations
+- `5,800-6,500` compatibility rows
+- median `16+` actions
 
 ## Candidate Tracking
 

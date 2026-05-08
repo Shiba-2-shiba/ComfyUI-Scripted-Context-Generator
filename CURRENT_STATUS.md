@@ -7,8 +7,9 @@ Last verified: 2026-05-08
 `docs/context_refactor/README.md` を参照してください。
 subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` を先に参照してください。
 日常系 location / action pool の拡張作業は `docs/variation_expansion/README.md` に計画と進捗があります。
-次の拡張順は P8: `unique locations`、P9: `unique subjects` 評価です。
+次の拡張順は P9: 100k target modeling、P10: compatibility taxonomy expansion、P11: action authoring refactor です。
 現在の variation sizing 境界は `vocab/data/variation_scope.json` に固定されています。
+書類整理方針は `docs/documentation_cleanup_plan.md` を参照してください。
 
 ## Runtime Surface
 

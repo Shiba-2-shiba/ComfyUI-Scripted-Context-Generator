@@ -1,2 +1,0 @@
-Review the changes for correctness, risks, and missing tests.
-Return: findings ordered by severity.
