@@ -29,6 +29,7 @@ prompt-surface repetition 調整の要約入口です。
 
 現在の実装に対して通常参照するのは次です。
 
+- [Current Status](../../CURRENT_STATUS.md)
 - [Context Refactor Summary](./README.md)
 - [Context Schema Extension Guidance](./context_extension_guidance.md)
 
@@ -48,6 +49,6 @@ prompt-surface repetition 調整の要約入口です。
 
 今後の変更では、完了済み migration task を live plan として再利用しません。
 
-- 現在の仕様確認は repo root の `README.md`, `REPO_STRUCTURE.md`, `assets/ARCHITECTURE.md` を優先
+- 現在の仕様確認は repo root の `CURRENT_STATUS.md`, `README.md`, `REPO_STRUCTURE.md`, `assets/ARCHITECTURE.md` を優先
 - context 拡張時の判断は `context_extension_guidance.md` を優先
 - 過去の判断経緯や cutover 履歴が必要なときだけ archive を参照

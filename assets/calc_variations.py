@@ -190,62 +190,53 @@ def calc_per_subject_metrics(project_root):
     return metrics
 
 def calc_garnish_metrics(project_root):
-    # Load separate vocabulary files
     vocab_dir = project_root / 'vocab/data'
-    
+
     garnish_base = load_json(vocab_dir / 'garnish_base_vocab.json')
     micro_actions = load_json(vocab_dir / 'garnish_micro_actions.json')
-    # Background packs (for details/textures)
-    bg_packs = load_json(vocab_dir / 'background_packs.json') # or background_loc_tag_map?
-    # Actually background details come from packs
-    
-    # 1. Camera
+    bg_packs = load_json(vocab_dir / 'background_packs.json')
+
+    # Camera/effect vocab is legacy-disabled in the semantic-only runtime. Keep it
+    # visible for cleanup audits, but do not count it as active variation space.
     angles = len(garnish_base.get('VIEW_ANGLES', []))
     framing = len(garnish_base.get('VIEW_FRAMING', []))
-    camera_configs = angles * framing
-    
-    # 2. Moods
+    legacy_camera_configs = angles * framing
+    legacy_effect_tags = set()
+    for key in ['EFFECTS_UNIVERSAL', 'EFFECTS_BRIGHT', 'EFFECTS_DARK', 'EFFECTS_DYNAMIC']:
+        if key in garnish_base:
+            legacy_effect_tags.update(garnish_base[key])
+
     mood_pools = garnish_base.get('MOOD_POOLS', {})
     mood_keys_count = len(mood_pools)
     total_mood_tags = len(get_unique_tags_recursive(list(mood_pools.values())))
 
-    # 3. Micro Actions
-    # Structure: Key -> { triggers, specific, generic, roulette }
-    # We want unique output tags
-    ma_tags = set()
+    micro_action_tags = set()
     for cat_data in micro_actions.values():
-        # Specific
         if 'specific' in cat_data:
-            get_unique_tags_recursive(cat_data['specific'], ma_tags)
-        # Generic
+            get_unique_tags_recursive(cat_data['specific'], micro_action_tags)
         if 'generic' in cat_data:
-            get_unique_tags_recursive(cat_data['generic'], ma_tags)
-        # Roulette options
+            get_unique_tags_recursive(cat_data['generic'], micro_action_tags)
         if 'roulette' in cat_data and 'options' in cat_data['roulette']:
-             get_unique_tags_recursive(cat_data['roulette']['options'], ma_tags)
+             get_unique_tags_recursive(cat_data['roulette']['options'], micro_action_tags)
 
-    # 4. Effects
-    effects_tags = set()
-    for key in ['EFFECTS_UNIVERSAL', 'EFFECTS_BRIGHT', 'EFFECTS_DARK', 'EFFECTS_DYNAMIC']:
-        if key in garnish_base:
-            effects_tags.update(garnish_base[key])
-            
-    # 5. Background Details (Estimate from likely largest pack)
-    # We just want a sense of "Detail" variation. 
-    # Let's count unique strings in all 'props', 'texture', 'environment' of bg packs
-    bg_tags = set()
+    background_context_tags = set()
     for pack in bg_packs.values():
-        for sub_key in ['props', 'texture', 'environment', 'core']:
+        for sub_key in ['props', 'environment', 'core']:
             if sub_key in pack:
-                get_unique_tags_recursive(pack[sub_key], bg_tags)
+                get_unique_tags_recursive(pack[sub_key], background_context_tags)
+
+    semantic_unit_count = total_mood_tags + len(micro_action_tags) + len(background_context_tags)
 
     return {
-        "camera_configs": camera_configs,
         "mood_keys": mood_keys_count,
         "mood_tags_unique": total_mood_tags,
-        "micro_actions_unique": len(ma_tags),
-        "effects_unique": len(effects_tags),
-        "background_details_unique": len(bg_tags)
+        "micro_actions_unique": len(micro_action_tags),
+        "background_context_tags_unique": len(background_context_tags),
+        "semantic_units_unique": semantic_unit_count,
+        "legacy_disabled": {
+            "camera_configs": legacy_camera_configs,
+            "effect_tags_unique": len(legacy_effect_tags),
+        },
     }
 
 def main():
@@ -267,20 +258,9 @@ def main():
     garnish = calc_garnish_metrics(root)
     per_subject = calc_per_subject_metrics(root) if args.all_subjects else []
 
-    # Combined Indices
-    # Conservative Garnish Factor: 
-    # Assume 1 Camera * 1 Mood * 1 MicroAction * 1 Effect * 1 BG Detail is possible?
-    # Actually, let's just use the product of the counts as a "Theoretical Upper Bound Garnish Multiplier"
-    # But that's too huge.
-    # Let's define "Active Garnish Factor" as:
-    # Camera (N) * Moods (N) * (MicroActions + Effects + BGDetails) (since they are often optional or exclusive-ish)
-    
-    # A cleaner metric might be: "Garnish Universe Size"
-    # Camera * Moods * (Micro + Effects)
-    garnish_universe = garnish['camera_configs'] * garnish['mood_keys'] * (
-        garnish['micro_actions_unique'] + garnish['effects_unique']
-    )
-    
+    # Semantic-only active space: camera/effect vocab is not part of runtime output.
+    garnish_universe = garnish['mood_keys'] * garnish['semantic_units_unique']
+
     combined_upper_bound = base['total_base_variations'] * garnish_universe
 
     metrics = {
@@ -332,15 +312,21 @@ def main():
                 f"contribution={row['contribution']}"
             )
 
-        print("\n--- [2] GARNISH METRICS (Vocabulary Data) ---")
-        print(f"  Camera Configs:      {garnish['camera_configs']} (Angles x Framing)")
+        print("\n--- [2] SEMANTIC GARNISH METRICS (Active Vocabulary Data) ---")
         print(f"  Mood Keys:           {garnish['mood_keys']} (Unique Moods)")
+        print(f"  Mood Tags:           {garnish['mood_tags_unique']} (Unique Tags)")
         print(f"  Micro-Actions:       {garnish['micro_actions_unique']} (Unique Tags)")
-        print(f"  Effects:             {garnish['effects_unique']} (Unique Tags)")
-        print(f"  Background Details:  {garnish['background_details_unique']} (Unique Tags)")
-        
+        print(f"  Background Context:  {garnish['background_context_tags_unique']} (Unique Tags)")
+        print(f"  Semantic Units:      {garnish['semantic_units_unique']} (Mood + Micro + Background)")
+        legacy_disabled = garnish.get("legacy_disabled", {})
+        print(
+            "  Legacy Disabled:     "
+            f"camera={legacy_disabled.get('camera_configs', 0)}, "
+            f"effects={legacy_disabled.get('effect_tags_unique', 0)}"
+        )
+
         print("\n--- [3] COMBINED INDICES ---")
-        print(f"  Garnish Universe:    {garnish_universe:,}")
+        print(f"  Semantic Garnish Universe: {garnish_universe:,}")
         print(f"  Theoretical Max:     {combined_upper_bound:,} (Base x Garnish Universe)")
 
         if per_subject:
