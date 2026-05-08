@@ -1352,3 +1352,215 @@ yoga instructor,tropical_beach,tropical_beach,tag:nature,nature,1,0,0,0,gym_work
 yoga instructor,wave_barrel,wave_barrel,tag:nature,nature,1,0,0,0,gym_workout
 yoga instructor,winter_street,winter_street,universal,,0,1,0,0,gym_workout
 yoga instructor,yoga_studio,yoga_studio,existing,,0,0,1,1,gym_workout
+student,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,school_uniform
+office worker,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,office_lady
+business girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,office_lady
+cyberpunk girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
+gothic girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic doll,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,gothic_lolita
+doll-like girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,gothic_lolita
+rock singer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rock_concert
+rock star,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rock_concert
+spy agent,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,secret_agent
+detective,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,secret_agent
+secret agent,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,secret_agent
+vacationer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,beach_resort
+winter traveler,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,winter_date
+winter date girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,winter_date
+cafe customer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cozy_cafe
+urban shopper,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,urban_shopping
+chef girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rainy_day
+rainy day girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rainy_day
+street dancer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
+cafe barista,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cozy_cafe
+afternoon reader,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cozy_cafe
+fashionista,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,urban_shopping
+student,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,school_uniform
+office worker,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,office_lady
+business girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,office_lady
+cyberpunk girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
+gothic girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic doll,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,gothic_lolita
+doll-like girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,gothic_lolita
+rock singer,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rock_concert
+rock star,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rock_concert
+spy agent,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,secret_agent
+detective,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,secret_agent
+secret agent,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,secret_agent
+vacationer,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,beach_resort
+winter traveler,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,winter_date
+winter date girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,winter_date
+cafe customer,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cozy_cafe
+urban shopper,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,urban_shopping
+chef girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rainy_day
+rainy day girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rainy_day
+street dancer,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
+cafe barista,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cozy_cafe
+afternoon reader,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cozy_cafe
+fashionista,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,urban_shopping
+student,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,school_uniform
+office worker,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,office_lady
+business girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,office_lady
+cyberpunk girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+gothic girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic doll,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
+doll-like girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
+rock singer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rock_concert
+rock star,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rock_concert
+spy agent,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,secret_agent
+detective,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,secret_agent
+secret agent,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,secret_agent
+vacationer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,beach_resort
+winter traveler,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,winter_date
+winter date girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,winter_date
+cafe customer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
+urban shopper,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,urban_shopping
+chef girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rainy_day
+rainy day girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rainy_day
+street dancer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+cafe barista,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
+afternoon reader,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
+fashionista,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,urban_shopping
+student,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,school_uniform
+office worker,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,office_lady
+business girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,office_lady
+cyberpunk girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+gothic girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic doll,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
+doll-like girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
+rock singer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rock_concert
+rock star,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rock_concert
+spy agent,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,secret_agent
+detective,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,secret_agent
+secret agent,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,secret_agent
+vacationer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,beach_resort
+winter traveler,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,winter_date
+winter date girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,winter_date
+cafe customer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
+urban shopper,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,urban_shopping
+chef girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rainy_day
+rainy day girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rainy_day
+street dancer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+cafe barista,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
+afternoon reader,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
+fashionista,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,urban_shopping
+student,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,school_uniform
+office worker,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,office_lady
+business girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,office_lady
+cyberpunk girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
+gothic girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic doll,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,gothic_lolita
+doll-like girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,gothic_lolita
+rock singer,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rock_concert
+rock star,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rock_concert
+spy agent,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,secret_agent
+detective,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,secret_agent
+secret agent,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,secret_agent
+vacationer,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,beach_resort
+winter traveler,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,winter_date
+winter date girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,winter_date
+cafe customer,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cozy_cafe
+urban shopper,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,urban_shopping
+chef girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rainy_day
+rainy day girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rainy_day
+street dancer,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
+cafe barista,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cozy_cafe
+afternoon reader,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cozy_cafe
+fashionista,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,urban_shopping
+student,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,school_uniform
+office worker,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,office_lady
+business girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,office_lady
+cyberpunk girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
+gothic girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic doll,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,gothic_lolita
+doll-like girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,gothic_lolita
+rock singer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rock_concert
+rock star,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rock_concert
+spy agent,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,secret_agent
+detective,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,secret_agent
+secret agent,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,secret_agent
+vacationer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,beach_resort
+winter traveler,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,winter_date
+winter date girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,winter_date
+cafe customer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cozy_cafe
+urban shopper,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,urban_shopping
+chef girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rainy_day
+rainy day girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rainy_day
+street dancer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
+cafe barista,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cozy_cafe
+afternoon reader,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cozy_cafe
+fashionista,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,urban_shopping
+student,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,school_uniform
+office worker,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,office_lady
+business girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,office_lady
+cyberpunk girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cyberpunk_night
+gothic girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic doll,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,gothic_lolita
+doll-like girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,gothic_lolita
+rock singer,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rock_concert
+rock star,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rock_concert
+spy agent,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,secret_agent
+detective,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,secret_agent
+secret agent,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,secret_agent
+vacationer,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,beach_resort
+winter traveler,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,winter_date
+winter date girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,winter_date
+cafe customer,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cozy_cafe
+urban shopper,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,urban_shopping
+chef girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rainy_day
+rainy day girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rainy_day
+street dancer,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cyberpunk_night
+cafe barista,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cozy_cafe
+afternoon reader,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cozy_cafe
+fashionista,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,urban_shopping
+student,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,school_uniform
+office worker,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,office_lady
+library girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,school_uniform
+bookworm girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,school_uniform
+sleepy girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,winter_date
+cafe customer,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,cozy_cafe
+chef girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,rainy_day
+cafe barista,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,cozy_cafe
+afternoon reader,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,cozy_cafe
+fashionista,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,urban_shopping
+window shopper,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,urban_shopping
+silver-haired girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,school_uniform
+student,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,school_uniform
+library girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,school_uniform
+bookworm girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,school_uniform
+kendo girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,traditional_japanese
+sleepy girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,winter_date
+silver-haired girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,school_uniform
+student,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,school_uniform
+library girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,school_uniform
+bookworm girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,school_uniform
+kendo girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,traditional_japanese
+sleepy girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,winter_date

@@ -6,6 +6,7 @@ Last verified: 2026-05-08
 詳細な構造は `REPO_STRUCTURE.md`、設計背景は `assets/ARCHITECTURE.md` と
 `docs/context_refactor/README.md` を参照してください。
 subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` を先に参照してください。
+日常系 location / action pool の拡張作業は `docs/variation_expansion/README.md` に計画と進捗があります。
 
 ## Runtime Surface
 
@@ -61,9 +62,9 @@ python assets/calc_variations.py --json
 Current semantic-only summary:
 
 - unique subjects: `58`
-- unique locations: `58`
-- base variations: `11,916`
-- actions per location: `min 4 / median 8 / mean 7.6 / max 12`
+- unique locations: `68`
+- base variations: `15,034`
+- actions per location: `min 4 / median 8 / mean 8.03 / max 12`
 - missing action pools: `0`
 - mood keys: `9`
 - unique mood tags: `172`
@@ -71,7 +72,7 @@ Current semantic-only summary:
 - unique background context tags: `771`
 - semantic units: `1,223`
 - semantic garnish universe: `11,007`
-- theoretical max: `131,159,412`
+- theoretical max: `165,479,238`
 
 Legacy-disabled vocabulary still present for audit visibility:
 
@@ -98,7 +99,7 @@ python -m py_compile assets/calc_variations.py assets/test_calc_variations.py as
 Results:
 
 - targeted unittest group: `14 tests OK`
-- assets unittest discovery: `250 tests OK`
+- assets unittest discovery: `253 tests OK`
 - context/workflow smoke tests: `12 tests OK`
 - full flow: `OK`
 - prompt data validator: `ERROR: []`, `WARNING: []`
@@ -129,6 +130,13 @@ Recent cleanup:
 - `assets/test_char_profile_nl.py` now checks expected profile text programmatically
 - `assets/test_calc_variations.py` locks semantic-only metric shape
 - `pipeline/action_profiles.py` holds expansion-oriented daily-life/location action profile tables
+
+Recent expansion:
+
+- 10 daily-life locations were promoted into base variation sizing
+- dedicated action pools were added for the promoted daily-life locations
+- high-coverage existing locations received additional semantic actions
+- base variations increased from `11,916` to `15,034`
 
 ## Refactor Risk Map
 

@@ -14,6 +14,7 @@
 - semantic-only prompt cleanliness
 
 現在値は `CURRENT_STATUS.md` と次のコマンドで確認します。
+日常系 location / action pool の具体的な拡張計画は `docs/variation_expansion/README.md` を参照します。
 
 ```bash
 python assets/calc_variations.py --json
