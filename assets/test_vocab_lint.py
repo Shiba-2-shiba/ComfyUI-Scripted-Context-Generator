@@ -2,6 +2,8 @@ import json
 import os
 import re
 import sys
+import unittest
+
 
 ASSETS_DIR = os.path.dirname(os.path.abspath(__file__))
 if ASSETS_DIR not in sys.path:
@@ -10,66 +12,29 @@ ROOT = os.path.dirname(ASSETS_DIR)
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
-import test_bootstrap  # noqa: F401 — パッケージコンテキストを自動解決
+import test_bootstrap  # noqa: F401,E402
 
-import background_vocab
-import clothing_vocab
-import improved_pose_emotion_vocab
-from registry import resolve_clothing_theme, resolve_location_key
+import background_vocab  # noqa: E402
+import improved_pose_emotion_vocab  # noqa: E402
+from registry import resolve_clothing_theme, resolve_location_key  # noqa: E402
 
 try:
-    from vocab.garnish.logic import LEGACY_MAP
+    from vocab.garnish.logic import LEGACY_MAP  # noqa: E402
 except ImportError:
     LEGACY_MAP = {}
 
-def check_referential_integrity():
-    print("--- Checking Referential Integrity ---")
-    prompts_path = "prompts.jsonl"
-    if not os.path.exists(prompts_path):
-        print(f"[Skip] {prompts_path} not found.")
-        return
 
-    # Load prompts
-    prompts = []
-    with open(prompts_path, "r", encoding="utf-8") as f:
-        for line in f:
+def _load_prompt_rows():
+    prompts_path = os.path.join(ROOT, "prompts.jsonl")
+    rows = []
+    with open(prompts_path, "r", encoding="utf-8") as handle:
+        for line in handle:
             if line.strip():
-                prompts.append(json.loads(line))
+                rows.append(json.loads(line))
+    return rows
 
-    # Check matches
-    missing_locs = set()
-    missing_costumes = set()
 
-    for p in prompts:
-        loc = p.get("loc_tag", "") or p.get("loc", "")
-        costume = p.get("costume_key", "") or p.get("costume", "")
-        
-        # Loc Check
-        # Normalize as the node does: lower().strip()
-        raw_loc_key = loc.lower().strip()
-        loc_key = resolve_location_key(raw_loc_key)
-        if loc and not loc_key:
-            missing_locs.add(raw_loc_key)
-
-        # Costume Check
-        # Normalize: key lookup in THEME_TO_PACKS
-        theme_key = resolve_clothing_theme(costume.lower().strip())
-        if costume and not theme_key:
-             missing_costumes.add(costume.lower().strip())
-
-    if missing_locs:
-        print(f"[FAIL] Prompts use locations not in LOC_TAG_MAP: {missing_locs}")
-    else:
-        print("[PASS] All location tags in prompts are valid.")
-
-    if missing_costumes:
-        print(f"[WARN] Prompts use costumes not in THEME_TO_PACKS (might be aliases): {missing_costumes}")
-    else:
-        print("[PASS] All costume keys look valid.")
-
-def check_vocab_cleanliness():
-    print("\n--- Checking Vocab Cleanliness ---")
-    
+def _collect_string_violations(obj, path=""):
     banned_patterns = {
         "meta_style": re.compile(r"\bmeta_style\b"),
         "art style": re.compile(r"\bart style\b"),
@@ -84,205 +49,150 @@ def check_vocab_cleanliness():
         "prismatic light leaks": re.compile(r"\bprismatic light leaks\b"),
         "chromatic aberration": re.compile(r"\bchromatic aberration\b"),
     }
-    
-    def check_obj(obj, name, path=""):
+    violations = []
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            violations.extend(_collect_string_violations(value, f"{path}.{key}" if path else str(key)))
+    elif isinstance(obj, list):
+        for index, item in enumerate(obj):
+            item_path = f"{path}[{index}]"
+            if isinstance(item, str):
+                if not item.strip():
+                    violations.append(f"{item_path} is empty/whitespace")
+                item_lower = item.lower()
+                for label, pattern in banned_patterns.items():
+                    if pattern.search(item_lower):
+                        if "art" in label and ("museum" in item_lower or "gallery" in item_lower):
+                            continue
+                        violations.append(f"{item_path} contains banned '{label}': '{item}'")
+            else:
+                violations.extend(_collect_string_violations(item, item_path))
+    return violations
+
+
+def _normalize_emotion_token(mood_key):
+    key = mood_key.lower().strip()
+    if key in LEGACY_MAP:
+        return LEGACY_MAP[key][0]
+    parts = [part for part in key.split("_") if part]
+    if parts and parts[0] in getattr(improved_pose_emotion_vocab, "MOOD_POOLS", {}):
+        return parts[0]
+    return key
+
+
+class TestVocabLint(unittest.TestCase):
+    def test_prompt_references_resolve(self):
+        missing_locs = set()
+        missing_costumes = set()
+
+        for payload in _load_prompt_rows():
+            loc = payload.get("loc_tag", "") or payload.get("loc", "")
+            costume = payload.get("costume_key", "") or payload.get("costume", "")
+            if loc and not resolve_location_key(loc.lower().strip()):
+                missing_locs.add(loc.lower().strip())
+            if costume and not resolve_clothing_theme(costume.lower().strip()):
+                missing_costumes.add(costume.lower().strip())
+
+        self.assertEqual(missing_locs, set())
+        self.assertEqual(missing_costumes, set())
+
+    def test_vocab_strings_are_clean(self):
         violations = []
-        if isinstance(obj, dict):
-            for k, v in obj.items():
-                violations.extend(check_obj(v, name, path=f"{path}.{k}"))
-        elif isinstance(obj, list):
-            for i, item in enumerate(obj):
-                if isinstance(item, str):
-                    # Empty check
-                    if not item.strip():
-                        violations.append(f"{path}[{i}] is empty/whitespace")
-                    
-                    # Banned check
-                    item_lower = item.lower()
-                    for bw, pat in banned_patterns.items():
-                        if pat.search(item_lower):
-                             # Exception: "art museum", "art gallery"
-                             if "art" in bw and ("museum" in item_lower or "gallery" in item_lower):
-                                 continue
-                             violations.append(f"{path}[{i}] contains banned '{bw}': '{item}'")
-                else:
-                    violations.extend(check_obj(item, name, path=f"{path}[{i}]"))
-        return violations
+        violations.extend(_collect_string_violations(background_vocab.CONCEPT_PACKS, "background_vocab.CONCEPT_PACKS"))
+        violations.extend(_collect_string_violations(improved_pose_emotion_vocab.MICRO_ACTION_CONCEPTS, "MICRO_ACTION_CONCEPTS"))
+        violations.extend(_collect_string_violations(improved_pose_emotion_vocab.MOOD_POOLS, "MOOD_POOLS"))
 
-    # Check background_vocab
-    v1 = check_obj(background_vocab.CONCEPT_PACKS, "background_vocab", "background_vocab.CONCEPT_PACKS")
-    
-    # Check improved_pose_emotion_vocab
-    v2 = check_obj(improved_pose_emotion_vocab.MICRO_ACTION_CONCEPTS, "pose_vocab", "MICRO_ACTION_CONCEPTS")
-    v2.extend(check_obj(improved_pose_emotion_vocab.MOOD_POOLS, "pose_vocab", "MOOD_POOLS"))
-    
-    all_violations = v1 + v2
+        allow_dirty_packs = {
+            "rainy_alley",
+            "cyberpunk_street",
+            "burning_battlefield",
+            "alien_planet",
+            "dragon_lair",
+            "abandoned_shrine",
+        }
+        for pack_name, pack_data in background_vocab.CONCEPT_PACKS.items():
+            if pack_name in allow_dirty_packs:
+                continue
+            for field in ("core", "props", "fx"):
+                for item in pack_data.get(field, []):
+                    lowered = str(item).lower()
+                    if "trash" in lowered or "debris" in lowered:
+                        violations.append(
+                            f"background_vocab.CONCEPT_PACKS.{pack_name}.{field} contains unwanted noun: '{item}'"
+                        )
 
-    allow_dirty_packs = {
-        "rainy_alley",
-        "cyberpunk_street",
-        "burning_battlefield",
-        "alien_planet",
-        "dragon_lair",
-        "abandoned_shrine",
-    }
-
-    for pack_name, pack_data in background_vocab.CONCEPT_PACKS.items():
-        if pack_name in allow_dirty_packs:
-            continue
-        for field in ("core", "props", "fx"):
-            for item in pack_data.get(field, []):
-                low = str(item).lower()
-                if "trash" in low or "debris" in low:
-                    all_violations.append(
-                        f"background_vocab.CONCEPT_PACKS.{pack_name}.{field} contains unwanted noun: '{item}'"
-                    )
-
-    prompts_path = os.path.join("vocab", "data", "action_pools.json")
-    if os.path.exists(prompts_path):
-        with open(prompts_path, "r", encoding="utf-8") as f:
-            action_pools = json.load(f)
+        action_pools_path = os.path.join(ROOT, "vocab", "data", "action_pools.json")
+        with open(action_pools_path, "r", encoding="utf-8") as handle:
+            action_pools = json.load(handle)
         for loc, items in action_pools.items():
             if loc.startswith("_") or loc == "schema_version":
                 continue
-            for idx, item in enumerate(items):
+            for index, item in enumerate(items):
                 text = item.get("text", "") if isinstance(item, dict) else str(item)
-                low = text.lower()
-                if "imaginary" in low:
-                    all_violations.append(
-                        f"action_pools.{loc}[{idx}] contains banned 'imaginary': '{text}'"
-                    )
-                if loc not in allow_dirty_packs and ("trash" in low or "debris" in low):
-                    all_violations.append(
-                        f"action_pools.{loc}[{idx}] contains unwanted noun: '{text}'"
-                    )
+                lowered = text.lower()
+                if "imaginary" in lowered:
+                    violations.append(f"action_pools.{loc}[{index}] contains banned 'imaginary': '{text}'")
+                if loc not in allow_dirty_packs and ("trash" in lowered or "debris" in lowered):
+                    violations.append(f"action_pools.{loc}[{index}] contains unwanted noun: '{text}'")
 
-    if all_violations:
-        print(f"[FAIL] Found {len(all_violations)} vocab violations:")
-        for v in all_violations[:10]:
-            print(f"  - {v}")
-        if len(all_violations) > 10: print("  ... and more")
-    else:
-        print("[PASS] Vocab cleanliness check passed.")
+        self.assertEqual(violations, [])
 
+    def test_mood_references_resolve(self):
+        mood_map_path = os.path.join(ROOT, "mood_map.json")
+        with open(mood_map_path, "r", encoding="utf-8") as handle:
+            mood_map = json.load(handle)
 
+        moods = sorted({payload.get("meta", {}).get("mood", "") for payload in _load_prompt_rows() if payload.get("meta")})
+        missing_moods = [mood for mood in moods if mood and mood not in mood_map]
+        emotion_tokens = sorted({_normalize_emotion_token(mood) for mood in moods if mood})
+        missing_emotion_pool = [
+            token
+            for token in emotion_tokens
+            if token not in getattr(improved_pose_emotion_vocab, "MOOD_POOLS", {})
+        ]
 
-def check_extended_rules():
-    print("\n--- Checking Extended Rules (Merged from test.py) ---")
-    
-    # Setup paths
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    mood_map_path = os.path.join(base_dir, "mood_map.json")
-    prompts_path = os.path.join(base_dir, "prompts.jsonl")
+        self.assertEqual(missing_moods, [])
+        self.assertEqual(missing_emotion_pool, [])
 
-    if not os.path.exists(mood_map_path):
-        print(f"[Skip] {mood_map_path} not found.")
-        return
-        
-    # Load Data
-    with open(mood_map_path, "r", encoding="utf-8") as f:
-        mood_map = json.load(f)
-        
-    prompts = []
-    if os.path.exists(prompts_path):
-        with open(prompts_path, "r", encoding="utf-8") as f:
-            for line in f:
-                if line.strip():
-                    try:
-                        prompts.append(json.loads(line))
-                    except json.JSONDecodeError:
-                        print(f"[WARN] Failed to parse JSON line in prompts.jsonl: {line[:50]}...")
-    
-    # 1. Mood Map Consistency
-    moods = sorted({p.get("meta", {}).get("mood", "") for p in prompts if p.get("meta")})
-    missing_mood = [m for m in moods if m and m not in mood_map]
-    
-    if missing_mood:
-        print(f"[FAIL] Prompts use moods not in mood_map.json: {missing_mood}")
-    else:
-        print("[PASS] All prompt moods exist in mood_map.json")
+    def test_prompt_actions_keep_basic_anchor_verbs(self):
+        anchor_words = {
+            "browsing",
+            "checking",
+            "comparing",
+            "dancing",
+            "gripping",
+            "holding",
+            "kneeling",
+            "leaning",
+            "lying",
+            "moving",
+            "organizing",
+            "pausing",
+            "pinning",
+            "resting",
+            "reviewing",
+            "running",
+            "settling",
+            "singing",
+            "sitting",
+            "slipping",
+            "sorting",
+            "staying",
+            "standing",
+            "stretching",
+            "walking",
+            "watching",
+            "working",
+        }
+        missing = []
+        for payload in _load_prompt_rows():
+            action = payload.get("action", "")
+            words = re.findall(r"[A-Za-z']+", action.lower())
+            if action and (not words or words[0] not in anchor_words):
+                missing.append(action)
 
-    # 2. Emotion Pool Coverage
-    # Check if the 'emotion' part of the mood tag (e.g. 'surreal_dream_blue' -> 'blue'?? No, logic was split('_')[-1])
-    # test.py logic: parts = mood_key.lower().split("_"); return parts[-1]
-    def normalize_emotion_token(mood_key: str) -> str:
-        key = mood_key.lower().strip()
-        if key in LEGACY_MAP:
-            return LEGACY_MAP[key][0]
-        parts = [part for part in key.split("_") if part]
-        if parts and parts[0] in getattr(improved_pose_emotion_vocab, "MOOD_POOLS", {}):
-            return parts[0]
-        return key
+        self.assertEqual(missing, [])
 
-    emotion_tokens = sorted({normalize_emotion_token(m) for m in moods if m})
-    # MOOD_POOLS is in improved_pose_emotion_vocab
-    # We need to access MOOD_POOLS. In test.py it was import improved_pose_emotion_vocab as garnish_vocab
-    # In this file it is imported as improved_pose_emotion_vocab
-    
-    # Note: improved_pose_emotion_vocab might not expose MOOD_POOLS directly if not in __all__? 
-    # Let's check imports. test_vocab_lint imports it as improved_pose_emotion_vocab.
-    
-    if hasattr(improved_pose_emotion_vocab, 'MOOD_POOLS'):
-        pools = improved_pose_emotion_vocab.MOOD_POOLS
-        missing_emotion_pool = [e for e in emotion_tokens if e not in pools]
-        
-        if missing_emotion_pool:
-            # This is often strict, maybe just WARN
-            print(f"[WARN] Mood suffixes (emotions) not found in MOOD_POOLS: {missing_emotion_pool}")
-        else:
-            print("[PASS] All mood suffixes map to an Emotion Pool")
-    else:
-        print("[SKIP] improved_pose_emotion_vocab.MOOD_POOLS not found")
-
-    # 3. Anchor Check
-    anchor_words = {
-        "browsing",
-        "checking",
-        "comparing",
-        "dancing",
-        "gripping",
-        "holding",
-        "kneeling",
-        "leaning",
-        "lying",
-        "moving",
-        "organizing",
-        "pausing",
-        "pinning",
-        "resting",
-        "reviewing",
-        "running",
-        "settling",
-        "singing",
-        "sitting",
-        "slipping",
-        "sorting",
-        "staying",
-        "standing",
-        "stretching",
-        "walking",
-        "watching",
-        "working",
-    }
-    
-    actions = [p.get("action", "") for p in prompts]
-    anchor_missing = []
-    for a in actions:
-        if not a: continue
-        words = re.findall(r"[A-Za-z']+", a.lower())
-        first_word = words[0] if words else ""
-        if first_word not in anchor_words:
-            anchor_missing.append(a)
-            
-    if anchor_missing:
-        print(f"[INFO] {len(anchor_missing)} actions do not contain basic anchors (sitting/standing/etc). Examples:")
-        for m in anchor_missing[:5]:
-            print(f"  - {m}")
-    else:
-        print("[PASS] All actions contain basic anchor verbs")
 
 if __name__ == "__main__":
-    check_referential_integrity()
-
-    check_vocab_cleanliness()
-    check_extended_rules()
+    unittest.main()
