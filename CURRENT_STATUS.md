@@ -70,10 +70,10 @@ Current semantic-only summary:
 - mood keys: `9`
 - unique mood tags: `172`
 - unique micro actions: `280`
-- unique background context tags: `771`
-- semantic units: `1,223`
-- semantic garnish universe: `11,007`
-- theoretical max: `165,479,238`
+- unique background context tags: `835`
+- semantic units: `1,287`
+- semantic garnish universe: `11,583`
+- theoretical max: `174,138,822`
 
 Legacy-disabled vocabulary still present for audit visibility:
 
@@ -141,6 +141,7 @@ Recent expansion:
 - high-coverage existing locations received additional semantic actions
 - base variations increased from `11,916` to `15,034`
 - `vocab/data/variation_scope.json` now records the active 58 subjects / 68 locations boundary
+- `tools/build_compatibility_review.py --check` now verifies scoped CSV regeneration with `ERROR: []`
 
 ## Refactor Risk Map
 
@@ -206,3 +207,11 @@ python tools/validate_prompt_data.py
 python tools/check_variation_scope.py
 python assets/calc_variations.py --json
 ```
+
+Scoped CSV regeneration check:
+
+```bash
+python tools/build_compatibility_review.py --check
+```
+
+Current expected result is `ERROR: []` and `WARNING: []`.

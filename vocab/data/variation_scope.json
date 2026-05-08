@@ -158,5 +158,123 @@
     "public_library_lobby",
     "riverside_walk",
     "laundromat"
-  ]
+  ],
+  "compatibility_review_generation": {
+    "canonical_location_overrides": {
+      "elegant_dining_room": "street_cafe",
+      "luxury_bathroom": "bedroom_boudoir",
+      "rainy_bus_stop": "rainy_alley",
+      "steampunk_airship": "airship_deck"
+    },
+    "excluded_pairs": [
+      {
+        "subj": "CEO",
+        "canonical_loc": "luxury_hotel_lobby"
+      },
+      {
+        "subj": "afternoon reader",
+        "canonical_loc": "antique_shop"
+      },
+      {
+        "subj": "business girl",
+        "canonical_loc": "fashion_boutique"
+      },
+      {
+        "subj": "business girl",
+        "canonical_loc": "karaoke_bar"
+      },
+      {
+        "subj": "business girl",
+        "canonical_loc": "luxury_hotel_lobby"
+      },
+      {
+        "subj": "business girl",
+        "canonical_loc": "neon_city_street"
+      },
+      {
+        "subj": "business girl",
+        "canonical_loc": "underground_bar"
+      },
+      {
+        "subj": "cafe barista",
+        "canonical_loc": "poolside_resort"
+      },
+      {
+        "subj": "detective",
+        "canonical_loc": "luxury_hotel_lobby"
+      },
+      {
+        "subj": "office worker",
+        "canonical_loc": "fashion_boutique"
+      },
+      {
+        "subj": "office worker",
+        "canonical_loc": "karaoke_bar"
+      },
+      {
+        "subj": "office worker",
+        "canonical_loc": "luxury_hotel_lobby"
+      },
+      {
+        "subj": "office worker",
+        "canonical_loc": "neon_city_street"
+      },
+      {
+        "subj": "office worker",
+        "canonical_loc": "underground_bar"
+      },
+      {
+        "subj": "secret agent",
+        "canonical_loc": "luxury_hotel_lobby"
+      },
+      {
+        "subj": "student",
+        "canonical_loc": "fashion_boutique"
+      },
+      {
+        "subj": "student",
+        "canonical_loc": "karaoke_bar"
+      },
+      {
+        "subj": "student",
+        "canonical_loc": "neon_city_street"
+      },
+      {
+        "subj": "student",
+        "canonical_loc": "underground_bar"
+      },
+      {
+        "subj": "vacation girl",
+        "canonical_loc": "fashion_boutique"
+      },
+      {
+        "subj": "vacation girl",
+        "canonical_loc": "karaoke_bar"
+      },
+      {
+        "subj": "vacation girl",
+        "canonical_loc": "neon_city_street"
+      },
+      {
+        "subj": "vacation girl",
+        "canonical_loc": "underground_bar"
+      },
+      {
+        "subj": "vacationer",
+        "canonical_loc": "fashion_boutique"
+      },
+      {
+        "subj": "vacationer",
+        "canonical_loc": "karaoke_bar"
+      },
+      {
+        "subj": "vacationer",
+        "canonical_loc": "neon_city_street"
+      },
+      {
+        "subj": "vacationer",
+        "canonical_loc": "underground_bar"
+      }
+    ]
+  }
 }

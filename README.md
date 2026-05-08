@@ -116,6 +116,7 @@ subject / location / base variations を増やす作業では、[`EXPANSION_GUID
 - `assets/compatibility_review.csv`
 - 計測責務: [`assets/calc_variations.py`](./assets/calc_variations.py)
 - scope 検証: [`tools/check_variation_scope.py`](./tools/check_variation_scope.py)
+- scoped CSV 生成チェック: [`tools/build_compatibility_review.py`](./tools/build_compatibility_review.py)
 
 `assets/calc_variations.py` は `assets/compatibility_review.csv` を base variation sizing の入力として使います。
 location を追加しても、この CSV に反映されなければ `base variations` には加算されません。
@@ -168,10 +169,10 @@ location を追加しても、この CSV に反映されなければ `base varia
 - mood keys: `9`
 - unique mood tags: `172`
 - unique micro actions: `280`
-- unique background context tags: `771`
-- semantic units: `1,223`
-- semantic garnish universe: `11,007`
-- theoretical max: `165,479,238`
+- unique background context tags: `835`
+- semantic units: `1,287`
+- semantic garnish universe: `11,583`
+- theoretical max: `174,138,822`
 
 camera / effect 系は semantic-only ランタイムでは active variation に含めません。
 監査用の legacy-disabled 指標として `camera_configs=120`, `effect_tags=22` は残しています。
@@ -211,6 +212,9 @@ python tools/check_variation_scope.py
 python tools/check_widgets_values.py
 ```
 
+`python tools/build_compatibility_review.py --check` は scoped CSV 再生成の差分確認用です。
+現状は `ERROR: []`, `WARNING: []` が期待値です。
+
 frontend / browser round-trip は `verification/` と `tools/run_*.ps1` を使って実行できます。
 
 ## データ編集ポイント
@@ -235,6 +239,7 @@ variation 拡張時は次も確認してください。
 - `python tools/validate_prompt_data.py`
 - `python assets/calc_variations.py --json`
 - `python tools/check_variation_scope.py`
+- `python tools/build_compatibility_review.py --check`
 - `python tools/report_expansion_delta.py assets/results/variation_before.json assets/results/variation_after.json`
 
 ## 注意事項

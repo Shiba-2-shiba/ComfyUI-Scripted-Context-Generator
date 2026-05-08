@@ -133,10 +133,28 @@ python -m unittest assets.test_variation_scope
 
 ## P6: Scoped Compatibility Review Generation
 
-- [ ] VE-601 Add scoped generator with `--check`
-- [ ] VE-602 Compare generated rows against current `assets/compatibility_review.csv`
-- [ ] VE-603 Add `--write` only after check mode is stable
-- [ ] VE-604 Document generation workflow in `EXPANSION_GUIDE.md`
+- [x] VE-601 Add scoped generator with `--check`
+- [x] VE-602 Compare generated rows against current `assets/compatibility_review.csv`
+- [x] VE-603 Enable overwrite only after check mode has no drift
+- [x] VE-604 Document generation workflow in `EXPANSION_GUIDE.md`
+- [x] VE-605 Add direct background packs for all current scoped locations
+
+Current generator state:
+
+- generated rows: `1,565`
+- current rows: `1,565`
+- missing current pairs: `0`
+- extra generated pairs: `0`
+- row metadata drift: `0`
+- prompt source scope warnings: `0`
+- scope background-pack warnings: `0`
+
+Commands:
+
+```bash
+python tools/build_compatibility_review.py --check
+python -m unittest assets.test_build_compatibility_review
+```
 
 ## P7: Action Pool Authoring Split Evaluation
 

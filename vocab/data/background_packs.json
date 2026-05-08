@@ -3864,6 +3864,388 @@
       "steady commercial bustle"
     ]
   },
+  "art_gallery": {
+    "label": "アートギャラリー",
+    "environment": [
+      "quiet art gallery hall with white walls",
+      "small contemporary gallery arranged for a weekday viewing"
+    ],
+    "core": [
+      "framed canvas works spaced along the wall",
+      "low bench centered in the viewing room",
+      "small title plaques mounted beside each work"
+    ],
+    "texture": [
+      "smooth painted wall surface",
+      "polished concrete floor with muted reflections"
+    ],
+    "props": [
+      "folded exhibition leaflet held at waist height",
+      "thin brochure rack near the entrance",
+      "museum tote resting beside the bench"
+    ],
+    "fx": [
+      "hushed viewing room atmosphere",
+      "slow footsteps softened by the open space"
+    ],
+    "time": [
+      "quiet weekday afternoon",
+      "early evening before closing"
+    ],
+    "crowd": [
+      "a few visitors moving slowly between works",
+      "gallery staff waiting near the doorway"
+    ],
+    "weather": [
+      "soft daylight filtered through the front glass",
+      "overcast brightness from the street outside"
+    ],
+    "aliases": [
+      "art gallery",
+      "gallery hall"
+    ],
+    "lighting": [
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "castle_hall": {
+    "label": "城の大広間",
+    "environment": [
+      "grand castle hall with high stone arches",
+      "old royal corridor opening into a ceremonial chamber"
+    ],
+    "core": [
+      "long red carpet leading between stone columns",
+      "tall stained glass windows above the hall",
+      "velvet chair placed near a carved wooden dais"
+    ],
+    "texture": [
+      "cold stone floor worn by footsteps",
+      "heavy woven banners hanging from the walls"
+    ],
+    "props": [
+      "rolled parchment set on a side table",
+      "polished armor stand beside the archway",
+      "silver candelabrum resting near the dais"
+    ],
+    "fx": [
+      "formal quiet filling the vaulted room",
+      "faint echo of steps across the stone"
+    ],
+    "time": [
+      "late afternoon in the hall",
+      "evening before a formal audience"
+    ],
+    "crowd": [
+      "distant attendants waiting near the pillars",
+      "empty ceremonial space beyond the carpet"
+    ],
+    "weather": [
+      "cool daylight through stained glass",
+      "clouded sky beyond the narrow windows"
+    ],
+    "aliases": [
+      "castle hall",
+      "royal hall"
+    ],
+    "lighting": [
+      "magical glow",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
+    ]
+  },
+  "enchanted_lake": {
+    "label": "魔法の湖",
+    "environment": [
+      "quiet enchanted lake bordered by old trees",
+      "misty lakeside clearing with a narrow stone bridge"
+    ],
+    "core": [
+      "still water reflecting hanging branches",
+      "mossy stones arranged along the shore",
+      "arched stone bridge crossing a shallow inlet"
+    ],
+    "texture": [
+      "damp moss around the waterline",
+      "smooth wet stones under the trees"
+    ],
+    "props": [
+      "small lantern set beside the path",
+      "folded cloak resting on a lakeside rock",
+      "glass vial catching color from the water"
+    ],
+    "fx": [
+      "thin mist drifting over the lake surface",
+      "faint ripples moving through the reflection"
+    ],
+    "time": [
+      "blue hour by the water",
+      "calm morning beside the lake"
+    ],
+    "crowd": [
+      "empty shoreline hidden by willow branches",
+      "one distant figure crossing the bridge"
+    ],
+    "weather": [
+      "cool clear air above the water",
+      "light rain touching the lake surface"
+    ],
+    "aliases": [
+      "enchanted lake",
+      "mystic lakeside"
+    ],
+    "lighting": [
+      "magical glow",
+      "bioluminescent",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
+    ]
+  },
+  "high_tech_medbay": {
+    "label": "ハイテク医療室",
+    "environment": [
+      "high tech medbay with clean modular walls",
+      "compact medical bay inside a futuristic facility"
+    ],
+    "core": [
+      "scanner bed set beneath a curved diagnostic arch",
+      "transparent medical chart panels beside the bed",
+      "sealed supply cabinet with labeled drawers"
+    ],
+    "texture": [
+      "smooth white composite panels",
+      "brushed metal rails around the equipment"
+    ],
+    "props": [
+      "sterile tray with sealed instruments",
+      "small vial rack clipped to the counter",
+      "folded patient blanket on the scanner bed"
+    ],
+    "fx": [
+      "controlled clinical stillness",
+      "soft machine hum under the room tone"
+    ],
+    "time": [
+      "quiet diagnostic shift",
+      "late night emergency standby"
+    ],
+    "crowd": [
+      "one technician checking the far console",
+      "empty waiting chair near the wall"
+    ],
+    "weather": [
+      "dark corridor beyond the sealed door",
+      "cold station light through the viewport"
+    ],
+    "aliases": [
+      "high tech medbay",
+      "medical bay"
+    ],
+    "lighting": [
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "magic_academy_library": {
+    "label": "魔法学院図書館",
+    "environment": [
+      "magic academy library with towering bookcases",
+      "old study hall filled with scroll shelves and reading desks"
+    ],
+    "core": [
+      "spiral staircase climbing between tall shelves",
+      "long oak tables lined with open reference books",
+      "arched windows overlooking the academy courtyard"
+    ],
+    "texture": [
+      "aged leather bindings and polished wood",
+      "dusty stone floor beneath the reading tables"
+    ],
+    "props": [
+      "thick grimoire open beside a bookmark ribbon",
+      "brass reading stand placed near the aisle",
+      "rolled scroll tied with blue cord"
+    ],
+    "fx": [
+      "hushed study air with a faint page rustle",
+      "quiet sense of old knowledge in the room"
+    ],
+    "time": [
+      "late afternoon study hour",
+      "evening before the library closes"
+    ],
+    "crowd": [
+      "students reading at separate desks",
+      "librarian moving between the shelves"
+    ],
+    "weather": [
+      "cloudy courtyard visible beyond the windows",
+      "rain tracing the high glass panes"
+    ],
+    "aliases": [
+      "magic academy library",
+      "academy library"
+    ],
+    "lighting": [
+      "magical glow",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
+    ]
+  },
+  "museum_hall": {
+    "label": "博物館ホール",
+    "environment": [
+      "museum hall with wide exhibit corridors",
+      "natural history gallery arranged around glass cases"
+    ],
+    "core": [
+      "large skeleton display suspended over the hall",
+      "glass exhibit cases aligned along the walkway",
+      "information panels mounted beside each display"
+    ],
+    "texture": [
+      "polished stone floor under the exhibit cases",
+      "matte display walls with subtle signage"
+    ],
+    "props": [
+      "folded museum map held open in one hand",
+      "audio guide device clipped to a strap",
+      "small notebook beside an exhibit label"
+    ],
+    "fx": [
+      "quiet educational atmosphere",
+      "soft murmur from visitors further down the hall"
+    ],
+    "time": [
+      "weekend afternoon visit",
+      "weekday morning opening hour"
+    ],
+    "crowd": [
+      "families reading labels near the cases",
+      "visitors pausing under the central display"
+    ],
+    "weather": [
+      "daylight from the entrance atrium",
+      "grey sky visible through high windows"
+    ],
+    "aliases": [
+      "museum hall",
+      "exhibit hall"
+    ],
+    "lighting": [
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "starship_quarters": {
+    "label": "宇宙船の居住区",
+    "environment": [
+      "compact starship quarters with a narrow bunk",
+      "personal cabin inside a long range spacecraft"
+    ],
+    "core": [
+      "folding bunk built into the metal wall",
+      "small viewport showing a field of stars",
+      "personal locker beside a compact desk"
+    ],
+    "texture": [
+      "brushed metal wall panels",
+      "plain fabric bedding strapped neatly in place"
+    ],
+    "props": [
+      "datapad resting on the built-in desk",
+      "folded uniform arranged inside the locker",
+      "magnetic cup fixed beside the bunk"
+    ],
+    "fx": [
+      "low engine vibration in the quiet cabin",
+      "private off-duty stillness inside the ship"
+    ],
+    "time": [
+      "ship night cycle",
+      "quiet standby between shifts"
+    ],
+    "crowd": [
+      "private room with the corridor sealed outside",
+      "empty upper bunk folded into the wall"
+    ],
+    "weather": [
+      "stars moving beyond the viewport",
+      "dark space outside the cabin window"
+    ],
+    "aliases": [
+      "starship quarters",
+      "spacecraft cabin"
+    ],
+    "lighting": [
+      "quiet room air",
+      "rows of overhead fixtures",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "underground_bar": {
+    "label": "地下バー",
+    "environment": [
+      "underground bar tucked beneath a side street",
+      "low ceiling basement lounge with a narrow counter"
+    ],
+    "core": [
+      "long wooden counter with worn brass trim",
+      "small jukebox near the back wall",
+      "round tables arranged under low ceiling beams"
+    ],
+    "texture": [
+      "dark varnished wood marked by use",
+      "brick wall softened by years of smoke"
+    ],
+    "props": [
+      "half filled glass set on a coaster",
+      "dartboard mounted beside the corner booth",
+      "folded menu tucked behind the counter"
+    ],
+    "fx": [
+      "muted basement chatter",
+      "dim late night atmosphere under the street"
+    ],
+    "time": [
+      "late evening after work",
+      "quiet hour before last call"
+    ],
+    "crowd": [
+      "regulars speaking quietly at the counter",
+      "bartender polishing a glass near the shelves"
+    ],
+    "weather": [
+      "rainy street entrance above the stairs",
+      "night air beyond the basement door"
+    ],
+    "aliases": [
+      "underground bar",
+      "basement bar"
+    ],
+    "lighting": [
+      "neon glow",
+      "streetlight",
+      "moonlight",
+      "dim ambient",
+      "city lights"
+    ]
+  },
   "japanese_garden": {
     "label": "日本庭園",
     "environment": [

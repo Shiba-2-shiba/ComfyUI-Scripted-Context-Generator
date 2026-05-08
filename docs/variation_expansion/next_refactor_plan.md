@@ -40,16 +40,15 @@ python tools/check_variation_scope.py
 python -m unittest assets.test_variation_scope
 ```
 
-Current caveat:
+Current state:
 
-- `tools/check_variation_scope.py` allows existing scoped locations that are present in
-  compatibility/action data even when a direct background pack is still missing.
-- Missing direct background packs are warnings, not errors, until the scoped generator
-  makes background coverage part of the write path.
+- All 68 current variation-scope locations have direct background packs.
+- `tools/check_variation_scope.py` should stay clean (`ERROR: []`, `WARNING: []`)
+  before the next promotion wave is accepted.
 
 ### 2. Make Compatibility Review Regenerable
 
-Status: `next`
+Status: `done`
 
 Add a scoped generator for `assets/compatibility_review.csv`.
 
@@ -62,6 +61,15 @@ Requirements:
 - support `--check` before `--write`
 
 Do not replace the current CSV blindly until generated rows match the intended current scope.
+
+Current implementation:
+
+- `tools/build_compatibility_review.py --check` generates scoped candidate rows and
+  compares them to `assets/compatibility_review.csv`.
+- `assets/compatibility_review.csv` has been normalized from the generator output.
+- The check now reports `ERROR: []` and no row or pair drift.
+- Current generated rows: `1,565`.
+- `prompts.jsonl` rows are aligned to the current variation scope.
 
 ### 3. Split Action Pool Authoring Surface
 

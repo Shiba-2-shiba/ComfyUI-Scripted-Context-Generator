@@ -2,7 +2,7 @@
 CEO,aquarium,aquarium,universal,,0,1,0,0,office_lady
 CEO,art_gallery,art_gallery,universal,,0,1,0,0,office_lady
 CEO,luxury_bathroom,bedroom_boudoir,tag:luxury,luxury,1,0,0,1,office_lady
-CEO,boardroom,boardroom,existing,,0,0,1,1,office_lady
+CEO,boardroom,boardroom,existing,,0,0,1,0,office_lady
 CEO,botanical_garden,botanical_garden,universal,,0,1,0,0,office_lady
 CEO,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,office_lady
 CEO,commuter_transport,commuter_transport,universal,,0,1,0,0,office_lady
@@ -21,25 +21,33 @@ CEO,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,office_lady
 CEO,elegant_dining_room,street_cafe,tag:luxury,luxury,1,0,0,1,office_lady
 CEO,surveillance_room,surveillance_room,tag:office,office,1,0,0,0,office_lady
 CEO,winter_street,winter_street,universal,,0,1,0,0,office_lady
-afternoon reader,aquarium,aquarium,universal,,0,1,0,0,cozy_cafe
+afternoon reader,aquarium,aquarium,tag:urban,urban,1,0,0,0,cozy_cafe
 afternoon reader,art_gallery,art_gallery,universal,,0,1,0,0,cozy_cafe
+afternoon reader,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cozy_cafe
 afternoon reader,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,cozy_cafe
 afternoon reader,botanical_garden,botanical_garden,universal,,0,1,0,0,cozy_cafe
+afternoon reader,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,cozy_cafe
+afternoon reader,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cozy_cafe
 afternoon reader,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,cozy_cafe
 afternoon reader,commuter_transport,commuter_transport,universal,,0,1,0,0,cozy_cafe
-afternoon reader,cozy_bookstore,cozy_bookstore,existing,,0,0,1,1,cozy_cafe
+afternoon reader,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cozy_cafe
+afternoon reader,cozy_bookstore,cozy_bookstore,existing,,0,0,1,0,cozy_cafe
 afternoon reader,cozy_living_room,cozy_living_room,universal,,0,1,0,0,cozy_cafe
+afternoon reader,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
+afternoon reader,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cozy_cafe
 afternoon reader,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,cozy_cafe
-afternoon reader,illuminated_park,illuminated_park,universal,,0,1,0,0,cozy_cafe
+afternoon reader,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cozy_cafe
+afternoon reader,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,cozy_cafe
 afternoon reader,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,cozy_cafe
 afternoon reader,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 afternoon reader,museum_hall,museum_hall,universal,,0,1,0,0,cozy_cafe
 afternoon reader,neon_city_street,neon_city_street,tag:urban,urban,1,0,0,0,cozy_cafe
 afternoon reader,picnic_park,picnic_park,universal,,0,1,0,0,cozy_cafe
-afternoon reader,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,cozy_cafe
-afternoon reader,school_library,school_library,universal,,0,1,0,0,cozy_cafe
+afternoon reader,rainy_bus_stop,rainy_alley,tag:suburban,suburban,1,0,0,1,cozy_cafe
+afternoon reader,school_library,school_library,existing,,0,0,1,0,cozy_cafe
 afternoon reader,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,cozy_cafe
-afternoon reader,street_cafe,street_cafe,universal,,0,1,0,0,cozy_cafe
+afternoon reader,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,cozy_cafe
+afternoon reader,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
 afternoon reader,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,cozy_cafe
 afternoon reader,winter_street,winter_street,universal,,0,1,0,0,cozy_cafe
 airship captain,airship_deck,airship_deck,existing,,0,0,1,0,steampunk
@@ -81,7 +89,7 @@ blonde elf archer,cozy_living_room,cozy_living_room,universal,,0,1,0,0,fantasy_b
 blonde elf archer,dragon_lair,dragon_lair,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
 blonde elf archer,dungeon_crypt,dungeon_crypt,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
 blonde elf archer,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,fantasy_battle
-blonde elf archer,fantasy_forest,fantasy_forest,existing,,0,0,1,1,fantasy_battle
+blonde elf archer,fantasy_forest,fantasy_forest,existing,,0,0,1,0,fantasy_battle
 blonde elf archer,illuminated_park,illuminated_park,universal,,0,1,0,0,fantasy_battle
 blonde elf archer,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,fantasy_battle
 blonde elf archer,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
@@ -94,11 +102,14 @@ blonde elf archer,shinto_shrine,shinto_shrine,tag:nature,nature,1,0,0,0,fantasy_
 blonde elf archer,tropical_beach,tropical_beach,tag:nature,nature,1,0,0,0,fantasy_battle
 blonde elf archer,wave_barrel,wave_barrel,tag:nature,nature,1,0,0,0,fantasy_battle
 blonde elf archer,winter_street,winter_street,universal,,0,1,0,0,fantasy_battle
-bookworm girl,antique_shop,antique_shop,existing,,0,0,1,1,school_uniform
+bookworm girl,antique_shop,antique_shop,existing,,0,0,1,0,school_uniform
 bookworm girl,aquarium,aquarium,universal,,0,1,0,0,school_uniform
 bookworm girl,art_gallery,art_gallery,universal,,0,1,0,0,school_uniform
 bookworm girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,school_uniform
 bookworm girl,botanical_garden,botanical_garden,universal,,0,1,0,0,school_uniform
+bookworm girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,school_uniform
+bookworm girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,school_uniform
+bookworm girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,school_uniform
 bookworm girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,school_uniform
 bookworm girl,commuter_transport,commuter_transport,universal,,0,1,0,0,school_uniform
 bookworm girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,school_uniform
@@ -107,7 +118,7 @@ bookworm girl,illuminated_park,illuminated_park,universal,,0,1,0,0,school_unifor
 bookworm girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 bookworm girl,museum_hall,museum_hall,universal,,0,1,0,0,school_uniform
 bookworm girl,picnic_park,picnic_park,universal,,0,1,0,0,school_uniform
-bookworm girl,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,school_uniform
+bookworm girl,rainy_bus_stop,rainy_alley,tag:suburban,suburban,1,0,0,1,school_uniform
 bookworm girl,school_classroom,school_classroom,tag:school,school,1,0,0,0,school_uniform
 bookworm girl,school_gym_hall,school_gym_hall,tag:school,school,1,0,0,0,school_uniform
 bookworm girl,school_library,school_library,tag:school,school,1,0,0,0,school_uniform
@@ -115,89 +126,120 @@ bookworm girl,school_rooftop,school_rooftop,tag:school,school,1,0,0,0,school_uni
 bookworm girl,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,school_uniform
 bookworm girl,street_cafe,street_cafe,universal,,0,1,0,0,school_uniform
 bookworm girl,winter_street,winter_street,universal,,0,1,0,0,school_uniform
-business girl,aquarium,aquarium,universal,,0,1,0,0,office_lady
+business girl,aquarium,aquarium,tag:urban,urban,1,0,0,0,office_lady
 business girl,art_gallery,art_gallery,universal,,0,1,0,0,office_lady
+business girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,office_lady
 business girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,office_lady
 business girl,boardroom,boardroom,tag:office,office,1,0,0,0,office_lady
 business girl,botanical_garden,botanical_garden,universal,,0,1,0,0,office_lady
+business girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,office_lady
 business girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,office_lady
 business girl,commuter_transport,commuter_transport,universal,,0,1,0,0,office_lady
-business girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,office_lady
+business girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,office_lady
+business girl,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,office_lady
 business girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,office_lady
-business girl,illuminated_park,illuminated_park,universal,,0,1,0,0,office_lady
+business girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,office_lady
+business girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,office_lady
+business girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,office_lady
+business girl,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,office_lady
 business girl,messy_copy_room,messy_copy_room,tag:office,office,1,0,0,0,office_lady
 business girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
-business girl,modern_office,modern_office,existing,,0,0,1,1,office_lady
+business girl,modern_office,modern_office,existing,,0,0,1,0,office_lady
 business girl,museum_hall,museum_hall,universal,,0,1,0,0,office_lady
-business girl,office_elevator,office_elevator,tag:office,office,1,0,0,0,office_lady
+business girl,office_elevator,office_elevator,existing,,0,0,1,0,office_lady
 business girl,picnic_park,picnic_park,universal,,0,1,0,0,office_lady
-business girl,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,office_lady
+business girl,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,office_lady
 business girl,school_library,school_library,universal,,0,1,0,0,office_lady
-business girl,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,office_lady
-business girl,street_cafe,street_cafe,universal,,0,1,0,0,office_lady
+business girl,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,office_lady
+business girl,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,office_lady
+business girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,office_lady
 business girl,surveillance_room,surveillance_room,tag:office,office,1,0,0,0,office_lady
 business girl,winter_street,winter_street,universal,,0,1,0,0,office_lady
-cafe barista,aquarium,aquarium,universal,,0,1,0,0,cozy_cafe
+cafe barista,aquarium,aquarium,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe barista,art_gallery,art_gallery,universal,,0,1,0,0,cozy_cafe
+cafe barista,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe barista,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,cozy_cafe
 cafe barista,botanical_garden,botanical_garden,universal,,0,1,0,0,cozy_cafe
+cafe barista,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,cozy_cafe
+cafe barista,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe barista,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,cozy_cafe
 cafe barista,commuter_transport,commuter_transport,universal,,0,1,0,0,cozy_cafe
-cafe barista,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,cozy_cafe
+cafe barista,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cozy_cafe
+cafe barista,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe barista,cozy_living_room,cozy_living_room,universal,,0,1,0,0,cozy_cafe
+cafe barista,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
+cafe barista,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe barista,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,cozy_cafe
-cafe barista,illuminated_park,illuminated_park,universal,,0,1,0,0,cozy_cafe
+cafe barista,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cozy_cafe
+cafe barista,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe barista,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe barista,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 cafe barista,museum_hall,museum_hall,universal,,0,1,0,0,cozy_cafe
 cafe barista,neon_city_street,neon_city_street,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe barista,picnic_park,picnic_park,universal,,0,1,0,0,cozy_cafe
-cafe barista,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,cozy_cafe
+cafe barista,rainy_bus_stop,rainy_alley,tag:suburban,suburban,1,0,0,1,cozy_cafe
 cafe barista,school_library,school_library,universal,,0,1,0,0,cozy_cafe
 cafe barista,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,cozy_cafe
-cafe barista,street_cafe,street_cafe,existing,,0,0,1,1,cozy_cafe
+cafe barista,street_cafe,street_cafe,existing,,0,0,1,0,cozy_cafe
+cafe barista,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe barista,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe barista,winter_street,winter_street,universal,,0,1,0,0,cozy_cafe
-cafe customer,aquarium,aquarium,universal,,0,1,0,0,cozy_cafe
+cafe customer,aquarium,aquarium,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe customer,art_gallery,art_gallery,universal,,0,1,0,0,cozy_cafe
+cafe customer,bakery_shop,bakery_shop,existing,,0,0,1,0,cozy_cafe
 cafe customer,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,cozy_cafe
 cafe customer,botanical_garden,botanical_garden,universal,,0,1,0,0,cozy_cafe
+cafe customer,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,cozy_cafe
+cafe customer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe customer,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,cozy_cafe
 cafe customer,commuter_transport,commuter_transport,universal,,0,1,0,0,cozy_cafe
-cafe customer,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,cozy_cafe
+cafe customer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cozy_cafe
+cafe customer,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe customer,cozy_living_room,cozy_living_room,universal,,0,1,0,0,cozy_cafe
+cafe customer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
+cafe customer,family_restaurant,family_restaurant,existing,,0,0,1,0,cozy_cafe
 cafe customer,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,cozy_cafe
-cafe customer,illuminated_park,illuminated_park,universal,,0,1,0,0,cozy_cafe
+cafe customer,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cozy_cafe
+cafe customer,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe customer,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe customer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 cafe customer,museum_hall,museum_hall,universal,,0,1,0,0,cozy_cafe
 cafe customer,neon_city_street,neon_city_street,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe customer,picnic_park,picnic_park,universal,,0,1,0,0,cozy_cafe
-cafe customer,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,cozy_cafe
+cafe customer,rainy_bus_stop,rainy_alley,tag:suburban,suburban,1,0,0,1,cozy_cafe
 cafe customer,school_library,school_library,universal,,0,1,0,0,cozy_cafe
 cafe customer,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,cozy_cafe
-cafe customer,street_cafe,street_cafe,existing,,0,0,1,1,cozy_cafe
+cafe customer,street_cafe,street_cafe,existing,,0,0,1,0,cozy_cafe
+cafe customer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe customer,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,cozy_cafe
 cafe customer,winter_street,winter_street,universal,,0,1,0,0,cozy_cafe
-chef girl,aquarium,aquarium,universal,,0,1,0,0,rainy_day
+chef girl,aquarium,aquarium,tag:urban,urban,1,0,0,0,rainy_day
 chef girl,art_gallery,art_gallery,universal,,0,1,0,0,rainy_day
+chef girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rainy_day
 chef girl,bedroom_boudoir,bedroom_boudoir,tag:domestic,domestic,1,0,0,0,rainy_day
 chef girl,botanical_garden,botanical_garden,universal,,0,1,0,0,rainy_day
-chef girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,rainy_day
+chef girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,rainy_day
+chef girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rainy_day
+chef girl,clean_modern_kitchen,clean_modern_kitchen,existing,,0,0,1,0,rainy_day
 chef girl,commuter_transport,commuter_transport,universal,,0,1,0,0,rainy_day
-chef girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,rainy_day
-chef girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,rainy_day
+chef girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rainy_day
+chef girl,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,rainy_day
+chef girl,cozy_living_room,cozy_living_room,tag:domestic,domestic,1,0,0,0,rainy_day
+chef girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rainy_day
+chef girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rainy_day
 chef girl,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,rainy_day
-chef girl,illuminated_park,illuminated_park,universal,,0,1,0,0,rainy_day
+chef girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rainy_day
+chef girl,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,rainy_day
 chef girl,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,rainy_day
-chef girl,messy_kitchen,messy_kitchen,existing,,0,0,1,1,rainy_day
+chef girl,messy_kitchen,messy_kitchen,existing,,0,0,1,0,rainy_day
 chef girl,museum_hall,museum_hall,universal,,0,1,0,0,rainy_day
 chef girl,neon_city_street,neon_city_street,tag:urban,urban,1,0,0,0,rainy_day
 chef girl,picnic_park,picnic_park,universal,,0,1,0,0,rainy_day
-chef girl,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,rainy_day
+chef girl,rainy_bus_stop,rainy_alley,tag:suburban,suburban,1,0,0,1,rainy_day
 chef girl,school_library,school_library,universal,,0,1,0,0,rainy_day
 chef girl,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,rainy_day
-chef girl,street_cafe,street_cafe,universal,,0,1,0,0,rainy_day
+chef girl,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,rainy_day
+chef girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rainy_day
 chef girl,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,rainy_day
 chef girl,winter_street,winter_street,universal,,0,1,0,0,rainy_day
 clockwork artisan,steampunk_airship,airship_deck,tag:steampunk,steampunk,1,0,0,1,steampunk
@@ -207,7 +249,7 @@ clockwork artisan,art_gallery,art_gallery,universal,,0,1,0,0,steampunk
 clockwork artisan,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,steampunk
 clockwork artisan,botanical_garden,botanical_garden,universal,,0,1,0,0,steampunk
 clockwork artisan,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,steampunk
-clockwork artisan,clockwork_workshop,clockwork_workshop,existing,,0,0,1,1,steampunk
+clockwork artisan,clockwork_workshop,clockwork_workshop,existing,,0,0,1,0,steampunk
 clockwork artisan,commuter_transport,commuter_transport,universal,,0,1,0,0,steampunk
 clockwork artisan,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,steampunk
 clockwork artisan,cozy_living_room,cozy_living_room,universal,,0,1,0,0,steampunk
@@ -223,42 +265,55 @@ clockwork artisan,street_cafe,street_cafe,universal,,0,1,0,0,steampunk
 clockwork artisan,winter_street,winter_street,universal,,0,1,0,0,steampunk
 cyberpunk girl,airship_deck,airship_deck,tag:scifi,scifi,1,0,0,0,cyberpunk_night
 cyberpunk girl,alien_planet,alien_planet,tag:scifi,scifi,1,0,0,0,cyberpunk_night
-cyberpunk girl,aquarium,aquarium,universal,,0,1,0,0,cyberpunk_night
+cyberpunk girl,aquarium,aquarium,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,art_gallery,art_gallery,universal,,0,1,0,0,cyberpunk_night
+cyberpunk girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,cyberpunk_night
+cyberpunk girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,cyberpunk_night
 cyberpunk girl,commuter_transport,commuter_transport,universal,,0,1,0,0,cyberpunk_night
-cyberpunk girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,cyberpunk_night
+cyberpunk girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk girl,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,cyberpunk_night
 cyberpunk girl,cyber_lab,cyber_lab,tag:scifi,scifi,1,0,0,0,cyberpunk_night
+cyberpunk girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,cyberpunk_night
-cyberpunk girl,illuminated_park,illuminated_park,universal,,0,1,0,0,cyberpunk_night
+cyberpunk girl,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cyberpunk_night
 cyberpunk girl,museum_hall,museum_hall,universal,,0,1,0,0,cyberpunk_night
-cyberpunk girl,neon_city_street,neon_city_street,existing,,0,0,1,1,cyberpunk_night
+cyberpunk girl,neon_city_street,neon_city_street,existing,,0,0,1,0,cyberpunk_night
 cyberpunk girl,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,school_library,school_library,universal,,0,1,0,0,cyberpunk_night
 cyberpunk girl,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,spaceship_bridge,spaceship_bridge,tag:scifi,scifi,1,0,0,0,cyberpunk_night
 cyberpunk girl,starship_quarters,starship_quarters,tag:scifi,scifi,1,0,0,0,cyberpunk_night
-cyberpunk girl,street_cafe,street_cafe,universal,,0,1,0,0,cyberpunk_night
+cyberpunk girl,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk girl,winter_street,winter_street,universal,,0,1,0,0,cyberpunk_night
 cyberpunk hacker,airship_deck,airship_deck,tag:scifi,scifi,1,0,0,0,cyberpunk_night
 cyberpunk hacker,alien_planet,alien_planet,tag:scifi,scifi,1,0,0,0,cyberpunk_night
-cyberpunk hacker,aquarium,aquarium,universal,,0,1,0,0,cyberpunk_night
+cyberpunk hacker,aquarium,aquarium,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk hacker,art_gallery,art_gallery,universal,,0,1,0,0,cyberpunk_night
+cyberpunk hacker,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk hacker,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,cyberpunk_night
+cyberpunk hacker,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk hacker,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,cyberpunk_night
 cyberpunk hacker,commuter_transport,commuter_transport,universal,,0,1,0,0,cyberpunk_night
-cyberpunk hacker,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,cyberpunk_night
+cyberpunk hacker,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk hacker,cozy_living_room,cozy_living_room,universal,,0,1,0,0,cyberpunk_night
 cyberpunk hacker,cyber_lab,cyber_lab,tag:scifi,scifi,1,0,0,0,cyberpunk_night
+cyberpunk hacker,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk hacker,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk hacker,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,cyberpunk_night
-cyberpunk hacker,illuminated_park,illuminated_park,universal,,0,1,0,0,cyberpunk_night
+cyberpunk hacker,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk hacker,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk hacker,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cyberpunk_night
 cyberpunk hacker,museum_hall,museum_hall,universal,,0,1,0,0,cyberpunk_night
@@ -268,46 +323,60 @@ cyberpunk hacker,school_library,school_library,universal,,0,1,0,0,cyberpunk_nigh
 cyberpunk hacker,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk hacker,spaceship_bridge,spaceship_bridge,tag:scifi,scifi,1,0,0,0,cyberpunk_night
 cyberpunk hacker,starship_quarters,starship_quarters,tag:scifi,scifi,1,0,0,0,cyberpunk_night
-cyberpunk hacker,street_cafe,street_cafe,universal,,0,1,0,0,cyberpunk_night
-cyberpunk hacker,surveillance_room,surveillance_room,existing,,0,0,1,1,cyberpunk_night
+cyberpunk hacker,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk hacker,surveillance_room,surveillance_room,existing,,0,0,1,0,cyberpunk_night
 cyberpunk hacker,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk hacker,winter_street,winter_street,universal,,0,1,0,0,cyberpunk_night
 cyberpunk mercenary,airship_deck,airship_deck,tag:scifi,scifi,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,alien_planet,alien_planet,tag:scifi,scifi,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,aquarium,aquarium,universal,,0,1,0,0,cyberpunk_night
+cyberpunk mercenary,aquarium,aquarium,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,art_gallery,art_gallery,universal,,0,1,0,0,cyberpunk_night
+cyberpunk mercenary,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,cyberpunk_night
+cyberpunk mercenary,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,cyberpunk_night
 cyberpunk mercenary,commuter_transport,commuter_transport,universal,,0,1,0,0,cyberpunk_night
-cyberpunk mercenary,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,cyberpunk_night
+cyberpunk mercenary,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,cozy_living_room,cozy_living_room,universal,,0,1,0,0,cyberpunk_night
 cyberpunk mercenary,cyber_lab,cyber_lab,tag:scifi,scifi,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,illuminated_park,illuminated_park,universal,,0,1,0,0,cyberpunk_night
+cyberpunk mercenary,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cyberpunk_night
 cyberpunk mercenary,museum_hall,museum_hall,universal,,0,1,0,0,cyberpunk_night
 cyberpunk mercenary,neon_city_street,neon_city_street,tag:scifi,scifi,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,rainy_alley,rainy_alley,existing,,0,0,1,1,cyberpunk_night
+cyberpunk mercenary,rainy_alley,rainy_alley,existing,,0,0,1,0,cyberpunk_night
 cyberpunk mercenary,school_library,school_library,universal,,0,1,0,0,cyberpunk_night
 cyberpunk mercenary,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,spaceship_bridge,spaceship_bridge,tag:scifi,scifi,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,starship_quarters,starship_quarters,tag:scifi,scifi,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,street_cafe,street_cafe,universal,,0,1,0,0,cyberpunk_night
+cyberpunk mercenary,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,cyberpunk_night
+cyberpunk mercenary,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,winter_street,winter_street,universal,,0,1,0,0,cyberpunk_night
-detective,aquarium,aquarium,universal,,0,1,0,0,secret_agent
+detective,aquarium,aquarium,tag:urban,urban,1,0,0,0,secret_agent
 detective,art_gallery,art_gallery,universal,,0,1,0,0,secret_agent
+detective,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,secret_agent
 detective,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,secret_agent
 detective,boardroom,boardroom,tag:office,office,1,0,0,0,secret_agent
 detective,botanical_garden,botanical_garden,universal,,0,1,0,0,secret_agent
+detective,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,secret_agent
 detective,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,secret_agent
 detective,commuter_transport,commuter_transport,universal,,0,1,0,0,secret_agent
-detective,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,secret_agent
+detective,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,secret_agent
+detective,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,secret_agent
 detective,cozy_living_room,cozy_living_room,universal,,0,1,0,0,secret_agent
+detective,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,secret_agent
+detective,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,secret_agent
 detective,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,secret_agent
-detective,illuminated_park,illuminated_park,universal,,0,1,0,0,secret_agent
+detective,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,secret_agent
+detective,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,secret_agent
 detective,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,secret_agent
 detective,messy_copy_room,messy_copy_room,tag:office,office,1,0,0,0,secret_agent
 detective,messy_kitchen,messy_kitchen,universal,,0,1,0,0,secret_agent
@@ -316,29 +385,36 @@ detective,museum_hall,museum_hall,universal,,0,1,0,0,secret_agent
 detective,neon_city_street,neon_city_street,tag:urban,urban,1,0,0,0,secret_agent
 detective,office_elevator,office_elevator,tag:office,office,1,0,0,0,secret_agent
 detective,picnic_park,picnic_park,universal,,0,1,0,0,secret_agent
-detective,rainy_alley,rainy_alley,existing,,0,0,1,1,secret_agent
+detective,rainy_alley,rainy_alley,existing,,0,0,1,0,secret_agent
 detective,school_library,school_library,universal,,0,1,0,0,secret_agent
 detective,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,secret_agent
-detective,street_cafe,street_cafe,universal,,0,1,0,0,secret_agent
+detective,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,secret_agent
+detective,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,secret_agent
 detective,surveillance_room,surveillance_room,tag:office,office,1,0,0,0,secret_agent
 detective,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,secret_agent
 detective,winter_street,winter_street,universal,,0,1,0,0,secret_agent
 doll-like girl,alien_planet,alien_planet,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
-doll-like girl,aquarium,aquarium,universal,,0,1,0,0,gothic_lolita
+doll-like girl,aquarium,aquarium,tag:urban,urban,1,0,0,0,gothic_lolita
 doll-like girl,art_gallery,art_gallery,universal,,0,1,0,0,gothic_lolita
-doll-like girl,bedroom_boudoir,bedroom_boudoir,existing,,0,0,1,1,gothic_lolita
+doll-like girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,gothic_lolita
+doll-like girl,bedroom_boudoir,bedroom_boudoir,existing,,0,0,1,0,gothic_lolita
 doll-like girl,botanical_garden,botanical_garden,universal,,0,1,0,0,gothic_lolita
 doll-like girl,burning_battlefield,burning_battlefield,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
 doll-like girl,castle_hall,castle_hall,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
+doll-like girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,gothic_lolita
 doll-like girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,gothic_lolita
 doll-like girl,commuter_transport,commuter_transport,universal,,0,1,0,0,gothic_lolita
-doll-like girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,gothic_lolita
+doll-like girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,gothic_lolita
+doll-like girl,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,gothic_lolita
 doll-like girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,gothic_lolita
 doll-like girl,dragon_lair,dragon_lair,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
+doll-like girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
 doll-like girl,dungeon_crypt,dungeon_crypt,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
 doll-like girl,enchanted_lake,enchanted_lake,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
+doll-like girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,gothic_lolita
 doll-like girl,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,gothic_lolita
-doll-like girl,illuminated_park,illuminated_park,universal,,0,1,0,0,gothic_lolita
+doll-like girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,gothic_lolita
+doll-like girl,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,gothic_lolita
 doll-like girl,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,gothic_lolita
 doll-like girl,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
 doll-like girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gothic_lolita
@@ -348,7 +424,8 @@ doll-like girl,picnic_park,picnic_park,universal,,0,1,0,0,gothic_lolita
 doll-like girl,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,gothic_lolita
 doll-like girl,school_library,school_library,universal,,0,1,0,0,gothic_lolita
 doll-like girl,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,gothic_lolita
-doll-like girl,street_cafe,street_cafe,universal,,0,1,0,0,gothic_lolita
+doll-like girl,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,gothic_lolita
+doll-like girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
 doll-like girl,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,gothic_lolita
 doll-like girl,winter_street,winter_street,universal,,0,1,0,0,gothic_lolita
 fantasy warrior,alien_planet,alien_planet,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
@@ -360,10 +437,10 @@ fantasy warrior,burning_battlefield,burning_battlefield,tag:fantasy,fantasy,1,0,
 fantasy warrior,castle_hall,castle_hall,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
 fantasy warrior,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,fantasy_battle
 fantasy warrior,cozy_living_room,cozy_living_room,universal,,0,1,0,0,fantasy_battle
-fantasy warrior,dragon_lair,dragon_lair,existing,,0,0,1,1,fantasy_battle
+fantasy warrior,dragon_lair,dragon_lair,existing,,0,0,1,0,fantasy_battle
 fantasy warrior,dungeon_crypt,dungeon_crypt,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
 fantasy warrior,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,fantasy_battle
-fantasy warrior,bamboo_forest,fantasy_forest,tag:nature,nature,1,0,0,1,fantasy_battle
+fantasy warrior,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,fantasy_battle
 fantasy warrior,illuminated_park,illuminated_park,universal,,0,1,0,0,fantasy_battle
 fantasy warrior,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,fantasy_battle
 fantasy warrior,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
@@ -376,25 +453,33 @@ fantasy warrior,shinto_shrine,shinto_shrine,tag:nature,nature,1,0,0,0,fantasy_ba
 fantasy warrior,tropical_beach,tropical_beach,tag:nature,nature,1,0,0,0,fantasy_battle
 fantasy warrior,wave_barrel,wave_barrel,tag:nature,nature,1,0,0,0,fantasy_battle
 fantasy warrior,winter_street,winter_street,universal,,0,1,0,0,fantasy_battle
-fashionista,aquarium,aquarium,universal,,0,1,0,0,urban_shopping
+fashionista,aquarium,aquarium,tag:urban,urban,1,0,0,0,urban_shopping
 fashionista,art_gallery,art_gallery,universal,,0,1,0,0,urban_shopping
+fashionista,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,urban_shopping
 fashionista,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,urban_shopping
 fashionista,botanical_garden,botanical_garden,universal,,0,1,0,0,urban_shopping
+fashionista,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,urban_shopping
+fashionista,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,urban_shopping
 fashionista,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,urban_shopping
 fashionista,commuter_transport,commuter_transport,universal,,0,1,0,0,urban_shopping
-fashionista,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,urban_shopping
+fashionista,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,urban_shopping
+fashionista,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,urban_shopping
 fashionista,cozy_living_room,cozy_living_room,universal,,0,1,0,0,urban_shopping
-fashionista,fashion_boutique,fashion_boutique,existing,,0,0,1,1,urban_shopping
-fashionista,illuminated_park,illuminated_park,universal,,0,1,0,0,urban_shopping
-fashionista,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,urban_shopping
+fashionista,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,urban_shopping
+fashionista,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,urban_shopping
+fashionista,fashion_boutique,fashion_boutique,existing,,0,0,1,0,urban_shopping
+fashionista,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,urban_shopping
+fashionista,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,urban_shopping
+fashionista,karaoke_bar,karaoke_bar,existing,,0,0,1,0,urban_shopping
 fashionista,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 fashionista,museum_hall,museum_hall,universal,,0,1,0,0,urban_shopping
 fashionista,neon_city_street,neon_city_street,tag:urban,urban,1,0,0,0,urban_shopping
 fashionista,picnic_park,picnic_park,universal,,0,1,0,0,urban_shopping
-fashionista,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,urban_shopping
+fashionista,rainy_bus_stop,rainy_alley,tag:suburban,suburban,1,0,0,1,urban_shopping
 fashionista,school_library,school_library,universal,,0,1,0,0,urban_shopping
 fashionista,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,urban_shopping
-fashionista,street_cafe,street_cafe,universal,,0,1,0,0,urban_shopping
+fashionista,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,urban_shopping
+fashionista,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,urban_shopping
 fashionista,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,urban_shopping
 fashionista,winter_street,winter_street,universal,,0,1,0,0,urban_shopping
 female knight,alien_planet,alien_planet,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
@@ -402,7 +487,7 @@ female knight,aquarium,aquarium,universal,,0,1,0,0,fantasy_battle
 female knight,art_gallery,art_gallery,universal,,0,1,0,0,fantasy_battle
 female knight,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,fantasy_battle
 female knight,botanical_garden,botanical_garden,universal,,0,1,0,0,fantasy_battle
-female knight,burning_battlefield,burning_battlefield,existing,,0,0,1,1,fantasy_battle
+female knight,burning_battlefield,burning_battlefield,existing,,0,0,1,0,fantasy_battle
 female knight,castle_hall,castle_hall,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
 female knight,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,fantasy_battle
 female knight,commuter_transport,commuter_transport,universal,,0,1,0,0,fantasy_battle
@@ -411,7 +496,7 @@ female knight,cozy_living_room,cozy_living_room,universal,,0,1,0,0,fantasy_battl
 female knight,dragon_lair,dragon_lair,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
 female knight,dungeon_crypt,dungeon_crypt,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
 female knight,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,fantasy_battle
-female knight,bamboo_forest,fantasy_forest,tag:nature,nature,1,0,0,1,fantasy_battle
+female knight,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,fantasy_battle
 female knight,illuminated_park,illuminated_park,universal,,0,1,0,0,fantasy_battle
 female knight,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,fantasy_battle
 female knight,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
@@ -434,7 +519,7 @@ fitness model,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,gym_w
 fitness model,commuter_transport,commuter_transport,universal,,0,1,0,0,gym_workout
 fitness model,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,gym_workout
 fitness model,cozy_living_room,cozy_living_room,universal,,0,1,0,0,gym_workout
-fitness model,fitness_gym,fitness_gym,existing,,0,0,1,1,gym_workout
+fitness model,fitness_gym,fitness_gym,existing,,0,0,1,0,gym_workout
 fitness model,illuminated_park,illuminated_park,universal,,0,1,0,0,gym_workout
 fitness model,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gym_workout
 fitness model,museum_hall,museum_hall,universal,,0,1,0,0,gym_workout
@@ -449,13 +534,13 @@ fitness model,yoga_studio,yoga_studio,tag:sport,sport,1,0,0,0,gym_workout
 flower girl,aquarium,aquarium,universal,,0,1,0,0,mori_natural
 flower girl,art_gallery,art_gallery,universal,,0,1,0,0,mori_natural
 flower girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,mori_natural
-flower girl,botanical_garden,botanical_garden,existing,,0,0,1,1,mori_natural
+flower girl,botanical_garden,botanical_garden,existing,,0,0,1,0,mori_natural
 flower girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,mori_natural
 flower girl,commuter_transport,commuter_transport,universal,,0,1,0,0,mori_natural
 flower girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,mori_natural
 flower girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,mori_natural
 flower girl,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,mori_natural
-flower girl,bamboo_forest,fantasy_forest,tag:nature,nature,1,0,0,1,mori_natural
+flower girl,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,mori_natural
 flower girl,illuminated_park,illuminated_park,universal,,0,1,0,0,mori_natural
 flower girl,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,mori_natural
 flower girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,mori_natural
@@ -477,7 +562,7 @@ geisha,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,traditional_
 geisha,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,traditional_japanese
 geisha,cozy_living_room,cozy_living_room,universal,,0,1,0,0,traditional_japanese
 geisha,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,traditional_japanese
-geisha,bamboo_forest,fantasy_forest,tag:japanese,japanese,1,0,0,1,traditional_japanese
+geisha,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,traditional_japanese
 geisha,illuminated_park,illuminated_park,universal,,0,1,0,0,traditional_japanese
 geisha,japanese_bath,japanese_bath,tag:japanese,japanese,1,0,0,0,traditional_japanese
 geisha,japanese_garden,japanese_garden,tag:japanese,japanese,1,0,0,0,traditional_japanese
@@ -491,26 +576,32 @@ geisha,street_cafe,street_cafe,universal,,0,1,0,0,traditional_japanese
 geisha,tea_room,tea_room,tag:japanese,japanese,1,0,0,0,traditional_japanese
 geisha,tropical_beach,tropical_beach,tag:nature,nature,1,0,0,0,traditional_japanese
 geisha,wave_barrel,wave_barrel,tag:nature,nature,1,0,0,0,traditional_japanese
-geisha,winter_street,winter_street,existing,,0,0,1,1,traditional_japanese
+geisha,winter_street,winter_street,existing,,0,0,1,0,traditional_japanese
 gothic doll,alien_planet,alien_planet,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
-gothic doll,aquarium,aquarium,universal,,0,1,0,0,gothic_lolita
+gothic doll,aquarium,aquarium,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic doll,art_gallery,art_gallery,universal,,0,1,0,0,gothic_lolita
+gothic doll,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic doll,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,gothic_lolita
 gothic doll,botanical_garden,botanical_garden,universal,,0,1,0,0,gothic_lolita
 gothic doll,burning_battlefield,burning_battlefield,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
 gothic doll,castle_hall,castle_hall,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
+gothic doll,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic doll,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,gothic_lolita
 gothic doll,commuter_transport,commuter_transport,universal,,0,1,0,0,gothic_lolita
-gothic doll,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,gothic_lolita
+gothic doll,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic doll,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic doll,cozy_living_room,cozy_living_room,universal,,0,1,0,0,gothic_lolita
 gothic doll,dragon_lair,dragon_lair,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
+gothic doll,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic doll,dungeon_crypt,dungeon_crypt,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
 gothic doll,enchanted_lake,enchanted_lake,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
+gothic doll,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic doll,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,gothic_lolita
-gothic doll,illuminated_park,illuminated_park,universal,,0,1,0,0,gothic_lolita
+gothic doll,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic doll,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic doll,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic doll,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
-gothic doll,messy_copy_room,messy_copy_room,existing,,0,0,1,1,gothic_lolita
+gothic doll,messy_copy_room,messy_copy_room,existing,,0,0,1,0,gothic_lolita
 gothic doll,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gothic_lolita
 gothic doll,museum_hall,museum_hall,universal,,0,1,0,0,gothic_lolita
 gothic doll,neon_city_street,neon_city_street,tag:urban,urban,1,0,0,0,gothic_lolita
@@ -518,25 +609,32 @@ gothic doll,picnic_park,picnic_park,universal,,0,1,0,0,gothic_lolita
 gothic doll,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic doll,school_library,school_library,universal,,0,1,0,0,gothic_lolita
 gothic doll,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,gothic_lolita
-gothic doll,street_cafe,street_cafe,universal,,0,1,0,0,gothic_lolita
+gothic doll,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic doll,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic doll,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic doll,winter_street,winter_street,universal,,0,1,0,0,gothic_lolita
 gothic girl,alien_planet,alien_planet,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
-gothic girl,aquarium,aquarium,universal,,0,1,0,0,gothic_lolita
+gothic girl,aquarium,aquarium,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic girl,art_gallery,art_gallery,universal,,0,1,0,0,gothic_lolita
+gothic girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,gothic_lolita
 gothic girl,botanical_garden,botanical_garden,universal,,0,1,0,0,gothic_lolita
 gothic girl,burning_battlefield,burning_battlefield,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
 gothic girl,castle_hall,castle_hall,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
+gothic girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,gothic_lolita
 gothic girl,commuter_transport,commuter_transport,universal,,0,1,0,0,gothic_lolita
-gothic girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,gothic_lolita
+gothic girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic girl,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,gothic_lolita
 gothic girl,dragon_lair,dragon_lair,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
-gothic girl,dungeon_crypt,dungeon_crypt,existing,,0,0,1,1,gothic_lolita
+gothic girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic girl,dungeon_crypt,dungeon_crypt,existing,,0,0,1,0,gothic_lolita
 gothic girl,enchanted_lake,enchanted_lake,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
+gothic girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic girl,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,gothic_lolita
-gothic girl,illuminated_park,illuminated_park,universal,,0,1,0,0,gothic_lolita
+gothic girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic girl,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic girl,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic girl,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
 gothic girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gothic_lolita
@@ -546,7 +644,8 @@ gothic girl,picnic_park,picnic_park,universal,,0,1,0,0,gothic_lolita
 gothic girl,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic girl,school_library,school_library,universal,,0,1,0,0,gothic_lolita
 gothic girl,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,gothic_lolita
-gothic girl,street_cafe,street_cafe,universal,,0,1,0,0,gothic_lolita
+gothic girl,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,gothic_lolita
+gothic girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic girl,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,gothic_lolita
 gothic girl,winter_street,winter_street,universal,,0,1,0,0,gothic_lolita
 guitarist,aquarium,aquarium,universal,,0,1,0,0,rock_concert
@@ -565,7 +664,7 @@ guitarist,museum_hall,museum_hall,universal,,0,1,0,0,rock_concert
 guitarist,opera_house,opera_house,tag:music,music,1,0,0,0,rock_concert
 guitarist,picnic_park,picnic_park,universal,,0,1,0,0,rock_concert
 guitarist,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,rock_concert
-guitarist,recording_studio,recording_studio,existing,,0,0,1,1,rock_concert
+guitarist,recording_studio,recording_studio,existing,,0,0,1,0,rock_concert
 guitarist,school_library,school_library,universal,,0,1,0,0,rock_concert
 guitarist,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,rock_concert
 guitarist,street_cafe,street_cafe,universal,,0,1,0,0,rock_concert
@@ -586,7 +685,7 @@ gym girl,picnic_park,picnic_park,universal,,0,1,0,0,gym_workout
 gym girl,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,gym_workout
 gym girl,school_library,school_library,universal,,0,1,0,0,gym_workout
 gym girl,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,gym_workout
-gym girl,stadium_court,stadium_court,existing,,0,0,1,1,gym_workout
+gym girl,stadium_court,stadium_court,existing,,0,0,1,0,gym_workout
 gym girl,street_cafe,street_cafe,universal,,0,1,0,0,gym_workout
 gym girl,winter_street,winter_street,universal,,0,1,0,0,gym_workout
 gym girl,yoga_studio,yoga_studio,tag:sport,sport,1,0,0,0,gym_workout
@@ -600,9 +699,9 @@ injured knight,castle_hall,castle_hall,tag:fantasy,fantasy,1,0,0,0,fantasy_battl
 injured knight,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,fantasy_battle
 injured knight,cozy_living_room,cozy_living_room,universal,,0,1,0,0,fantasy_battle
 injured knight,dragon_lair,dragon_lair,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
-injured knight,dungeon_crypt,dungeon_crypt,existing,,0,0,1,1,fantasy_battle
+injured knight,dungeon_crypt,dungeon_crypt,existing,,0,0,1,0,fantasy_battle
 injured knight,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,fantasy_battle
-injured knight,bamboo_forest,fantasy_forest,tag:nature,nature,1,0,0,1,fantasy_battle
+injured knight,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,fantasy_battle
 injured knight,illuminated_park,illuminated_park,universal,,0,1,0,0,fantasy_battle
 injured knight,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,fantasy_battle
 injured knight,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
@@ -623,7 +722,7 @@ inventor girl,art_gallery,art_gallery,universal,,0,1,0,0,steampunk
 inventor girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,steampunk
 inventor girl,botanical_garden,botanical_garden,universal,,0,1,0,0,steampunk
 inventor girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,steampunk
-inventor girl,clockwork_workshop,clockwork_workshop,existing,,0,0,1,1,steampunk
+inventor girl,workshop,clockwork_workshop,existing,,0,0,1,1,steampunk
 inventor girl,commuter_transport,commuter_transport,universal,,0,1,0,0,steampunk
 inventor girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,steampunk
 inventor girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,steampunk
@@ -646,12 +745,14 @@ kendo girl,aquarium,aquarium,universal,,0,1,0,0,traditional_japanese
 kendo girl,art_gallery,art_gallery,universal,,0,1,0,0,traditional_japanese
 kendo girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,traditional_japanese
 kendo girl,botanical_garden,botanical_garden,universal,,0,1,0,0,traditional_japanese
+kendo girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,traditional_japanese
+kendo girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,traditional_japanese
 kendo girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,traditional_japanese
 kendo girl,commuter_transport,commuter_transport,universal,,0,1,0,0,traditional_japanese
 kendo girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,traditional_japanese
 kendo girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,traditional_japanese
 kendo girl,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,traditional_japanese
-kendo girl,bamboo_forest,fantasy_forest,tag:nature,nature,1,0,0,1,traditional_japanese
+kendo girl,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,traditional_japanese
 kendo girl,illuminated_park,illuminated_park,universal,,0,1,0,0,traditional_japanese
 kendo girl,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,traditional_japanese
 kendo girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,traditional_japanese
@@ -659,7 +760,7 @@ kendo girl,museum_hall,museum_hall,universal,,0,1,0,0,traditional_japanese
 kendo girl,picnic_park,picnic_park,universal,,0,1,0,0,traditional_japanese
 kendo girl,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,traditional_japanese
 kendo girl,school_classroom,school_classroom,tag:school,school,1,0,0,0,traditional_japanese
-kendo girl,school_gym_hall,school_gym_hall,existing,,0,0,1,1,traditional_japanese
+kendo girl,school_gym_hall,school_gym_hall,existing,,0,0,1,0,traditional_japanese
 kendo girl,school_library,school_library,tag:school,school,1,0,0,0,traditional_japanese
 kendo girl,school_rooftop,school_rooftop,tag:school,school,1,0,0,0,traditional_japanese
 kendo girl,shinto_shrine,shinto_shrine,tag:nature,nature,1,0,0,0,traditional_japanese
@@ -672,6 +773,9 @@ library girl,aquarium,aquarium,universal,,0,1,0,0,school_uniform
 library girl,art_gallery,art_gallery,universal,,0,1,0,0,school_uniform
 library girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,school_uniform
 library girl,botanical_garden,botanical_garden,universal,,0,1,0,0,school_uniform
+library girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,school_uniform
+library girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,school_uniform
+library girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,school_uniform
 library girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,school_uniform
 library girl,commuter_transport,commuter_transport,universal,,0,1,0,0,school_uniform
 library girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,school_uniform
@@ -680,10 +784,10 @@ library girl,illuminated_park,illuminated_park,universal,,0,1,0,0,school_uniform
 library girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 library girl,museum_hall,museum_hall,universal,,0,1,0,0,school_uniform
 library girl,picnic_park,picnic_park,universal,,0,1,0,0,school_uniform
-library girl,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,school_uniform
+library girl,rainy_bus_stop,rainy_alley,tag:suburban,suburban,1,0,0,1,school_uniform
 library girl,school_classroom,school_classroom,tag:school,school,1,0,0,0,school_uniform
 library girl,school_gym_hall,school_gym_hall,tag:school,school,1,0,0,0,school_uniform
-library girl,school_library,school_library,existing,,0,0,1,1,school_uniform
+library girl,school_library,school_library,existing,,0,0,1,0,school_uniform
 library girl,school_rooftop,school_rooftop,tag:school,school,1,0,0,0,school_uniform
 library girl,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,school_uniform
 library girl,street_cafe,street_cafe,universal,,0,1,0,0,school_uniform
@@ -697,12 +801,12 @@ mori girl,commuter_transport,commuter_transport,universal,,0,1,0,0,mori_natural
 mori girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,mori_natural
 mori girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,mori_natural
 mori girl,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,mori_natural
-mori girl,bamboo_forest,fantasy_forest,tag:nature,nature,1,0,0,1,mori_natural
+mori girl,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,mori_natural
 mori girl,illuminated_park,illuminated_park,universal,,0,1,0,0,mori_natural
 mori girl,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,mori_natural
 mori girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,mori_natural
 mori girl,museum_hall,museum_hall,universal,,0,1,0,0,mori_natural
-mori girl,picnic_park,picnic_park,existing,,0,0,1,1,mori_natural
+mori girl,picnic_park,picnic_park,existing,,0,0,1,0,mori_natural
 mori girl,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,mori_natural
 mori girl,school_library,school_library,universal,,0,1,0,0,mori_natural
 mori girl,shinto_shrine,shinto_shrine,tag:nature,nature,1,0,0,0,mori_natural
@@ -720,7 +824,7 @@ nature wanderer,commuter_transport,commuter_transport,universal,,0,1,0,0,mori_na
 nature wanderer,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,mori_natural
 nature wanderer,cozy_living_room,cozy_living_room,universal,,0,1,0,0,mori_natural
 nature wanderer,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,mori_natural
-nature wanderer,fantasy_forest,fantasy_forest,existing,,0,0,1,1,mori_natural
+nature wanderer,fantasy_forest,fantasy_forest,existing,,0,0,1,0,mori_natural
 nature wanderer,illuminated_park,illuminated_park,universal,,0,1,0,0,mori_natural
 nature wanderer,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,mori_natural
 nature wanderer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,mori_natural
@@ -734,28 +838,36 @@ nature wanderer,street_cafe,street_cafe,universal,,0,1,0,0,mori_natural
 nature wanderer,tropical_beach,tropical_beach,tag:nature,nature,1,0,0,0,mori_natural
 nature wanderer,wave_barrel,wave_barrel,tag:nature,nature,1,0,0,0,mori_natural
 nature wanderer,winter_street,winter_street,universal,,0,1,0,0,mori_natural
-office worker,aquarium,aquarium,universal,,0,1,0,0,office_lady
+office worker,aquarium,aquarium,tag:urban,urban,1,0,0,0,office_lady
 office worker,art_gallery,art_gallery,universal,,0,1,0,0,office_lady
+office worker,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,office_lady
 office worker,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,office_lady
 office worker,boardroom,boardroom,tag:office,office,1,0,0,0,office_lady
 office worker,botanical_garden,botanical_garden,universal,,0,1,0,0,office_lady
+office worker,bus_terminal,bus_terminal,existing,,0,0,1,0,office_lady
+office worker,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,office_lady
 office worker,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,office_lady
-office worker,commuter_transport,commuter_transport,universal,,0,1,0,0,office_lady
-office worker,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,office_lady
+office worker,commuter_transport,commuter_transport,existing,,0,0,1,0,office_lady
+office worker,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,office_lady
+office worker,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,office_lady
 office worker,cozy_living_room,cozy_living_room,universal,,0,1,0,0,office_lady
-office worker,illuminated_park,illuminated_park,universal,,0,1,0,0,office_lady
+office worker,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,office_lady
+office worker,family_restaurant,family_restaurant,existing,,0,0,1,0,office_lady
+office worker,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,office_lady
+office worker,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,office_lady
 office worker,messy_copy_room,messy_copy_room,tag:office,office,1,0,0,0,office_lady
 office worker,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
-office worker,modern_office,modern_office,tag:office,office,1,0,0,0,office_lady
+office worker,modern_office,modern_office,existing,,0,0,1,0,office_lady
 office worker,museum_hall,museum_hall,universal,,0,1,0,0,office_lady
-office worker,office_elevator,office_elevator,existing,,0,0,1,1,office_lady
+office worker,office_elevator,office_elevator,existing,,0,0,1,0,office_lady
 office worker,picnic_park,picnic_park,universal,,0,1,0,0,office_lady
-office worker,rainy_bus_stop,rainy_alley,tag:suburban,suburban,1,0,0,1,office_lady
+office worker,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,office_lady
 office worker,school_library,school_library,universal,,0,1,0,0,office_lady
-office worker,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,office_lady
-office worker,street_cafe,street_cafe,universal,,0,1,0,0,office_lady
+office worker,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,office_lady
+office worker,street_cafe,street_cafe,existing,,0,0,1,0,office_lady
+office worker,supermarket_aisle,supermarket_aisle,existing,,0,0,1,0,office_lady
 office worker,surveillance_room,surveillance_room,tag:office,office,1,0,0,0,office_lady
-office worker,rural_town_street,winter_street,tag:suburban,suburban,1,0,0,1,office_lady
+office worker,winter_street,winter_street,universal,,0,1,0,0,office_lady
 opera singer,aquarium,aquarium,universal,,0,1,0,0,gothic_lolita
 opera singer,art_gallery,art_gallery,universal,,0,1,0,0,gothic_lolita
 opera singer,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,gothic_lolita
@@ -769,7 +881,7 @@ opera singer,illuminated_park,illuminated_park,universal,,0,1,0,0,gothic_lolita
 opera singer,karaoke_bar,karaoke_bar,tag:music,music,1,0,0,0,gothic_lolita
 opera singer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gothic_lolita
 opera singer,museum_hall,museum_hall,universal,,0,1,0,0,gothic_lolita
-opera singer,opera_house,opera_house,existing,,0,0,1,1,gothic_lolita
+opera singer,opera_house,opera_house,existing,,0,0,1,0,gothic_lolita
 opera singer,picnic_park,picnic_park,universal,,0,1,0,0,gothic_lolita
 opera singer,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,gothic_lolita
 opera singer,recording_studio,recording_studio,tag:music,music,1,0,0,0,gothic_lolita
@@ -777,25 +889,32 @@ opera singer,school_library,school_library,universal,,0,1,0,0,gothic_lolita
 opera singer,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,gothic_lolita
 opera singer,street_cafe,street_cafe,universal,,0,1,0,0,gothic_lolita
 opera singer,winter_street,winter_street,universal,,0,1,0,0,gothic_lolita
-rainy day girl,aquarium,aquarium,universal,,0,1,0,0,rainy_day
+rainy day girl,aquarium,aquarium,tag:urban,urban,1,0,0,0,rainy_day
 rainy day girl,art_gallery,art_gallery,universal,,0,1,0,0,rainy_day
+rainy day girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rainy_day
 rainy day girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,rainy_day
 rainy day girl,botanical_garden,botanical_garden,universal,,0,1,0,0,rainy_day
+rainy day girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rainy_day
 rainy day girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,rainy_day
 rainy day girl,commuter_transport,commuter_transport,universal,,0,1,0,0,rainy_day
-rainy day girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,rainy_day
+rainy day girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rainy_day
+rainy day girl,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,rainy_day
 rainy day girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,rainy_day
+rainy day girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rainy_day
+rainy day girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rainy_day
 rainy day girl,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,rainy_day
-rainy day girl,illuminated_park,illuminated_park,universal,,0,1,0,0,rainy_day
+rainy day girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rainy_day
+rainy day girl,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,rainy_day
 rainy day girl,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,rainy_day
 rainy day girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,rainy_day
 rainy day girl,museum_hall,museum_hall,universal,,0,1,0,0,rainy_day
 rainy day girl,neon_city_street,neon_city_street,tag:urban,urban,1,0,0,0,rainy_day
 rainy day girl,picnic_park,picnic_park,universal,,0,1,0,0,rainy_day
-rainy day girl,rainy_alley,rainy_alley,existing,,0,0,1,1,rainy_day
+rainy day girl,rainy_alley,rainy_alley,existing,,0,0,1,0,rainy_day
 rainy day girl,school_library,school_library,universal,,0,1,0,0,rainy_day
 rainy day girl,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,rainy_day
-rainy day girl,street_cafe,street_cafe,universal,,0,1,0,0,rainy_day
+rainy day girl,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,rainy_day
+rainy day girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rainy_day
 rainy day girl,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,rainy_day
 rainy day girl,winter_street,winter_street,universal,,0,1,0,0,rainy_day
 recording artist,aquarium,aquarium,universal,,0,1,0,0,rock_concert
@@ -814,22 +933,28 @@ recording artist,museum_hall,museum_hall,universal,,0,1,0,0,rock_concert
 recording artist,opera_house,opera_house,tag:music,music,1,0,0,0,rock_concert
 recording artist,picnic_park,picnic_park,universal,,0,1,0,0,rock_concert
 recording artist,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,rock_concert
-recording artist,recording_studio,recording_studio,existing,,0,0,1,1,rock_concert
+recording artist,recording_studio,recording_studio,existing,,0,0,1,0,rock_concert
 recording artist,school_library,school_library,universal,,0,1,0,0,rock_concert
 recording artist,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,rock_concert
 recording artist,street_cafe,street_cafe,universal,,0,1,0,0,rock_concert
 recording artist,winter_street,winter_street,universal,,0,1,0,0,rock_concert
-rock singer,aquarium,aquarium,universal,,0,1,0,0,rock_concert
+rock singer,aquarium,aquarium,tag:urban,urban,1,0,0,0,rock_concert
 rock singer,art_gallery,art_gallery,universal,,0,1,0,0,rock_concert
+rock singer,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rock_concert
 rock singer,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,rock_concert
 rock singer,botanical_garden,botanical_garden,universal,,0,1,0,0,rock_concert
+rock singer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rock_concert
 rock singer,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,rock_concert
 rock singer,commuter_transport,commuter_transport,universal,,0,1,0,0,rock_concert
-rock singer,concert_stage,concert_stage,existing,,0,0,1,1,rock_concert
-rock singer,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,rock_concert
+rock singer,concert_stage,concert_stage,existing,,0,0,1,0,rock_concert
+rock singer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rock_concert
+rock singer,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,rock_concert
 rock singer,cozy_living_room,cozy_living_room,universal,,0,1,0,0,rock_concert
+rock singer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rock_concert
+rock singer,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rock_concert
 rock singer,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,rock_concert
-rock singer,illuminated_park,illuminated_park,universal,,0,1,0,0,rock_concert
+rock singer,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rock_concert
+rock singer,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,rock_concert
 rock singer,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,rock_concert
 rock singer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,rock_concert
 rock singer,museum_hall,museum_hall,universal,,0,1,0,0,rock_concert
@@ -840,21 +965,28 @@ rock singer,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,rock_concert
 rock singer,recording_studio,recording_studio,tag:music,music,1,0,0,0,rock_concert
 rock singer,school_library,school_library,universal,,0,1,0,0,rock_concert
 rock singer,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,rock_concert
-rock singer,street_cafe,street_cafe,universal,,0,1,0,0,rock_concert
+rock singer,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,rock_concert
+rock singer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rock_concert
 rock singer,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,rock_concert
 rock singer,winter_street,winter_street,universal,,0,1,0,0,rock_concert
-rock star,aquarium,aquarium,universal,,0,1,0,0,rock_concert
+rock star,aquarium,aquarium,tag:urban,urban,1,0,0,0,rock_concert
 rock star,art_gallery,art_gallery,universal,,0,1,0,0,rock_concert
+rock star,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rock_concert
 rock star,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,rock_concert
 rock star,botanical_garden,botanical_garden,universal,,0,1,0,0,rock_concert
+rock star,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rock_concert
 rock star,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,rock_concert
 rock star,commuter_transport,commuter_transport,universal,,0,1,0,0,rock_concert
 rock star,concert_stage,concert_stage,tag:music,music,1,0,0,0,rock_concert
-rock star,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,rock_concert
+rock star,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rock_concert
+rock star,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,rock_concert
 rock star,cozy_living_room,cozy_living_room,universal,,0,1,0,0,rock_concert
+rock star,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rock_concert
+rock star,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rock_concert
 rock star,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,rock_concert
-rock star,illuminated_park,illuminated_park,universal,,0,1,0,0,rock_concert
-rock star,karaoke_bar,karaoke_bar,existing,,0,0,1,1,rock_concert
+rock star,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rock_concert
+rock star,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,rock_concert
+rock star,karaoke_bar,karaoke_bar,existing,,0,0,1,0,rock_concert
 rock star,messy_kitchen,messy_kitchen,universal,,0,1,0,0,rock_concert
 rock star,museum_hall,museum_hall,universal,,0,1,0,0,rock_concert
 rock star,neon_city_street,neon_city_street,tag:urban,urban,1,0,0,0,rock_concert
@@ -864,7 +996,8 @@ rock star,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,rock_concert
 rock star,recording_studio,recording_studio,tag:music,music,1,0,0,0,rock_concert
 rock star,school_library,school_library,universal,,0,1,0,0,rock_concert
 rock star,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,rock_concert
-rock star,street_cafe,street_cafe,universal,,0,1,0,0,rock_concert
+rock star,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,rock_concert
+rock star,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rock_concert
 rock star,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,rock_concert
 rock star,winter_street,winter_street,universal,,0,1,0,0,rock_concert
 runner,aquarium,aquarium,universal,,0,1,0,0,gym_workout
@@ -883,21 +1016,27 @@ runner,picnic_park,picnic_park,universal,,0,1,0,0,gym_workout
 runner,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,gym_workout
 runner,school_library,school_library,universal,,0,1,0,0,gym_workout
 runner,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,gym_workout
-runner,stadium_court,stadium_court,existing,,0,0,1,1,gym_workout
+runner,stadium_court,stadium_court,existing,,0,0,1,0,gym_workout
 runner,street_cafe,street_cafe,universal,,0,1,0,0,gym_workout
 runner,winter_street,winter_street,universal,,0,1,0,0,gym_workout
 runner,yoga_studio,yoga_studio,tag:sport,sport,1,0,0,0,gym_workout
-secret agent,aquarium,aquarium,universal,,0,1,0,0,secret_agent
+secret agent,aquarium,aquarium,tag:urban,urban,1,0,0,0,secret_agent
 secret agent,art_gallery,art_gallery,universal,,0,1,0,0,secret_agent
+secret agent,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,secret_agent
 secret agent,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,secret_agent
 secret agent,boardroom,boardroom,tag:office,office,1,0,0,0,secret_agent
 secret agent,botanical_garden,botanical_garden,universal,,0,1,0,0,secret_agent
+secret agent,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,secret_agent
 secret agent,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,secret_agent
-secret agent,commuter_transport,commuter_transport,existing,,0,0,1,1,secret_agent
-secret agent,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,secret_agent
+secret agent,commuter_transport,commuter_transport,existing,,0,0,1,0,secret_agent
+secret agent,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,secret_agent
+secret agent,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,secret_agent
 secret agent,cozy_living_room,cozy_living_room,universal,,0,1,0,0,secret_agent
+secret agent,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,secret_agent
+secret agent,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,secret_agent
 secret agent,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,secret_agent
-secret agent,illuminated_park,illuminated_park,universal,,0,1,0,0,secret_agent
+secret agent,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,secret_agent
+secret agent,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,secret_agent
 secret agent,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,secret_agent
 secret agent,messy_copy_room,messy_copy_room,tag:office,office,1,0,0,0,secret_agent
 secret agent,messy_kitchen,messy_kitchen,universal,,0,1,0,0,secret_agent
@@ -909,7 +1048,8 @@ secret agent,picnic_park,picnic_park,universal,,0,1,0,0,secret_agent
 secret agent,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,secret_agent
 secret agent,school_library,school_library,universal,,0,1,0,0,secret_agent
 secret agent,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,secret_agent
-secret agent,street_cafe,street_cafe,universal,,0,1,0,0,secret_agent
+secret agent,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,secret_agent
+secret agent,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,secret_agent
 secret agent,surveillance_room,surveillance_room,tag:office,office,1,0,0,0,secret_agent
 secret agent,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,secret_agent
 secret agent,winter_street,winter_street,universal,,0,1,0,0,secret_agent
@@ -921,16 +1061,16 @@ shrine maiden,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,tradi
 shrine maiden,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,traditional_japanese
 shrine maiden,cozy_living_room,cozy_living_room,universal,,0,1,0,0,traditional_japanese
 shrine maiden,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,traditional_japanese
-shrine maiden,fantasy_forest,fantasy_forest,existing,,0,0,1,1,traditional_japanese
+shrine maiden,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,traditional_japanese
 shrine maiden,illuminated_park,illuminated_park,universal,,0,1,0,0,traditional_japanese
 shrine maiden,japanese_bath,japanese_bath,tag:japanese,japanese,1,0,0,0,traditional_japanese
-shrine maiden,japanese_garden,japanese_garden,tag:japanese,japanese,1,0,0,0,traditional_japanese
+shrine maiden,japanese_garden,japanese_garden,existing,,0,0,1,0,traditional_japanese
 shrine maiden,messy_kitchen,messy_kitchen,universal,,0,1,0,0,traditional_japanese
 shrine maiden,museum_hall,museum_hall,universal,,0,1,0,0,traditional_japanese
 shrine maiden,picnic_park,picnic_park,universal,,0,1,0,0,traditional_japanese
 shrine maiden,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,traditional_japanese
 shrine maiden,school_library,school_library,universal,,0,1,0,0,traditional_japanese
-shrine maiden,shinto_shrine,shinto_shrine,existing,,0,0,1,1,traditional_japanese
+shrine maiden,shinto_shrine,shinto_shrine,existing,,0,0,1,0,traditional_japanese
 shrine maiden,street_cafe,street_cafe,universal,,0,1,0,0,traditional_japanese
 shrine maiden,tea_room,tea_room,tag:japanese,japanese,1,0,0,0,traditional_japanese
 shrine maiden,tropical_beach,tropical_beach,tag:nature,nature,1,0,0,0,traditional_japanese
@@ -940,6 +1080,8 @@ silver-haired girl,aquarium,aquarium,universal,,0,1,0,0,school_uniform
 silver-haired girl,art_gallery,art_gallery,universal,,0,1,0,0,school_uniform
 silver-haired girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,school_uniform
 silver-haired girl,botanical_garden,botanical_garden,universal,,0,1,0,0,school_uniform
+silver-haired girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,school_uniform
+silver-haired girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,school_uniform
 silver-haired girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,school_uniform
 silver-haired girl,commuter_transport,commuter_transport,universal,,0,1,0,0,school_uniform
 silver-haired girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,school_uniform
@@ -949,7 +1091,7 @@ silver-haired girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 silver-haired girl,museum_hall,museum_hall,universal,,0,1,0,0,school_uniform
 silver-haired girl,picnic_park,picnic_park,universal,,0,1,0,0,school_uniform
 silver-haired girl,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,school_uniform
-silver-haired girl,school_classroom,school_classroom,existing,,0,0,1,1,school_uniform
+silver-haired girl,school_classroom,school_classroom,existing,,0,0,1,0,school_uniform
 silver-haired girl,school_gym_hall,school_gym_hall,tag:school,school,1,0,0,0,school_uniform
 silver-haired girl,school_library,school_library,tag:school,school,1,0,0,0,school_uniform
 silver-haired girl,school_rooftop,school_rooftop,tag:school,school,1,0,0,0,school_uniform
@@ -958,17 +1100,20 @@ silver-haired girl,street_cafe,street_cafe,universal,,0,1,0,0,school_uniform
 silver-haired girl,winter_street,winter_street,universal,,0,1,0,0,school_uniform
 sleepy girl,aquarium,aquarium,universal,,0,1,0,0,winter_date
 sleepy girl,art_gallery,art_gallery,universal,,0,1,0,0,winter_date
-sleepy girl,bedroom_boudoir,bedroom_boudoir,existing,,0,0,1,1,winter_date
+sleepy girl,bedroom_boudoir,bedroom_boudoir,existing,,0,0,1,0,winter_date
 sleepy girl,botanical_garden,botanical_garden,universal,,0,1,0,0,winter_date
-sleepy girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,winter_date
+sleepy girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,winter_date
+sleepy girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,winter_date
+sleepy girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,winter_date
+sleepy girl,clean_modern_kitchen,clean_modern_kitchen,tag:domestic,domestic,1,0,0,0,winter_date
 sleepy girl,commuter_transport,commuter_transport,universal,,0,1,0,0,winter_date
 sleepy girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,winter_date
-sleepy girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,winter_date
+sleepy girl,cozy_living_room,cozy_living_room,existing,,0,0,1,0,winter_date
 sleepy girl,illuminated_park,illuminated_park,universal,,0,1,0,0,winter_date
 sleepy girl,messy_kitchen,messy_kitchen,tag:domestic,domestic,1,0,0,0,winter_date
 sleepy girl,museum_hall,museum_hall,universal,,0,1,0,0,winter_date
 sleepy girl,picnic_park,picnic_park,universal,,0,1,0,0,winter_date
-sleepy girl,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,winter_date
+sleepy girl,rainy_bus_stop,rainy_alley,tag:suburban,suburban,1,0,0,1,winter_date
 sleepy girl,school_classroom,school_classroom,tag:school,school,1,0,0,0,winter_date
 sleepy girl,school_gym_hall,school_gym_hall,tag:school,school,1,0,0,0,winter_date
 sleepy girl,school_library,school_library,tag:school,school,1,0,0,0,winter_date
@@ -977,7 +1122,7 @@ sleepy girl,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,winter_
 sleepy girl,street_cafe,street_cafe,universal,,0,1,0,0,winter_date
 sleepy girl,winter_street,winter_street,universal,,0,1,0,0,winter_date
 solarpunk girl,airship_deck,airship_deck,tag:scifi,scifi,1,0,0,0,beach_resort
-solarpunk girl,alien_planet,alien_planet,existing,,0,0,1,1,beach_resort
+solarpunk girl,alien_planet,alien_planet,existing,,0,0,1,0,beach_resort
 solarpunk girl,aquarium,aquarium,universal,,0,1,0,0,beach_resort
 solarpunk girl,art_gallery,art_gallery,universal,,0,1,0,0,beach_resort
 solarpunk girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,beach_resort
@@ -988,7 +1133,7 @@ solarpunk girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,beach_resort
 solarpunk girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,beach_resort
 solarpunk girl,cyber_lab,cyber_lab,tag:scifi,scifi,1,0,0,0,beach_resort
 solarpunk girl,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,beach_resort
-solarpunk girl,bamboo_forest,fantasy_forest,tag:nature,nature,1,0,0,1,beach_resort
+solarpunk girl,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,beach_resort
 solarpunk girl,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,beach_resort
 solarpunk girl,illuminated_park,illuminated_park,universal,,0,1,0,0,beach_resort
 solarpunk girl,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,beach_resort
@@ -1018,7 +1163,7 @@ sorceress,cozy_living_room,cozy_living_room,universal,,0,1,0,0,fantasy_battle
 sorceress,dragon_lair,dragon_lair,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
 sorceress,dungeon_crypt,dungeon_crypt,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
 sorceress,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,fantasy_battle
-sorceress,fantasy_forest,fantasy_forest,existing,,0,0,1,1,fantasy_battle
+sorceress,fantasy_forest,fantasy_forest,existing,,0,0,1,0,fantasy_battle
 sorceress,illuminated_park,illuminated_park,universal,,0,1,0,0,fantasy_battle
 sorceress,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,fantasy_battle
 sorceress,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
@@ -1041,7 +1186,7 @@ space engineer,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,scif
 space engineer,commuter_transport,commuter_transport,universal,,0,1,0,0,scifi_space
 space engineer,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,scifi_space
 space engineer,cozy_living_room,cozy_living_room,universal,,0,1,0,0,scifi_space
-space engineer,cyber_lab,cyber_lab,existing,,0,0,1,1,scifi_space
+space engineer,cyber_lab,cyber_lab,existing,,0,0,1,0,scifi_space
 space engineer,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,scifi_space
 space engineer,illuminated_park,illuminated_park,universal,,0,1,0,0,scifi_space
 space engineer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,scifi_space
@@ -1073,23 +1218,29 @@ space pilot,neon_city_street,neon_city_street,tag:scifi,scifi,1,0,0,0,scifi_spac
 space pilot,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,scifi_space
 space pilot,school_library,school_library,universal,,0,1,0,0,scifi_space
 space pilot,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,scifi_space
-space pilot,spaceship_bridge,spaceship_bridge,existing,,0,0,1,1,scifi_space
+space pilot,spaceship,spaceship_bridge,existing,,0,0,1,1,scifi_space
 space pilot,starship_quarters,starship_quarters,tag:scifi,scifi,1,0,0,0,scifi_space
 space pilot,street_cafe,street_cafe,universal,,0,1,0,0,scifi_space
 space pilot,winter_street,winter_street,universal,,0,1,0,0,scifi_space
-spy agent,aquarium,aquarium,universal,,0,1,0,0,secret_agent
+spy agent,aquarium,aquarium,tag:urban,urban,1,0,0,0,secret_agent
 spy agent,art_gallery,art_gallery,universal,,0,1,0,0,secret_agent
+spy agent,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,secret_agent
 spy agent,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,secret_agent
 spy agent,boardroom,boardroom,tag:office,office,1,0,0,0,secret_agent
 spy agent,botanical_garden,botanical_garden,universal,,0,1,0,0,secret_agent
+spy agent,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,secret_agent
 spy agent,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,secret_agent
 spy agent,commuter_transport,commuter_transport,universal,,0,1,0,0,secret_agent
-spy agent,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,secret_agent
+spy agent,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,secret_agent
+spy agent,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,secret_agent
 spy agent,cozy_living_room,cozy_living_room,universal,,0,1,0,0,secret_agent
+spy agent,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,secret_agent
+spy agent,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,secret_agent
 spy agent,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,secret_agent
-spy agent,illuminated_park,illuminated_park,universal,,0,1,0,0,secret_agent
+spy agent,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,secret_agent
+spy agent,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,secret_agent
 spy agent,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,secret_agent
-spy agent,luxury_hotel_lobby,luxury_hotel_lobby,existing,,0,0,1,1,secret_agent
+spy agent,luxury_hotel_lobby,luxury_hotel_lobby,existing,,0,0,1,0,secret_agent
 spy agent,messy_copy_room,messy_copy_room,tag:office,office,1,0,0,0,secret_agent
 spy agent,messy_kitchen,messy_kitchen,universal,,0,1,0,0,secret_agent
 spy agent,modern_office,modern_office,tag:office,office,1,0,0,0,secret_agent
@@ -1100,7 +1251,8 @@ spy agent,picnic_park,picnic_park,universal,,0,1,0,0,secret_agent
 spy agent,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,secret_agent
 spy agent,school_library,school_library,universal,,0,1,0,0,secret_agent
 spy agent,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,secret_agent
-spy agent,street_cafe,street_cafe,universal,,0,1,0,0,secret_agent
+spy agent,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,secret_agent
+spy agent,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,secret_agent
 spy agent,surveillance_room,surveillance_room,tag:office,office,1,0,0,0,secret_agent
 spy agent,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,secret_agent
 spy agent,winter_street,winter_street,universal,,0,1,0,0,secret_agent
@@ -1116,7 +1268,7 @@ stargazer,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,scifi_space
 stargazer,cozy_living_room,cozy_living_room,universal,,0,1,0,0,scifi_space
 stargazer,cyber_lab,cyber_lab,tag:scifi,scifi,1,0,0,0,scifi_space
 stargazer,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,scifi_space
-stargazer,bamboo_forest,fantasy_forest,tag:nature,nature,1,0,0,1,scifi_space
+stargazer,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,scifi_space
 stargazer,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,scifi_space
 stargazer,illuminated_park,illuminated_park,universal,,0,1,0,0,scifi_space
 stargazer,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,scifi_space
@@ -1134,53 +1286,70 @@ stargazer,street_cafe,street_cafe,universal,,0,1,0,0,scifi_space
 stargazer,tropical_beach,tropical_beach,tag:nature,nature,1,0,0,0,scifi_space
 stargazer,wave_barrel,wave_barrel,tag:nature,nature,1,0,0,0,scifi_space
 stargazer,winter_street,winter_street,universal,,0,1,0,0,scifi_space
-street dancer,aquarium,aquarium,universal,,0,1,0,0,cyberpunk_night
+street dancer,aquarium,aquarium,tag:urban,urban,1,0,0,0,cyberpunk_night
 street dancer,art_gallery,art_gallery,universal,,0,1,0,0,cyberpunk_night
+street dancer,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
 street dancer,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,cyberpunk_night
 street dancer,botanical_garden,botanical_garden,universal,,0,1,0,0,cyberpunk_night
+street dancer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
 street dancer,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,cyberpunk_night
 street dancer,commuter_transport,commuter_transport,universal,,0,1,0,0,cyberpunk_night
 street dancer,concert_stage,concert_stage,tag:music,music,1,0,0,0,cyberpunk_night
-street dancer,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,cyberpunk_night
+street dancer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
+street dancer,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,cyberpunk_night
 street dancer,cozy_living_room,cozy_living_room,universal,,0,1,0,0,cyberpunk_night
+street dancer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
+street dancer,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
 street dancer,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,cyberpunk_night
-street dancer,illuminated_park,illuminated_park,universal,,0,1,0,0,cyberpunk_night
+street dancer,game_arcade,game_arcade,existing,,0,0,1,0,cyberpunk_night
+street dancer,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,cyberpunk_night
 street dancer,karaoke_bar,karaoke_bar,tag:music,music,1,0,0,0,cyberpunk_night
 street dancer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cyberpunk_night
 street dancer,museum_hall,museum_hall,universal,,0,1,0,0,cyberpunk_night
-street dancer,neon_city_street,neon_city_street,existing,,0,0,1,1,cyberpunk_night
+street dancer,neon_city_street,neon_city_street,existing,,0,0,1,0,cyberpunk_night
 street dancer,opera_house,opera_house,tag:music,music,1,0,0,0,cyberpunk_night
 street dancer,picnic_park,picnic_park,universal,,0,1,0,0,cyberpunk_night
 street dancer,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,cyberpunk_night
 street dancer,recording_studio,recording_studio,tag:music,music,1,0,0,0,cyberpunk_night
 street dancer,school_library,school_library,universal,,0,1,0,0,cyberpunk_night
 street dancer,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,cyberpunk_night
-street dancer,street_cafe,street_cafe,universal,,0,1,0,0,cyberpunk_night
+street dancer,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,cyberpunk_night
+street dancer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
 street dancer,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,cyberpunk_night
 street dancer,winter_street,winter_street,universal,,0,1,0,0,cyberpunk_night
-student,aquarium,aquarium,universal,,0,1,0,0,school_uniform
+student,aquarium,aquarium,tag:urban,urban,1,0,0,0,school_uniform
 student,art_gallery,art_gallery,universal,,0,1,0,0,school_uniform
+student,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,school_uniform
 student,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,school_uniform
 student,botanical_garden,botanical_garden,universal,,0,1,0,0,school_uniform
+student,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,school_uniform
+student,campus_cafeteria,campus_cafeteria,existing,,0,0,1,0,school_uniform
+student,campus_hallway,campus_hallway,existing,,0,0,1,0,school_uniform
+student,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,school_uniform
 student,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,school_uniform
-student,commuter_transport,commuter_transport,universal,,0,1,0,0,school_uniform
-student,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,school_uniform
+student,commuter_transport,commuter_transport,existing,,0,0,1,0,school_uniform
+student,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,school_uniform
+student,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,school_uniform
 student,cozy_living_room,cozy_living_room,universal,,0,1,0,0,school_uniform
-student,illuminated_park,illuminated_park,universal,,0,1,0,0,school_uniform
+student,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,school_uniform
+student,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,school_uniform
+student,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,school_uniform
+student,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,school_uniform
 student,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 student,museum_hall,museum_hall,universal,,0,1,0,0,school_uniform
-student,picnic_park,picnic_park,universal,,0,1,0,0,school_uniform
-student,rainy_bus_stop,rainy_alley,tag:suburban,suburban,1,0,0,1,school_uniform
-student,school_classroom,school_classroom,tag:school,school,1,0,0,0,school_uniform
-student,school_gym_hall,school_gym_hall,tag:school,school,1,0,0,0,school_uniform
+student,picnic_park,picnic_park,existing,,0,0,1,0,school_uniform
+student,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,school_uniform
+student,school_classroom,school_classroom,existing,,0,0,1,0,school_uniform
+student,school_gym_hall,school_gym_hall,existing,,0,0,1,0,school_uniform
 student,school_library,school_library,tag:school,school,1,0,0,0,school_uniform
-student,school_rooftop,school_rooftop,existing,,0,0,1,1,school_uniform
-student,shopping_mall_atrium,shopping_mall_atrium,universal,,0,1,0,0,school_uniform
-student,street_cafe,street_cafe,universal,,0,1,0,0,school_uniform
-student,rural_town_street,winter_street,tag:suburban,suburban,1,0,0,1,school_uniform
+student,school_rooftop,school_rooftop,existing,,0,0,1,0,school_uniform
+student,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,school_uniform
+student,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,school_uniform
+student,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,school_uniform
+student,winter_street,winter_street,universal,,0,1,0,0,school_uniform
 surfer girl,aquarium,aquarium,universal,,0,1,0,0,beach_resort
 surfer girl,art_gallery,art_gallery,universal,,0,1,0,0,beach_resort
-surfer girl,luxury_hotel_room,bedroom_boudoir,tag:resort,resort,1,0,0,1,beach_resort
+surfer girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,beach_resort
 surfer girl,botanical_garden,botanical_garden,tag:resort,resort,1,0,0,0,beach_resort
 surfer girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,beach_resort
 surfer girl,commuter_transport,commuter_transport,universal,,0,1,0,0,beach_resort
@@ -1199,19 +1368,25 @@ surfer girl,shopping_mall_atrium,shopping_mall_atrium,tag:resort,resort,1,0,0,0,
 surfer girl,stadium_court,stadium_court,tag:sport,sport,1,0,0,0,beach_resort
 surfer girl,street_cafe,street_cafe,universal,,0,1,0,0,beach_resort
 surfer girl,tropical_beach,tropical_beach,tag:resort,resort,1,0,0,0,beach_resort
-surfer girl,wave_barrel,wave_barrel,existing,,0,0,1,1,beach_resort
+surfer girl,wave_barrel,wave_barrel,existing,,0,0,1,0,beach_resort
 surfer girl,winter_street,winter_street,universal,,0,1,0,0,beach_resort
 surfer girl,yoga_studio,yoga_studio,tag:sport,sport,1,0,0,0,beach_resort
-urban shopper,aquarium,aquarium,universal,,0,1,0,0,urban_shopping
+urban shopper,aquarium,aquarium,tag:urban,urban,1,0,0,0,urban_shopping
 urban shopper,art_gallery,art_gallery,universal,,0,1,0,0,urban_shopping
+urban shopper,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,urban_shopping
 urban shopper,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,urban_shopping
 urban shopper,botanical_garden,botanical_garden,universal,,0,1,0,0,urban_shopping
+urban shopper,cinema_lobby,cinema_lobby,existing,,0,0,1,0,urban_shopping
 urban shopper,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,urban_shopping
 urban shopper,commuter_transport,commuter_transport,universal,,0,1,0,0,urban_shopping
-urban shopper,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,urban_shopping
+urban shopper,convenience_store,convenience_store,existing,,0,0,1,0,urban_shopping
+urban shopper,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,urban_shopping
 urban shopper,cozy_living_room,cozy_living_room,universal,,0,1,0,0,urban_shopping
+urban shopper,drugstore_aisle,drugstore_aisle,existing,,0,0,1,0,urban_shopping
+urban shopper,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,urban_shopping
 urban shopper,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,urban_shopping
-urban shopper,illuminated_park,illuminated_park,universal,,0,1,0,0,urban_shopping
+urban shopper,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,urban_shopping
+urban shopper,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,urban_shopping
 urban shopper,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,urban_shopping
 urban shopper,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 urban shopper,museum_hall,museum_hall,universal,,0,1,0,0,urban_shopping
@@ -1219,81 +1394,110 @@ urban shopper,neon_city_street,neon_city_street,tag:urban,urban,1,0,0,0,urban_sh
 urban shopper,picnic_park,picnic_park,universal,,0,1,0,0,urban_shopping
 urban shopper,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,urban_shopping
 urban shopper,school_library,school_library,universal,,0,1,0,0,urban_shopping
-urban shopper,shopping_mall_atrium,shopping_mall_atrium,existing,,0,0,1,1,urban_shopping
-urban shopper,street_cafe,street_cafe,universal,,0,1,0,0,urban_shopping
+urban shopper,shopping_mall_atrium,shopping_mall_atrium,existing,,0,0,1,0,urban_shopping
+urban shopper,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,urban_shopping
+urban shopper,supermarket_aisle,supermarket_aisle,existing,,0,0,1,0,urban_shopping
 urban shopper,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,urban_shopping
 urban shopper,winter_street,winter_street,universal,,0,1,0,0,urban_shopping
-vacation girl,aquarium,aquarium,universal,,0,1,0,0,beach_resort
+vacation girl,aquarium,aquarium,tag:urban,urban,1,0,0,0,beach_resort
 vacation girl,art_gallery,art_gallery,universal,,0,1,0,0,beach_resort
-vacation girl,luxury_hotel_room,bedroom_boudoir,tag:resort,resort,1,0,0,1,beach_resort
+vacation girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,beach_resort
 vacation girl,botanical_garden,botanical_garden,tag:resort,resort,1,0,0,0,beach_resort
+vacation girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,beach_resort
 vacation girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,beach_resort
 vacation girl,commuter_transport,commuter_transport,universal,,0,1,0,0,beach_resort
-vacation girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,beach_resort
+vacation girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,beach_resort
 vacation girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,beach_resort
-vacation girl,illuminated_park,illuminated_park,universal,,0,1,0,0,beach_resort
-vacation girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:resort,resort,1,0,0,0,beach_resort
+vacation girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,luxury_hotel_lobby,luxury_hotel_lobby,existing,,0,0,1,0,beach_resort
 vacation girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,beach_resort
 vacation girl,museum_hall,museum_hall,universal,,0,1,0,0,beach_resort
 vacation girl,picnic_park,picnic_park,universal,,0,1,0,0,beach_resort
-vacation girl,poolside_resort,poolside_resort,existing,,0,0,1,1,beach_resort
-vacation girl,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,beach_resort
+vacation girl,poolside_resort,poolside_resort,existing,,0,0,1,0,beach_resort
+vacation girl,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,beach_resort
 vacation girl,school_library,school_library,universal,,0,1,0,0,beach_resort
-vacation girl,shopping_mall_atrium,shopping_mall_atrium,tag:resort,resort,1,0,0,0,beach_resort
-vacation girl,street_cafe,street_cafe,universal,,0,1,0,0,beach_resort
+vacation girl,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,beach_resort
+vacation girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,beach_resort
 vacation girl,tropical_beach,tropical_beach,tag:resort,resort,1,0,0,0,beach_resort
 vacation girl,winter_street,winter_street,universal,,0,1,0,0,beach_resort
-vacationer,aquarium,aquarium,universal,,0,1,0,0,beach_resort
+vacationer,aquarium,aquarium,tag:urban,urban,1,0,0,0,beach_resort
 vacationer,art_gallery,art_gallery,universal,,0,1,0,0,beach_resort
-vacationer,luxury_hotel_room,bedroom_boudoir,tag:resort,resort,1,0,0,1,beach_resort
+vacationer,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,beach_resort
+vacationer,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,beach_resort
 vacationer,botanical_garden,botanical_garden,tag:resort,resort,1,0,0,0,beach_resort
+vacationer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,beach_resort
 vacationer,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,beach_resort
 vacationer,commuter_transport,commuter_transport,universal,,0,1,0,0,beach_resort
-vacationer,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,beach_resort
+vacationer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,beach_resort
+vacationer,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,beach_resort
 vacationer,cozy_living_room,cozy_living_room,universal,,0,1,0,0,beach_resort
-vacationer,illuminated_park,illuminated_park,universal,,0,1,0,0,beach_resort
-vacationer,luxury_hotel_lobby,luxury_hotel_lobby,tag:resort,resort,1,0,0,0,beach_resort
+vacationer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,beach_resort
+vacationer,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,beach_resort
+vacationer,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,beach_resort
+vacationer,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,beach_resort
+vacationer,luxury_hotel_lobby,luxury_hotel_lobby,existing,,0,0,1,0,beach_resort
 vacationer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,beach_resort
 vacationer,museum_hall,museum_hall,universal,,0,1,0,0,beach_resort
 vacationer,picnic_park,picnic_park,universal,,0,1,0,0,beach_resort
 vacationer,poolside_resort,poolside_resort,tag:resort,resort,1,0,0,0,beach_resort
-vacationer,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,beach_resort
+vacationer,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,beach_resort
 vacationer,school_library,school_library,universal,,0,1,0,0,beach_resort
-vacationer,shopping_mall_atrium,shopping_mall_atrium,tag:resort,resort,1,0,0,0,beach_resort
-vacationer,street_cafe,street_cafe,universal,,0,1,0,0,beach_resort
-vacationer,tropical_beach,tropical_beach,existing,,0,0,1,1,beach_resort
+vacationer,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,beach_resort
+vacationer,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,beach_resort
+vacationer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,beach_resort
+vacationer,tropical_beach,tropical_beach,existing,,0,0,1,0,beach_resort
 vacationer,winter_street,winter_street,universal,,0,1,0,0,beach_resort
-window shopper,aquarium,aquarium,universal,,0,1,0,0,urban_shopping
+window shopper,aquarium,aquarium,existing,,0,0,1,0,urban_shopping
 window shopper,art_gallery,art_gallery,universal,,0,1,0,0,urban_shopping
+window shopper,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,urban_shopping
 window shopper,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,urban_shopping
 window shopper,botanical_garden,botanical_garden,universal,,0,1,0,0,urban_shopping
+window shopper,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,urban_shopping
+window shopper,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,urban_shopping
 window shopper,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,urban_shopping
 window shopper,commuter_transport,commuter_transport,universal,,0,1,0,0,urban_shopping
-window shopper,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,urban_shopping
+window shopper,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,urban_shopping
 window shopper,cozy_living_room,cozy_living_room,universal,,0,1,0,0,urban_shopping
+window shopper,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,urban_shopping
 window shopper,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,urban_shopping
-window shopper,illuminated_park,illuminated_park,universal,,0,1,0,0,urban_shopping
+window shopper,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,urban_shopping
 window shopper,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,urban_shopping
 window shopper,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 window shopper,museum_hall,museum_hall,universal,,0,1,0,0,urban_shopping
 window shopper,neon_city_street,neon_city_street,tag:urban,urban,1,0,0,0,urban_shopping
 window shopper,picnic_park,picnic_park,universal,,0,1,0,0,urban_shopping
-window shopper,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,rainy_bus_stop,rainy_alley,tag:suburban,suburban,1,0,0,1,urban_shopping
 window shopper,school_library,school_library,universal,,0,1,0,0,urban_shopping
-window shopper,shopping_mall_atrium,shopping_mall_atrium,existing,,0,0,1,1,urban_shopping
-window shopper,street_cafe,street_cafe,universal,,0,1,0,0,urban_shopping
+window shopper,shopping_mall_atrium,shopping_mall_atrium,existing,,0,0,1,0,urban_shopping
+window shopper,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,urban_shopping
+window shopper,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,urban_shopping
 window shopper,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,urban_shopping
 window shopper,winter_street,winter_street,universal,,0,1,0,0,urban_shopping
-winter date girl,aquarium,aquarium,universal,,0,1,0,0,winter_date
+winter date girl,aquarium,aquarium,tag:urban,urban,1,0,0,0,winter_date
 winter date girl,art_gallery,art_gallery,universal,,0,1,0,0,winter_date
+winter date girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,winter_date
 winter date girl,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,winter_date
 winter date girl,botanical_garden,botanical_garden,universal,,0,1,0,0,winter_date
+winter date girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,winter_date
 winter date girl,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,winter_date
 winter date girl,commuter_transport,commuter_transport,universal,,0,1,0,0,winter_date
-winter date girl,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,winter_date
+winter date girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,winter_date
+winter date girl,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,winter_date
 winter date girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,winter_date
+winter date girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,winter_date
+winter date girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,winter_date
 winter date girl,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,winter_date
-winter date girl,illuminated_park,illuminated_park,existing,,0,0,1,1,winter_date
+winter date girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,winter_date
+winter date girl,illuminated_park,illuminated_park,existing,,0,0,1,0,winter_date
 winter date girl,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,winter_date
 winter date girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,winter_date
 winter date girl,museum_hall,museum_hall,universal,,0,1,0,0,winter_date
@@ -1302,19 +1506,26 @@ winter date girl,picnic_park,picnic_park,universal,,0,1,0,0,winter_date
 winter date girl,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,winter_date
 winter date girl,school_library,school_library,universal,,0,1,0,0,winter_date
 winter date girl,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,winter_date
-winter date girl,street_cafe,street_cafe,universal,,0,1,0,0,winter_date
+winter date girl,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,winter_date
+winter date girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,winter_date
 winter date girl,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,winter_date
 winter date girl,winter_street,winter_street,universal,,0,1,0,0,winter_date
-winter traveler,aquarium,aquarium,universal,,0,1,0,0,winter_date
+winter traveler,aquarium,aquarium,tag:urban,urban,1,0,0,0,winter_date
 winter traveler,art_gallery,art_gallery,universal,,0,1,0,0,winter_date
+winter traveler,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,winter_date
 winter traveler,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,winter_date
 winter traveler,botanical_garden,botanical_garden,universal,,0,1,0,0,winter_date
+winter traveler,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,winter_date
 winter traveler,clean_modern_kitchen,clean_modern_kitchen,universal,,0,1,0,0,winter_date
 winter traveler,commuter_transport,commuter_transport,universal,,0,1,0,0,winter_date
-winter traveler,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,winter_date
+winter traveler,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,winter_date
+winter traveler,cozy_bookstore,cozy_bookstore,tag:urban,urban,1,0,0,0,winter_date
 winter traveler,cozy_living_room,cozy_living_room,universal,,0,1,0,0,winter_date
+winter traveler,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,winter_date
+winter traveler,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,winter_date
 winter traveler,fashion_boutique,fashion_boutique,tag:urban,urban,1,0,0,0,winter_date
-winter traveler,illuminated_park,illuminated_park,universal,,0,1,0,0,winter_date
+winter traveler,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,winter_date
+winter traveler,illuminated_park,illuminated_park,tag:urban,urban,1,0,0,0,winter_date
 winter traveler,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,winter_date
 winter traveler,messy_kitchen,messy_kitchen,universal,,0,1,0,0,winter_date
 winter traveler,museum_hall,museum_hall,universal,,0,1,0,0,winter_date
@@ -1323,9 +1534,10 @@ winter traveler,picnic_park,picnic_park,universal,,0,1,0,0,winter_date
 winter traveler,rainy_alley,rainy_alley,tag:urban,urban,1,0,0,0,winter_date
 winter traveler,school_library,school_library,universal,,0,1,0,0,winter_date
 winter traveler,shopping_mall_atrium,shopping_mall_atrium,tag:urban,urban,1,0,0,0,winter_date
-winter traveler,street_cafe,street_cafe,universal,,0,1,0,0,winter_date
+winter traveler,street_cafe,street_cafe,tag:urban,urban,1,0,0,0,winter_date
+winter traveler,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,winter_date
 winter traveler,underground_bar,underground_bar,tag:urban,urban,1,0,0,0,winter_date
-winter traveler,winter_street,winter_street,existing,,0,0,1,1,winter_date
+winter traveler,winter_street,winter_street,existing,,0,0,1,0,winter_date
 yoga instructor,aquarium,aquarium,universal,,0,1,0,0,gym_workout
 yoga instructor,art_gallery,art_gallery,universal,,0,1,0,0,gym_workout
 yoga instructor,bedroom_boudoir,bedroom_boudoir,universal,,0,1,0,0,gym_workout
@@ -1335,7 +1547,7 @@ yoga instructor,commuter_transport,commuter_transport,universal,,0,1,0,0,gym_wor
 yoga instructor,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,gym_workout
 yoga instructor,cozy_living_room,cozy_living_room,universal,,0,1,0,0,gym_workout
 yoga instructor,enchanted_lake,enchanted_lake,tag:nature,nature,1,0,0,0,gym_workout
-yoga instructor,bamboo_forest,fantasy_forest,tag:nature,nature,1,0,0,1,gym_workout
+yoga instructor,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,gym_workout
 yoga instructor,fitness_gym,fitness_gym,tag:sport,sport,1,0,0,0,gym_workout
 yoga instructor,illuminated_park,illuminated_park,universal,,0,1,0,0,gym_workout
 yoga instructor,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,gym_workout
@@ -1351,216 +1563,4 @@ yoga instructor,street_cafe,street_cafe,universal,,0,1,0,0,gym_workout
 yoga instructor,tropical_beach,tropical_beach,tag:nature,nature,1,0,0,0,gym_workout
 yoga instructor,wave_barrel,wave_barrel,tag:nature,nature,1,0,0,0,gym_workout
 yoga instructor,winter_street,winter_street,universal,,0,1,0,0,gym_workout
-yoga instructor,yoga_studio,yoga_studio,existing,,0,0,1,1,gym_workout
-student,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,school_uniform
-office worker,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,office_lady
-business girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,office_lady
-cyberpunk girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk hacker,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
-gothic girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,gothic_lolita
-gothic doll,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,gothic_lolita
-doll-like girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,gothic_lolita
-rock singer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rock_concert
-rock star,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rock_concert
-spy agent,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,secret_agent
-detective,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,secret_agent
-secret agent,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,secret_agent
-vacationer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,beach_resort
-vacation girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,beach_resort
-winter traveler,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,winter_date
-winter date girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,winter_date
-cafe customer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cozy_cafe
-urban shopper,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,urban_shopping
-chef girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rainy_day
-rainy day girl,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,rainy_day
-street dancer,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cyberpunk_night
-cafe barista,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cozy_cafe
-afternoon reader,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,cozy_cafe
-fashionista,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,urban_shopping
-window shopper,convenience_store,convenience_store,tag:urban,urban,1,0,0,0,urban_shopping
-student,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,school_uniform
-office worker,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,office_lady
-business girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,office_lady
-cyberpunk girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk hacker,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
-gothic girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,gothic_lolita
-gothic doll,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,gothic_lolita
-doll-like girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,gothic_lolita
-rock singer,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rock_concert
-rock star,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rock_concert
-spy agent,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,secret_agent
-detective,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,secret_agent
-secret agent,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,secret_agent
-vacationer,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,beach_resort
-vacation girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,beach_resort
-winter traveler,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,winter_date
-winter date girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,winter_date
-cafe customer,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cozy_cafe
-urban shopper,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,urban_shopping
-chef girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rainy_day
-rainy day girl,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,rainy_day
-street dancer,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cyberpunk_night
-cafe barista,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cozy_cafe
-afternoon reader,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,cozy_cafe
-fashionista,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,urban_shopping
-window shopper,bakery_shop,bakery_shop,tag:urban,urban,1,0,0,0,urban_shopping
-student,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,school_uniform
-office worker,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,office_lady
-business girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,office_lady
-cyberpunk girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk hacker,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
-gothic girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
-gothic doll,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
-doll-like girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
-rock singer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rock_concert
-rock star,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rock_concert
-spy agent,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,secret_agent
-detective,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,secret_agent
-secret agent,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,secret_agent
-vacationer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,beach_resort
-vacation girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,beach_resort
-winter traveler,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,winter_date
-winter date girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,winter_date
-cafe customer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
-urban shopper,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,urban_shopping
-chef girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rainy_day
-rainy day girl,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,rainy_day
-street dancer,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
-cafe barista,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
-afternoon reader,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
-fashionista,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,urban_shopping
-window shopper,supermarket_aisle,supermarket_aisle,tag:urban,urban,1,0,0,0,urban_shopping
-student,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,school_uniform
-office worker,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,office_lady
-business girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,office_lady
-cyberpunk girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk hacker,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
-gothic girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
-gothic doll,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
-doll-like girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,gothic_lolita
-rock singer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rock_concert
-rock star,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rock_concert
-spy agent,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,secret_agent
-detective,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,secret_agent
-secret agent,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,secret_agent
-vacationer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,beach_resort
-vacation girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,beach_resort
-winter traveler,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,winter_date
-winter date girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,winter_date
-cafe customer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
-urban shopper,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,urban_shopping
-chef girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rainy_day
-rainy day girl,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,rainy_day
-street dancer,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cyberpunk_night
-cafe barista,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
-afternoon reader,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,cozy_cafe
-fashionista,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,urban_shopping
-window shopper,drugstore_aisle,drugstore_aisle,tag:urban,urban,1,0,0,0,urban_shopping
-student,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,school_uniform
-office worker,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,office_lady
-business girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,office_lady
-cyberpunk girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk hacker,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
-gothic girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,gothic_lolita
-gothic doll,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,gothic_lolita
-doll-like girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,gothic_lolita
-rock singer,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rock_concert
-rock star,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rock_concert
-spy agent,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,secret_agent
-detective,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,secret_agent
-secret agent,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,secret_agent
-vacationer,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,beach_resort
-vacation girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,beach_resort
-winter traveler,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,winter_date
-winter date girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,winter_date
-cafe customer,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cozy_cafe
-urban shopper,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,urban_shopping
-chef girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rainy_day
-rainy day girl,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,rainy_day
-street dancer,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cyberpunk_night
-cafe barista,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cozy_cafe
-afternoon reader,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,cozy_cafe
-fashionista,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,urban_shopping
-window shopper,family_restaurant,family_restaurant,tag:urban,urban,1,0,0,0,urban_shopping
-student,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,school_uniform
-office worker,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,office_lady
-business girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,office_lady
-cyberpunk girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk hacker,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
-gothic girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,gothic_lolita
-gothic doll,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,gothic_lolita
-doll-like girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,gothic_lolita
-rock singer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rock_concert
-rock star,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rock_concert
-spy agent,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,secret_agent
-detective,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,secret_agent
-secret agent,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,secret_agent
-vacationer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,beach_resort
-vacation girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,beach_resort
-winter traveler,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,winter_date
-winter date girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,winter_date
-cafe customer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cozy_cafe
-urban shopper,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,urban_shopping
-chef girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rainy_day
-rainy day girl,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,rainy_day
-street dancer,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cyberpunk_night
-cafe barista,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cozy_cafe
-afternoon reader,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,cozy_cafe
-fashionista,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,urban_shopping
-window shopper,cinema_lobby,cinema_lobby,tag:urban,urban,1,0,0,0,urban_shopping
-student,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,school_uniform
-office worker,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,office_lady
-business girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,office_lady
-cyberpunk girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cyberpunk_night
-cyberpunk hacker,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cyberpunk_night
-gothic girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,gothic_lolita
-gothic doll,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,gothic_lolita
-doll-like girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,gothic_lolita
-rock singer,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rock_concert
-rock star,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rock_concert
-spy agent,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,secret_agent
-detective,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,secret_agent
-secret agent,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,secret_agent
-vacationer,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,beach_resort
-vacation girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,beach_resort
-winter traveler,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,winter_date
-winter date girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,winter_date
-cafe customer,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cozy_cafe
-urban shopper,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,urban_shopping
-chef girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rainy_day
-rainy day girl,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,rainy_day
-street dancer,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cyberpunk_night
-cafe barista,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cozy_cafe
-afternoon reader,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,cozy_cafe
-fashionista,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,urban_shopping
-window shopper,game_arcade,game_arcade,tag:urban,urban,1,0,0,0,urban_shopping
-student,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,school_uniform
-office worker,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,office_lady
-library girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,school_uniform
-bookworm girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,school_uniform
-sleepy girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,winter_date
-cafe customer,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,cozy_cafe
-chef girl,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,rainy_day
-cafe barista,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,cozy_cafe
-afternoon reader,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,cozy_cafe
-fashionista,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,urban_shopping
-window shopper,bus_terminal,bus_terminal,tag:suburban,suburban,1,0,0,0,urban_shopping
-silver-haired girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,school_uniform
-student,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,school_uniform
-library girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,school_uniform
-bookworm girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,school_uniform
-kendo girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,traditional_japanese
-sleepy girl,campus_hallway,campus_hallway,tag:school,school,1,0,0,0,winter_date
-silver-haired girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,school_uniform
-student,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,school_uniform
-library girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,school_uniform
-bookworm girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,school_uniform
-kendo girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,traditional_japanese
-sleepy girl,campus_cafeteria,campus_cafeteria,tag:school,school,1,0,0,0,winter_date
+yoga instructor,yoga_studio,yoga_studio,existing,,0,0,1,0,gym_workout

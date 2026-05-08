@@ -154,6 +154,30 @@ python tools/verify_full_flow.py
 python tools/check_widgets_values.py
 ```
 
+## Compatibility Review Generation
+
+`assets/compatibility_review.csv` is the current base variation sizing input.
+Use the scoped generator before editing or regenerating it:
+
+```bash
+python tools/build_compatibility_review.py --check
+```
+
+The generator reads:
+
+- `vocab/data/variation_scope.json`
+- `vocab/data/scene_compatibility.json`
+- `prompts.jsonl`
+
+Current state:
+
+- current generated rows match the checked-in CSV rows
+- current generated/current row count is `1,565`
+- subject/location pair drift is `0`
+- `prompts.jsonl` rows are expected to stay inside the current variation scope
+
+Use `--write --output assets/compatibility_review.csv` only after `--check` has no row or pair drift.
+
 ## Safety Rules
 
 - Do not add style, quality, camera, render-effect, or body-type terms to active prompt output.
@@ -162,6 +186,7 @@ python tools/check_widgets_values.py
 - Do not rely on `background_loc_tag_map.json` as the new source of truth.
 - Do not count every `scene_compatibility.characters` entry automatically; promote subjects through `variation_scope.json`.
 - Do not count a location in base variation sizing unless it is in `variation_scope.json` and `assets/compatibility_review.csv`.
+- Do not run the legacy `assets/validate_compatibility.py` as a regeneration step; it targets the full compatibility surface and writes the CSV directly.
 - Keep public `Context*` node inputs stable unless workflow round-trip tests are updated together.
 
 ## Reading The Validator Summary

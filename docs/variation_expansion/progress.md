@@ -6,12 +6,12 @@ Last updated: 2026-05-08
 
 Overall status: `verified`
 
-Current phase: `variation scope refactor`
+Current phase: `scoped compatibility review generation`
 
 Primary target:
 
 - variation scope を明示して、意図しない subject / location 増加を防ぐ
-- `compatibility_review.csv` を再生成可能にする準備を行う
+- `compatibility_review.csv` の scoped check-only generator で差分を固定する
 - 第2波の daily-life location 追加前にデータ境界を軽くする
 
 ## Baseline Snapshot
@@ -59,7 +59,7 @@ base variations: 18,000+
 | P3 | Add actions to high-coverage existing locations | Done | +1,298 | +1,422 |
 | P4 | Full validation and final status update | Done | 0 | 0 |
 | P5 | Define variation scope source of truth | Done | 0 | 0 |
-| P6 | Scoped compatibility review generation | Not started | 0 | TBD |
+| P6 | Scoped compatibility review generation | Done | 0 | 0 |
 | P7 | Action pool authoring split evaluation | Not started | 0 | TBD |
 
 ## Candidate Tracking
@@ -134,13 +134,17 @@ High-coverage existing action additions:
 | 2026-05-08 | `python tools/report_expansion_delta.py assets/results/variation_before.json assets/results/variation_after.json` | Pass | base variations `11,916 -> 15,034` |
 | 2026-05-08 | `python tools/check_variation_scope.py` | Pass | `ERROR: []`; background-pack warnings recorded for 8 legacy/scoped locations |
 | 2026-05-08 | `python -m unittest assets.test_variation_scope` | Pass | 2 tests OK |
+| 2026-05-08 | `python tools/build_compatibility_review.py --check` | Pass | `ERROR: []`; `WARNING: []`; generated/current rows `1,565`; pair drift `0` |
+| 2026-05-08 | `python -m unittest assets.test_build_compatibility_review` | Pass | 3 tests OK |
+| 2026-05-08 | `python tools/check_variation_scope.py` | Pass | `ERROR: []`; `WARNING: []`; all 68 scoped locations have direct background packs |
+| 2026-05-08 | `python -m unittest assets.test_asset_validator assets.test_vocab_lint assets.test_variation_scope assets.test_calc_variations assets.test_data_consistency` | Pass | 23 tests OK |
 
 ## Open Risks
 
 - Some remaining daily-life candidates still rely on compositional fallback; this is intentional for this wave.
 - `vocab/data/action_pools.json` is larger after this pass; defer format splitting until review pain becomes concrete.
 - Future action text must stay semantic-only and avoid object overconcentration.
-- `compatibility_review.csv` is not yet regenerated from scope; current refactor first validates the boundary, then adds generation.
-- 8 scoped locations are counted through compatibility/action data but do not have direct background packs yet:
-  `art_gallery`, `castle_hall`, `enchanted_lake`, `high_tech_medbay`,
-  `magic_academy_library`, `museum_hall`, `starship_quarters`, `underground_bar`.
+- All current variation-scope locations now have direct background packs.
+- Before subject/location promotion, keep `prompts.jsonl`, `variation_scope.json`,
+  and `assets/compatibility_review.csv` aligned through
+  `python tools/build_compatibility_review.py --check`.
