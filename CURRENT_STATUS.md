@@ -5,6 +5,7 @@ Last verified: 2026-05-08
 このファイルは、毎回全スクリプトを読み直さずに現在地を把握するための短い入口です。
 詳細な構造は `REPO_STRUCTURE.md`、設計背景は `assets/ARCHITECTURE.md` と
 `docs/context_refactor/README.md` を参照してください。
+subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` を先に参照してください。
 
 ## Runtime Surface
 
@@ -127,6 +128,7 @@ Recent cleanup:
 - `assets/test_vocab_lint.py` now uses unittest assertions instead of print-only checks
 - `assets/test_char_profile_nl.py` now checks expected profile text programmatically
 - `assets/test_calc_variations.py` locks semantic-only metric shape
+- `pipeline/action_profiles.py` holds expansion-oriented daily-life/location action profile tables
 
 ## Refactor Risk Map
 
@@ -173,6 +175,20 @@ Before changing vocabulary assets:
 
 ```bash
 python -c "from asset_validator import validate_assets; print(validate_assets())"
+python tools/validate_prompt_data.py
+python assets/calc_variations.py --json
+```
+
+Optional before/after expansion comparison:
+
+```bash
+python tools/report_expansion_delta.py assets/results/variation_before.json assets/results/variation_after.json --enforce
+```
+
+Before expanding subjects / locations / actions:
+
+```bash
+python -m unittest assets.test_data_consistency assets.test_character_resolution assets.test_location_resolution assets.test_action_generator assets.test_calc_variations
 python tools/validate_prompt_data.py
 python assets/calc_variations.py --json
 ```

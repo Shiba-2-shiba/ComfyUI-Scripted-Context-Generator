@@ -3,8 +3,9 @@ from __future__ import annotations
 import json
 import random
 import sys
+import csv
 from pathlib import Path
-from typing import Dict, List
+from typing import Any, Dict, List
 
 ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
@@ -41,6 +42,77 @@ def _flatten_strings(value):
     elif isinstance(value, dict):
         for item in value.values():
             yield from _flatten_strings(item)
+
+
+def build_variation_source_summary() -> Dict[str, Any]:
+    csv_path = ROOT / "assets" / "compatibility_review.csv"
+    if not csv_path.exists():
+        return {
+            "variation_subject_count": 0,
+            "variation_location_count": 0,
+            "variation_row_count": 0,
+        }
+
+    subjects = set()
+    locations = set()
+    row_count = 0
+    with csv_path.open("r", encoding="utf-8-sig", newline="") as handle:
+        for row in csv.DictReader(handle):
+            row_count += 1
+            subject = str(row.get("subj") or "").strip()
+            location = str(row.get("canonical_loc") or row.get("loc") or "").strip()
+            if subject:
+                subjects.add(subject)
+            if location:
+                locations.add(location)
+
+    return {
+        "variation_subject_count": len(subjects),
+        "variation_location_count": len(locations),
+        "variation_row_count": row_count,
+    }
+
+
+def build_expansion_summary(
+    compatibility: dict,
+    backgrounds: dict,
+    clothing: dict,
+    characters: dict,
+    action_pools: dict,
+    alias_map: dict,
+) -> Dict[str, Any]:
+    location_candidates = list(iter_location_candidates())
+    action_pool_locations = sorted(
+        str(key)
+        for key, value in action_pools.items()
+        if isinstance(key, str)
+        and key.strip()
+        and not key.startswith("_")
+        and key != "schema_version"
+        and isinstance(value, list)
+    )
+    action_generatable = sorted(
+        loc
+        for loc in location_candidates
+        if can_generate_action_for_location(loc, compatibility)
+    )
+    dedicated_pool_missing = sorted(set(location_candidates) - set(action_pool_locations))
+
+    return {
+        "subject_count": len(characters),
+        **build_variation_source_summary(),
+        "compat_character_count": len(compatibility.get("characters", {})),
+        "clothing_theme_count": len(clothing),
+        "background_pack_count": len(backgrounds),
+        "location_candidate_count": len(location_candidates),
+        "daily_life_location_count": len(compatibility.get("daily_life_locs", [])),
+        "universal_location_count": len(compatibility.get("universal_locs", [])),
+        "action_pool_count": len(action_pool_locations),
+        "action_generatable_count": len(action_generatable),
+        "dedicated_action_pool_missing_count": len(dedicated_pool_missing),
+        "dedicated_action_pool_missing_preview": dedicated_pool_missing[:12],
+        "alias_entry_count": len(alias_map),
+    }
 
 
 def build_report() -> Dict[str, List[dict]]:
@@ -119,6 +191,19 @@ def build_report() -> Dict[str, List[dict]]:
         {
             "code": "clothing_theme_count",
             "count": len(clothing),
+        }
+    )
+    report["INFO"].append(
+        {
+            "code": "expansion_summary",
+            **build_expansion_summary(
+                compatibility,
+                backgrounds,
+                clothing,
+                characters,
+                action_pools,
+                alias_map,
+            ),
         }
     )
 
