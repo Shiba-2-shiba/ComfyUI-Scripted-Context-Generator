@@ -33,5 +33,11 @@
       "text": "turning toward the room as the curtain moves",
       "load": "active"
     }
+  ],
+  "families": [
+    {
+      "name": "home_rhythm",
+      "take": 4
+    }
   ]
 }

@@ -6,14 +6,16 @@ Last updated: 2026-05-08
 
 Overall status: `verified`
 
-Current phase: `P9 100k target planning`
+Current phase: `P13 500k target planning`
 
 Primary target:
 
 - variation scope を明示して、意図しない subject / location 増加を防ぐ
 - `compatibility_review.csv` の scoped check-only generator で差分を固定する
 - 第2波の daily-life location 追加前にデータ境界を軽くする
-- 次は 100k target planning を追加し、subject / location / action depth を同時に設計する
+- P10 compatibility taxonomy expansion、P11 action authoring refactor、P12
+  100k stabilization gate は完了済み。次は 500k へ向けた拡張形状を
+  再設計する
 
 ## Baseline Snapshot
 
@@ -43,12 +45,26 @@ action pool count: 87
 dedicated action pool missing candidates: 9
 ```
 
+## Current Snapshot After P12
+
+Measured on: 2026-05-08
+
+```text
+unique subjects: 120
+unique locations: 91
+base variations: 105,612
+compatibility rows: 5,926
+action pool count: 96
+actions per location: min 12 / median 16 / mean 15.6 / max 20
+missing action pools: 0
+```
+
 Intermediate target:
 
 ```text
 base variations: 100,000
 compatibility rows: 5,800-6,500
-median actions: 16+
+effective actions: 20+
 final planning horizon: 500,000
 ```
 
@@ -65,10 +81,11 @@ final planning horizon: 500,000
 | P6 | Scoped compatibility review generation | Done | 0 | 0 |
 | P7 | Action pool authoring split evaluation | Done | 0 | 0 |
 | P8 | Promote remaining daily-life locations | Done | +576 | +576 |
-| P9 | Add 100k target modeling | Planned | 0 | TBD |
-| P10 | Expand compatibility taxonomy for 100k | Planned | TBD | TBD |
-| P11 | Refactor action authoring source for 16+ median actions | Planned | TBD | TBD |
-| P12 | Stabilize 100k verification gate | Planned | 0 | TBD |
+| P9 | Add 100k target modeling | Done | 0 | 0 |
+| P10 | Expand compatibility taxonomy for 100k | Done | 45,000-60,000 | 52,121 |
+| P11 | Refactor action authoring source for 20+ effective actions | Done | 100,000+ base | 105,612 |
+| P12 | Stabilize 100k verification gate | Done | 0 | verified at 105,612 |
+| P13 | Model the 500k expansion shape | Planned | TBD | TBD |
 
 ## Next Direction
 
@@ -84,7 +101,7 @@ base variations: 15,034 -> 15,610
 estimated delta: +576
 ```
 
-P9 should now start with target modeling for the 100k intermediate goal. The
+P9 added `tools/plan_variation_target.py` for read-only target modeling. The
 current post-P8 compatibility surface has 33 subject candidates outside
 `variation_scope.variation_subjects`, but promoting every known subject only
 raises the current location surface to about `25,524` base variations. The 100k
@@ -106,6 +123,53 @@ Preferred 100k shape:
 - `105-115` locations
 - `5,800-6,500` compatibility rows
 - median `16+` actions
+
+P10 should use the planner before changing scope or compatibility data:
+
+```bash
+python tools/plan_variation_target.py --target 100000
+```
+
+P9 rejected subject-only expansion as the next implementation step because the
+best current subject candidates are mostly overlapping office / urban /
+suburban archetypes and the full known subject pool still only reaches about
+`25k` base variations on current locations.
+
+P10 result:
+
+- added mid-level tags: `retail_service`, `daily_public`, `transit`,
+  `home_life`, `workplace`, `leisure`, `quiet_indoor`
+- promoted compatibility subjects into variation scope and added distinct
+  daily-life archetypes
+- promoted existing background/action surface into scope where canonical
+  generation can produce rows
+- added dedicated action pools for the remaining daily-life locations
+- reached `5,926` rows and `52,121` base variations
+
+P11 target planner result before action refactor:
+
+| Effective minimum actions | Base variations |
+| --- | ---: |
+| 16 | 94,816 |
+| 20 | 118,520 |
+
+P11 implemented a tiered action-depth target instead of forcing every location
+to 20 actions:
+
+| Location tier | Target actions |
+| --- | ---: |
+| high-row locations (`rows >= 100`) | 20 |
+| medium-row locations (`rows >= 50`) | 16 |
+| low-row/specialized locations | 12 |
+
+P11 result:
+
+- added shared semantic action families under
+  `vocab/source/action_pools/_shared_families.json`
+- expanded `tools/build_action_pools.py` so source files can reference shared
+  families while runtime keeps the flat `vocab/data/action_pools.json` shape
+- raised base variations from `52,121` to `105,612`
+- current target planner reports `target_met: true` at the current surface
 
 ## Candidate Tracking
 
@@ -185,6 +249,11 @@ High-coverage existing action additions:
 | 2026-05-08 | `python -m unittest assets.test_asset_validator assets.test_vocab_lint assets.test_variation_scope assets.test_calc_variations assets.test_data_consistency` | Pass | 23 tests OK |
 | 2026-05-08 | `python tools/build_action_pools.py --check` | Pass | `ERROR: []`; `WARNING: []`; 79 source location files match runtime JSON |
 | 2026-05-08 | `python -m unittest assets.test_build_action_pools` | Pass | 2 tests OK |
+| 2026-05-08 | `python tools/plan_variation_target.py --target 100000` | Pass | current base variations `105,612`; target met |
+| 2026-05-08 | `python tools/build_action_pools.py --check` | Pass | `ERROR: []`; `WARNING: []`; shared family source expands to runtime JSON |
+| 2026-05-08 | `python -m unittest assets.test_build_action_pools assets.test_action_generator assets.test_action_diversity_audit assets.test_repetition_guard_audit` | Pass | 26 tests OK |
+| 2026-05-08 | `python -m unittest discover -s assets -p "test_*.py"` | Pass | 266 tests OK |
+| 2026-05-08 | `python tools/verify_full_flow.py` | Pass | OK |
 
 ## Open Risks
 

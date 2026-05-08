@@ -33,5 +33,11 @@
       "text": "warming up with high knees",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "fitness_motion",
+      "take": 8
+    }
   ]
 }

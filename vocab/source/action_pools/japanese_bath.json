@@ -25,5 +25,11 @@
       "text": "sitting on a small stool scrubbing back",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "home_rhythm",
+      "take": 6
+    }
   ]
 }

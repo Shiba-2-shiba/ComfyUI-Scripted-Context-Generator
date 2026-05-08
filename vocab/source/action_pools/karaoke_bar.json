@@ -33,5 +33,11 @@
       "text": "pasting a song into the queue",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "leisure_participation",
+      "take": 8
+    }
   ]
 }

@@ -33,5 +33,11 @@
       "text": "looking up at the high vaulted ceiling",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "refined_interior",
+      "take": 4
+    }
   ]
 }

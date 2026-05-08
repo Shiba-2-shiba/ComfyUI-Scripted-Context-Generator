@@ -45,5 +45,15 @@
       "text": "holding a gallery leaflet while comparing two paintings",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "refined_interior",
+      "take": 8
+    },
+    {
+      "name": "quiet_study",
+      "take": 1
+    }
   ]
 }

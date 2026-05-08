@@ -1,0 +1,47 @@
+{
+  "location": "neighborhood_playground",
+  "actions": [
+    {
+      "text": "standing beside a bench near the play equipment",
+      "load": "calm"
+    },
+    {
+      "text": "watching the open playground while holding a drink",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a low wall beside the sandpit",
+      "load": "calm"
+    },
+    {
+      "text": "walking past the swings at a relaxed pace",
+      "load": "active"
+    },
+    {
+      "text": "checking a phone while leaning near the fence",
+      "load": "calm"
+    },
+    {
+      "text": "holding a small bag beside the slide",
+      "load": "calm"
+    },
+    {
+      "text": "turning toward voices from the play area",
+      "load": "active"
+    },
+    {
+      "text": "pausing near a tree at the edge of the playground",
+      "load": "calm"
+    }
+  ],
+  "families": [
+    {
+      "name": "outdoor_observation",
+      "take": 8
+    },
+    {
+      "name": "leisure_participation",
+      "take": 4
+    }
+  ]
+}

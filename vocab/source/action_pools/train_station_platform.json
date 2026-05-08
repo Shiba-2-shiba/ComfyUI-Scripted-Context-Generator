@@ -1,0 +1,43 @@
+{
+  "location": "train_station_platform",
+  "actions": [
+    {
+      "text": "waiting near the platform marker with a bag in hand",
+      "load": "calm"
+    },
+    {
+      "text": "checking the train arrival board overhead",
+      "load": "calm"
+    },
+    {
+      "text": "standing behind the safety line while watching the tracks",
+      "load": "calm"
+    },
+    {
+      "text": "walking along the platform toward the correct car",
+      "load": "active"
+    },
+    {
+      "text": "reading a route map beside a pillar",
+      "load": "calm"
+    },
+    {
+      "text": "holding a ticket while listening for an announcement",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting luggage near the bench before boarding",
+      "load": "calm"
+    },
+    {
+      "text": "turning toward the arriving train at the platform edge",
+      "load": "active"
+    }
+  ],
+  "families": [
+    {
+      "name": "transit_flow",
+      "take": 8
+    }
+  ]
+}

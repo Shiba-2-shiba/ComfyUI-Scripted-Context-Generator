@@ -25,5 +25,11 @@
       "text": "signaling to advance",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "cautious_tension",
+      "take": 6
+    }
   ]
 }

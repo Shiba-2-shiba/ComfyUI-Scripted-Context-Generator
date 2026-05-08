@@ -45,5 +45,15 @@
       "text": "folding a blanket beside the sofa",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "home_rhythm",
+      "take": 8
+    },
+    {
+      "name": "public_presence",
+      "take": 1
+    }
   ]
 }

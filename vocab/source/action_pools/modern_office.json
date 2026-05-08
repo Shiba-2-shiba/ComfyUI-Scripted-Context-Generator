@@ -37,5 +37,11 @@
       "text": "stretching her shoulders beside the copier",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "work_rhythm",
+      "take": 3
+    }
   ]
 }

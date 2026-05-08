@@ -15,10 +15,10 @@ class TestCalcVariations(unittest.TestCase):
     def test_base_metrics_still_report_current_action_pool_coverage(self):
         metrics = calc_base_metrics(ROOT)
 
-        self.assertEqual(metrics["unique_subjects"], 58)
-        self.assertEqual(metrics["unique_locations"], 76)
-        self.assertEqual(metrics["total_base_variations"], 15610)
-        self.assertEqual(metrics["row_count"], 1637)
+        self.assertEqual(metrics["unique_subjects"], 120)
+        self.assertEqual(metrics["unique_locations"], 91)
+        self.assertEqual(metrics["total_base_variations"], 105612)
+        self.assertEqual(metrics["row_count"], 5926)
         self.assertEqual(metrics["missing_pools_count"], 0)
 
     def test_garnish_metrics_are_semantic_only(self):

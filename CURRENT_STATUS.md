@@ -7,7 +7,7 @@ Last verified: 2026-05-08
 `docs/context_refactor/README.md` を参照してください。
 subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` を先に参照してください。
 日常系 location / action pool の拡張作業は `docs/variation_expansion/README.md` に計画と進捗があります。
-次の拡張順は P9: 100k target modeling、P10: compatibility taxonomy expansion、P11: action authoring refactor です。
+100k base variations gate は通過済みです。次の拡張計画対象は 500k に向けた subject / location / action-depth の再設計です。
 現在の variation sizing 境界は `vocab/data/variation_scope.json` に固定されています。
 書類整理方針は `docs/documentation_cleanup_plan.md` を参照してください。
 
@@ -21,7 +21,7 @@ subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` 
 - Main runtime logic: `pipeline/`
 - Schema / context operations / policy: `core/`
 - Data source of truth: `vocab/data/`
-- Action authoring source: `vocab/source/action_pools/`
+- Action authoring source: `vocab/source/action_pools/` with shared families in `_shared_families.json`
 
 Retired / compatibility state:
 
@@ -65,21 +65,21 @@ python assets/calc_variations.py --json
 
 Current semantic-only summary:
 
-- unique subjects: `58`
-- unique locations: `76`
-- compatibility review rows: `1,637`
-- base variations: `15,610`
-- actions per location: `min 4 / median 8 / mean 8.03 / max 12`
+- unique subjects: `120`
+- unique locations: `91`
+- compatibility review rows: `5,926`
+- base variations: `105,612`
+- actions per location: `min 12 / median 16 / mean 15.6 / max 20`
 - missing action pools: `0`
-- runtime action pools: `87`
-- split action pool source files: `87` location files + `_manifest.json`
+- runtime action pools: `96`
+- split action pool source files: `96` location files + `_manifest.json` + `_shared_families.json`
 - mood keys: `9`
 - unique mood tags: `172`
 - unique micro actions: `280`
 - unique background context tags: `835`
 - semantic units: `1,287`
 - semantic garnish universe: `11,583`
-- theoretical max: `180,810,630`
+- theoretical max: `1,223,303,796`
 
 Legacy-disabled vocabulary still present for audit visibility:
 
@@ -92,11 +92,14 @@ Interpretation:
 
 - `base variations` is calculated from `assets/compatibility_review.csv`
   rows and dedicated action counts in `vocab/data/action_pools.json`.
-- Current base sizing is stable at `58 subjects × 76 locations` within
-  `vocab/data/variation_scope.json`, producing `15,610` counted base
+- Current base sizing is stable at `120 subjects × 91 locations` within
+  `vocab/data/variation_scope.json`, producing `105,612` counted base
   variations.
 - The split files in `vocab/source/action_pools/` are for editing/review only;
-  runtime still reads `vocab/data/action_pools.json`.
+  runtime still reads the generated flat `vocab/data/action_pools.json`.
+- `vocab/source/action_pools/_shared_families.json` is the shared authoring
+  layer for repeated semantic action patterns. Do not hand-edit the runtime
+  action pool for normal authoring.
 
 ## Verification Snapshot
 
@@ -109,7 +112,9 @@ python -m unittest assets.test_context_nodes assets.test_workflow_samples
 python tools/verify_full_flow.py
 python tools/validate_prompt_data.py
 python tools/check_variation_scope.py
+python tools/build_compatibility_review.py --check
 python tools/build_action_pools.py --check
+python tools/plan_variation_target.py --target 100000
 python -c "from asset_validator import validate_assets; issues=validate_assets(); print('issues', len(issues))"
 python tools/check_widgets_values.py
 python -m py_compile assets/calc_variations.py assets/test_calc_variations.py assets/test_char_profile_nl.py assets/test_scene_variator.py assets/test_vocab_lint.py
@@ -118,12 +123,14 @@ python -m py_compile assets/calc_variations.py assets/test_calc_variations.py as
 Results:
 
 - targeted unittest group: `14 tests OK`
-- assets unittest discovery: `260 tests OK`
+- assets unittest discovery: `266 tests OK`
 - context/workflow smoke tests: `12 tests OK`
 - full flow: `OK`
 - prompt data validator: `ERROR: []`, `WARNING: []`
 - variation scope check: `ERROR: []`
+- compatibility review check: `ERROR: []`, `WARNING: []`
 - action pool source check: `ERROR: []`, `WARNING: []`
+- target planner: `105,612` base variations, target met
 - asset validator: `issues 0`
 - workflow widget validation: `OK`
 - compile check: `OK`
@@ -156,21 +163,26 @@ Recent expansion:
 
 - 10 daily-life locations were promoted into base variation sizing
 - 8 remaining daily-life locations were promoted in P8
-- dedicated action pools were added for the promoted daily-life locations
-- high-coverage existing locations received additional semantic actions
-- base variations increased from `11,916` to `15,610`
-- `vocab/data/variation_scope.json` now records the active 58 subjects / 76 locations boundary
+- P9 added read-only 100k target planning
+- P10 added mid-level compatibility tags, promoted 120 subjects / 91 locations,
+  and added missing daily-life action pools
+- P11 added shared action families and raised action depth to the 12/16/20 tier
+- base variations increased from `11,916` to `105,612`
+- `vocab/data/variation_scope.json` now records the active 120 subjects / 91 locations boundary
 - `tools/build_compatibility_review.py --check` now verifies scoped CSV regeneration with `ERROR: []`
 - `tools/build_action_pools.py --check` now verifies split action-pool source
   rebuilds the runtime JSON exactly
 
-Next expansion direction:
+Current expansion state:
 
-- P8 promoted 8 remaining daily-life locations while keeping `unique subjects` at `58`.
-- P8 result: `unique locations 68 -> 76`, rows `1,565 -> 1,637`,
-  base variations `15,034 -> 15,610`.
-- P9 now evaluates subject promotion after the P8 measurement.
-- Detailed P8/P9 plan: `docs/variation_expansion/next_expansion_wave_plan.md`.
+- P10 result: `unique subjects 58 -> 120`, `unique locations 76 -> 91`,
+  rows `1,637 -> 5,926`, base variations `15,610 -> 52,121`.
+- P11 result: action depth `min 12 / median 16 / mean 15.6 / max 20`,
+  base variations `52,121 -> 105,612`.
+- P12 stabilization gate commands have passed at the 100k scale.
+- Next planning target: `500,000` base variations without making the 100k
+  implementation noisy or repetitive.
+- Detailed current plan: `docs/variation_expansion/base_variations_100k_plan.md`.
 
 ## Refactor Risk Map
 
@@ -234,6 +246,7 @@ Before expanding subjects / locations / actions:
 ```bash
 python -m unittest assets.test_data_consistency assets.test_character_resolution assets.test_location_resolution assets.test_action_generator assets.test_calc_variations
 python tools/validate_prompt_data.py
+python tools/plan_variation_target.py --target 100000
 python tools/check_variation_scope.py
 python tools/build_action_pools.py --check
 python assets/calc_variations.py --json

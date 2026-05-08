@@ -33,5 +33,11 @@
       "text": "leaning over the table to compare project notes",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "work_rhythm",
+      "take": 4
+    }
   ]
 }

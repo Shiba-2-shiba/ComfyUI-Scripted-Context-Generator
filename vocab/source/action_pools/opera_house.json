@@ -17,5 +17,15 @@
       "text": "standing backstage, preparing",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "performance_focus",
+      "take": 8
+    },
+    {
+      "name": "refined_interior",
+      "take": 4
+    }
   ]
 }

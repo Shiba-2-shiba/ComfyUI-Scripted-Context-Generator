@@ -17,5 +17,11 @@
       "text": "leaning against the mast, relaxing",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "speculative_exploration",
+      "take": 8
+    }
   ]
 }

@@ -45,5 +45,15 @@
       "text": "straightening the edge of the picnic blanket",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "outdoor_observation",
+      "take": 8
+    },
+    {
+      "name": "leisure_participation",
+      "take": 1
+    }
   ]
 }

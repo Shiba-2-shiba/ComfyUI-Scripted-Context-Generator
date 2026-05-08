@@ -33,5 +33,11 @@
       "text": "buying a drink from a futuristic vending machine",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "public_navigation",
+      "take": 8
+    }
   ]
 }

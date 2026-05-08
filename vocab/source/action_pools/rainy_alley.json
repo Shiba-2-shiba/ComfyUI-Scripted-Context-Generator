@@ -45,5 +45,15 @@
       "text": "waiting under a sign while checking the street ahead",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "public_navigation",
+      "take": 8
+    },
+    {
+      "name": "cautious_tension",
+      "take": 1
+    }
   ]
 }

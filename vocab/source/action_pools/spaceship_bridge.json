@@ -17,5 +17,11 @@
       "text": "standing by the viewport, arms behind back",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "speculative_exploration",
+      "take": 8
+    }
   ]
 }

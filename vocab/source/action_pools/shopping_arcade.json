@@ -1,0 +1,43 @@
+{
+  "location": "shopping_arcade",
+  "actions": [
+    {
+      "text": "walking beneath the covered arcade signs",
+      "load": "active"
+    },
+    {
+      "text": "checking a storefront display while holding a bag",
+      "load": "calm"
+    },
+    {
+      "text": "standing near a shop entrance as people pass by",
+      "load": "calm"
+    },
+    {
+      "text": "reading a sale sign beside the walkway",
+      "load": "calm"
+    },
+    {
+      "text": "carrying a small purchase through the arcade",
+      "load": "active"
+    },
+    {
+      "text": "pausing under the awning while deciding where to go",
+      "load": "calm"
+    },
+    {
+      "text": "looking across the row of small shops",
+      "load": "calm"
+    },
+    {
+      "text": "stepping around pedestrians in the covered street",
+      "load": "active"
+    }
+  ],
+  "families": [
+    {
+      "name": "retail_service",
+      "take": 8
+    }
+  ]
+}

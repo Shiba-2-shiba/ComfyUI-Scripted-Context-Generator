@@ -25,5 +25,11 @@
       "text": "spotting a shiny gem on the floor",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "cautious_tension",
+      "take": 6
+    }
   ]
 }

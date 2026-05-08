@@ -29,5 +29,11 @@
       "text": "rearranging name cards before everyone arrives",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "work_rhythm",
+      "take": 5
+    }
   ]
 }

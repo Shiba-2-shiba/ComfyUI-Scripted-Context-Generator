@@ -33,5 +33,11 @@
       "text": "holding a paper umbrella in the rain",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "outdoor_observation",
+      "take": 4
+    }
   ]
 }

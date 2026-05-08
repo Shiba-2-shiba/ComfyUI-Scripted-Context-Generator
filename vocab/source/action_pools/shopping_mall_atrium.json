@@ -45,5 +45,15 @@
       "text": "checking a receipt while standing near the directory",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "retail_service",
+      "take": 8
+    },
+    {
+      "name": "public_navigation",
+      "take": 1
+    }
   ]
 }

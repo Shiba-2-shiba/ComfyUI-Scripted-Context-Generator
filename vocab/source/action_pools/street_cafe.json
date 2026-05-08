@@ -49,5 +49,11 @@
       "text": "checking the bill while waiting near the table",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "retail_service",
+      "take": 8
+    }
   ]
 }

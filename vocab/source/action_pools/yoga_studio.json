@@ -25,5 +25,15 @@
       "text": "lying on back in savasana",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "fitness_motion",
+      "take": 8
+    },
+    {
+      "name": "quiet_study",
+      "take": 2
+    }
   ]
 }

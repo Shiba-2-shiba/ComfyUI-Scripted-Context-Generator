@@ -1,0 +1,43 @@
+{
+  "location": "university_campus_courtyard",
+  "actions": [
+    {
+      "text": "walking across the courtyard with notebooks held close",
+      "load": "active"
+    },
+    {
+      "text": "sitting on a bench between campus buildings",
+      "load": "calm"
+    },
+    {
+      "text": "checking a class schedule near the walkway",
+      "load": "calm"
+    },
+    {
+      "text": "standing beside a notice board with a folder",
+      "load": "calm"
+    },
+    {
+      "text": "talking quietly near the edge of the courtyard",
+      "load": "calm"
+    },
+    {
+      "text": "carrying study materials toward the next building",
+      "load": "active"
+    },
+    {
+      "text": "pausing beside a planter while looking around",
+      "load": "calm"
+    },
+    {
+      "text": "reading a campus flyer under the trees",
+      "load": "calm"
+    }
+  ],
+  "families": [
+    {
+      "name": "quiet_study",
+      "take": 4
+    }
+  ]
+}

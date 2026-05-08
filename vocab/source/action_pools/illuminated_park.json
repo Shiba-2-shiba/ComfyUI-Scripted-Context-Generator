@@ -45,5 +45,15 @@
       "text": "pausing near a lantern to warm both hands",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "outdoor_observation",
+      "take": 8
+    },
+    {
+      "name": "public_presence",
+      "take": 1
+    }
   ]
 }

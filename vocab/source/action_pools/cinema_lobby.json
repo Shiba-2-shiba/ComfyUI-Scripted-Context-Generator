@@ -33,5 +33,11 @@
       "text": "adjusting a small bag while leaving the ticket gate",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "leisure_participation",
+      "take": 8
+    }
   ]
 }

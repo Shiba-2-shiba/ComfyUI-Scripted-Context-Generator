@@ -17,5 +17,15 @@
       "text": "standing with feet in the water",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "resort_relaxation",
+      "take": 8
+    },
+    {
+      "name": "outdoor_observation",
+      "take": 8
+    }
   ]
 }

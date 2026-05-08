@@ -33,6 +33,22 @@
         {
             "text": "cleaning the classroom after school",
             "load": "active"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "standing quietly while reviewing what she needs next",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in to recheck a small point",
+            "load": "calm"
+        },
+        {
+            "text": "pausing before continuing the task at hand",
+            "load": "calm"
         }
     ],
     "school_rooftop": [
@@ -59,6 +75,30 @@
         {
             "text": "walking towards the fence with a smile",
             "load": "active"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "standing quietly while reviewing what she needs next",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in to recheck a small point",
+            "load": "calm"
+        },
+        {
+            "text": "pausing before continuing the task at hand",
+            "load": "calm"
+        },
+        {
+            "text": "walking softly while keeping the quiet rhythm of the place",
+            "load": "active"
+        },
+        {
+            "text": "looking down in concentration while holding her place",
+            "load": "calm"
         }
     ],
     "school_library": [
@@ -101,6 +141,46 @@
         {
             "text": "walking between tables while carrying borrowed books",
             "load": "active"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "standing quietly while reviewing what she needs next",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in to recheck a small point",
+            "load": "calm"
+        },
+        {
+            "text": "pausing before continuing the task at hand",
+            "load": "calm"
+        },
+        {
+            "text": "walking softly while keeping the quiet rhythm of the place",
+            "load": "active"
+        },
+        {
+            "text": "looking down in concentration while holding her place",
+            "load": "calm"
+        },
+        {
+            "text": "settling back after finishing a careful check",
+            "load": "calm"
+        },
+        {
+            "text": "turning slightly while staying absorbed in the work",
+            "load": "calm"
+        },
+        {
+            "text": "standing and checking what needs attention next",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while keeping track of the space around her",
+            "load": "active"
         }
     ],
     "school_gym_hall": [
@@ -127,6 +207,30 @@
         {
             "text": "walking across the polished floor",
             "load": "active"
+        },
+        {
+            "text": "standing and preparing for the next movement",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the space while loosening her posture",
+            "load": "active"
+        },
+        {
+            "text": "pausing to catch her breath before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "checking her stance before shifting into motion",
+            "load": "calm"
+        },
+        {
+            "text": "moving with steady energy while keeping control",
+            "load": "active"
+        },
+        {
+            "text": "leaning forward to reset her balance",
+            "load": "calm"
         }
     ],
     "modern_office": [
@@ -165,6 +269,18 @@
         {
             "text": "stretching her shoulders beside the copier",
             "load": "calm"
+        },
+        {
+            "text": "standing and lining up the next task in order",
+            "load": "calm"
+        },
+        {
+            "text": "checking one detail before moving on with the work",
+            "load": "calm"
+        },
+        {
+            "text": "leaning forward while keeping the task precise",
+            "load": "calm"
         }
     ],
     "boardroom": [
@@ -194,6 +310,26 @@
         },
         {
             "text": "rearranging name cards before everyone arrives",
+            "load": "calm"
+        },
+        {
+            "text": "standing and lining up the next task in order",
+            "load": "calm"
+        },
+        {
+            "text": "checking one detail before moving on with the work",
+            "load": "calm"
+        },
+        {
+            "text": "leaning forward while keeping the task precise",
+            "load": "calm"
+        },
+        {
+            "text": "walking between work areas with a measured pace",
+            "load": "active"
+        },
+        {
+            "text": "pausing to reassess what still needs finishing",
             "load": "calm"
         }
     ],
@@ -225,6 +361,26 @@
         {
             "text": "straightening an ID badge before the doors open",
             "load": "calm"
+        },
+        {
+            "text": "standing ready while watching for the next departure",
+            "load": "calm"
+        },
+        {
+            "text": "checking the timing before stepping forward",
+            "load": "calm"
+        },
+        {
+            "text": "walking with the crowd while keeping her balance",
+            "load": "active"
+        },
+        {
+            "text": "pausing near the route marker and reassessing direction",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her stance as the crowd shifts around her",
+            "load": "calm"
         }
     ],
     "surveillance_room": [
@@ -251,6 +407,30 @@
         {
             "text": "eating a donut while watching screens",
             "load": "calm"
+        },
+        {
+            "text": "standing and lining up the next task in order",
+            "load": "calm"
+        },
+        {
+            "text": "checking one detail before moving on with the work",
+            "load": "calm"
+        },
+        {
+            "text": "leaning forward while keeping the task precise",
+            "load": "calm"
+        },
+        {
+            "text": "walking between work areas with a measured pace",
+            "load": "active"
+        },
+        {
+            "text": "pausing to reassess what still needs finishing",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the next responsibility before continuing",
+            "load": "calm"
         }
     ],
     "messy_copy_room": [
@@ -276,6 +456,30 @@
         },
         {
             "text": "standing and reading a notice on the wall",
+            "load": "calm"
+        },
+        {
+            "text": "standing and lining up the next task in order",
+            "load": "calm"
+        },
+        {
+            "text": "checking one detail before moving on with the work",
+            "load": "calm"
+        },
+        {
+            "text": "leaning forward while keeping the task precise",
+            "load": "calm"
+        },
+        {
+            "text": "walking between work areas with a measured pace",
+            "load": "active"
+        },
+        {
+            "text": "pausing to reassess what still needs finishing",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the next responsibility before continuing",
             "load": "calm"
         }
     ],
@@ -357,6 +561,42 @@
         {
             "text": "waiting under a sign while checking the street ahead",
             "load": "calm"
+        },
+        {
+            "text": "checking the route ahead before choosing where to go",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the area while scanning for a clear path",
+            "load": "active"
+        },
+        {
+            "text": "slowing down as the flow around her changes",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the edge of the path and watching timing",
+            "load": "calm"
+        },
+        {
+            "text": "stepping forward after a small delay in the movement around her",
+            "load": "active"
+        },
+        {
+            "text": "looking over the signs of activity before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her position to keep from blocking the way",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully while leaving space for others nearby",
+            "load": "active"
+        },
+        {
+            "text": "standing tense while watching for movement nearby",
+            "load": "calm"
         }
     ],
     "commuter_transport": [
@@ -403,6 +643,42 @@
         {
             "text": "checking a transit card near the train doors",
             "load": "calm"
+        },
+        {
+            "text": "standing ready while watching for the next departure",
+            "load": "calm"
+        },
+        {
+            "text": "checking the timing before stepping forward",
+            "load": "calm"
+        },
+        {
+            "text": "walking with the crowd while keeping her balance",
+            "load": "active"
+        },
+        {
+            "text": "pausing near the route marker and reassessing direction",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her stance as the crowd shifts around her",
+            "load": "calm"
+        },
+        {
+            "text": "moving forward after the delay finally clears",
+            "load": "active"
+        },
+        {
+            "text": "looking ahead while preparing for the next transfer",
+            "load": "calm"
+        },
+        {
+            "text": "waiting at the side while keeping track of movement nearby",
+            "load": "calm"
+        },
+        {
+            "text": "checking the route ahead before choosing where to go",
+            "load": "calm"
         }
     ],
     "luxury_hotel_lobby": [
@@ -429,6 +705,46 @@
         {
             "text": "standing near a large flower arrangement",
             "load": "calm"
+        },
+        {
+            "text": "standing with careful posture while taking in the room",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while keeping her movements composed",
+            "load": "active"
+        },
+        {
+            "text": "pausing beside the quiet activity of the space",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in just enough to review a nearby detail",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the next exchange with polite attention",
+            "load": "calm"
+        },
+        {
+            "text": "waiting calmly while the formal mood holds",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before settling into place",
+            "load": "calm"
+        },
+        {
+            "text": "moving with restraint through the ordered scene",
+            "load": "active"
+        },
+        {
+            "text": "standing in the easy atmosphere while looking around",
+            "load": "calm"
+        },
+        {
+            "text": "walking unhurriedly while letting the moment open up",
+            "load": "active"
         }
     ],
     "karaoke_bar": [
@@ -462,6 +778,38 @@
         },
         {
             "text": "pasting a song into the queue",
+            "load": "calm"
+        },
+        {
+            "text": "standing with attention on the activity unfolding nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking closer while deciding how to join in",
+            "load": "active"
+        },
+        {
+            "text": "pausing with a small smile before the next moment",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in as the atmosphere draws her attention",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the sound of activity around her",
+            "load": "calm"
+        },
+        {
+            "text": "checking the flow of the event before moving again",
+            "load": "calm"
+        },
+        {
+            "text": "moving lightly while keeping up with the lively pace",
+            "load": "active"
+        },
+        {
+            "text": "waiting for the right timing to step in",
             "load": "calm"
         }
     ],
@@ -509,6 +857,42 @@
         {
             "text": "placing washed utensils beside the sink",
             "load": "calm"
+        },
+        {
+            "text": "standing and tidying the small area around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while checking what still needs doing",
+            "load": "active"
+        },
+        {
+            "text": "pausing to smooth out the next part of the routine",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while adjusting something out of place",
+            "load": "calm"
+        },
+        {
+            "text": "settling into a quiet pause before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after remembering one more small task",
+            "load": "active"
+        },
+        {
+            "text": "checking the room with an easy unhurried look",
+            "load": "calm"
+        },
+        {
+            "text": "moving through the routine without rushing",
+            "load": "active"
+        },
+        {
+            "text": "standing and checking what needs attention next",
+            "load": "calm"
         }
     ],
     "bedroom_boudoir": [
@@ -554,6 +938,42 @@
         },
         {
             "text": "placing a folded blanket at the foot of the bed",
+            "load": "calm"
+        },
+        {
+            "text": "standing and tidying the small area around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while checking what still needs doing",
+            "load": "active"
+        },
+        {
+            "text": "pausing to smooth out the next part of the routine",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while adjusting something out of place",
+            "load": "calm"
+        },
+        {
+            "text": "settling into a quiet pause before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after remembering one more small task",
+            "load": "active"
+        },
+        {
+            "text": "checking the room with an easy unhurried look",
+            "load": "calm"
+        },
+        {
+            "text": "moving through the routine without rushing",
+            "load": "active"
+        },
+        {
+            "text": "standing with careful posture while taking in the room",
             "load": "calm"
         }
     ],
@@ -605,6 +1025,22 @@
         {
             "text": "checking form in the mirror",
             "load": "calm"
+        },
+        {
+            "text": "standing and preparing for the next movement",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the space while loosening her posture",
+            "load": "active"
+        },
+        {
+            "text": "pausing to catch her breath before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "checking her stance before shifting into motion",
+            "load": "calm"
         }
     ],
     "yoga_studio": [
@@ -630,6 +1066,46 @@
         },
         {
             "text": "lying on back in savasana",
+            "load": "calm"
+        },
+        {
+            "text": "standing and preparing for the next movement",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the space while loosening her posture",
+            "load": "active"
+        },
+        {
+            "text": "pausing to catch her breath before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "checking her stance before shifting into motion",
+            "load": "calm"
+        },
+        {
+            "text": "moving with steady energy while keeping control",
+            "load": "active"
+        },
+        {
+            "text": "leaning forward to reset her balance",
+            "load": "calm"
+        },
+        {
+            "text": "turning back toward the next exercise with focus",
+            "load": "active"
+        },
+        {
+            "text": "slowing down as the effort settles into rhythm",
+            "load": "calm"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "standing quietly while reviewing what she needs next",
             "load": "calm"
         }
     ],
@@ -665,6 +1141,38 @@
         {
             "text": "warming up with high knees",
             "load": "calm"
+        },
+        {
+            "text": "standing and preparing for the next movement",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the space while loosening her posture",
+            "load": "active"
+        },
+        {
+            "text": "pausing to catch her breath before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "checking her stance before shifting into motion",
+            "load": "calm"
+        },
+        {
+            "text": "moving with steady energy while keeping control",
+            "load": "active"
+        },
+        {
+            "text": "leaning forward to reset her balance",
+            "load": "calm"
+        },
+        {
+            "text": "turning back toward the next exercise with focus",
+            "load": "active"
+        },
+        {
+            "text": "slowing down as the effort settles into rhythm",
+            "load": "calm"
         }
     ],
     "concert_stage": [
@@ -699,6 +1207,38 @@
         {
             "text": "pointing to a fan in the front row",
             "load": "calm"
+        },
+        {
+            "text": "standing ready while listening for the next cue",
+            "load": "calm"
+        },
+        {
+            "text": "checking her timing before the activity resumes",
+            "load": "calm"
+        },
+        {
+            "text": "moving through a small practice step with focus",
+            "load": "active"
+        },
+        {
+            "text": "pausing to steady her rhythm before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the center of attention with composure",
+            "load": "calm"
+        },
+        {
+            "text": "walking into position while keeping the pace controlled",
+            "load": "active"
+        },
+        {
+            "text": "leaning in as she follows the shape of the moment",
+            "load": "calm"
+        },
+        {
+            "text": "waiting for the signal to begin again",
+            "load": "calm"
         }
     ],
     "recording_studio": [
@@ -725,6 +1265,46 @@
         {
             "text": "signaling 'OK' from the booth",
             "load": "calm"
+        },
+        {
+            "text": "standing ready while listening for the next cue",
+            "load": "calm"
+        },
+        {
+            "text": "checking her timing before the activity resumes",
+            "load": "calm"
+        },
+        {
+            "text": "moving through a small practice step with focus",
+            "load": "active"
+        },
+        {
+            "text": "pausing to steady her rhythm before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the center of attention with composure",
+            "load": "calm"
+        },
+        {
+            "text": "walking into position while keeping the pace controlled",
+            "load": "active"
+        },
+        {
+            "text": "leaning in as she follows the shape of the moment",
+            "load": "calm"
+        },
+        {
+            "text": "waiting for the signal to begin again",
+            "load": "calm"
+        },
+        {
+            "text": "standing and lining up the next task in order",
+            "load": "calm"
+        },
+        {
+            "text": "checking one detail before moving on with the work",
+            "load": "calm"
         }
     ],
     "opera_house": [
@@ -743,6 +1323,54 @@
         {
             "text": "standing backstage, preparing",
             "load": "calm"
+        },
+        {
+            "text": "standing ready while listening for the next cue",
+            "load": "calm"
+        },
+        {
+            "text": "checking her timing before the activity resumes",
+            "load": "calm"
+        },
+        {
+            "text": "moving through a small practice step with focus",
+            "load": "active"
+        },
+        {
+            "text": "pausing to steady her rhythm before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the center of attention with composure",
+            "load": "calm"
+        },
+        {
+            "text": "walking into position while keeping the pace controlled",
+            "load": "active"
+        },
+        {
+            "text": "leaning in as she follows the shape of the moment",
+            "load": "calm"
+        },
+        {
+            "text": "waiting for the signal to begin again",
+            "load": "calm"
+        },
+        {
+            "text": "standing with careful posture while taking in the room",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while keeping her movements composed",
+            "load": "active"
+        },
+        {
+            "text": "pausing beside the quiet activity of the space",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in just enough to review a nearby detail",
+            "load": "calm"
         }
     ],
     "fantasy_forest": [
@@ -760,6 +1388,38 @@
         },
         {
             "text": "standing and looking at a glowing light",
+            "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her pace to match the quieter surroundings",
+            "load": "calm"
+        },
+        {
+            "text": "leaning slightly forward while noticing a small change nearby",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully along the edge of the scene",
+            "load": "active"
+        },
+        {
+            "text": "waiting a moment as the atmosphere settles around her",
             "load": "calm"
         }
     ],
@@ -787,6 +1447,30 @@
         {
             "text": "signaling to advance",
             "load": "calm"
+        },
+        {
+            "text": "standing tense while watching for movement nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking carefully while keeping herself ready to react",
+            "load": "active"
+        },
+        {
+            "text": "pausing after a sudden shift in the atmosphere",
+            "load": "calm"
+        },
+        {
+            "text": "looking toward the danger before choosing her next move",
+            "load": "calm"
+        },
+        {
+            "text": "leaning away slightly while holding her ground",
+            "load": "calm"
+        },
+        {
+            "text": "moving from cover to cover with controlled urgency",
+            "load": "active"
         }
     ],
     "dungeon_crypt": [
@@ -813,6 +1497,30 @@
         {
             "text": "listening to distant echoes",
             "load": "calm"
+        },
+        {
+            "text": "standing tense while watching for movement nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking carefully while keeping herself ready to react",
+            "load": "active"
+        },
+        {
+            "text": "pausing after a sudden shift in the atmosphere",
+            "load": "calm"
+        },
+        {
+            "text": "looking toward the danger before choosing her next move",
+            "load": "calm"
+        },
+        {
+            "text": "leaning away slightly while holding her ground",
+            "load": "calm"
+        },
+        {
+            "text": "moving from cover to cover with controlled urgency",
+            "load": "active"
         }
     ],
     "alien_planet": [
@@ -839,6 +1547,30 @@
         {
             "text": "watching the twin moons rise",
             "load": "calm"
+        },
+        {
+            "text": "standing alert while reading the unfamiliar space around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking forward carefully while checking each change nearby",
+            "load": "active"
+        },
+        {
+            "text": "pausing to understand the strange rhythm of the place",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward an unexpected signal with focused attention",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while studying an unusual detail",
+            "load": "calm"
+        },
+        {
+            "text": "moving with caution as the environment shifts around her",
+            "load": "active"
         }
     ],
     "dragon_lair": [
@@ -865,6 +1597,30 @@
         {
             "text": "spotting a shiny gem on the floor",
             "load": "calm"
+        },
+        {
+            "text": "standing tense while watching for movement nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking carefully while keeping herself ready to react",
+            "load": "active"
+        },
+        {
+            "text": "pausing after a sudden shift in the atmosphere",
+            "load": "calm"
+        },
+        {
+            "text": "looking toward the danger before choosing her next move",
+            "load": "calm"
+        },
+        {
+            "text": "leaning away slightly while holding her ground",
+            "load": "calm"
+        },
+        {
+            "text": "moving from cover to cover with controlled urgency",
+            "load": "active"
         }
     ],
     "shinto_shrine": [
@@ -891,6 +1647,30 @@
         {
             "text": "clapping hands twice in prayer",
             "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her pace to match the quieter surroundings",
+            "load": "calm"
+        },
+        {
+            "text": "leaning slightly forward while noticing a small change nearby",
+            "load": "calm"
         }
     ],
     "bamboo_forest": [
@@ -916,6 +1696,30 @@
         },
         {
             "text": "spotting a bamboo shoot",
+            "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her pace to match the quieter surroundings",
+            "load": "calm"
+        },
+        {
+            "text": "leaning slightly forward while noticing a small change nearby",
             "load": "calm"
         }
     ],
@@ -963,6 +1767,42 @@
         {
             "text": "brushing snow from a sleeve near a storefront",
             "load": "calm"
+        },
+        {
+            "text": "checking the route ahead before choosing where to go",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the area while scanning for a clear path",
+            "load": "active"
+        },
+        {
+            "text": "slowing down as the flow around her changes",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the edge of the path and watching timing",
+            "load": "calm"
+        },
+        {
+            "text": "stepping forward after a small delay in the movement around her",
+            "load": "active"
+        },
+        {
+            "text": "looking over the signs of activity before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her position to keep from blocking the way",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully while leaving space for others nearby",
+            "load": "active"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
         }
     ],
     "tropical_beach": [
@@ -980,6 +1820,70 @@
         },
         {
             "text": "standing with feet in the water",
+            "load": "calm"
+        },
+        {
+            "text": "standing in the easy atmosphere while looking around",
+            "load": "calm"
+        },
+        {
+            "text": "walking unhurriedly while letting the moment open up",
+            "load": "active"
+        },
+        {
+            "text": "pausing to enjoy the quieter part of the scene",
+            "load": "calm"
+        },
+        {
+            "text": "leaning back slightly as the day slows around her",
+            "load": "calm"
+        },
+        {
+            "text": "checking where to settle next before moving on",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the view with relaxed attention",
+            "load": "calm"
+        },
+        {
+            "text": "moving lightly through the relaxed flow of the place",
+            "load": "active"
+        },
+        {
+            "text": "waiting a moment while the atmosphere stays warm and slow",
+            "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her pace to match the quieter surroundings",
+            "load": "calm"
+        },
+        {
+            "text": "leaning slightly forward while noticing a small change nearby",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully along the edge of the scene",
+            "load": "active"
+        },
+        {
+            "text": "waiting a moment as the atmosphere settles around her",
             "load": "calm"
         }
     ],
@@ -1023,6 +1927,46 @@
         {
             "text": "pushing through choppy water toward deeper line",
             "load": "calm"
+        },
+        {
+            "text": "standing in the easy atmosphere while looking around",
+            "load": "calm"
+        },
+        {
+            "text": "walking unhurriedly while letting the moment open up",
+            "load": "active"
+        },
+        {
+            "text": "pausing to enjoy the quieter part of the scene",
+            "load": "calm"
+        },
+        {
+            "text": "leaning back slightly as the day slows around her",
+            "load": "calm"
+        },
+        {
+            "text": "checking where to settle next before moving on",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the view with relaxed attention",
+            "load": "calm"
+        },
+        {
+            "text": "moving lightly through the relaxed flow of the place",
+            "load": "active"
+        },
+        {
+            "text": "waiting a moment while the atmosphere stays warm and slow",
+            "load": "calm"
+        },
+        {
+            "text": "standing and preparing for the next movement",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the space while loosening her posture",
+            "load": "active"
         }
     ],
     "poolside_resort": [
@@ -1049,6 +1993,46 @@
         {
             "text": "adjusting sunglasses on head",
             "load": "calm"
+        },
+        {
+            "text": "standing in the easy atmosphere while looking around",
+            "load": "calm"
+        },
+        {
+            "text": "walking unhurriedly while letting the moment open up",
+            "load": "active"
+        },
+        {
+            "text": "pausing to enjoy the quieter part of the scene",
+            "load": "calm"
+        },
+        {
+            "text": "leaning back slightly as the day slows around her",
+            "load": "calm"
+        },
+        {
+            "text": "checking where to settle next before moving on",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the view with relaxed attention",
+            "load": "calm"
+        },
+        {
+            "text": "moving lightly through the relaxed flow of the place",
+            "load": "active"
+        },
+        {
+            "text": "waiting a moment while the atmosphere stays warm and slow",
+            "load": "calm"
+        },
+        {
+            "text": "standing with attention on the activity unfolding nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking closer while deciding how to join in",
+            "load": "active"
         }
     ],
     "antique_shop": [
@@ -1075,6 +2059,46 @@
         {
             "text": "holding a magnifying glass examining an item",
             "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "standing with careful posture while taking in the room",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while keeping her movements composed",
+            "load": "active"
         }
     ],
     "illuminated_park": [
@@ -1120,6 +2144,42 @@
         },
         {
             "text": "pausing near a lantern to warm both hands",
+            "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her pace to match the quieter surroundings",
+            "load": "calm"
+        },
+        {
+            "text": "leaning slightly forward while noticing a small change nearby",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully along the edge of the scene",
+            "load": "active"
+        },
+        {
+            "text": "waiting a moment as the atmosphere settles around her",
+            "load": "calm"
+        },
+        {
+            "text": "standing and checking what needs attention next",
             "load": "calm"
         }
     ],
@@ -1171,6 +2231,38 @@
         {
             "text": "checking the bill while waiting near the table",
             "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
+            "load": "calm"
         }
     ],
     "cozy_bookstore": [
@@ -1216,6 +2308,42 @@
         },
         {
             "text": "placing a reserved book on the checkout counter",
+            "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
             "load": "calm"
         }
     ],
@@ -1263,6 +2391,42 @@
         {
             "text": "checking a receipt while standing near the directory",
             "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "checking the route ahead before choosing where to go",
+            "load": "calm"
         }
     ],
     "convenience_store": [
@@ -1297,6 +2461,38 @@
         {
             "text": "stepping aside to let another customer pass",
             "load": "active"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
+            "load": "calm"
         }
     ],
     "bakery_shop": [
@@ -1330,6 +2526,38 @@
         },
         {
             "text": "folding a paper bag after paying at the counter",
+            "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
             "load": "calm"
         }
     ],
@@ -1365,6 +2593,38 @@
         {
             "text": "checking coupons beside the checkout lane",
             "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
+            "load": "calm"
         }
     ],
     "drugstore_aisle": [
@@ -1398,6 +2658,38 @@
         },
         {
             "text": "looking up at the aisle sign before turning",
+            "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
             "load": "calm"
         }
     ],
@@ -1433,6 +2725,38 @@
         {
             "text": "waving politely to call the server",
             "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
+            "load": "calm"
         }
     ],
     "cinema_lobby": [
@@ -1467,6 +2791,38 @@
         {
             "text": "adjusting a small bag while leaving the ticket gate",
             "load": "calm"
+        },
+        {
+            "text": "standing with attention on the activity unfolding nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking closer while deciding how to join in",
+            "load": "active"
+        },
+        {
+            "text": "pausing with a small smile before the next moment",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in as the atmosphere draws her attention",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the sound of activity around her",
+            "load": "calm"
+        },
+        {
+            "text": "checking the flow of the event before moving again",
+            "load": "calm"
+        },
+        {
+            "text": "moving lightly while keeping up with the lively pace",
+            "load": "active"
+        },
+        {
+            "text": "waiting for the right timing to step in",
+            "load": "calm"
         }
     ],
     "game_arcade": [
@@ -1500,6 +2856,38 @@
         },
         {
             "text": "waiting behind another player for a turn",
+            "load": "calm"
+        },
+        {
+            "text": "standing with attention on the activity unfolding nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking closer while deciding how to join in",
+            "load": "active"
+        },
+        {
+            "text": "pausing with a small smile before the next moment",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in as the atmosphere draws her attention",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the sound of activity around her",
+            "load": "calm"
+        },
+        {
+            "text": "checking the flow of the event before moving again",
+            "load": "calm"
+        },
+        {
+            "text": "moving lightly while keeping up with the lively pace",
+            "load": "active"
+        },
+        {
+            "text": "waiting for the right timing to step in",
             "load": "calm"
         }
     ],
@@ -1543,6 +2931,30 @@
         {
             "text": "smoothing a sleeve while waiting for a second opinion",
             "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
         }
     ],
     "picnic_park": [
@@ -1588,6 +3000,42 @@
         },
         {
             "text": "straightening the edge of the picnic blanket",
+            "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her pace to match the quieter surroundings",
+            "load": "calm"
+        },
+        {
+            "text": "leaning slightly forward while noticing a small change nearby",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully along the edge of the scene",
+            "load": "active"
+        },
+        {
+            "text": "waiting a moment as the atmosphere settles around her",
+            "load": "calm"
+        },
+        {
+            "text": "standing with attention on the activity unfolding nearby",
             "load": "calm"
         }
     ],
@@ -1635,6 +3083,42 @@
         {
             "text": "brushing a leaf from the path before stepping forward",
             "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her pace to match the quieter surroundings",
+            "load": "calm"
+        },
+        {
+            "text": "leaning slightly forward while noticing a small change nearby",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully along the edge of the scene",
+            "load": "active"
+        },
+        {
+            "text": "waiting a moment as the atmosphere settles around her",
+            "load": "calm"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
         }
     ],
     "spaceship_bridge": [
@@ -1652,6 +3136,38 @@
         },
         {
             "text": "standing by the viewport, arms behind back",
+            "load": "calm"
+        },
+        {
+            "text": "standing alert while reading the unfamiliar space around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking forward carefully while checking each change nearby",
+            "load": "active"
+        },
+        {
+            "text": "pausing to understand the strange rhythm of the place",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward an unexpected signal with focused attention",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while studying an unusual detail",
+            "load": "calm"
+        },
+        {
+            "text": "moving with caution as the environment shifts around her",
+            "load": "active"
+        },
+        {
+            "text": "checking her position before committing to the next step",
+            "load": "calm"
+        },
+        {
+            "text": "waiting still while listening for the next change",
             "load": "calm"
         }
     ],
@@ -1671,6 +3187,38 @@
         {
             "text": "leaning over a table of circuit boards",
             "load": "calm"
+        },
+        {
+            "text": "standing alert while reading the unfamiliar space around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking forward carefully while checking each change nearby",
+            "load": "active"
+        },
+        {
+            "text": "pausing to understand the strange rhythm of the place",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward an unexpected signal with focused attention",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while studying an unusual detail",
+            "load": "calm"
+        },
+        {
+            "text": "moving with caution as the environment shifts around her",
+            "load": "active"
+        },
+        {
+            "text": "checking her position before committing to the next step",
+            "load": "calm"
+        },
+        {
+            "text": "waiting still while listening for the next change",
+            "load": "calm"
         }
     ],
     "airship_deck": [
@@ -1688,6 +3236,38 @@
         },
         {
             "text": "leaning against the mast, relaxing",
+            "load": "calm"
+        },
+        {
+            "text": "standing alert while reading the unfamiliar space around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking forward carefully while checking each change nearby",
+            "load": "active"
+        },
+        {
+            "text": "pausing to understand the strange rhythm of the place",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward an unexpected signal with focused attention",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while studying an unusual detail",
+            "load": "calm"
+        },
+        {
+            "text": "moving with caution as the environment shifts around her",
+            "load": "active"
+        },
+        {
+            "text": "checking her position before committing to the next step",
+            "load": "calm"
+        },
+        {
+            "text": "waiting still while listening for the next change",
             "load": "calm"
         }
     ],
@@ -1715,6 +3295,30 @@
         {
             "text": "sitting on a small stool scrubbing back",
             "load": "calm"
+        },
+        {
+            "text": "standing and tidying the small area around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while checking what still needs doing",
+            "load": "active"
+        },
+        {
+            "text": "pausing to smooth out the next part of the routine",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while adjusting something out of place",
+            "load": "calm"
+        },
+        {
+            "text": "settling into a quiet pause before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after remembering one more small task",
+            "load": "active"
         }
     ],
     "clockwork_workshop": [
@@ -1732,6 +3336,38 @@
         },
         {
             "text": "standing surrounded by ticking clocks",
+            "load": "calm"
+        },
+        {
+            "text": "standing and lining up the next task in order",
+            "load": "calm"
+        },
+        {
+            "text": "checking one detail before moving on with the work",
+            "load": "calm"
+        },
+        {
+            "text": "leaning forward while keeping the task precise",
+            "load": "calm"
+        },
+        {
+            "text": "walking between work areas with a measured pace",
+            "load": "active"
+        },
+        {
+            "text": "pausing to reassess what still needs finishing",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the next responsibility before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "standing aside while waiting for the next cue",
+            "load": "calm"
+        },
+        {
+            "text": "reviewing the situation with steady concentration",
             "load": "calm"
         }
     ],
@@ -1767,6 +3403,22 @@
         {
             "text": "looking up at the high vaulted ceiling",
             "load": "calm"
+        },
+        {
+            "text": "standing with careful posture while taking in the room",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while keeping her movements composed",
+            "load": "active"
+        },
+        {
+            "text": "pausing beside the quiet activity of the space",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in just enough to review a nearby detail",
+            "load": "calm"
         }
     ],
     "enchanted_lake": [
@@ -1800,6 +3452,22 @@
         },
         {
             "text": "gazing at the moon reflected in the lake",
+            "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
             "load": "calm"
         }
     ],
@@ -1835,6 +3503,22 @@
         {
             "text": "looking at a map of the stars",
             "load": "calm"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "standing quietly while reviewing what she needs next",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in to recheck a small point",
+            "load": "calm"
+        },
+        {
+            "text": "pausing before continuing the task at hand",
+            "load": "calm"
         }
     ],
     "japanese_garden": [
@@ -1868,6 +3552,22 @@
         },
         {
             "text": "holding a paper umbrella in the rain",
+            "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
             "load": "calm"
         }
     ],
@@ -1903,6 +3603,22 @@
         {
             "text": "holding a tea bowl with both hands",
             "load": "calm"
+        },
+        {
+            "text": "standing with careful posture while taking in the room",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while keeping her movements composed",
+            "load": "active"
+        },
+        {
+            "text": "pausing beside the quiet activity of the space",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in just enough to review a nearby detail",
+            "load": "calm"
         }
     ],
     "starship_quarters": [
@@ -1937,6 +3653,22 @@
         {
             "text": "checking life support indicators on the wall",
             "load": "calm"
+        },
+        {
+            "text": "standing alert while reading the unfamiliar space around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking forward carefully while checking each change nearby",
+            "load": "active"
+        },
+        {
+            "text": "pausing to understand the strange rhythm of the place",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward an unexpected signal with focused attention",
+            "load": "calm"
         }
     ],
     "high_tech_medbay": [
@@ -1970,6 +3702,22 @@
         },
         {
             "text": "typing notes into a medical terminal",
+            "load": "calm"
+        },
+        {
+            "text": "standing alert while reading the unfamiliar space around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking forward carefully while checking each change nearby",
+            "load": "active"
+        },
+        {
+            "text": "pausing to understand the strange rhythm of the place",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward an unexpected signal with focused attention",
             "load": "calm"
         }
     ],
@@ -2017,6 +3765,42 @@
         {
             "text": "holding a gallery leaflet while comparing two paintings",
             "load": "calm"
+        },
+        {
+            "text": "standing with careful posture while taking in the room",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while keeping her movements composed",
+            "load": "active"
+        },
+        {
+            "text": "pausing beside the quiet activity of the space",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in just enough to review a nearby detail",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the next exchange with polite attention",
+            "load": "calm"
+        },
+        {
+            "text": "waiting calmly while the formal mood holds",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before settling into place",
+            "load": "calm"
+        },
+        {
+            "text": "moving with restraint through the ordered scene",
+            "load": "active"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
         }
     ],
     "museum_hall": [
@@ -2063,6 +3847,42 @@
         {
             "text": "standing beside an exhibit case while reading notes",
             "load": "calm"
+        },
+        {
+            "text": "standing with careful posture while taking in the room",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while keeping her movements composed",
+            "load": "active"
+        },
+        {
+            "text": "pausing beside the quiet activity of the space",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in just enough to review a nearby detail",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the next exchange with polite attention",
+            "load": "calm"
+        },
+        {
+            "text": "waiting calmly while the formal mood holds",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before settling into place",
+            "load": "calm"
+        },
+        {
+            "text": "moving with restraint through the ordered scene",
+            "load": "active"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
         }
     ],
     "underground_bar": [
@@ -2104,6 +3924,30 @@
         },
         {
             "text": "adjusting a coaster on the table",
+            "load": "calm"
+        },
+        {
+            "text": "standing with attention on the activity unfolding nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking closer while deciding how to join in",
+            "load": "active"
+        },
+        {
+            "text": "pausing with a small smile before the next moment",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in as the atmosphere draws her attention",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the sound of activity around her",
+            "load": "calm"
+        },
+        {
+            "text": "checking the flow of the event before moving again",
             "load": "calm"
         }
     ],
@@ -2151,6 +3995,42 @@
         {
             "text": "following the floor arrows toward the next tank",
             "load": "active"
+        },
+        {
+            "text": "standing with attention on the activity unfolding nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking closer while deciding how to join in",
+            "load": "active"
+        },
+        {
+            "text": "pausing with a small smile before the next moment",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in as the atmosphere draws her attention",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the sound of activity around her",
+            "load": "calm"
+        },
+        {
+            "text": "checking the flow of the event before moving again",
+            "load": "calm"
+        },
+        {
+            "text": "moving lightly while keeping up with the lively pace",
+            "load": "active"
+        },
+        {
+            "text": "waiting for the right timing to step in",
+            "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
         }
     ],
     "abandoned_shrine": [
@@ -2184,6 +4064,22 @@
         },
         {
             "text": "brushing away spiderwebs",
+            "load": "calm"
+        },
+        {
+            "text": "standing tense while watching for movement nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking carefully while keeping herself ready to react",
+            "load": "active"
+        },
+        {
+            "text": "pausing after a sudden shift in the atmosphere",
+            "load": "calm"
+        },
+        {
+            "text": "looking toward the danger before choosing her next move",
             "load": "calm"
         }
     ],
@@ -2287,6 +4183,38 @@
         {
             "text": "buying a drink from a futuristic vending machine",
             "load": "calm"
+        },
+        {
+            "text": "checking the route ahead before choosing where to go",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the area while scanning for a clear path",
+            "load": "active"
+        },
+        {
+            "text": "slowing down as the flow around her changes",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the edge of the path and watching timing",
+            "load": "calm"
+        },
+        {
+            "text": "stepping forward after a small delay in the movement around her",
+            "load": "active"
+        },
+        {
+            "text": "looking over the signs of activity before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her position to keep from blocking the way",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully while leaving space for others nearby",
+            "load": "active"
         }
     ],
     "luxury_hotel_room": [
@@ -2321,6 +4249,38 @@
         {
             "text": "relaxing in a bathrobe",
             "load": "intimate"
+        },
+        {
+            "text": "standing with careful posture while taking in the room",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while keeping her movements composed",
+            "load": "active"
+        },
+        {
+            "text": "pausing beside the quiet activity of the space",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in just enough to review a nearby detail",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the next exchange with polite attention",
+            "load": "calm"
+        },
+        {
+            "text": "waiting calmly while the formal mood holds",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before settling into place",
+            "load": "calm"
+        },
+        {
+            "text": "moving with restraint through the ordered scene",
+            "load": "active"
         }
     ],
     "steampunk_airship": [
@@ -2400,6 +4360,42 @@
         },
         {
             "text": "checking the oven timer while standing by the counter",
+            "load": "calm"
+        },
+        {
+            "text": "standing and tidying the small area around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while checking what still needs doing",
+            "load": "active"
+        },
+        {
+            "text": "pausing to smooth out the next part of the routine",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while adjusting something out of place",
+            "load": "calm"
+        },
+        {
+            "text": "settling into a quiet pause before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after remembering one more small task",
+            "load": "active"
+        },
+        {
+            "text": "checking the room with an easy unhurried look",
+            "load": "calm"
+        },
+        {
+            "text": "moving through the routine without rushing",
+            "load": "active"
+        },
+        {
+            "text": "standing with careful posture while taking in the room",
             "load": "calm"
         }
     ],
@@ -2481,6 +4477,42 @@
         {
             "text": "folding a blanket beside the sofa",
             "load": "calm"
+        },
+        {
+            "text": "standing and tidying the small area around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while checking what still needs doing",
+            "load": "active"
+        },
+        {
+            "text": "pausing to smooth out the next part of the routine",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while adjusting something out of place",
+            "load": "calm"
+        },
+        {
+            "text": "settling into a quiet pause before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after remembering one more small task",
+            "load": "active"
+        },
+        {
+            "text": "checking the room with an easy unhurried look",
+            "load": "calm"
+        },
+        {
+            "text": "moving through the routine without rushing",
+            "load": "active"
+        },
+        {
+            "text": "standing and checking what needs attention next",
+            "load": "calm"
         }
     ],
     "rural_town_street": [
@@ -2514,6 +4546,54 @@
         },
         {
             "text": "inspecting a roadside flower",
+            "load": "calm"
+        },
+        {
+            "text": "checking the route ahead before choosing where to go",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the area while scanning for a clear path",
+            "load": "active"
+        },
+        {
+            "text": "slowing down as the flow around her changes",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the edge of the path and watching timing",
+            "load": "calm"
+        },
+        {
+            "text": "stepping forward after a small delay in the movement around her",
+            "load": "active"
+        },
+        {
+            "text": "looking over the signs of activity before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her position to keep from blocking the way",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully while leaving space for others nearby",
+            "load": "active"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
             "load": "calm"
         }
     ],
@@ -2549,6 +4629,54 @@
         {
             "text": "jogging slowly down the street",
             "load": "calm"
+        },
+        {
+            "text": "checking the route ahead before choosing where to go",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the area while scanning for a clear path",
+            "load": "active"
+        },
+        {
+            "text": "slowing down as the flow around her changes",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the edge of the path and watching timing",
+            "load": "calm"
+        },
+        {
+            "text": "stepping forward after a small delay in the movement around her",
+            "load": "active"
+        },
+        {
+            "text": "looking over the signs of activity before continuing",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her position to keep from blocking the way",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully while leaving space for others nearby",
+            "load": "active"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
+            "load": "calm"
         }
     ],
     "bus_terminal": [
@@ -2583,6 +4711,54 @@
         {
             "text": "stepping aside as passengers leave the bus",
             "load": "active"
+        },
+        {
+            "text": "standing ready while watching for the next departure",
+            "load": "calm"
+        },
+        {
+            "text": "checking the timing before stepping forward",
+            "load": "calm"
+        },
+        {
+            "text": "walking with the crowd while keeping her balance",
+            "load": "active"
+        },
+        {
+            "text": "pausing near the route marker and reassessing direction",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her stance as the crowd shifts around her",
+            "load": "calm"
+        },
+        {
+            "text": "moving forward after the delay finally clears",
+            "load": "active"
+        },
+        {
+            "text": "looking ahead while preparing for the next transfer",
+            "load": "calm"
+        },
+        {
+            "text": "waiting at the side while keeping track of movement nearby",
+            "load": "calm"
+        },
+        {
+            "text": "checking the route ahead before choosing where to go",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the area while scanning for a clear path",
+            "load": "active"
+        },
+        {
+            "text": "slowing down as the flow around her changes",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the edge of the path and watching timing",
+            "load": "calm"
         }
     ],
     "campus_hallway": [
@@ -2617,6 +4793,22 @@
         {
             "text": "walking toward the stairwell after the bell",
             "load": "active"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "standing quietly while reviewing what she needs next",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in to recheck a small point",
+            "load": "calm"
+        },
+        {
+            "text": "pausing before continuing the task at hand",
+            "load": "calm"
         }
     ],
     "campus_cafeteria": [
@@ -2650,6 +4842,22 @@
         },
         {
             "text": "checking a notebook while waiting for a friend",
+            "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
             "load": "calm"
         }
     ],
@@ -2685,6 +4893,38 @@
         {
             "text": "leaning on the wooden railing",
             "load": "calm"
+        },
+        {
+            "text": "standing in the easy atmosphere while looking around",
+            "load": "calm"
+        },
+        {
+            "text": "walking unhurriedly while letting the moment open up",
+            "load": "active"
+        },
+        {
+            "text": "pausing to enjoy the quieter part of the scene",
+            "load": "calm"
+        },
+        {
+            "text": "leaning back slightly as the day slows around her",
+            "load": "calm"
+        },
+        {
+            "text": "checking where to settle next before moving on",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the view with relaxed attention",
+            "load": "calm"
+        },
+        {
+            "text": "moving lightly through the relaxed flow of the place",
+            "load": "active"
+        },
+        {
+            "text": "waiting a moment while the atmosphere stays warm and slow",
+            "load": "calm"
         }
     ],
     "food_court": [
@@ -2718,6 +4958,38 @@
         },
         {
             "text": "placing a drink beside the tray before sitting down",
+            "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
             "load": "calm"
         }
     ],
@@ -2753,6 +5025,22 @@
         {
             "text": "leaning over the table to compare project notes",
             "load": "calm"
+        },
+        {
+            "text": "standing and lining up the next task in order",
+            "load": "calm"
+        },
+        {
+            "text": "checking one detail before moving on with the work",
+            "load": "calm"
+        },
+        {
+            "text": "leaning forward while keeping the task precise",
+            "load": "calm"
+        },
+        {
+            "text": "walking between work areas with a measured pace",
+            "load": "active"
         }
     ],
     "community_center": [
@@ -2787,6 +5075,54 @@
         {
             "text": "turning a chair toward the discussion circle",
             "load": "active"
+        },
+        {
+            "text": "standing and checking what needs attention next",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while keeping track of the space around her",
+            "load": "active"
+        },
+        {
+            "text": "pausing to adjust her pace before moving on",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in slightly while reassessing the scene",
+            "load": "calm"
+        },
+        {
+            "text": "waiting quietly while watching for the next opening",
+            "load": "calm"
+        },
+        {
+            "text": "turning her attention from one nearby detail to another",
+            "load": "calm"
+        },
+        {
+            "text": "standing aside while making room for people passing by",
+            "load": "calm"
+        },
+        {
+            "text": "moving with a measured step while staying aware of the surroundings",
+            "load": "active"
+        },
+        {
+            "text": "standing with attention on the activity unfolding nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking closer while deciding how to join in",
+            "load": "active"
+        },
+        {
+            "text": "pausing with a small smile before the next moment",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in as the atmosphere draws her attention",
+            "load": "calm"
         }
     ],
     "apartment_balcony": [
@@ -2821,6 +5157,22 @@
         {
             "text": "turning toward the room as the curtain moves",
             "load": "active"
+        },
+        {
+            "text": "standing and tidying the small area around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while checking what still needs doing",
+            "load": "active"
+        },
+        {
+            "text": "pausing to smooth out the next part of the routine",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while adjusting something out of place",
+            "load": "calm"
         }
     ],
     "apartment_entryway": [
@@ -2854,6 +5206,22 @@
         },
         {
             "text": "pausing on the entry step before heading out",
+            "load": "calm"
+        },
+        {
+            "text": "standing and tidying the small area around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while checking what still needs doing",
+            "load": "active"
+        },
+        {
+            "text": "pausing to smooth out the next part of the routine",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while adjusting something out of place",
             "load": "calm"
         }
     ],
@@ -2889,6 +5257,54 @@
         {
             "text": "turning toward the reading area after asking a question",
             "load": "active"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "standing quietly while reviewing what she needs next",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in to recheck a small point",
+            "load": "calm"
+        },
+        {
+            "text": "pausing before continuing the task at hand",
+            "load": "calm"
+        },
+        {
+            "text": "walking softly while keeping the quiet rhythm of the place",
+            "load": "active"
+        },
+        {
+            "text": "looking down in concentration while holding her place",
+            "load": "calm"
+        },
+        {
+            "text": "settling back after finishing a careful check",
+            "load": "calm"
+        },
+        {
+            "text": "turning slightly while staying absorbed in the work",
+            "load": "calm"
+        },
+        {
+            "text": "standing and checking what needs attention next",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while keeping track of the space around her",
+            "load": "active"
+        },
+        {
+            "text": "pausing to adjust her pace before moving on",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in slightly while reassessing the scene",
+            "load": "calm"
         }
     ],
     "riverside_walk": [
@@ -2922,6 +5338,54 @@
         },
         {
             "text": "looking across the water before continuing downstream",
+            "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her pace to match the quieter surroundings",
+            "load": "calm"
+        },
+        {
+            "text": "leaning slightly forward while noticing a small change nearby",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully along the edge of the scene",
+            "load": "active"
+        },
+        {
+            "text": "waiting a moment as the atmosphere settles around her",
+            "load": "calm"
+        },
+        {
+            "text": "checking the route ahead before choosing where to go",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the area while scanning for a clear path",
+            "load": "active"
+        },
+        {
+            "text": "slowing down as the flow around her changes",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the edge of the path and watching timing",
             "load": "calm"
         }
     ],
@@ -2957,6 +5421,616 @@
         {
             "text": "lifting a warm towel from the dryer",
             "load": "active"
+        },
+        {
+            "text": "standing and tidying the small area around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while checking what still needs doing",
+            "load": "active"
+        },
+        {
+            "text": "pausing to smooth out the next part of the routine",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while adjusting something out of place",
+            "load": "calm"
+        }
+    ],
+    "local_market_street": [
+        {
+            "text": "checking produce displayed beside the market stall",
+            "load": "calm"
+        },
+        {
+            "text": "standing near a small vendor table with a tote bag",
+            "load": "calm"
+        },
+        {
+            "text": "walking past street stalls while comparing prices",
+            "load": "active"
+        },
+        {
+            "text": "holding a wrapped purchase close while waiting for change",
+            "load": "calm"
+        },
+        {
+            "text": "reading a handwritten sign above stacked crates",
+            "load": "calm"
+        },
+        {
+            "text": "stepping aside as shoppers pass through the narrow lane",
+            "load": "active"
+        },
+        {
+            "text": "sorting coins at the edge of the counter",
+            "load": "calm"
+        },
+        {
+            "text": "pausing near a stall while deciding what to buy",
+            "load": "calm"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "checking the route ahead before choosing where to go",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the area while scanning for a clear path",
+            "load": "active"
+        },
+        {
+            "text": "slowing down as the flow around her changes",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the edge of the path and watching timing",
+            "load": "calm"
+        }
+    ],
+    "neighborhood_crosswalk": [
+        {
+            "text": "waiting at the crosswalk with one foot near the curb",
+            "load": "calm"
+        },
+        {
+            "text": "checking the pedestrian signal before stepping forward",
+            "load": "calm"
+        },
+        {
+            "text": "holding a small bag while crossing the street",
+            "load": "calm"
+        },
+        {
+            "text": "walking beside the painted lines at a steady pace",
+            "load": "active"
+        },
+        {
+            "text": "turning her head to watch passing traffic",
+            "load": "active"
+        },
+        {
+            "text": "standing near the corner as bicycles move by",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting a shoulder strap while waiting for the light",
+            "load": "calm"
+        },
+        {
+            "text": "stepping onto the sidewalk after crossing",
+            "load": "active"
+        },
+        {
+            "text": "standing ready while watching for the next departure",
+            "load": "calm"
+        },
+        {
+            "text": "checking the timing before stepping forward",
+            "load": "calm"
+        },
+        {
+            "text": "walking with the crowd while keeping her balance",
+            "load": "active"
+        },
+        {
+            "text": "pausing near the route marker and reassessing direction",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her stance as the crowd shifts around her",
+            "load": "calm"
+        },
+        {
+            "text": "moving forward after the delay finally clears",
+            "load": "active"
+        },
+        {
+            "text": "looking ahead while preparing for the next transfer",
+            "load": "calm"
+        },
+        {
+            "text": "waiting at the side while keeping track of movement nearby",
+            "load": "calm"
+        },
+        {
+            "text": "checking the route ahead before choosing where to go",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the area while scanning for a clear path",
+            "load": "active"
+        },
+        {
+            "text": "slowing down as the flow around her changes",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the edge of the path and watching timing",
+            "load": "calm"
+        }
+    ],
+    "neighborhood_playground": [
+        {
+            "text": "standing beside a bench near the play equipment",
+            "load": "calm"
+        },
+        {
+            "text": "watching the open playground while holding a drink",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a low wall beside the sandpit",
+            "load": "calm"
+        },
+        {
+            "text": "walking past the swings at a relaxed pace",
+            "load": "active"
+        },
+        {
+            "text": "checking a phone while leaning near the fence",
+            "load": "calm"
+        },
+        {
+            "text": "holding a small bag beside the slide",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward voices from the play area",
+            "load": "active"
+        },
+        {
+            "text": "pausing near a tree at the edge of the playground",
+            "load": "calm"
+        },
+        {
+            "text": "standing still while taking in the open air around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while following the change in the scenery",
+            "load": "active"
+        },
+        {
+            "text": "pausing as the weather shifts the mood of the place",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the distance before choosing her next step",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her pace to match the quieter surroundings",
+            "load": "calm"
+        },
+        {
+            "text": "leaning slightly forward while noticing a small change nearby",
+            "load": "calm"
+        },
+        {
+            "text": "moving carefully along the edge of the scene",
+            "load": "active"
+        },
+        {
+            "text": "waiting a moment as the atmosphere settles around her",
+            "load": "calm"
+        },
+        {
+            "text": "standing with attention on the activity unfolding nearby",
+            "load": "calm"
+        },
+        {
+            "text": "walking closer while deciding how to join in",
+            "load": "active"
+        },
+        {
+            "text": "pausing with a small smile before the next moment",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in as the atmosphere draws her attention",
+            "load": "calm"
+        }
+    ],
+    "rooftop_laundry_area": [
+        {
+            "text": "hanging a towel along the rooftop clothesline",
+            "load": "calm"
+        },
+        {
+            "text": "checking dry laundry in the afternoon air",
+            "load": "calm"
+        },
+        {
+            "text": "standing beside a basket near the washing poles",
+            "load": "calm"
+        },
+        {
+            "text": "folding a shirt before placing it into the basket",
+            "load": "calm"
+        },
+        {
+            "text": "reaching up to clip fabric onto the line",
+            "load": "active"
+        },
+        {
+            "text": "walking between laundry racks with careful steps",
+            "load": "active"
+        },
+        {
+            "text": "holding clothespins while looking over the railing",
+            "load": "calm"
+        },
+        {
+            "text": "gathering laundry as the wind lifts the fabric",
+            "load": "active"
+        },
+        {
+            "text": "standing and tidying the small area around her",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly while checking what still needs doing",
+            "load": "active"
+        },
+        {
+            "text": "pausing to smooth out the next part of the routine",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer while adjusting something out of place",
+            "load": "calm"
+        }
+    ],
+    "school_clubroom": [
+        {
+            "text": "sorting club materials on a shared table",
+            "load": "calm"
+        },
+        {
+            "text": "standing beside a whiteboard with notes prepared",
+            "load": "calm"
+        },
+        {
+            "text": "sitting near stacked boxes after practice",
+            "load": "calm"
+        },
+        {
+            "text": "checking a schedule pinned to the wall",
+            "load": "calm"
+        },
+        {
+            "text": "holding a folder while listening to club members",
+            "load": "calm"
+        },
+        {
+            "text": "arranging chairs before a small meeting",
+            "load": "calm"
+        },
+        {
+            "text": "walking past shelves filled with supplies",
+            "load": "active"
+        },
+        {
+            "text": "writing a short note on the clubroom board",
+            "load": "calm"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "standing quietly while reviewing what she needs next",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in to recheck a small point",
+            "load": "calm"
+        },
+        {
+            "text": "pausing before continuing the task at hand",
+            "load": "calm"
+        }
+    ],
+    "shopping_arcade": [
+        {
+            "text": "walking beneath the covered arcade signs",
+            "load": "active"
+        },
+        {
+            "text": "checking a storefront display while holding a bag",
+            "load": "calm"
+        },
+        {
+            "text": "standing near a shop entrance as people pass by",
+            "load": "calm"
+        },
+        {
+            "text": "reading a sale sign beside the walkway",
+            "load": "calm"
+        },
+        {
+            "text": "carrying a small purchase through the arcade",
+            "load": "active"
+        },
+        {
+            "text": "pausing under the awning while deciding where to go",
+            "load": "calm"
+        },
+        {
+            "text": "looking across the row of small shops",
+            "load": "calm"
+        },
+        {
+            "text": "stepping around pedestrians in the covered street",
+            "load": "active"
+        },
+        {
+            "text": "browsing slowly while comparing nearby choices",
+            "load": "calm"
+        },
+        {
+            "text": "standing and deciding what to check next",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the display area while looking from side to side",
+            "load": "active"
+        },
+        {
+            "text": "pausing to weigh one option against another",
+            "load": "calm"
+        },
+        {
+            "text": "checking the arrangement before moving to the next section",
+            "load": "calm"
+        },
+        {
+            "text": "turning back after noticing a small detail she missed",
+            "load": "active"
+        },
+        {
+            "text": "waiting her turn while keeping her place in the flow",
+            "load": "calm"
+        },
+        {
+            "text": "leaning closer to review the choice in front of her",
+            "load": "calm"
+        }
+    ],
+    "subway_ticket_gate": [
+        {
+            "text": "holding a transit card above the ticket gate reader",
+            "load": "calm"
+        },
+        {
+            "text": "checking the fare display before passing through",
+            "load": "calm"
+        },
+        {
+            "text": "standing beside the gate while searching a bag",
+            "load": "calm"
+        },
+        {
+            "text": "walking through the ticket gate with a steady step",
+            "load": "active"
+        },
+        {
+            "text": "pausing near the route map after tapping in",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting a shoulder bag beside the gate line",
+            "load": "calm"
+        },
+        {
+            "text": "looking toward the platform signs beyond the gates",
+            "load": "calm"
+        },
+        {
+            "text": "stepping aside to let another passenger pass",
+            "load": "active"
+        },
+        {
+            "text": "standing ready while watching for the next departure",
+            "load": "calm"
+        },
+        {
+            "text": "checking the timing before stepping forward",
+            "load": "calm"
+        },
+        {
+            "text": "walking with the crowd while keeping her balance",
+            "load": "active"
+        },
+        {
+            "text": "pausing near the route marker and reassessing direction",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her stance as the crowd shifts around her",
+            "load": "calm"
+        },
+        {
+            "text": "moving forward after the delay finally clears",
+            "load": "active"
+        },
+        {
+            "text": "looking ahead while preparing for the next transfer",
+            "load": "calm"
+        },
+        {
+            "text": "waiting at the side while keeping track of movement nearby",
+            "load": "calm"
+        }
+    ],
+    "train_station_platform": [
+        {
+            "text": "waiting near the platform marker with a bag in hand",
+            "load": "calm"
+        },
+        {
+            "text": "checking the train arrival board overhead",
+            "load": "calm"
+        },
+        {
+            "text": "standing behind the safety line while watching the tracks",
+            "load": "calm"
+        },
+        {
+            "text": "walking along the platform toward the correct car",
+            "load": "active"
+        },
+        {
+            "text": "reading a route map beside a pillar",
+            "load": "calm"
+        },
+        {
+            "text": "holding a ticket while listening for an announcement",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting luggage near the bench before boarding",
+            "load": "calm"
+        },
+        {
+            "text": "turning toward the arriving train at the platform edge",
+            "load": "active"
+        },
+        {
+            "text": "standing ready while watching for the next departure",
+            "load": "calm"
+        },
+        {
+            "text": "checking the timing before stepping forward",
+            "load": "calm"
+        },
+        {
+            "text": "walking with the crowd while keeping her balance",
+            "load": "active"
+        },
+        {
+            "text": "pausing near the route marker and reassessing direction",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting her stance as the crowd shifts around her",
+            "load": "calm"
+        },
+        {
+            "text": "moving forward after the delay finally clears",
+            "load": "active"
+        },
+        {
+            "text": "looking ahead while preparing for the next transfer",
+            "load": "calm"
+        },
+        {
+            "text": "waiting at the side while keeping track of movement nearby",
+            "load": "calm"
+        }
+    ],
+    "university_campus_courtyard": [
+        {
+            "text": "walking across the courtyard with notebooks held close",
+            "load": "active"
+        },
+        {
+            "text": "sitting on a bench between campus buildings",
+            "load": "calm"
+        },
+        {
+            "text": "checking a class schedule near the walkway",
+            "load": "calm"
+        },
+        {
+            "text": "standing beside a notice board with a folder",
+            "load": "calm"
+        },
+        {
+            "text": "talking quietly near the edge of the courtyard",
+            "load": "calm"
+        },
+        {
+            "text": "carrying study materials toward the next building",
+            "load": "active"
+        },
+        {
+            "text": "pausing beside a planter while looking around",
+            "load": "calm"
+        },
+        {
+            "text": "reading a campus flyer under the trees",
+            "load": "calm"
+        },
+        {
+            "text": "sitting with focused attention on the detail in front of her",
+            "load": "calm"
+        },
+        {
+            "text": "standing quietly while reviewing what she needs next",
+            "load": "calm"
+        },
+        {
+            "text": "leaning in to recheck a small point",
+            "load": "calm"
+        },
+        {
+            "text": "pausing before continuing the task at hand",
+            "load": "calm"
         }
     ]
 }

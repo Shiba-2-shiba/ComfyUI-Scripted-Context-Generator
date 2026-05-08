@@ -33,5 +33,11 @@
       "text": "placing a drink beside the tray before sitting down",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "retail_service",
+      "take": 8
+    }
   ]
 }

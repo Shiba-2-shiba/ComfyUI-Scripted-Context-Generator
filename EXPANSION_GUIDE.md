@@ -15,11 +15,13 @@
 
 現在値は `CURRENT_STATUS.md` と次のコマンドで確認します。
 日常系 location / action pool の具体的な拡張計画は `docs/variation_expansion/README.md` を参照します。
-現在の優先順は、まず `unique locations` を増やし、その後に
-`unique subjects` の昇格を評価する流れです。
+現在は 100k gate を通過済みです。次の拡張では、500k を見据えて
+subject / location / compatibility density / action depth を事前に
+`tools/plan_variation_target.py` で測ってから進めます。
 
 ```bash
 python assets/calc_variations.py --json
+python tools/plan_variation_target.py --target 100000
 python tools/check_variation_scope.py
 ```
 
@@ -82,6 +84,8 @@ python tools/check_variation_scope.py
 Primary files:
 
 - `vocab/data/action_pools.json`
+- `vocab/source/action_pools/*.json`
+- `vocab/source/action_pools/_shared_families.json`
 - `vocab/data/scene_axis.json`
 - `pipeline/action_profiles.py`
 - `pipeline/action_generator.py`
@@ -130,7 +134,8 @@ python assets/calc_variations.py --json > assets/results/variation_before.json
 
 2. Edit the smallest data surface that expresses the new variation.
    For base variation sizing, update `vocab/data/variation_scope.json` and
-   `assets/compatibility_review.csv` together until the scoped generator is available.
+   regenerate `assets/compatibility_review.csv` only through
+   `tools/build_compatibility_review.py`.
 
 3. Run the matching focused checks from the sections above.
 
@@ -138,6 +143,7 @@ python assets/calc_variations.py --json > assets/results/variation_before.json
 
 ```bash
 python tools/validate_prompt_data.py
+python tools/plan_variation_target.py --target 100000
 python tools/check_variation_scope.py
 ```
 
@@ -174,7 +180,7 @@ The generator reads:
 Current state:
 
 - current generated rows match the checked-in CSV rows
-- current generated/current row count is `1,637`
+- current generated/current row count is `5,926`
 - subject/location pair drift is `0`
 - `prompts.jsonl` rows are expected to stay inside the current variation scope
 
@@ -189,7 +195,17 @@ Runtime loading still reads:
 For editing and review, use the split source files:
 
 - `vocab/source/action_pools/_manifest.json`
+- `vocab/source/action_pools/_shared_families.json`
 - `vocab/source/action_pools/<location>.json`
+
+Location source files may include `families` refs. `tools/build_action_pools.py`
+expands those shared semantic families into the flat runtime
+`vocab/data/action_pools.json` file.
+The current 100k surface uses a tiered action-depth target:
+
+- high-row locations: `20` actions
+- medium-row locations: `16` actions
+- low-row / specialized locations: `12` actions
 
 Check that the split source rebuilds the runtime JSON exactly:
 

@@ -17,5 +17,11 @@
       "text": "standing surrounded by ticking clocks",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "work_rhythm",
+      "take": 8
+    }
   ]
 }

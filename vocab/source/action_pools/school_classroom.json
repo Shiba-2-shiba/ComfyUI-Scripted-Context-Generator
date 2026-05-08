@@ -33,5 +33,11 @@
       "text": "cleaning the classroom after school",
       "load": "active"
     }
+  ],
+  "families": [
+    {
+      "name": "quiet_study",
+      "take": 4
+    }
   ]
 }

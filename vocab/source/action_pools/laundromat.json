@@ -33,5 +33,11 @@
       "text": "lifting a warm towel from the dryer",
       "load": "active"
     }
+  ],
+  "families": [
+    {
+      "name": "home_rhythm",
+      "take": 4
+    }
   ]
 }

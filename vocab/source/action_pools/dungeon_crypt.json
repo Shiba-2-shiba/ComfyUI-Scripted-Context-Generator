@@ -25,5 +25,11 @@
       "text": "listening to distant echoes",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "cautious_tension",
+      "take": 6
+    }
   ]
 }

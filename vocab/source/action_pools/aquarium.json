@@ -45,5 +45,15 @@
       "text": "following the floor arrows toward the next tank",
       "load": "active"
     }
+  ],
+  "families": [
+    {
+      "name": "leisure_participation",
+      "take": 8
+    },
+    {
+      "name": "outdoor_observation",
+      "take": 1
+    }
   ]
 }
