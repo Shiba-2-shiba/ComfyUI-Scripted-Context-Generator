@@ -16,7 +16,9 @@ class TestCalcVariations(unittest.TestCase):
         metrics = calc_base_metrics(ROOT)
 
         self.assertEqual(metrics["unique_subjects"], 58)
-        self.assertEqual(metrics["unique_locations"], 58)
+        self.assertEqual(metrics["unique_locations"], 68)
+        self.assertEqual(metrics["total_base_variations"], 15034)
+        self.assertEqual(metrics["row_count"], 1565)
         self.assertEqual(metrics["missing_pools_count"], 0)
 
     def test_garnish_metrics_are_semantic_only(self):

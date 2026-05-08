@@ -89,6 +89,18 @@
         {
             "text": "sorting returned materials onto a cart",
             "load": "calm"
+        },
+        {
+            "text": "checking a study schedule beside a stack of books",
+            "load": "calm"
+        },
+        {
+            "text": "placing a bookmark before closing a reference book",
+            "load": "calm"
+        },
+        {
+            "text": "walking between tables while carrying borrowed books",
+            "load": "active"
         }
     ],
     "school_gym_hall": [
@@ -333,6 +345,18 @@
         {
             "text": "checking a map under a streetlight",
             "load": "calm"
+        },
+        {
+            "text": "shaking rain from an umbrella near the doorway",
+            "load": "calm"
+        },
+        {
+            "text": "stepping carefully along the edge of a puddle",
+            "load": "active"
+        },
+        {
+            "text": "waiting under a sign while checking the street ahead",
+            "load": "calm"
         }
     ],
     "commuter_transport": [
@@ -374,6 +398,10 @@
         },
         {
             "text": "glancing at the route map above the door",
+            "load": "calm"
+        },
+        {
+            "text": "checking a transit card near the train doors",
             "load": "calm"
         }
     ],
@@ -477,6 +505,10 @@
         {
             "text": "checking a recipe on a phone",
             "load": "calm"
+        },
+        {
+            "text": "placing washed utensils beside the sink",
+            "load": "calm"
         }
     ],
     "bedroom_boudoir": [
@@ -519,6 +551,10 @@
         {
             "text": "fluffing a pillow on the bed",
             "load": "intimate"
+        },
+        {
+            "text": "placing a folded blanket at the foot of the bed",
+            "load": "calm"
         }
     ],
     "fitness_gym": [
@@ -923,6 +959,10 @@
         {
             "text": "breathing visible vapor into the air",
             "load": "calm"
+        },
+        {
+            "text": "brushing snow from a sleeve near a storefront",
+            "load": "calm"
         }
     ],
     "tropical_beach": [
@@ -1075,7 +1115,11 @@
             "load": "calm"
         },
         {
-            "text": "sipping hot cocoa from a cup",
+            "text": "warming both hands beside a small winter stall",
+            "load": "calm"
+        },
+        {
+            "text": "pausing near a lantern to warm both hands",
             "load": "calm"
         }
     ],
@@ -1123,6 +1167,10 @@
         {
             "text": "closing a small notebook after writing a few lines",
             "load": "calm"
+        },
+        {
+            "text": "checking the bill while waiting near the table",
+            "load": "calm"
         }
     ],
     "cozy_bookstore": [
@@ -1165,6 +1213,10 @@
         {
             "text": "waiting near the register with a folded tote bag",
             "load": "calm"
+        },
+        {
+            "text": "placing a reserved book on the checkout counter",
+            "load": "calm"
         }
     ],
     "shopping_mall_atrium": [
@@ -1206,6 +1258,248 @@
         },
         {
             "text": "sitting near a fountain listening to water",
+            "load": "calm"
+        },
+        {
+            "text": "checking a receipt while standing near the directory",
+            "load": "calm"
+        }
+    ],
+    "convenience_store": [
+        {
+            "text": "checking items near a shelf of daily goods",
+            "load": "calm"
+        },
+        {
+            "text": "standing by the drink case choosing a bottle",
+            "load": "calm"
+        },
+        {
+            "text": "waiting near the register with a small basket",
+            "load": "calm"
+        },
+        {
+            "text": "walking between narrow aisles with a shopping basket",
+            "load": "active"
+        },
+        {
+            "text": "reading a label on a packaged meal",
+            "load": "calm"
+        },
+        {
+            "text": "placing daily items on the checkout counter",
+            "load": "calm"
+        },
+        {
+            "text": "checking a phone memo beside the snack shelf",
+            "load": "calm"
+        },
+        {
+            "text": "stepping aside to let another customer pass",
+            "load": "active"
+        }
+    ],
+    "bakery_shop": [
+        {
+            "text": "standing by the bread trays choosing a pastry",
+            "load": "calm"
+        },
+        {
+            "text": "holding a small tray with tongs in hand",
+            "load": "calm"
+        },
+        {
+            "text": "waiting near the counter with wrapped bread",
+            "load": "calm"
+        },
+        {
+            "text": "reading handwritten labels beside the pastry case",
+            "load": "calm"
+        },
+        {
+            "text": "placing a roll onto a bakery tray",
+            "load": "calm"
+        },
+        {
+            "text": "walking slowly past shelves of fresh bread",
+            "load": "active"
+        },
+        {
+            "text": "checking the day's specials near the entrance",
+            "load": "calm"
+        },
+        {
+            "text": "folding a paper bag after paying at the counter",
+            "load": "calm"
+        }
+    ],
+    "supermarket_aisle": [
+        {
+            "text": "pushing a small cart down the grocery aisle",
+            "load": "active"
+        },
+        {
+            "text": "checking a shopping list beside the shelves",
+            "load": "calm"
+        },
+        {
+            "text": "reaching for an item on the middle shelf",
+            "load": "calm"
+        },
+        {
+            "text": "comparing two packages before choosing one",
+            "load": "calm"
+        },
+        {
+            "text": "placing vegetables into a shopping basket",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the refrigerated case reading a label",
+            "load": "calm"
+        },
+        {
+            "text": "walking around a cart left in the aisle",
+            "load": "active"
+        },
+        {
+            "text": "checking coupons beside the checkout lane",
+            "load": "calm"
+        }
+    ],
+    "drugstore_aisle": [
+        {
+            "text": "standing by the shelves comparing small bottles",
+            "load": "calm"
+        },
+        {
+            "text": "reading a label on a daily care product",
+            "load": "calm"
+        },
+        {
+            "text": "holding a basket with household items inside",
+            "load": "calm"
+        },
+        {
+            "text": "checking a note near the medicine aisle",
+            "load": "calm"
+        },
+        {
+            "text": "walking past rows of neatly arranged products",
+            "load": "active"
+        },
+        {
+            "text": "placing a small box into a shopping basket",
+            "load": "calm"
+        },
+        {
+            "text": "waiting near the pharmacy counter",
+            "load": "calm"
+        },
+        {
+            "text": "looking up at the aisle sign before turning",
+            "load": "calm"
+        }
+    ],
+    "family_restaurant": [
+        {
+            "text": "sitting at a booth reading the menu",
+            "load": "calm"
+        },
+        {
+            "text": "placing an order while holding the menu",
+            "load": "calm"
+        },
+        {
+            "text": "pouring water from a table pitcher",
+            "load": "calm"
+        },
+        {
+            "text": "waiting with a numbered receipt on the table",
+            "load": "calm"
+        },
+        {
+            "text": "cutting a meal into smaller bites",
+            "load": "calm"
+        },
+        {
+            "text": "checking the dessert page with interest",
+            "load": "calm"
+        },
+        {
+            "text": "standing near the cashier after the meal",
+            "load": "calm"
+        },
+        {
+            "text": "waving politely to call the server",
+            "load": "calm"
+        }
+    ],
+    "cinema_lobby": [
+        {
+            "text": "standing near the poster wall checking showtimes",
+            "load": "calm"
+        },
+        {
+            "text": "waiting in line with a ticket in hand",
+            "load": "calm"
+        },
+        {
+            "text": "holding a drink cup beside the concession counter",
+            "load": "calm"
+        },
+        {
+            "text": "checking a seat number before entering the hall",
+            "load": "calm"
+        },
+        {
+            "text": "walking across the lobby toward the theater doors",
+            "load": "active"
+        },
+        {
+            "text": "reading a movie flyer near the entrance",
+            "load": "calm"
+        },
+        {
+            "text": "waiting under the lobby clock for a friend",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting a small bag while leaving the ticket gate",
+            "load": "calm"
+        }
+    ],
+    "game_arcade": [
+        {
+            "text": "standing at a rhythm game cabinet choosing a song",
+            "load": "active"
+        },
+        {
+            "text": "holding a token cup near the prize machines",
+            "load": "calm"
+        },
+        {
+            "text": "leaning forward to watch a claw machine",
+            "load": "calm"
+        },
+        {
+            "text": "checking the score panel after a round",
+            "load": "calm"
+        },
+        {
+            "text": "walking between rows of bright game cabinets",
+            "load": "active"
+        },
+        {
+            "text": "placing a coin into a racing game cabinet",
+            "load": "calm"
+        },
+        {
+            "text": "holding a small prize ticket with a smile",
+            "load": "calm"
+        },
+        {
+            "text": "waiting behind another player for a turn",
             "load": "calm"
         }
     ],
@@ -1289,7 +1583,11 @@
             "load": "calm"
         },
         {
-            "text": "sipping lemonade from a thermos",
+            "text": "resting beside a packed lunch on the blanket",
+            "load": "calm"
+        },
+        {
+            "text": "straightening the edge of the picnic blanket",
             "load": "calm"
         }
     ],
@@ -1332,6 +1630,10 @@
         },
         {
             "text": "looking up at a tall palm tree",
+            "load": "calm"
+        },
+        {
+            "text": "brushing a leaf from the path before stepping forward",
             "load": "calm"
         }
     ],
@@ -1711,6 +2013,10 @@
         {
             "text": "walking quietly to the next room",
             "load": "active"
+        },
+        {
+            "text": "holding a gallery leaflet while comparing two paintings",
+            "load": "calm"
         }
     ],
     "museum_hall": [
@@ -1752,6 +2058,10 @@
         },
         {
             "text": "looking at a map of the museum",
+            "load": "calm"
+        },
+        {
+            "text": "standing beside an exhibit case while reading notes",
             "load": "calm"
         }
     ],
@@ -1837,6 +2147,10 @@
         {
             "text": "standing in awe of a giant stingray",
             "load": "calm"
+        },
+        {
+            "text": "following the floor arrows toward the next tank",
+            "load": "active"
         }
     ],
     "abandoned_shrine": [
@@ -2061,6 +2375,10 @@
             "load": "calm"
         },
         {
+            "text": "rinsing vegetables in a shallow bowl at the sink",
+            "load": "calm"
+        },
+        {
             "text": "arranging flowers in a vase",
             "load": "calm"
         },
@@ -2074,6 +2392,14 @@
         },
         {
             "text": "loading the dishwasher",
+            "load": "calm"
+        },
+        {
+            "text": "setting clean plates beside the island",
+            "load": "calm"
+        },
+        {
+            "text": "checking the oven timer while standing by the counter",
             "load": "calm"
         }
     ],
@@ -2143,6 +2469,18 @@
         {
             "text": "dozing off under a blanket",
             "load": "calm"
+        },
+        {
+            "text": "arranging magazines on the coffee table",
+            "load": "calm"
+        },
+        {
+            "text": "standing by the window watering a small plant",
+            "load": "calm"
+        },
+        {
+            "text": "folding a blanket beside the sofa",
+            "load": "calm"
         }
     ],
     "rural_town_street": [
@@ -2210,6 +2548,108 @@
         },
         {
             "text": "jogging slowly down the street",
+            "load": "calm"
+        }
+    ],
+    "bus_terminal": [
+        {
+            "text": "checking the departure board near the bus bays",
+            "load": "calm"
+        },
+        {
+            "text": "standing in line with a transit card ready",
+            "load": "calm"
+        },
+        {
+            "text": "sitting on a bench with a bag at her feet",
+            "load": "calm"
+        },
+        {
+            "text": "walking toward the marked boarding lane",
+            "load": "active"
+        },
+        {
+            "text": "reading a timetable posted beside the platform",
+            "load": "calm"
+        },
+        {
+            "text": "adjusting a shoulder bag while waiting to board",
+            "load": "calm"
+        },
+        {
+            "text": "holding a folded ticket near the gate",
+            "load": "calm"
+        },
+        {
+            "text": "stepping aside as passengers leave the bus",
+            "load": "active"
+        }
+    ],
+    "campus_hallway": [
+        {
+            "text": "walking past classroom doors with books in hand",
+            "load": "active"
+        },
+        {
+            "text": "standing by a notice board reading club flyers",
+            "load": "calm"
+        },
+        {
+            "text": "checking a class schedule beside the lockers",
+            "load": "calm"
+        },
+        {
+            "text": "leaning near the window while waiting between classes",
+            "load": "calm"
+        },
+        {
+            "text": "holding a notebook while talking quietly with a friend",
+            "load": "calm"
+        },
+        {
+            "text": "picking up dropped papers from the hallway floor",
+            "load": "active"
+        },
+        {
+            "text": "standing aside as students pass through the corridor",
+            "load": "calm"
+        },
+        {
+            "text": "walking toward the stairwell after the bell",
+            "load": "active"
+        }
+    ],
+    "campus_cafeteria": [
+        {
+            "text": "standing in line while holding a lunch tray",
+            "load": "calm"
+        },
+        {
+            "text": "sitting at a table with a simple meal",
+            "load": "calm"
+        },
+        {
+            "text": "checking the daily menu near the counter",
+            "load": "calm"
+        },
+        {
+            "text": "carrying a tray toward an open seat",
+            "load": "active"
+        },
+        {
+            "text": "pouring tea from a dispenser beside the counter",
+            "load": "calm"
+        },
+        {
+            "text": "clearing a tray at the return station",
+            "load": "calm"
+        },
+        {
+            "text": "talking quietly with classmates over lunch",
+            "load": "calm"
+        },
+        {
+            "text": "checking a notebook while waiting for a friend",
             "load": "calm"
         }
     ],
