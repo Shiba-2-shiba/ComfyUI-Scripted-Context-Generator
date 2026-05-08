@@ -7,6 +7,7 @@ Last verified: 2026-05-08
 `docs/context_refactor/README.md` を参照してください。
 subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` を先に参照してください。
 日常系 location / action pool の拡張作業は `docs/variation_expansion/README.md` に計画と進捗があります。
+現在の variation sizing 境界は `vocab/data/variation_scope.json` に固定されています。
 
 ## Runtime Surface
 
@@ -91,6 +92,7 @@ python -m unittest discover -s assets -p "test_*.py"
 python -m unittest assets.test_context_nodes assets.test_workflow_samples
 python tools/verify_full_flow.py
 python tools/validate_prompt_data.py
+python tools/check_variation_scope.py
 python -c "from asset_validator import validate_assets; issues=validate_assets(); print('issues', len(issues))"
 python tools/check_widgets_values.py
 python -m py_compile assets/calc_variations.py assets/test_calc_variations.py assets/test_char_profile_nl.py assets/test_scene_variator.py assets/test_vocab_lint.py
@@ -103,6 +105,7 @@ Results:
 - context/workflow smoke tests: `12 tests OK`
 - full flow: `OK`
 - prompt data validator: `ERROR: []`, `WARNING: []`
+- variation scope check: `ERROR: []`
 - asset validator: `issues 0`
 - workflow widget validation: `OK`
 - compile check: `OK`
@@ -137,6 +140,7 @@ Recent expansion:
 - dedicated action pools were added for the promoted daily-life locations
 - high-coverage existing locations received additional semantic actions
 - base variations increased from `11,916` to `15,034`
+- `vocab/data/variation_scope.json` now records the active 58 subjects / 68 locations boundary
 
 ## Refactor Risk Map
 
@@ -185,6 +189,7 @@ Before changing vocabulary assets:
 python -c "from asset_validator import validate_assets; print(validate_assets())"
 python tools/validate_prompt_data.py
 python assets/calc_variations.py --json
+python tools/check_variation_scope.py
 ```
 
 Optional before/after expansion comparison:
@@ -198,5 +203,6 @@ Before expanding subjects / locations / actions:
 ```bash
 python -m unittest assets.test_data_consistency assets.test_character_resolution assets.test_location_resolution assets.test_action_generator assets.test_calc_variations
 python tools/validate_prompt_data.py
+python tools/check_variation_scope.py
 python assets/calc_variations.py --json
 ```

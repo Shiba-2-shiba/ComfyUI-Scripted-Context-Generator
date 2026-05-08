@@ -115,3 +115,31 @@ python tools/check_widgets_values.py
 python assets/calc_variations.py --json > assets/results/variation_after.json
 python tools/report_expansion_delta.py assets/results/variation_before.json assets/results/variation_after.json
 ```
+
+## P5: Variation Scope Source Of Truth
+
+- [x] VE-501 Add `vocab/data/variation_scope.json`
+- [x] VE-502 Add `tools/check_variation_scope.py`
+- [x] VE-503 Add regression tests for variation scope
+- [x] VE-504 Run focused scope checks
+- [x] VE-505 Update `progress.md` verification log
+
+Commands:
+
+```bash
+python tools/check_variation_scope.py
+python -m unittest assets.test_variation_scope
+```
+
+## P6: Scoped Compatibility Review Generation
+
+- [ ] VE-601 Add scoped generator with `--check`
+- [ ] VE-602 Compare generated rows against current `assets/compatibility_review.csv`
+- [ ] VE-603 Add `--write` only after check mode is stable
+- [ ] VE-604 Document generation workflow in `EXPANSION_GUIDE.md`
+
+## P7: Action Pool Authoring Split Evaluation
+
+- [ ] VE-701 Measure review pain after P6
+- [ ] VE-702 Decide whether `vocab/source/action_pools/*.json` is justified
+- [ ] VE-703 Keep runtime loader unchanged unless generated output is proven stable

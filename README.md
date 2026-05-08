@@ -111,12 +111,15 @@ subject / location / base variations を増やす作業では、[`EXPANSION_GUID
 
 ### Action / variation sizing
 
+- `vocab/data/variation_scope.json`
 - `vocab/data/action_pools.json`
 - `assets/compatibility_review.csv`
 - 計測責務: [`assets/calc_variations.py`](./assets/calc_variations.py)
+- scope 検証: [`tools/check_variation_scope.py`](./tools/check_variation_scope.py)
 
 `assets/calc_variations.py` は `assets/compatibility_review.csv` を base variation sizing の入力として使います。
 location を追加しても、この CSV に反映されなければ `base variations` には加算されません。
+`vocab/data/variation_scope.json` は、現在 variation sizing に含める subject / location の境界を明示します。
 
 ### Policy / banned terms
 
@@ -204,6 +207,7 @@ python -c "from asset_validator import validate_assets; print(validate_assets())
 ```bash
 python tools/validate_prompt_data.py
 python assets/calc_variations.py --json
+python tools/check_variation_scope.py
 python tools/check_widgets_values.py
 ```
 
@@ -230,6 +234,7 @@ variation 拡張時は次も確認してください。
 
 - `python tools/validate_prompt_data.py`
 - `python assets/calc_variations.py --json`
+- `python tools/check_variation_scope.py`
 - `python tools/report_expansion_delta.py assets/results/variation_before.json assets/results/variation_after.json`
 
 ## 注意事項

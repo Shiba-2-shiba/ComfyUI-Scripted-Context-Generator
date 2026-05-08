@@ -6,13 +6,13 @@ Last updated: 2026-05-08
 
 Overall status: `verified`
 
-Current phase: `complete`
+Current phase: `variation scope refactor`
 
 Primary target:
 
-- 日常系 location 8-10件を base variation 計測に昇格
-- 昇格 location に dedicated action pool を追加
-- 高カバレッジ既存 location の action を追加
+- variation scope を明示して、意図しない subject / location 増加を防ぐ
+- `compatibility_review.csv` を再生成可能にする準備を行う
+- 第2波の daily-life location 追加前にデータ境界を軽くする
 
 ## Baseline Snapshot
 
@@ -58,6 +58,9 @@ base variations: 18,000+
 | P2 | Add dedicated action pools for promoted locations | Done | included in P1 | included in P1 |
 | P3 | Add actions to high-coverage existing locations | Done | +1,298 | +1,422 |
 | P4 | Full validation and final status update | Done | 0 | 0 |
+| P5 | Define variation scope source of truth | Done | 0 | 0 |
+| P6 | Scoped compatibility review generation | Not started | 0 | TBD |
+| P7 | Action pool authoring split evaluation | Not started | 0 | TBD |
 
 ## Candidate Tracking
 
@@ -114,6 +117,8 @@ High-coverage existing action additions:
 - Keep `vocab/data/action_pools.json` as the runtime source of truth for this wave.
 - Treat `assets/compatibility_review.csv` as the base variation sizing source because `assets/calc_variations.py` reads it directly.
 - Avoid schema and public node changes.
+- Treat `vocab/data/variation_scope.json` as the source of truth for the current sizing boundary.
+- Do not add all `scene_compatibility.characters` entries to variation sizing unless they are promoted into scope.
 
 ## Verification Log
 
@@ -127,9 +132,15 @@ High-coverage existing action additions:
 | 2026-05-08 | `python tools/verify_full_flow.py` | Pass | OK |
 | 2026-05-08 | `python tools/check_widgets_values.py` | Pass | OK |
 | 2026-05-08 | `python tools/report_expansion_delta.py assets/results/variation_before.json assets/results/variation_after.json` | Pass | base variations `11,916 -> 15,034` |
+| 2026-05-08 | `python tools/check_variation_scope.py` | Pass | `ERROR: []`; background-pack warnings recorded for 8 legacy/scoped locations |
+| 2026-05-08 | `python -m unittest assets.test_variation_scope` | Pass | 2 tests OK |
 
 ## Open Risks
 
 - Some remaining daily-life candidates still rely on compositional fallback; this is intentional for this wave.
 - `vocab/data/action_pools.json` is larger after this pass; defer format splitting until review pain becomes concrete.
 - Future action text must stay semantic-only and avoid object overconcentration.
+- `compatibility_review.csv` is not yet regenerated from scope; current refactor first validates the boundary, then adds generation.
+- 8 scoped locations are counted through compatibility/action data but do not have direct background packs yet:
+  `art_gallery`, `castle_hall`, `enchanted_lake`, `high_tech_medbay`,
+  `magic_academy_library`, `museum_hall`, `starship_quarters`, `underground_bar`.
