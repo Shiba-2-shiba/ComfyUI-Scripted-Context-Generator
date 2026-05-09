@@ -33,5 +33,11 @@
       "text": "pausing on the entry step before heading out",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "home_rhythm",
+      "take": 4
+    }
   ]
 }

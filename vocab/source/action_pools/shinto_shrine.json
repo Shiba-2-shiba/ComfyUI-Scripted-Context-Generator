@@ -25,5 +25,11 @@
       "text": "clapping hands twice in prayer",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "outdoor_observation",
+      "take": 6
+    }
   ]
 }

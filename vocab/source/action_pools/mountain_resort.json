@@ -33,5 +33,11 @@
       "text": "leaning on the wooden railing",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "resort_relaxation",
+      "take": 8
+    }
   ]
 }

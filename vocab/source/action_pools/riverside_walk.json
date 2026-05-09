@@ -33,5 +33,15 @@
       "text": "looking across the water before continuing downstream",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "outdoor_observation",
+      "take": 8
+    },
+    {
+      "name": "public_navigation",
+      "take": 4
+    }
   ]
 }

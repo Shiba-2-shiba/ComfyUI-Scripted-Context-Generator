@@ -1,13 +1,16 @@
-# Base Variations 100k Implementation Plan
+# 100k Stabilization and 500k Forward Plan
 
 Last updated: 2026-05-08
 
 ## Goal
 
-Re-plan the variation expansion lane around a new intermediate target:
+Record the completed 100k stabilization lane and define the current P13
+planning surface for 500k.
 
-- intermediate target: `100,000` base variations
-- final planning horizon: `500,000` base variations
+Current targets:
+
+- stabilized intermediate target: `100,000` base variations
+- active planning horizon: `500,000` base variations
 
 `base variations` currently means:
 
@@ -15,7 +18,17 @@ Re-plan the variation expansion lane around a new intermediate target:
 sum(compatibility rows per location * action count for that location)
 ```
 
-Current measured baseline:
+Current status for P13:
+
+```text
+100k target: achieved and stabilized
+current base variations: 105,612
+current surface: 120 subjects / 91 locations / 5,926 compatibility rows
+current action depth: min 12 / median 16 / mean 15.6 / max 20
+active planning horizon: 500,000 base variations
+```
+
+Starting baseline for this plan:
 
 ```text
 unique subjects: 58
@@ -78,7 +91,7 @@ every location to carry 35 near-duplicate actions.
 
 ### P9: Add Target Modeling Before More Data
 
-Status: `next`
+Status: `done`
 
 Add a first-class planning tool so expansion work can be measured before CSV or
 scope files are changed.
@@ -107,9 +120,16 @@ python tools/plan_variation_target.py --target 100000
 python -m unittest assets.test_variation_target_planner
 ```
 
+Current implementation:
+
+- `tools/plan_variation_target.py`
+- `assets/test_variation_target_planner.py`
+- reports current metrics, candidate deltas, all-known-subject scenarios, and
+  minimum action-depth scenarios without writing data files
+
 ### P10: Compatibility Taxonomy Expansion
 
-Status: `planned`
+Status: `done`
 
 The compatibility graph needs more meaningful rows before action-pool growth
 can pay off.
@@ -141,11 +161,17 @@ Work:
 Target after this phase:
 
 ```text
-subjects: 105-120
-locations: 105-115
-compatibility rows: 5,800-6,500
-base variations with current action depth: 45,000-60,000
+subjects: 120
+locations: 91
+compatibility rows: 5,926
+base variations with current action depth: 52,121
 ```
+
+P10 used the existing background/action surface instead of inventing new
+locations solely to hit the original 105-115 location shape. The row/base target
+was reached by adding mid-level tags, promoting all current compatibility
+subjects into scope, adding distinct daily-life subjects, and adding missing
+daily-life action pools.
 
 Validation:
 
@@ -159,7 +185,7 @@ python assets/calc_variations.py --json
 
 ### P11: Scalable Action Authoring Refactor
 
-Status: `planned`
+Status: `done`
 
 Keep runtime stable:
 
@@ -179,10 +205,10 @@ Do not add new dependencies.
 Action depth targets:
 
 ```text
-high-row locations: 18-24 actions
-medium-row locations: 14-18 actions
-low-row/specialized locations: 10-14 actions
-global median: 16+
+high-row locations: 20 actions
+medium-row locations: 16 actions
+low-row/specialized locations: 12 actions
+actual result: 105,612 base variations on the P10 row surface
 ```
 
 Authoring rules:
@@ -205,14 +231,21 @@ python assets/calc_variations.py --json
 Target after this phase:
 
 ```text
-compatibility rows: 5,800-6,500
-median actions: 16+
-base variations: 100,000+
+compatibility rows: 5,926
+actions per location: min 12 / median 16 / mean 15.6 / max 20
+base variations: 105,612
 ```
+
+Implementation result:
+
+- added `vocab/source/action_pools/_shared_families.json`
+- added per-location `families` refs to source action-pool files
+- kept runtime loading stable by expanding refs into `vocab/data/action_pools.json`
+- added regression coverage for shared family expansion
 
 ### P12: 100k Stabilization Gate
 
-Status: `planned`
+Status: `done`
 
 Lock the new scale before moving toward 500k.
 
@@ -233,6 +266,39 @@ Docs to update:
 - `docs/variation_expansion/progress.md`
 - `docs/variation_expansion/tasks.md`
 - `docs/variation_expansion/README.md`
+
+Verification result:
+
+- current measured base variations: `105,612`
+- target planner: target met for `100000`
+- scoped compatibility review, action-pool source rebuild, prompt data
+  validation, full asset unittest discovery, and full flow verification passed
+
+### P13: 500k Target Planning
+
+Status: `active planning`
+
+Before adding more data, model the next shape with the same discipline used for
+the 100k lane. The likely variables are:
+
+- subject count
+- location count
+- compatibility density
+- median action depth
+- action-family reuse quality
+
+Do not begin by bulk-adding subjects or actions. First measure what combination
+can reach `500,000` without weakening semantic quality or making action text
+feel repetitive.
+
+P13 should produce a scenario note before implementation. At minimum, record:
+
+- current `--target 500000` planner output
+- subject-only, location-only, compatibility-density, and action-depth scenarios
+- the first limiter to address
+- rejected inflation routes, especially near-duplicate subjects or action-only growth
+- verification commands that will prove the selected route did not drift from
+  the P12 clean baseline
 
 ## 500k Forward Constraint
 
@@ -255,6 +321,18 @@ That requires the 100k work to leave these foundations in place:
 - regenerable compatibility review
 - scalable action authoring source
 - strong diversity/repetition audits
+
+## P13 Acceptance Criteria
+
+Planning is complete when:
+
+- `python tools/plan_variation_target.py --target 500000` has been run and summarized
+- the chosen 500k route identifies which files will change first
+- compatibility density and action-depth tradeoffs are explicit
+- subject/location candidates are grouped by distinct prompt utility, not only
+  by metric impact
+- guardrails for action-family reuse are written before expanding pools again
+- P12 checks remain the baseline for any later implementation pass
 
 ## Guardrails
 

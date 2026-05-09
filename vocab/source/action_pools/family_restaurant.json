@@ -33,5 +33,11 @@
       "text": "waving politely to call the server",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "retail_service",
+      "take": 8
+    }
   ]
 }

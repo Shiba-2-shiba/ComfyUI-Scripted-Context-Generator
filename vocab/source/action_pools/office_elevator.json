@@ -29,5 +29,11 @@
       "text": "straightening an ID badge before the doors open",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "transit_flow",
+      "take": 5
+    }
   ]
 }

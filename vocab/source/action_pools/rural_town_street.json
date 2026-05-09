@@ -33,5 +33,15 @@
       "text": "inspecting a roadside flower",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "public_navigation",
+      "take": 8
+    },
+    {
+      "name": "outdoor_observation",
+      "take": 4
+    }
   ]
 }

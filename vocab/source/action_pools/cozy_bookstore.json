@@ -45,5 +45,15 @@
       "text": "placing a reserved book on the checkout counter",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "retail_service",
+      "take": 8
+    },
+    {
+      "name": "quiet_study",
+      "take": 1
+    }
   ]
 }

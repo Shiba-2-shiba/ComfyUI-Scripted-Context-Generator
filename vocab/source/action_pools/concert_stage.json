@@ -33,5 +33,11 @@
       "text": "pointing to a fan in the front row",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "performance_focus",
+      "take": 8
+    }
   ]
 }

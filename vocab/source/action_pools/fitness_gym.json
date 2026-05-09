@@ -49,5 +49,11 @@
       "text": "checking form in the mirror",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "fitness_motion",
+      "take": 4
+    }
   ]
 }

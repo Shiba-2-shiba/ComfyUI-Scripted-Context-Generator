@@ -33,5 +33,11 @@
       "text": "checking coupons beside the checkout lane",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "retail_service",
+      "take": 8
+    }
   ]
 }

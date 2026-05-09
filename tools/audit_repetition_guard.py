@@ -80,7 +80,7 @@ def _adjacent_object_overlap_rate(object_sets: Sequence[Set[str]]) -> float:
     overlaps = 0
     total = 0
     for prev, curr in zip(object_sets, object_sets[1:]):
-        if not prev or not curr:
+        if not prev and not curr:
             continue
         total += 1
         if prev & curr:
@@ -100,7 +100,7 @@ def _recent_window_object_overlap_rate(object_sets: Sequence[Set[str]], window: 
         previous_union: Set[str] = set()
         for prev in object_sets[max(0, idx - window) : idx]:
             previous_union.update(prev or set())
-        if not previous_union:
+        if not current and not previous_union:
             continue
         total += 1
         if current & previous_union:

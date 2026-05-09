@@ -41,5 +41,15 @@
       "text": "pushing through choppy water toward deeper line",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "resort_relaxation",
+      "take": 8
+    },
+    {
+      "name": "fitness_motion",
+      "take": 2
+    }
   ]
 }

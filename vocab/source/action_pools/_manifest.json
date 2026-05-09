@@ -89,6 +89,15 @@
     "apartment_entryway",
     "public_library_lobby",
     "riverside_walk",
-    "laundromat"
+    "laundromat",
+    "local_market_street",
+    "neighborhood_crosswalk",
+    "neighborhood_playground",
+    "rooftop_laundry_area",
+    "school_clubroom",
+    "shopping_arcade",
+    "subway_ticket_gate",
+    "train_station_platform",
+    "university_campus_courtyard"
   ]
 }

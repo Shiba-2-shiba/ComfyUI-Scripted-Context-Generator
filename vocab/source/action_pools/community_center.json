@@ -33,5 +33,15 @@
       "text": "turning a chair toward the discussion circle",
       "load": "active"
     }
+  ],
+  "families": [
+    {
+      "name": "public_presence",
+      "take": 8
+    },
+    {
+      "name": "leisure_participation",
+      "take": 4
+    }
   ]
 }

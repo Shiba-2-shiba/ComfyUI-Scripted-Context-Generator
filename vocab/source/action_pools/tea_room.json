@@ -33,5 +33,11 @@
       "text": "holding a tea bowl with both hands",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "refined_interior",
+      "take": 4
+    }
   ]
 }

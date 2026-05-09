@@ -1,0 +1,43 @@
+{
+  "location": "subway_ticket_gate",
+  "actions": [
+    {
+      "text": "holding a transit card above the ticket gate reader",
+      "load": "calm"
+    },
+    {
+      "text": "checking the fare display before passing through",
+      "load": "calm"
+    },
+    {
+      "text": "standing beside the gate while searching a bag",
+      "load": "calm"
+    },
+    {
+      "text": "walking through the ticket gate with a steady step",
+      "load": "active"
+    },
+    {
+      "text": "pausing near the route map after tapping in",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting a shoulder bag beside the gate line",
+      "load": "calm"
+    },
+    {
+      "text": "looking toward the platform signs beyond the gates",
+      "load": "calm"
+    },
+    {
+      "text": "stepping aside to let another passenger pass",
+      "load": "active"
+    }
+  ],
+  "families": [
+    {
+      "name": "transit_flow",
+      "take": 8
+    }
+  ]
+}

@@ -17,5 +17,11 @@
       "text": "standing and looking at a glowing light",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "outdoor_observation",
+      "take": 8
+    }
   ]
 }

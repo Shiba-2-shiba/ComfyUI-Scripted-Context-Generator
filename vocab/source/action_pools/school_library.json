@@ -41,5 +41,15 @@
       "text": "walking between tables while carrying borrowed books",
       "load": "active"
     }
+  ],
+  "families": [
+    {
+      "name": "quiet_study",
+      "take": 8
+    },
+    {
+      "name": "public_presence",
+      "take": 2
+    }
   ]
 }

@@ -45,5 +45,15 @@
       "text": "checking a transit card near the train doors",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "transit_flow",
+      "take": 8
+    },
+    {
+      "name": "public_navigation",
+      "take": 1
+    }
   ]
 }

@@ -33,5 +33,11 @@
       "text": "gazing at the moon reflected in the lake",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "outdoor_observation",
+      "take": 4
+    }
   ]
 }

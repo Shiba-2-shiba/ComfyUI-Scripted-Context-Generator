@@ -30,10 +30,10 @@ class TestActionDiversityAudit(unittest.TestCase):
             msg=f"threshold failures: {evaluation['failures']}",
         )
 
-    def test_daily_life_audit_preserves_known_school_rooftop_verb_normalization(self):
+    def test_daily_life_audit_preserves_school_rooftop_fragment_verb_normalization(self):
         report = build_action_diversity_report(scope="daily_life", seed_count=32)
         school_rooftop = next(item for item in report["locations"] if item["location"] == "school_rooftop")
-        target_prefix = "hands busy with the material in front of her near the part of the scene she is using"
+        target_prefix = "hands settling and then shifting again near the part of the scene she is using"
         sample = next(
             row
             for row in school_rooftop["samples"]
@@ -41,10 +41,10 @@ class TestActionDiversityAudit(unittest.TestCase):
         )
         self.assertEqual(
             sample["verb"],
-            "walking",
+            "settling",
             msg=(
                 "school_rooftop audit regression:\n"
-                f"expected normalized verb: walking\n"
+                f"expected normalized verb: settling\n"
                 f"actual normalized verb: {sample['verb']}\n"
                 f"action: {sample['action']}"
             ),

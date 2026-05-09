@@ -25,5 +25,11 @@
       "text": "standing and reading a notice on the wall",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "work_rhythm",
+      "take": 6
+    }
   ]
 }

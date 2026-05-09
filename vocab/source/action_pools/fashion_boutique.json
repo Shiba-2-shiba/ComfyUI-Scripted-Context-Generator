@@ -41,5 +41,11 @@
       "text": "smoothing a sleeve while waiting for a second opinion",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "retail_service",
+      "take": 6
+    }
   ]
 }

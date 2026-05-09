@@ -33,5 +33,15 @@
       "text": "stepping aside as passengers leave the bus",
       "load": "active"
     }
+  ],
+  "families": [
+    {
+      "name": "transit_flow",
+      "take": 8
+    },
+    {
+      "name": "public_navigation",
+      "take": 4
+    }
   ]
 }

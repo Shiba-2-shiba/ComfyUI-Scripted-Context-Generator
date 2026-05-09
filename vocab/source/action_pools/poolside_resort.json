@@ -25,5 +25,15 @@
       "text": "adjusting sunglasses on head",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "resort_relaxation",
+      "take": 8
+    },
+    {
+      "name": "leisure_participation",
+      "take": 2
+    }
   ]
 }

@@ -45,5 +45,15 @@
       "text": "checking the oven timer while standing by the counter",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "home_rhythm",
+      "take": 8
+    },
+    {
+      "name": "refined_interior",
+      "take": 1
+    }
   ]
 }

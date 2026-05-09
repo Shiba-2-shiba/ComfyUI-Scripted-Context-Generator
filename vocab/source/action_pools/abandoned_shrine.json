@@ -33,5 +33,11 @@
       "text": "brushing away spiderwebs",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "cautious_tension",
+      "take": 4
+    }
   ]
 }

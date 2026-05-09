@@ -25,5 +25,11 @@
       "text": "eating a donut while watching screens",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "work_rhythm",
+      "take": 6
+    }
   ]
 }

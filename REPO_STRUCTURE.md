@@ -63,7 +63,7 @@
 │   │   ├── micro_actions.py                 # micro action 語彙
 │   │   └── utils.py                         # garnish utility
 │   ├── source/
-│   │   └── action_pools/                    # location 別 action pool authoring source
+│   │   └── action_pools/                    # location 別 action pool authoring source。_shared_families.json を含む
 │   └── data/
 │       ├── action_pools.json
 │       ├── background_alias_overrides.json
@@ -85,6 +85,7 @@
 │       ├── policy_terms.json                # banned-domain canonical source
 │       ├── scene_axis.json
 │       ├── scene_compatibility.json
+│       ├── variation_scope.json             # base variation sizing の subject/location 境界
 │       └── template_catalog.json
 ├── background_vocab.py                      # vocab/background の互換 facade
 ├── clothing_vocab.py                        # vocab/clothing の互換 facade
@@ -138,6 +139,10 @@ active / recommended な workflow sample は `ComfyUI-workflow-context.json` だ
 │   ├── check_widgets_values.py              # sample workflow の widget 検証
 │   ├── verify_full_flow.py                  # end-to-end 検証
 │   ├── validate_prompt_data.py              # prompt data 整合性チェック
+│   ├── plan_variation_target.py             # base variation target modeling
+│   ├── check_variation_scope.py             # variation_scope と CSV の整合確認
+│   ├── build_compatibility_review.py        # scoped compatibility_review.csv 生成/差分確認
+│   ├── build_action_pools.py                # action pool source -> runtime JSON 生成/差分確認
 │   ├── audit_action_diversity.py            # action 多様性監査
 │   ├── audit_repetition_guard.py            # repetition guard 監査
 │   ├── audit_template_diversity.py          # template 多様性監査
@@ -176,6 +181,10 @@ source of truth は次で見るとズレにくいです。
 - character: `vocab/data/character_profiles.json` + `vocab/data/scene_compatibility.json` を `character_service.py` で統合
 - location: `vocab/data/background_packs.json` の pack key / aliases と `vocab/data/background_alias_overrides.json` が主経路。`loc_aliases_canonical.json` / `loc_aliases_legacy.json` / `loc_aliases_fallback.json` を `location_service.py` が順序付きで重ね、`background_loc_tag_map.json` は legacy fallback。`loc_aliases.json` は inert placeholder で、runtime source ではない
 - clothing: `vocab/data/clothing_theme_map.json` と `vocab/data/clothing_packs.json`
+- variation sizing: `vocab/data/variation_scope.json` と `assets/compatibility_review.csv`
+- action authoring: `vocab/source/action_pools/*.json` と
+  `vocab/source/action_pools/_shared_families.json`。runtime は生成済みの
+  `vocab/data/action_pools.json`
 - banned terms: `vocab/data/policy_terms.json` を `core/semantic_policy.py` / `nodes_prompt_cleaner.py` / `asset_validator.py` が共有
 
 refactor 完了後も、意図的に残している compatibility surface があります。

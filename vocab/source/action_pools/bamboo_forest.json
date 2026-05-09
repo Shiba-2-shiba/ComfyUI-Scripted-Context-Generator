@@ -25,5 +25,11 @@
       "text": "spotting a bamboo shoot",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "outdoor_observation",
+      "take": 6
+    }
   ]
 }

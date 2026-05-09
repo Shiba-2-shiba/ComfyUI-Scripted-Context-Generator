@@ -25,5 +25,15 @@
       "text": "signaling 'OK' from the booth",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "performance_focus",
+      "take": 8
+    },
+    {
+      "name": "work_rhythm",
+      "take": 2
+    }
   ]
 }

@@ -25,5 +25,15 @@
       "text": "standing near a large flower arrangement",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "refined_interior",
+      "take": 8
+    },
+    {
+      "name": "resort_relaxation",
+      "take": 2
+    }
   ]
 }

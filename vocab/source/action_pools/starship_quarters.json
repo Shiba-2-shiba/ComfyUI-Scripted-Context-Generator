@@ -33,5 +33,11 @@
       "text": "checking life support indicators on the wall",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "speculative_exploration",
+      "take": 4
+    }
   ]
 }

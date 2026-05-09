@@ -45,5 +45,15 @@
       "text": "standing beside an exhibit case while reading notes",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "refined_interior",
+      "take": 8
+    },
+    {
+      "name": "quiet_study",
+      "take": 1
+    }
   ]
 }

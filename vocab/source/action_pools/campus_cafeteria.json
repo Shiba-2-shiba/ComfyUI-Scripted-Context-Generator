@@ -33,5 +33,11 @@
       "text": "checking a notebook while waiting for a friend",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "retail_service",
+      "take": 4
+    }
   ]
 }

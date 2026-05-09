@@ -1,0 +1,47 @@
+{
+  "location": "local_market_street",
+  "actions": [
+    {
+      "text": "checking produce displayed beside the market stall",
+      "load": "calm"
+    },
+    {
+      "text": "standing near a small vendor table with a tote bag",
+      "load": "calm"
+    },
+    {
+      "text": "walking past street stalls while comparing prices",
+      "load": "active"
+    },
+    {
+      "text": "holding a wrapped purchase close while waiting for change",
+      "load": "calm"
+    },
+    {
+      "text": "reading a handwritten sign above stacked crates",
+      "load": "calm"
+    },
+    {
+      "text": "stepping aside as shoppers pass through the narrow lane",
+      "load": "active"
+    },
+    {
+      "text": "sorting coins at the edge of the counter",
+      "load": "calm"
+    },
+    {
+      "text": "pausing near a stall while deciding what to buy",
+      "load": "calm"
+    }
+  ],
+  "families": [
+    {
+      "name": "retail_service",
+      "take": 8
+    },
+    {
+      "name": "public_navigation",
+      "take": 4
+    }
+  ]
+}

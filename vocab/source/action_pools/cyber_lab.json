@@ -17,5 +17,11 @@
       "text": "leaning over a table of circuit boards",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "speculative_exploration",
+      "take": 8
+    }
   ]
 }

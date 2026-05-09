@@ -25,5 +25,11 @@
       "text": "watching the twin moons rise",
       "load": "calm"
     }
+  ],
+  "families": [
+    {
+      "name": "speculative_exploration",
+      "take": 6
+    }
   ]
 }

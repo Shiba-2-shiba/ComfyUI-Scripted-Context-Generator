@@ -33,5 +33,15 @@
       "text": "turning toward the reading area after asking a question",
       "load": "active"
     }
+  ],
+  "families": [
+    {
+      "name": "quiet_study",
+      "take": 8
+    },
+    {
+      "name": "public_presence",
+      "take": 4
+    }
   ]
 }

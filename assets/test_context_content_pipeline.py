@@ -19,6 +19,31 @@ from pipeline.prompt_orchestrator import (
 
 
 class TestContextContentPipeline(unittest.TestCase):
+    def _clothing_prompts_for(self, theme, loc, mode="random", seeds=range(96)):
+        return [
+            expand_clothing_prompt(
+                theme,
+                seed,
+                mode,
+                0.0,
+                "black, gold",
+                loc=loc,
+            )
+            for seed in seeds
+        ]
+
+    def _assert_state_terms_absent(self, theme, loc, terms, mode="random", seeds=range(96)):
+        for prompt in self._clothing_prompts_for(theme, loc, mode=mode, seeds=seeds):
+            for term in terms:
+                self.assertNotIn(term, prompt)
+
+    def _assert_any_state_term_present(self, theme, loc, terms, mode="random", seeds=range(160)):
+        prompts = self._clothing_prompts_for(theme, loc, mode=mode, seeds=seeds)
+        self.assertTrue(
+            any(any(term in prompt for term in terms) for prompt in prompts),
+            msg=f"missing {terms} for {theme} at {loc}: {prompts[:8]}",
+        )
+
     def test_apply_mood_expansion_updates_context(self):
         ctx = patch_context({}, updates={"seed": 10}, meta={"mood": "quiet"})
         updated, expanded, staging = apply_mood_expansion(ctx, 10, "mood_map.json", "quiet")
@@ -98,6 +123,37 @@ class TestContextContentPipeline(unittest.TestCase):
         )
         self.assertTrue(decision.get("outerwear_pack"))
         self.assertIn("over it", clothing_prompt)
+
+    def test_expand_clothing_prompt_suppresses_snow_state_for_indoor_locations(self):
+        for loc in ("modern_office", "food_court", "tea_room", "messy_kitchen"):
+            self._assert_state_terms_absent("winter_date", loc, ("covered in snow",), mode="dresses")
+
+    def test_expand_clothing_prompt_allows_snow_state_for_winter_street(self):
+        self._assert_any_state_term_present("winter_date", "winter_street", ("covered in snow",), mode="dresses")
+
+    def test_expand_clothing_prompt_suppresses_weather_and_context_states_for_indoor_locations(self):
+        cases = [
+            ("rainy_day", "art_gallery", "separates", ("rain-soaked",)),
+            ("beach_resort", "bedroom_boudoir", "separates", ("sun-kissed glow", "wet")),
+            ("gym_workout", "museum_hall", "separates", ("sweaty",)),
+            ("fantasy_battle", "clean_modern_kitchen", "random", ("battle-worn", "blood-stained")),
+            ("steampunk", "cozy_living_room", "separates", ("grease stained",)),
+        ]
+        for theme, loc, mode, terms in cases:
+            with self.subTest(theme=theme, loc=loc):
+                self._assert_state_terms_absent(theme, loc, terms, mode=mode)
+
+    def test_expand_clothing_prompt_allows_context_states_for_compatible_locations(self):
+        cases = [
+            ("rainy_day", "rainy_alley", "separates", ("rain-soaked",)),
+            ("beach_resort", "tropical_beach", "separates", ("sun-kissed glow", "wet")),
+            ("gym_workout", "fitness_gym", "separates", ("sweaty",)),
+            ("fantasy_battle", "burning_battlefield", "random", ("battle-worn", "blood-stained")),
+            ("steampunk", "clockwork_workshop", "separates", ("grease stained",)),
+        ]
+        for theme, loc, mode, terms in cases:
+            with self.subTest(theme=theme, loc=loc):
+                self._assert_any_state_term_present(theme, loc, terms, mode=mode)
 
     def test_clothing_signature_tracks_variant_details_within_same_pack(self):
         first = clothing_signature_from_decision(

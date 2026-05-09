@@ -25,5 +25,11 @@
       "text": "walking across the polished floor",
       "load": "active"
     }
+  ],
+  "families": [
+    {
+      "name": "fitness_motion",
+      "take": 6
+    }
   ]
 }

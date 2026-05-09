@@ -25,5 +25,11 @@
       "text": "walking towards the fence with a smile",
       "load": "active"
     }
+  ],
+  "families": [
+    {
+      "name": "quiet_study",
+      "take": 6
+    }
   ]
 }
