@@ -1,14 +1,24 @@
-# Next Expansion Wave Plan
+# Completed P8 Expansion Wave Plan
 
 Last updated: 2026-05-08
+
+This file records the completed P8 wave and the superseded P9 subject-only
+evaluation. It is not the active next-work plan.
+
+Active work has moved to **P13: 500k target planning**. Use:
+
+- [Progress](./progress.md)
+- [Task Board](./tasks.md)
+- [100k Stabilization and 500k Forward Plan](./base_variations_100k_plan.md)
 
 ## Direction
 
 This plan records the completed P8 wave and the original P9 subject evaluation.
-For the new `100,000` base variation intermediate target, use
+The `100,000` base variation intermediate target has since been achieved and
+stabilized. For the current 500k planning surface, use
 `docs/variation_expansion/base_variations_100k_plan.md`.
 
-Proceed in this revised order:
+The completed revised order was:
 
 1. Increase `unique locations`.
 2. Re-check variation balance and action quality.
@@ -16,10 +26,10 @@ Proceed in this revised order:
 4. Expand compatibility taxonomy and action authoring together.
 
 Do not promote subjects as a standalone inflation step. Subject promotion
-multiplies against the current location/action surface, so it should happen
-inside the 100k target model.
+multiplies against the current location/action surface, so future subject work
+should happen inside the P13 target model.
 
-## Current Baseline
+## P8 Completion Baseline
 
 Measured with:
 
@@ -30,7 +40,7 @@ python tools/check_variation_scope.py
 python tools/build_action_pools.py --check
 ```
 
-Current values:
+P8 completion values:
 
 - unique subjects: `58`
 - unique locations: `76`
@@ -162,11 +172,20 @@ P9 acceptance criteria before subject promotion:
 
 ## P9 Replacement: Target Modeling For 100k
 
-Status: `next`
+Status: `done; superseded by P13 500k planning`
 
-The previous P9 subject-only gate remains useful as input, but it is too small
-for the new target. The replacement P9 is a read-only target planning tool and
-scenario report.
+The previous P9 subject-only gate remains useful as historical input, but it
+was too small for the 100k target. The replacement P9 added a read-only target
+planning tool and scenario report.
+
+P12 later stabilized the surface at:
+
+```text
+subjects: 120
+locations: 91
+compatibility rows: 5,926
+base variations: 105,612
+```
 
 See:
 
@@ -180,3 +199,5 @@ See:
   `assets/compatibility_review.csv`.
 - Do not edit `vocab/data/action_pools.json` directly for normal authoring;
   edit `vocab/source/action_pools/*.json`, then rebuild.
+- For current work, apply these guardrails through the P13 500k target model
+  instead of reopening this completed P8 plan.

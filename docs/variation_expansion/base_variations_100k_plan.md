@@ -1,13 +1,16 @@
-# Base Variations 100k Implementation Plan
+# 100k Stabilization and 500k Forward Plan
 
 Last updated: 2026-05-08
 
 ## Goal
 
-Re-plan the variation expansion lane around a new intermediate target:
+Record the completed 100k stabilization lane and define the current P13
+planning surface for 500k.
 
-- intermediate target: `100,000` base variations
-- final planning horizon: `500,000` base variations
+Current targets:
+
+- stabilized intermediate target: `100,000` base variations
+- active planning horizon: `500,000` base variations
 
 `base variations` currently means:
 
@@ -15,14 +18,14 @@ Re-plan the variation expansion lane around a new intermediate target:
 sum(compatibility rows per location * action count for that location)
 ```
 
-Current status:
+Current status for P13:
 
 ```text
 100k target: achieved and stabilized
 current base variations: 105,612
 current surface: 120 subjects / 91 locations / 5,926 compatibility rows
 current action depth: min 12 / median 16 / mean 15.6 / max 20
-next planning horizon: 500,000 base variations
+active planning horizon: 500,000 base variations
 ```
 
 Starting baseline for this plan:
@@ -273,7 +276,7 @@ Verification result:
 
 ### P13: 500k Target Planning
 
-Status: `planned`
+Status: `active planning`
 
 Before adding more data, model the next shape with the same discipline used for
 the 100k lane. The likely variables are:
@@ -287,6 +290,15 @@ the 100k lane. The likely variables are:
 Do not begin by bulk-adding subjects or actions. First measure what combination
 can reach `500,000` without weakening semantic quality or making action text
 feel repetitive.
+
+P13 should produce a scenario note before implementation. At minimum, record:
+
+- current `--target 500000` planner output
+- subject-only, location-only, compatibility-density, and action-depth scenarios
+- the first limiter to address
+- rejected inflation routes, especially near-duplicate subjects or action-only growth
+- verification commands that will prove the selected route did not drift from
+  the P12 clean baseline
 
 ## 500k Forward Constraint
 
@@ -309,6 +321,18 @@ That requires the 100k work to leave these foundations in place:
 - regenerable compatibility review
 - scalable action authoring source
 - strong diversity/repetition audits
+
+## P13 Acceptance Criteria
+
+Planning is complete when:
+
+- `python tools/plan_variation_target.py --target 500000` has been run and summarized
+- the chosen 500k route identifies which files will change first
+- compatibility density and action-depth tradeoffs are explicit
+- subject/location candidates are grouped by distinct prompt utility, not only
+  by metric impact
+- guardrails for action-family reuse are written before expanding pools again
+- P12 checks remain the baseline for any later implementation pass
 
 ## Guardrails
 

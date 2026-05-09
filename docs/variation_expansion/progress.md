@@ -4,7 +4,7 @@ Last updated: 2026-05-08
 
 ## Status Summary
 
-Overall status: `verified`
+Overall status: `P12 verified; P13 planning active`
 
 Current phase: `P13 500k target planning`
 
@@ -85,9 +85,25 @@ final planning horizon: 500,000
 | P10 | Expand compatibility taxonomy for 100k | Done | 45,000-60,000 | 52,121 |
 | P11 | Refactor action authoring source for 20+ effective actions | Done | 100,000+ base | 105,612 |
 | P12 | Stabilize 100k verification gate | Done | 0 | verified at 105,612 |
-| P13 | Model the 500k expansion shape | Planned | TBD | TBD |
+| P13 | Model the 500k expansion shape | Active planning | TBD | TBD |
 
-## Next Direction
+## P13 Current Direction
+
+The active work is 500k target planning. Before changing data, measure the
+next expansion shape and decide whether the first limiter is subject count,
+location count, compatibility density, or action depth.
+
+P13 should start from:
+
+```bash
+python tools/plan_variation_target.py --target 500000
+```
+
+Record the chosen route before editing `variation_scope.json`,
+`scene_compatibility.json`, `assets/compatibility_review.csv`, or
+`vocab/source/action_pools/`.
+
+## Completed 100k Direction
 
 P8 increased `unique locations` before any subject promotion.
 
@@ -170,6 +186,9 @@ P11 result:
   families while runtime keeps the flat `vocab/data/action_pools.json` shape
 - raised base variations from `52,121` to `105,612`
 - current target planner reports `target_met: true` at the current surface
+
+P12 stabilized this at `105,612` base variations. These notes are retained as
+history and input for P13, not as the active next implementation plan.
 
 ## Candidate Tracking
 

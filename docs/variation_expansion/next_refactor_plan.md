@@ -1,12 +1,22 @@
-# Next Refactor Plan
+# Completed Refactor Plan
 
 Last updated: 2026-05-08
 
+This file is a completed-plan record for the P5-P12 refactor lane. It is not
+the active next-work entry point.
+
+Active work has moved to **P13: 500k target planning**. Use:
+
+- [Progress](./progress.md)
+- [Task Board](./tasks.md)
+- [100k Stabilization and 500k Forward Plan](./base_variations_100k_plan.md)
+
 ## Goal
 
-Make future variation expansion predictable by separating completed expansion history from the active expansion scope.
+Make future variation expansion predictable by separating completed expansion
+history from the active expansion scope.
 
-The next work should reduce hidden coupling around:
+This completed work reduced hidden coupling around:
 
 - which subjects count toward base variation sizing
 - which locations count toward base variation sizing
@@ -42,9 +52,10 @@ python -m unittest assets.test_variation_scope
 
 Current state:
 
-- All 68 current variation-scope locations have direct background packs.
+- Current P12 stabilized scope has 120 subjects and 91 locations.
+- All current variation-scope locations have direct background packs.
 - `tools/check_variation_scope.py` should stay clean (`ERROR: []`, `WARNING: []`)
-  before the next promotion wave is accepted.
+  before any P13 promotion wave is accepted.
 
 ### 2. Make Compatibility Review Regenerable
 
@@ -67,8 +78,8 @@ Current implementation:
 - `tools/build_compatibility_review.py --check` generates scoped candidate rows and
   compares them to `assets/compatibility_review.csv`.
 - `assets/compatibility_review.csv` has been normalized from the generator output.
-- The check now reports `ERROR: []` and no row or pair drift.
-- Current generated rows: `1,637`.
+- The check now reports `ERROR: []`, `WARNING: []`, and no row or pair drift.
+- Current generated rows after P12: `5,926`.
 - `prompts.jsonl` rows are aligned to the current variation scope.
 
 ### 3. Split Action Pool Authoring Surface
@@ -87,7 +98,7 @@ Authoring source:
 
 Current implementation:
 
-- The split source has 79 location files.
+- The split source has 96 location files plus `_shared_families.json`.
 - `tools/build_action_pools.py --check` verifies that split source rebuilds
   `vocab/data/action_pools.json` exactly.
 - Runtime loaders still read only `vocab/data/action_pools.json`.
@@ -138,12 +149,12 @@ modeling and scenario measurement before any subject promotion.
 
 ### 6. Plan Toward 100k Base Variations
 
-Status: `next`
+Status: `done; superseded by P13 500k planning`
 
-The next implementation lane should add a read-only target planner, then expand
+The 100k implementation lane added a read-only target planner, then expanded
 compatibility taxonomy and action authoring together.
 
-Current planning finding:
+Original planning finding:
 
 - current scope: `15,610`
 - all known subjects and compatible action-backed locations with current
@@ -154,13 +165,26 @@ Current planning finding:
 Because the minimum-35-actions route risks repetitive action text, the preferred
 target shape is `5,800-6,500` compatibility rows with median `16+` actions.
 
-Detailed plan:
+P12 stabilized the result at:
+
+```text
+subjects: 120
+locations: 91
+compatibility rows: 5,926
+base variations: 105,612
+actions per location: min 12 / median 16 / mean 15.6 / max 20
+```
+
+Current successor plan:
 
 - `docs/variation_expansion/base_variations_100k_plan.md`
 
 ## Acceptance Criteria For This Refactor Lane
 
+This lane is complete. Continue to use these as regression checks before any
+P13 implementation pass:
+
 - `python tools/check_variation_scope.py` reports no errors
 - `python tools/validate_prompt_data.py` reports no errors
 - `python assets/calc_variations.py --json` remains stable unless a deliberate expansion changes expected metrics
-- docs distinguish completed waves from active next work
+- docs distinguish completed waves from active P13 work

@@ -304,6 +304,11 @@ P12 result:
 
 ## P13: 500k Target Planning
 
-- [ ] VE-1301 Model subject/location/action-depth shapes for `500000`
-- [ ] VE-1302 Identify whether compatibility density or location count is the next limiter
-- [ ] VE-1303 Define guardrails for expanding beyond the 100k stabilized surface
+Active phase. Do not begin bulk subject, location, compatibility, or action-pool
+edits until this planning gate is recorded.
+
+- [ ] VE-1301 Run and summarize `python tools/plan_variation_target.py --target 500000`
+- [ ] VE-1302 Model subject/location/compatibility-density/action-depth shapes for `500000`
+- [ ] VE-1303 Identify whether compatibility density, location count, subject count, or action depth is the next limiter
+- [ ] VE-1304 Define guardrails for expanding beyond the 100k stabilized surface
+- [ ] VE-1305 Record rejected inflation routes before implementation starts

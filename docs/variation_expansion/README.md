@@ -1,32 +1,44 @@
 # Variation Expansion Workstream
 
-このディレクトリは、日常系 location 昇格と action pool 拡張を進めるための作業入口です。
+このディレクトリは、base variations 拡張作業の入口です。
+
+現在の active work は **P13: 500k target planning** です。P8-P12 の
+100k stabilization までは完了済みなので、次の実装は subject / location /
+compatibility density / action depth の組み合わせを測ってから開始します。
 
 ## Active Documents
 
-- [Base Variations 100k Implementation Plan](./base_variations_100k_plan.md)
-- [Next Refactor Plan](./next_refactor_plan.md)
-- [Next Expansion Wave Plan](./next_expansion_wave_plan.md)
 - [Progress](./progress.md)
 - [Task Board](./tasks.md)
+- [100k Stabilization and 500k Forward Plan](./base_variations_100k_plan.md)
+
+Historical or completed-plan references:
+
+- [Completed Refactor Plan](./next_refactor_plan.md)
+- [Completed P8 Expansion Wave Plan](./next_expansion_wave_plan.md)
 - [Completed Wave: 2026-05-08](./completed_wave_2026-05-08.md)
 - [Original Wave Plan](./location_action_refactor_plan.md)
 
 ## Current Scope
 
-第1波、運用面リファクタ、P8 location expansion、P9 target modeling、P10 compatibility taxonomy expansion、P11 action authoring refactor、P12 100k stabilization gate は完了済みです。現在の次作業は 500k へ向けた拡張計画の再設計です。
+第1波、運用面リファクタ、P8 location expansion、P9 target modeling、P10
+compatibility taxonomy expansion、P11 action authoring refactor、P12 100k
+stabilization gate は完了済みです。
+
+現在は P13 です。500k へ向けた拡張形状を再設計し、bulk data edit の前に
+target planner で候補形状を測ります。
 
 1. P8: remaining daily-life location を昇格し、`unique locations` を増やす - Done
 2. P9: 100k target modeling を追加し、subject / location / action depth の必要量を測る - Done
 3. P10: compatibility taxonomy と variation scope を 100k 向けに拡張する - Done
 4. P11: action authoring source を 20+ effective actions に耐える形へ拡張する - Done
 5. P12: 100k stabilization gate で全体検証を固定する - Done
-6. P13: 500k target planning を開始する - Next
+6. P13: 500k target planning で次の拡張形状を決める - Active
 
 10万達成までの再計画と、500kへ進むための制約は
 [`base_variations_100k_plan.md`](./base_variations_100k_plan.md) を参照してください。
 
-## Baseline
+## Historical Baseline
 
 Last measured: 2026-05-08
 
@@ -51,13 +63,23 @@ actions per location: min 12 / median 16 / mean 15.6 / max 20
 missing action pools: 0
 ```
 
+## P13 Planning Target
+
+500k planning は、次を先に測ってから実装に入ります。
+
+- subject count
+- location count
+- compatibility density
+- median action depth
+- action-family reuse quality
+
 Target planning command:
 
 ```bash
-python tools/plan_variation_target.py --target 100000
+python tools/plan_variation_target.py --target 500000
 ```
 
-## Intermediate Target
+## Current Stabilized Target
 
 ```text
 target base variations: 100,000
@@ -74,11 +96,11 @@ final planning horizon: 500,000 base variations
 
 ## Completion Rule
 
-この workstream は、次が満たされたとき完了扱いにします。
+P13 planning は、次が満たされたとき実装計画へ進めます。
 
-- `vocab/data/variation_scope.json` が current sizing surface を明示する
-- `python tools/check_variation_scope.py` が `ERROR: []`
-- `assets/compatibility_review.csv` の生成・検証手順が docs に明記されている
-- `python tools/validate_prompt_data.py` が `ERROR: []`, `WARNING: []`
-- `python tools/build_action_pools.py --check` が `ERROR: []`, `WARNING: []`
-- `python tools/plan_variation_target.py --target 100000` が target met を返す
+- `python tools/plan_variation_target.py --target 500000` の scenario output が記録されている
+- compatibility density と location count のどちらが次の limiter か明示されている
+- action depth を増やす場合の repetition / semantic-quality guardrail が明示されている
+- `vocab/data/variation_scope.json`, `assets/compatibility_review.csv`,
+  `vocab/source/action_pools/` のどれを先に変えるかが決まっている
+- P12 baseline checks は引き続き clean である
