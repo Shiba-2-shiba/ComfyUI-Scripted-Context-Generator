@@ -49,6 +49,54 @@ OUTERWEAR_BLOCKED_LOCATION_KEYS = {
     "fitness_gym",
     "school_gym_hall",
 }
+STATE_DETAIL_RULES = (
+    {
+        "family": "snow",
+        "terms": ("snow", "snowy", "snowflake"),
+        "allowed_location_keys": ("winter_street",),
+        "allowed_location_terms": ("snow", "snowy", "winter", "ski"),
+    },
+    {
+        "family": "wet",
+        "terms": ("rain-soaked", "wet"),
+        "allowed_location_keys": (
+            "enchanted_lake",
+            "japanese_bath",
+            "luxury_bathroom",
+            "poolside_resort",
+            "rainy_alley",
+            "rainy_bus_stop",
+            "riverside_walk",
+            "tropical_beach",
+            "wave_barrel",
+        ),
+        "allowed_location_terms": ("rain", "wet", "bath", "onsen", "beach", "pool", "wave", "lake", "riverside"),
+    },
+    {
+        "family": "sun_beach",
+        "terms": ("sun-kissed",),
+        "allowed_location_keys": ("mountain_resort", "poolside_resort", "tropical_beach", "wave_barrel"),
+        "allowed_location_terms": ("beach", "pool", "poolside", "resort", "summer", "sun", "wave"),
+    },
+    {
+        "family": "exertion",
+        "terms": ("sweaty",),
+        "allowed_location_keys": ("fitness_gym", "school_gym_hall", "stadium_court", "yoga_studio"),
+        "allowed_location_terms": ("gym", "yoga", "stadium", "court", "sport", "training", "workout"),
+    },
+    {
+        "family": "battle_damage",
+        "terms": ("battle-worn", "blood-stained"),
+        "allowed_location_keys": ("burning_battlefield", "castle_hall", "dragon_lair", "dungeon_crypt"),
+        "allowed_location_terms": ("battle", "battlefield", "castle", "dragon", "dungeon", "lair"),
+    },
+    {
+        "family": "workshop_dirt",
+        "terms": ("grease stained",),
+        "allowed_location_keys": ("clockwork_workshop",),
+        "allowed_location_terms": ("clockwork", "workshop", "mechanic", "industrial", "machinery"),
+    },
+)
 
 
 def _normalize_signature_part(value):
@@ -63,7 +111,28 @@ def _build_variant_signature(parts):
     return "~".join(normalized)
 
 
-def _build_item_description(rng, concept_data, char_colors=None):
+def _state_detail_rule(value):
+    text = str(value or "").lower()
+    for rule in STATE_DETAIL_RULES:
+        if any(term in text for term in rule["terms"]):
+            return rule
+    return None
+
+
+def _location_allows_state_detail(loc, state_detail):
+    rule = _state_detail_rule(state_detail)
+    if not rule:
+        return True
+    raw = str(loc or "").strip().lower()
+    loc_key = resolve_location_key(loc) or raw
+    loc_key = str(loc_key or "").strip().lower()
+    if loc_key in rule["allowed_location_keys"]:
+        return True
+    loc_text = " ".join(part for part in (raw, loc_key) if part)
+    return bool(loc_text and any(term in loc_text for term in rule["allowed_location_terms"]))
+
+
+def _build_item_description(rng, concept_data, char_colors=None, loc=""):
     selected_items = []
     choices_dict = concept_data.get("choices", {})
     for _, options in choices_dict.items():
@@ -106,7 +175,9 @@ def _build_item_description(rng, concept_data, char_colors=None):
         details_list.append(rng.choice(opt_details))
     states = concept_data.get("states", [])
     if states and rng.random() < state_detail_prob:
-        details_list.append(rng.choice(states))
+        state_detail = rng.choice(states)
+        if _location_allows_state_detail(loc, state_detail):
+            details_list.append(state_detail)
 
     adjectives = [x for x in [color, pattern, material, style] if x]
     adj_str = " ".join(adjectives)
@@ -205,7 +276,7 @@ def _render_clothing_candidate(
             chosen_pack_name = _weighted_recent_choice(packs_map[chosen_type], rng, recent_values=recent_packs)
             concept_data = clothing_vocab.CONCEPT_PACKS[chosen_type].get(chosen_pack_name)
             if concept_data:
-                item_description, variant_signature = _build_item_description(rng, concept_data, char_colors)
+                item_description, variant_signature = _build_item_description(rng, concept_data, char_colors, loc=loc)
                 final_parts.append(item_description)
                 decision["chosen_type"] = chosen_type
                 decision["base_pack"] = chosen_pack_name

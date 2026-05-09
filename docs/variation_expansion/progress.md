@@ -1,12 +1,14 @@
 # Variation Expansion Progress
 
-Last updated: 2026-05-08
+Last updated: 2026-05-09
 
 ## Status Summary
 
 Overall status: `P12 verified; P13 planning active`
 
 Current phase: `P13 500k target planning`
+
+Active sidecar cleanup: `P14 clothing state location gate` - verified
 
 Primary target:
 
@@ -86,6 +88,7 @@ final planning horizon: 500,000
 | P11 | Refactor action authoring source for 20+ effective actions | Done | 100,000+ base | 105,612 |
 | P12 | Stabilize 100k verification gate | Done | 0 | verified at 105,612 |
 | P13 | Model the 500k expansion shape | Active planning | TBD | TBD |
+| P14 | Gate clothing state details by Location | Done | 0 | 0 |
 
 ## P13 Current Direction
 
@@ -102,6 +105,45 @@ python tools/plan_variation_target.py --target 500000
 Record the chosen route before editing `variation_scope.json`,
 `scene_compatibility.json`, `assets/compatibility_review.csv`, or
 `vocab/source/action_pools/`.
+
+## P14 Clothing State Location Gate
+
+Status: `verified`
+
+This is a prompt-quality cleanup lane, not a variation-sizing expansion lane.
+It should keep public node behavior and data schemas stable while preventing
+environment-specific clothing `states` from appearing in incompatible
+Locations.
+
+Completed result:
+
+- `covered in snow` has already been identified as unsafe for indoor Locations.
+- Similar risks exist for `rain-soaked` / `wet`, `sun-kissed glow`, `sweaty`,
+  `battle-worn` / `blood-stained`, and `grease stained`.
+- Added a shared state-family location gate in `pipeline/clothing_builder.py`.
+- Added negative and positive regression tests for snow, wet, sun/beach,
+  exertion, battle damage, and workshop dirt state families.
+- Updated prompt snapshots only where incompatible state text was intentionally
+  removed.
+
+Plan:
+
+- [Clothing State Location Gate Refactor Plan](./clothing_state_location_gate_plan.md)
+
+Verified behavior:
+
+- incompatible indoor prompts do not receive snow/wet/sun/sweaty/battle/grease
+  state details
+- compatible Locations still allow the relevant state family
+- `assets/compatibility_review.csv`, `variation_scope.json`, and action-pool
+  data remain unchanged
+
+Remaining compatibility-level risk:
+
+- State gating does not change broad costume/location compatibility. A costume
+  family such as `fantasy_battle`, `beach_resort`, or `gym_workout` can still
+  appear in broadly compatible daily-public Locations; only the most
+  environment-specific `states` are suppressed.
 
 ## Completed 100k Direction
 
@@ -258,6 +300,14 @@ High-coverage existing action additions:
 | 2026-05-08 | `python -m unittest assets.test_action_generator assets.test_action_diversity_audit assets.test_repetition_guard_audit` | Pass | 22 tests OK |
 | 2026-05-08 | `python -m unittest discover -s assets -p "test_*.py"` | Pass | 253 tests OK |
 | 2026-05-08 | `python tools/verify_full_flow.py` | Pass | OK |
+| 2026-05-09 | `python -m unittest assets.test_context_content_pipeline` | Pass | 23 tests OK; state-family gates covered |
+| 2026-05-09 | `python -m unittest assets.test_prompt_snapshots` | Pass | snapshots updated for removed incompatible state details |
+| 2026-05-09 | `python -m unittest assets.test_determinism assets.test_registry` | Pass | 10 tests OK |
+| 2026-05-09 | `python tools/validate_prompt_data.py` | Pass | `ERROR: []`, `WARNING: []` |
+| 2026-05-09 | `python tools/check_variation_scope.py` | Pass | `ERROR: []`, `WARNING: []`; base variations `105,612` |
+| 2026-05-09 | `python tools/build_compatibility_review.py --check` | Pass | generated/current rows `5,926`; pair drift `0` |
+| 2026-05-09 | `python tools/build_action_pools.py --check` | Pass | runtime/source location count `96` |
+| 2026-05-09 | `python assets/calc_variations.py --json` | Pass | base variations unchanged at `105,612` |
 | 2026-05-08 | `python tools/check_widgets_values.py` | Pass | OK |
 | 2026-05-08 | `python tools/report_expansion_delta.py assets/results/variation_before.json assets/results/variation_after.json` | Pass | base variations `11,916 -> 15,034` |
 | 2026-05-08 | `python tools/check_variation_scope.py` | Pass | `ERROR: []`; background-pack warnings recorded for 8 legacy/scoped locations |

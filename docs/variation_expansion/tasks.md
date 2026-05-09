@@ -1,6 +1,6 @@
 # Variation Expansion Task Board
 
-Last updated: 2026-05-08
+Last updated: 2026-05-09
 
 Legend:
 
@@ -312,3 +312,42 @@ edits until this planning gate is recorded.
 - [ ] VE-1303 Identify whether compatibility density, location count, subject count, or action depth is the next limiter
 - [ ] VE-1304 Define guardrails for expanding beyond the 100k stabilized surface
 - [ ] VE-1305 Record rejected inflation routes before implementation starts
+
+## P14: Clothing State Location Gate
+
+Prompt-quality cleanup lane. This should not change variation sizing,
+compatibility rows, public node sockets, or data schemas.
+
+Plan:
+
+- `docs/variation_expansion/clothing_state_location_gate_plan.md`
+
+Tasks:
+
+- [x] VE-1401 Identify snow state mismatch from generated prompt samples
+- [x] VE-1402 Survey other clothing `states` that can conflict with Location
+- [x] VE-1403 Replace snow-only gating with shared state-family location gate
+- [x] VE-1404 Add negative regression tests for indoor-incompatible states
+- [x] VE-1405 Add positive regression tests for compatible state Locations
+- [x] VE-1406 Update prompt snapshots only where incompatible state text is intentionally removed
+- [x] VE-1407 Run targeted verification for clothing, snapshots, prompt data, and variation scope
+- [x] VE-1408 Record remaining compatibility-level risks after state gating
+
+State families to gate:
+
+- snow: `covered in snow`
+- wet: `rain-soaked`, `wet`
+- sun/beach: `sun-kissed glow`
+- exertion: `sweaty`
+- battle damage: `battle-worn`, `blood-stained`
+- workshop dirt: `grease stained`
+
+Focused commands:
+
+```bash
+python -m unittest assets.test_context_content_pipeline
+python -m unittest assets.test_prompt_snapshots
+python -m unittest assets.test_determinism assets.test_registry
+python tools/validate_prompt_data.py
+python tools/check_variation_scope.py
+```
