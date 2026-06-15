@@ -9,11 +9,15 @@ from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 if __package__ and __package__.count(".") >= 2:
     from ...core.semantic_families import semantic_families_for_text
     from ...core.semantic_policy import sanitize_sequence
+    from ...pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
     from .. import emotion_vad
+    from .. import personality_semantics
 else:
     from core.semantic_families import semantic_families_for_text
     from core.semantic_policy import sanitize_sequence
+    from pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
     from vocab import emotion_vad
+    from vocab import personality_semantics
 
 from .utils import _dedupe
 from .base_vocab import (
@@ -707,6 +711,24 @@ def sample_garnish(
     scene_tags = scene_tags or {}
     personality_key = (personality or "").lower().strip()
     personality_bias = PERSONALITY_GARNISH_BIAS.get(personality_key, PERSONALITY_GARNISH_BIAS[""])
+    personality_behavior_enabled = domain_enabled("personality_behavior")
+    personality_behavior_mode = semantic_mode("personality_behavior")
+    personality_behavior_active = personality_behavior_enabled and personality_behavior_mode == "active"
+    semantic_prefer_category = (
+        personality_semantics.prefer_category_for_personality(personality_key)
+        if personality_behavior_enabled and personality_key
+        else None
+    )
+    if domain_enabled("personality_behavior") and personality_key:
+        add_semantic_debug(
+            debug_log,
+            "personality_behavior",
+            personality_semantics.personality_behavior_debug_payload(
+                personality_key,
+                mode=personality_behavior_mode,
+                selected="",
+            ),
+        )
 
     action_load = _guess_action_load(action_text)
     debug_log["action_load"] = action_load
@@ -725,17 +747,42 @@ def sample_garnish(
         load=action_load,
         rng=rng,
         log=debug_log,
-        prefer_category=personality_bias.get("prefer_category"),
+        prefer_category=semantic_prefer_category if semantic_prefer_category is not None else personality_bias.get("prefer_category"),
         emotion_nuance=emotion_nuance,
     )
 
     garnish_pool: List[str] = []
 
     prefer_tags = personality_bias.get("prefer", [])
-    preferred = _pick_first_valid(prefer_tags, rng, context_loc, context_costume, action_text, garnish_pool)
+    semantic_selected = False
+    preferred = None
+    if personality_behavior_active and personality_key:
+        semantic_candidate = personality_semantics.pick_personality_descriptor(
+            personality_key,
+            rng,
+            context_loc=context_loc,
+            context_costume=context_costume,
+            action_text=action_text,
+            existing_tags=garnish_pool,
+        )
+        if semantic_candidate and not _is_out_of_context(
+            semantic_candidate,
+            context_loc,
+            context_costume,
+            action_text,
+            garnish_pool,
+        ):
+            preferred = semantic_candidate
+            semantic_selected = True
+    if not preferred:
+        preferred = _pick_first_valid(prefer_tags, rng, context_loc, context_costume, action_text, garnish_pool)
     if preferred:
         garnish_pool.append(preferred)
         debug_log["personality_preferred"] = preferred
+        semantic_debug = debug_log.get("semantic_epig", {}).get("personality_behavior")
+        if isinstance(semantic_debug, dict):
+            semantic_debug["selected"] = preferred
+            semantic_debug["selected_by_semantic"] = semantic_selected
 
     emotion_tags = _emotion_profile_tags(
         category=category,

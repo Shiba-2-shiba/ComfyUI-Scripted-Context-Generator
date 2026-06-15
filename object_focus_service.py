@@ -9,6 +9,7 @@ from typing import Any, Dict, Iterable, Sequence
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 DATA_DIR = os.path.join(ROOT_DIR, "vocab", "data")
+OBJECT_RELATION_FILE = "object_relation_profiles.json"
 
 _SHARED_OBJECT_PATTERNS = {
     "book": re.compile(r"\bbook\b|\bbooks\b|\bnotebook\b|\btextbook\b", re.IGNORECASE),
@@ -35,6 +36,16 @@ _SYMBOLIC_OBJECT_HINTS = (
 @lru_cache(maxsize=1)
 def load_object_concentration_policy() -> Dict[str, Any]:
     path = os.path.join(DATA_DIR, "object_concentration_policy.json")
+    if not os.path.exists(path):
+        return {}
+    with open(path, "r", encoding="utf-8") as handle:
+        payload = json.load(handle)
+    return payload if isinstance(payload, dict) else {}
+
+
+@lru_cache(maxsize=1)
+def load_object_relation_profiles() -> Dict[str, Any]:
+    path = os.path.join(DATA_DIR, OBJECT_RELATION_FILE)
     if not os.path.exists(path):
         return {}
     with open(path, "r", encoding="utf-8") as handle:
@@ -135,4 +146,60 @@ def summarize_slot_object_focus(loc: str, slots: Dict[str, str], slot_keys: Sequ
         "detected_objects": sorted(classifications.keys()),
         "slot_map": slot_map,
         "classifications": classifications,
+    }
+
+
+def _action_matches_relation(action_text: str, verbs: Sequence[str]) -> bool:
+    source = str(action_text or "").lower()
+    for verb in verbs:
+        token = str(verb or "").strip().lower()
+        if token and re.search(rf"(?<!\w){re.escape(token)}(?!\w)", source):
+            return True
+    return False
+
+
+def infer_object_relation_key(action_text: str, object_flags: set[str] | None = None) -> str:
+    profiles = load_object_relation_profiles()
+    relations = profiles.get("relations", {}) if isinstance(profiles, dict) else {}
+    if not isinstance(relations, dict):
+        return ""
+
+    flags = set(object_flags or extract_action_object_flags(action_text))
+    for relation_key in sorted(relations):
+        relation = relations.get(relation_key, {})
+        if not isinstance(relation, dict):
+            continue
+        object_token = str(relation.get("object", "")).strip()
+        verbs = relation.get("verbs", [])
+        if object_token not in flags:
+            continue
+        if isinstance(verbs, list) and _action_matches_relation(action_text, verbs):
+            return relation_key
+    return ""
+
+
+def relation_slots_for_action(action_text: str, object_flags: set[str] | None = None) -> Dict[str, list[str]]:
+    profiles = load_object_relation_profiles()
+    relations = profiles.get("relations", {}) if isinstance(profiles, dict) else {}
+    relation_key = infer_object_relation_key(action_text, object_flags)
+    if not relation_key or not isinstance(relations, dict):
+        return {}
+    relation = relations.get(relation_key, {})
+    roles = relation.get("required_roles", {}) if isinstance(relation, dict) else {}
+    if not isinstance(roles, dict):
+        return {}
+    return {
+        str(role): [str(value).strip() for value in values if str(value).strip()]
+        for role, values in roles.items()
+        if isinstance(values, list)
+    }
+
+
+def summarize_object_relation_focus(action_text: str, object_flags: set[str] | None = None) -> Dict[str, Any]:
+    flags = sorted(set(object_flags or extract_action_object_flags(action_text)))
+    relation_key = infer_object_relation_key(action_text, set(flags))
+    return {
+        "detected_objects": flags,
+        "relation_key": relation_key,
+        "required_roles": relation_slots_for_action(action_text, set(flags)),
     }

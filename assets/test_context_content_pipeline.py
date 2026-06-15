@@ -52,13 +52,22 @@ class TestContextContentPipeline(unittest.TestCase):
         self.assertEqual(updated.extras.get("staging_tags", ""), staging)
 
     def test_apply_clothing_expansion_writes_extras(self):
-        ctx = patch_context({}, updates={"costume": "office_lady", "seed": 11}, extras={"raw_costume_key": "office_lady", "character_palette_str": "navy, white"})
+        ctx = patch_context(
+            {},
+            updates={"costume": "office_lady", "loc": "modern_office", "action": "reviewing documents", "seed": 11},
+            extras={"raw_costume_key": "office_lady", "character_palette_str": "navy, white"},
+        )
         updated, clothing_prompt = apply_clothing_expansion(ctx, 11, "random", 0.3)
         self.assertIsInstance(clothing_prompt, str)
         self.assertEqual(updated.extras["clothing_prompt"], clothing_prompt)
         self.assertEqual(updated.history[-1].node, "ContextClothingExpander")
         self.assertTrue(updated.history[-1].decision.get("signature"))
         self.assertTrue(updated.history[-1].decision.get("base_variant"))
+        clothing_debug = updated.history[-1].decision["semantic_epig"]["clothing_tpo"]
+        self.assertEqual(clothing_debug["mode"], "active")
+        self.assertTrue(clothing_debug["selected_by_semantic"])
+        self.assertIn("target_vector", clothing_debug)
+        self.assertGreaterEqual(len(clothing_debug["candidate_scores"]), 1)
 
     def test_apply_clothing_expansion_suppresses_outerwear_for_home_locations(self):
         ctx = patch_context(
@@ -84,6 +93,38 @@ class TestContextContentPipeline(unittest.TestCase):
         self.assertIsInstance(clothing_prompt, str)
         self.assertEqual(decision.get("outerwear_pack", ""), "")
         self.assertNotIn("over it", clothing_prompt)
+
+    def test_clothing_tpo_active_selection_is_deterministic(self):
+        prompt_without_assertion, _debug_a = expand_clothing_prompt(
+            "rainy_day",
+            31,
+            "random",
+            1.0,
+            "navy, white",
+            loc="rainy_bus_stop",
+            action_text="commuting",
+            return_debug=True,
+        )
+        prompt_with_debug, debug = expand_clothing_prompt(
+            "rainy_day",
+            31,
+            "random",
+            1.0,
+            "navy, white",
+            loc="rainy_bus_stop",
+            action_text="commuting",
+            return_debug=True,
+        )
+
+        self.assertEqual(prompt_with_debug, prompt_without_assertion)
+        clothing_debug = debug["semantic_epig"]["clothing_tpo"]
+        self.assertEqual(clothing_debug["mode"], "active")
+        self.assertTrue(clothing_debug["selected_by_semantic"])
+        self.assertEqual(clothing_debug["selected_attempt_index"], debug["attempt_index"])
+        self.assertIn("semantic_tpo_score", debug)
+        selected_score = clothing_debug["candidate_scores"][debug["attempt_index"]]
+        self.assertEqual(selected_score["final_penalty"], debug["semantic_tpo_final_penalty"])
+        self.assertGreaterEqual(selected_score["final_penalty"], selected_score["repeat_penalty"])
 
     def test_expand_clothing_prompt_suppresses_outerwear_for_apartment_balcony(self):
         clothing_prompt, decision = expand_clothing_prompt(
@@ -177,11 +218,21 @@ class TestContextContentPipeline(unittest.TestCase):
         self.assertNotEqual(first, second)
 
     def test_apply_location_expansion_writes_extras(self):
-        ctx = patch_context({}, updates={"loc": "classroom", "seed": 12}, extras={"raw_loc_tag": "classroom"})
+        ctx = patch_context(
+            {},
+            updates={"loc": "classroom", "action": "reading notes", "seed": 12},
+            meta={"mood": "quiet"},
+            extras={"raw_loc_tag": "classroom"},
+        )
         updated, location_prompt = apply_location_expansion(ctx, 12, "detailed", "auto")
         self.assertIsInstance(location_prompt, str)
         self.assertEqual(updated.extras["location_prompt"], location_prompt)
         self.assertEqual(updated.history[-1].node, "ContextLocationExpander")
+        location_debug = updated.history[-1].decision["semantic_epig"]["location_scene"]
+        self.assertEqual(location_debug["mode"], "active")
+        self.assertTrue(location_debug["selected_by_semantic"])
+        self.assertIn("target_vector", location_debug)
+        self.assertIn("segment_rankings", location_debug)
 
     def test_apply_location_expansion_off_avoids_lighting_segments(self):
         ctx = patch_context({}, updates={"loc": "street_cafe", "seed": 12}, extras={"raw_loc_tag": "street_cafe"})
@@ -190,6 +241,33 @@ class TestContextContentPipeline(unittest.TestCase):
         self.assertNotIn("golden hour", location_prompt.lower())
         self.assertNotIn("bright daylight", location_prompt.lower())
         self.assertNotIn("warm ambient", location_prompt.lower())
+
+    def test_location_scene_active_selection_is_deterministic(self):
+        from pipeline.location_builder import expand_location_prompt
+
+        prompt_without_assertion, _debug_a = expand_location_prompt(
+            "school_library",
+            42,
+            "detailed",
+            "auto",
+            return_debug=True,
+            action_text="reading a book",
+            mood_text="quiet",
+        )
+        prompt_with_debug, debug = expand_location_prompt(
+            "school_library",
+            42,
+            "detailed",
+            "auto",
+            return_debug=True,
+            action_text="reading a book",
+            mood_text="quiet",
+        )
+
+        self.assertEqual(prompt_with_debug, prompt_without_assertion)
+        self.assertEqual(debug["semantic_epig"]["location_scene"]["mode"], "active")
+        self.assertTrue(debug["semantic_epig"]["location_scene"]["selected_by_semantic"])
+        self.assertIn("core", debug["semantic_epig"]["location_scene"]["segment_rankings"])
 
     def test_build_prompt_from_context_prefers_expanded_fields(self):
         ctx = patch_context(

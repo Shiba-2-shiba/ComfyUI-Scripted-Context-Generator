@@ -12,6 +12,7 @@ if __package__ and "." in __package__:
         classify_object_hotspot,
         extract_action_object_flags,
         slot_object_policy_weight,
+        summarize_object_relation_focus,
         summarize_slot_object_focus,
     )
     from .action_profiles import (
@@ -20,6 +21,12 @@ if __package__ and "." in __package__:
         LOC_SPECIFIC_DAILY_LIFE_PROFILES,
         TAG_BASED_DAILY_LIFE_PROFILES,
     )
+    from .action_semantics import (
+        build_action_target_vector,
+        rank_action_slot_options,
+        semantic_action_debug_payload,
+    )
+    from .semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 else:
     from location_service import resolve_location_key
     from object_focus_service import (
@@ -28,6 +35,7 @@ else:
         classify_object_hotspot,
         extract_action_object_flags,
         slot_object_policy_weight,
+        summarize_object_relation_focus,
         summarize_slot_object_focus,
     )
     from pipeline.action_profiles import (
@@ -36,6 +44,12 @@ else:
         LOC_SPECIFIC_DAILY_LIFE_PROFILES,
         TAG_BASED_DAILY_LIFE_PROFILES,
     )
+    from pipeline.action_semantics import (
+        build_action_target_vector,
+        rank_action_slot_options,
+        semantic_action_debug_payload,
+    )
+    from pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 
 POSTURE_BY_PURPOSE = {
     "study": ["settled at the edge of her seat", "leaning in over what she is doing", "paused in a still working posture"],
@@ -449,13 +463,22 @@ def _location_context_profile(loc):
     }
 
 
-def _weighted_slot_choice(options: Sequence[str], rng, loc="", recent_verbs=None, recent_objects=None, selected_objects=None):
+def _weighted_slot_choice(
+    options: Sequence[str],
+    rng,
+    loc="",
+    recent_verbs=None,
+    recent_objects=None,
+    selected_objects=None,
+    semantic_scores=None,
+):
     values = [str(item) for item in options if str(item).strip()]
     if not values:
         return ""
     recent_verbs = {str(item).lower() for item in (recent_verbs or []) if item}
     recent_objects = set(recent_objects or [])
     selected_objects = set(selected_objects or [])
+    semantic_scores = semantic_scores or {}
     weights = []
     for value in values:
         weight = 1.0
@@ -467,6 +490,8 @@ def _weighted_slot_choice(options: Sequence[str], rng, loc="", recent_verbs=None
             weight *= 0.55
         policy_weight, _policy_objects, _classifications = slot_object_policy_weight(loc, value, selected_objects=selected_objects)
         weight *= policy_weight
+        if value in semantic_scores:
+            weight *= 0.50 + max(0.0, float(semantic_scores.get(value, 0.0) or 0.0))
         weights.append(weight)
     return rng.choices(values, weights=weights, k=1)[0]
 
@@ -650,7 +675,16 @@ def _slot_sources(slots: Dict[str, str], slot_overrides: Dict[str, str]) -> Dict
     return sources
 
 
-def build_action_slots(loc, compat, scene_axes, rng, recent_verbs=None, recent_objects=None, slot_overrides=None):
+def build_action_slots(
+    loc,
+    compat,
+    scene_axes,
+    rng,
+    recent_verbs=None,
+    recent_objects=None,
+    slot_overrides=None,
+    semantic_debug=None,
+):
     slot_overrides = {
         str(key): _normalize_action_phrase(value)
         for key, value in (slot_overrides or {}).items()
@@ -670,6 +704,19 @@ def build_action_slots(loc, compat, scene_axes, rng, recent_verbs=None, recent_o
     if not obstacle_or_trigger and profile.get("obstacle") and rng.random() < 0.35:
         obstacle_or_trigger = _pick_axis_value(profile.get("obstacle", []), rng)
 
+    action_semantic_mode = semantic_mode("action")
+    action_target_vector = {}
+    action_slot_rankings: Dict[str, List[Dict[str, Any]]] = {}
+    if domain_enabled("action"):
+        action_target_vector = build_action_target_vector(
+            purpose,
+            progress_state=progress_state,
+            social_distance=social_distance,
+            obstacle_or_trigger=obstacle_or_trigger,
+            loc=loc_key,
+            action_text=" ".join(str(value) for value in slot_overrides.values()),
+        )
+
     selected_objects = set()
     for key in (
         "posture",
@@ -685,6 +732,19 @@ def build_action_slots(loc, compat, scene_axes, rng, recent_verbs=None, recent_o
         selected_objects.update(action_object_flags(slot_overrides.get(key, "")))
 
     def choose_slot(name: str, options: Sequence[str]):
+        semantic_scores = {}
+        if domain_enabled("action") and options:
+            action_slot_rankings[name] = rank_action_slot_options(
+                name,
+                [str(option) for option in options if str(option).strip()],
+                action_target_vector,
+                loc=loc_key,
+            )
+            if semantic_mode("action") == "active":
+                semantic_scores = {
+                    str(item.get("text", "")): float(item.get("score", 0.0) or 0.0)
+                    for item in action_slot_rankings[name]
+                }
         value = slot_overrides.get(name) or _weighted_slot_choice(
             options,
             rng,
@@ -692,6 +752,7 @@ def build_action_slots(loc, compat, scene_axes, rng, recent_verbs=None, recent_o
             recent_verbs=recent_verbs,
             recent_objects=recent_objects,
             selected_objects=selected_objects,
+            semantic_scores=semantic_scores,
         )
         if value:
             selected_objects.update(action_object_flags(value))
@@ -735,6 +796,13 @@ def build_action_slots(loc, compat, scene_axes, rng, recent_verbs=None, recent_o
             list(profile.get("time", [])) or list(profile.get("weather", [])),
         ),
     }
+    if isinstance(semantic_debug, dict) and domain_enabled("action"):
+        semantic_debug["action"] = semantic_action_debug_payload(
+            mode=action_semantic_mode,
+            target_vector=action_target_vector,
+            slot_rankings=action_slot_rankings,
+            selected_by_semantic=action_semantic_mode == "active",
+        )
     return slots
 
 
@@ -760,7 +828,17 @@ def render_action_slots(slots: Dict[str, str], activity_first: bool = False) -> 
         primary_parts.append(anchor)
     primary = " ".join(primary_parts).strip()
     clauses = [primary] if primary else []
-    for key in ("posture", "hand_action", "gaze_target", "optional_micro_action", "social_clause", "progress_clause", "obstacle_clause"):
+    for key in (
+        "posture",
+        "hand_action",
+        "object_relation",
+        "object_state",
+        "gaze_target",
+        "optional_micro_action",
+        "social_clause",
+        "progress_clause",
+        "obstacle_clause",
+    ):
         value = str(slots.get(key, "")).strip()
         if value and value.lower() not in primary.lower():
             clauses.append(value)
@@ -792,6 +870,41 @@ def _append_clause(action_text: str, clause: str) -> str:
     return f"{clean_action}, {clean_clause}"
 
 
+def _apply_object_relation_slots(slots: Dict[str, str], action_text_value: str) -> Dict[str, Any]:
+    relation_debug = summarize_object_relation_focus(
+        action_text_value,
+        action_object_flags(action_text_value),
+    )
+    relation_debug["mode"] = semantic_mode("object_relation")
+    relation_debug["applied_slots"] = {}
+    relation_debug["skipped_slots"] = {}
+
+    if semantic_mode("object_relation") != "active":
+        relation_debug["skipped_slots"] = {
+            role: "passive mode"
+            for role in relation_debug.get("required_roles", {})
+        }
+        return relation_debug
+
+    role_slots = relation_debug.get("required_roles", {})
+    if not isinstance(role_slots, dict):
+        return relation_debug
+    for role, candidates in role_slots.items():
+        if not isinstance(candidates, list) or not candidates:
+            continue
+        chosen = str(candidates[0]).strip()
+        if not chosen:
+            continue
+        role_key = str(role)
+        existing = str(slots.get(role_key, "")).strip()
+        if existing:
+            relation_debug["skipped_slots"][role_key] = "existing slot already set"
+            continue
+        slots[role_key] = chosen
+        relation_debug["applied_slots"][role_key] = chosen
+    return relation_debug
+
+
 def generate_action_for_location(
     loc,
     compat,
@@ -817,6 +930,7 @@ def generate_action_for_location(
             action_text = str(new_action_item)
             action_load = ""
         pool_slots = parse_pool_action_to_slots(action_text, loc=loc_key, compat=compat)
+        semantic_debug = {}
         slots = build_action_slots(
             loc_key,
             compat,
@@ -825,7 +939,9 @@ def generate_action_for_location(
             recent_verbs=recent_verbs,
             recent_objects=recent_objects,
             slot_overrides=pool_slots,
+            semantic_debug=semantic_debug,
         )
+        relation_debug = _apply_object_relation_slots(slots, render_action_slots(slots, activity_first=True)) if domain_enabled("object_relation") else None
         normalized_action = render_action_slots(slots, activity_first=True)
         decision = {
             "generator_mode": "pool",
@@ -840,13 +956,27 @@ def generate_action_for_location(
             "object_focus": summarize_slot_object_focus(
                 loc_key,
                 slots,
-                ("posture", "hand_action", "gaze_target", "purpose_clause", "optional_micro_action", "obstacle_clause", "time_or_weather"),
+                ("posture", "hand_action", "object_relation", "object_state", "gaze_target", "purpose_clause", "optional_micro_action", "obstacle_clause", "time_or_weather"),
             ),
             "slots": slots,
         }
+        if semantic_debug.get("action"):
+            add_semantic_debug(decision, "action", semantic_debug["action"])
+        if relation_debug is not None:
+            add_semantic_debug(decision, "object_relation", relation_debug)
         return normalized_action, decision
 
-    slots = build_action_slots(loc_key, compat, scene_axes, rng, recent_verbs=recent_verbs, recent_objects=recent_objects)
+    semantic_debug = {}
+    slots = build_action_slots(
+        loc_key,
+        compat,
+        scene_axes,
+        rng,
+        recent_verbs=recent_verbs,
+        recent_objects=recent_objects,
+        semantic_debug=semantic_debug,
+    )
+    relation_debug = _apply_object_relation_slots(slots, render_action_slots(slots)) if domain_enabled("object_relation") else None
     action_text = render_action_slots(slots)
     decision = {
         "generator_mode": "compositional",
@@ -856,8 +986,12 @@ def generate_action_for_location(
         "object_focus": summarize_slot_object_focus(
             loc_key,
             slots,
-            ("posture", "hand_action", "gaze_target", "purpose_clause", "optional_micro_action", "obstacle_clause", "time_or_weather"),
+            ("posture", "hand_action", "object_relation", "object_state", "gaze_target", "purpose_clause", "optional_micro_action", "obstacle_clause", "time_or_weather"),
         ),
         "slots": slots,
     }
+    if semantic_debug.get("action"):
+        add_semantic_debug(decision, "action", semantic_debug["action"])
+    if relation_debug is not None:
+        add_semantic_debug(decision, "object_relation", relation_debug)
     return action_text, decision

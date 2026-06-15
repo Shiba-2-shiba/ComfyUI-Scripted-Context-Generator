@@ -1,6 +1,6 @@
 # Current Status
 
-Last verified: 2026-05-08
+Last verified: 2026-06-15
 
 このファイルは、毎回全スクリプトを読み直さずに現在地を把握するための短い入口です。
 詳細な構造は `REPO_STRUCTURE.md`、設計背景は `assets/ARCHITECTURE.md` と
@@ -22,6 +22,7 @@ subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` 
 - Schema / context operations / policy: `core/`
 - Data source of truth: `vocab/data/`
 - Action authoring source: `vocab/source/action_pools/` with shared families in `_shared_families.json`
+- Semantic EPIG config: `vocab/data/semantic_epig_config.json`
 
 Retired / compatibility state:
 
@@ -54,6 +55,22 @@ Shared policy source:
 - `core/semantic_policy.py`
 - `nodes_prompt_cleaner.py`
 - `asset_validator.py`
+
+## Semantic EPIG State
+
+All semantic EPIG domains are active through `vocab/data/semantic_epig_config.json`.
+The rollout keeps the public `Context*` node I/O unchanged and records rankings
+under `DebugInfo.decision.semantic_epig`.
+
+Active domains:
+
+- `action`: semantic score adjusts action slot weights
+- `object_relation`: object-use relation slots are added without overwriting existing slots
+- `location_scene`: scene-axis score adjusts location segment weights
+- `clothing_tpo`: final candidate penalty combines repeat and semantic penalties
+- `personality_behavior`: semantic descriptor ranking selects personality garnish with inline fallback
+
+Implementation/audit docs: `docs/semantic_epig/progress.md`.
 
 ## Current Metrics
 
@@ -111,6 +128,7 @@ python -m unittest discover -s assets -p "test_*.py"
 python -m unittest assets.test_context_nodes assets.test_workflow_samples
 python tools/verify_full_flow.py
 python tools/validate_prompt_data.py
+python assets/calc_variations.py --json
 python tools/check_variation_scope.py
 python tools/build_compatibility_review.py --check
 python tools/build_action_pools.py --check
@@ -123,10 +141,11 @@ python -m py_compile assets/calc_variations.py assets/test_calc_variations.py as
 Results:
 
 - targeted unittest group: `14 tests OK`
-- assets unittest discovery: `266 tests OK`
+- assets unittest discovery: `315 tests OK`
 - context/workflow smoke tests: `12 tests OK`
 - full flow: `OK`
 - prompt data validator: `ERROR: []`, `WARNING: []`
+- variation metrics: base variations `105,612`, missing action pools `0`
 - variation scope check: `ERROR: []`
 - compatibility review check: `ERROR: []`, `WARNING: []`
 - action pool source check: `ERROR: []`, `WARNING: []`

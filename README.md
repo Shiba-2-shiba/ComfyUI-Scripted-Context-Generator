@@ -85,6 +85,7 @@ subject / location / base variations を増やす作業では、[`EXPANSION_GUID
 - `meta.style` は legacy read-only metadata として保持されますが、prompt 生成には使いません
 - `ContextGarnish.include_camera` は旧 workflow 復元用の hidden legacy arg としてのみ残り、実行時は no-op です
 - public prompt surface では camera / quality / body-type を前提にしません
+- semantic EPIG は config 管理で全 domain active です
 - 新規機能追加先は `Context*` ノードと `pipeline/` です
 
 ## Source Of Truth
@@ -125,6 +126,28 @@ location を追加しても、この CSV に反映されなければ `base varia
 `vocab/data/variation_scope.json` は、現在 variation sizing に含める subject / location の境界を明示します。
 action pool は source 側で編集し、`tools/build_action_pools.py --write` で runtime の
 `vocab/data/action_pools.json` へ展開します。
+
+### Semantic EPIG
+
+- `vocab/data/semantic_epig_config.json`
+- `vocab/data/action_semantic_profiles.json`
+- `vocab/data/action_slot_descriptors.json`
+- `vocab/data/object_relation_profiles.json`
+- `vocab/data/location_axis_profiles.json`
+- `vocab/data/staging_axis_descriptors.json`
+- `vocab/data/clothing_axis_profiles.json`
+- `vocab/data/personality_behavior_profiles.json`
+- 共通 ranking: [`vocab/semantic_space.py`](./vocab/semantic_space.py)
+- config / debug helper: [`pipeline/semantic_epig.py`](./pipeline/semantic_epig.py)
+- 実装進捗と監査ログ: [`docs/semantic_epig/progress.md`](./docs/semantic_epig/progress.md)
+
+Active domains:
+
+- `action`
+- `object_relation`
+- `location_scene`
+- `clothing_tpo`
+- `personality_behavior`
 
 ### Policy / banned terms
 

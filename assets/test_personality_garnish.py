@@ -86,6 +86,35 @@ class TestContextGarnishPersonality(unittest.TestCase):
         )
         self.assertIsInstance(garnish, str)
 
+    def test_personality_behavior_active_debug_is_recorded(self):
+        garnish, debug = self.sample_garnish(
+            action_text="standing near the classroom door",
+            meta_mood_key="quiet_focused",
+            seed=42,
+            max_items=3,
+            include_camera=False,
+            context_loc="school_classroom",
+            context_costume="school_uniform",
+            scene_tags="{}",
+            personality="shy",
+        )
+        decision = debug.get("decision", {})
+        personality_debug = decision["semantic_epig"]["personality_behavior"]
+
+        self.assertIsInstance(garnish, str)
+        self.assertEqual(personality_debug["mode"], "active")
+        self.assertEqual(personality_debug["personality"], "shy")
+        self.assertEqual(personality_debug["prefer_category"], "care")
+        self.assertTrue(personality_debug["selected_by_semantic"])
+        self.assertIn("gaze", personality_debug["slot_rankings"])
+        self.assertTrue(personality_debug["selected"])
+        ranked_tags = {
+            item["text"]
+            for ranking in personality_debug["slot_rankings"].values()
+            for item in ranking[:1]
+        }
+        self.assertIn(personality_debug["selected"], ranked_tags)
+
     def test_max_items_respected(self):
         """max_itemsの上限が守られること"""
         for max_items in [1, 2, 3, 5]:

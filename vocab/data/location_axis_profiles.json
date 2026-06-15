@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "axes": [
+    "crowd_density",
+    "activity_level",
+    "openness",
+    "orderliness",
+    "weather_intensity",
+    "light_softness",
+    "intimacy",
+    "time_pressure"
+  ],
+  "axis_weights": {
+    "crowd_density": 1.0,
+    "activity_level": 1.0,
+    "openness": 1.0,
+    "orderliness": 1.0,
+    "weather_intensity": 1.0,
+    "light_softness": 1.0,
+    "intimacy": 1.0,
+    "time_pressure": 1.0
+  },
+  "profiles": {
+    "school_library": {
+      "vector": {
+        "crowd_density": 0.2,
+        "activity_level": 0.15,
+        "openness": 0.35,
+        "orderliness": 0.9,
+        "weather_intensity": 0.0,
+        "light_softness": 0.65,
+        "intimacy": 0.5,
+        "time_pressure": 0.15
+      }
+    },
+    "modern_office": {
+      "vector": {
+        "crowd_density": 0.45,
+        "activity_level": 0.55,
+        "openness": 0.45,
+        "orderliness": 0.8,
+        "weather_intensity": 0.0,
+        "light_softness": 0.35,
+        "intimacy": 0.25,
+        "time_pressure": 0.55
+      }
+    },
+    "commuter_transport": {
+      "vector": {
+        "crowd_density": 0.85,
+        "activity_level": 0.8,
+        "openness": 0.45,
+        "orderliness": 0.45,
+        "weather_intensity": 0.1,
+        "light_softness": 0.25,
+        "intimacy": 0.15,
+        "time_pressure": 0.85
+      }
+    },
+    "rainy_bus_stop": {
+      "vector": {
+        "crowd_density": 0.45,
+        "activity_level": 0.45,
+        "openness": 0.65,
+        "orderliness": 0.55,
+        "weather_intensity": 0.85,
+        "light_softness": 0.35,
+        "intimacy": 0.25,
+        "time_pressure": 0.65
+      }
+    },
+    "street_cafe": {
+      "vector": {
+        "crowd_density": 0.45,
+        "activity_level": 0.45,
+        "openness": 0.55,
+        "orderliness": 0.55,
+        "weather_intensity": 0.15,
+        "light_softness": 0.6,
+        "intimacy": 0.55,
+        "time_pressure": 0.25
+      }
+    },
+    "cozy_living_room": {
+      "vector": {
+        "crowd_density": 0.05,
+        "activity_level": 0.15,
+        "openness": 0.25,
+        "orderliness": 0.55,
+        "weather_intensity": 0.0,
+        "light_softness": 0.75,
+        "intimacy": 0.9,
+        "time_pressure": 0.05
+      }
+    },
+    "shopping_mall_atrium": {
+      "vector": {
+        "crowd_density": 0.75,
+        "activity_level": 0.7,
+        "openness": 0.7,
+        "orderliness": 0.55,
+        "weather_intensity": 0.0,
+        "light_softness": 0.35,
+        "intimacy": 0.15,
+        "time_pressure": 0.45
+      }
+    },
+    "picnic_park": {
+      "vector": {
+        "crowd_density": 0.25,
+        "activity_level": 0.35,
+        "openness": 0.9,
+        "orderliness": 0.45,
+        "weather_intensity": 0.25,
+        "light_softness": 0.7,
+        "intimacy": 0.45,
+        "time_pressure": 0.15
+      }
+    }
+  },
+  "notes": {
+    "scope": "Initial passive scene-axis profiles for location expansion debug."
+  }
+}

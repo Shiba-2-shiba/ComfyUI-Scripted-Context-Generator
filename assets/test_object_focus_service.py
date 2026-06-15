@@ -12,8 +12,11 @@ from object_focus_service import (
     classify_object_hotspot,
     extract_action_object_flags,
     extract_object_flags,
+    infer_object_relation_key,
     is_symbolic_object_text,
+    relation_slots_for_action,
     slot_object_policy_weight,
+    summarize_object_relation_focus,
     summarize_slot_object_focus,
 )
 
@@ -60,6 +63,23 @@ class TestObjectFocusService(unittest.TestCase):
         self.assertEqual(summary["detected_objects"], ["book"])
         self.assertEqual(summary["slot_map"]["posture"], ["book"])
         self.assertEqual(summary["classifications"]["book"], "thematic_anchor")
+
+    def test_infer_object_relation_key_matches_book_reading(self):
+        relation_key = infer_object_relation_key("reading a book quietly", {"book"})
+        self.assertEqual(relation_key, "book:reading")
+
+    def test_relation_slots_for_action_returns_role_bound_slots(self):
+        slots = relation_slots_for_action("checking phone while waiting", {"phone"})
+        self.assertIn("hand_action", slots)
+        self.assertIn("gaze_target", slots)
+        self.assertIn("object_state", slots)
+        self.assertTrue(any("phone" in item for item in slots["hand_action"]))
+
+    def test_unknown_relation_returns_empty_slots(self):
+        self.assertEqual(relation_slots_for_action("walking through the room", set()), {})
+        summary = summarize_object_relation_focus("walking through the room", set())
+        self.assertEqual(summary["relation_key"], "")
+        self.assertEqual(summary["required_roles"], {})
 
 
 if __name__ == "__main__":

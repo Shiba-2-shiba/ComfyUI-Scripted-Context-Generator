@@ -16,6 +16,8 @@ from asset_validator import (
     validate_banned_terms_in_asset,
     validate_character_assets,
     validate_location_aliases,
+    validate_semantic_axis_asset,
+    validate_semantic_epig_config,
 )
 from tools.capture_asset_validator_baseline import (
     build_validator_baseline_text,
@@ -251,6 +253,38 @@ class TestAssetValidator(unittest.TestCase):
         )
         self.assertTrue(any("Broken Hero" in item and "unresolved default costume" in item for item in warnings))
         self.assertTrue(any("Isolated Idol" in item and "not connected" in item for item in warnings))
+
+    def test_validate_semantic_epig_config_accepts_current_config(self):
+        warnings = validate_semantic_epig_config(_read_json_asset("semantic_epig_config.json"))
+        self.assertEqual(warnings, [])
+
+    def test_validate_semantic_epig_config_flags_bad_modes(self):
+        warnings = validate_semantic_epig_config(
+            {
+                "schema_version": "1.0",
+                "default_mode": "surprise",
+                "domains": {"action": {"mode": "maybe"}},
+            }
+        )
+        self.assertTrue(any("default_mode" in item for item in warnings))
+        self.assertTrue(any("domains.action.mode" in item for item in warnings))
+        self.assertTrue(any("domains missing 'clothing_tpo'" in item for item in warnings))
+
+    def test_validate_semantic_axis_asset_flags_vector_policy_errors(self):
+        warnings = validate_semantic_axis_asset(
+            "fixture_semantic.json",
+            {
+                "schema_version": "1.0",
+                "axes": ["energy"],
+                "descriptors": {
+                    "slot": [
+                        {"text": "depth of field", "vector": {"energy": 1.2}},
+                    ]
+                },
+            },
+        )
+        self.assertTrue(any("energy must be between" in item for item in warnings))
+        self.assertTrue(any("depth of field" in item for item in warnings))
 
 
 if __name__ == "__main__":

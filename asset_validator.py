@@ -9,6 +9,7 @@ from clothing_service import load_clothing_theme_map, resolve_clothing_theme
 from core.semantic_policy import find_banned_term_matches
 from location_service import load_background_alias_overrides, load_background_packs
 from scene_service import load_scene_compatibility
+from vocab.semantic_space import validate_axis_payload
 
 
 def _iter_string_paths(value: Any, path: str = "") -> Iterable[tuple[str, str]]:
@@ -33,6 +34,27 @@ _TARGETED_BANNED_ASSETS = (
     "garnish_base_vocab.json",
     "garnish_exclusive_groups.json",
     "garnish_micro_actions.json",
+    "semantic_epig_config.json",
+)
+_SEMANTIC_CONFIG_FILE = "semantic_epig_config.json"
+_SEMANTIC_DOMAINS = {
+    "action",
+    "object_relation",
+    "location_scene",
+    "clothing_tpo",
+    "personality_behavior",
+}
+_SEMANTIC_MODES = {"off", "passive", "active"}
+_SEMANTIC_AXIS_ASSETS = (
+    "action_semantic_profiles.json",
+    "action_slot_descriptors.json",
+    "location_axis_profiles.json",
+    "staging_axis_descriptors.json",
+    "clothing_axis_profiles.json",
+    "personality_behavior_profiles.json",
+)
+_SEMANTIC_BANNED_ASSETS = _SEMANTIC_AXIS_ASSETS + (
+    "object_relation_profiles.json",
 )
 _ALLOWED_UNCONNECTED_PROFILES = {
     "Diana (Noble)",
@@ -58,6 +80,10 @@ def _data_dir() -> Path:
 
 def _read_json_asset(filename: str) -> Any:
     return json.loads((_data_dir() / filename).read_text(encoding="utf-8"))
+
+
+def _asset_exists(filename: str) -> bool:
+    return (_data_dir() / filename).exists()
 
 
 def _normalize_alias_targets(value: Any) -> list[str]:
@@ -232,6 +258,67 @@ def validate_character_assets(
     return warnings
 
 
+def validate_semantic_epig_config(payload: Any | None = None) -> list[str]:
+    warnings: list[str] = []
+    data = _read_json_asset(_SEMANTIC_CONFIG_FILE) if payload is None else payload
+    if not isinstance(data, dict):
+        return [f"{_SEMANTIC_CONFIG_FILE} must be a JSON object"]
+
+    if not data.get("schema_version"):
+        warnings.append(f"{_SEMANTIC_CONFIG_FILE} missing schema_version")
+
+    default_mode = str(data.get("default_mode", "")).strip().lower()
+    if default_mode not in _SEMANTIC_MODES:
+        warnings.append(f"{_SEMANTIC_CONFIG_FILE}:default_mode must be one of {sorted(_SEMANTIC_MODES)}")
+
+    domains = data.get("domains")
+    if not isinstance(domains, dict):
+        warnings.append(f"{_SEMANTIC_CONFIG_FILE}:domains must be an object")
+        return warnings
+
+    missing_domains = sorted(_SEMANTIC_DOMAINS - {str(key) for key in domains})
+    for domain in missing_domains:
+        warnings.append(f"{_SEMANTIC_CONFIG_FILE}:domains missing '{domain}'")
+
+    for domain, domain_payload in domains.items():
+        domain_key = str(domain)
+        if domain_key not in _SEMANTIC_DOMAINS:
+            warnings.append(f"{_SEMANTIC_CONFIG_FILE}:domains has unknown domain '{domain_key}'")
+        if not isinstance(domain_payload, dict):
+            warnings.append(f"{_SEMANTIC_CONFIG_FILE}:domains.{domain_key} must be an object")
+            continue
+        mode = str(domain_payload.get("mode", default_mode)).strip().lower()
+        if mode not in _SEMANTIC_MODES:
+            warnings.append(f"{_SEMANTIC_CONFIG_FILE}:domains.{domain_key}.mode must be one of {sorted(_SEMANTIC_MODES)}")
+
+    return warnings
+
+
+def validate_semantic_axis_asset(filename: str, payload: Any | None = None) -> list[str]:
+    data = _read_json_asset(filename) if payload is None else payload
+    warnings = [
+        f"{filename}:{warning}"
+        for warning in validate_axis_payload(data if isinstance(data, dict) else {})
+    ]
+    warnings.extend(validate_banned_terms_in_asset(filename, data))
+    return warnings
+
+
+def validate_semantic_epig_assets() -> list[str]:
+    warnings: list[str] = []
+    warnings.extend(validate_semantic_epig_config())
+
+    for filename in _SEMANTIC_AXIS_ASSETS:
+        if _asset_exists(filename):
+            warnings.extend(validate_semantic_axis_asset(filename))
+
+    for filename in _SEMANTIC_BANNED_ASSETS:
+        if _asset_exists(filename) and filename not in _SEMANTIC_AXIS_ASSETS:
+            warnings.extend(validate_banned_terms_in_asset(filename, _read_json_asset(filename)))
+
+    return warnings
+
+
 def validate_assets() -> list[str]:
     warnings: list[str] = []
     backgrounds = load_background_packs()
@@ -254,5 +341,6 @@ def validate_assets() -> list[str]:
             allow_unconnected_profiles=_ALLOWED_UNCONNECTED_PROFILES,
         )
     )
+    warnings.extend(validate_semantic_epig_assets())
 
     return sorted(set(warnings))

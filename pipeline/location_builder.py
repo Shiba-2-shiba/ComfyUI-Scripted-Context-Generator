@@ -10,6 +10,8 @@ if __package__ and "." in __package__:
     from ..object_focus_service import background_weight_map, extract_object_flags, is_symbolic_object_text
     from ..history_service import recent_prompt_objects
     from ..vocab.seed_utils import mix_seed
+    from .location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
+    from .semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 else:
     from core.context_state import generation_state_from_context
     from core.context_ops import append_history, ensure_context, patch_context
@@ -19,6 +21,8 @@ else:
     from object_focus_service import background_weight_map, extract_object_flags, is_symbolic_object_text
     from history_service import recent_prompt_objects
     from vocab.seed_utils import mix_seed
+    from pipeline.location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
+    from pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 
 if __package__ and "." in __package__:
     from .. import background_vocab
@@ -97,27 +101,40 @@ def _filter_fx_candidates(options):
     return filtered
 
 
-def _weighted_choice(options, rng, loc_tag, section_name):
+def _semantic_score_multiplier(option, semantic_scores=None):
+    if not semantic_scores:
+        return 1.0
+    score = max(0.0, float(semantic_scores.get(str(option), 0.0) or 0.0))
+    return 0.50 + score
+
+
+def _weighted_choice(options, rng, loc_tag, section_name, semantic_scores=None):
     if not options:
         return ""
     weights_map = background_weight_map(loc_tag, section_name)
-    weights = [max(0.01, float(weights_map.get(str(option), 1.0))) for option in options]
+    weights = [
+        max(0.01, float(weights_map.get(str(option), 1.0))) * _semantic_score_multiplier(option, semantic_scores)
+        for option in options
+    ]
     return rng.choices(list(options), weights=weights, k=1)[0]
 
 
-def _weighted_sample(options, rng, k, loc_tag, section_name):
+def _weighted_sample(options, rng, k, loc_tag, section_name, semantic_scores=None):
     available = list(options)
     selected = []
     while available and len(selected) < k:
         weights_map = background_weight_map(loc_tag, section_name)
-        weights = [max(0.01, float(weights_map.get(str(option), 1.0))) for option in available]
+        weights = [
+            max(0.01, float(weights_map.get(str(option), 1.0))) * _semantic_score_multiplier(option, semantic_scores)
+            for option in available
+        ]
         chosen = rng.choices(available, weights=weights, k=1)[0]
         selected.append(chosen)
         available.remove(chosen)
     return selected
 
 
-def _weighted_sample_with_recent_object_guard(options, rng, k, loc_tag, section_name, recent_objects=None):
+def _weighted_sample_with_recent_object_guard(options, rng, k, loc_tag, section_name, recent_objects=None, semantic_scores=None):
     available = list(options)
     selected = []
     recent_objects = set(recent_objects or [])
@@ -128,11 +145,22 @@ def _weighted_sample_with_recent_object_guard(options, rng, k, loc_tag, section_
             base_weight = max(0.01, float(weights_map.get(str(option), 1.0)))
             if extract_object_flags(option) & recent_objects:
                 base_weight *= 0.35
+            base_weight *= _semantic_score_multiplier(option, semantic_scores)
             weights.append(base_weight)
         chosen = rng.choices(available, weights=weights, k=1)[0]
         selected.append(chosen)
         available.remove(chosen)
     return selected
+
+
+def _semantic_choice(options, rng, semantic_scores=None):
+    if not options:
+        return ""
+    values = list(options)
+    if not semantic_scores:
+        return rng.choice(values)
+    weights = [_semantic_score_multiplier(option, semantic_scores) for option in values]
+    return rng.choices(values, weights=weights, k=1)[0]
 
 
 def _is_daily_life_loc(loc_tag):
@@ -177,7 +205,16 @@ def _filter_off_mode_options(options, fallback_all=True):
     return list(options) if fallback_all else []
 
 
-def expand_location_prompt(loc_tag, seed, mode, lighting_mode="auto", recent_objects=None, return_debug=False):
+def expand_location_prompt(
+    loc_tag,
+    seed,
+    mode,
+    lighting_mode="auto",
+    recent_objects=None,
+    return_debug=False,
+    action_text="",
+    mood_text="",
+):
     try:
         seed = int(seed)
     except Exception:
@@ -195,19 +232,59 @@ def expand_location_prompt(loc_tag, seed, mode, lighting_mode="auto", recent_obj
         debug = {"pack_key": cleaned_tag, "objects": [], "selected_props": [], "template_key": ""}
         return (str(loc_tag), debug) if return_debug else str(loc_tag)
 
+    location_semantic_mode = semantic_mode("location_scene")
+    location_target_vector = {}
+    location_segment_rankings = {}
+    if domain_enabled("location_scene"):
+        location_target_vector = build_scene_target_vector(
+            cleaned_tag,
+            action_text=action_text,
+            mood_text=mood_text,
+        )
+
+    def record_segment_ranking(section_name, options):
+        if domain_enabled("location_scene") and options:
+            location_segment_rankings[section_name] = rank_location_segment_options(
+                section_name,
+                [str(option) for option in options if str(option).strip()],
+                location_target_vector,
+                loc_key=cleaned_tag,
+            )
+
+    def semantic_scores_for(section_name):
+        if semantic_mode("location_scene") != "active":
+            return {}
+        return {
+            str(item.get("text", "")): float(item.get("score", 0.0) or 0.0)
+            for item in location_segment_rankings.get(section_name, [])
+        }
+
     env_options = filter_candidate_strings(pack_data.get("environment", []))
-    env_part = _weighted_choice(env_options, rng, cleaned_tag, "environment") if env_options else cleaned_tag
+    record_segment_ranking("environment", env_options)
+    env_part = _weighted_choice(env_options, rng, cleaned_tag, "environment", semantic_scores=semantic_scores_for("environment")) if env_options else cleaned_tag
     if mode == "simple":
         prompt = sanitize_text(env_part)
         debug = {"pack_key": cleaned_tag, "objects": sorted(extract_object_flags(prompt)), "selected_props": [], "template_key": "simple"}
+        if domain_enabled("location_scene"):
+            add_semantic_debug(
+                debug,
+                "location_scene",
+                semantic_location_debug_payload(
+                    mode=location_semantic_mode,
+                    target_vector=location_target_vector,
+                    segment_rankings=location_segment_rankings,
+                    selected_by_semantic=location_semantic_mode == "active",
+                ),
+            )
         return (prompt, debug) if return_debug else prompt
 
     segments = []
     decision = {"pack_key": cleaned_tag, "objects": [], "selected_props": [], "template_key": "detailed"}
     core_opts = filter_candidate_strings(pack_data.get("core", []))
+    record_segment_ranking("core", core_opts)
     if core_opts and rng.random() < 0.95:
         num_core = 2 if len(core_opts) > 1 and rng.random() < 0.50 else 1
-        chosen_core = _weighted_sample(core_opts, rng, min(num_core, len(core_opts)), cleaned_tag, "core")
+        chosen_core = _weighted_sample(core_opts, rng, min(num_core, len(core_opts)), cleaned_tag, "core", semantic_scores=semantic_scores_for("core"))
         if len(chosen_core) == 1:
             segments.append(f"featuring {chosen_core[0]}")
         else:
@@ -215,6 +292,7 @@ def expand_location_prompt(loc_tag, seed, mode, lighting_mode="auto", recent_obj
             segments.append(f"featuring {chosen_core[0]} {connector} {chosen_core[1]}")
 
     props_opts = filter_candidate_strings(pack_data.get("props", []))
+    record_segment_ranking("props", props_opts)
     include_prob, second_prop_prob = _props_sampling_policy(props_opts)
     if props_opts and rng.random() < include_prob:
         num_props = 2 if len(props_opts) > 1 and rng.random() < second_prop_prob else 1
@@ -227,6 +305,7 @@ def expand_location_prompt(loc_tag, seed, mode, lighting_mode="auto", recent_obj
             cleaned_tag,
             "props",
             recent_objects=recent_objects,
+            semantic_scores=semantic_scores_for("props"),
         )
         connector_word = rng.choice(["with", "scattered with", "filled with", "adorned with"])
         if len(chosen_props) == 1:
@@ -242,32 +321,38 @@ def expand_location_prompt(loc_tag, seed, mode, lighting_mode="auto", recent_obj
         texture_candidates.extend(filter_candidate_strings(general_defaults.get("texture", [])))
     if lighting_mode == "off":
         texture_candidates = _filter_off_mode_options(texture_candidates, fallback_all=False)
+    record_segment_ranking("texture", texture_candidates)
     if texture_candidates and rng.random() < TEXTURE_SEGMENT_SELECT_PROB:
-        segments.append(rng.choice(texture_candidates))
+        segments.append(_semantic_choice(texture_candidates, rng, semantic_scores_for("texture")))
 
     if rng.random() < 0.35:
         details_defaults = filter_candidate_strings(general_defaults.get("details", []))
         if lighting_mode == "off":
             details_defaults = _filter_off_mode_options(details_defaults, fallback_all=False)
+        record_segment_ranking("details", details_defaults)
         if details_defaults:
-            segments.append(rng.choice(details_defaults))
+            segments.append(_semantic_choice(details_defaults, rng, semantic_scores_for("details")))
 
     is_daily_life = _is_daily_life_loc(cleaned_tag)
     time_opts = filter_candidate_strings(pack_data.get("time", []))
     if lighting_mode == "off":
         time_opts = _filter_off_mode_options(time_opts, fallback_all=False)
+    record_segment_ranking("time", time_opts)
     if time_opts and rng.random() < (0.72 if is_daily_life else 0.5):
-        segments.append(f"during {rng.choice(_prefer_bright_time_options(time_opts))}")
+        bright_time_options = _prefer_bright_time_options(time_opts)
+        segments.append(f"during {_semantic_choice(bright_time_options, rng, semantic_scores_for('time'))}")
     weather_opts = filter_candidate_strings(pack_data.get("weather", []))
+    record_segment_ranking("weather", weather_opts)
     preferred_weather, rare_weather = _split_weather_options(weather_opts)
     weather_probability = 0.18 if is_daily_life else 0.12
     if preferred_weather and rng.random() < weather_probability:
-        segments.append(rng.choice(preferred_weather))
+        segments.append(_semantic_choice(preferred_weather, rng, semantic_scores_for("weather")))
     elif rare_weather and rng.random() < 0.03:
-        segments.append(rng.choice(rare_weather))
+        segments.append(_semantic_choice(rare_weather, rng, semantic_scores_for("weather")))
     crowd_opts = filter_candidate_strings(pack_data.get("crowd", []))
+    record_segment_ranking("crowd", crowd_opts)
     if crowd_opts and rng.random() < (0.58 if is_daily_life else 0.30):
-        segments.append(rng.choice(crowd_opts))
+        segments.append(_semantic_choice(crowd_opts, rng, semantic_scores_for("crowd")))
 
     fx_candidates = _filter_fx_candidates(filter_candidate_strings(pack_data.get("fx", []) or []))
     if lighting_mode == "off":
@@ -276,9 +361,10 @@ def expand_location_prompt(loc_tag, seed, mode, lighting_mode="auto", recent_obj
         fx_candidates.extend(_filter_fx_candidates(filter_candidate_strings(general_defaults.get("fx", []))))
     if lighting_mode == "off":
         fx_candidates = _filter_off_mode_options(fx_candidates, fallback_all=False)
+    record_segment_ranking("fx", fx_candidates)
     fx_segments_added = 0
     if fx_candidates and fx_segments_added < MAX_FX_SEGMENTS and rng.random() < FX_SEGMENT_SELECT_PROB:
-        segments.append(_weighted_choice(fx_candidates, rng, cleaned_tag, "fx"))
+        segments.append(_weighted_choice(fx_candidates, rng, cleaned_tag, "fx", semantic_scores=semantic_scores_for("fx")))
         fx_segments_added += 1
 
     rng.shuffle(segments)
@@ -291,6 +377,17 @@ def expand_location_prompt(loc_tag, seed, mode, lighting_mode="auto", recent_obj
 
     prompt = sanitize_text(", ".join([env_part] + deduped_segments) if deduped_segments else env_part)
     decision["objects"] = sorted(extract_object_flags(prompt))
+    if domain_enabled("location_scene"):
+        add_semantic_debug(
+            decision,
+            "location_scene",
+            semantic_location_debug_payload(
+                mode=location_semantic_mode,
+                target_vector=location_target_vector,
+                segment_rankings=location_segment_rankings,
+                selected_by_semantic=location_semantic_mode == "active",
+            ),
+        )
     return (prompt, decision) if return_debug else prompt
 
 
@@ -306,6 +403,8 @@ def apply_location_expansion(context, seed, mode, lighting_mode="auto"):
         lighting_mode,
         recent_objects=recent_prompt_objects(ctx),
         return_debug=True,
+        action_text=ctx.action,
+        mood_text=ctx.meta.mood,
     )
     state.location.raw_loc_tag = raw_loc_tag
     state.location.resolved_location_key = loc_tag
