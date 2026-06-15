@@ -9,9 +9,11 @@ from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 if __package__ and __package__.count(".") >= 2:
     from ...core.semantic_families import semantic_families_for_text
     from ...core.semantic_policy import sanitize_sequence
+    from .. import emotion_vad
 else:
     from core.semantic_families import semantic_families_for_text
     from core.semantic_policy import sanitize_sequence
+    from vocab import emotion_vad
 
 from .utils import _dedupe
 from .base_vocab import (
@@ -270,6 +272,38 @@ def _select_category_weighted(load: str, rng: random.Random, prefer_category: Op
     return rng.choices(valid_categories, weights=valid_weights, k=1)[0]
 
 
+def _intensity_from_vad(target_vad: Optional[Tuple[float, float]]) -> Optional[str]:
+    if target_vad is None:
+        return None
+    arousal = target_vad[1]
+    if arousal >= 0.68:
+        return "strong"
+    if arousal <= 0.35:
+        return "mild"
+    return "medium"
+
+
+def _debug_vad_distances(target_vad: Optional[Tuple[float, float]], allowed: Set[str]) -> List[Dict[str, Any]]:
+    if target_vad is None:
+        return []
+    ranked: List[Dict[str, Any]] = []
+    for category in EMOTION_CATEGORIES:
+        if category not in allowed:
+            continue
+        category_vad = emotion_vad.category_vad(category)
+        if category_vad is None:
+            continue
+        ranked.append(
+            {
+                "category": category,
+                "vad": [round(category_vad[0], 3), round(category_vad[1], 3)],
+                "distance": round(emotion_vad.distance(category_vad, target_vad), 4),
+            }
+        )
+    ranked.sort(key=lambda item: (item["distance"], item["category"]))
+    return ranked[:5]
+
+
 def _resolve_target_emotion(
     meta_mood: str,
     load: str,
@@ -277,37 +311,72 @@ def _resolve_target_emotion(
     log: Dict[str, Any],
     prefer_category: Optional[str] = None,
     emotion_nuance: str = "",
-) -> Tuple[str, str]:
+) -> Tuple[str, str, Optional[Tuple[float, float]]]:
     category = None
     intensity = None
+    target_vad = None
+    target_source = "fallback_weighted"
     mood_key = (meta_mood or "").strip().lower().replace(" ", "_")
     nuance_key = (emotion_nuance or "").strip().lower()
+    nuance_target = emotion_vad.nuance_vad(nuance_key)
 
     if mood_key in LEGACY_MAP:
         category, intensity = LEGACY_MAP[mood_key]
-    elif mood_key in EMOTION_CATEGORIES:
+        target_source = "legacy_mood"
+    else:
+        alias_category = emotion_vad.alias_category(mood_key)
+        if alias_category:
+            category = alias_category
+            target_source = "vad_alias"
+
+    if category is None and mood_key in EMOTION_CATEGORIES:
         category = mood_key
         intensity = "medium"
-    elif "_" in mood_key:
+        target_source = "category"
+    elif category is None and "_" in mood_key:
         parts = [part for part in mood_key.split("_") if part]
         if parts and parts[0] in EMOTION_CATEGORIES:
             category = parts[0]
+            target_source = "parsed_category"
             if len(parts) > 1 and parts[1] in INTENSITIES:
                 intensity = parts[1]
 
     if nuance_key in EMOTION_NUANCE_MAP and category is None:
         category, intensity = EMOTION_NUANCE_MAP[nuance_key]
+        target_source = "emotion_nuance"
+
+    if category is not None:
+        target_vad = emotion_vad.category_vad(category)
+    target_vad = emotion_vad.blend_vad(target_vad, nuance_target, secondary_weight=0.35)
+    target_vad = emotion_vad.apply_load_bias(target_vad, load)
 
     if category and not _is_compatible(category, load):
         log["mood_conflict"] = f"requested={category} load={load}"
-        category = None
+        allowed = COMPATIBILITY.get(load, COMPATIBILITY["calm"])
+        if target_vad is not None:
+            category = emotion_vad.closest_category(target_vad, allowed)
+            target_source = f"{target_source}:compatible_vad"
+        else:
+            category = None
         intensity = None
 
     if category is None:
-        category = _select_category_weighted(load, rng, prefer_category=prefer_category)
+        allowed = COMPATIBILITY.get(load, COMPATIBILITY["calm"])
+        if target_vad is not None:
+            category = emotion_vad.closest_category(target_vad, allowed)
+            target_source = f"{target_source}:vad_closest"
+        if category is None:
+            category = _select_category_weighted(load, rng, prefer_category=prefer_category)
+            target_vad = emotion_vad.category_vad(category)
+
+    if target_vad is None and category is not None:
+        target_vad = emotion_vad.category_vad(category)
 
     if intensity is None:
-        if nuance_key in EMOTION_NUANCE_MAP and EMOTION_NUANCE_MAP[nuance_key][0] == category:
+        vad_intensity = _intensity_from_vad(target_vad)
+        if vad_intensity:
+            intensity = vad_intensity
+        elif nuance_key in EMOTION_NUANCE_MAP and EMOTION_NUANCE_MAP[nuance_key][0] == category:
             intensity = EMOTION_NUANCE_MAP[nuance_key][1]
         elif load == "tense":
             intensity = rng.choices(INTENSITIES, weights=[1, 3, 4], k=1)[0]
@@ -318,7 +387,10 @@ def _resolve_target_emotion(
 
     log["emotion_core"] = category
     log["emotion_intensity"] = intensity
-    return category, intensity
+    log["target_vad"] = [round(target_vad[0], 3), round(target_vad[1], 3)] if target_vad else []
+    log["target_vad_source"] = target_source
+    log["vad_category_distances"] = _debug_vad_distances(target_vad, COMPATIBILITY.get(load, COMPATIBILITY["calm"]))
+    return category, intensity, target_vad
 
 
 def _get_action_anchors(action_text: str) -> List[str]:
@@ -444,6 +516,50 @@ def _pick_first_valid(
     return None
 
 
+def _pick_first_valid_vad_ranked(
+    category: str,
+    slot: str,
+    candidates: Sequence[str],
+    target_vad: Optional[Tuple[float, float]],
+    intensity: str,
+    rng: random.Random,
+    context_loc: str,
+    context_costume: str,
+    action_text: str,
+    existing_tags: Sequence[str],
+    debug_log: Dict[str, Any],
+) -> Optional[str]:
+    items = [candidate for candidate in candidates if candidate]
+    if not items:
+        return None
+    if target_vad is None:
+        return _pick_first_valid(items, rng, context_loc, context_costume, action_text, existing_tags)
+
+    ranked = emotion_vad.rank_descriptors(category, items, target_vad, intensity=intensity)
+    debug_rankings = debug_log.setdefault("vad_descriptor_rankings", {})
+    debug_rankings[slot] = [
+        {
+            "tag": item["tag"],
+            "vad": [round(item["vad"][0], 3), round(item["vad"][1], 3)] if item.get("vad") else [],
+            "distance": round(item["distance"], 4) if item.get("distance") is not None else None,
+            "score": round(item["score"], 4),
+        }
+        for item in ranked[:5]
+    ]
+
+    top_window = [item["tag"] for item in ranked[: min(len(ranked), 3)]]
+    rng.shuffle(top_window)
+    for candidate in top_window:
+        if not _is_out_of_context(candidate, context_loc, context_costume, action_text, existing_tags):
+            return candidate
+
+    for item in ranked[3:]:
+        candidate = item["tag"]
+        if not _is_out_of_context(candidate, context_loc, context_costume, action_text, existing_tags):
+            return candidate
+    return None
+
+
 def _emotion_profile_tags(
     category: str,
     intensity: str,
@@ -452,31 +568,92 @@ def _emotion_profile_tags(
     context_costume: str,
     action_text: str,
     debug_log: Dict[str, Any],
+    target_vad: Optional[Tuple[float, float]] = None,
 ) -> List[str]:
     model = EMOTION_MODEL.get(category, EMOTION_MODEL["focus"])
     chosen: List[str] = []
-    expression = _pick_first_valid(model["expression"], rng, context_loc, context_costume, action_text, chosen)
+    expression = _pick_first_valid_vad_ranked(
+        category,
+        "expression",
+        model["expression"],
+        target_vad,
+        intensity,
+        rng,
+        context_loc,
+        context_costume,
+        action_text,
+        chosen,
+        debug_log,
+    )
     if expression:
         chosen.append(expression)
 
-    gaze = _pick_first_valid(model["gaze"], rng, context_loc, context_costume, action_text, chosen)
+    gaze = _pick_first_valid_vad_ranked(
+        category,
+        "gaze",
+        model["gaze"],
+        target_vad,
+        intensity,
+        rng,
+        context_loc,
+        context_costume,
+        action_text,
+        chosen,
+        debug_log,
+    )
     if gaze:
         chosen.append(gaze)
 
     behavior_candidates = list(model["posture"]) + list(model["hands"]) + list(model["behavior"])
     rng.shuffle(behavior_candidates)
-    behavior = _pick_first_valid(behavior_candidates, rng, context_loc, context_costume, action_text, chosen)
+    behavior = _pick_first_valid_vad_ranked(
+        category,
+        "behavior",
+        behavior_candidates,
+        target_vad,
+        intensity,
+        rng,
+        context_loc,
+        context_costume,
+        action_text,
+        chosen,
+        debug_log,
+    )
     if behavior:
         chosen.append(behavior)
 
     if intensity == "strong":
         extra_candidates = list(model["mouth"]) + list(model["hands"]) + list(model["behavior"])
-        extra = _pick_first_valid(extra_candidates, rng, context_loc, context_costume, action_text, chosen)
+        extra = _pick_first_valid_vad_ranked(
+            category,
+            "extra",
+            extra_candidates,
+            target_vad,
+            intensity,
+            rng,
+            context_loc,
+            context_costume,
+            action_text,
+            chosen,
+            debug_log,
+        )
         if extra:
             chosen.append(extra)
     elif intensity == "mild":
         soft_candidates = list(model["mouth"]) + list(model["posture"])
-        soft = _pick_first_valid(soft_candidates, rng, context_loc, context_costume, action_text, chosen)
+        soft = _pick_first_valid_vad_ranked(
+            category,
+            "soft",
+            soft_candidates,
+            target_vad,
+            intensity,
+            rng,
+            context_loc,
+            context_costume,
+            action_text,
+            chosen,
+            debug_log,
+        )
         if soft and len(chosen) < 3:
             chosen.append(soft)
 
@@ -534,8 +711,16 @@ def sample_garnish(
     action_load = _guess_action_load(action_text)
     debug_log["action_load"] = action_load
     debug_log["generation_mode"] = "scene_emotion_priority"
+    debug_log["emotion_role_mode"] = "subject_only"
+    debug_log["subject_role"] = "context subject / character profile"
+    debug_log["stimulus_role"] = action_text or ""
+    debug_log["context_role"] = {
+        "location": context_loc or "",
+        "costume": context_costume or "",
+        "scene_tags": scene_tags,
+    }
 
-    category, intensity = _resolve_target_emotion(
+    category, intensity, target_vad = _resolve_target_emotion(
         meta_mood=meta_mood,
         load=action_load,
         rng=rng,
@@ -560,6 +745,7 @@ def sample_garnish(
         context_costume=context_costume,
         action_text=action_text,
         debug_log=debug_log,
+        target_vad=target_vad,
     )
     garnish_pool.extend(emotion_tags)
 
