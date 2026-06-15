@@ -16,6 +16,12 @@ if __package__ and "." in __package__:
     )
     from ..location_service import resolve_location_key
     from ..vocab.seed_utils import mix_seed
+    from .clothing_semantics import (
+        build_clothing_target_vector,
+        clothing_semantic_debug_payload,
+        score_clothing_decision,
+    )
+    from .semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 else:
     from clothing_service import resolve_clothing_theme
     from core.context_state import generation_state_from_context
@@ -32,6 +38,12 @@ else:
     )
     from location_service import resolve_location_key
     from vocab.seed_utils import mix_seed
+    from pipeline.clothing_semantics import (
+        build_clothing_target_vector,
+        clothing_semantic_debug_payload,
+        score_clothing_decision,
+    )
+    from pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 
 if __package__ and "." in __package__:
     from .. import clothing_vocab
@@ -350,6 +362,7 @@ def expand_clothing_prompt(
     recent_outerwear=None,
     recent_signatures=None,
     return_debug=False,
+    action_text="",
 ):
     try:
         seed = int(seed)
@@ -363,6 +376,17 @@ def expand_clothing_prompt(
     recent_types = {str(item) for item in (recent_types or []) if item}
     recent_outerwear = {str(item) for item in (recent_outerwear or []) if item}
     recent_signatures = {str(item) for item in (recent_signatures or []) if item}
+    clothing_tpo_enabled = domain_enabled("clothing_tpo")
+    clothing_tpo_mode = semantic_mode("clothing_tpo")
+    clothing_tpo_active = clothing_tpo_enabled and clothing_tpo_mode == "active"
+    clothing_target_vector = {}
+    candidate_scores = []
+    if clothing_tpo_enabled:
+        clothing_target_vector = build_clothing_target_vector(
+            resolve_location_key(loc) or loc,
+            action_text=action_text,
+            theme_key=resolve_clothing_theme(theme_key) or theme_key,
+        )
 
     prompt, decision = _render_clothing_candidate(
         theme_key,
@@ -377,7 +401,23 @@ def expand_clothing_prompt(
         recent_signatures=recent_signatures,
         attempt_index=0,
     )
-    best_score = int(decision.get("repeat_guard_penalty", 0))
+    if clothing_tpo_enabled:
+        semantic_score = score_clothing_decision(decision, prompt, clothing_target_vector)
+        repeat_penalty = int(decision.get("repeat_guard_penalty", 0) or 0)
+        final_penalty = repeat_penalty + (int(semantic_score["semantic_penalty"]) if clothing_tpo_active else 0)
+        decision["semantic_tpo_score"] = semantic_score["score"]
+        decision["semantic_tpo_penalty"] = semantic_score["semantic_penalty"]
+        decision["semantic_tpo_distance"] = semantic_score["distance"]
+        decision["semantic_tpo_final_penalty"] = final_penalty
+        candidate_scores.append({
+            "attempt_index": decision.get("attempt_index", 0),
+            "score": semantic_score["score"],
+            "distance": semantic_score["distance"],
+            "semantic_penalty": semantic_score["semantic_penalty"],
+            "repeat_penalty": repeat_penalty,
+            "final_penalty": final_penalty,
+        })
+    best_score = int(decision.get("semantic_tpo_final_penalty", decision.get("repeat_guard_penalty", 0)) or 0)
     for attempt_index in range(1, CLOTHING_CANDIDATE_ATTEMPTS):
         candidate_prompt, candidate_decision = _render_clothing_candidate(
             theme_key,
@@ -392,12 +432,40 @@ def expand_clothing_prompt(
             recent_signatures=recent_signatures,
             attempt_index=attempt_index,
         )
-        candidate_score = int(candidate_decision.get("repeat_guard_penalty", 0))
+        if clothing_tpo_enabled:
+            semantic_score = score_clothing_decision(candidate_decision, candidate_prompt, clothing_target_vector)
+            repeat_penalty = int(candidate_decision.get("repeat_guard_penalty", 0) or 0)
+            final_penalty = repeat_penalty + (int(semantic_score["semantic_penalty"]) if clothing_tpo_active else 0)
+            candidate_decision["semantic_tpo_score"] = semantic_score["score"]
+            candidate_decision["semantic_tpo_penalty"] = semantic_score["semantic_penalty"]
+            candidate_decision["semantic_tpo_distance"] = semantic_score["distance"]
+            candidate_decision["semantic_tpo_final_penalty"] = final_penalty
+            candidate_scores.append({
+                "attempt_index": candidate_decision.get("attempt_index", attempt_index),
+                "score": semantic_score["score"],
+                "distance": semantic_score["distance"],
+                "semantic_penalty": semantic_score["semantic_penalty"],
+                "repeat_penalty": repeat_penalty,
+                "final_penalty": final_penalty,
+            })
+        candidate_score = int(candidate_decision.get("semantic_tpo_final_penalty", candidate_decision.get("repeat_guard_penalty", 0)) or 0)
         if candidate_score < best_score:
             prompt, decision = candidate_prompt, candidate_decision
             best_score = candidate_score
             if best_score == 0:
                 break
+    if clothing_tpo_enabled:
+        add_semantic_debug(
+            decision,
+            "clothing_tpo",
+            clothing_semantic_debug_payload(
+                mode=clothing_tpo_mode,
+                target_vector=clothing_target_vector,
+                candidate_scores=candidate_scores,
+                selected_attempt_index=decision.get("attempt_index", 0),
+                selected_by_semantic=clothing_tpo_active,
+            ),
+        )
     return (prompt, decision) if return_debug else prompt
 
 
@@ -420,6 +488,7 @@ def apply_clothing_expansion(context, seed, outfit_mode, outerwear_chance, chara
         recent_outerwear=recent_outerwear_packs(ctx),
         recent_signatures=recent_clothing_signatures(ctx),
         return_debug=True,
+        action_text=ctx.action,
     )
     state.character.palette_text = palette_value
     state.character.palette = [item.strip() for item in palette_value.split(",") if item.strip()] if palette_value else []

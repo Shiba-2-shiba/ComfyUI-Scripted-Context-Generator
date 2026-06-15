@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0",
+  "relations": {
+    "book:reading": {
+      "object": "book",
+      "verbs": [
+        "reading",
+        "reviewing",
+        "studying"
+      ],
+      "required_roles": {
+        "hand_action": [
+          "holding an open book",
+          "one hand supporting the book"
+        ],
+        "gaze_target": [
+          "eyes lowered toward the pages"
+        ],
+        "object_state": [
+          "open pages visible"
+        ]
+      },
+      "forbidden_patterns": [
+        "closed book in the background",
+        "book floating nearby"
+      ]
+    },
+    "phone:checking": {
+      "object": "phone",
+      "verbs": [
+        "checking",
+        "scrolling",
+        "texting"
+      ],
+      "required_roles": {
+        "hand_action": [
+          "phone held close in one hand"
+        ],
+        "gaze_target": [
+          "eyes lowered toward the phone screen"
+        ],
+        "object_state": [
+          "lit phone screen visible"
+        ]
+      },
+      "forbidden_patterns": [
+        "phone floating nearby"
+      ]
+    },
+    "coffee:sipping_or_holding": {
+      "object": "coffee",
+      "verbs": [
+        "sipping",
+        "holding",
+        "carrying"
+      ],
+      "required_roles": {
+        "hand_action": [
+          "one hand wrapped around the coffee cup"
+        ],
+        "object_state": [
+          "coffee cup close to her hand"
+        ]
+      },
+      "forbidden_patterns": [
+        "coffee cup floating nearby"
+      ]
+    },
+    "drink:sipping": {
+      "object": "drink",
+      "verbs": [
+        "sipping",
+        "drinking"
+      ],
+      "required_roles": {
+        "hand_action": [
+          "drink held near her mouth"
+        ],
+        "object_state": [
+          "drink container in use"
+        ]
+      },
+      "forbidden_patterns": [
+        "drink floating nearby"
+      ]
+    },
+    "screen:typing_or_reviewing": {
+      "object": "screen",
+      "verbs": [
+        "typing",
+        "reviewing",
+        "checking"
+      ],
+      "required_roles": {
+        "hand_action": [
+          "hands working near the keyboard"
+        ],
+        "gaze_target": [
+          "eyes fixed on the screen"
+        ],
+        "object_state": [
+          "screen content held in her attention"
+        ]
+      },
+      "forbidden_patterns": [
+        "screen floating nearby"
+      ]
+    },
+    "microphone:singing_or_speaking": {
+      "object": "microphone",
+      "verbs": [
+        "singing",
+        "speaking",
+        "announcing"
+      ],
+      "required_roles": {
+        "hand_action": [
+          "microphone held close enough to use"
+        ],
+        "gaze_target": [
+          "eyes turned toward the room ahead"
+        ],
+        "object_state": [
+          "microphone actively in use"
+        ]
+      },
+      "forbidden_patterns": [
+        "microphone floating nearby"
+      ]
+    },
+    "surfboard:carrying_or_balancing": {
+      "object": "surfboard",
+      "verbs": [
+        "carrying",
+        "balancing",
+        "holding"
+      ],
+      "required_roles": {
+        "hand_action": [
+          "one arm keeping the surfboard balanced"
+        ],
+        "posture": [
+          "body angled to manage the surfboard"
+        ],
+        "object_state": [
+          "surfboard held as part of the action"
+        ]
+      },
+      "forbidden_patterns": [
+        "surfboard floating nearby"
+      ]
+    }
+  },
+  "notes": {
+    "scope": "Initial passive object relation profiles for role-bound action debug."
+  }
+}

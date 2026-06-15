@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "axes": [
+    "motion_energy",
+    "body_openness",
+    "precision",
+    "object_coupling",
+    "social_intensity",
+    "time_pressure"
+  ],
+  "axis_weights": {
+    "motion_energy": 1.0,
+    "body_openness": 1.0,
+    "precision": 1.0,
+    "object_coupling": 1.0,
+    "social_intensity": 1.0,
+    "time_pressure": 1.0
+  },
+  "slots": {
+    "posture": [
+      {
+        "text": "leaning in over what she is doing",
+        "vector": {
+          "motion_energy": 0.25,
+          "body_openness": 0.3,
+          "precision": 0.85,
+          "object_coupling": 0.75,
+          "social_intensity": 0.1,
+          "time_pressure": 0.3
+        }
+      },
+      {
+        "text": "keeping an upright working posture",
+        "vector": {
+          "motion_energy": 0.35,
+          "body_openness": 0.45,
+          "precision": 0.8,
+          "object_coupling": 0.6,
+          "social_intensity": 0.3,
+          "time_pressure": 0.45
+        }
+      },
+      {
+        "text": "braced to move at any second",
+        "vector": {
+          "motion_energy": 0.75,
+          "body_openness": 0.45,
+          "precision": 0.35,
+          "object_coupling": 0.4,
+          "social_intensity": 0.55,
+          "time_pressure": 0.9
+        }
+      },
+      {
+        "text": "letting her shoulders loosen",
+        "vector": {
+          "motion_energy": 0.15,
+          "body_openness": 0.55,
+          "precision": 0.25,
+          "object_coupling": 0.2,
+          "social_intensity": 0.15,
+          "time_pressure": 0.1
+        }
+      }
+    ],
+    "hand_action": [
+      {
+        "text": "fingers keeping her notes in order",
+        "vector": {
+          "motion_energy": 0.25,
+          "body_openness": 0.25,
+          "precision": 0.9,
+          "object_coupling": 0.85,
+          "social_intensity": 0.1,
+          "time_pressure": 0.3
+        }
+      },
+      {
+        "text": "hands staying precise and controlled",
+        "vector": {
+          "motion_energy": 0.3,
+          "body_openness": 0.3,
+          "precision": 0.9,
+          "object_coupling": 0.6,
+          "social_intensity": 0.15,
+          "time_pressure": 0.35
+        }
+      },
+      {
+        "text": "hand shifting to keep her balance",
+        "vector": {
+          "motion_energy": 0.7,
+          "body_openness": 0.45,
+          "precision": 0.4,
+          "object_coupling": 0.45,
+          "social_intensity": 0.55,
+          "time_pressure": 0.85
+        }
+      },
+      {
+        "text": "hands loosening at her sides",
+        "vector": {
+          "motion_energy": 0.15,
+          "body_openness": 0.55,
+          "precision": 0.2,
+          "object_coupling": 0.15,
+          "social_intensity": 0.15,
+          "time_pressure": 0.1
+        }
+      }
+    ],
+    "gaze_target": [
+      {
+        "text": "eyes following the detail she is working through",
+        "vector": {
+          "motion_energy": 0.2,
+          "body_openness": 0.3,
+          "precision": 0.9,
+          "object_coupling": 0.75,
+          "social_intensity": 0.1,
+          "time_pressure": 0.25
+        }
+      },
+      {
+        "text": "eyes fixed on what needs to happen next",
+        "vector": {
+          "motion_energy": 0.35,
+          "body_openness": 0.4,
+          "precision": 0.75,
+          "object_coupling": 0.55,
+          "social_intensity": 0.3,
+          "time_pressure": 0.5
+        }
+      },
+      {
+        "text": "checking where the next movement will come from",
+        "vector": {
+          "motion_energy": 0.7,
+          "body_openness": 0.45,
+          "precision": 0.35,
+          "object_coupling": 0.35,
+          "social_intensity": 0.55,
+          "time_pressure": 0.85
+        }
+      },
+      {
+        "text": "looking off for a quiet second",
+        "vector": {
+          "motion_energy": 0.15,
+          "body_openness": 0.5,
+          "precision": 0.25,
+          "object_coupling": 0.15,
+          "social_intensity": 0.1,
+          "time_pressure": 0.1
+        }
+      }
+    ],
+    "purpose_clause": [
+      {
+        "text": "rechecking a small detail",
+        "vector": {
+          "motion_energy": 0.25,
+          "body_openness": 0.25,
+          "precision": 0.9,
+          "object_coupling": 0.75,
+          "social_intensity": 0.1,
+          "time_pressure": 0.3
+        }
+      },
+      {
+        "text": "counting the moment before she has to move",
+        "vector": {
+          "motion_energy": 0.65,
+          "body_openness": 0.4,
+          "precision": 0.35,
+          "object_coupling": 0.3,
+          "social_intensity": 0.55,
+          "time_pressure": 0.9
+        }
+      }
+    ],
+    "optional_micro_action": [
+      {
+        "text": "staying with the line she was following",
+        "vector": {
+          "motion_energy": 0.2,
+          "body_openness": 0.3,
+          "precision": 0.85,
+          "object_coupling": 0.75,
+          "social_intensity": 0.1,
+          "time_pressure": 0.25
+        }
+      },
+      {
+        "text": "adjusting to the movement around her",
+        "vector": {
+          "motion_energy": 0.7,
+          "body_openness": 0.45,
+          "precision": 0.4,
+          "object_coupling": 0.35,
+          "social_intensity": 0.6,
+          "time_pressure": 0.8
+        }
+      }
+    ]
+  },
+  "notes": {
+    "scope": "Initial descriptors mirror common runtime slots for passive Action EPIG debug."
+  }
+}

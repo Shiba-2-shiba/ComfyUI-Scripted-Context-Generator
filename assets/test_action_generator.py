@@ -66,6 +66,10 @@ class TestActionGenerator(unittest.TestCase):
         self.assertIn("object_focus", debug)
         self.assertEqual(debug["normalized_action"], action)
         self.assertEqual(find_banned_terms(action), {})
+        self.assertEqual(debug["semantic_epig"]["action"]["mode"], "active")
+        self.assertTrue(debug["semantic_epig"]["action"]["selected_by_semantic"])
+        self.assertIn("target_vector", debug["semantic_epig"]["action"])
+        self.assertIn("slot_rankings", debug["semantic_epig"]["action"])
 
     def test_generate_action_for_location_with_pool_enriches_pool_result(self):
         pool = [a for a in self.action_pools["modern_office"]]
@@ -88,6 +92,52 @@ class TestActionGenerator(unittest.TestCase):
         self.assertEqual(debug["normalized_action"], action)
         self.assertTrue(any(source == "pool" for source in debug["slot_sources"].values()))
         self.assertEqual(find_banned_terms(action), {})
+        self.assertEqual(debug["semantic_epig"]["action"]["mode"], "active")
+        self.assertTrue(debug["semantic_epig"]["action"]["selected_by_semantic"])
+
+    def test_action_semantic_active_selection_is_deterministic(self):
+        action_without_debug, _debug_without_assertion = generate_action_for_location(
+            "modern_office",
+            self.compat,
+            self.scene_axes,
+            random.Random(19),
+            recent_verbs=["typing"],
+            recent_objects=[],
+        )
+        action_with_debug, debug = generate_action_for_location(
+            "modern_office",
+            self.compat,
+            self.scene_axes,
+            random.Random(19),
+            recent_verbs=["typing"],
+            recent_objects=[],
+        )
+
+        self.assertEqual(action_with_debug, action_without_debug)
+        self.assertEqual(debug["normalized_action"], action_with_debug)
+        self.assertIn("semantic_epig", debug)
+        self.assertTrue(debug["semantic_epig"]["action"]["selected_by_semantic"])
+
+    def test_object_relation_active_adds_object_state_without_overwriting_existing_slots(self):
+        action, debug = generate_action_for_location(
+            "school_library",
+            self.compat,
+            self.scene_axes,
+            random.Random(3),
+            pool=[{"text": "reading a book quietly", "load": "calm"}],
+            recent_verbs=[],
+            recent_objects=[],
+        )
+
+        relation_debug = debug["semantic_epig"]["object_relation"]
+        self.assertEqual(relation_debug["mode"], "active")
+        self.assertEqual(relation_debug["relation_key"], "book:reading")
+        self.assertIn("gaze_target", relation_debug["required_roles"])
+        self.assertEqual(relation_debug["applied_slots"]["object_state"], "open pages visible")
+        self.assertIn("hand_action", relation_debug["skipped_slots"])
+        self.assertEqual(debug["slots"]["object_state"], "open pages visible")
+        self.assertIn("open pages visible", action)
+        self.assertEqual(debug["normalized_action"], action)
 
     def test_parse_pool_action_to_slots_extracts_posture_and_hand_action(self):
         slots = parse_pool_action_to_slots(

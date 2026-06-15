@@ -1,0 +1,252 @@
+{
+  "schema_version": "1.0",
+  "axes": [
+    "sociability",
+    "restraint",
+    "confidence",
+    "curiosity",
+    "meticulousness",
+    "warmth"
+  ],
+  "axis_weights": {
+    "sociability": 1.0,
+    "restraint": 1.0,
+    "confidence": 1.0,
+    "curiosity": 1.0,
+    "meticulousness": 1.0,
+    "warmth": 1.0
+  },
+  "profiles": {
+    "shy": {
+      "vector": {
+        "sociability": 0.25,
+        "restraint": 0.85,
+        "confidence": 0.2,
+        "curiosity": 0.45,
+        "meticulousness": 0.5,
+        "warmth": 0.55
+      },
+      "prefer_category": "care"
+    },
+    "confident": {
+      "vector": {
+        "sociability": 0.75,
+        "restraint": 0.25,
+        "confidence": 0.9,
+        "curiosity": 0.55,
+        "meticulousness": 0.5,
+        "warmth": 0.55
+      },
+      "prefer_category": "joy"
+    },
+    "energetic": {
+      "vector": {
+        "sociability": 0.85,
+        "restraint": 0.2,
+        "confidence": 0.75,
+        "curiosity": 0.7,
+        "meticulousness": 0.35,
+        "warmth": 0.75
+      },
+      "prefer_category": "joy"
+    },
+    "gloomy": {
+      "vector": {
+        "sociability": 0.2,
+        "restraint": 0.75,
+        "confidence": 0.2,
+        "curiosity": 0.25,
+        "meticulousness": 0.45,
+        "warmth": 0.25
+      },
+      "prefer_category": "sadness"
+    },
+    "faithful": {
+      "vector": {
+        "sociability": 0.55,
+        "restraint": 0.55,
+        "confidence": 0.45,
+        "curiosity": 0.35,
+        "meticulousness": 0.7,
+        "warmth": 0.85
+      },
+      "prefer_category": "care"
+    },
+    "aggressive": {
+      "vector": {
+        "sociability": 0.45,
+        "restraint": 0.15,
+        "confidence": 0.8,
+        "curiosity": 0.35,
+        "meticulousness": 0.35,
+        "warmth": 0.1
+      },
+      "prefer_category": "anger"
+    },
+    "mysterious": {
+      "vector": {
+        "sociability": 0.25,
+        "restraint": 0.8,
+        "confidence": 0.55,
+        "curiosity": 0.8,
+        "meticulousness": 0.6,
+        "warmth": 0.3
+      },
+      "prefer_category": "focus"
+    },
+    "cheerful": {
+      "vector": {
+        "sociability": 0.85,
+        "restraint": 0.25,
+        "confidence": 0.75,
+        "curiosity": 0.65,
+        "meticulousness": 0.35,
+        "warmth": 0.85
+      },
+      "prefer_category": "playful"
+    },
+    "serious": {
+      "vector": {
+        "sociability": 0.35,
+        "restraint": 0.65,
+        "confidence": 0.65,
+        "curiosity": 0.45,
+        "meticulousness": 0.9,
+        "warmth": 0.35
+      },
+      "prefer_category": "focus"
+    },
+    "gentle": {
+      "vector": {
+        "sociability": 0.55,
+        "restraint": 0.6,
+        "confidence": 0.45,
+        "curiosity": 0.4,
+        "meticulousness": 0.55,
+        "warmth": 0.9
+      },
+      "prefer_category": "care"
+    },
+    "neutral": {
+      "vector": {
+        "sociability": 0.5,
+        "restraint": 0.5,
+        "confidence": 0.5,
+        "curiosity": 0.5,
+        "meticulousness": 0.5,
+        "warmth": 0.5
+      },
+      "prefer_category": null
+    }
+  },
+  "descriptors": {
+    "gaze": [
+      {
+        "text": "looking slightly away",
+        "vector": {
+          "sociability": 0.25,
+          "restraint": 0.8,
+          "confidence": 0.25,
+          "curiosity": 0.45,
+          "meticulousness": 0.5,
+          "warmth": 0.55
+        }
+      },
+      {
+        "text": "looking directly ahead",
+        "vector": {
+          "sociability": 0.7,
+          "restraint": 0.25,
+          "confidence": 0.85,
+          "curiosity": 0.55,
+          "meticulousness": 0.5,
+          "warmth": 0.55
+        }
+      },
+      {
+        "text": "focused gaze",
+        "vector": {
+          "sociability": 0.35,
+          "restraint": 0.65,
+          "confidence": 0.65,
+          "curiosity": 0.45,
+          "meticulousness": 0.9,
+          "warmth": 0.35
+        }
+      }
+    ],
+    "posture": [
+      {
+        "text": "shoulders drawn inward",
+        "vector": {
+          "sociability": 0.25,
+          "restraint": 0.85,
+          "confidence": 0.2,
+          "curiosity": 0.4,
+          "meticulousness": 0.45,
+          "warmth": 0.5
+        }
+      },
+      {
+        "text": "upright composed posture",
+        "vector": {
+          "sociability": 0.45,
+          "restraint": 0.55,
+          "confidence": 0.8,
+          "curiosity": 0.45,
+          "meticulousness": 0.75,
+          "warmth": 0.45
+        }
+      },
+      {
+        "text": "open posture",
+        "vector": {
+          "sociability": 0.8,
+          "restraint": 0.25,
+          "confidence": 0.8,
+          "curiosity": 0.55,
+          "meticulousness": 0.4,
+          "warmth": 0.75
+        }
+      }
+    ],
+    "hands": [
+      {
+        "text": "holding her bag close",
+        "vector": {
+          "sociability": 0.25,
+          "restraint": 0.8,
+          "confidence": 0.25,
+          "curiosity": 0.4,
+          "meticulousness": 0.5,
+          "warmth": 0.55
+        }
+      },
+      {
+        "text": "hands held carefully together",
+        "vector": {
+          "sociability": 0.5,
+          "restraint": 0.65,
+          "confidence": 0.45,
+          "curiosity": 0.35,
+          "meticulousness": 0.75,
+          "warmth": 0.8
+        }
+      },
+      {
+        "text": "hands moving as she talks",
+        "vector": {
+          "sociability": 0.85,
+          "restraint": 0.2,
+          "confidence": 0.7,
+          "curiosity": 0.7,
+          "meticulousness": 0.35,
+          "warmth": 0.75
+        }
+      }
+    ]
+  },
+  "notes": {
+    "scope": "Initial passive personality behavior profiles mirrored from existing personality garnish bias."
+  }
+}
