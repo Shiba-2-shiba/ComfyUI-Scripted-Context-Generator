@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "source": "repo_authored_policy_fixture",
+  "notes": "Small hand-authored examples for semantic-only policy tests. These are not copied from reference CSV rows.",
+  "examples": [
+    {
+      "id": "style_anime",
+      "text": "anime illustration style portrait in a school corridor",
+      "expected_domains": ["style"]
+    },
+    {
+      "id": "quality_masterpiece",
+      "text": "masterpiece, best quality, quiet library corner",
+      "expected_domains": ["quality"]
+    },
+    {
+      "id": "camera_closeup",
+      "text": "close-up with depth of field near the classroom window",
+      "expected_domains": ["camera"]
+    },
+    {
+      "id": "render_lighting",
+      "text": "soft lighting and neon signs in a small shop",
+      "expected_domains": ["render"]
+    },
+    {
+      "id": "body_type_terms",
+      "text": "petite character with long legs standing in a hallway",
+      "expected_domains": ["body_type"]
+    }
+  ]
+}
