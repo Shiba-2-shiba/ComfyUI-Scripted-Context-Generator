@@ -1,6 +1,6 @@
 # Current Status
 
-Last verified: 2026-06-15
+Last verified: 2026-06-16
 
 このファイルは、毎回全スクリプトを読み直さずに現在地を把握するための短い入口です。
 詳細な構造は `REPO_STRUCTURE.md`、設計背景は `assets/ARCHITECTURE.md` と
@@ -70,7 +70,16 @@ Active domains:
 - `clothing_tpo`: final candidate penalty combines repeat and semantic penalties
 - `personality_behavior`: semantic descriptor ranking selects personality garnish with inline fallback
 
-Implementation/audit docs: `docs/semantic_epig/progress.md`.
+Implementation/audit docs:
+
+- rollout docs: `docs/semantic_epig/progress.md`
+- refactor docs: `docs/semantic_epig/refactor_spec.md`, `docs/semantic_epig/refactor_progress.md`, `docs/semantic_epig/refactor_tasks.md`
+
+Current refactor state:
+
+- R1-R7 are complete.
+- Builders were split into action parser / relation binder / renderer, location policy / selector, and clothing candidate renderer / selector.
+- Remaining follow-up: add a relation-key-specific action descriptor fixture/test.
 
 ## Current Metrics
 
@@ -123,36 +132,26 @@ Interpretation:
 Last verified commands:
 
 ```bash
-python -m unittest assets.test_scene_variator assets.test_vocab_lint assets.test_char_profile_nl assets.test_calc_variations
 python -m unittest discover -s assets -p "test_*.py"
-python -m unittest assets.test_context_nodes assets.test_workflow_samples
-python tools/verify_full_flow.py
 python tools/validate_prompt_data.py
-python assets/calc_variations.py --json
-python tools/check_variation_scope.py
-python tools/build_compatibility_review.py --check
-python tools/build_action_pools.py --check
-python tools/plan_variation_target.py --target 100000
-python -c "from asset_validator import validate_assets; issues=validate_assets(); print('issues', len(issues))"
+python tools/verify_full_flow.py
 python tools/check_widgets_values.py
-python -m py_compile assets/calc_variations.py assets/test_calc_variations.py assets/test_char_profile_nl.py assets/test_scene_variator.py assets/test_vocab_lint.py
+python assets/calc_variations.py --json
+python -c "from asset_validator import validate_assets; issues=validate_assets(); print(len(issues)); print(issues[:20])"
+python -m unittest assets.test_prompt_snapshots assets.test_context_pipeline assets.test_context_state_adapter assets.test_determinism
+python -m unittest assets.test_repetition_guard_audit
 ```
 
 Results:
 
-- targeted unittest group: `14 tests OK`
-- assets unittest discovery: `315 tests OK`
-- context/workflow smoke tests: `12 tests OK`
+- assets unittest discovery: `334 tests OK`
+- prompt/context/determinism tests: `16 tests OK`
+- repetition guard audit: `5 tests OK`
 - full flow: `OK`
 - prompt data validator: `ERROR: []`, `WARNING: []`
 - variation metrics: base variations `105,612`, missing action pools `0`
-- variation scope check: `ERROR: []`
-- compatibility review check: `ERROR: []`, `WARNING: []`
-- action pool source check: `ERROR: []`, `WARNING: []`
-- target planner: `105,612` base variations, target met
-- asset validator: `issues 0`
+- asset validator: `0` issues
 - workflow widget validation: `OK`
-- compile check: `OK`
 
 Notes:
 

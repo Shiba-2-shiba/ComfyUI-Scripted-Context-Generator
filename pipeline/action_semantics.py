@@ -7,11 +7,11 @@ from typing import Any, Sequence
 try:  # pragma: no cover - package mode varies in tests and ComfyUI
     from ..vocab.loader import load_json
     from ..vocab.semantic_space import Vector, normalize_vector, rank_candidates
-    from .semantic_epig import load_semantic_epig_config, semantic_mode
+    from .semantic_epig import load_semantic_epig_config, selection_debug_fields, semantic_mode
 except ImportError:  # pragma: no cover
     from vocab.loader import load_json
     from vocab.semantic_space import Vector, normalize_vector, rank_candidates
-    from pipeline.semantic_epig import load_semantic_epig_config, semantic_mode
+    from pipeline.semantic_epig import load_semantic_epig_config, selection_debug_fields, semantic_mode
 
 PROFILE_FILE = "action_semantic_profiles.json"
 DESCRIPTOR_FILE = "action_slot_descriptors.json"
@@ -146,6 +146,42 @@ def rank_action_slot_options(
     )
 
 
+def _matches_filter(values: Any, candidates: set[str]) -> bool:
+    if not values:
+        return False
+    if isinstance(values, str):
+        values = [values]
+    if not isinstance(values, list):
+        return False
+    normalized = {str(value).strip().lower() for value in values if str(value).strip()}
+    return bool(normalized & candidates)
+
+
+def semantic_descriptor_options_for_slot(
+    slot_name: str,
+    purpose: str = "",
+    action_verb: str = "",
+    object_flags: set[str] | None = None,
+    relation_key: str = "",
+) -> list[str]:
+    lookup = _descriptor_lookup(slot_name)
+    purpose_set = {str(purpose or "").strip().lower()} - {""}
+    action_set = {str(action_verb or "").strip().lower()} - {""}
+    object_set = {str(item).strip().lower() for item in (object_flags or set()) if str(item).strip()}
+    relation_set = {str(relation_key or "").strip().lower()} - {""}
+    options: list[str] = []
+    for text, descriptor in lookup.items():
+        matched = (
+            _matches_filter(descriptor.get("purpose_keys"), purpose_set)
+            or _matches_filter(descriptor.get("action_keys"), action_set)
+            or _matches_filter(descriptor.get("object_tokens"), object_set)
+            or _matches_filter(descriptor.get("relation_keys"), relation_set)
+        )
+        if matched:
+            options.append(text)
+    return options
+
+
 def semantic_slot_weights(slot_name: str, options: Sequence[str], target_vector: dict[str, float]) -> dict[str, float]:
     ranked = rank_action_slot_options(slot_name, options, target_vector)
     return {str(item["text"]): float(item.get("score", 0.0) or 0.0) for item in ranked}
@@ -156,8 +192,10 @@ def semantic_action_debug_payload(
     mode: str | None = None,
     target_vector: dict[str, float] | None = None,
     slot_rankings: dict[str, list[dict[str, Any]]] | None = None,
+    slot_changes: dict[str, dict[str, Any]] | None = None,
     selected_by_semantic: bool = False,
 ) -> dict[str, Any]:
+    resolved_mode = mode or semantic_mode("action")
     compact_rankings: dict[str, list[dict[str, Any]]] = {}
     for slot_name, ranking in (slot_rankings or {}).items():
         compact_rankings[slot_name] = [
@@ -170,9 +208,28 @@ def semantic_action_debug_payload(
             }
             for item in ranking[:5]
         ]
+    compact_changes: dict[str, dict[str, Any]] = {}
+    for slot_name, change in (slot_changes or {}).items():
+        if not isinstance(change, dict):
+            continue
+        compact_changes[slot_name] = {
+            "baseline": str(change.get("baseline", "")),
+            "semantic": str(change.get("semantic", "")),
+            "changed": bool(change.get("changed", False)),
+            "semantic_top_candidate": str(change.get("semantic_top_candidate", "")),
+            "selected_candidate_rank": change.get("selected_candidate_rank"),
+        }
+    changed_slots = [slot for slot, change in compact_changes.items() if change.get("changed")]
     return {
-        "mode": mode or semantic_mode("action"),
+        "mode": resolved_mode,
         "target_vector": normalize_vector(target_vector or {}, ACTION_AXES),
         "slot_rankings": compact_rankings,
+        "slot_changes": compact_changes,
+        "changed_slots": changed_slots,
         "selected_by_semantic": bool(selected_by_semantic),
+        **selection_debug_fields(
+            mode=resolved_mode,
+            semantic_scoring_enabled=bool(slot_rankings),
+            selection_changed_by_semantic=bool(changed_slots),
+        ),
     }

@@ -1,0 +1,47 @@
+[
+  {
+    "case_id": "study_book_library",
+    "subj": "a student",
+    "loc": "school_library",
+    "action": "reading a book",
+    "costume": "school_uniform",
+    "mood": "focus",
+    "personality": "serious"
+  },
+  {
+    "case_id": "commute_station_wait",
+    "subj": "a commuter",
+    "loc": "commuter_transport",
+    "action": "waiting for the next train",
+    "costume": "casual",
+    "mood": "tense",
+    "personality": "neutral"
+  },
+  {
+    "case_id": "rainy_bus_stop_commute",
+    "subj": "a woman",
+    "loc": "rainy_bus_stop",
+    "action": "commuting",
+    "costume": "casual",
+    "mood": "calm",
+    "personality": "gentle"
+  },
+  {
+    "case_id": "shy_classroom_door",
+    "subj": "a student",
+    "loc": "school_classroom",
+    "action": "standing near the classroom door",
+    "costume": "school_uniform",
+    "mood": "focus",
+    "personality": "shy"
+  },
+  {
+    "case_id": "office_document_review",
+    "subj": "an office worker",
+    "loc": "modern_office",
+    "action": "reviewing documents",
+    "costume": "office_lady",
+    "mood": "quiet_focused",
+    "personality": "serious"
+  }
+]

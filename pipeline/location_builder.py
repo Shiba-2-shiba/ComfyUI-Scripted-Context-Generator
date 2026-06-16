@@ -1,5 +1,4 @@
 import random
-import re
 
 if __package__ and "." in __package__:
     from ..core.context_state import generation_state_from_context
@@ -7,10 +6,25 @@ if __package__ and "." in __package__:
     from ..core.schema import DebugInfo
     from ..core.semantic_policy import filter_candidate_strings, sanitize_text
     from ..location_service import resolve_location_key
-    from ..object_focus_service import background_weight_map, extract_object_flags, is_symbolic_object_text
+    from ..object_focus_service import extract_object_flags
     from ..history_service import recent_prompt_objects
     from ..vocab.seed_utils import mix_seed
     from .location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
+    from .location_policy import (
+        filter_fx_candidates as _filter_fx_candidates,
+        filter_off_mode_options as _filter_off_mode_options,
+        is_daily_life_loc as _is_daily_life_loc,
+        is_symbolic_prop as _is_symbolic_prop,
+        prefer_bright_time_options as _prefer_bright_time_options,
+        props_sampling_policy as _props_sampling_policy,
+        split_weather_options as _split_weather_options,
+    )
+    from .location_segment_selector import (
+        semantic_choice as _semantic_choice,
+        weighted_choice as _weighted_choice,
+        weighted_sample as _weighted_sample,
+        weighted_sample_with_recent_object_guard as _weighted_sample_with_recent_object_guard,
+    )
     from .semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 else:
     from core.context_state import generation_state_from_context
@@ -18,10 +32,25 @@ else:
     from core.schema import DebugInfo
     from core.semantic_policy import filter_candidate_strings, sanitize_text
     from location_service import resolve_location_key
-    from object_focus_service import background_weight_map, extract_object_flags, is_symbolic_object_text
+    from object_focus_service import extract_object_flags
     from history_service import recent_prompt_objects
     from vocab.seed_utils import mix_seed
     from pipeline.location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
+    from pipeline.location_policy import (
+        filter_fx_candidates as _filter_fx_candidates,
+        filter_off_mode_options as _filter_off_mode_options,
+        is_daily_life_loc as _is_daily_life_loc,
+        is_symbolic_prop as _is_symbolic_prop,
+        prefer_bright_time_options as _prefer_bright_time_options,
+        props_sampling_policy as _props_sampling_policy,
+        split_weather_options as _split_weather_options,
+    )
+    from pipeline.location_segment_selector import (
+        semantic_choice as _semantic_choice,
+        weighted_choice as _weighted_choice,
+        weighted_sample as _weighted_sample,
+        weighted_sample_with_recent_object_guard as _weighted_sample_with_recent_object_guard,
+    )
     from pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 
 if __package__ and "." in __package__:
@@ -29,180 +58,11 @@ if __package__ and "." in __package__:
 else:
     import background_vocab
 
-DAILY_LIFE_LOCS = {
-    "school_classroom", "school_rooftop", "school_library", "modern_office",
-    "boardroom", "office_elevator", "commuter_transport", "street_cafe",
-    "cozy_bookstore", "shopping_mall_atrium", "fashion_boutique",
-    "bedroom_boudoir", "messy_kitchen", "clean_modern_kitchen",
-    "cozy_living_room", "rainy_bus_stop", "suburban_neighborhood",
-    "rural_town_street", "picnic_park", "illuminated_park", "winter_street",
-    "japanese_garden", "tea_room",
-}
 TEXTURE_DEFAULT_BLEND_PROB = 0.25
 TEXTURE_SEGMENT_SELECT_PROB = 0.55
 FX_DEFAULT_BLEND_PROB = 0.10
 FX_SEGMENT_SELECT_PROB = 0.20
 MAX_FX_SEGMENTS = 1
-FX_DENY_PATTERNS = (
-    re.compile(r"\bconfetti\b", re.IGNORECASE),
-    re.compile(r"\bfloating dust particles?\b", re.IGNORECASE),
-    re.compile(r"\bsparkling air\b", re.IGNORECASE),
-    re.compile(r"\bsparkles?\b", re.IGNORECASE),
-    re.compile(r"\bglittering air\b", re.IGNORECASE),
-    re.compile(r"\bbokeh\b", re.IGNORECASE),
-    re.compile(r"\blens flares?\b", re.IGNORECASE),
-    re.compile(r"\bdust motes?\b", re.IGNORECASE),
-    re.compile(r"\bdust particles?\b", re.IGNORECASE),
-    re.compile(r"\bfloating dust\b", re.IGNORECASE),
-    re.compile(r"\bsparkling(?!\s+eyes\b)\w*\b", re.IGNORECASE),
-)
-_TIME_DARK_HINTS = ("night", "midnight", "twilight", "dusk", "late night", "stormy", "holiday night")
-_WEATHER_RARE_HINTS = ("rain", "snow", "storm", "fog", "acid", "winter")
-_LIGHTING_HINTS = ("light", "glow", "fluorescent", "ambient", "sun", "spotlight", "daylight", "hour")
-
-def _is_symbolic_prop(text):
-    return is_symbolic_object_text(text)
-
-
-def _props_sampling_policy(props_opts):
-    include_prob = 0.8
-    second_prop_prob = 0.45
-    if len(props_opts) <= 3:
-        include_prob = 0.62
-        second_prop_prob = 0.20
-    if any(_is_symbolic_prop(prop) for prop in props_opts):
-        include_prob = max(0.50, include_prob - 0.12)
-        second_prop_prob = max(0.10, second_prop_prob - 0.10)
-    return include_prob, second_prop_prob
-
-
-def _is_disallowed_fx_segment(text):
-    low = str(text).lower()
-    if "snowflake" in low or "sparkling eyes" in low:
-        return False
-    return any(pattern.search(low) for pattern in FX_DENY_PATTERNS)
-
-
-def _filter_fx_candidates(options):
-    if not options:
-        return []
-    filtered = []
-    seen = set()
-    for item in options:
-        if not item:
-            continue
-        item_text = str(item)
-        if _is_disallowed_fx_segment(item_text):
-            continue
-        if item_text in seen:
-            continue
-        filtered.append(item_text)
-        seen.add(item_text)
-    return filtered
-
-
-def _semantic_score_multiplier(option, semantic_scores=None):
-    if not semantic_scores:
-        return 1.0
-    score = max(0.0, float(semantic_scores.get(str(option), 0.0) or 0.0))
-    return 0.50 + score
-
-
-def _weighted_choice(options, rng, loc_tag, section_name, semantic_scores=None):
-    if not options:
-        return ""
-    weights_map = background_weight_map(loc_tag, section_name)
-    weights = [
-        max(0.01, float(weights_map.get(str(option), 1.0))) * _semantic_score_multiplier(option, semantic_scores)
-        for option in options
-    ]
-    return rng.choices(list(options), weights=weights, k=1)[0]
-
-
-def _weighted_sample(options, rng, k, loc_tag, section_name, semantic_scores=None):
-    available = list(options)
-    selected = []
-    while available and len(selected) < k:
-        weights_map = background_weight_map(loc_tag, section_name)
-        weights = [
-            max(0.01, float(weights_map.get(str(option), 1.0))) * _semantic_score_multiplier(option, semantic_scores)
-            for option in available
-        ]
-        chosen = rng.choices(available, weights=weights, k=1)[0]
-        selected.append(chosen)
-        available.remove(chosen)
-    return selected
-
-
-def _weighted_sample_with_recent_object_guard(options, rng, k, loc_tag, section_name, recent_objects=None, semantic_scores=None):
-    available = list(options)
-    selected = []
-    recent_objects = set(recent_objects or [])
-    while available and len(selected) < k:
-        weights_map = background_weight_map(loc_tag, section_name)
-        weights = []
-        for option in available:
-            base_weight = max(0.01, float(weights_map.get(str(option), 1.0)))
-            if extract_object_flags(option) & recent_objects:
-                base_weight *= 0.35
-            base_weight *= _semantic_score_multiplier(option, semantic_scores)
-            weights.append(base_weight)
-        chosen = rng.choices(available, weights=weights, k=1)[0]
-        selected.append(chosen)
-        available.remove(chosen)
-    return selected
-
-
-def _semantic_choice(options, rng, semantic_scores=None):
-    if not options:
-        return ""
-    values = list(options)
-    if not semantic_scores:
-        return rng.choice(values)
-    weights = [_semantic_score_multiplier(option, semantic_scores) for option in values]
-    return rng.choices(values, weights=weights, k=1)[0]
-
-
-def _is_daily_life_loc(loc_tag):
-    return str(loc_tag).lower().strip() in DAILY_LIFE_LOCS
-
-
-def _prefer_bright_time_options(options):
-    if not options:
-        return []
-    preferred = [
-        option for option in options
-        if not any(token in str(option).lower() for token in _TIME_DARK_HINTS)
-    ]
-    return preferred or list(options)
-
-
-def _split_weather_options(options):
-    if not options:
-        return [], []
-    normal = []
-    rare = []
-    for option in options:
-        option_text = str(option).lower()
-        if any(token in option_text for token in _WEATHER_RARE_HINTS):
-            rare.append(option)
-        else:
-            normal.append(option)
-    return normal, rare
-
-
-def _contains_lighting_hint(text):
-    lowered = str(text).lower()
-    return any(token in lowered for token in _LIGHTING_HINTS)
-
-
-def _filter_off_mode_options(options, fallback_all=True):
-    if not options:
-        return []
-    filtered = [option for option in options if not _contains_lighting_hint(option)]
-    if filtered:
-        return filtered
-    return list(options) if fallback_all else []
 
 
 def expand_location_prompt(
@@ -235,6 +95,7 @@ def expand_location_prompt(
     location_semantic_mode = semantic_mode("location_scene")
     location_target_vector = {}
     location_segment_rankings = {}
+    location_section_changes = {}
     if domain_enabled("location_scene"):
         location_target_vector = build_scene_target_vector(
             cleaned_tag,
@@ -259,9 +120,34 @@ def expand_location_prompt(
             for item in location_segment_rankings.get(section_name, [])
         }
 
+    def record_section_change(section_name, baseline, semantic):
+        if not domain_enabled("location_scene"):
+            return
+        ranking = location_segment_rankings.get(section_name, [])
+        semantic_text = semantic[0] if isinstance(semantic, list) and semantic else semantic
+        selected_rank = None
+        for index, item in enumerate(ranking, start=1):
+            if str(item.get("text", "")) == str(semantic_text):
+                selected_rank = index
+                break
+        location_section_changes[section_name] = {
+            "baseline": baseline,
+            "semantic": semantic,
+            "changed": semantic_mode("location_scene") == "active" and baseline != semantic,
+            "semantic_top_candidate": str(ranking[0].get("text", "")) if ranking else "",
+            "selected_candidate_rank": selected_rank,
+        }
+
     env_options = filter_candidate_strings(pack_data.get("environment", []))
     record_segment_ranking("environment", env_options)
-    env_part = _weighted_choice(env_options, rng, cleaned_tag, "environment", semantic_scores=semantic_scores_for("environment")) if env_options else cleaned_tag
+    if env_options:
+        rng_state = rng.getstate()
+        baseline_env_part = _weighted_choice(env_options, rng, cleaned_tag, "environment", semantic_scores={})
+        rng.setstate(rng_state)
+        env_part = _weighted_choice(env_options, rng, cleaned_tag, "environment", semantic_scores=semantic_scores_for("environment"))
+        record_section_change("environment", baseline_env_part, env_part)
+    else:
+        env_part = cleaned_tag
     if mode == "simple":
         prompt = sanitize_text(env_part)
         debug = {"pack_key": cleaned_tag, "objects": sorted(extract_object_flags(prompt)), "selected_props": [], "template_key": "simple"}
@@ -273,6 +159,7 @@ def expand_location_prompt(
                     mode=location_semantic_mode,
                     target_vector=location_target_vector,
                     segment_rankings=location_segment_rankings,
+                    section_changes=location_section_changes,
                     selected_by_semantic=location_semantic_mode == "active",
                 ),
             )
@@ -284,7 +171,11 @@ def expand_location_prompt(
     record_segment_ranking("core", core_opts)
     if core_opts and rng.random() < 0.95:
         num_core = 2 if len(core_opts) > 1 and rng.random() < 0.50 else 1
+        rng_state = rng.getstate()
+        baseline_core = _weighted_sample(core_opts, rng, min(num_core, len(core_opts)), cleaned_tag, "core", semantic_scores={})
+        rng.setstate(rng_state)
         chosen_core = _weighted_sample(core_opts, rng, min(num_core, len(core_opts)), cleaned_tag, "core", semantic_scores=semantic_scores_for("core"))
+        record_section_change("core", baseline_core, chosen_core)
         if len(chosen_core) == 1:
             segments.append(f"featuring {chosen_core[0]}")
         else:
@@ -298,6 +189,17 @@ def expand_location_prompt(
         num_props = 2 if len(props_opts) > 1 and rng.random() < second_prop_prob else 1
         if num_props == 2 and all(_is_symbolic_prop(prop) for prop in props_opts):
             num_props = 1
+        rng_state = rng.getstate()
+        baseline_props = _weighted_sample_with_recent_object_guard(
+            props_opts,
+            rng,
+            min(num_props, len(props_opts)),
+            cleaned_tag,
+            "props",
+            recent_objects=recent_objects,
+            semantic_scores={},
+        )
+        rng.setstate(rng_state)
         chosen_props = _weighted_sample_with_recent_object_guard(
             props_opts,
             rng,
@@ -307,6 +209,7 @@ def expand_location_prompt(
             recent_objects=recent_objects,
             semantic_scores=semantic_scores_for("props"),
         )
+        record_section_change("props", baseline_props, chosen_props)
         connector_word = rng.choice(["with", "scattered with", "filled with", "adorned with"])
         if len(chosen_props) == 1:
             segments.append(f"{connector_word} {chosen_props[0]}")
@@ -323,7 +226,12 @@ def expand_location_prompt(
         texture_candidates = _filter_off_mode_options(texture_candidates, fallback_all=False)
     record_segment_ranking("texture", texture_candidates)
     if texture_candidates and rng.random() < TEXTURE_SEGMENT_SELECT_PROB:
-        segments.append(_semantic_choice(texture_candidates, rng, semantic_scores_for("texture")))
+        rng_state = rng.getstate()
+        baseline_texture = _semantic_choice(texture_candidates, rng, {})
+        rng.setstate(rng_state)
+        texture = _semantic_choice(texture_candidates, rng, semantic_scores_for("texture"))
+        record_section_change("texture", baseline_texture, texture)
+        segments.append(texture)
 
     if rng.random() < 0.35:
         details_defaults = filter_candidate_strings(general_defaults.get("details", []))
@@ -331,7 +239,12 @@ def expand_location_prompt(
             details_defaults = _filter_off_mode_options(details_defaults, fallback_all=False)
         record_segment_ranking("details", details_defaults)
         if details_defaults:
-            segments.append(_semantic_choice(details_defaults, rng, semantic_scores_for("details")))
+            rng_state = rng.getstate()
+            baseline_details = _semantic_choice(details_defaults, rng, {})
+            rng.setstate(rng_state)
+            details = _semantic_choice(details_defaults, rng, semantic_scores_for("details"))
+            record_section_change("details", baseline_details, details)
+            segments.append(details)
 
     is_daily_life = _is_daily_life_loc(cleaned_tag)
     time_opts = filter_candidate_strings(pack_data.get("time", []))
@@ -340,19 +253,39 @@ def expand_location_prompt(
     record_segment_ranking("time", time_opts)
     if time_opts and rng.random() < (0.72 if is_daily_life else 0.5):
         bright_time_options = _prefer_bright_time_options(time_opts)
-        segments.append(f"during {_semantic_choice(bright_time_options, rng, semantic_scores_for('time'))}")
+        rng_state = rng.getstate()
+        baseline_time = _semantic_choice(bright_time_options, rng, {})
+        rng.setstate(rng_state)
+        time_choice = _semantic_choice(bright_time_options, rng, semantic_scores_for("time"))
+        record_section_change("time", baseline_time, time_choice)
+        segments.append(f"during {time_choice}")
     weather_opts = filter_candidate_strings(pack_data.get("weather", []))
     record_segment_ranking("weather", weather_opts)
     preferred_weather, rare_weather = _split_weather_options(weather_opts)
     weather_probability = 0.18 if is_daily_life else 0.12
     if preferred_weather and rng.random() < weather_probability:
-        segments.append(_semantic_choice(preferred_weather, rng, semantic_scores_for("weather")))
+        rng_state = rng.getstate()
+        baseline_weather = _semantic_choice(preferred_weather, rng, {})
+        rng.setstate(rng_state)
+        weather = _semantic_choice(preferred_weather, rng, semantic_scores_for("weather"))
+        record_section_change("weather", baseline_weather, weather)
+        segments.append(weather)
     elif rare_weather and rng.random() < 0.03:
-        segments.append(_semantic_choice(rare_weather, rng, semantic_scores_for("weather")))
+        rng_state = rng.getstate()
+        baseline_weather = _semantic_choice(rare_weather, rng, {})
+        rng.setstate(rng_state)
+        weather = _semantic_choice(rare_weather, rng, semantic_scores_for("weather"))
+        record_section_change("weather", baseline_weather, weather)
+        segments.append(weather)
     crowd_opts = filter_candidate_strings(pack_data.get("crowd", []))
     record_segment_ranking("crowd", crowd_opts)
     if crowd_opts and rng.random() < (0.58 if is_daily_life else 0.30):
-        segments.append(_semantic_choice(crowd_opts, rng, semantic_scores_for("crowd")))
+        rng_state = rng.getstate()
+        baseline_crowd = _semantic_choice(crowd_opts, rng, {})
+        rng.setstate(rng_state)
+        crowd = _semantic_choice(crowd_opts, rng, semantic_scores_for("crowd"))
+        record_section_change("crowd", baseline_crowd, crowd)
+        segments.append(crowd)
 
     fx_candidates = _filter_fx_candidates(filter_candidate_strings(pack_data.get("fx", []) or []))
     if lighting_mode == "off":
@@ -364,7 +297,12 @@ def expand_location_prompt(
     record_segment_ranking("fx", fx_candidates)
     fx_segments_added = 0
     if fx_candidates and fx_segments_added < MAX_FX_SEGMENTS and rng.random() < FX_SEGMENT_SELECT_PROB:
-        segments.append(_weighted_choice(fx_candidates, rng, cleaned_tag, "fx", semantic_scores=semantic_scores_for("fx")))
+        rng_state = rng.getstate()
+        baseline_fx = _weighted_choice(fx_candidates, rng, cleaned_tag, "fx", semantic_scores={})
+        rng.setstate(rng_state)
+        fx = _weighted_choice(fx_candidates, rng, cleaned_tag, "fx", semantic_scores=semantic_scores_for("fx"))
+        record_section_change("fx", baseline_fx, fx)
+        segments.append(fx)
         fx_segments_added += 1
 
     rng.shuffle(segments)
@@ -385,6 +323,7 @@ def expand_location_prompt(
                 mode=location_semantic_mode,
                 target_vector=location_target_vector,
                 segment_rankings=location_segment_rankings,
+                section_changes=location_section_changes,
                 selected_by_semantic=location_semantic_mode == "active",
             ),
         )

@@ -16,6 +16,7 @@ from asset_validator import (
     validate_banned_terms_in_asset,
     validate_character_assets,
     validate_location_aliases,
+    validate_object_relation_profiles,
     validate_semantic_axis_asset,
     validate_semantic_epig_config,
 )
@@ -285,6 +286,42 @@ class TestAssetValidator(unittest.TestCase):
         )
         self.assertTrue(any("energy must be between" in item for item in warnings))
         self.assertTrue(any("depth of field" in item for item in warnings))
+
+    def test_validate_object_relation_profiles_accepts_current_asset(self):
+        warnings = validate_object_relation_profiles(_read_json_asset("object_relation_profiles.json"))
+        self.assertEqual(warnings, [])
+
+    def test_validate_object_relation_profiles_flags_schema_errors(self):
+        warnings = validate_object_relation_profiles(
+            {
+                "schema_version": "1.0",
+                "relations": {
+                    "bookreading": {
+                        "object": "unknown_object",
+                        "verbs": [],
+                        "required_roles": {
+                            "camera_angle": ["close-up"],
+                            "gaze_target": [""],
+                        },
+                        "forbidden_patterns": "bad",
+                    },
+                    "phone:checking": {
+                        "object": "book",
+                        "verbs": ["checking"],
+                        "required_roles": {},
+                    },
+                },
+            }
+        )
+
+        self.assertTrue(any("object:relation" in item for item in warnings))
+        self.assertTrue(any("unknown object token" in item for item in warnings))
+        self.assertTrue(any(".verbs must be a non-empty list" in item for item in warnings))
+        self.assertTrue(any("camera_angle" in item and "unknown role" in item for item in warnings))
+        self.assertTrue(any("gaze_target" in item and "non-empty strings" in item for item in warnings))
+        self.assertTrue(any("forbidden_patterns must be a list" in item for item in warnings))
+        self.assertTrue(any("must match relation key object" in item for item in warnings))
+        self.assertTrue(any("close-up" in item for item in warnings))
 
 
 if __name__ == "__main__":

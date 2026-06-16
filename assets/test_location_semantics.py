@@ -58,7 +58,39 @@ class TestLocationSemantics(unittest.TestCase):
 
         self.assertEqual(payload["mode"], "active")
         self.assertFalse(payload["selected_by_semantic"])
+        self.assertTrue(payload["semantic_scoring_enabled"])
+        self.assertFalse(payload["selection_changed_by_semantic"])
+        self.assertEqual(payload["changed_sections"], [])
         self.assertEqual(payload["segment_rankings"]["core"][0]["text"], "quiet reading tables")
+
+    def test_location_policy_filters_lighting_and_disallowed_fx(self):
+        from pipeline.location_policy import filter_fx_candidates, filter_off_mode_options
+
+        self.assertEqual(
+            filter_off_mode_options(["warm ambient glow", "plain ceramic tiles"], fallback_all=False),
+            ["plain ceramic tiles"],
+        )
+        self.assertEqual(
+            filter_fx_candidates(["bokeh", "snowflakes drifting near the path", "sparkling eyes", "bokeh"]),
+            ["snowflakes drifting near the path", "sparkling eyes"],
+        )
+
+    def test_location_segment_selector_prefers_semantic_scores_without_losing_determinism(self):
+        import random
+
+        from pipeline.location_segment_selector import semantic_choice, semantic_score_multiplier
+
+        options = ["quiet reading tables", "overhead transit signs"]
+        semantic_scores = {"quiet reading tables": 1.5, "overhead transit signs": 0.0}
+
+        self.assertGreater(
+            semantic_score_multiplier("quiet reading tables", semantic_scores),
+            semantic_score_multiplier("overhead transit signs", semantic_scores),
+        )
+        self.assertEqual(
+            semantic_choice(options, random.Random(4), semantic_scores),
+            semantic_choice(options, random.Random(4), semantic_scores),
+        )
 
 
 if __name__ == "__main__":

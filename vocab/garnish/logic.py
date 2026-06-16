@@ -756,6 +756,8 @@ def sample_garnish(
     prefer_tags = personality_bias.get("prefer", [])
     semantic_selected = False
     preferred = None
+    personality_pick_debug = {}
+    semantic_rejected_candidates = []
     if personality_behavior_active and personality_key:
         semantic_candidate = personality_semantics.pick_personality_descriptor(
             personality_key,
@@ -764,16 +766,15 @@ def sample_garnish(
             context_costume=context_costume,
             action_text=action_text,
             existing_tags=garnish_pool,
+            reject_fn=lambda candidate: "out_of_context"
+            if _is_out_of_context(candidate, context_loc, context_costume, action_text, garnish_pool)
+            else "",
+            debug=personality_pick_debug,
         )
-        if semantic_candidate and not _is_out_of_context(
-            semantic_candidate,
-            context_loc,
-            context_costume,
-            action_text,
-            garnish_pool,
-        ):
+        if semantic_candidate:
             preferred = semantic_candidate
             semantic_selected = True
+        semantic_rejected_candidates = personality_pick_debug.get("rejected_candidates", [])
     if not preferred:
         preferred = _pick_first_valid(prefer_tags, rng, context_loc, context_costume, action_text, garnish_pool)
     if preferred:
@@ -783,6 +784,11 @@ def sample_garnish(
         if isinstance(semantic_debug, dict):
             semantic_debug["selected"] = preferred
             semantic_debug["selected_by_semantic"] = semantic_selected
+            semantic_debug["semantic_candidate"] = preferred if semantic_selected else ""
+            semantic_debug["selection_changed_by_semantic"] = semantic_selected
+            semantic_debug["selected_candidate_rank"] = personality_pick_debug.get("selected_candidate_rank") if semantic_selected else None
+            semantic_debug["fallback_used"] = not semantic_selected
+            semantic_debug["rejected_candidates"] = semantic_rejected_candidates
 
     emotion_tags = _emotion_profile_tags(
         category=category,

@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 import random
-import re
-from typing import Any, Dict, List, Sequence, Tuple
+from typing import Any, Dict, List, Sequence
 
 if __package__ and "." in __package__:
     from ..location_service import resolve_location_key
@@ -12,7 +11,6 @@ if __package__ and "." in __package__:
         classify_object_hotspot,
         extract_action_object_flags,
         slot_object_policy_weight,
-        summarize_object_relation_focus,
         summarize_slot_object_focus,
     )
     from .action_profiles import (
@@ -25,7 +23,11 @@ if __package__ and "." in __package__:
         build_action_target_vector,
         rank_action_slot_options,
         semantic_action_debug_payload,
+        semantic_descriptor_options_for_slot,
     )
+    from .action_relation_binder import apply_object_relation_slots
+    from . import action_parser
+    from . import action_renderer
     from .semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 else:
     from location_service import resolve_location_key
@@ -35,7 +37,6 @@ else:
         classify_object_hotspot,
         extract_action_object_flags,
         slot_object_policy_weight,
-        summarize_object_relation_focus,
         summarize_slot_object_focus,
     )
     from pipeline.action_profiles import (
@@ -48,7 +49,11 @@ else:
         build_action_target_vector,
         rank_action_slot_options,
         semantic_action_debug_payload,
+        semantic_descriptor_options_for_slot,
     )
+    from pipeline.action_relation_binder import apply_object_relation_slots
+    from pipeline import action_parser
+    from pipeline import action_renderer
     from pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 
 POSTURE_BY_PURPOSE = {
@@ -102,252 +107,12 @@ OPTIONAL_MICRO_ACTIONS = {
     "wait": ["measuring the pause instead of rushing it", "checking whether anything has changed yet", "holding onto her place a little longer"],
 }
 
-STANCE_STARTERS = ("sitting", "standing", "walking", "leaning", "kneeling", "crouching", "lying", "running")
-SECONDARY_SEGMENT_STARTERS = (
-    "working",
-    "straightening",
-    "looking",
-    "gazing",
-    "watching",
-    "following",
-    "checking",
-    "typing",
-    "waiting",
-    "pinning",
-    "stretching",
-    "holding",
-    "reviewing",
-    "arguing",
-    "rearranging",
-    "sorting",
-    "whispering",
-    "carrying",
-    "feeling",
-    "writing",
-    "reading",
-    "browsing",
-    "packing",
-    "erasing",
-    "cleaning",
-    "eating",
-    "reaching",
-    "taking",
-    "chatting",
-    "choosing",
-    "singing",
-    "playing",
-    "sipping",
-    "cooking",
-    "wiping",
-    "lifting",
-    "warming",
-    "listening",
-    "dozing",
-    "relaxing",
-    "resting",
-    "surveying",
-    "searching",
-    "avoiding",
-    "tuning",
-)
-GAZE_STARTERS = ("looking", "gazing", "watching", "glancing", "staring", "following", "surveying")
-PURPOSE_HINTS = {
-    "study": ("study", "textbook", "notes", "folder", "reading", "bookshelves", "shelf", "librarian", "highlighted"),
-    "work": ("working", "document", "documents", "printouts", "typing", "printer", "monitor", "agenda", "contract", "copier", "badge"),
-    "commute": ("hallway", "elevator", "platform", "door", "route", "train", "bus", "floor numbers", "walkway"),
-    "rest": ("break", "sky", "wind", "lost in thought", "stretching"),
-    "shop": ("browsing", "titles", "shelf", "shopping", "fitting room", "checking out", "compare"),
-    "wait": ("waiting", "watch", "arrives", "before everyone arrives", "holding the door open"),
-}
-SOCIAL_DISTANCE_HINTS = {
-    "crowd": ("crowd", "people", "others"),
-    "acquaintance": ("friends", "librarian"),
-    "stranger": ("someone",),
-}
-PROGRESS_STATE_HINTS = {
-    "preparing": ("before ", "getting ready", "arrives", "begins", "open"),
-    "wrapping_up": ("after ", "wraps up", "closes", "finally", "last "),
-    "midway": ("while ", "during ", "mid-", "ongoing"),
-}
-OBSTACLE_HINTS = {
-    "delay": ("delay", "late"),
-    "spill": ("spill", "wet"),
-    "wind": ("wind", "breeze"),
-    "luggage": ("bag", "bags", "luggage", "cart"),
-    "forgot": ("forgot", "missing", "left behind"),
-}
-ANCHOR_PREPOSITION_PATTERN = re.compile(
-    r"\b(?:by|at|near|between|beside|along|against|close to|in front of|on|through|across|inside|outside|under|over)\b.+",
-    re.IGNORECASE,
-)
-CONTEXTUAL_SPLITTERS = (
-    (" while ", "while"),
-    (" before ", "before"),
-    (" after ", "after"),
-    (" during ", "during"),
-)
-
 def action_text(item: Any) -> str:
-    if isinstance(item, dict):
-        return str(item.get("text", ""))
-    return str(item)
-
-
-_ACTION_VERB_STOPWORDS = {
-    "a",
-    "an",
-    "the",
-    "her",
-    "his",
-    "their",
-    "my",
-    "our",
-    "its",
-    "this",
-    "that",
-    "these",
-    "those",
-    "what",
-    "which",
-    "who",
-    "whom",
-    "whose",
-    "and",
-    "then",
-    "just",
-    "again",
-    "still",
-    "busy",
-    "using",
-    "lightly",
-    "quietly",
-    "softly",
-    "gently",
-    "slowly",
-    "hurriedly",
-    "mentally",
-    "briefly",
-    "slightly",
-    "more",
-    "easy",
-    "with",
-    "without",
-    "into",
-    "onto",
-    "over",
-    "under",
-    "near",
-    "by",
-    "at",
-    "beside",
-    "between",
-    "along",
-    "through",
-    "across",
-    "around",
-}
-_ACTION_FRAGMENT_SUBJECT_TOKENS = {
-    "hand",
-    "hands",
-    "finger",
-    "fingers",
-    "eye",
-    "eyes",
-    "brow",
-    "brows",
-    "shoulder",
-    "shoulders",
-}
-_ACTION_NOUN_TO_VERB = {
-    "sigh": "sighing",
-    "glance": "glancing",
-    "look": "looking",
-    "breath": "breathing",
-    "pause": "pausing",
-}
-_GERUND_PREFIXES_TO_DROP = {"double", "re"}
-
-
-def _action_clause_tokens(text: str) -> List[str]:
-    first_clause = str(text or "").split(",", 1)[0].strip().lower()
-    return re.findall(r"[a-z]+(?:-[a-z]+)*", first_clause)
-
-
-def _action_all_tokens(text: str) -> List[str]:
-    return re.findall(r"[a-z]+(?:-[a-z]+)*", str(text or "").lower())
-
-
-def _normalize_action_verb_candidate(token: str) -> str:
-    candidate = str(token or "").strip().lower()
-    if not candidate or candidate in _ACTION_VERB_STOPWORDS:
-        return ""
-    if candidate in _ACTION_FRAGMENT_SUBJECT_TOKENS:
-        return ""
-    if candidate in _ACTION_NOUN_TO_VERB:
-        return _ACTION_NOUN_TO_VERB[candidate]
-    if "-" in candidate:
-        parts = [part for part in candidate.split("-") if part]
-        if (
-            len(parts) >= 2
-            and parts[0] in _GERUND_PREFIXES_TO_DROP
-            and parts[-1].endswith("ing")
-        ):
-            return parts[-1]
-    return candidate
-
-
-def _is_action_verb_like(candidate: str) -> bool:
-    value = str(candidate or "").strip().lower()
-    if not value:
-        return False
-    if value.endswith("ing"):
-        return True
-    if value in STANCE_STARTERS:
-        return True
-    return False
-
-
-def _pick_action_verb_from_tokens(tokens: Sequence[str], allow_fallback: bool = True) -> str:
-    if not tokens:
-        return ""
-
-    if len(tokens) >= 2 and tokens[0] == "deep" and tokens[1] in _ACTION_NOUN_TO_VERB:
-        return _ACTION_NOUN_TO_VERB[tokens[1]]
-
-    if len(tokens) >= 3 and tokens[0] in STANCE_STARTERS and tokens[1] == "and":
-        for token in tokens[2:]:
-            normalized = _normalize_action_verb_candidate(token)
-            if normalized:
-                return normalized
-
-    index = 0
-    fallback = ""
-    while index < len(tokens):
-        token = tokens[index]
-        if token == "one" and index + 1 < len(tokens) and tokens[index + 1] in _ACTION_FRAGMENT_SUBJECT_TOKENS:
-            index += 2
-            continue
-        normalized = _normalize_action_verb_candidate(token)
-        if normalized and _is_action_verb_like(normalized):
-            return normalized
-        if normalized and not fallback:
-            fallback = normalized
-        index += 1
-
-    return fallback if allow_fallback else ""
+    return action_parser.action_text(item)
 
 
 def action_verb(text: str) -> str:
-    clause_tokens = _action_clause_tokens(text)
-    normalized = _pick_action_verb_from_tokens(clause_tokens, allow_fallback=False)
-    if normalized:
-        return normalized
-
-    all_tokens = _action_all_tokens(text)
-    normalized = _pick_action_verb_from_tokens(all_tokens)
-    if normalized:
-        return normalized
-    return all_tokens[0] if all_tokens else ""
+    return action_parser.action_verb(text)
 
 
 def action_object_flags(text: str) -> set[str]:
@@ -497,171 +262,20 @@ def _weighted_slot_choice(
 
 
 def _normalize_action_phrase(text: str) -> str:
-    return re.sub(r"\s+", " ", str(text or "").strip(" ,.\t\r\n"))
-
-
-def _extract_anchor_from_phrase(text: str) -> str:
-    clean = _normalize_action_phrase(text)
-    if not clean:
-        return ""
-    match = ANCHOR_PREPOSITION_PATTERN.search(clean)
-    if not match:
-        return ""
-    anchor = match.group(0)
-    for splitter in (" while ", ",", " looking ", " gazing ", " watching ", " checking ", " straightening ", " holding "):
-        idx = anchor.lower().find(splitter.strip().lower() if splitter == "," else splitter.lower())
-        if idx > 0:
-            anchor = anchor[:idx]
-            break
-    return _normalize_action_phrase(anchor)
-
-
-def _split_leading_posture_segment(segment: str) -> Tuple[str, str]:
-    clean = _normalize_action_phrase(segment)
-    lowered = clean.lower()
-    for starter in STANCE_STARTERS:
-        if not lowered.startswith(starter):
-            continue
-        remainder_text = clean[len(starter) :]
-        earliest = None
-        remainder_lowered = remainder_text.lower()
-        for keyword in SECONDARY_SEGMENT_STARTERS:
-            match = re.search(rf"\b(?:and\s+)?{re.escape(keyword)}\b", remainder_lowered, re.IGNORECASE)
-            if not match:
-                continue
-            absolute_start = len(starter) + match.start()
-            if earliest is None or absolute_start < earliest:
-                earliest = absolute_start
-        if earliest is None:
-            return clean, ""
-        posture = _normalize_action_phrase(clean[:earliest])
-        remainder = _normalize_action_phrase(re.sub(r"^and\s+", "", clean[earliest:], flags=re.IGNORECASE))
-        return posture, remainder
-    return "", clean
-
-
-def _split_contextual_clause(text: str) -> Tuple[str, str, str]:
-    clean = _normalize_action_phrase(text)
-    lowered = clean.lower()
-    for splitter, kind in CONTEXTUAL_SPLITTERS:
-        idx = lowered.find(splitter)
-        if idx <= 0:
-            continue
-        head = _normalize_action_phrase(clean[:idx])
-        tail = _normalize_action_phrase(clean[idx + 1 :])
-        if head and tail:
-            return head, tail, kind
-    return clean, "", ""
-
-
-def _infer_slot_value_from_hints(text: str, hint_map: Dict[str, Sequence[str]]) -> str:
-    lowered = str(text or "").lower()
-    for slot_value, hints in hint_map.items():
-        if any(_text_matches_hint(lowered, hint) for hint in hints):
-            return slot_value
-    return ""
-
-
-def _text_matches_hint(text: str, hint: str) -> bool:
-    if not hint:
-        return False
-    stripped = hint.strip()
-    if not stripped:
-        return False
-    pattern = re.escape(stripped)
-    if stripped[0].isalnum():
-        pattern = r"\b" + pattern
-    if stripped[-1].isalnum():
-        pattern = pattern + r"\b"
-    if hint.endswith(" "):
-        pattern = pattern + r"\s"
-    return re.search(pattern, text, re.IGNORECASE) is not None
+    return action_parser.normalize_action_phrase(text)
 
 
 def parse_pool_action_to_slots(action_text: str, loc: str = "", compat=None) -> Dict[str, str]:
-    compat = compat or {}
-    loc_key = resolve_location_key(loc) or str(loc or "").strip()
-    clean = _normalize_action_phrase(action_text)
-    if not clean:
-        return {"location": loc_key} if loc_key else {}
+    def resolve_profile(loc_key: str, compatibility: Dict[str, Any]):
+        profile, _matching_tags = build_daily_life_profile(loc_key, compatibility)
+        return profile
 
-    main_text, contextual_clause, contextual_kind = _split_contextual_clause(clean)
-    segments = [_normalize_action_phrase(part) for part in main_text.split(",") if _normalize_action_phrase(part)]
-    slots: Dict[str, str] = {"location": loc_key} if loc_key else {}
-    if not segments:
-        return slots
-
-    posture, remainder = _split_leading_posture_segment(segments[0])
-    if posture:
-        slots["posture"] = posture
-        if remainder:
-            segments = [posture, remainder] + segments[1:]
-
-    if contextual_clause:
-        if contextual_kind == "while":
-            slots["optional_micro_action"] = contextual_clause
-        elif contextual_kind == "before":
-            slots["progress_state"] = "preparing"
-            slots.setdefault("optional_micro_action", contextual_clause)
-        elif contextual_kind == "after":
-            slots["progress_state"] = "wrapping_up"
-            slots.setdefault("optional_micro_action", contextual_clause)
-        elif contextual_kind == "during":
-            slots["progress_state"] = "midway"
-            slots.setdefault("optional_micro_action", contextual_clause)
-
-    for segment in segments:
-        if not segment or segment == slots.get("posture", ""):
-            continue
-        lowered = segment.lower()
-        if not slots.get("gaze_target") and any(lowered.startswith(prefix) for prefix in GAZE_STARTERS):
-            slots["gaze_target"] = segment
-            continue
-        if not slots.get("optional_micro_action") and (
-            lowered.startswith("waiting")
-            or "break" in lowered
-            or "lost in thought" in lowered
-            or "on a call" in lowered
-            or "feeling the wind" in lowered
-        ):
-            slots["optional_micro_action"] = segment
-            continue
-        if not slots.get("hand_action"):
-            slots["hand_action"] = segment
-            continue
-        if not slots.get("gaze_target") and any(prefix in lowered for prefix in GAZE_STARTERS):
-            slots["gaze_target"] = segment
-            continue
-        if not slots.get("optional_micro_action"):
-            slots["optional_micro_action"] = segment
-
-    anchor = ""
-    for source_text in (slots.get("posture", ""), slots.get("hand_action", ""), main_text):
-        anchor = _extract_anchor_from_phrase(source_text)
-        if anchor:
-            break
-    if anchor:
-        slots["anchor"] = anchor
-
-    purpose = _infer_slot_value_from_hints(clean, PURPOSE_HINTS)
-    progress_state = _infer_slot_value_from_hints(clean, PROGRESS_STATE_HINTS)
-    social_distance = _infer_slot_value_from_hints(clean, SOCIAL_DISTANCE_HINTS)
-    obstacle_or_trigger = _infer_slot_value_from_hints(clean, OBSTACLE_HINTS)
-
-    if not purpose and loc_key:
-        profile, _matching_tags = build_daily_life_profile(loc_key, compat)
-        if len(profile.get("purpose", [])) == 1:
-            purpose = str(profile["purpose"][0])
-
-    if purpose:
-        slots["purpose"] = purpose
-    if progress_state:
-        slots["progress_state"] = progress_state
-    if social_distance:
-        slots["social_distance"] = social_distance
-    if obstacle_or_trigger:
-        slots["obstacle_or_trigger"] = obstacle_or_trigger
-    return slots
+    return action_parser.parse_pool_action_to_slots(
+        action_text,
+        loc=loc,
+        compat=compat or {},
+        daily_life_profile_resolver=resolve_profile,
+    )
 
 
 def _slot_sources(slots: Dict[str, str], slot_overrides: Dict[str, str]) -> Dict[str, str]:
@@ -707,14 +321,16 @@ def build_action_slots(
     action_semantic_mode = semantic_mode("action")
     action_target_vector = {}
     action_slot_rankings: Dict[str, List[Dict[str, Any]]] = {}
+    action_slot_changes: Dict[str, Dict[str, Any]] = {}
     if domain_enabled("action"):
+        semantic_action_text = " ".join(str(value) for value in slot_overrides.values())
         action_target_vector = build_action_target_vector(
             purpose,
             progress_state=progress_state,
             social_distance=social_distance,
             obstacle_or_trigger=obstacle_or_trigger,
             loc=loc_key,
-            action_text=" ".join(str(value) for value in slot_overrides.values()),
+            action_text=semantic_action_text,
         )
 
     selected_objects = set()
@@ -733,10 +349,24 @@ def build_action_slots(
 
     def choose_slot(name: str, options: Sequence[str]):
         semantic_scores = {}
-        if domain_enabled("action") and options:
+        baseline_value = ""
+        semantic_top_candidate = ""
+        selected_candidate_rank = None
+        option_values = [str(option) for option in options if str(option).strip()]
+        if domain_enabled("action"):
+            descriptor_options = semantic_descriptor_options_for_slot(
+                name,
+                purpose=purpose,
+                action_verb=action_verb(" ".join(str(value) for value in slot_overrides.values())),
+                object_flags=selected_objects,
+            )
+            for descriptor_option in descriptor_options[:2]:
+                if descriptor_option not in option_values:
+                    option_values.append(descriptor_option)
+        if domain_enabled("action") and option_values:
             action_slot_rankings[name] = rank_action_slot_options(
                 name,
-                [str(option) for option in options if str(option).strip()],
+                option_values,
                 action_target_vector,
                 loc=loc_key,
             )
@@ -745,15 +375,44 @@ def build_action_slots(
                     str(item.get("text", "")): float(item.get("score", 0.0) or 0.0)
                     for item in action_slot_rankings[name]
                 }
-        value = slot_overrides.get(name) or _weighted_slot_choice(
-            options,
-            rng,
-            loc=loc_key,
-            recent_verbs=recent_verbs,
-            recent_objects=recent_objects,
-            selected_objects=selected_objects,
-            semantic_scores=semantic_scores,
-        )
+                semantic_top_candidate = str(action_slot_rankings[name][0].get("text", "")) if action_slot_rankings[name] else ""
+        if slot_overrides.get(name):
+            value = slot_overrides.get(name, "")
+            baseline_value = value
+        else:
+            rng_state = rng.getstate()
+            baseline_value = _weighted_slot_choice(
+                option_values,
+                rng,
+                loc=loc_key,
+                recent_verbs=recent_verbs,
+                recent_objects=recent_objects,
+                selected_objects=selected_objects,
+                semantic_scores={},
+            )
+            rng.setstate(rng_state)
+            value = _weighted_slot_choice(
+                option_values,
+                rng,
+                loc=loc_key,
+                recent_verbs=recent_verbs,
+                recent_objects=recent_objects,
+                selected_objects=selected_objects,
+                semantic_scores=semantic_scores,
+            )
+        if action_slot_rankings.get(name) and value:
+            for index, item in enumerate(action_slot_rankings[name], start=1):
+                if str(item.get("text", "")) == value:
+                    selected_candidate_rank = index
+                    break
+            semantic_top_candidate = semantic_top_candidate or str(action_slot_rankings[name][0].get("text", ""))
+            action_slot_changes[name] = {
+                "baseline": baseline_value,
+                "semantic": value,
+                "changed": bool(semantic_scores) and baseline_value != value,
+                "semantic_top_candidate": semantic_top_candidate,
+                "selected_candidate_rank": selected_candidate_rank,
+            }
         if value:
             selected_objects.update(action_object_flags(value))
         return value
@@ -801,108 +460,14 @@ def build_action_slots(
             mode=action_semantic_mode,
             target_vector=action_target_vector,
             slot_rankings=action_slot_rankings,
+            slot_changes=action_slot_changes,
             selected_by_semantic=action_semantic_mode == "active",
         )
     return slots
 
 
 def render_action_slots(slots: Dict[str, str], activity_first: bool = False) -> str:
-    anchor = slots.get("anchor", "")
-    posture = str(slots.get("posture", "")).strip()
-    hand_action = str(slots.get("hand_action", "")).strip()
-    purpose_clause = str(slots.get("purpose_clause", "")).strip() or "holding onto the moment in front of her"
-    primary_parts = []
-    if activity_first:
-        if hand_action:
-            primary_parts.append(hand_action)
-        elif posture:
-            primary_parts.append(posture)
-        elif purpose_clause:
-            primary_parts.append(purpose_clause)
-    else:
-        if purpose_clause:
-            primary_parts.append(purpose_clause)
-        elif hand_action:
-            primary_parts.append(hand_action)
-    if anchor and all(anchor.lower() not in part.lower() for part in (posture, hand_action, purpose_clause) if part):
-        primary_parts.append(anchor)
-    primary = " ".join(primary_parts).strip()
-    clauses = [primary] if primary else []
-    for key in (
-        "posture",
-        "hand_action",
-        "object_relation",
-        "object_state",
-        "gaze_target",
-        "optional_micro_action",
-        "social_clause",
-        "progress_clause",
-        "obstacle_clause",
-    ):
-        value = str(slots.get(key, "")).strip()
-        if value and value.lower() not in primary.lower():
-            clauses.append(value)
-    time_or_weather = str(slots.get("time_or_weather", "")).strip()
-    if time_or_weather:
-        clauses.append(time_or_weather)
-    deduped = []
-    seen = []
-    for clause in clauses:
-        if not clause:
-            continue
-        lowered = clause.lower()
-        if any(lowered == existing or lowered in existing or existing in lowered for existing in seen):
-            continue
-        seen.append(lowered)
-        deduped.append(clause)
-    return ", ".join(deduped)
-
-
-def _append_clause(action_text: str, clause: str) -> str:
-    if not clause:
-        return action_text
-    clean_action = str(action_text).strip().rstrip(".")
-    clean_clause = str(clause).strip().rstrip(".")
-    if not clean_action:
-        return clean_clause
-    if clean_clause.lower() in clean_action.lower():
-        return clean_action
-    return f"{clean_action}, {clean_clause}"
-
-
-def _apply_object_relation_slots(slots: Dict[str, str], action_text_value: str) -> Dict[str, Any]:
-    relation_debug = summarize_object_relation_focus(
-        action_text_value,
-        action_object_flags(action_text_value),
-    )
-    relation_debug["mode"] = semantic_mode("object_relation")
-    relation_debug["applied_slots"] = {}
-    relation_debug["skipped_slots"] = {}
-
-    if semantic_mode("object_relation") != "active":
-        relation_debug["skipped_slots"] = {
-            role: "passive mode"
-            for role in relation_debug.get("required_roles", {})
-        }
-        return relation_debug
-
-    role_slots = relation_debug.get("required_roles", {})
-    if not isinstance(role_slots, dict):
-        return relation_debug
-    for role, candidates in role_slots.items():
-        if not isinstance(candidates, list) or not candidates:
-            continue
-        chosen = str(candidates[0]).strip()
-        if not chosen:
-            continue
-        role_key = str(role)
-        existing = str(slots.get(role_key, "")).strip()
-        if existing:
-            relation_debug["skipped_slots"][role_key] = "existing slot already set"
-            continue
-        slots[role_key] = chosen
-        relation_debug["applied_slots"][role_key] = chosen
-    return relation_debug
+    return action_renderer.render_action_slots(slots, activity_first=activity_first)
 
 
 def generate_action_for_location(
@@ -941,7 +506,7 @@ def generate_action_for_location(
             slot_overrides=pool_slots,
             semantic_debug=semantic_debug,
         )
-        relation_debug = _apply_object_relation_slots(slots, render_action_slots(slots, activity_first=True)) if domain_enabled("object_relation") else None
+        relation_debug = apply_object_relation_slots(slots, render_action_slots(slots, activity_first=True)) if domain_enabled("object_relation") else None
         normalized_action = render_action_slots(slots, activity_first=True)
         decision = {
             "generator_mode": "pool",
@@ -976,7 +541,7 @@ def generate_action_for_location(
         recent_objects=recent_objects,
         semantic_debug=semantic_debug,
     )
-    relation_debug = _apply_object_relation_slots(slots, render_action_slots(slots)) if domain_enabled("object_relation") else None
+    relation_debug = apply_object_relation_slots(slots, render_action_slots(slots)) if domain_enabled("object_relation") else None
     action_text = render_action_slots(slots)
     decision = {
         "generator_mode": "compositional",
