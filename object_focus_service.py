@@ -16,7 +16,15 @@ _SHARED_OBJECT_PATTERNS = {
     "phone": re.compile(r"\bphone\b|\bsmartphone\b|\bmobile\b", re.IGNORECASE),
     "coffee": re.compile(r"\bcoffee\b|\blatte\b|\bespresso\b|\bcappuccino\b|\bcup\b", re.IGNORECASE),
     "drink": re.compile(r"\bdrink\b|\bbeverage\b|\btea bowl\b|\btea\b", re.IGNORECASE),
-    "screen": re.compile(r"\bscreen\b|\bmonitor\b|\bdisplay\b", re.IGNORECASE),
+    "screen": re.compile(r"\bscreen\b|\bmonitor\b", re.IGNORECASE),
+    "bag": re.compile(r"\bbags?\b|\btote\b|\bluggage\b", re.IGNORECASE),
+    "towel": re.compile(r"\btowels?\b", re.IGNORECASE),
+    "napkin": re.compile(r"\bnapkins?\b", re.IGNORECASE),
+    "display": re.compile(r"\bdisplays?\b|\bdisplay\s+(?:area|case|counter|cabinet|cart)\b", re.IGNORECASE),
+    "generic_object": re.compile(r"\bobjects?\b|\bitems?\b|\bnearby choices\b|\bpersonal items\b", re.IGNORECASE),
+    "people": re.compile(r"\bpeople\b|\bstudents?\s+(?:pass|passes|passing)\b|\bsomeone\b", re.IGNORECASE),
+    "spill": re.compile(r"\bspill(?:s|ed)?\b", re.IGNORECASE),
+    "stain": re.compile(r"\bstain(?:s|ed)?\b", re.IGNORECASE),
 }
 ACTION_OBJECT_PATTERNS = {
     "surfboard": re.compile(r"\bsurfboard\b|\bboard\b", re.IGNORECASE),
@@ -25,11 +33,20 @@ ACTION_OBJECT_PATTERNS = {
     "coffee": re.compile(r"\bcoffee\b|\blatte\b|\bespresso\b|\bcappuccino\b", re.IGNORECASE),
     "drink": re.compile(r"\bdrink\b|\bdrinks\b|\bbeverage\b|\bsipping\b", re.IGNORECASE),
     "microphone": re.compile(r"\bmicrophone\b|\bmic\b", re.IGNORECASE),
-    "screen": re.compile(r"\bscreen\b|\bmonitor\b|\bdisplay\b", re.IGNORECASE),
+    "screen": re.compile(r"\bscreen\b|\bmonitor\b", re.IGNORECASE),
+    "bag": re.compile(r"\bbags?\b|\btote\b|\bluggage\b", re.IGNORECASE),
+    "towel": re.compile(r"\btowels?\b", re.IGNORECASE),
+    "napkin": re.compile(r"\bnapkins?\b", re.IGNORECASE),
+    "display": re.compile(r"\bdisplays?\b|\bdisplay\s+(?:area|case|counter|cabinet|cart)\b", re.IGNORECASE),
+    "generic_object": re.compile(r"\bobjects?\b|\bitems?\b|\bnearby choices\b|\bpersonal items\b", re.IGNORECASE),
+    "people": re.compile(r"\bpeople\b|\bstudents?\s+(?:pass|passes|passing)\b|\bsomeone\b", re.IGNORECASE),
+    "spill": re.compile(r"\bspill(?:s|ed)?\b", re.IGNORECASE),
+    "stain": re.compile(r"\bstain(?:s|ed)?\b", re.IGNORECASE),
 }
 OBJECT_TOKENS = tuple(ACTION_OBJECT_PATTERNS.keys())
 _SYMBOLIC_OBJECT_HINTS = (
     "surfboard", " board", "book", "phone", "coffee", "drink", "microphone", "screen",
+    "bag", "towel", "napkin", "display", "object", "people", "spill", "stain",
 )
 
 
@@ -104,6 +121,8 @@ def classify_object_hotspot(loc: str, object_token: str) -> str:
         return "true_bias_background"
     if token in policy.get("true_bias_action", {}).get(loc_key, []):
         return "true_bias_action"
+    if token in policy.get("solo_safety_artifact", []):
+        return "solo_safety_artifact"
     if token in policy.get("thematic_anchor", {}).get(loc_key, {}):
         return "thematic_anchor"
     return "general"
@@ -122,6 +141,8 @@ def slot_object_policy_weight(loc: str, text: str, selected_objects: Iterable[st
         classifications[object_token] = classification
         if classification in {"audit_artifact", "true_bias_action"}:
             weight *= 0.18
+        elif classification == "solo_safety_artifact":
+            weight *= 0.18 if object_token in {"people", "spill", "stain", "napkin"} else 0.55
         elif classification == "thematic_anchor":
             weight *= 1.10
         if object_token in selected_objects:

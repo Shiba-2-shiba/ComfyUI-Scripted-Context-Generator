@@ -75,6 +75,39 @@ class TestLocationSemantics(unittest.TestCase):
             ["snowflakes drifting near the path", "sparkling eyes"],
         )
 
+    def test_location_expansion_filters_solo_unsafe_segments(self):
+        from unittest.mock import patch
+
+        from pipeline import location_builder
+
+        packs = {
+            "solo_safety_room": {
+                "environment": ["quiet private room", "crowded train"],
+                "core": ["single desk", "students pass through the corridor"],
+                "props": ["plain notebook", "people waiting near display"],
+                "crowd": ["line of people waiting"],
+                "time": [],
+                "weather": [],
+                "texture": [],
+                "fx": [],
+            }
+        }
+
+        with patch.object(location_builder.background_vocab, "CONCEPT_PACKS", packs):
+            prompt, debug = location_builder.expand_location_prompt(
+                "solo_safety_room",
+                12,
+                "detailed",
+                return_debug=True,
+            )
+
+        lowered = prompt.lower()
+        self.assertEqual(debug["pack_key"], "solo_safety_room")
+        self.assertIn("quiet private room", lowered)
+        self.assertNotIn("crowded", lowered)
+        self.assertNotIn("students pass", lowered)
+        self.assertNotIn("people", lowered)
+
     def test_location_segment_selector_prefers_semantic_scores_without_losing_determinism(self):
         import random
 

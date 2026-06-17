@@ -13,6 +13,7 @@ if __package__ and "." in __package__:
         slot_object_policy_weight,
         summarize_slot_object_focus,
     )
+    from ..core.solo_safety import filter_solo_safe_candidates, is_solo_safe_text
     from .action_profiles import (
         DEFAULT_DAILY_LIFE_TAGS,
         LOCATION_CONTEXT_HINTS,
@@ -39,6 +40,7 @@ else:
         slot_object_policy_weight,
         summarize_slot_object_focus,
     )
+    from core.solo_safety import filter_solo_safe_candidates, is_solo_safe_text
     from pipeline.action_profiles import (
         DEFAULT_DAILY_LIFE_TAGS,
         LOCATION_CONTEXT_HINTS,
@@ -98,6 +100,7 @@ SOCIAL_DISTANCE_CLAUSES = {
     "stranger": ["keeping a polite distance", "avoiding getting in anyone's way"],
     "crowd": ["protecting her space in the crowd", "moving carefully around the people nearby"],
 }
+SOLO_SAFE_SOCIAL_DISTANCES = ("alone", "acquaintance", "stranger")
 OPTIONAL_MICRO_ACTIONS = {
     "study": ["quietly marking her place", "rechecking a small detail", "staying with the line she was following"],
     "work": ["mentally lining up the next task", "pausing to reassess one detail", "moving on only after one more check"],
@@ -119,9 +122,19 @@ def action_object_flags(text: str) -> set[str]:
     return extract_action_object_flags(text)
 
 
-def choose_action_with_bias_guard(pool, rng, loc="", recent_verbs=None, recent_objects=None):
+def _solo_safe_social_distance(value: str, rng: random.Random) -> str:
+    if is_solo_safe_text(value):
+        return value
+    return rng.choice(SOLO_SAFE_SOCIAL_DISTANCES)
+
+
+def choose_action_with_bias_guard(pool, rng, loc="", recent_verbs=None, recent_objects=None, solo_safety=True):
     if not pool:
         return None, set(), {}
+    if solo_safety:
+        pool = [item for item in pool if is_solo_safe_text(action_text(item))]
+        if not pool:
+            return None, set(), {}
     recent_verbs = {str(item).lower() for item in (recent_verbs or []) if item}
     recent_objects = set(recent_objects or [])
     parsed = []
@@ -298,12 +311,25 @@ def build_action_slots(
     recent_objects=None,
     slot_overrides=None,
     semantic_debug=None,
+    solo_safety=True,
 ):
     slot_overrides = {
         str(key): _normalize_action_phrase(value)
         for key, value in (slot_overrides or {}).items()
         if _normalize_action_phrase(value)
     }
+    solo_safety_suppressed_obstacle = False
+    if solo_safety:
+        slot_overrides = {
+            key: value
+            for key, value in slot_overrides.items()
+            if key in {"social_distance", "obstacle_or_trigger"} or is_solo_safe_text(value)
+        }
+        if not is_solo_safe_text(slot_overrides.get("social_distance", "")):
+            slot_overrides["social_distance"] = _solo_safe_social_distance(slot_overrides.get("social_distance", ""), rng)
+        if not is_solo_safe_text(slot_overrides.get("obstacle_or_trigger", "")):
+            solo_safety_suppressed_obstacle = "obstacle_or_trigger" in slot_overrides
+            slot_overrides["obstacle_or_trigger"] = ""
     loc_key = slot_overrides.get("location") or resolve_location_key(loc) or str(loc or "").strip()
     profile, matching_tags = build_daily_life_profile(loc_key, compat)
     context_profile = _location_context_profile(loc_key)
@@ -314,9 +340,13 @@ def build_action_slots(
     purpose = slot_overrides.get("purpose") or pick_axis("purpose", ["wait", "rest", "shop"])
     progress_state = slot_overrides.get("progress_state") or pick_axis("progress", ["midway", "preparing"])
     social_distance = slot_overrides.get("social_distance") or pick_axis("social_distance", ["alone", "acquaintance"])
+    if solo_safety and not is_solo_safe_text(social_distance):
+        social_distance = _solo_safe_social_distance(social_distance, rng)
     obstacle_or_trigger = slot_overrides.get("obstacle_or_trigger", "")
-    if not obstacle_or_trigger and profile.get("obstacle") and rng.random() < 0.35:
+    if not obstacle_or_trigger and not solo_safety_suppressed_obstacle and profile.get("obstacle") and rng.random() < 0.35:
         obstacle_or_trigger = _pick_axis_value(profile.get("obstacle", []), rng)
+    if solo_safety and not is_solo_safe_text(obstacle_or_trigger):
+        obstacle_or_trigger = ""
 
     action_semantic_mode = semantic_mode("action")
     action_target_vector = {}
@@ -363,6 +393,8 @@ def build_action_slots(
             for descriptor_option in descriptor_options[:2]:
                 if descriptor_option not in option_values:
                     option_values.append(descriptor_option)
+        if solo_safety:
+            option_values = filter_solo_safe_candidates(option_values)
         if domain_enabled("action") and option_values:
             action_slot_rankings[name] = rank_action_slot_options(
                 name,
@@ -478,8 +510,14 @@ def generate_action_for_location(
     pool=None,
     recent_verbs=None,
     recent_objects=None,
+    solo_safety=True,
 ):
     loc_key = resolve_location_key(loc) or str(loc or "").strip()
+    filtered_pool_count = 0
+    if solo_safety and pool:
+        original_pool_size = len(pool)
+        pool = [item for item in pool if is_solo_safe_text(action_text(item))]
+        filtered_pool_count = original_pool_size - len(pool)
     if pool:
         new_action_item, dominant_objects, object_hits = choose_action_with_bias_guard(
             pool,
@@ -487,14 +525,19 @@ def generate_action_for_location(
             loc_key,
             recent_verbs=recent_verbs,
             recent_objects=recent_objects,
+            solo_safety=solo_safety,
         )
-        if isinstance(new_action_item, dict):
-            action_text = str(new_action_item.get("text", ""))
-            action_load = new_action_item.get("load")
+        if new_action_item is None:
+            pool = None
         else:
-            action_text = str(new_action_item)
-            action_load = ""
-        pool_slots = parse_pool_action_to_slots(action_text, loc=loc_key, compat=compat)
+            if isinstance(new_action_item, dict):
+                base_action_text = str(new_action_item.get("text", ""))
+                action_load = new_action_item.get("load")
+            else:
+                base_action_text = str(new_action_item)
+                action_load = ""
+    if pool:
+        pool_slots = parse_pool_action_to_slots(base_action_text, loc=loc_key, compat=compat)
         semantic_debug = {}
         slots = build_action_slots(
             loc_key,
@@ -505,6 +548,7 @@ def generate_action_for_location(
             recent_objects=recent_objects,
             slot_overrides=pool_slots,
             semantic_debug=semantic_debug,
+            solo_safety=solo_safety,
         )
         relation_debug = apply_object_relation_slots(slots, render_action_slots(slots, activity_first=True)) if domain_enabled("object_relation") else None
         normalized_action = render_action_slots(slots, activity_first=True)
@@ -513,7 +557,8 @@ def generate_action_for_location(
             "action_pool_size": len(pool),
             "action_pool_dominant_objects": sorted(dominant_objects) if dominant_objects else [],
             "action_pool_object_hits": {k: v for k, v in object_hits.items() if v > 0},
-            "base_action": action_text,
+            "solo_safety_filtered_pool_count": filtered_pool_count,
+            "base_action": base_action_text,
             "normalized_action": normalized_action,
             "action_load": action_load,
             "pool_slots": pool_slots,
@@ -540,14 +585,16 @@ def generate_action_for_location(
         recent_verbs=recent_verbs,
         recent_objects=recent_objects,
         semantic_debug=semantic_debug,
+        solo_safety=solo_safety,
     )
     relation_debug = apply_object_relation_slots(slots, render_action_slots(slots)) if domain_enabled("object_relation") else None
-    action_text = render_action_slots(slots)
+    normalized_action = render_action_slots(slots)
     decision = {
         "generator_mode": "compositional",
-        "normalized_action": action_text,
+        "normalized_action": normalized_action,
         "pool_slots": {},
         "slot_sources": _slot_sources(slots, {}),
+        "solo_safety_filtered_pool_count": filtered_pool_count,
         "object_focus": summarize_slot_object_focus(
             loc_key,
             slots,
@@ -559,4 +606,4 @@ def generate_action_for_location(
         add_semantic_debug(decision, "action", semantic_debug["action"])
     if relation_debug is not None:
         add_semantic_debug(decision, "object_relation", relation_debug)
-    return action_text, decision
+    return normalized_action, decision

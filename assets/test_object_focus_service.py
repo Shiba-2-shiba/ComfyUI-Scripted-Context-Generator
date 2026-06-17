@@ -25,6 +25,11 @@ class TestObjectFocusService(unittest.TestCase):
     def test_extract_object_flags_covers_runtime_object_tokens(self):
         self.assertEqual(extract_object_flags("checking phone beside a monitor"), {"phone", "screen"})
         self.assertEqual(extract_action_object_flags("holding a surfboard and coffee"), {"surfboard", "coffee"})
+        self.assertEqual(
+            extract_action_object_flags("dabbing stain with napkin while people pass by a display"),
+            {"display", "napkin", "people", "stain"},
+        )
+        self.assertEqual(extract_action_object_flags("holding a towel and searching a bag"), {"bag", "towel"})
 
     def test_symbolic_object_detection_uses_shared_object_rules(self):
         self.assertTrue(is_symbolic_object_text("leaning surfboard"))
@@ -49,6 +54,17 @@ class TestObjectFocusService(unittest.TestCase):
         self.assertEqual(objects, {"phone"})
         self.assertEqual(classifications["phone"], "true_bias_action")
         self.assertLess(weight, 0.2)
+
+    def test_slot_object_policy_weight_penalizes_solo_safety_artifacts(self):
+        weight, objects, classifications = slot_object_policy_weight(
+            "modern_office",
+            "dabbing stain with napkin while people pass by",
+            selected_objects=set(),
+        )
+        self.assertEqual(objects, {"napkin", "people", "stain"})
+        self.assertEqual(classifications["people"], "solo_safety_artifact")
+        self.assertEqual(classifications["stain"], "solo_safety_artifact")
+        self.assertLess(weight, 0.1)
 
     def test_summarize_slot_object_focus_collects_slot_map_and_classifications(self):
         summary = summarize_slot_object_focus(

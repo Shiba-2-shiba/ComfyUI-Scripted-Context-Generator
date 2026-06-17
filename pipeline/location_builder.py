@@ -5,6 +5,7 @@ if __package__ and "." in __package__:
     from ..core.context_ops import append_history, ensure_context, patch_context
     from ..core.schema import DebugInfo
     from ..core.semantic_policy import filter_candidate_strings, sanitize_text
+    from ..core.solo_safety import filter_solo_safe_candidates
     from ..location_service import resolve_location_key
     from ..object_focus_service import extract_object_flags
     from ..history_service import recent_prompt_objects
@@ -31,6 +32,7 @@ else:
     from core.context_ops import append_history, ensure_context, patch_context
     from core.schema import DebugInfo
     from core.semantic_policy import filter_candidate_strings, sanitize_text
+    from core.solo_safety import filter_solo_safe_candidates
     from location_service import resolve_location_key
     from object_focus_service import extract_object_flags
     from history_service import recent_prompt_objects
@@ -138,7 +140,7 @@ def expand_location_prompt(
             "selected_candidate_rank": selected_rank,
         }
 
-    env_options = filter_candidate_strings(pack_data.get("environment", []))
+    env_options = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("environment", [])))
     record_segment_ranking("environment", env_options)
     if env_options:
         rng_state = rng.getstate()
@@ -167,7 +169,7 @@ def expand_location_prompt(
 
     segments = []
     decision = {"pack_key": cleaned_tag, "objects": [], "selected_props": [], "template_key": "detailed"}
-    core_opts = filter_candidate_strings(pack_data.get("core", []))
+    core_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("core", [])))
     record_segment_ranking("core", core_opts)
     if core_opts and rng.random() < 0.95:
         num_core = 2 if len(core_opts) > 1 and rng.random() < 0.50 else 1
@@ -182,7 +184,7 @@ def expand_location_prompt(
             connector = rng.choice(["and", "plus", "featuring"])
             segments.append(f"featuring {chosen_core[0]} {connector} {chosen_core[1]}")
 
-    props_opts = filter_candidate_strings(pack_data.get("props", []))
+    props_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("props", [])))
     record_segment_ranking("props", props_opts)
     include_prob, second_prop_prob = _props_sampling_policy(props_opts)
     if props_opts and rng.random() < include_prob:
@@ -218,10 +220,10 @@ def expand_location_prompt(
             segments.append(f"{connector_word} {chosen_props[0]} {joiner} {chosen_props[1]}")
         decision["selected_props"] = list(chosen_props)
 
-    texture_candidates = list(filter_candidate_strings(pack_data.get("texture", []) or []))
+    texture_candidates = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("texture", []) or []))
     general_defaults = getattr(background_vocab, "GENERAL_DEFAULTS", {})
     if rng.random() < TEXTURE_DEFAULT_BLEND_PROB:
-        texture_candidates.extend(filter_candidate_strings(general_defaults.get("texture", [])))
+        texture_candidates.extend(filter_solo_safe_candidates(filter_candidate_strings(general_defaults.get("texture", []))))
     if lighting_mode == "off":
         texture_candidates = _filter_off_mode_options(texture_candidates, fallback_all=False)
     record_segment_ranking("texture", texture_candidates)
@@ -234,7 +236,7 @@ def expand_location_prompt(
         segments.append(texture)
 
     if rng.random() < 0.35:
-        details_defaults = filter_candidate_strings(general_defaults.get("details", []))
+        details_defaults = filter_solo_safe_candidates(filter_candidate_strings(general_defaults.get("details", [])))
         if lighting_mode == "off":
             details_defaults = _filter_off_mode_options(details_defaults, fallback_all=False)
         record_segment_ranking("details", details_defaults)
@@ -247,7 +249,7 @@ def expand_location_prompt(
             segments.append(details)
 
     is_daily_life = _is_daily_life_loc(cleaned_tag)
-    time_opts = filter_candidate_strings(pack_data.get("time", []))
+    time_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("time", [])))
     if lighting_mode == "off":
         time_opts = _filter_off_mode_options(time_opts, fallback_all=False)
     record_segment_ranking("time", time_opts)
@@ -259,7 +261,7 @@ def expand_location_prompt(
         time_choice = _semantic_choice(bright_time_options, rng, semantic_scores_for("time"))
         record_section_change("time", baseline_time, time_choice)
         segments.append(f"during {time_choice}")
-    weather_opts = filter_candidate_strings(pack_data.get("weather", []))
+    weather_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("weather", [])))
     record_segment_ranking("weather", weather_opts)
     preferred_weather, rare_weather = _split_weather_options(weather_opts)
     weather_probability = 0.18 if is_daily_life else 0.12
@@ -277,7 +279,7 @@ def expand_location_prompt(
         weather = _semantic_choice(rare_weather, rng, semantic_scores_for("weather"))
         record_section_change("weather", baseline_weather, weather)
         segments.append(weather)
-    crowd_opts = filter_candidate_strings(pack_data.get("crowd", []))
+    crowd_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("crowd", [])))
     record_segment_ranking("crowd", crowd_opts)
     if crowd_opts and rng.random() < (0.58 if is_daily_life else 0.30):
         rng_state = rng.getstate()
@@ -287,11 +289,11 @@ def expand_location_prompt(
         record_section_change("crowd", baseline_crowd, crowd)
         segments.append(crowd)
 
-    fx_candidates = _filter_fx_candidates(filter_candidate_strings(pack_data.get("fx", []) or []))
+    fx_candidates = _filter_fx_candidates(filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("fx", []) or [])))
     if lighting_mode == "off":
         fx_candidates = _filter_off_mode_options(fx_candidates, fallback_all=False)
     if rng.random() < FX_DEFAULT_BLEND_PROB:
-        fx_candidates.extend(_filter_fx_candidates(filter_candidate_strings(general_defaults.get("fx", []))))
+        fx_candidates.extend(_filter_fx_candidates(filter_solo_safe_candidates(filter_candidate_strings(general_defaults.get("fx", [])))))
     if lighting_mode == "off":
         fx_candidates = _filter_off_mode_options(fx_candidates, fallback_all=False)
     record_segment_ranking("fx", fx_candidates)

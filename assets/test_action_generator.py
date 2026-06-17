@@ -106,6 +106,70 @@ class TestActionGenerator(unittest.TestCase):
         self.assertEqual(debug["semantic_epig"]["action"]["mode"], "active")
         self.assertTrue(debug["semantic_epig"]["action"]["selected_by_semantic"])
 
+    def test_solo_safety_filters_people_and_spill_pool_actions(self):
+        pool = [
+            {"text": "standing aside as students pass through the corridor", "load": "calm"},
+            {"text": "wiping spill off table", "load": "calm"},
+            {"text": "checking the next task at her desk", "load": "calm"},
+        ]
+
+        action, debug = generate_action_for_location(
+            "modern_office",
+            self.compat,
+            self.scene_axes,
+            random.Random(1),
+            pool=pool,
+            recent_verbs=[],
+            recent_objects=[],
+        )
+
+        lowered = action.lower()
+        self.assertEqual(debug["base_action"], "checking the next task at her desk")
+        self.assertNotIn("students pass", lowered)
+        self.assertNotIn("people", lowered)
+        self.assertNotIn("crowd", lowered)
+        self.assertNotIn("spill", lowered)
+
+    def test_solo_safety_falls_back_when_pool_is_only_unsafe(self):
+        action, debug = generate_action_for_location(
+            "modern_office",
+            self.compat,
+            self.scene_axes,
+            random.Random(4),
+            pool=[
+                {"text": "moving carefully around the people nearby", "load": "calm"},
+                {"text": "dabbing stain with napkin", "load": "calm"},
+            ],
+            recent_verbs=[],
+            recent_objects=[],
+        )
+
+        lowered = action.lower()
+        self.assertEqual(debug["generator_mode"], "compositional")
+        self.assertNotIn("people nearby", lowered)
+        self.assertNotIn("stain", lowered)
+        self.assertNotIn("napkin", lowered)
+
+    def test_solo_safety_sanitizes_slot_overrides(self):
+        slots = build_action_slots(
+            "modern_office",
+            self.compat,
+            self.scene_axes,
+            random.Random(9),
+            slot_overrides={
+                "social_distance": "crowd",
+                "social_clause": "moving carefully around the people nearby",
+                "obstacle_or_trigger": "spill",
+                "obstacle_clause": "after a small mess interrupts the rhythm",
+            },
+        )
+        rendered = render_action_slots(slots)
+
+        self.assertIn(slots["social_distance"], {"alone", "acquaintance", "stranger"})
+        self.assertEqual(slots["obstacle_or_trigger"], "")
+        self.assertNotIn("people", rendered.lower())
+        self.assertNotIn("spill", rendered.lower())
+
     def test_action_semantic_active_selection_is_deterministic(self):
         action_without_debug, _debug_without_assertion = generate_action_for_location(
             "modern_office",
