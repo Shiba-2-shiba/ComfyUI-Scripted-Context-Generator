@@ -12,7 +12,7 @@
 - Do not change public `Context*` node inputs or outputs.
 - Do not add dependencies.
 - Do not copy full external reference datasets into the repo without license/redistribution review.
-- Do not commit files from `C:\Users\inott\Downloads\新しいフォルダー (3)\参考`.
+- Do not commit files from `<REFERENCE_ROOT>` (for example `..\参考` from the repo root).
 - Generated score-bearing overlays from reference data may be used locally.
 - Do not track source-repo data as-is.
 - Track only repo-specific curated/derived descriptors, rules, tests, or minimal overlays transformed for this project.

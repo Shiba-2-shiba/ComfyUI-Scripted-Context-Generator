@@ -726,6 +726,7 @@ def sample_garnish(
             personality_semantics.personality_behavior_debug_payload(
                 personality_key,
                 mode=personality_behavior_mode,
+                mood_key=meta_mood,
                 selected="",
             ),
         )
@@ -766,6 +767,7 @@ def sample_garnish(
             context_costume=context_costume,
             action_text=action_text,
             existing_tags=garnish_pool,
+            mood_key=meta_mood,
             reject_fn=lambda candidate: "out_of_context"
             if _is_out_of_context(candidate, context_loc, context_costume, action_text, garnish_pool)
             else "",
@@ -787,6 +789,11 @@ def sample_garnish(
             semantic_debug["semantic_candidate"] = preferred if semantic_selected else ""
             semantic_debug["selection_changed_by_semantic"] = semantic_selected
             semantic_debug["selected_candidate_rank"] = personality_pick_debug.get("selected_candidate_rank") if semantic_selected else None
+            semantic_debug["selected_candidate_role"] = personality_pick_debug.get("selected_candidate_role", "") if semantic_selected else ""
+            if personality_pick_debug.get("subject_centric_override_selected"):
+                semantic_debug["subject_centric_override_selected"] = personality_pick_debug.get("subject_centric_override_selected")
+            if personality_pick_debug.get("subject_centric_override_rejected") is not None:
+                semantic_debug["subject_centric_override_rejected"] = personality_pick_debug.get("subject_centric_override_rejected")
             semantic_debug["fallback_used"] = not semantic_selected
             semantic_debug["rejected_candidates"] = semantic_rejected_candidates
 
