@@ -87,6 +87,20 @@ def rank_personality_descriptors(personality: str, slot: str, candidates: Sequen
     return rank_candidates(ranked_candidates, target, PERSONALITY_AXES)
 
 
+def ranked_personality_candidate_stream(personality: str) -> list[dict[str, Any]]:
+    merged: list[dict[str, Any]] = []
+    for slot in ("gaze", "posture", "hands"):
+        for slot_rank, item in enumerate(rank_personality_descriptors(personality, slot), start=1):
+            candidate = dict(item)
+            candidate["role"] = str(candidate.get("role", slot))
+            candidate["slot_rank"] = slot_rank
+            merged.append(candidate)
+    merged.sort(key=lambda item: (-(float(item.get("score", 0.0) or 0.0)), str(item.get("role", "")), str(item.get("text", ""))))
+    for index, item in enumerate(merged, start=1):
+        item["rank"] = index
+    return merged
+
+
 def pick_personality_descriptor(
     personality: str,
     rng,
@@ -94,9 +108,32 @@ def pick_personality_descriptor(
     context_costume: str = "",
     action_text: str = "",
     existing_tags: list[str] | None = None,
+    reject_fn=None,
     debug: dict[str, Any] | None = None,
 ) -> str:
     del context_loc, context_costume, action_text, existing_tags
+    if reject_fn is not None:
+        rejected_candidates = []
+        for candidate in ranked_personality_candidate_stream(personality):
+            text = str(candidate.get("text", "")).strip()
+            if not text:
+                continue
+            reject_reason = reject_fn(text)
+            if reject_reason:
+                rejected_candidates.append({"text": text, "reason": str(reject_reason), "rank": candidate.get("rank")})
+                continue
+            if debug is not None:
+                debug["selected_candidate_rank"] = candidate.get("rank")
+                debug["selected_candidate_role"] = candidate.get("role")
+                debug["rejected_candidates"] = rejected_candidates
+                debug["candidate_stream"] = ranked_personality_candidate_stream(personality)[:5]
+            return text
+        if debug is not None:
+            debug["selected_candidate_rank"] = None
+            debug["rejected_candidates"] = rejected_candidates
+            debug["candidate_stream"] = ranked_personality_candidate_stream(personality)[:5]
+        return ""
+
     rankings = {
         slot: rank_personality_descriptors(personality, slot)
         for slot in ("gaze", "posture", "hands")
@@ -105,8 +142,15 @@ def pick_personality_descriptor(
         debug["slot_rankings"] = rankings
     choices = [ranking[0]["text"] for ranking in rankings.values() if ranking]
     if not choices:
+        if debug is not None:
+            debug["candidate_options"] = []
+            debug["selected_candidate_rank"] = None
         return ""
-    return rng.choice(choices)
+    selected = rng.choice(choices)
+    if debug is not None:
+        debug["candidate_options"] = choices
+        debug["selected_candidate_rank"] = choices.index(selected) + 1 if selected in choices else None
+    return selected
 
 
 def personality_behavior_debug_payload(
@@ -115,6 +159,9 @@ def personality_behavior_debug_payload(
     mode: str = "passive",
     selected: str = "",
     selected_by_semantic: bool = False,
+    fallback_used: bool = False,
+    rejected_candidates: list[dict[str, Any]] | None = None,
+    selected_candidate_rank: int | None = None,
 ) -> dict[str, Any]:
     target = personality_vector(personality)
     slot_rankings = {
@@ -141,4 +188,12 @@ def personality_behavior_debug_payload(
         "slot_rankings": compact_rankings,
         "selected": selected,
         "selected_by_semantic": bool(selected_by_semantic),
+        "semantic_scoring_enabled": mode in {"passive", "active"},
+        "selection_changed_by_semantic": bool(selected_by_semantic),
+        "baseline_candidate": "",
+        "semantic_candidate": selected if selected_by_semantic else "",
+        "semantic_top_candidate": "",
+        "selected_candidate_rank": selected_candidate_rank,
+        "fallback_used": bool(fallback_used),
+        "rejected_candidates": list(rejected_candidates or []),
     }

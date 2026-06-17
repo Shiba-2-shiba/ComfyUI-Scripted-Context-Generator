@@ -106,6 +106,10 @@ class TestContextGarnishPersonality(unittest.TestCase):
         self.assertEqual(personality_debug["personality"], "shy")
         self.assertEqual(personality_debug["prefer_category"], "care")
         self.assertTrue(personality_debug["selected_by_semantic"])
+        self.assertTrue(personality_debug["semantic_scoring_enabled"])
+        self.assertFalse(personality_debug["fallback_used"])
+        self.assertEqual(personality_debug["rejected_candidates"], [])
+        self.assertIsNotNone(personality_debug["selected_candidate_rank"])
         self.assertIn("gaze", personality_debug["slot_rankings"])
         self.assertTrue(personality_debug["selected"])
         ranked_tags = {

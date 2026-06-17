@@ -53,6 +53,50 @@ class TestPersonalitySemantics(unittest.TestCase):
 
         self.assertEqual(rank_personality_descriptors("unknown", "gaze"), [])
 
+    def test_ranked_personality_candidate_stream_is_ordered(self):
+        from vocab.personality_semantics import ranked_personality_candidate_stream
+
+        stream = ranked_personality_candidate_stream("shy")
+
+        self.assertGreaterEqual(len(stream), 3)
+        self.assertEqual(stream[0]["rank"], 1)
+        self.assertGreaterEqual(stream[0]["score"], stream[1]["score"])
+        self.assertIn(stream[0]["role"], {"gaze", "posture", "hands"})
+
+    def test_pick_personality_descriptor_tries_next_candidate_after_reject(self):
+        import random
+        from vocab.personality_semantics import pick_personality_descriptor, ranked_personality_candidate_stream
+
+        stream = ranked_personality_candidate_stream("shy")
+        rejected_text = stream[0]["text"]
+        debug = {}
+        selected = pick_personality_descriptor(
+            "shy",
+            random.Random(1),
+            reject_fn=lambda text: "blocked" if text == rejected_text else "",
+            debug=debug,
+        )
+
+        self.assertNotEqual(selected, rejected_text)
+        self.assertEqual(debug["rejected_candidates"][0]["text"], rejected_text)
+        self.assertEqual(debug["selected_candidate_rank"], 2)
+
+    def test_pick_personality_descriptor_returns_empty_when_all_rejected(self):
+        import random
+        from vocab.personality_semantics import pick_personality_descriptor
+
+        debug = {}
+        selected = pick_personality_descriptor(
+            "shy",
+            random.Random(1),
+            reject_fn=lambda _text: "blocked",
+            debug=debug,
+        )
+
+        self.assertEqual(selected, "")
+        self.assertIsNone(debug["selected_candidate_rank"])
+        self.assertTrue(debug["rejected_candidates"])
+
 
 if __name__ == "__main__":
     unittest.main()

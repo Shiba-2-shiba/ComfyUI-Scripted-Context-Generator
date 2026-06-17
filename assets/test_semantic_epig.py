@@ -44,6 +44,22 @@ class TestSemanticEpigConfig(unittest.TestCase):
         self.assertEqual(config["default_mode"], "active")
         self.assertEqual(config["domains"]["action"]["mode"], "active")
 
+    def test_selection_debug_fields_separates_scoring_from_selection_change(self):
+        from pipeline.semantic_epig import selection_debug_fields
+
+        payload = selection_debug_fields(
+            mode="active",
+            baseline_candidate="plain",
+            semantic_candidate="plain",
+            semantic_top_candidate="semantic top",
+            selected_candidate_rank=2,
+        )
+
+        self.assertTrue(payload["semantic_scoring_enabled"])
+        self.assertFalse(payload["selection_changed_by_semantic"])
+        self.assertEqual(payload["semantic_top_candidate"], "semantic top")
+        self.assertEqual(payload["selected_candidate_rank"], 2)
+
 
 if __name__ == "__main__":
     unittest.main()

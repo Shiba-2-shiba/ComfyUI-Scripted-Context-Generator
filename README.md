@@ -18,6 +18,8 @@ subject / location / base variations を増やす作業では、[`EXPANSION_GUID
 日常系 location / action pool の拡張計画と進捗は [`docs/variation_expansion/`](./docs/variation_expansion/README.md) にあります。
 現在は 100k base variations gate を通過済みで、次の大きな計画対象は 500k へ向けた段階拡張です。
 
+Semantic EPIG の直近リファクタリング仕様・進捗・タスクは [`docs/semantic_epig/refactor_spec.md`](./docs/semantic_epig/refactor_spec.md)、[`refactor_progress.md`](./docs/semantic_epig/refactor_progress.md)、[`refactor_tasks.md`](./docs/semantic_epig/refactor_tasks.md) にあります。
+
 ## 概要
 
 - ノード間の正式な受け渡しは `context_json: STRING`

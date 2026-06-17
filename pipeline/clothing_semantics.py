@@ -7,11 +7,11 @@ from typing import Any
 try:  # pragma: no cover - package mode varies in tests and ComfyUI
     from ..vocab.loader import load_json
     from ..vocab.semantic_space import Vector, normalize_vector, relevance_from_distance, weighted_distance
-    from .semantic_epig import semantic_mode
+    from .semantic_epig import selection_debug_fields, semantic_mode
 except ImportError:  # pragma: no cover
     from vocab.loader import load_json
     from vocab.semantic_space import Vector, normalize_vector, relevance_from_distance, weighted_distance
-    from pipeline.semantic_epig import semantic_mode
+    from pipeline.semantic_epig import selection_debug_fields, semantic_mode
 
 PROFILE_FILE = "clothing_axis_profiles.json"
 CLOTHING_AXES = (
@@ -123,11 +123,16 @@ def clothing_semantic_debug_payload(
     target_vector: dict[str, float],
     candidate_scores: list[dict[str, Any]],
     selected_attempt_index: int,
+    baseline_selected_attempt_index: int | None = None,
+    semantic_selected_attempt_index: int | None = None,
     mode: str | None = None,
     selected_by_semantic: bool = False,
 ) -> dict[str, Any]:
+    resolved_mode = mode or semantic_mode("clothing_tpo")
+    baseline_index = selected_attempt_index if baseline_selected_attempt_index is None else int(baseline_selected_attempt_index)
+    semantic_index = selected_attempt_index if semantic_selected_attempt_index is None else int(semantic_selected_attempt_index)
     return {
-        "mode": mode or semantic_mode("clothing_tpo"),
+        "mode": resolved_mode,
         "target_vector": normalize_vector(target_vector, CLOTHING_AXES),
         "candidate_scores": [
             {
@@ -141,5 +146,16 @@ def clothing_semantic_debug_payload(
             for item in candidate_scores
         ],
         "selected_attempt_index": int(selected_attempt_index),
+        "baseline_selected_attempt_index": baseline_index,
+        "semantic_selected_attempt_index": semantic_index,
         "selected_by_semantic": bool(selected_by_semantic),
+        **selection_debug_fields(
+            mode=resolved_mode,
+            semantic_scoring_enabled=bool(candidate_scores),
+            baseline_candidate=baseline_index,
+            semantic_candidate=semantic_index,
+            semantic_top_candidate=semantic_index,
+            selected_candidate_rank=semantic_index,
+            selection_changed_by_semantic=baseline_index != semantic_index,
+        ),
     }

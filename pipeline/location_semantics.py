@@ -7,11 +7,11 @@ from typing import Any, Sequence
 try:  # pragma: no cover - package mode varies in tests and ComfyUI
     from ..vocab.loader import load_json
     from ..vocab.semantic_space import Vector, normalize_vector, rank_candidates
-    from .semantic_epig import load_semantic_epig_config, semantic_mode
+    from .semantic_epig import load_semantic_epig_config, selection_debug_fields, semantic_mode
 except ImportError:  # pragma: no cover
     from vocab.loader import load_json
     from vocab.semantic_space import Vector, normalize_vector, rank_candidates
-    from pipeline.semantic_epig import load_semantic_epig_config, semantic_mode
+    from pipeline.semantic_epig import load_semantic_epig_config, selection_debug_fields, semantic_mode
 
 PROFILE_FILE = "location_axis_profiles.json"
 DESCRIPTOR_FILE = "staging_axis_descriptors.json"
@@ -136,8 +136,10 @@ def semantic_location_debug_payload(
     mode: str | None = None,
     target_vector: dict[str, float] | None = None,
     segment_rankings: dict[str, list[dict[str, Any]]] | None = None,
+    section_changes: dict[str, dict[str, Any]] | None = None,
     selected_by_semantic: bool = False,
 ) -> dict[str, Any]:
+    resolved_mode = mode or semantic_mode("location_scene")
     compact_rankings: dict[str, list[dict[str, Any]]] = {}
     for section_name, ranking in (segment_rankings or {}).items():
         compact_rankings[section_name] = [
@@ -150,9 +152,28 @@ def semantic_location_debug_payload(
             }
             for item in ranking[:5]
         ]
+    compact_changes: dict[str, dict[str, Any]] = {}
+    for section_name, change in (section_changes or {}).items():
+        if not isinstance(change, dict):
+            continue
+        compact_changes[section_name] = {
+            "baseline": change.get("baseline", ""),
+            "semantic": change.get("semantic", ""),
+            "changed": bool(change.get("changed", False)),
+            "semantic_top_candidate": change.get("semantic_top_candidate", ""),
+            "selected_candidate_rank": change.get("selected_candidate_rank"),
+        }
+    changed_sections = [section for section, change in compact_changes.items() if change.get("changed")]
     return {
-        "mode": mode or semantic_mode("location_scene"),
+        "mode": resolved_mode,
         "target_vector": normalize_vector(target_vector or {}, SCENE_AXES),
         "segment_rankings": compact_rankings,
+        "section_changes": compact_changes,
+        "changed_sections": changed_sections,
         "selected_by_semantic": bool(selected_by_semantic),
+        **selection_debug_fields(
+            mode=resolved_mode,
+            semantic_scoring_enabled=bool(segment_rankings),
+            selection_changed_by_semantic=bool(changed_sections),
+        ),
     }

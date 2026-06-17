@@ -16,6 +16,15 @@ from pipeline.action_generator import (
     parse_pool_action_to_slots,
     render_action_slots,
 )
+from pipeline.action_parser import (
+    action_verb as parser_action_verb,
+    parse_pool_action_to_slots as parser_parse_pool_action_to_slots,
+)
+from pipeline.action_relation_binder import apply_object_relation_slots
+from pipeline.action_renderer import (
+    append_clause,
+    render_action_slots as renderer_render_action_slots,
+)
 from pipeline.context_pipeline import _load_action_pools, _load_compatibility, _load_scene_axes
 
 
@@ -70,6 +79,8 @@ class TestActionGenerator(unittest.TestCase):
         self.assertTrue(debug["semantic_epig"]["action"]["selected_by_semantic"])
         self.assertIn("target_vector", debug["semantic_epig"]["action"])
         self.assertIn("slot_rankings", debug["semantic_epig"]["action"])
+        self.assertIn("slot_changes", debug["semantic_epig"]["action"])
+        self.assertIn("selection_changed_by_semantic", debug["semantic_epig"]["action"])
 
     def test_generate_action_for_location_with_pool_enriches_pool_result(self):
         pool = [a for a in self.action_pools["modern_office"]]
@@ -117,6 +128,23 @@ class TestActionGenerator(unittest.TestCase):
         self.assertEqual(debug["normalized_action"], action_with_debug)
         self.assertIn("semantic_epig", debug)
         self.assertTrue(debug["semantic_epig"]["action"]["selected_by_semantic"])
+        self.assertTrue(debug["semantic_epig"]["action"]["semantic_scoring_enabled"])
+
+    def test_action_semantic_debug_includes_descriptor_supplied_candidates(self):
+        from pipeline.action_generator import build_action_slots
+
+        semantic_debug = {}
+        build_action_slots(
+            "school_library",
+            self.compat,
+            self.scene_axes,
+            random.Random(5),
+            slot_overrides={"purpose": "study", "location": "school_library"},
+            semantic_debug=semantic_debug,
+        )
+
+        hand_rankings = semantic_debug["action"]["slot_rankings"]["hand_action"]
+        self.assertIn("thumb keeping the page open", {item["text"] for item in hand_rankings})
 
     def test_object_relation_active_adds_object_state_without_overwriting_existing_slots(self):
         action, debug = generate_action_for_location(
@@ -139,12 +167,103 @@ class TestActionGenerator(unittest.TestCase):
         self.assertIn("open pages visible", action)
         self.assertEqual(debug["normalized_action"], action)
 
+    def test_action_relation_binder_preserves_existing_slots(self):
+        slots = {
+            "hand_action": "hands already keeping the book open",
+            "gaze_target": "eyes already on the open page",
+        }
+
+        relation_debug = apply_object_relation_slots(slots, "reading a book quietly")
+
+        self.assertEqual(relation_debug["relation_key"], "book:reading")
+        self.assertEqual(slots["hand_action"], "hands already keeping the book open")
+        self.assertEqual(slots["gaze_target"], "eyes already on the open page")
+        self.assertEqual(relation_debug["skipped_slots"]["hand_action"], "existing slot already set")
+        self.assertEqual(relation_debug["skipped_slots"]["gaze_target"], "existing slot already set")
+        self.assertEqual(slots["object_state"], "open pages visible")
+        self.assertEqual(relation_debug["applied_slots"]["object_state"], "open pages visible")
+
+    def test_render_action_slots_dedupes_anchor_and_preserves_clause_order(self):
+        rendered = render_action_slots(
+            {
+                "anchor": "by the window",
+                "posture": "standing by the window",
+                "hand_action": "straightening a stack of printouts",
+                "object_state": "printouts squared into a neat stack",
+                "gaze_target": "checking the top page",
+                "optional_micro_action": "checking the top page",
+                "time_or_weather": "during lunch break",
+            }
+        )
+        renderer_rendered = renderer_render_action_slots(
+            {
+                "anchor": "by the window",
+                "posture": "standing by the window",
+                "hand_action": "straightening a stack of printouts",
+                "object_state": "printouts squared into a neat stack",
+                "gaze_target": "checking the top page",
+                "optional_micro_action": "checking the top page",
+                "time_or_weather": "during lunch break",
+            }
+        )
+
+        self.assertEqual(
+            rendered,
+            "holding onto the moment in front of her, standing by the window, "
+            "straightening a stack of printouts, printouts squared into a neat stack, "
+            "checking the top page, during lunch break",
+        )
+        self.assertEqual(renderer_rendered, rendered)
+
+    def test_render_action_slots_activity_first_starts_with_hand_action(self):
+        rendered = render_action_slots(
+            {
+                "posture": "standing by the poster wall",
+                "hand_action": "turning a ticket over in her fingers",
+                "purpose_clause": "checking the entry time",
+                "gaze_target": "looking toward the queue",
+            },
+            activity_first=True,
+        )
+        renderer_rendered = renderer_render_action_slots(
+            {
+                "posture": "standing by the poster wall",
+                "hand_action": "turning a ticket over in her fingers",
+                "purpose_clause": "checking the entry time",
+                "gaze_target": "looking toward the queue",
+            },
+            activity_first=True,
+        )
+
+        self.assertEqual(
+            rendered,
+            "turning a ticket over in her fingers, standing by the poster wall, looking toward the queue",
+        )
+        self.assertEqual(renderer_rendered, rendered)
+
+    def test_action_renderer_append_clause_dedupes_existing_text(self):
+        self.assertEqual(append_clause("", "checking the entry time."), "checking the entry time")
+        self.assertEqual(
+            append_clause("checking the entry time", "checking the entry time"),
+            "checking the entry time",
+        )
+        self.assertEqual(
+            append_clause("checking the entry time.", "looking toward the queue."),
+            "checking the entry time, looking toward the queue",
+        )
+
     def test_parse_pool_action_to_slots_extracts_posture_and_hand_action(self):
         slots = parse_pool_action_to_slots(
             "standing by the window straightening a stack of printouts",
             loc="modern_office",
             compat=self.compat,
         )
+        parser_slots = parser_parse_pool_action_to_slots(
+            "standing by the window straightening a stack of printouts",
+            loc="modern_office",
+            compat=self.compat,
+        )
+        self.assertEqual(parser_slots, slots)
         self.assertEqual(slots["posture"], "standing by the window")
         self.assertEqual(slots["hand_action"], "straightening a stack of printouts")
         self.assertEqual(slots["anchor"], "by the window")
@@ -182,12 +301,14 @@ class TestActionGenerator(unittest.TestCase):
 
     def assertNormalizedVerb(self, text: str, expected: str, label: str | None = None):
         actual = action_verb(text)
+        parser_actual = parser_action_verb(text)
         case_label = label or text
         self.assertEqual(
             actual,
             expected,
             msg=f"{case_label}\nexpected normalized verb: {expected}\nactual normalized verb: {actual}\naction: {text}",
         )
+        self.assertEqual(parser_actual, actual)
 
     def test_action_verb_skips_fragment_subject_tokens(self):
         self.assertNormalizedVerb("hands settling and then shifting again", "settling")

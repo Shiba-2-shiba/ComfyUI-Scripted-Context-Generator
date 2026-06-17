@@ -77,6 +77,10 @@
       },
       {
         "text": "hands staying precise and controlled",
+        "purpose_keys": [
+          "work",
+          "study"
+        ],
         "vector": {
           "motion_energy": 0.3,
           "body_openness": 0.3,
@@ -88,6 +92,9 @@
       },
       {
         "text": "hand shifting to keep her balance",
+        "purpose_keys": [
+          "commute"
+        ],
         "vector": {
           "motion_energy": 0.7,
           "body_openness": 0.45,
@@ -99,6 +106,9 @@
       },
       {
         "text": "hands loosening at her sides",
+        "purpose_keys": [
+          "rest"
+        ],
         "vector": {
           "motion_energy": 0.15,
           "body_openness": 0.55,
@@ -107,11 +117,57 @@
           "social_intensity": 0.15,
           "time_pressure": 0.1
         }
+      },
+      {
+        "text": "thumb keeping the page open",
+        "purpose_keys": [
+          "study"
+        ],
+        "action_keys": [
+          "reading",
+          "studying",
+          "reviewing"
+        ],
+        "object_tokens": [
+          "book"
+        ],
+        "vector": {
+          "motion_energy": 0.2,
+          "body_openness": 0.25,
+          "precision": 0.92,
+          "object_coupling": 0.95,
+          "social_intensity": 0.1,
+          "time_pressure": 0.25
+        }
+      },
+      {
+        "text": "fingers poised over the keyboard",
+        "purpose_keys": [
+          "work"
+        ],
+        "action_keys": [
+          "typing",
+          "reviewing"
+        ],
+        "object_tokens": [
+          "screen"
+        ],
+        "vector": {
+          "motion_energy": 0.3,
+          "body_openness": 0.3,
+          "precision": 0.9,
+          "object_coupling": 0.9,
+          "social_intensity": 0.15,
+          "time_pressure": 0.4
+        }
       }
     ],
     "gaze_target": [
       {
         "text": "eyes following the detail she is working through",
+        "purpose_keys": [
+          "study"
+        ],
         "vector": {
           "motion_energy": 0.2,
           "body_openness": 0.3,
@@ -123,6 +179,10 @@
       },
       {
         "text": "eyes fixed on what needs to happen next",
+        "purpose_keys": [
+          "work",
+          "wait"
+        ],
         "vector": {
           "motion_energy": 0.35,
           "body_openness": 0.4,
@@ -134,6 +194,9 @@
       },
       {
         "text": "checking where the next movement will come from",
+        "purpose_keys": [
+          "commute"
+        ],
         "vector": {
           "motion_energy": 0.7,
           "body_openness": 0.45,
@@ -145,6 +208,9 @@
       },
       {
         "text": "looking off for a quiet second",
+        "purpose_keys": [
+          "rest"
+        ],
         "vector": {
           "motion_energy": 0.15,
           "body_openness": 0.5,
@@ -152,6 +218,27 @@
           "object_coupling": 0.15,
           "social_intensity": 0.1,
           "time_pressure": 0.1
+        }
+      },
+      {
+        "text": "eyes tracking the line on the page",
+        "purpose_keys": [
+          "study"
+        ],
+        "action_keys": [
+          "reading",
+          "studying"
+        ],
+        "object_tokens": [
+          "book"
+        ],
+        "vector": {
+          "motion_energy": 0.15,
+          "body_openness": 0.25,
+          "precision": 0.92,
+          "object_coupling": 0.9,
+          "social_intensity": 0.1,
+          "time_pressure": 0.2
         }
       }
     ],

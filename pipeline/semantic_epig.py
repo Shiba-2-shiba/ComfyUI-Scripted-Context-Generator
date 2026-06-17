@@ -94,6 +94,34 @@ def domain_enabled(domain: str, *, active_only: bool = False) -> bool:
     return mode in {"passive", "active"}
 
 
+def selection_debug_fields(
+    *,
+    mode: str,
+    semantic_scoring_enabled: bool | None = None,
+    baseline_candidate: Any = "",
+    semantic_candidate: Any = "",
+    semantic_top_candidate: Any = "",
+    selected_candidate_rank: int | None = None,
+    selection_changed_by_semantic: bool | None = None,
+) -> dict[str, Any]:
+    scoring_enabled = mode in {"passive", "active"} if semantic_scoring_enabled is None else bool(semantic_scoring_enabled)
+    if selection_changed_by_semantic is None:
+        selection_changed_by_semantic = (
+            bool(scoring_enabled)
+            and baseline_candidate not in ("", None)
+            and semantic_candidate not in ("", None)
+            and baseline_candidate != semantic_candidate
+        )
+    return {
+        "semantic_scoring_enabled": bool(scoring_enabled),
+        "selection_changed_by_semantic": bool(selection_changed_by_semantic),
+        "baseline_candidate": baseline_candidate,
+        "semantic_candidate": semantic_candidate,
+        "semantic_top_candidate": semantic_top_candidate,
+        "selected_candidate_rank": selected_candidate_rank,
+    }
+
+
 def add_semantic_debug(decision: dict[str, Any], domain: str, payload: dict[str, Any]) -> None:
     if not isinstance(decision, dict) or not isinstance(payload, dict):
         return

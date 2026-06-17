@@ -8,6 +8,7 @@ from character_service import load_character_profiles
 from clothing_service import load_clothing_theme_map, resolve_clothing_theme
 from core.semantic_policy import find_banned_term_matches
 from location_service import load_background_alias_overrides, load_background_packs
+from object_focus_service import OBJECT_TOKENS
 from scene_service import load_scene_compatibility
 from vocab.semantic_space import validate_axis_payload
 
@@ -56,6 +57,15 @@ _SEMANTIC_AXIS_ASSETS = (
 _SEMANTIC_BANNED_ASSETS = _SEMANTIC_AXIS_ASSETS + (
     "object_relation_profiles.json",
 )
+_OBJECT_RELATION_FILE = "object_relation_profiles.json"
+ALLOWED_OBJECT_RELATION_ROLES = {
+    "posture",
+    "hand_action",
+    "gaze_target",
+    "object_relation",
+    "object_state",
+    "optional_micro_action",
+}
 _ALLOWED_UNCONNECTED_PROFILES = {
     "Diana (Noble)",
     "Hana (Idol)",
@@ -304,6 +314,74 @@ def validate_semantic_axis_asset(filename: str, payload: Any | None = None) -> l
     return warnings
 
 
+def validate_object_relation_profiles(payload: Any | None = None) -> list[str]:
+    data = _read_json_asset(_OBJECT_RELATION_FILE) if payload is None else payload
+    warnings: list[str] = []
+    if not isinstance(data, dict):
+        return [f"{_OBJECT_RELATION_FILE} must be a JSON object"]
+
+    if not data.get("schema_version"):
+        warnings.append(f"{_OBJECT_RELATION_FILE} missing schema_version")
+
+    relations = data.get("relations")
+    if not isinstance(relations, dict):
+        warnings.append(f"{_OBJECT_RELATION_FILE}:relations must be an object")
+        warnings.extend(validate_banned_terms_in_asset(_OBJECT_RELATION_FILE, data))
+        return warnings
+
+    object_tokens = {str(token) for token in OBJECT_TOKENS}
+    for relation_key, relation in relations.items():
+        key = str(relation_key or "").strip()
+        path = f"{_OBJECT_RELATION_FILE}:relations.{key or '<empty>'}"
+        if ":" not in key or key.startswith(":") or key.endswith(":"):
+            warnings.append(f"{path} key must use 'object:relation' format")
+            key_object = ""
+        else:
+            key_object = key.split(":", 1)[0]
+
+        if not isinstance(relation, dict):
+            warnings.append(f"{path} must be an object")
+            continue
+
+        object_token = str(relation.get("object", "")).strip()
+        if not object_token:
+            warnings.append(f"{path}.object is required")
+        elif object_token not in object_tokens:
+            warnings.append(f"{path}.object unknown object token '{object_token}'")
+        if key_object and object_token and key_object != object_token:
+            warnings.append(f"{path}.object must match relation key object '{key_object}'")
+
+        verbs = relation.get("verbs")
+        if not isinstance(verbs, list) or not verbs:
+            warnings.append(f"{path}.verbs must be a non-empty list")
+        elif not all(isinstance(verb, str) and verb.strip() for verb in verbs):
+            warnings.append(f"{path}.verbs must contain non-empty strings")
+
+        roles = relation.get("required_roles")
+        if not isinstance(roles, dict) or not roles:
+            warnings.append(f"{path}.required_roles must be a non-empty object")
+        elif isinstance(roles, dict):
+            for role, values in roles.items():
+                role_key = str(role or "").strip()
+                role_path = f"{path}.required_roles.{role_key or '<empty>'}"
+                if role_key not in ALLOWED_OBJECT_RELATION_ROLES:
+                    warnings.append(f"{role_path} unknown role")
+                if not isinstance(values, list) or not values:
+                    warnings.append(f"{role_path} must be a non-empty list")
+                    continue
+                if not all(isinstance(value, str) and value.strip() for value in values):
+                    warnings.append(f"{role_path} must contain non-empty strings")
+
+        forbidden = relation.get("forbidden_patterns", [])
+        if not isinstance(forbidden, list):
+            warnings.append(f"{path}.forbidden_patterns must be a list")
+        elif not all(isinstance(value, str) and value.strip() for value in forbidden):
+            warnings.append(f"{path}.forbidden_patterns must contain non-empty strings")
+
+    warnings.extend(validate_banned_terms_in_asset(_OBJECT_RELATION_FILE, data))
+    return warnings
+
+
 def validate_semantic_epig_assets() -> list[str]:
     warnings: list[str] = []
     warnings.extend(validate_semantic_epig_config())
@@ -315,6 +393,9 @@ def validate_semantic_epig_assets() -> list[str]:
     for filename in _SEMANTIC_BANNED_ASSETS:
         if _asset_exists(filename) and filename not in _SEMANTIC_AXIS_ASSETS:
             warnings.extend(validate_banned_terms_in_asset(filename, _read_json_asset(filename)))
+
+    if _asset_exists(_OBJECT_RELATION_FILE):
+        warnings.extend(validate_object_relation_profiles())
 
     return warnings
 
