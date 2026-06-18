@@ -13,7 +13,7 @@ if __package__ and "." in __package__:
         slot_object_policy_weight,
         summarize_slot_object_focus,
     )
-    from ..core.solo_safety import filter_solo_safe_candidates, is_solo_safe_text
+    from ..core.solo_safety import filter_solo_action_safe_candidates, filter_solo_safe_candidates, is_solo_action_safe_text, is_solo_safe_text
     from .action_profiles import (
         DEFAULT_DAILY_LIFE_TAGS,
         LOCATION_CONTEXT_HINTS,
@@ -40,7 +40,7 @@ else:
         slot_object_policy_weight,
         summarize_slot_object_focus,
     )
-    from core.solo_safety import filter_solo_safe_candidates, is_solo_safe_text
+    from core.solo_safety import filter_solo_action_safe_candidates, filter_solo_safe_candidates, is_solo_action_safe_text, is_solo_safe_text
     from pipeline.action_profiles import (
         DEFAULT_DAILY_LIFE_TAGS,
         LOCATION_CONTEXT_HINTS,
@@ -143,7 +143,7 @@ def choose_action_with_bias_guard(pool, rng, loc="", recent_verbs=None, recent_o
     if not pool:
         return None, set(), {}
     if solo_safety:
-        pool = [item for item in pool if is_solo_safe_text(action_text(item))]
+        pool = [item for item in pool if is_solo_action_safe_text(action_text(item))]
         if not pool:
             return None, set(), {}
     recent_verbs = {str(item).lower() for item in (recent_verbs or []) if item}
@@ -334,7 +334,7 @@ def build_action_slots(
         slot_overrides = {
             key: value
             for key, value in slot_overrides.items()
-            if key in {"social_distance", "obstacle_or_trigger"} or is_solo_safe_text(value)
+            if key in {"social_distance", "obstacle_or_trigger"} or is_solo_action_safe_text(value)
         }
         if slot_overrides.get("social_distance"):
             slot_overrides["social_distance"] = _solo_safe_social_distance(slot_overrides.get("social_distance", ""))
@@ -405,7 +405,7 @@ def build_action_slots(
                 if descriptor_option not in option_values:
                     option_values.append(descriptor_option)
         if solo_safety:
-            option_values = filter_solo_safe_candidates(option_values)
+            option_values = filter_solo_action_safe_candidates(option_values)
         if domain_enabled("action") and option_values:
             action_slot_rankings[name] = rank_action_slot_options(
                 name,
@@ -527,7 +527,7 @@ def generate_action_for_location(
     filtered_pool_count = 0
     if solo_safety and pool:
         original_pool_size = len(pool)
-        pool = [item for item in pool if is_solo_safe_text(action_text(item))]
+        pool = [item for item in pool if is_solo_action_safe_text(action_text(item))]
         filtered_pool_count = original_pool_size - len(pool)
     if pool:
         new_action_item, dominant_objects, object_hits = choose_action_with_bias_guard(

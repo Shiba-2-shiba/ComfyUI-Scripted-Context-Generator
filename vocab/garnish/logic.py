@@ -99,7 +99,7 @@ PERSONALITY_GARNISH_BIAS: Dict[str, Dict[str, Any]] = {
         "prefer_category": "joy",
     },
     "energetic": {
-        "prefer": ["bright smile", "leaning forward", "hands moving as she talks"],
+        "prefer": ["bright smile", "leaning forward", "one hand lifted mid-gesture"],
         "prefer_category": "joy",
     },
     "gloomy": {
