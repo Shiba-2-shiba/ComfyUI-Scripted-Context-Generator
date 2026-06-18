@@ -165,10 +165,30 @@ class TestActionGenerator(unittest.TestCase):
         )
         rendered = render_action_slots(slots)
 
-        self.assertIn(slots["social_distance"], {"alone", "acquaintance", "stranger"})
+        self.assertEqual(slots["social_distance"], "viewer")
         self.assertEqual(slots["obstacle_or_trigger"], "")
         self.assertNotIn("people", rendered.lower())
         self.assertNotIn("spill", rendered.lower())
+
+    def test_solo_safety_normalizes_social_distance_to_viewer_facing(self):
+        for social_distance in ("acquaintance", "stranger", "crowd"):
+            with self.subTest(social_distance=social_distance):
+                slots = build_action_slots(
+                    "modern_office",
+                    self.compat,
+                    self.scene_axes,
+                    random.Random(12),
+                    slot_overrides={"social_distance": social_distance},
+                )
+                rendered = render_action_slots(slots).lower()
+
+                self.assertEqual(slots["social_distance"], "viewer")
+                self.assertIn("viewer", rendered)
+                self.assertNotIn("camera", rendered)
+                self.assertNotIn("lens", rendered)
+                self.assertNotIn("someone", rendered)
+                self.assertNotIn("people", rendered)
+                self.assertNotIn("crowd", rendered)
 
     def test_action_semantic_active_selection_is_deterministic(self):
         action_without_debug, _debug_without_assertion = generate_action_for_location(

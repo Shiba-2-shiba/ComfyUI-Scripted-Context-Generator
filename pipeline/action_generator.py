@@ -96,11 +96,17 @@ OBSTACLE_OR_TRIGGER_CLAUSES = {
 }
 SOCIAL_DISTANCE_CLAUSES = {
     "alone": ["keeping to herself", "lost in her own rhythm"],
+    "viewer": [
+        "meeting the viewer with a quiet look",
+        "as if responding directly to the viewer",
+        "leaving room for a quiet exchange with the viewer",
+    ],
     "acquaintance": ["leaving room for casual conversation", "half-ready to answer someone nearby"],
     "stranger": ["keeping a polite distance", "avoiding getting in anyone's way"],
     "crowd": ["protecting her space in the crowd", "moving carefully around the people nearby"],
 }
-SOLO_SAFE_SOCIAL_DISTANCES = ("alone", "acquaintance", "stranger")
+SOLO_VIEWER_FACING_SOCIAL_DISTANCES = {"acquaintance", "stranger", "crowd"}
+SOLO_SAFE_SOCIAL_DISTANCES = ("alone", "viewer")
 OPTIONAL_MICRO_ACTIONS = {
     "study": ["quietly marking her place", "rechecking a small detail", "staying with the line she was following"],
     "work": ["mentally lining up the next task", "pausing to reassess one detail", "moving on only after one more check"],
@@ -122,10 +128,15 @@ def action_object_flags(text: str) -> set[str]:
     return extract_action_object_flags(text)
 
 
-def _solo_safe_social_distance(value: str, rng: random.Random) -> str:
-    if is_solo_safe_text(value):
-        return value
-    return rng.choice(SOLO_SAFE_SOCIAL_DISTANCES)
+def _solo_safe_social_distance(value: str) -> str:
+    normalized = str(value or "").strip().lower()
+    if normalized in SOLO_VIEWER_FACING_SOCIAL_DISTANCES:
+        return "viewer"
+    if normalized in SOLO_SAFE_SOCIAL_DISTANCES and is_solo_safe_text(normalized):
+        return normalized
+    if normalized and not is_solo_safe_text(normalized):
+        return "viewer"
+    return normalized
 
 
 def choose_action_with_bias_guard(pool, rng, loc="", recent_verbs=None, recent_objects=None, solo_safety=True):
@@ -325,8 +336,8 @@ def build_action_slots(
             for key, value in slot_overrides.items()
             if key in {"social_distance", "obstacle_or_trigger"} or is_solo_safe_text(value)
         }
-        if not is_solo_safe_text(slot_overrides.get("social_distance", "")):
-            slot_overrides["social_distance"] = _solo_safe_social_distance(slot_overrides.get("social_distance", ""), rng)
+        if slot_overrides.get("social_distance"):
+            slot_overrides["social_distance"] = _solo_safe_social_distance(slot_overrides.get("social_distance", ""))
         if not is_solo_safe_text(slot_overrides.get("obstacle_or_trigger", "")):
             solo_safety_suppressed_obstacle = "obstacle_or_trigger" in slot_overrides
             slot_overrides["obstacle_or_trigger"] = ""
@@ -340,8 +351,8 @@ def build_action_slots(
     purpose = slot_overrides.get("purpose") or pick_axis("purpose", ["wait", "rest", "shop"])
     progress_state = slot_overrides.get("progress_state") or pick_axis("progress", ["midway", "preparing"])
     social_distance = slot_overrides.get("social_distance") or pick_axis("social_distance", ["alone", "acquaintance"])
-    if solo_safety and not is_solo_safe_text(social_distance):
-        social_distance = _solo_safe_social_distance(social_distance, rng)
+    if solo_safety:
+        social_distance = _solo_safe_social_distance(social_distance)
     obstacle_or_trigger = slot_overrides.get("obstacle_or_trigger", "")
     if not obstacle_or_trigger and not solo_safety_suppressed_obstacle and profile.get("obstacle") and rng.random() < 0.35:
         obstacle_or_trigger = _pick_axis_value(profile.get("obstacle", []), rng)
