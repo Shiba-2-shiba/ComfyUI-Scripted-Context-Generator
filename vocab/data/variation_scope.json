@@ -3,9 +3,9 @@
   "schema_version": "1.0",
   "expected_metrics": {
     "unique_subjects": 120,
-    "unique_locations": 91,
-    "row_count": 5926,
-    "total_base_variations": 105612
+    "unique_locations": 90,
+    "row_count": 5806,
+    "total_base_variations": 103212
   },
   "variation_subjects": [
     "CEO",
@@ -181,7 +181,6 @@
     "luxury_hotel_room",
     "magic_academy_library",
     "messy_copy_room",
-    "messy_kitchen",
     "modern_office",
     "mountain_resort",
     "museum_hall",

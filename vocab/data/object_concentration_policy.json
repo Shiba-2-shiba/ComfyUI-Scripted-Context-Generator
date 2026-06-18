@@ -97,6 +97,16 @@
     "spill",
     "stain"
   ],
+  "background_repeat_risk": [
+    "display",
+    "poster",
+    "kiosk",
+    "exhibit_case",
+    "panel",
+    "plant",
+    "cat",
+    "ventilation_unit"
+  ],
   "audit_normalization": {
     "screen": {
       "exclude_phrases": [

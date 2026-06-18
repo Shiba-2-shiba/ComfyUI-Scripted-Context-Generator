@@ -17,7 +17,6 @@
     "art_gallery",
     "museum_hall",
     "shopping_mall_atrium",
-    "messy_kitchen",
     "botanical_garden",
     "aquarium"
   ],
@@ -98,7 +97,6 @@
       "stadium_court"
     ],
     "domestic": [
-      "messy_kitchen",
       "bedroom_boudoir",
       "clean_modern_kitchen",
       "cozy_living_room",
@@ -207,7 +205,6 @@
       "bedroom_boudoir",
       "cozy_living_room",
       "clean_modern_kitchen",
-      "messy_kitchen",
       "laundromat",
       "apartment_balcony",
       "apartment_entryway",
@@ -1539,7 +1536,6 @@
     "fashion_boutique",
     "karaoke_bar",
     "bedroom_boudoir",
-    "messy_kitchen",
     "clean_modern_kitchen",
     "cozy_living_room",
     "rainy_bus_stop",

@@ -30,6 +30,13 @@ class TestObjectFocusService(unittest.TestCase):
             {"display", "napkin", "people", "stain"},
         )
         self.assertEqual(extract_action_object_flags("holding a towel and searching a bag"), {"bag", "towel"})
+        self.assertEqual(
+            extract_object_flags(
+                "large movie poster beside a ticket kiosk with potted house plant, "
+                "cat on a shelf, exhibit case, information panel, ventilation unit"
+            ),
+            {"cat", "exhibit_case", "kiosk", "panel", "plant", "poster", "ventilation_unit"},
+        )
 
     def test_symbolic_object_detection_uses_shared_object_rules(self):
         self.assertTrue(is_symbolic_object_text("leaning surfboard"))
@@ -44,6 +51,8 @@ class TestObjectFocusService(unittest.TestCase):
         self.assertEqual(classify_object_hotspot("school_library", "book"), "thematic_anchor")
         self.assertEqual(classify_object_hotspot("commuter_transport", "phone"), "true_bias_action")
         self.assertEqual(classify_object_hotspot("antique_shop", "screen"), "audit_artifact")
+        self.assertEqual(classify_object_hotspot("cinema_lobby", "poster"), "background_repeat_risk")
+        self.assertEqual(classify_object_hotspot("cinema_lobby", "kiosk"), "background_repeat_risk")
 
     def test_slot_object_policy_weight_penalizes_true_bias_and_selected_objects(self):
         weight, objects, classifications = slot_object_policy_weight(

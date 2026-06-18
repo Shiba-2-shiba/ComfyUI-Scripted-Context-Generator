@@ -7,7 +7,7 @@ if __package__ and "." in __package__:
     from ..core.semantic_policy import filter_candidate_strings, sanitize_text
     from ..core.solo_safety import filter_solo_safe_candidates
     from ..location_service import resolve_location_key
-    from ..object_focus_service import extract_object_flags
+    from ..object_focus_service import background_repeat_risk_flags, extract_object_flags
     from ..history_service import recent_prompt_objects
     from ..vocab.seed_utils import mix_seed
     from .location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
@@ -34,7 +34,7 @@ else:
     from core.semantic_policy import filter_candidate_strings, sanitize_text
     from core.solo_safety import filter_solo_safe_candidates
     from location_service import resolve_location_key
-    from object_focus_service import extract_object_flags
+    from object_focus_service import background_repeat_risk_flags, extract_object_flags
     from history_service import recent_prompt_objects
     from vocab.seed_utils import mix_seed
     from pipeline.location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
@@ -168,7 +168,32 @@ def expand_location_prompt(
         return (prompt, debug) if return_debug else prompt
 
     segments = []
+    selected_repeat_risk_objects = set()
     decision = {"pack_key": cleaned_tag, "objects": [], "selected_props": [], "template_key": "detailed"}
+
+    def keep_repeat_risk_budget(options):
+        kept = []
+        for option in options:
+            if background_repeat_risk_flags(option) and selected_repeat_risk_objects:
+                continue
+            kept.append(option)
+        return kept
+
+    def remember_repeat_risk(options):
+        for option in options:
+            selected_repeat_risk_objects.update(background_repeat_risk_flags(option))
+
+    def enforce_repeat_risk_budget(options):
+        accepted = []
+        local_repeat_risk_objects = set(selected_repeat_risk_objects)
+        for option in options:
+            flags = background_repeat_risk_flags(option)
+            if flags and local_repeat_risk_objects:
+                continue
+            accepted.append(option)
+            local_repeat_risk_objects.update(flags)
+        return accepted
+
     core_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("core", [])))
     record_segment_ranking("core", core_opts)
     if core_opts and rng.random() < 0.95:
@@ -177,14 +202,16 @@ def expand_location_prompt(
         baseline_core = _weighted_sample(core_opts, rng, min(num_core, len(core_opts)), cleaned_tag, "core", semantic_scores={})
         rng.setstate(rng_state)
         chosen_core = _weighted_sample(core_opts, rng, min(num_core, len(core_opts)), cleaned_tag, "core", semantic_scores=semantic_scores_for("core"))
+        chosen_core = enforce_repeat_risk_budget(chosen_core)
         record_section_change("core", baseline_core, chosen_core)
+        remember_repeat_risk(chosen_core)
         if len(chosen_core) == 1:
             segments.append(f"featuring {chosen_core[0]}")
         else:
-            connector = rng.choice(["and", "plus", "featuring"])
-            segments.append(f"featuring {chosen_core[0]} {connector} {chosen_core[1]}")
+            segments.append(f"featuring {chosen_core[0]} and {chosen_core[1]}")
 
     props_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("props", [])))
+    props_opts = keep_repeat_risk_budget(props_opts)
     record_segment_ranking("props", props_opts)
     include_prob, second_prop_prob = _props_sampling_policy(props_opts)
     if props_opts and rng.random() < include_prob:
@@ -212,12 +239,12 @@ def expand_location_prompt(
             semantic_scores=semantic_scores_for("props"),
         )
         record_section_change("props", baseline_props, chosen_props)
-        connector_word = rng.choice(["with", "scattered with", "filled with", "adorned with"])
+        remember_repeat_risk(chosen_props)
+        connector_word = rng.choice(["with", "adorned with"])
         if len(chosen_props) == 1:
             segments.append(f"{connector_word} {chosen_props[0]}")
         else:
-            joiner = rng.choice(["and", "plus", "as well as"])
-            segments.append(f"{connector_word} {chosen_props[0]} {joiner} {chosen_props[1]}")
+            segments.append(f"{connector_word} {chosen_props[0]} and {chosen_props[1]}")
         decision["selected_props"] = list(chosen_props)
 
     texture_candidates = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("texture", []) or []))

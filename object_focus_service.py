@@ -21,6 +21,13 @@ _SHARED_OBJECT_PATTERNS = {
     "towel": re.compile(r"\btowels?\b", re.IGNORECASE),
     "napkin": re.compile(r"\bnapkins?\b", re.IGNORECASE),
     "display": re.compile(r"\bdisplays?\b|\bdisplay\s+(?:area|case|counter|cabinet|cart)\b", re.IGNORECASE),
+    "poster": re.compile(r"\bposters?\b", re.IGNORECASE),
+    "kiosk": re.compile(r"\bkiosks?\b", re.IGNORECASE),
+    "exhibit_case": re.compile(r"\bexhibit\s+cases?\b|\bdisplay\s+cases?\b", re.IGNORECASE),
+    "panel": re.compile(r"\bpanels?\b|\binformation\s+panels?\b", re.IGNORECASE),
+    "plant": re.compile(r"\bplants?\b|\bpotted\s+house\s+plants?\b", re.IGNORECASE),
+    "cat": re.compile(r"\bcats?\b", re.IGNORECASE),
+    "ventilation_unit": re.compile(r"\bventilation\s+units?\b", re.IGNORECASE),
     "generic_object": re.compile(r"\bobjects?\b|\bitems?\b|\bnearby choices\b|\bpersonal items\b", re.IGNORECASE),
     "people": re.compile(r"\bpeople\b|\bstudents?\s+(?:pass|passes|passing)\b|\bsomeone\b", re.IGNORECASE),
     "spill": re.compile(r"\bspill(?:s|ed)?\b", re.IGNORECASE),
@@ -38,6 +45,13 @@ ACTION_OBJECT_PATTERNS = {
     "towel": re.compile(r"\btowels?\b", re.IGNORECASE),
     "napkin": re.compile(r"\bnapkins?\b", re.IGNORECASE),
     "display": re.compile(r"\bdisplays?\b|\bdisplay\s+(?:area|case|counter|cabinet|cart)\b", re.IGNORECASE),
+    "poster": re.compile(r"\bposters?\b", re.IGNORECASE),
+    "kiosk": re.compile(r"\bkiosks?\b", re.IGNORECASE),
+    "exhibit_case": re.compile(r"\bexhibit\s+cases?\b|\bdisplay\s+cases?\b", re.IGNORECASE),
+    "panel": re.compile(r"\bpanels?\b|\binformation\s+panels?\b", re.IGNORECASE),
+    "plant": re.compile(r"\bplants?\b|\bpotted\s+house\s+plants?\b", re.IGNORECASE),
+    "cat": re.compile(r"\bcats?\b", re.IGNORECASE),
+    "ventilation_unit": re.compile(r"\bventilation\s+units?\b", re.IGNORECASE),
     "generic_object": re.compile(r"\bobjects?\b|\bitems?\b|\bnearby choices\b|\bpersonal items\b", re.IGNORECASE),
     "people": re.compile(r"\bpeople\b|\bstudents?\s+(?:pass|passes|passing)\b|\bsomeone\b", re.IGNORECASE),
     "spill": re.compile(r"\bspill(?:s|ed)?\b", re.IGNORECASE),
@@ -46,8 +60,19 @@ ACTION_OBJECT_PATTERNS = {
 OBJECT_TOKENS = tuple(ACTION_OBJECT_PATTERNS.keys())
 _SYMBOLIC_OBJECT_HINTS = (
     "surfboard", " board", "book", "phone", "coffee", "drink", "microphone", "screen",
-    "bag", "towel", "napkin", "display", "object", "people", "spill", "stain",
+    "bag", "towel", "napkin", "display", "poster", "kiosk", "exhibit", "panel",
+    "plant", "cat", "ventilation unit", "object", "people", "spill", "stain",
 )
+BACKGROUND_REPEAT_RISK_OBJECTS = {
+    "display",
+    "poster",
+    "kiosk",
+    "exhibit_case",
+    "panel",
+    "plant",
+    "cat",
+    "ventilation_unit",
+}
 
 
 @lru_cache(maxsize=1)
@@ -123,9 +148,15 @@ def classify_object_hotspot(loc: str, object_token: str) -> str:
         return "true_bias_action"
     if token in policy.get("solo_safety_artifact", []):
         return "solo_safety_artifact"
+    if token in policy.get("background_repeat_risk", []):
+        return "background_repeat_risk"
     if token in policy.get("thematic_anchor", {}).get(loc_key, {}):
         return "thematic_anchor"
     return "general"
+
+
+def background_repeat_risk_flags(text: str) -> set[str]:
+    return extract_object_flags(text) & BACKGROUND_REPEAT_RISK_OBJECTS
 
 
 def slot_object_policy_weight(loc: str, text: str, selected_objects: Iterable[str] | None = None):

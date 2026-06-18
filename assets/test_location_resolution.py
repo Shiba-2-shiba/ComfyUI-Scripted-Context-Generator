@@ -119,6 +119,15 @@ class TestLocationResolution(unittest.TestCase):
         self.assertIn("steampunk_airship", layers["legacy"])
         self.assertIn("rainy_bus_stop", layers["fallback"])
 
+    def test_messy_kitchen_is_not_a_default_daily_life_candidate(self):
+        compat = json.loads((DATA_DIR / "scene_compatibility.json").read_text(encoding="utf-8"))
+
+        self.assertNotIn("messy_kitchen", compat["daily_life_locs"])
+        self.assertNotIn("messy_kitchen", compat["universal_locs"])
+        self.assertNotIn("messy_kitchen", compat["loc_tags"]["domestic"])
+        self.assertNotIn("messy_kitchen", compat["loc_tags"]["home_life"])
+        self.assertIn("clean_modern_kitchen", compat["daily_life_locs"])
+
 
 if __name__ == "__main__":
     unittest.main()
