@@ -55,6 +55,22 @@ class TestSoloDuplicateRiskDetection(unittest.TestCase):
             with self.subTest(phrase=phrase):
                 self.assertFalse(is_solo_action_safe_text(phrase))
 
+    def test_risk_policy_classifies_known_solo_and_plural_artifact_families(self):
+        from core.prompt_risk_policy import classify_risk_families
+
+        cases = {
+            "framed family photos on the wall": "family_artifact",
+            "cleaning staff working in the background": "other_person",
+            "friends sharing a booth nearby": "other_person",
+            "people passing through the station": "crowd",
+            "customers near the table": "crowd",
+            "with pile of decorative pillows": "plural_prop_overload",
+            "quick step": "ineffective_motion",
+        }
+        for phrase, expected_family in cases.items():
+            with self.subTest(phrase=phrase):
+                self.assertIn(expected_family, classify_risk_families(phrase))
+
     def test_viewer_facing_social_text_remains_solo_safe(self):
         from core.solo_safety import is_solo_action_safe_text
 
@@ -80,6 +96,16 @@ class TestSoloDuplicateRiskDetection(unittest.TestCase):
 
         self.assertEqual([entry["key"] for entry in filtered], ["subject_first"])
         self.assertEqual([entry["key"] for entry in dropped], ["location_first"])
+
+    def test_solo_location_first_detection_does_not_flag_subject_clothing_clause(self):
+        from core.solo_safety import has_location_first_template_conflict, solo_duplicate_risk_flags
+
+        clean = "1girl, solo in white blouse, sitting on a sofa, in cozy living room"
+        bad = "in a cozy living room, 1girl, solo in white blouse, sitting on a sofa"
+
+        self.assertFalse(has_location_first_template_conflict(clean))
+        self.assertNotIn("location_first_template", solo_duplicate_risk_flags(clean))
+        self.assertTrue(has_location_first_template_conflict(bad))
 
     def test_solo_prompt_assembly_filters_location_first_and_compacts_support_tags(self):
         from prompt_renderer import build_prompt_text

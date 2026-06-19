@@ -17,6 +17,7 @@ from asset_validator import (
     validate_character_assets,
     validate_location_aliases,
     validate_object_relation_profiles,
+    validate_prompt_risk_policy,
     validate_semantic_axis_asset,
     validate_semantic_epig_config,
     validate_subject_centric_descriptor_overrides,
@@ -392,6 +393,25 @@ class TestAssetValidator(unittest.TestCase):
         self.assertTrue(any("personality must be a list" in item for item in warnings))
         self.assertTrue(any("forbidden score-bearing fields" in item for item in warnings))
         self.assertTrue(any("close-up" in item for item in warnings))
+
+    def test_validate_prompt_risk_policy_accepts_current_asset(self):
+        warnings = validate_prompt_risk_policy(_read_json_asset("prompt_risk_families.json"))
+        self.assertEqual(warnings, [])
+
+    def test_validate_prompt_risk_policy_flags_empty_and_duplicate_patterns(self):
+        warnings = validate_prompt_risk_policy(
+            {
+                "schema_version": "1.0",
+                "families": {
+                    "other_person": {"patterns": ["\\bpeople\\b", ""]},
+                    "crowd": {"patterns": ["\\bpeople\\b"]},
+                    "empty": {"patterns": []},
+                },
+            }
+        )
+
+        self.assertTrue(any("duplicate pattern" in item for item in warnings))
+        self.assertTrue(any("families.empty.patterns" in item for item in warnings))
 
 
 if __name__ == "__main__":

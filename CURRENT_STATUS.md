@@ -11,6 +11,8 @@ subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` 
 現在の variation sizing 境界は `vocab/data/variation_scope.json` に固定されています。
 書類整理方針は `docs/documentation_cleanup_plan.md` を参照してください。
 repository cleanup の直近リファクタは `docs/repository_cleanup/` に仕様・進捗・タスクがあります。
+Prompt IR / validator / guarded active candidate rerank のリファクタは
+`docs/prompt_ir_refactor/` に仕様・進捗・タスクがあります。
 
 ## Runtime Surface
 
@@ -82,6 +84,37 @@ Current refactor state:
 - Builders were split into action parser / relation binder / renderer, location policy / selector, and clothing candidate renderer / selector.
 - Remaining follow-up: add a relation-key-specific action descriptor fixture/test.
 
+## Prompt IR Refactor State
+
+Prompt IR は、LLM なし・script-only のまま prompt の構成品質を上げるための
+debug / audit layer と guarded active selection として導入済みです。
+
+Active pieces:
+
+- `core/prompt_ir.py`: subject / clothing / foreground action / location / props / mood / garnish の internal IR
+- `core/prompt_ir_validator.py`: solo conflict、plural artifact、layout order、semantic overload などの read-only scoring
+- `pipeline/prompt_candidate_generator.py`: deterministic 2-branch candidate generation and local risk-fragment sanitization
+- `pipeline/prompt_candidate_selector.py`: validator score による candidate selection / rerank summary
+- `core/prompt_risk_policy.py` + `vocab/data/prompt_risk_families.json`: data-driven risk family policy
+- `tools/audit_prompt_ir_candidates.py`: long-running audit ではなく明示実行する Prompt IR smoke audit
+
+Current behavior:
+
+- public `Context*` node I/O は変更なし
+- solo prompt で active risk family が検出された場合、低リスクな sanitizing candidate を final prompt に採用する
+- solo prompt で location-first layout risk が検出された場合、subject-first layout-repair candidate を final prompt に採用する
+- layout-first の広範な順序変更はまだ active output には使わない
+- active 範囲は人物/群衆、family/group photos、decorative pillows、quick step、location-first repair に限定する
+- `social_interaction` 単独と `mirror_clone` は検出・監査のみで、active 置換対象にはしない
+- 人物リスクに付随して残る `talking with friends` などの会話断片は、人物除去の一部として局所的に整理する
+- `build_prompt_text(..., return_debug=True)` の debug に `prompt_ir`,
+  `prompt_ir_validator`, `prompt_candidates` が追加される
+- risk のない通常 prompt generation は baseline output を維持する
+- solo safety の public API は維持しつつ、内部で risk family policy を参照する
+- `1girl, solo in ...` のような正常な subject/clothing clause は location-first と誤判定しない
+- Prompt IR audit は `active_selection` preview と active 後 validator を出力する
+- Prompt IR audit は 45 件の clean/risky/borderline/out-of-scope fixture に対する false positive / false negative summary を出力する
+
 ## Current Metrics
 
 Command:
@@ -106,7 +139,7 @@ Current semantic-only summary:
 - unique background context tags: `835`
 - semantic units: `1,287`
 - semantic garnish universe: `11,583`
-- theoretical max: `1,223,303,796`
+- theoretical max: `1,195,504,596`
 
 Legacy-disabled vocabulary still present for audit visibility:
 
@@ -135,6 +168,8 @@ Last verified commands:
 ```bash
 python -m unittest assets.test_calc_variations assets.test_variation_target_planner assets.test_variation_scope assets.test_build_compatibility_review assets.test_build_action_pools
 python -m unittest assets.test_context_nodes assets.test_workflow_samples assets.test_prompt_snapshots assets.test_context_pipeline assets.test_context_state_adapter assets.test_determinism
+python -m unittest assets.test_prompt_ir assets.test_prompt_ir_validator assets.test_prompt_candidate_rerank assets.test_prompt_renderer assets.test_prompt_snapshots assets.test_solo_duplicate_suppression assets.test_asset_validator assets.test_determinism
+python tools/audit_prompt_ir_candidates.py --seed-count 8 --output assets/results/prompt_ir_validator_smoke.json
 python tools/validate_prompt_data.py
 python tools/verify_full_flow.py
 python tools/check_widgets_values.py
@@ -150,6 +185,9 @@ Results:
 
 - variation regression tests: `15 tests OK`
 - context/workflow/prompt tests: `28 tests OK`
+- Prompt IR target tests: `66 tests OK`
+- Prompt IR audit smoke: generated ignored `assets/results/prompt_ir_validator_smoke.json` with active preview
+- Prompt IR audit summary: `45` cases, `45` passed, false positive cases `[]`, false negative cases `[]`
 - full flow: `OK`
 - prompt data validator: `ERROR: []`, `WARNING: []`
 - variation metrics: base variations `103,212`, missing action pools `0`
@@ -157,6 +195,13 @@ Results:
 - target planner: target `100000` still met at `103,212`
 - asset validator: `0` issues
 - workflow widget validation: `OK`
+
+Full discover note:
+
+- `python -m unittest discover -s assets -p "test_*.py"` passed during
+  the Prompt IR wave at `420 tests OK` in `201.276s`.
+- The long runtime is dominated by existing audit-style unittest coverage such as
+  `assets.test_action_diversity_audit`; Prompt IR target tests finish in under 2 seconds.
 
 Notes:
 
@@ -167,6 +212,7 @@ Notes:
 ```bash
 python tools/audit_prompt_repetition.py --samples-per-row 8 --output assets/results/prompt_repetition_active_source_8.json --enforce-thresholds
 python tools/audit_template_diversity.py --seed-count 32 --seed-start 0 --output assets/results/template_diversity_32.json --enforce-thresholds
+python tools/audit_prompt_ir_candidates.py --seed-count 8 --output assets/results/prompt_ir_validator_smoke.json
 ```
 
 ## Test Script State

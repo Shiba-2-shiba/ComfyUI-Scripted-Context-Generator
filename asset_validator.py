@@ -7,6 +7,7 @@ from typing import Any, Iterable, List, Sequence
 from character_service import load_character_profiles
 from clothing_service import load_clothing_theme_map, resolve_clothing_theme
 from core.semantic_policy import find_banned_term_matches
+from core.prompt_risk_policy import validate_prompt_risk_policy
 from location_service import load_background_alias_overrides, load_background_packs
 from object_focus_service import OBJECT_TOKENS
 from scene_service import load_scene_compatibility
@@ -535,5 +536,6 @@ def validate_assets() -> list[str]:
         )
     )
     warnings.extend(validate_semantic_epig_assets())
+    warnings.extend(validate_prompt_risk_policy())
 
     return sorted(set(warnings))

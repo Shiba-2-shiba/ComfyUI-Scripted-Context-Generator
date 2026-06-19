@@ -15,7 +15,12 @@ if __package__:
     )
     from .core.semantic_policy import filter_candidate_strings, sanitize_text
     from .core.solo_safety import filter_solo_safe_candidates, has_location_first_template_conflict, is_solo_action_safe_text
+    from .core.prompt_ir import build_prompt_ir, prompt_ir_summary, prompt_ir_to_dict
+    from .core.prompt_ir_validator import validate_prompt_ir
+    from .core.prompt_risk_policy import classify_risk_families
     from .location_service import load_background_packs, resolve_location_key
+    from .pipeline.prompt_candidate_generator import generate_prompt_candidates
+    from .pipeline.prompt_candidate_selector import select_prompt_candidate, summarize_prompt_candidates
     from .pipeline.action_generator import action_verb as normalize_action_verb
 else:
     from core.semantic_families import (
@@ -25,7 +30,12 @@ else:
     )
     from core.semantic_policy import filter_candidate_strings, sanitize_text
     from core.solo_safety import filter_solo_safe_candidates, has_location_first_template_conflict, is_solo_action_safe_text
+    from core.prompt_ir import build_prompt_ir, prompt_ir_summary, prompt_ir_to_dict
+    from core.prompt_ir_validator import validate_prompt_ir
+    from core.prompt_risk_policy import classify_risk_families
     from location_service import load_background_packs, resolve_location_key
+    from pipeline.prompt_candidate_generator import generate_prompt_candidates
+    from pipeline.prompt_candidate_selector import select_prompt_candidate, summarize_prompt_candidates
     from pipeline.action_generator import action_verb as normalize_action_verb
 
 
@@ -434,6 +444,74 @@ def _normalize_prompt(text):
     return sanitize_text(str(text))
 
 
+def _build_passive_prompt_ir(subj, costume, loc, action, garnish, meta_mood, staging_tags):
+    return build_prompt_ir(
+        {
+            "subject": subj,
+            "clothing": costume,
+            "foreground_action": action,
+            "location_core": loc,
+            "props": staging_tags,
+            "mood": meta_mood,
+            "garnish": garnish,
+        },
+        source="prompt_renderer",
+    )
+
+
+_ACTIVE_RERANK_RISK_FAMILIES = {
+    "crowd",
+    "family_artifact",
+    "foreground_background_conflict",
+    "ineffective_motion",
+    "other_person",
+    "plural_prop_overload",
+}
+
+
+def _select_active_prompt_result(result, prompt_ir, seed, solo_prompt_context):
+    baseline_report = validate_prompt_ir(prompt_ir, rendered_text=result)
+    baseline_risks = classify_risk_families(result) & _ACTIVE_RERANK_RISK_FAMILIES
+    layout_risk = int(baseline_report["scores"].get("layout_order", 0) or 0) > 0
+    if not solo_prompt_context or (not baseline_risks and not layout_risk):
+        return result, None, None
+
+    candidates = generate_prompt_candidates(
+        prompt_ir,
+        rendered_text=result,
+        seed=seed,
+        max_candidates=2,
+    )
+    selected = select_prompt_candidate(candidates, mode="active_selection")
+    baseline = next((candidate for candidate in selected.get("selection", {}).get("rejected_candidate_ids", []) if candidate), "")
+    selected_text = _normalize_prompt(selected.get("rendered_text", ""))
+    should_apply = (
+        selected.get("candidate_id") != f"seed:{seed}:branch:0"
+        and selected_text
+        and int(selected.get("total_risk", 0)) < baseline_report["total_risk"]
+    )
+    if not should_apply:
+        return result, {
+            "mode": "active_selection",
+            "applied": False,
+            "baseline_risk_families": sorted(baseline_risks),
+            "baseline_scores": baseline_report["scores"],
+            "selected_candidate_id": selected.get("candidate_id"),
+            "baseline_candidate_id": baseline or f"seed:{seed}:branch:0",
+        }, candidates
+    return selected_text, {
+        "mode": "active_selection",
+        "applied": True,
+        "baseline_risk_families": sorted(baseline_risks),
+        "baseline_scores": baseline_report["scores"],
+        "selected_candidate_id": selected.get("candidate_id"),
+        "baseline_candidate_id": f"seed:{seed}:branch:0",
+        "dropped_components": selected.get("dropped_components", []),
+        "scores": selected.get("scores", {}),
+        "total_risk": selected.get("total_risk", 0),
+    }, candidates
+
+
 def _apply_semantic_family_budget(action, garnish, meta_mood, staging_tags):
     action_text = sanitize_text(str(action or "").strip())
     garnish_tags = split_semantic_tags(garnish)
@@ -702,13 +780,37 @@ def build_prompt_text(
         result = result.replace("{staging_tags}", "")
 
     result = _normalize_prompt(result)
+    prompt_ir = _build_passive_prompt_ir(subj, costume, loc, action, garnish, meta_mood, staging_tags)
+    result, active_candidate_debug, active_prompt_candidates = _select_active_prompt_result(
+        result,
+        prompt_ir,
+        seed,
+        solo_prompt_context,
+    )
     logger.info(f"Final Prompt: {result}")
     if return_debug:
+        prompt_ir_validation = validate_prompt_ir(prompt_ir, rendered_text=result)
+        prompt_candidates = active_prompt_candidates or generate_prompt_candidates(
+            prompt_ir,
+            rendered_text=result,
+            seed=seed,
+            max_candidates=2,
+        )
+        prompt_candidate_summary = summarize_prompt_candidates(
+            prompt_candidates,
+            mode="active_selection" if active_candidate_debug else "passive_debug",
+        )
+        if active_candidate_debug:
+            prompt_candidate_summary["active_result"] = active_candidate_debug
         debug_payload = {
             "template_key": selected_template_key or str(template),
             "composition_mode": bool(composition_mode),
             "semantic_family_budget": semantic_layers["debug"],
             "solo_support_dropped_tags": solo_support_dropped_tags,
+            "prompt_ir": prompt_ir_summary(prompt_ir),
+            "prompt_ir_components": prompt_ir_to_dict(prompt_ir),
+            "prompt_ir_validator": prompt_ir_validation,
+            "prompt_candidates": prompt_candidate_summary,
         }
         if composition_mode:
             debug_payload.update(

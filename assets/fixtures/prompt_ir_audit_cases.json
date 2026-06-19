@@ -1,0 +1,387 @@
+[
+  {
+    "name": "clean_solo_classroom",
+    "category": "true_negative",
+    "prompt": "1girl, solo, in a quiet classroom, reading near the window, white blouse, calm expression",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "clean_viewer_exchange",
+    "category": "true_negative",
+    "prompt": "1girl, solo, meeting the viewer with a quiet look, as if responding directly to the viewer, in a small bookshop",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "clean_single_pillow",
+    "category": "true_negative",
+    "prompt": "1girl, solo, sitting on a sofa with a single cushion, in a tidy living room",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "clean_staff_room_label",
+    "category": "true_negative",
+    "prompt": "1girl, solo, checking a notice board near the staff room door, quiet hallway",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "solo_with_people_conflict",
+    "category": "true_positive",
+    "prompt": "1girl, solo, in a cafe with customers in the background, talking with friends",
+    "expected_risk_families": ["crowd", "other_person", "social_interaction"],
+    "expected_min_total_risk": 2,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["customers", "friends"]
+  },
+  {
+    "name": "plural_prop_overload",
+    "category": "true_positive",
+    "prompt": "1girl, solo, sitting on a sofa with pile of decorative pillows",
+    "expected_risk_families": ["plural_prop_overload"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["decorative pillows"]
+  },
+  {
+    "name": "family_photo_artifact",
+    "category": "true_positive",
+    "prompt": "1girl, solo, in a living room with framed family photos on the wall",
+    "expected_risk_families": ["family_artifact"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["family photos"]
+  },
+  {
+    "name": "ineffective_motion",
+    "category": "true_positive",
+    "prompt": "1girl, solo, standing near the table, quick step",
+    "expected_risk_families": ["ineffective_motion"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["quick step"]
+  },
+  {
+    "name": "location_first_solo",
+    "category": "true_positive",
+    "prompt": "At the edge of pristine modern kitchen, 1girl, solo in blue dress, wiping down the marble counter",
+    "expected_risk_families": ["location_first_template"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_active_startswith": "1girl, solo"
+  },
+  {
+    "name": "mirror_clone",
+    "category": "true_positive",
+    "prompt": "1girl, solo, brushing hair in front of a mirror, checking reflection in the mirrored wall",
+    "expected_risk_families": ["mirror_clone"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": false
+  },
+  {
+    "name": "background_staff",
+    "category": "true_positive",
+    "prompt": "1girl, solo, in a shop aisle with cleaning staff working in the background",
+    "expected_risk_families": ["other_person"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["staff"]
+  },
+  {
+    "name": "group_photo_artifact",
+    "category": "true_positive",
+    "prompt": "1girl, solo, beside a desk with group photos on the corkboard",
+    "expected_risk_families": ["family_artifact"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["group photos"]
+  },
+  {
+    "name": "benign_mirrorless_glass",
+    "category": "true_negative",
+    "prompt": "1girl, solo, arranging a glass cup on a table, in a quiet cafe corner",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "non_solo_crowd_not_active_target",
+    "category": "out_of_scope",
+    "prompt": "two girls in a crowded cafe, customers chatting nearby",
+    "expected_risk_families": ["crowd", "social_interaction"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "notes": "Audit preview can still show active candidate; runtime active selection remains gated by solo context."
+  },
+  {
+    "name": "clean_empty_chairs_background",
+    "category": "true_negative",
+    "prompt": "1girl, solo, in a cafe corner with empty chairs, reading a menu quietly",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "clean_shop_counter_no_staff",
+    "category": "true_negative",
+    "prompt": "1girl, solo, checking a receipt at a quiet shop counter, folded tote bag nearby",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "clean_single_framed_landscape_photo",
+    "category": "true_negative",
+    "prompt": "1girl, solo, in a hallway with a framed landscape photo on the wall, adjusting her bag strap",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "clean_cushion_stack_not_decorative_pillows",
+    "category": "true_negative",
+    "prompt": "1girl, solo, sitting beside a folded blanket and one cushion, in a tidy apartment room",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "clean_visitor_badge_no_people",
+    "category": "true_negative",
+    "prompt": "1girl, solo, holding a visitor badge near the reception desk, quiet office lobby",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "clean_viewer_conversation_style",
+    "category": "true_negative",
+    "prompt": "1girl, solo, leaving room for a quiet exchange with the viewer, in a calm tea room",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "clean_fast_pace_without_quick_step",
+    "category": "true_negative",
+    "prompt": "1girl, solo, walking at a steady pace through a station corridor, holding a commuter pass",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "clean_subject_clothing_in_phrase",
+    "category": "true_negative",
+    "prompt": "1girl, solo in a navy cardigan, reading beside the window, in a quiet library",
+    "expected_risk_families": [],
+    "expected_max_total_risk": 0,
+    "expected_active_applied": false
+  },
+  {
+    "name": "customer_background_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, arranging a cup on the table with customers near the counter",
+    "expected_risk_families": ["crowd"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["customers"]
+  },
+  {
+    "name": "people_background_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, checking her phone with background people crossing the plaza",
+    "expected_risk_families": ["crowd", "foreground_background_conflict"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["people"]
+  },
+  {
+    "name": "friends_booth_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, in a cafe with friends sharing a booth nearby, looking at the menu",
+    "expected_risk_families": ["other_person"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["friends"]
+  },
+  {
+    "name": "classmates_background_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, walking through campus with classmates passing by",
+    "expected_risk_families": ["crowd", "other_person"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["classmates"]
+  },
+  {
+    "name": "staff_working_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, browsing a boutique with staff working near the display",
+    "expected_risk_families": ["other_person"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["staff"]
+  },
+  {
+    "name": "restaurant_staff_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, seated at a table near restaurant staff, checking the dessert menu",
+    "expected_risk_families": ["other_person"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["staff"]
+  },
+  {
+    "name": "family_photos_unframed_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, standing near a shelf with family photos and a small vase",
+    "expected_risk_families": ["family_artifact"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["family photos"]
+  },
+  {
+    "name": "group_photos_wall_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, in a clubroom with group photos on the wall, sorting papers",
+    "expected_risk_families": ["family_artifact"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["group photos"]
+  },
+  {
+    "name": "decorative_pillows_plural_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, leaning on the sofa with decorative pillows around her",
+    "expected_risk_families": ["plural_prop_overload"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["decorative pillows"]
+  },
+  {
+    "name": "piles_of_decorative_pillows_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, sitting in a lounge with piles of decorative pillows",
+    "expected_risk_families": ["plural_prop_overload"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["decorative pillows"]
+  },
+  {
+    "name": "quick_steps_plural_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, standing beside the table, quick steps",
+    "expected_risk_families": ["ineffective_motion"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["quick steps"]
+  },
+  {
+    "name": "location_first_inside_variant",
+    "category": "true_positive",
+    "prompt": "Inside quiet library, 1girl, solo in a gray cardigan, reading notes",
+    "expected_risk_families": ["location_first_template"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_active_startswith": "1girl, solo"
+  },
+  {
+    "name": "location_first_against_variant",
+    "category": "true_positive",
+    "prompt": "Against the school rooftop fence, 1girl, solo in a blue jacket, checking the sky",
+    "expected_risk_families": ["location_first_template"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_active_startswith": "1girl, solo"
+  },
+  {
+    "name": "mirror_single_prop",
+    "category": "true_positive",
+    "prompt": "1girl, solo, standing by the mirror, adjusting her collar",
+    "expected_risk_families": ["mirror_clone"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": false
+  },
+  {
+    "name": "reflection_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, checking her reflection in the window glass",
+    "expected_risk_families": ["mirror_clone"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": false
+  },
+  {
+    "name": "mirrored_wall_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, walking past a mirrored wall, adjusting her sleeve",
+    "expected_risk_families": ["mirror_clone"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": false
+  },
+  {
+    "name": "social_talk_only_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, talking quietly in the cafe corner",
+    "expected_risk_families": ["social_interaction"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": false
+  },
+  {
+    "name": "conversation_without_viewer_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, pausing mid conversation beside the table",
+    "expected_risk_families": ["social_interaction"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": false
+  },
+  {
+    "name": "talking_with_friends_active_context",
+    "category": "true_positive",
+    "prompt": "1girl, solo, talking with friends near the school gate",
+    "expected_risk_families": ["other_person", "social_interaction"],
+    "expected_min_total_risk": 2,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["talking", "friends"]
+  },
+  {
+    "name": "background_people_nearby_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, standing near a fountain, nearby people crossing the square",
+    "expected_risk_families": ["crowd", "foreground_background_conflict"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["people"]
+  },
+  {
+    "name": "someone_nearby_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, writing notes while someone waits near the door",
+    "expected_risk_families": ["other_person"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["someone"]
+  },
+  {
+    "name": "commuters_variant",
+    "category": "true_positive",
+    "prompt": "1girl, solo, standing by the ticket gate with commuters passing by",
+    "expected_risk_families": ["crowd"],
+    "expected_min_total_risk": 1,
+    "expected_active_applied": true,
+    "expected_removed_terms": ["commuters"]
+  },
+  {
+    "name": "non_solo_mirror_out_of_scope",
+    "category": "out_of_scope",
+    "prompt": "two girls standing by the mirror, checking their reflection",
+    "expected_risk_families": ["mirror_clone"],
+    "expected_min_total_risk": 1,
+    "notes": "Runtime active selection is solo-gated; this remains audit-only context."
+  }
+]

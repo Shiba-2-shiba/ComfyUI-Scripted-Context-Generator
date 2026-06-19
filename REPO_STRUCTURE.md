@@ -26,7 +26,10 @@
 │   ├── context_codec.py                     # context_json の入出力
 │   ├── context_ops.py                       # patch / history / note / warning 操作
 │   ├── context_state.py                     # PromptContext -> internal typed state adapter
-│   └── semantic_policy.py                   # 文字列 sanitization / policy
+│   ├── semantic_policy.py                   # 文字列 sanitization / policy
+│   ├── prompt_ir.py                         # passive Prompt IR component contract / layout-first render helper
+│   ├── prompt_ir_validator.py               # read-only Prompt IR / prompt risk scoring
+│   └── prompt_risk_policy.py                # risk family policy loader / classifier
 ├── pipeline/
 │   ├── source_pipeline.py                   # prompts / json -> context
 │   ├── character_profile_pipeline.py        # character profile 適用
@@ -35,6 +38,8 @@
 │   ├── location_builder.py                  # location 展開本体
 │   ├── mood_builder.py                      # mood 展開本体
 │   ├── prompt_orchestrator.py               # prompt builder / template orchestration 本体
+│   ├── prompt_candidate_generator.py        # deterministic passive prompt candidates
+│   ├── prompt_candidate_selector.py         # passive candidate scoring / rerank summary
 │   ├── content_pipeline.py                  # extracted modules への互換 facade。内部実装の default import 先ではない
 │   └── action_generator.py                  # action 選択ロジック
 ├── vocab/
@@ -83,6 +88,7 @@
 │       ├── loc_aliases_fallback.json        # semantic fallback layer
 │       ├── object_concentration_policy.json
 │       ├── policy_terms.json                # banned-domain canonical source
+│       ├── prompt_risk_families.json        # solo/plural/social risk family policy
 │       ├── scene_axis.json
 │       ├── scene_compatibility.json
 │       ├── variation_scope.json             # base variation sizing の subject/location 境界
@@ -113,6 +119,9 @@ active / recommended な workflow sample は `ComfyUI-workflow-context.json` だ
 │   ├── test_location_resolution.py          # location resolver 回帰
 │   ├── test_character_resolution.py         # character resolver 回帰
 │   ├── test_prompt_renderer.py              # prompt renderer 回帰
+│   ├── test_prompt_ir.py                    # Prompt IR contract / passive debug 回帰
+│   ├── test_prompt_ir_validator.py          # read-only validator scoring 回帰
+│   ├── test_prompt_candidate_rerank.py      # deterministic passive candidate rerank 回帰
 │   ├── test_deprecated_behavior.py          # legacy surface / no-op 回帰
 │   ├── test_compatibility_boundaries.py     # compatibility facade import 境界
 │   ├── test_asset_validator.py              # asset validator 回帰
@@ -147,6 +156,7 @@ active / recommended な workflow sample は `ComfyUI-workflow-context.json` だ
 │   ├── audit_action_diversity.py            # action 多様性監査
 │   ├── audit_repetition_guard.py            # repetition guard 監査
 │   ├── audit_template_diversity.py          # template 多様性監査
+│   ├── audit_prompt_ir_candidates.py        # Prompt IR validator / passive candidate smoke audit
 │   ├── run_bias_audit.py                    # bias 監査
 │   ├── measure_baseline.py                  # baseline 計測
 │   ├── analyze_context_workflow_diversity.py
@@ -187,6 +197,9 @@ source of truth は次で見るとズレにくいです。
   `vocab/source/action_pools/_shared_families.json`。runtime は生成済みの
   `vocab/data/action_pools.json`
 - banned terms: `vocab/data/policy_terms.json` を `core/semantic_policy.py` / `nodes_prompt_cleaner.py` / `asset_validator.py` が共有
+- prompt risk families: `vocab/data/prompt_risk_families.json` を
+  `core/prompt_risk_policy.py` / `core/solo_safety.py` /
+  `core/prompt_ir_validator.py` / `asset_validator.py` が共有
 
 refactor 完了後も、意図的に残している compatibility surface があります。
 

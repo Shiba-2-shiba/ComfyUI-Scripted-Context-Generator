@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "description": "Prompt risk family policy for script-only prompt validation and solo-safe filtering.",
+  "families": {
+    "crowd": {
+      "solo_flags": ["other_person"],
+      "patterns": [
+        "\\bcrowd\\w*\\b",
+        "\\bpeople\\b",
+        "\\bcustomers?\\b",
+        "\\bemployees?\\b",
+        "\\bbystanders?\\b",
+        "\\bcommuters\\b",
+        "\\bstudents?\\s+(?:pass|passes|passing)\\b",
+        "\\bpass(?:es|ing)?\\s+by\\b",
+        "\\bpass(?:es|ing)?\\s+through\\b"
+      ]
+    },
+    "family_artifact": {
+      "solo_flags": ["other_person"],
+      "patterns": [
+        "\\bfamily\\s+photos?\\b",
+        "\\bgroup\\s+photos?\\b",
+        "\\bframed\\s+family\\s+photos?\\b"
+      ]
+    },
+    "foreground_background_conflict": {
+      "solo_flags": [],
+      "patterns": [
+        "\\bbackground\\s+(?:people|crowd|customers|staff)\\b",
+        "\\bnearby\\s+(?:people|crowd|customers|staff)\\b"
+      ]
+    },
+    "ineffective_motion": {
+      "solo_flags": [],
+      "patterns": [
+        "\\bquick\\s+steps?\\b"
+      ]
+    },
+    "mirror_clone": {
+      "solo_flags": ["mirror_clone"],
+      "patterns": [
+        "\\bmirrors?\\b",
+        "\\bmirrored\\b",
+        "\\breflections?\\b"
+      ]
+    },
+    "other_person": {
+      "solo_flags": ["other_person"],
+      "patterns": [
+        "\\bsomeone\\b",
+        "\\bfriends?\\b",
+        "\\bclassmates?\\b",
+        "\\bcompanions?\\b",
+        "\\bstaff\\s+(?:working|guiding|arranging|restocking|wiping|waiting|moving|standing)\\b",
+        "\\b(?:cleaning|gallery|shop|store|cafe|restaurant)\\s+staff\\b"
+      ]
+    },
+    "plural_prop_overload": {
+      "solo_flags": [],
+      "patterns": [
+        "\\bdecorative\\s+pillows\\b",
+        "\\bpiles?\\s+of\\s+decorative\\s+pillows\\b",
+        "\\bwith\\s+piles?\\s+of\\b"
+      ]
+    },
+    "social_interaction": {
+      "solo_flags": ["social_talk"],
+      "patterns": [
+        "\\btalks?\\b",
+        "\\btalking\\b",
+        "\\bchat(?:s|ting)?\\b",
+        "\\bconversation\\b"
+      ]
+    }
+  }
+}
