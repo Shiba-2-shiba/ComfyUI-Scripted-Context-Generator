@@ -38,7 +38,7 @@
 
 Reference material handling policy:
 
-- `C:\Users\inott\Downloads\新しいフォルダー (3)\参考` 配下の原資料は commit に含めない。
+- `<REFERENCE_ROOT>`（例: repo root から `..\参考`）配下の原資料は commit に含めない。
 - 元リポや参照資料の raw data をそのまま流用・転載・dump して tracked data にしない。
 - NRC/EPIG/EmotionDynamics 由来の raw data や score-bearing overlay は、local audit / calibration の入力として使用してよい。
 - repo に採用するのは、現在のリポ用に加工・選別・再構成した data / rules / tests に限定する。
@@ -483,7 +483,7 @@ Reference audit smoke:
 
 ```bash
 python tools/audit_epig_reference_alignment.py --epig-dir "../参考/EPIG" --nrc-dir "../参考/NRC-VAD-Lexicon-v2.1/NRC-VAD-Lexicon-v2.1" --output assets/results/epig_reference_alignment.json
-python tools/extract_epig_reference_overlay.py --reference-root "../参考" --output assets/results/epig_reference_overlay.local.json
+python tools/extract_epig_reference_overlay.py --reference-root "..\参考" --output assets/results/epig_reference_overlay.local.json
 ```
 
 Before active behavior changes:

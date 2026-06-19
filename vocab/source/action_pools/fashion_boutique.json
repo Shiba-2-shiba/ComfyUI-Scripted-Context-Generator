@@ -2,7 +2,7 @@
   "location": "fashion_boutique",
   "actions": [
     {
-      "text": "standing in front of a mirror, trying on clothes",
+      "text": "trying on clothes beside the fitting room bench",
       "load": "calm"
     },
     {
@@ -30,7 +30,7 @@
       "load": "calm"
     },
     {
-      "text": "adjusting a hat in the mirror",
+      "text": "adjusting a hat beside the display shelf",
       "load": "calm"
     },
     {

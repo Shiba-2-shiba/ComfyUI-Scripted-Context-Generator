@@ -43,5 +43,59 @@
     "costume": "office_lady",
     "mood": "quiet_focused",
     "personality": "serious"
+  },
+  {
+    "case_id": "mysterious_bookstore_corner",
+    "subj": "a visitor",
+    "loc": "cozy_bookstore",
+    "action": "browsing a shelf of old books",
+    "costume": "casual",
+    "mood": "mysterious_curious",
+    "personality": "mysterious"
+  },
+  {
+    "case_id": "shy_moved_station_reunion",
+    "subj": "a student",
+    "loc": "train_station_platform",
+    "action": "waiting with a letter in her hand",
+    "costume": "school_uniform",
+    "mood": "moved",
+    "personality": "shy"
+  },
+  {
+    "case_id": "neutral_calm_balcony_pause",
+    "subj": "a tenant",
+    "loc": "apartment_balcony",
+    "action": "standing quietly by the railing",
+    "costume": "casual",
+    "mood": "calm",
+    "personality": "neutral"
+  },
+  {
+    "case_id": "faithful_library_note",
+    "subj": "a classmate",
+    "loc": "school_library",
+    "action": "offering a folded note across the table",
+    "costume": "school_uniform",
+    "mood": "care",
+    "personality": "faithful"
+  },
+  {
+    "case_id": "cheerful_joy_market_chat",
+    "subj": "a shopper",
+    "loc": "local_market_street",
+    "action": "chatting while choosing fruit",
+    "costume": "casual",
+    "mood": "joy",
+    "personality": "cheerful"
+  },
+  {
+    "case_id": "serious_awkward_office_paperwork",
+    "subj": "an office worker",
+    "loc": "modern_office",
+    "action": "realizing the paperwork is upside down",
+    "costume": "office_lady",
+    "mood": "awkward",
+    "personality": "serious"
   }
 ]

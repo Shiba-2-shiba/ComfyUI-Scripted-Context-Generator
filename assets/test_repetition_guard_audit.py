@@ -9,18 +9,30 @@ sys.path.append(ROOT)
 from tools.audit_repetition_guard import build_repetition_guard_report, evaluate_repetition_guard_thresholds
 
 
+UNIT_STEP_COUNT = 8
+UNIT_SCENARIO_COUNT = 2
+
+
 class TestRepetitionGuardAudit(unittest.TestCase):
     def test_repetition_guard_report_returns_summary(self):
-        report = build_repetition_guard_report(step_count=8, scenario_count=2, seed_start=0)
+        report = build_repetition_guard_report(
+            step_count=UNIT_STEP_COUNT,
+            scenario_count=UNIT_SCENARIO_COUNT,
+            seed_start=0,
+        )
         self.assertIn("summary", report)
         self.assertIn("clothing_repetition", report)
         self.assertIn("scenarios", report)
-        self.assertEqual(report["summary"]["scenario_count"], 2)
-        self.assertEqual(report["summary"]["step_count"], 8)
+        self.assertEqual(report["summary"]["scenario_count"], UNIT_SCENARIO_COUNT)
+        self.assertEqual(report["summary"]["step_count"], UNIT_STEP_COUNT)
         self.assertTrue(report["scenarios"])
 
     def test_repetition_guard_report_includes_explicit_clothing_kpi_block(self):
-        report = build_repetition_guard_report(step_count=8, scenario_count=2, seed_start=0)
+        report = build_repetition_guard_report(
+            step_count=UNIT_STEP_COUNT,
+            scenario_count=UNIT_SCENARIO_COUNT,
+            seed_start=0,
+        )
         clothing = report["clothing_repetition"]
         self.assertEqual(clothing["artifact_version"], 1)
         self.assertIn("kpi", clothing)
@@ -41,7 +53,11 @@ class TestRepetitionGuardAudit(unittest.TestCase):
         )
 
     def test_repetition_guard_clothing_summaries_distinguish_pack_and_signature_levels(self):
-        report = build_repetition_guard_report(step_count=8, scenario_count=2, seed_start=0)
+        report = build_repetition_guard_report(
+            step_count=UNIT_STEP_COUNT,
+            scenario_count=UNIT_SCENARIO_COUNT,
+            seed_start=0,
+        )
         for scenario in report["scenarios"]:
             self.assertLessEqual(
                 scenario["adjacent_costume_signature_repeat_rate"],
@@ -59,16 +75,24 @@ class TestRepetitionGuardAudit(unittest.TestCase):
             self.assertLessEqual(row["adjacent_signature_repeat_rate"], row["adjacent_pack_repeat_rate"])
             self.assertLessEqual(row["recent4_signature_repeat_rate"], row["recent4_pack_repeat_rate"])
 
-    def test_repetition_guard_thresholds_pass_for_default_audit(self):
-        report = build_repetition_guard_report(step_count=32, scenario_count=8, seed_start=0)
+    def test_repetition_guard_thresholds_pass_for_unit_seed_window(self):
+        report = build_repetition_guard_report(
+            step_count=UNIT_STEP_COUNT,
+            scenario_count=UNIT_SCENARIO_COUNT,
+            seed_start=0,
+        )
         evaluation = evaluate_repetition_guard_thresholds(report)
         self.assertTrue(
             evaluation["passed"],
             msg=f"threshold failures: {evaluation['failures']}",
         )
 
-    def test_repetition_guard_thresholds_pass_for_shifted_seed_window(self):
-        report = build_repetition_guard_report(step_count=32, scenario_count=8, seed_start=40)
+    def test_repetition_guard_thresholds_pass_for_shifted_unit_seed_window(self):
+        report = build_repetition_guard_report(
+            step_count=UNIT_STEP_COUNT,
+            scenario_count=UNIT_SCENARIO_COUNT,
+            seed_start=40,
+        )
         evaluation = evaluate_repetition_guard_thresholds(report)
         self.assertTrue(
             evaluation["passed"],

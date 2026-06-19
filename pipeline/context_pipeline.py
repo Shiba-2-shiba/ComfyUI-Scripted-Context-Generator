@@ -47,11 +47,11 @@ def _load_garnish_vocab_module():
     if _garnish_vocab_module is not None:
         return _garnish_vocab_module
     if __package__ and "." in __package__:
-        from .. import improved_pose_emotion_vocab as vocab_module  # type: ignore
+        from ..vocab import garnish as vocab_module  # type: ignore
         importlib.reload(vocab_module)
         _garnish_vocab_module = vocab_module
     else:
-        import improved_pose_emotion_vocab as vocab_module  # type: ignore
+        from vocab import garnish as vocab_module  # type: ignore
         importlib.reload(vocab_module)
         _garnish_vocab_module = vocab_module
     return _garnish_vocab_module
@@ -482,7 +482,7 @@ def apply_garnish(context: Any, seed: int, max_items: int, include_camera: bool,
         ctx = add_warning(ctx, "include_camera is deprecated and ignored by semantic-only garnish generation")
     vocab_module = _load_garnish_vocab_module()
     if not vocab_module:
-        warning = "improved_pose_emotion_vocab.py not found"
+        warning = "vocab.garnish not found"
         ctx = add_warning(ctx, warning)
         return ctx, "", {"error": warning}
 

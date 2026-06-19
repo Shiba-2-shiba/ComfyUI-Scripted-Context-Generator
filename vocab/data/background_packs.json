@@ -6,10 +6,10 @@
       "nostalgic after-school classroom with golden light"
     ],
     "core": [
-      "rows of wooden desks with scratches",
+      "wooden desk with light scratches",
       "dark green blackboard covered in chalk equations",
       "teacher's podium made of aged wood",
-      "bulletin board filled with colorful notices",
+      "bulletin board with one neat notice cluster",
       "cleaning locker in the corner"
     ],
     "texture": [
@@ -17,7 +17,7 @@
       "smooth desk surfaces with graffiti"
     ],
     "props": [
-      "scattered textbooks and open notebooks",
+      "textbook and open notebook set near the desk edge",
       "leather school bags hanging heavily on hooks",
       "pencil case and mechanical piles"
     ],
@@ -32,9 +32,9 @@
       "lunch break"
     ],
     "crowd": [
-      "full of chatting students",
+      "quiet classroom atmosphere",
       "completely empty",
-      "scattered with a few students",
+      "wide open aisle space",
       "teacher supervising"
     ],
     "weather": [
@@ -48,7 +48,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -62,7 +62,7 @@
     ],
     "core": [
       "rusted chain-link fence rattling in wind",
-      "large metallic ventilation units",
+      "single metallic ventilation unit",
       "locked steel access door"
     ],
     "texture": [
@@ -71,7 +71,7 @@
     ],
     "props": [
       "wooden bench with peeling paint",
-      "discarded soda can rolling on floor"
+      "small soda can near the bench"
     ],
     "fx": [
       "strong wind blowing through hair and fence",
@@ -89,7 +89,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -103,7 +103,7 @@
     ],
     "core": [
       "sleek glass partitions dividing the room",
-      "rows of white office desks with pinned notes and task trays",
+      "white office desk with pinned notes and a task tray",
       "black ergonomic mesh chairs",
       "water cooler with bubbling blue water",
       "metal filing cabinet"
@@ -113,7 +113,7 @@
       "highly reflective glass walls"
     ],
     "props": [
-      "stacks of organized documents",
+      "organized document folder",
       "lanyards and ID cards hanging from a rack",
       "whiteboards covered in brainstorming notes",
       "stacked lunch containers beside a tote bag"
@@ -147,7 +147,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -172,7 +172,7 @@
       "damp soil"
     ],
     "props": [
-      "scattered mystical ruins of a lost civilization",
+      "single mossy ruin fragment from a lost civilization",
       "swarms of glowing yellow fireflies"
     ],
     "fx": [
@@ -321,7 +321,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -409,7 +409,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -454,7 +454,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -498,7 +498,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -543,7 +543,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -585,7 +585,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -611,8 +611,8 @@
     ],
     "props": [
       "remote control",
-      "potted house plants",
-      "framed family photos"
+      "potted house plant",
+      "small framed landscape print"
     ],
     "fx": [
       "relaxed domestic vibe",
@@ -629,7 +629,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -656,7 +656,7 @@
     "props": [
       "bicycle leaning against wall",
       "plastic crates",
-      "street cats"
+      "street cat resting near a wall"
     ],
     "fx": [
       "peaceful silence",
@@ -717,7 +717,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -801,7 +801,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -842,7 +842,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -891,7 +891,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -938,7 +938,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -988,7 +988,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1028,7 +1028,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1122,7 +1122,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1216,21 +1216,21 @@
     "label": "散らかったキッチン",
     "environment": [
       "lived-in domestic kitchen",
-      "cramped apartment kitchen with clutter"
+      "compact apartment kitchen after a busy morning"
     ],
     "core": [
-      "kitchen counter pilled with items",
-      "sink overflowing with unwashed dishes",
-      "gas stove with grease stains"
+      "kitchen counter with a few utensils set aside",
+      "sink with a few dishes rinsed clean",
+      "gas stove wiped after cooking"
     ],
     "texture": [
-      "greasy tiled walls",
+      "plain tiled walls",
       "dull stainless steel"
     ],
     "props": [
-      "stacks of unwashed pans",
-      "spilled cooking ingredients",
-      "blender with leftover smoothie"
+      "pan resting on a side rack",
+      "small ingredient bowl on the counter",
+      "blender set neatly beside the wall"
     ],
     "fx": [
       "steam rising from pot",
@@ -1247,7 +1247,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1273,7 +1273,7 @@
     "props": [
       "cute plush toys on bed",
       "glass perfume bottles",
-      "pile of decorative pillows"
+      "single decorative pillow"
     ],
     "fx": [
       "soft dreamy focus",
@@ -1290,7 +1290,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1331,7 +1331,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1375,7 +1375,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1391,7 +1391,7 @@
     "core": [
       "taut sports net",
       "crisp white boundary lines",
-      "tiered audience stands filled with crowd"
+      "tiered audience seating beyond the court"
     ],
     "texture": [
       "synthetic court surface",
@@ -1416,7 +1416,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1456,7 +1456,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1496,7 +1496,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1538,7 +1538,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1661,7 +1661,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1706,7 +1706,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1966,7 +1966,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -1979,7 +1979,7 @@
       "mysterious curio store filled with history"
     ],
     "core": [
-      "wooden shelves filled with oddities",
+      "wooden shelf with a curated oddity display",
       "vintage curved glass display cabinets"
     ],
     "texture": [
@@ -1991,7 +1991,7 @@
       "old mechanical clocks",
       "creepy porcelain dolls",
       "ornate gold-framed mirrors",
-      "stacks of leather-bound books"
+      "leather-bound book stack"
     ],
     "fx": [
       "soft light beams in the air",
@@ -2088,7 +2088,7 @@
       "evening dusk"
     ],
     "crowd": [
-      "bustling with customers",
+      "empty nearby cafe tables",
       "quiet corner table",
       "line of people waiting",
       "sparse and relaxed"
@@ -2436,7 +2436,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -2481,7 +2481,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -2491,11 +2491,11 @@
     "label": "時計仕掛けの工房",
     "environment": [
       "cluttered steampunk inventor's workshop",
-      "clockmaker's room filled with gears"
+      "clockmaker's room with a single exposed gear mechanism"
     ],
     "core": [
-      "huge brass gears mounted on wall",
-      "heavy worktable filled with tools",
+      "large brass gear mounted on wall",
+      "heavy worktable with a compact tool tray",
       "hissing steam pipes",
       "rolled paper blueprints",
       "intricate brass machinery"
@@ -2512,7 +2512,7 @@
     ],
     "fx": [
       "white steam rising",
-      "warm sepia tone photorealism",
+      "warm sepia tone",
       "ticking sound visual"
     ],
     "time": [
@@ -2569,7 +2569,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -2618,7 +2618,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -2666,7 +2666,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -2856,7 +2856,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -2904,7 +2904,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -3000,7 +3000,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -3048,7 +3048,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -3333,7 +3333,7 @@
     "lighting": [
       "settled indoor warmth",
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "task lamps near the desks",
       "windows facing outside"
     ]
@@ -3345,8 +3345,8 @@
       "movie theater entrance hall with poster displays"
     ],
     "core": [
-      "ticket kiosks beside the entrance",
-      "large movie posters along the wall",
+      "ticket kiosk beside the entrance",
+      "large movie poster along the wall",
       "queue lane leading toward the concession stand"
     ],
     "texture": [
@@ -3381,7 +3381,7 @@
     "lighting": [
       "settled indoor warmth",
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "task lamps near the desks",
       "windows facing outside"
     ]
@@ -3475,7 +3475,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -3523,7 +3523,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -3532,12 +3532,12 @@
   "school_clubroom": {
     "label": "部室",
     "environment": [
-      "school clubroom filled with personal items",
+      "school clubroom with a small shared shelf",
       "small student club room after activities"
     ],
     "core": [
       "folding tables pushed against the wall",
-      "shelves stacked with club materials",
+      "shelf with a tidy club materials binder",
       "whiteboard covered with notes and doodles"
     ],
     "texture": [
@@ -3571,7 +3571,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -3619,7 +3619,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -3667,7 +3667,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -3715,7 +3715,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -3906,7 +3906,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -4049,7 +4049,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -4059,7 +4059,7 @@
     "label": "魔法学院図書館",
     "environment": [
       "magic academy library with towering bookcases",
-      "old study hall filled with scroll shelves and reading desks"
+      "old study hall with scroll shelves and one reading desk"
     ],
     "core": [
       "spiral staircase climbing between tall shelves",
@@ -4110,8 +4110,8 @@
     ],
     "core": [
       "large skeleton display suspended over the hall",
-      "glass exhibit cases aligned along the walkway",
-      "information panels mounted beside each display"
+      "glass exhibit case aligned along the walkway",
+      "information panel mounted beside one display"
     ],
     "texture": [
       "polished stone floor under the exhibit cases",
@@ -4144,7 +4144,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"
@@ -4192,7 +4192,7 @@
     ],
     "lighting": [
       "quiet room air",
-      "rows of overhead fixtures",
+      "single overhead light fixture",
       "settled indoor warmth",
       "task lamps near the desks",
       "windows facing outside"

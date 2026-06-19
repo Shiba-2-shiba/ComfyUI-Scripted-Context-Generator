@@ -102,6 +102,23 @@ class TestVocabLint(unittest.TestCase):
         violations.extend(_collect_string_violations(improved_pose_emotion_vocab.MICRO_ACTION_CONCEPTS, "MICRO_ACTION_CONCEPTS"))
         violations.extend(_collect_string_violations(improved_pose_emotion_vocab.MOOD_POOLS, "MOOD_POOLS"))
 
+        solo_prompt_risk_patterns = {
+            "framed family photos": re.compile(r"\bframed family photos\b", re.IGNORECASE),
+            "pile of decorative pillows": re.compile(r"\bpile of decorative pillows\b", re.IGNORECASE),
+            "bustling with customers": re.compile(r"\bbustling with customers\b", re.IGNORECASE),
+        }
+        for pack_name, pack_data in background_vocab.CONCEPT_PACKS.items():
+            for field, values in pack_data.items():
+                if not isinstance(values, list):
+                    continue
+                for index, item in enumerate(values):
+                    lowered_item = str(item)
+                    for label, pattern in solo_prompt_risk_patterns.items():
+                        if pattern.search(lowered_item):
+                            violations.append(
+                                f"background_vocab.CONCEPT_PACKS.{pack_name}.{field}[{index}] contains solo risk '{label}': '{item}'"
+                            )
+
         allow_dirty_packs = {
             "rainy_alley",
             "cyberpunk_street",

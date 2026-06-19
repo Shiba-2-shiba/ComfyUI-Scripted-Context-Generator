@@ -16,29 +16,29 @@ class TestVariationTargetPlanner(unittest.TestCase):
         metrics = scenario_metrics(scope["variation_subjects"], scope["variation_locations"], scope=scope)
 
         self.assertEqual(metrics["unique_subjects"], 120)
-        self.assertEqual(metrics["unique_locations"], 91)
-        self.assertEqual(metrics["row_count"], 5926)
-        self.assertEqual(metrics["total_base_variations"], 105612)
+        self.assertEqual(metrics["unique_locations"], 90)
+        self.assertEqual(metrics["row_count"], 5806)
+        self.assertEqual(metrics["total_base_variations"], 103212)
         self.assertEqual(metrics["missing_pools_count"], 0)
 
-    def test_planning_scenarios_match_current_p11_surface(self):
+    def test_planning_scenarios_match_current_restricted_surface(self):
         report = build_target_report(target=100000)
         scenarios = {row["name"]: row for row in report["scenarios"]}
 
-        self.assertEqual(scenarios["all_known_subjects_current_locations"]["total_base_variations"], 105612)
+        self.assertEqual(scenarios["all_known_subjects_current_locations"]["total_base_variations"], 103212)
         self.assertEqual(
             scenarios["current_subjects_all_action_backed_compatible_locations"]["total_base_variations"],
-            105612,
+            103212,
         )
         self.assertEqual(
             scenarios["all_known_subjects_all_action_backed_compatible_locations"]["total_base_variations"],
-            105612,
+            103212,
         )
 
         action_scenarios = {row["minimum_actions"]: row for row in report["minimum_action_scenarios"]}
-        self.assertEqual(action_scenarios[12]["total_base_variations"], 105612)
-        self.assertEqual(action_scenarios[16]["total_base_variations"], 107660)
-        self.assertEqual(action_scenarios[20]["total_base_variations"], 118520)
+        self.assertEqual(action_scenarios[12]["total_base_variations"], 103212)
+        self.assertEqual(action_scenarios[16]["total_base_variations"], 105260)
+        self.assertEqual(action_scenarios[20]["total_base_variations"], 116120)
         self.assertEqual(report["first_minimum_action_target_met"]["minimum_actions"], 12)
 
     def test_candidate_deltas_are_empty_after_p11_action_refactor(self):
@@ -48,7 +48,7 @@ class TestVariationTargetPlanner(unittest.TestCase):
     def test_action_backed_location_pool_matches_current_scope(self):
         locations = action_backed_compatible_locations()
 
-        self.assertEqual(len(locations), 91)
+        self.assertEqual(len(locations), 90)
         self.assertIn("local_market_street", locations)
         self.assertIn("train_station_platform", locations)
 

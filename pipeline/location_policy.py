@@ -13,7 +13,7 @@ DAILY_LIFE_LOCS = {
     "school_classroom", "school_rooftop", "school_library", "modern_office",
     "boardroom", "office_elevator", "commuter_transport", "street_cafe",
     "cozy_bookstore", "shopping_mall_atrium", "fashion_boutique",
-    "bedroom_boudoir", "messy_kitchen", "clean_modern_kitchen",
+    "bedroom_boudoir", "clean_modern_kitchen",
     "cozy_living_room", "rainy_bus_stop", "suburban_neighborhood",
     "rural_town_street", "picnic_park", "illuminated_park", "winter_street",
     "japanese_garden", "tea_room",

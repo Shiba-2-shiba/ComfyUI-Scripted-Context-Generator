@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0",
+  "notes": "Repo-authored subject-centric descriptor candidates derived from local audit hints. This file does not copy source rows or reference scores. Runtime selection requires both the config gate and descriptor-level mode to be active.",
+  "descriptors": [
+    {
+      "id": "sc_gaze_downcast_01",
+      "personality": [
+        "shy",
+        "gloomy"
+      ],
+      "slot": "gaze",
+      "text": "downcast eyes",
+      "source_hint": [
+        "subject_centric_audit:needs_phrase"
+      ],
+      "rewrite_reason": "Existing repo-style subject gaze descriptor useful for restrained or subdued states.",
+      "risk_note": "Keep as eye behavior, not image-control wording.",
+      "mode": "active",
+      "debug_tags": [
+        "restrained",
+        "low_arousal"
+      ]
+    },
+    {
+      "id": "sc_gaze_curious_01",
+      "personality": [
+        "mysterious",
+        "cheerful"
+      ],
+      "slot": "gaze",
+      "text": "curious eyes",
+      "source_hint": [
+        "subject_centric_audit:needs_phrase"
+      ],
+      "rewrite_reason": "Turns curiosity into subject expression instead of scene mood.",
+      "risk_note": "Semantic behavior only; avoid broad rendering-control wording.",
+      "mode": "active",
+      "debug_tags": [
+        "curiosity"
+      ]
+    },
+    {
+      "id": "sc_expression_calm_01",
+      "personality": [
+        "neutral",
+        "gentle"
+      ],
+      "slot": "expression",
+      "text": "calm expression",
+      "source_hint": [
+        "subject_centric_audit:needs_phrase"
+      ],
+      "rewrite_reason": "Stable low-arousal expression descriptor already aligned with repo wording.",
+      "risk_note": "Use as candidate signal only; do not replace the emotion model wholesale.",
+      "mode": "active",
+      "debug_tags": [
+        "low_arousal"
+      ],
+      "mood_keys": [
+        "calm",
+        "peaceful_relaxed",
+        "relieved"
+      ],
+      "reject_context_terms": [
+        "fighting",
+        "arguing",
+        "battle",
+        "danger",
+        "running",
+        "sprinting",
+        "jumping",
+        "dancing"
+      ]
+    },
+    {
+      "id": "sc_expression_contented_01",
+      "personality": [
+        "gentle",
+        "cheerful"
+      ],
+      "slot": "expression",
+      "text": "contented mouth",
+      "source_hint": [
+        "subject_centric_audit:needs_phrase"
+      ],
+      "rewrite_reason": "Subject-centric mouth expression that stays concise and semantic.",
+      "risk_note": "Avoid overuse in active mode; keep under repetition guard.",
+      "mode": "active",
+      "debug_tags": [
+        "warmth"
+      ],
+      "mood_keys": [
+        "joy",
+        "peaceful_relaxed",
+        "relieved"
+      ],
+      "reject_context_terms": [
+        "fighting",
+        "arguing",
+        "battle",
+        "danger",
+        "crying",
+        "rage",
+        "running",
+        "sprinting"
+      ]
+    },
+    {
+      "id": "sc_expression_reassuring_01",
+      "personality": [
+        "gentle",
+        "faithful"
+      ],
+      "slot": "expression",
+      "text": "small reassuring smile",
+      "source_hint": [
+        "subject_centric_audit:needs_phrase"
+      ],
+      "rewrite_reason": "Provides a gentle personality bridge without relying on style terms.",
+      "risk_note": "Keep as subtle expression, not as a moral judgment.",
+      "mode": "active",
+      "debug_tags": [
+        "care",
+        "warmth"
+      ]
+    },
+    {
+      "id": "sc_posture_relaxed_01",
+      "personality": [
+        "gentle",
+        "neutral"
+      ],
+      "slot": "posture",
+      "text": "relaxed posture",
+      "source_hint": [
+        "subject_centric_audit:needs_phrase"
+      ],
+      "rewrite_reason": "Useful calm body-expression candidate for low-pressure contexts.",
+      "risk_note": "Reject in active or high-pressure action contexts before adoption.",
+      "mode": "passive",
+      "reject_context_terms": [
+        "running",
+        "sprinting",
+        "jumping",
+        "dancing"
+      ],
+      "debug_tags": [
+        "low_arousal"
+      ]
+    },
+    {
+      "id": "sc_hands_touching_lips_01",
+      "personality": [
+        "shy"
+      ],
+      "mood_keys": [
+        "moved"
+      ],
+      "slot": "hands",
+      "text": "fingers resting near her lips",
+      "source_hint": [
+        "subject_centric_audit:needs_phrase"
+      ],
+      "rewrite_reason": "Rewrites a hand-to-face signal into a safe subject gesture.",
+      "risk_note": "Avoid sensual or body-emphasis usage; context filtering is required before active adoption.",
+      "mode": "active",
+      "debug_tags": [
+        "restrained",
+        "hands"
+      ],
+      "reject_context_terms": [
+        "kissing",
+        "cuddling",
+        "bed",
+        "bath",
+        "soaking",
+        "fighting",
+        "running",
+        "sprinting"
+      ]
+    },
+    {
+      "id": "sc_expression_wry_01",
+      "personality": [
+        "mysterious",
+        "serious"
+      ],
+      "slot": "expression",
+      "text": "wry grin",
+      "source_hint": [
+        "subject_centric_audit:needs_phrase"
+      ],
+      "rewrite_reason": "Useful restrained expression for awkward or amused affect.",
+      "risk_note": "Keep as facial expression; avoid style or color drift.",
+      "mode": "active",
+      "debug_tags": [
+        "restrained"
+      ],
+      "mood_keys": [
+        "awkward",
+        "mysterious_curious",
+        "playful"
+      ],
+      "reject_context_terms": [
+        "crying",
+        "fighting",
+        "arguing",
+        "battle",
+        "danger",
+        "rage",
+        "running",
+        "sprinting"
+      ]
+    }
+  ]
+}

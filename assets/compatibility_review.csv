@@ -1,4 +1,4 @@
-subj,loc,canonical_loc,source,source_tag,is_tag,is_universal,is_existing,is_alias,costume
+﻿subj,loc,canonical_loc,source,source_tag,is_tag,is_universal,is_existing,is_alias,costume
 CEO,aquarium,aquarium,tag:daily_public,daily_public,1,0,0,0,office_lady
 CEO,art_gallery,art_gallery,tag:daily_public,daily_public,1,0,0,0,office_lady
 CEO,luxury_bathroom,bedroom_boudoir,tag:luxury,luxury,1,0,0,1,office_lady
@@ -15,7 +15,6 @@ CEO,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,offi
 CEO,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,office_lady
 CEO,luxury_hotel_room,luxury_hotel_room,tag:luxury,luxury,1,0,0,0,office_lady
 CEO,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,office_lady
-CEO,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
 CEO,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,office_lady
 CEO,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,office_lady
 CEO,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,office_lady
@@ -67,7 +66,6 @@ after school walker,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,school_u
 after school walker,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,school_uniform
 after school walker,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,school_uniform
 after school walker,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,school_uniform
-after school walker,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 after school walker,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,school_uniform
 after school walker,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,school_uniform
 after school walker,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,school_uniform
@@ -131,7 +129,6 @@ after work shopper,local_market_street,local_market_street,tag:retail_service,re
 after work shopper,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,office_lady
 after work shopper,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,office_lady
 after work shopper,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,office_lady
-after work shopper,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
 after work shopper,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,office_lady
 after work shopper,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,office_lady
 after work shopper,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,office_lady
@@ -187,7 +184,6 @@ afternoon reader,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 afternoon reader,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cozy_cafe
 afternoon reader,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 afternoon reader,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-afternoon reader,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 afternoon reader,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 afternoon reader,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 afternoon reader,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -231,7 +227,6 @@ airship captain,neon_city_street,cyberpunk_street,tag:scifi,scifi,1,0,0,1,steamp
 airship captain,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,steampunk
 airship captain,illuminated_park,illuminated_park,universal,,0,1,0,0,steampunk
 airship captain,messy_copy_room,messy_copy_room,tag:craft,craft,1,0,0,0,steampunk
-airship captain,messy_kitchen,messy_kitchen,universal,,0,1,0,0,steampunk
 airship captain,museum_hall,museum_hall,universal,,0,1,0,0,steampunk
 airship captain,picnic_park,picnic_park,universal,,0,1,0,0,steampunk
 airship captain,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,steampunk
@@ -258,7 +253,6 @@ apartment neighbor,cozy_living_room,cozy_living_room,tag:domestic,domestic,1,0,0
 apartment neighbor,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,room_loungewear
 apartment neighbor,laundromat,laundromat,tag:domestic,domestic,1,0,0,0,room_loungewear
 apartment neighbor,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,room_loungewear
-apartment neighbor,messy_kitchen,messy_kitchen,tag:domestic,domestic,1,0,0,0,room_loungewear
 apartment neighbor,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,room_loungewear
 apartment neighbor,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,room_loungewear
 apartment neighbor,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,room_loungewear
@@ -302,7 +296,6 @@ apartment resident,laundromat,laundromat,tag:home_life,home_life,1,0,0,0,cozy_ca
 apartment resident,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cozy_cafe
 apartment resident,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 apartment resident,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-apartment resident,messy_kitchen,messy_kitchen,tag:home_life,home_life,1,0,0,0,cozy_cafe
 apartment resident,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 apartment resident,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 apartment resident,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -355,7 +348,6 @@ arcade girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shopping
 arcade girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 arcade girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 arcade girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-arcade girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 arcade girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 arcade girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 arcade girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -409,7 +401,6 @@ arcade regular,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,street_casual
 arcade regular,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,street_casual
 arcade regular,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,street_casual
 arcade regular,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,street_casual
-arcade regular,messy_kitchen,messy_kitchen,universal,,0,1,0,0,street_casual
 arcade regular,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,street_casual
 arcade regular,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,street_casual
 arcade regular,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,street_casual
@@ -463,7 +454,6 @@ bakery clerk,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 bakery clerk,local_market_street,local_market_street,tag:urban,urban,1,0,0,0,cozy_cafe
 bakery clerk,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 bakery clerk,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-bakery clerk,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 bakery clerk,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 bakery clerk,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 bakery clerk,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -510,7 +500,6 @@ balcony gardener,illuminated_park,illuminated_park,tag:daily_public,daily_public
 balcony gardener,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,mori_natural
 balcony gardener,laundromat,laundromat,tag:home_life,home_life,1,0,0,0,mori_natural
 balcony gardener,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,mori_natural
-balcony gardener,messy_kitchen,messy_kitchen,tag:home_life,home_life,1,0,0,0,mori_natural
 balcony gardener,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,mori_natural
 balcony gardener,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,mori_natural
 balcony gardener,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,mori_natural
@@ -546,7 +535,6 @@ blonde elf archer,fantasy_forest,fantasy_forest,existing,,0,0,1,0,fantasy_battle
 blonde elf archer,illuminated_park,illuminated_park,universal,,0,1,0,0,fantasy_battle
 blonde elf archer,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,fantasy_battle
 blonde elf archer,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
-blonde elf archer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,fantasy_battle
 blonde elf archer,museum_hall,museum_hall,universal,,0,1,0,0,fantasy_battle
 blonde elf archer,picnic_park,picnic_park,universal,,0,1,0,0,fantasy_battle
 blonde elf archer,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,fantasy_battle
@@ -585,7 +573,6 @@ bookworm girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,school_uniform
 bookworm girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,school_uniform
 bookworm girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,school_uniform
 bookworm girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,school_uniform
-bookworm girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 bookworm girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,school_uniform
 bookworm girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,school_uniform
 bookworm girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,school_uniform
@@ -645,7 +632,6 @@ boutique customer,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shop
 boutique customer,local_market_street,local_market_street,tag:urban,urban,1,0,0,0,urban_shopping
 boutique customer,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 boutique customer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-boutique customer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 boutique customer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 boutique customer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 boutique customer,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -699,7 +685,6 @@ business girl,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,
 business girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,office_lady
 business girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,office_lady
 business girl,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,office_lady
-business girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
 business girl,modern_office,modern_office,existing,,0,0,1,0,office_lady
 business girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,office_lady
 business girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,office_lady
@@ -755,7 +740,6 @@ cafe barista,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 cafe barista,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cozy_cafe
 cafe barista,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 cafe barista,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-cafe barista,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 cafe barista,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 cafe barista,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 cafe barista,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -808,7 +792,6 @@ cafe customer,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 cafe customer,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cozy_cafe
 cafe customer,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 cafe customer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-cafe customer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 cafe customer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 cafe customer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 cafe customer,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -863,7 +846,6 @@ cafeteria student,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,school_uni
 cafeteria student,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,school_uniform
 cafeteria student,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,school_uniform
 cafeteria student,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,school_uniform
-cafeteria student,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 cafeteria student,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,school_uniform
 cafeteria student,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,school_uniform
 cafeteria student,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,school_uniform
@@ -911,7 +893,6 @@ campus club member,cozy_bookstore,cozy_bookstore,tag:daily_public,daily_public,1
 campus club member,cozy_living_room,cozy_living_room,universal,,0,1,0,0,school_uniform
 campus club member,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,school_uniform
 campus club member,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,school_uniform
-campus club member,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 campus club member,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,school_uniform
 campus club member,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,school_uniform
 campus club member,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,school_uniform
@@ -961,7 +942,6 @@ campus girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,school_uniform
 campus girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,school_uniform
 campus girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,school_uniform
 campus girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,school_uniform
-campus girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 campus girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,school_uniform
 campus girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,school_uniform
 campus girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,school_uniform
@@ -1022,7 +1002,6 @@ campus student,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,school_unifor
 campus student,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,school_uniform
 campus student,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,school_uniform
 campus student,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,school_uniform
-campus student,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 campus student,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,school_uniform
 campus student,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,school_uniform
 campus student,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,school_uniform
@@ -1085,7 +1064,6 @@ chef girl,laundromat,laundromat,tag:home_life,home_life,1,0,0,0,rainy_day
 chef girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,rainy_day
 chef girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,rainy_day
 chef girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,rainy_day
-chef girl,messy_kitchen,messy_kitchen,existing,,0,0,1,0,rainy_day
 chef girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,rainy_day
 chef girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,rainy_day
 chef girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,rainy_day
@@ -1140,7 +1118,6 @@ cinema visitor,karaoke_bar,karaoke_bar,tag:urban,urban,1,0,0,0,urban_shopping
 cinema visitor,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 cinema visitor,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 cinema visitor,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-cinema visitor,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 cinema visitor,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 cinema visitor,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,urban_shopping
 cinema visitor,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -1194,7 +1171,6 @@ city girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shopping
 city girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 city girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 city girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-city girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 city girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 city girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 city girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -1234,7 +1210,6 @@ clockwork artisan,cozy_bookstore,cozy_bookstore,universal,,0,1,0,0,steampunk
 clockwork artisan,cozy_living_room,cozy_living_room,universal,,0,1,0,0,steampunk
 clockwork artisan,illuminated_park,illuminated_park,universal,,0,1,0,0,steampunk
 clockwork artisan,messy_copy_room,messy_copy_room,tag:craft,craft,1,0,0,0,steampunk
-clockwork artisan,messy_kitchen,messy_kitchen,universal,,0,1,0,0,steampunk
 clockwork artisan,museum_hall,museum_hall,universal,,0,1,0,0,steampunk
 clockwork artisan,picnic_park,picnic_park,universal,,0,1,0,0,steampunk
 clockwork artisan,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,steampunk
@@ -1272,7 +1247,6 @@ club member,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,school_uniform
 club member,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,school_uniform
 club member,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,school_uniform
 club member,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,school_uniform
-club member,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 club member,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,school_uniform
 club member,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,school_uniform
 club member,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,school_uniform
@@ -1334,7 +1308,6 @@ community organizer,local_market_street,local_market_street,tag:retail_service,r
 community organizer,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 community organizer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
 community organizer,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,cozy_cafe
-community organizer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 community organizer,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,cozy_cafe
 community organizer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 community organizer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
@@ -1393,7 +1366,6 @@ commuter,local_market_street,local_market_street,tag:retail_service,retail_servi
 commuter,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,office_lady
 commuter,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,office_lady
 commuter,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,office_lady
-commuter,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
 commuter,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,office_lady
 commuter,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,office_lady
 commuter,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,office_lady
@@ -1450,7 +1422,6 @@ convenience clerk,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 convenience clerk,local_market_street,local_market_street,tag:urban,urban,1,0,0,0,cozy_cafe
 convenience clerk,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 convenience clerk,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-convenience clerk,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 convenience clerk,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 convenience clerk,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 convenience clerk,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -1493,7 +1464,6 @@ coworking freelancer,illuminated_park,illuminated_park,tag:daily_public,daily_pu
 coworking freelancer,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,office_lady
 coworking freelancer,luxury_hotel_lobby,luxury_hotel_lobby,tag:office,office,1,0,0,0,office_lady
 coworking freelancer,messy_copy_room,messy_copy_room,tag:office,office,1,0,0,0,office_lady
-coworking freelancer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
 coworking freelancer,modern_office,modern_office,tag:office,office,1,0,0,0,office_lady
 coworking freelancer,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,office_lady
 coworking freelancer,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,office_lady
@@ -1542,7 +1512,6 @@ cyberpunk girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cyberpunk_nig
 cyberpunk girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cyberpunk_night
 cyberpunk girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 cyberpunk girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cyberpunk_night
-cyberpunk girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cyberpunk_night
 cyberpunk girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 cyberpunk girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 cyberpunk girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cyberpunk_night
@@ -1600,7 +1569,6 @@ cyberpunk hacker,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cyberpunk_n
 cyberpunk hacker,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cyberpunk_night
 cyberpunk hacker,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 cyberpunk hacker,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cyberpunk_night
-cyberpunk hacker,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cyberpunk_night
 cyberpunk hacker,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 cyberpunk hacker,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 cyberpunk hacker,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cyberpunk_night
@@ -1659,7 +1627,6 @@ cyberpunk mercenary,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cyberpun
 cyberpunk mercenary,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cyberpunk_night
-cyberpunk mercenary,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cyberpunk_night
 cyberpunk mercenary,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 cyberpunk mercenary,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cyberpunk_night
@@ -1714,7 +1681,6 @@ dancer girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,exotic_dancer
 dancer girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,exotic_dancer
 dancer girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,exotic_dancer
 dancer girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,exotic_dancer
-dancer girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,exotic_dancer
 dancer girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,exotic_dancer
 dancer girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,exotic_dancer
 dancer girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,exotic_dancer
@@ -1770,7 +1736,6 @@ detective,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,secret_agent
 detective,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,secret_agent
 detective,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,secret_agent
 detective,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,secret_agent
-detective,messy_kitchen,messy_kitchen,universal,,0,1,0,0,secret_agent
 detective,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,secret_agent
 detective,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,secret_agent
 detective,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,secret_agent
@@ -1834,7 +1799,6 @@ doll-like girl,local_market_street,local_market_street,tag:retail_service,retail
 doll-like girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,gothic_lolita
 doll-like girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,gothic_lolita
 doll-like girl,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
-doll-like girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gothic_lolita
 doll-like girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,gothic_lolita
 doll-like girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,gothic_lolita
 doll-like girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,gothic_lolita
@@ -1887,7 +1851,6 @@ family diner,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 family diner,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
 family diner,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 family diner,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-family diner,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 family diner,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 family diner,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
 family diner,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -1930,7 +1893,6 @@ fantasy warrior,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,fantasy_
 fantasy warrior,illuminated_park,illuminated_park,universal,,0,1,0,0,fantasy_battle
 fantasy warrior,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,fantasy_battle
 fantasy warrior,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
-fantasy warrior,messy_kitchen,messy_kitchen,universal,,0,1,0,0,fantasy_battle
 fantasy warrior,museum_hall,museum_hall,universal,,0,1,0,0,fantasy_battle
 fantasy warrior,picnic_park,picnic_park,universal,,0,1,0,0,fantasy_battle
 fantasy warrior,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,fantasy_battle
@@ -1968,7 +1930,6 @@ fashionista,karaoke_bar,karaoke_bar,existing,,0,0,1,0,urban_shopping
 fashionista,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 fashionista,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 fashionista,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-fashionista,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 fashionista,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 fashionista,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 fashionista,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -2015,7 +1976,6 @@ female knight,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,fantasy_ba
 female knight,illuminated_park,illuminated_park,universal,,0,1,0,0,fantasy_battle
 female knight,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,fantasy_battle
 female knight,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
-female knight,messy_kitchen,messy_kitchen,universal,,0,1,0,0,fantasy_battle
 female knight,museum_hall,museum_hall,universal,,0,1,0,0,fantasy_battle
 female knight,picnic_park,picnic_park,universal,,0,1,0,0,fantasy_battle
 female knight,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,fantasy_battle
@@ -2048,7 +2008,6 @@ fitness model,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,gym_workout
 fitness model,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,gym_workout
 fitness model,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,gym_workout
 fitness model,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,gym_workout
-fitness model,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gym_workout
 fitness model,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,gym_workout
 fitness model,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,gym_workout
 fitness model,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,gym_workout
@@ -2088,7 +2047,6 @@ flower girl,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,mori_natural
 flower girl,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,mori_natural
 flower girl,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,mori_natural
 flower girl,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,mori_natural
-flower girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,mori_natural
 flower girl,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,mori_natural
 flower girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,mori_natural
 flower girl,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,mori_natural
@@ -2132,7 +2090,6 @@ food court visitor,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_sho
 food court visitor,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 food court visitor,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 food court visitor,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-food court visitor,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 food court visitor,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 food court visitor,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 food court visitor,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -2180,7 +2137,6 @@ gallery sketcher,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,mori_natura
 gallery sketcher,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,mori_natural
 gallery sketcher,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,mori_natural
 gallery sketcher,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,mori_natural
-gallery sketcher,messy_kitchen,messy_kitchen,universal,,0,1,0,0,mori_natural
 gallery sketcher,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,mori_natural
 gallery sketcher,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,mori_natural
 gallery sketcher,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,mori_natural
@@ -2222,7 +2178,6 @@ geisha,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,t
 geisha,japanese_bath,japanese_bath,tag:japanese,japanese,1,0,0,0,traditional_japanese
 geisha,japanese_garden,japanese_garden,tag:japanese,japanese,1,0,0,0,traditional_japanese
 geisha,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,traditional_japanese
-geisha,messy_kitchen,messy_kitchen,universal,,0,1,0,0,traditional_japanese
 geisha,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,traditional_japanese
 geisha,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,traditional_japanese
 geisha,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,traditional_japanese
@@ -2274,7 +2229,6 @@ gothic doll,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,go
 gothic doll,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,gothic_lolita
 gothic doll,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
 gothic doll,messy_copy_room,messy_copy_room,existing,,0,0,1,0,gothic_lolita
-gothic doll,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gothic_lolita
 gothic doll,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,gothic_lolita
 gothic doll,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,gothic_lolita
 gothic doll,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,gothic_lolita
@@ -2335,7 +2289,6 @@ gothic girl,local_market_street,local_market_street,tag:retail_service,retail_se
 gothic girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,gothic_lolita
 gothic girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,gothic_lolita
 gothic girl,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,gothic_lolita
-gothic girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gothic_lolita
 gothic girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,gothic_lolita
 gothic girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,gothic_lolita
 gothic girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,gothic_lolita
@@ -2382,7 +2335,6 @@ guitarist,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,rock_concert
 guitarist,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,rock_concert
 guitarist,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,rock_concert
 guitarist,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,rock_concert
-guitarist,messy_kitchen,messy_kitchen,universal,,0,1,0,0,rock_concert
 guitarist,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,rock_concert
 guitarist,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,rock_concert
 guitarist,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,rock_concert
@@ -2425,7 +2377,6 @@ gym girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,gym_workout
 gym girl,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,gym_workout
 gym girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,gym_workout
 gym girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,gym_workout
-gym girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gym_workout
 gym girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,gym_workout
 gym girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,gym_workout
 gym girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,gym_workout
@@ -2477,7 +2428,6 @@ home girl,laundromat,laundromat,tag:home_life,home_life,1,0,0,0,room_loungewear
 home girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,room_loungewear
 home girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,room_loungewear
 home girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,room_loungewear
-home girl,messy_kitchen,messy_kitchen,tag:home_life,home_life,1,0,0,0,room_loungewear
 home girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,room_loungewear
 home girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,room_loungewear
 home girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,room_loungewear
@@ -2530,7 +2480,6 @@ idol performer,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,idols_stage
 idol performer,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,idols_stage
 idol performer,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,idols_stage
 idol performer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,idols_stage
-idol performer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,idols_stage
 idol performer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,idols_stage
 idol performer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,idols_stage
 idol performer,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,idols_stage
@@ -2575,7 +2524,6 @@ injured knight,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,fantasy_b
 injured knight,illuminated_park,illuminated_park,universal,,0,1,0,0,fantasy_battle
 injured knight,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,fantasy_battle
 injured knight,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
-injured knight,messy_kitchen,messy_kitchen,universal,,0,1,0,0,fantasy_battle
 injured knight,museum_hall,museum_hall,universal,,0,1,0,0,fantasy_battle
 injured knight,picnic_park,picnic_park,universal,,0,1,0,0,fantasy_battle
 injured knight,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,fantasy_battle
@@ -2603,7 +2551,6 @@ inventor girl,neon_city_street,cyberpunk_street,tag:scifi,scifi,1,0,0,1,steampun
 inventor girl,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,steampunk
 inventor girl,illuminated_park,illuminated_park,universal,,0,1,0,0,steampunk
 inventor girl,messy_copy_room,messy_copy_room,tag:craft,craft,1,0,0,0,steampunk
-inventor girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,steampunk
 inventor girl,museum_hall,museum_hall,universal,,0,1,0,0,steampunk
 inventor girl,picnic_park,picnic_park,universal,,0,1,0,0,steampunk
 inventor girl,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,steampunk
@@ -2635,7 +2582,6 @@ kendo girl,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,traditional_j
 kendo girl,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,traditional_japanese
 kendo girl,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,traditional_japanese
 kendo girl,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,traditional_japanese
-kendo girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,traditional_japanese
 kendo girl,museum_hall,museum_hall,tag:quiet_indoor,quiet_indoor,1,0,0,0,traditional_japanese
 kendo girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,traditional_japanese
 kendo girl,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,traditional_japanese
@@ -2687,7 +2633,6 @@ late shopper,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shopping
 late shopper,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 late shopper,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 late shopper,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-late shopper,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 late shopper,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 late shopper,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 late shopper,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -2729,7 +2674,6 @@ laundry day girl,cozy_living_room,cozy_living_room,tag:domestic,domestic,1,0,0,0
 laundry day girl,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,room_loungewear
 laundry day girl,laundromat,laundromat,tag:domestic,domestic,1,0,0,0,room_loungewear
 laundry day girl,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,room_loungewear
-laundry day girl,messy_kitchen,messy_kitchen,tag:domestic,domestic,1,0,0,0,room_loungewear
 laundry day girl,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,room_loungewear
 laundry day girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,room_loungewear
 laundry day girl,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,room_loungewear
@@ -2772,7 +2716,6 @@ library girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,school_uniform
 library girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,school_uniform
 library girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,school_uniform
 library girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,school_uniform
-library girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 library girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,school_uniform
 library girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,school_uniform
 library girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,school_uniform
@@ -2834,7 +2777,6 @@ library visitor,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 library visitor,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cozy_cafe
 library visitor,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 library visitor,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-library visitor,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 library visitor,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 library visitor,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 library visitor,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,cozy_cafe
@@ -2894,7 +2836,6 @@ local market vendor,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_caf
 local market vendor,local_market_street,local_market_street,tag:urban,urban,1,0,0,0,cozy_cafe
 local market vendor,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 local market vendor,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-local market vendor,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 local market vendor,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 local market vendor,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 local market vendor,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -2950,7 +2891,6 @@ local volunteer,laundromat,laundromat,tag:home_life,home_life,1,0,0,0,cozy_cafe
 local volunteer,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cozy_cafe
 local volunteer,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 local volunteer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-local volunteer,messy_kitchen,messy_kitchen,tag:home_life,home_life,1,0,0,0,cozy_cafe
 local volunteer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 local volunteer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 local volunteer,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -3006,7 +2946,6 @@ lunch break girl,local_market_street,local_market_street,tag:retail_service,reta
 lunch break girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,office_lady
 lunch break girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,office_lady
 lunch break girl,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,office_lady
-lunch break girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
 lunch break girl,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,office_lady
 lunch break girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,office_lady
 lunch break girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,office_lady
@@ -3062,7 +3001,6 @@ mall browser,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shopping
 mall browser,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,urban_shopping
 mall browser,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 mall browser,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-mall browser,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 mall browser,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 mall browser,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,urban_shopping
 mall browser,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -3114,7 +3052,6 @@ market shopper,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shoppin
 market shopper,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 market shopper,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 market shopper,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-market shopper,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 market shopper,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 market shopper,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 market shopper,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -3158,7 +3095,6 @@ mori girl,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,mori_natural
 mori girl,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,mori_natural
 mori girl,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,mori_natural
 mori girl,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,mori_natural
-mori girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,mori_natural
 mori girl,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,mori_natural
 mori girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,mori_natural
 mori girl,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,mori_natural
@@ -3202,7 +3138,6 @@ morning customer,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 morning customer,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cozy_cafe
 morning customer,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 morning customer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-morning customer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 morning customer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 morning customer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 morning customer,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -3258,7 +3193,6 @@ morning girl,laundromat,laundromat,tag:home_life,home_life,1,0,0,0,room_loungewe
 morning girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,room_loungewear
 morning girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,room_loungewear
 morning girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,room_loungewear
-morning girl,messy_kitchen,messy_kitchen,tag:home_life,home_life,1,0,0,0,room_loungewear
 morning girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,room_loungewear
 morning girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,room_loungewear
 morning girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,room_loungewear
@@ -3309,7 +3243,6 @@ mountain resort guest,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,beach_
 mountain resort guest,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,beach_resort
 mountain resort guest,luxury_hotel_lobby,luxury_hotel_lobby,tag:resort,resort,1,0,0,0,beach_resort
 mountain resort guest,luxury_hotel_room,luxury_hotel_room,tag:resort,resort,1,0,0,0,beach_resort
-mountain resort guest,messy_kitchen,messy_kitchen,universal,,0,1,0,0,beach_resort
 mountain resort guest,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,beach_resort
 mountain resort guest,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,beach_resort
 mountain resort guest,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,beach_resort
@@ -3360,7 +3293,6 @@ moviegoer,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shopping
 moviegoer,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 moviegoer,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 moviegoer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-moviegoer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 moviegoer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 moviegoer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 moviegoer,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -3408,7 +3340,6 @@ museum docent,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 museum docent,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
 museum docent,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 museum docent,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-museum docent,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 museum docent,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 museum docent,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
 museum docent,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -3450,7 +3381,6 @@ nature wanderer,fantasy_forest,fantasy_forest,existing,,0,0,1,0,mori_natural
 nature wanderer,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,mori_natural
 nature wanderer,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,mori_natural
 nature wanderer,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,mori_natural
-nature wanderer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,mori_natural
 nature wanderer,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,mori_natural
 nature wanderer,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,mori_natural
 nature wanderer,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,mori_natural
@@ -3495,7 +3425,6 @@ neighborhood student,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,school_
 neighborhood student,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,school_uniform
 neighborhood student,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,school_uniform
 neighborhood student,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,school_uniform
-neighborhood student,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 neighborhood student,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,school_uniform
 neighborhood student,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,school_uniform
 neighborhood student,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,school_uniform
@@ -3554,7 +3483,6 @@ neighborhood walker,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,street_c
 neighborhood walker,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,street_casual
 neighborhood walker,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,street_casual
 neighborhood walker,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,street_casual
-neighborhood walker,messy_kitchen,messy_kitchen,universal,,0,1,0,0,street_casual
 neighborhood walker,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,street_casual
 neighborhood walker,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,street_casual
 neighborhood walker,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,street_casual
@@ -3608,7 +3536,6 @@ noble lady,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,sleek_evening_gow
 noble lady,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,sleek_evening_gown
 noble lady,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,sleek_evening_gown
 noble lady,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,sleek_evening_gown
-noble lady,messy_kitchen,messy_kitchen,universal,,0,1,0,0,sleek_evening_gown
 noble lady,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,sleek_evening_gown
 noble lady,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,sleek_evening_gown
 noble lady,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,sleek_evening_gown
@@ -3665,7 +3592,6 @@ office girl,local_market_street,local_market_street,tag:retail_service,retail_se
 office girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,office_lady
 office girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,office_lady
 office girl,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,office_lady
-office girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
 office girl,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,office_lady
 office girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,office_lady
 office girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,office_lady
@@ -3722,7 +3648,6 @@ office worker,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,
 office worker,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,office_lady
 office worker,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,office_lady
 office worker,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,office_lady
-office worker,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
 office worker,modern_office,modern_office,existing,,0,0,1,0,office_lady
 office worker,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,office_lady
 office worker,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,office_lady
@@ -3771,7 +3696,6 @@ opera singer,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,gothic_lolita
 opera singer,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,gothic_lolita
 opera singer,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,gothic_lolita
 opera singer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,gothic_lolita
-opera singer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gothic_lolita
 opera singer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,gothic_lolita
 opera singer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,gothic_lolita
 opera singer,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,gothic_lolita
@@ -3825,7 +3749,6 @@ park girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 park girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cozy_cafe
 park girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 park girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-park girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 park girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 park girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 park girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
@@ -3877,7 +3800,6 @@ pharmacy customer,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 pharmacy customer,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,cozy_cafe
 pharmacy customer,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 pharmacy customer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-pharmacy customer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 pharmacy customer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 pharmacy customer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 pharmacy customer,neighborhood_crosswalk,neighborhood_crosswalk,tag:suburban,suburban,1,0,0,0,cozy_cafe
@@ -3928,7 +3850,6 @@ playground caretaker,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_ca
 playground caretaker,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cozy_cafe
 playground caretaker,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 playground caretaker,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-playground caretaker,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 playground caretaker,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 playground caretaker,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 playground caretaker,neighborhood_crosswalk,neighborhood_crosswalk,tag:suburban,suburban,1,0,0,0,cozy_cafe
@@ -3983,7 +3904,6 @@ project assistant,local_market_street,local_market_street,tag:retail_service,ret
 project assistant,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,office_lady
 project assistant,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,office_lady
 project assistant,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,office_lady
-project assistant,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
 project assistant,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,office_lady
 project assistant,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,office_lady
 project assistant,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,office_lady
@@ -4029,7 +3949,6 @@ public librarian,cozy_living_room,cozy_living_room,universal,,0,1,0,0,library_gi
 public librarian,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,library_girl
 public librarian,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,library_girl
 public librarian,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,library_girl
-public librarian,messy_kitchen,messy_kitchen,universal,,0,1,0,0,library_girl
 public librarian,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,library_girl
 public librarian,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,library_girl
 public librarian,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,library_girl
@@ -4080,7 +3999,6 @@ quiet reader,laundromat,laundromat,tag:home_life,home_life,1,0,0,0,library_girl
 quiet reader,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,library_girl
 quiet reader,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,library_girl
 quiet reader,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,library_girl
-quiet reader,messy_kitchen,messy_kitchen,tag:home_life,home_life,1,0,0,0,library_girl
 quiet reader,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,library_girl
 quiet reader,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,library_girl
 quiet reader,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,library_girl
@@ -4141,7 +4059,6 @@ rainy day girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,rainy_day
 rainy day girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,rainy_day
 rainy day girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,rainy_day
 rainy day girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,rainy_day
-rainy day girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,rainy_day
 rainy day girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,rainy_day
 rainy day girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,rainy_day
 rainy day girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,rainy_day
@@ -4188,7 +4105,6 @@ recording artist,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,rock_concer
 recording artist,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,rock_concert
 recording artist,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,rock_concert
 recording artist,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,rock_concert
-recording artist,messy_kitchen,messy_kitchen,universal,,0,1,0,0,rock_concert
 recording artist,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,rock_concert
 recording artist,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,rock_concert
 recording artist,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,rock_concert
@@ -4240,7 +4156,6 @@ resident,laundromat,laundromat,tag:home_life,home_life,1,0,0,0,room_loungewear
 resident,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,room_loungewear
 resident,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,room_loungewear
 resident,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,room_loungewear
-resident,messy_kitchen,messy_kitchen,tag:home_life,home_life,1,0,0,0,room_loungewear
 resident,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,room_loungewear
 resident,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,room_loungewear
 resident,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,room_loungewear
@@ -4297,7 +4212,6 @@ riverside walker,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cozy_cafe
 riverside walker,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cozy_cafe
 riverside walker,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cozy_cafe
 riverside walker,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cozy_cafe
-riverside walker,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cozy_cafe
 riverside walker,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cozy_cafe
 riverside walker,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cozy_cafe
 riverside walker,neighborhood_crosswalk,neighborhood_crosswalk,tag:suburban,suburban,1,0,0,0,cozy_cafe
@@ -4350,7 +4264,6 @@ rock singer,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,rock_concert
 rock singer,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,rock_concert
 rock singer,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,rock_concert
 rock singer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,rock_concert
-rock singer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,rock_concert
 rock singer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,rock_concert
 rock singer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,rock_concert
 rock singer,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,rock_concert
@@ -4404,7 +4317,6 @@ rock star,karaoke_bar,karaoke_bar,existing,,0,0,1,0,rock_concert
 rock star,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,rock_concert
 rock star,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,rock_concert
 rock star,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,rock_concert
-rock star,messy_kitchen,messy_kitchen,universal,,0,1,0,0,rock_concert
 rock star,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,rock_concert
 rock star,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,rock_concert
 rock star,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,rock_concert
@@ -4460,7 +4372,6 @@ rooftop neighbor,laundromat,laundromat,tag:home_life,home_life,1,0,0,0,street_ca
 rooftop neighbor,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,street_casual
 rooftop neighbor,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,street_casual
 rooftop neighbor,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,street_casual
-rooftop neighbor,messy_kitchen,messy_kitchen,tag:home_life,home_life,1,0,0,0,street_casual
 rooftop neighbor,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,street_casual
 rooftop neighbor,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,street_casual
 rooftop neighbor,neighborhood_crosswalk,neighborhood_crosswalk,tag:suburban,suburban,1,0,0,0,street_casual
@@ -4506,7 +4417,6 @@ runner,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,gym_workout
 runner,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,gym_workout
 runner,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,gym_workout
 runner,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,gym_workout
-runner,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gym_workout
 runner,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,gym_workout
 runner,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,gym_workout
 runner,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,gym_workout
@@ -4558,7 +4468,6 @@ secret agent,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,secret_agent
 secret agent,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,secret_agent
 secret agent,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,secret_agent
 secret agent,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,secret_agent
-secret agent,messy_kitchen,messy_kitchen,universal,,0,1,0,0,secret_agent
 secret agent,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,secret_agent
 secret agent,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,secret_agent
 secret agent,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,secret_agent
@@ -4614,7 +4523,6 @@ shopping arcade visitor,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urba
 shopping arcade visitor,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,urban_shopping
 shopping arcade visitor,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 shopping arcade visitor,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-shopping arcade visitor,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 shopping arcade visitor,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 shopping arcade visitor,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,urban_shopping
 shopping arcade visitor,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -4666,7 +4574,6 @@ shopping girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shopping
 shopping girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 shopping girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 shopping girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-shopping girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 shopping girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 shopping girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 shopping girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -4710,7 +4617,6 @@ shrine maiden,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,
 shrine maiden,japanese_bath,japanese_bath,tag:japanese,japanese,1,0,0,0,traditional_japanese
 shrine maiden,japanese_garden,japanese_garden,existing,,0,0,1,0,traditional_japanese
 shrine maiden,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,traditional_japanese
-shrine maiden,messy_kitchen,messy_kitchen,universal,,0,1,0,0,traditional_japanese
 shrine maiden,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,traditional_japanese
 shrine maiden,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,traditional_japanese
 shrine maiden,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,traditional_japanese
@@ -4742,7 +4648,6 @@ silver-haired girl,cozy_bookstore,cozy_bookstore,tag:quiet_indoor,quiet_indoor,1
 silver-haired girl,cozy_living_room,cozy_living_room,universal,,0,1,0,0,school_uniform
 silver-haired girl,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,school_uniform
 silver-haired girl,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,school_uniform
-silver-haired girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 silver-haired girl,museum_hall,museum_hall,tag:quiet_indoor,quiet_indoor,1,0,0,0,school_uniform
 silver-haired girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,school_uniform
 silver-haired girl,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,school_uniform
@@ -4795,7 +4700,6 @@ sleepy girl,laundromat,laundromat,tag:home_life,home_life,1,0,0,0,winter_date
 sleepy girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,winter_date
 sleepy girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,winter_date
 sleepy girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,winter_date
-sleepy girl,messy_kitchen,messy_kitchen,tag:home_life,home_life,1,0,0,0,winter_date
 sleepy girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,winter_date
 sleepy girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,winter_date
 sleepy girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,winter_date
@@ -4848,7 +4752,6 @@ solarpunk girl,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,beach_res
 solarpunk girl,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,beach_resort
 solarpunk girl,illuminated_park,illuminated_park,universal,,0,1,0,0,beach_resort
 solarpunk girl,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,beach_resort
-solarpunk girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,beach_resort
 solarpunk girl,museum_hall,museum_hall,universal,,0,1,0,0,beach_resort
 solarpunk girl,picnic_park,picnic_park,universal,,0,1,0,0,beach_resort
 solarpunk girl,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,beach_resort
@@ -4881,7 +4784,6 @@ sorceress,fantasy_forest,fantasy_forest,existing,,0,0,1,0,fantasy_battle
 sorceress,illuminated_park,illuminated_park,universal,,0,1,0,0,fantasy_battle
 sorceress,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,fantasy_battle
 sorceress,magic_academy_library,magic_academy_library,tag:fantasy,fantasy,1,0,0,0,fantasy_battle
-sorceress,messy_kitchen,messy_kitchen,universal,,0,1,0,0,fantasy_battle
 sorceress,museum_hall,museum_hall,universal,,0,1,0,0,fantasy_battle
 sorceress,picnic_park,picnic_park,universal,,0,1,0,0,fantasy_battle
 sorceress,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,fantasy_battle
@@ -4906,7 +4808,6 @@ space engineer,cyber_lab,cyber_lab,existing,,0,0,1,0,scifi_space
 space engineer,neon_city_street,cyberpunk_street,tag:scifi,scifi,1,0,0,1,scifi_space
 space engineer,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,scifi_space
 space engineer,illuminated_park,illuminated_park,universal,,0,1,0,0,scifi_space
-space engineer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,scifi_space
 space engineer,museum_hall,museum_hall,universal,,0,1,0,0,scifi_space
 space engineer,picnic_park,picnic_park,universal,,0,1,0,0,scifi_space
 space engineer,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,scifi_space
@@ -4931,7 +4832,6 @@ space pilot,cyber_lab,cyber_lab,tag:scifi,scifi,1,0,0,0,scifi_space
 space pilot,neon_city_street,cyberpunk_street,tag:scifi,scifi,1,0,0,1,scifi_space
 space pilot,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,scifi_space
 space pilot,illuminated_park,illuminated_park,universal,,0,1,0,0,scifi_space
-space pilot,messy_kitchen,messy_kitchen,universal,,0,1,0,0,scifi_space
 space pilot,museum_hall,museum_hall,universal,,0,1,0,0,scifi_space
 space pilot,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,scifi_space
 space pilot,rural_town_street,rural_town_street,universal,,0,1,0,0,scifi_space
@@ -4972,7 +4872,6 @@ spy agent,local_market_street,local_market_street,tag:retail_service,retail_serv
 spy agent,luxury_hotel_lobby,luxury_hotel_lobby,existing,,0,0,1,0,secret_agent
 spy agent,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,secret_agent
 spy agent,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,secret_agent
-spy agent,messy_kitchen,messy_kitchen,universal,,0,1,0,0,secret_agent
 spy agent,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,secret_agent
 spy agent,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,secret_agent
 spy agent,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,secret_agent
@@ -5021,7 +4920,6 @@ stargazer,fantasy_forest,fantasy_forest,tag:nature,nature,1,0,0,0,scifi_space
 stargazer,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,scifi_space
 stargazer,illuminated_park,illuminated_park,universal,,0,1,0,0,scifi_space
 stargazer,japanese_garden,japanese_garden,tag:nature,nature,1,0,0,0,scifi_space
-stargazer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,scifi_space
 stargazer,museum_hall,museum_hall,universal,,0,1,0,0,scifi_space
 stargazer,picnic_park,picnic_park,universal,,0,1,0,0,scifi_space
 stargazer,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,scifi_space
@@ -5062,7 +4960,6 @@ station traveler,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shopp
 station traveler,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 station traveler,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 station traveler,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-station traveler,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 station traveler,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 station traveler,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 station traveler,neighborhood_crosswalk,neighborhood_crosswalk,tag:suburban,suburban,1,0,0,0,urban_shopping
@@ -5106,7 +5003,6 @@ steampunk inventor,neon_city_street,cyberpunk_street,tag:scifi,scifi,1,0,0,1,ste
 steampunk inventor,high_tech_medbay,high_tech_medbay,tag:scifi,scifi,1,0,0,0,steampunk_inventor
 steampunk inventor,illuminated_park,illuminated_park,universal,,0,1,0,0,steampunk_inventor
 steampunk inventor,messy_copy_room,messy_copy_room,tag:craft,craft,1,0,0,0,steampunk_inventor
-steampunk inventor,messy_kitchen,messy_kitchen,universal,,0,1,0,0,steampunk_inventor
 steampunk inventor,museum_hall,museum_hall,universal,,0,1,0,0,steampunk_inventor
 steampunk inventor,picnic_park,picnic_park,universal,,0,1,0,0,steampunk_inventor
 steampunk inventor,rainy_bus_stop,rainy_alley,universal,,0,1,0,1,steampunk_inventor
@@ -5145,7 +5041,6 @@ street dancer,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,cyberpunk_nigh
 street dancer,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,cyberpunk_night
 street dancer,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 street dancer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,cyberpunk_night
-street dancer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,cyberpunk_night
 street dancer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 street dancer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,cyberpunk_night
 street dancer,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,cyberpunk_night
@@ -5199,7 +5094,6 @@ street girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,street_casual
 street girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,street_casual
 street girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,street_casual
 street girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,street_casual
-street girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,street_casual
 street girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,street_casual
 street girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,street_casual
 street girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,street_casual
@@ -5253,7 +5147,6 @@ student,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,
 student,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,school_uniform
 student,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,school_uniform
 student,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,school_uniform
-student,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 student,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,school_uniform
 student,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,school_uniform
 student,neighborhood_crosswalk,neighborhood_crosswalk,tag:transit,transit,1,0,0,0,school_uniform
@@ -5312,7 +5205,6 @@ subway passenger,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,street_casu
 subway passenger,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,street_casual
 subway passenger,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,street_casual
 subway passenger,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,street_casual
-subway passenger,messy_kitchen,messy_kitchen,universal,,0,1,0,0,street_casual
 subway passenger,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,street_casual
 subway passenger,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,street_casual
 subway passenger,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,street_casual
@@ -5365,7 +5257,6 @@ supermarket shopper,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_sh
 supermarket shopper,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,urban_shopping
 supermarket shopper,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 supermarket shopper,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-supermarket shopper,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 supermarket shopper,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 supermarket shopper,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 supermarket shopper,neighborhood_crosswalk,neighborhood_crosswalk,tag:suburban,suburban,1,0,0,0,urban_shopping
@@ -5410,7 +5301,6 @@ surfer girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,beach_resort
 surfer girl,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,beach_resort
 surfer girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,beach_resort
 surfer girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,beach_resort
-surfer girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,beach_resort
 surfer girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,beach_resort
 surfer girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,beach_resort
 surfer girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,beach_resort
@@ -5448,7 +5338,6 @@ train commuter,cozy_living_room,cozy_living_room,universal,,0,1,0,0,office_lady
 train commuter,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,office_lady
 train commuter,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,office_lady
 train commuter,messy_copy_room,messy_copy_room,tag:workplace,workplace,1,0,0,0,office_lady
-train commuter,messy_kitchen,messy_kitchen,universal,,0,1,0,0,office_lady
 train commuter,modern_office,modern_office,tag:workplace,workplace,1,0,0,0,office_lady
 train commuter,museum_hall,museum_hall,tag:daily_public,daily_public,1,0,0,0,office_lady
 train commuter,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,office_lady
@@ -5482,7 +5371,6 @@ university student,cozy_bookstore,cozy_bookstore,tag:quiet_indoor,quiet_indoor,1
 university student,cozy_living_room,cozy_living_room,universal,,0,1,0,0,school_uniform
 university student,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0,0,school_uniform
 university student,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,school_uniform
-university student,messy_kitchen,messy_kitchen,universal,,0,1,0,0,school_uniform
 university student,museum_hall,museum_hall,tag:quiet_indoor,quiet_indoor,1,0,0,0,school_uniform
 university student,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,school_uniform
 university student,neighborhood_playground,neighborhood_playground,tag:daily_public,daily_public,1,0,0,0,school_uniform
@@ -5531,7 +5419,6 @@ urban shopper,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shopping
 urban shopper,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 urban shopper,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 urban shopper,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-urban shopper,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 urban shopper,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 urban shopper,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 urban shopper,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -5583,7 +5470,6 @@ vacation girl,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,
 vacation girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,beach_resort
 vacation girl,luxury_hotel_lobby,luxury_hotel_lobby,existing,,0,0,1,0,beach_resort
 vacation girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,beach_resort
-vacation girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,beach_resort
 vacation girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,beach_resort
 vacation girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,beach_resort
 vacation girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,beach_resort
@@ -5634,7 +5520,6 @@ vacationer,illuminated_park,illuminated_park,tag:daily_public,daily_public,1,0,0
 vacationer,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,beach_resort
 vacationer,luxury_hotel_lobby,luxury_hotel_lobby,existing,,0,0,1,0,beach_resort
 vacationer,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,beach_resort
-vacationer,messy_kitchen,messy_kitchen,universal,,0,1,0,0,beach_resort
 vacationer,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,beach_resort
 vacationer,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,beach_resort
 vacationer,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,beach_resort
@@ -5687,7 +5572,6 @@ weekend traveler,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shopp
 weekend traveler,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 weekend traveler,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 weekend traveler,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-weekend traveler,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 weekend traveler,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 weekend traveler,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 weekend traveler,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -5741,7 +5625,6 @@ window shopper,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,urban_shoppin
 window shopper,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,urban_shopping
 window shopper,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,urban_shopping
 window shopper,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,urban_shopping
-window shopper,messy_kitchen,messy_kitchen,universal,,0,1,0,0,urban_shopping
 window shopper,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,urban_shopping
 window shopper,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,urban_shopping
 window shopper,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,urban_shopping
@@ -5795,7 +5678,6 @@ winter date girl,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,winter_date
 winter date girl,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,winter_date
 winter date girl,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,winter_date
 winter date girl,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,winter_date
-winter date girl,messy_kitchen,messy_kitchen,universal,,0,1,0,0,winter_date
 winter date girl,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,winter_date
 winter date girl,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,winter_date
 winter date girl,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,winter_date
@@ -5849,7 +5731,6 @@ winter traveler,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,winter_date
 winter traveler,local_market_street,local_market_street,tag:retail_service,retail_service,1,0,0,0,winter_date
 winter traveler,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,winter_date
 winter traveler,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,winter_date
-winter traveler,messy_kitchen,messy_kitchen,universal,,0,1,0,0,winter_date
 winter traveler,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,winter_date
 winter traveler,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,winter_date
 winter traveler,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,winter_date
@@ -5901,7 +5782,6 @@ yoga instructor,karaoke_bar,karaoke_bar,tag:leisure,leisure,1,0,0,0,gym_workout
 yoga instructor,local_market_street,local_market_street,tag:daily_public,daily_public,1,0,0,0,gym_workout
 yoga instructor,luxury_hotel_lobby,luxury_hotel_lobby,tag:leisure,leisure,1,0,0,0,gym_workout
 yoga instructor,luxury_hotel_room,luxury_hotel_room,tag:leisure,leisure,1,0,0,0,gym_workout
-yoga instructor,messy_kitchen,messy_kitchen,universal,,0,1,0,0,gym_workout
 yoga instructor,mountain_resort,mountain_resort,tag:leisure,leisure,1,0,0,0,gym_workout
 yoga instructor,museum_hall,museum_hall,tag:leisure,leisure,1,0,0,0,gym_workout
 yoga instructor,neighborhood_crosswalk,neighborhood_crosswalk,tag:daily_public,daily_public,1,0,0,0,gym_workout

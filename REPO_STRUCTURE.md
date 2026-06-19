@@ -114,6 +114,7 @@ active / recommended な workflow sample は `ComfyUI-workflow-context.json` だ
 │   ├── test_character_resolution.py         # character resolver 回帰
 │   ├── test_prompt_renderer.py              # prompt renderer 回帰
 │   ├── test_deprecated_behavior.py          # legacy surface / no-op 回帰
+│   ├── test_compatibility_boundaries.py     # compatibility facade import 境界
 │   ├── test_asset_validator.py              # asset validator 回帰
 │   ├── test_context_content_pipeline.py     # content pipeline 回帰
 │   ├── test_context_pipeline.py             # scene / garnish 回帰
@@ -133,8 +134,8 @@ active / recommended な workflow sample は `ComfyUI-workflow-context.json` だ
 │   ├── evaluate_kpi.py                      # KPI 評価
 │   ├── calc_variations.py                   # バリエーション規模計測
 │   ├── fixtures/                            # テスト入力
-│   ├── results/                             # 生成結果の置き場
-│   └── archive/                             # 過去の検証資産
+│   ├── results/                             # ignored generated audit outputs
+│   └── archive/                             # historical assets, not active checks
 ├── tools/
 │   ├── check_widgets_values.py              # sample workflow の widget 検証
 │   ├── verify_full_flow.py                  # end-to-end 検証
@@ -192,5 +193,6 @@ refactor 完了後も、意図的に残している compatibility surface があ
 - `meta.style`: legacy read-only metadata。prompt 生成では無視し、`ContextInspector` / context payload の `notes` で可視化
 - `ContextGarnish.include_camera`: public UI からは削除済み。hidden legacy arg としてのみ残り no-op
 - `pipeline.content_pipeline`: 旧 import 先のための facade。実装本体ではない。repo-owned で意図的に残している caller は `assets/test_deprecated_behavior.py` のみ
+- root `background_vocab.py` / `clothing_vocab.py` / `improved_pose_emotion_vocab.py`: 外部互換用 facade。repo-owned runtime は `vocab.background` / `vocab.clothing` / `vocab.garnish` を直接 import する。`assets/test_compatibility_boundaries.py` がこの境界を検証する
 
 asset を編集したら、最低限 `asset_validator.py` と該当 `assets/test_*.py` を一緒に見る前提です。

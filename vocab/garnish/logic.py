@@ -9,12 +9,14 @@ from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 if __package__ and __package__.count(".") >= 2:
     from ...core.semantic_families import semantic_families_for_text
     from ...core.semantic_policy import sanitize_sequence
+    from ...core.solo_safety import is_solo_safe_text
     from ...pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
     from .. import emotion_vad
     from .. import personality_semantics
 else:
     from core.semantic_families import semantic_families_for_text
     from core.semantic_policy import sanitize_sequence
+    from core.solo_safety import is_solo_safe_text
     from pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
     from vocab import emotion_vad
     from vocab import personality_semantics
@@ -97,7 +99,7 @@ PERSONALITY_GARNISH_BIAS: Dict[str, Dict[str, Any]] = {
         "prefer_category": "joy",
     },
     "energetic": {
-        "prefer": ["bright smile", "leaning forward", "hands moving as she talks"],
+        "prefer": ["bright smile", "leaning forward", "one hand lifted mid-gesture"],
         "prefer_category": "joy",
     },
     "gloomy": {
@@ -509,7 +511,7 @@ def _pick_first_valid(
     action_text: str,
     existing_tags: Sequence[str],
 ) -> Optional[str]:
-    items = [candidate for candidate in candidates if candidate]
+    items = [candidate for candidate in candidates if candidate and is_solo_safe_text(candidate)]
     if not items:
         return None
     ordered = list(items)
@@ -533,7 +535,7 @@ def _pick_first_valid_vad_ranked(
     existing_tags: Sequence[str],
     debug_log: Dict[str, Any],
 ) -> Optional[str]:
-    items = [candidate for candidate in candidates if candidate]
+    items = [candidate for candidate in candidates if candidate and is_solo_safe_text(candidate)]
     if not items:
         return None
     if target_vad is None:
@@ -672,7 +674,13 @@ def _has_physical_expression(tags: Sequence[str]) -> bool:
 
 def _fallback_physical_tag(category: str, rng: random.Random) -> str:
     model = EMOTION_MODEL.get(category, EMOTION_MODEL["focus"])
-    fallback_pool = model["expression"] + model["gaze"] + model["posture"] + model["hands"]
+    fallback_pool = [
+        tag
+        for tag in model["expression"] + model["gaze"] + model["posture"] + model["hands"]
+        if is_solo_safe_text(tag)
+    ]
+    if not fallback_pool:
+        return "calm expression"
     return rng.choice(fallback_pool)
 
 
@@ -726,6 +734,7 @@ def sample_garnish(
             personality_semantics.personality_behavior_debug_payload(
                 personality_key,
                 mode=personality_behavior_mode,
+                mood_key=meta_mood,
                 selected="",
             ),
         )
@@ -766,6 +775,7 @@ def sample_garnish(
             context_costume=context_costume,
             action_text=action_text,
             existing_tags=garnish_pool,
+            mood_key=meta_mood,
             reject_fn=lambda candidate: "out_of_context"
             if _is_out_of_context(candidate, context_loc, context_costume, action_text, garnish_pool)
             else "",
@@ -787,6 +797,11 @@ def sample_garnish(
             semantic_debug["semantic_candidate"] = preferred if semantic_selected else ""
             semantic_debug["selection_changed_by_semantic"] = semantic_selected
             semantic_debug["selected_candidate_rank"] = personality_pick_debug.get("selected_candidate_rank") if semantic_selected else None
+            semantic_debug["selected_candidate_role"] = personality_pick_debug.get("selected_candidate_role", "") if semantic_selected else ""
+            if personality_pick_debug.get("subject_centric_override_selected"):
+                semantic_debug["subject_centric_override_selected"] = personality_pick_debug.get("subject_centric_override_selected")
+            if personality_pick_debug.get("subject_centric_override_rejected") is not None:
+                semantic_debug["subject_centric_override_rejected"] = personality_pick_debug.get("subject_centric_override_rejected")
             semantic_debug["fallback_used"] = not semantic_selected
             semantic_debug["rejected_candidates"] = semantic_rejected_candidates
 
@@ -850,7 +865,7 @@ def sample_garnish(
     final_tags = sanitize_sequence(_dedupe(garnish_pool))
     filtered_tags: List[str] = []
     for tag in final_tags:
-        if not _is_out_of_context(tag, context_loc, context_costume, action_text, filtered_tags):
+        if is_solo_safe_text(tag) and not _is_out_of_context(tag, context_loc, context_costume, action_text, filtered_tags):
             filtered_tags.append(tag)
 
     if action_load == "calm" and category in CALM_FACE_CAP_CATEGORIES:

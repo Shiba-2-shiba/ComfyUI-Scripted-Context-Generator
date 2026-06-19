@@ -185,7 +185,7 @@ Implemented:
 Local reference run:
 
 ```text
-python tools\audit_epig_reference_alignment.py --reference-root "C:\Users\inott\Downloads\新しいフォルダー (3)\参考" --output assets\results\epig_reference_alignment.json
+python tools\audit_epig_reference_alignment.py --reference-root "..\参考" --output assets\results\epig_reference_alignment.json
 ```
 
 Result:
@@ -232,7 +232,7 @@ Implemented:
 Local reference run:
 
 ```text
-python tools\extract_epig_reference_overlay.py --reference-root "C:\Users\inott\Downloads\新しいフォルダー (3)\参考" --output assets\results\epig_reference_overlay.local.json
+python tools\extract_epig_reference_overlay.py --reference-root "..\参考" --output assets\results\epig_reference_overlay.local.json
 ```
 
 Result:
@@ -265,7 +265,7 @@ Implemented:
 Local reference run:
 
 ```text
-python tools\audit_subject_centric_descriptors.py --reference-root "C:\Users\inott\Downloads\新しいフォルダー (3)\参考" --output assets\results\subject_centric_descriptor_candidates.json
+python tools\audit_subject_centric_descriptors.py --reference-root "..\参考" --output assets\results\subject_centric_descriptor_candidates.json
 ```
 
 Result:
@@ -307,7 +307,7 @@ Implemented:
 Local reference run:
 
 ```text
-python tools\audit_reference_dimension_projection.py --reference-root "C:\Users\inott\Downloads\新しいフォルダー (3)\参考" --output assets\results\reference_dimension_projection.json
+python tools\audit_reference_dimension_projection.py --reference-root "..\参考" --output assets\results\reference_dimension_projection.json
 ```
 
 Result:
@@ -361,7 +361,7 @@ Implemented:
 Local reference run:
 
 ```text
-python tools\audit_llm_expanded_prompt_policy.py --reference-root "C:\Users\inott\Downloads\新しいフォルダー (3)\参考" --output assets\results\llm_expanded_prompt_policy_audit.json
+python tools\audit_llm_expanded_prompt_policy.py --reference-root "..\参考" --output assets\results\llm_expanded_prompt_policy_audit.json
 ```
 
 Result:

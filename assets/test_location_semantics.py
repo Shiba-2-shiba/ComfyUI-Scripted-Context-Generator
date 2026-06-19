@@ -75,6 +75,107 @@ class TestLocationSemantics(unittest.TestCase):
             ["snowflakes drifting near the path", "sparkling eyes"],
         )
 
+    def test_location_expansion_filters_solo_unsafe_segments(self):
+        from unittest.mock import patch
+
+        from pipeline import location_builder
+
+        packs = {
+            "solo_safety_room": {
+                "environment": ["quiet private room", "crowded train"],
+                "core": ["single desk", "students pass through the corridor"],
+                "props": ["plain notebook", "people waiting near display"],
+                "crowd": ["line of people waiting", "friends sharing a booth nearby"],
+                "time": [],
+                "weather": [],
+                "texture": [],
+                "fx": [],
+            }
+        }
+
+        with patch.object(location_builder.background_vocab, "CONCEPT_PACKS", packs):
+            prompt, debug = location_builder.expand_location_prompt(
+                "solo_safety_room",
+                12,
+                "detailed",
+                return_debug=True,
+            )
+
+        lowered = prompt.lower()
+        self.assertEqual(debug["pack_key"], "solo_safety_room")
+        self.assertIn("quiet private room", lowered)
+        self.assertNotIn("crowded", lowered)
+        self.assertNotIn("students pass", lowered)
+        self.assertNotIn("people", lowered)
+        self.assertNotIn("friends", lowered)
+
+    def test_location_expansion_uses_plain_connectors_for_core_and_props(self):
+        from unittest.mock import patch
+
+        from pipeline import location_builder
+
+        packs = {
+            "connector_room": {
+                "environment": ["plain room"],
+                "core": ["large movie poster", "ticket kiosk"],
+                "props": ["small popcorn tub", "folded program"],
+                "crowd": [],
+                "time": [],
+                "weather": [],
+                "texture": [],
+                "fx": [],
+            }
+        }
+
+        with patch.object(location_builder.background_vocab, "CONCEPT_PACKS", packs):
+            prompts = [
+                location_builder.expand_location_prompt(
+                    "connector_room",
+                    seed,
+                    "detailed",
+                )
+                for seed in range(50)
+            ]
+
+        joined = "\n".join(prompts).lower()
+        self.assertNotIn("featuring large movie poster featuring ticket kiosk", joined)
+        self.assertNotIn("featuring ticket kiosk featuring large movie poster", joined)
+        self.assertNotIn("scattered with", joined)
+        self.assertNotIn("filled with", joined)
+
+    def test_location_expansion_avoids_repeating_background_object_classes(self):
+        from unittest.mock import patch
+
+        from pipeline import location_builder
+
+        packs = {
+            "repeat_room": {
+                "environment": ["quiet lobby"],
+                "core": ["large movie poster", "ticket kiosk"],
+                "props": ["folded program"],
+                "crowd": [],
+                "time": [],
+                "weather": [],
+                "texture": [],
+                "fx": [],
+            }
+        }
+
+        with patch.object(location_builder.background_vocab, "CONCEPT_PACKS", packs):
+            for seed in range(30):
+                prompt, debug = location_builder.expand_location_prompt(
+                    "repeat_room",
+                    seed,
+                    "detailed",
+                    return_debug=True,
+                )
+                lowered = prompt.lower()
+                self.assertFalse(
+                    "large movie poster" in lowered and "ticket kiosk" in lowered,
+                    msg=prompt,
+                )
+                self.assertLessEqual(len(debug["objects"]), 1)
+
     def test_location_segment_selector_prefers_semantic_scores_without_losing_determinism(self):
         import random
 

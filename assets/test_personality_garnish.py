@@ -111,13 +111,29 @@ class TestContextGarnishPersonality(unittest.TestCase):
         self.assertEqual(personality_debug["rejected_candidates"], [])
         self.assertIsNotNone(personality_debug["selected_candidate_rank"])
         self.assertIn("gaze", personality_debug["slot_rankings"])
+        self.assertEqual(
+            personality_debug["subject_centric_overrides"]["adoption_state"],
+            "active_candidate_selection",
+        )
+        self.assertGreaterEqual(
+            personality_debug["subject_centric_overrides"]["available_count"],
+            1,
+        )
         self.assertTrue(personality_debug["selected"])
-        ranked_tags = {
-            item["text"]
-            for ranking in personality_debug["slot_rankings"].values()
-            for item in ranking[:1]
-        }
-        self.assertIn(personality_debug["selected"], ranked_tags)
+        if personality_debug.get("selected_candidate_role") == "subject_centric_override":
+            override_tags = {
+                item["text"]
+                for item in personality_debug["subject_centric_overrides"]["candidates"]
+            }
+            self.assertEqual(personality_debug["selected_candidate_rank"], 0)
+            self.assertIn(personality_debug["selected"], override_tags)
+        else:
+            ranked_tags = {
+                item["text"]
+                for ranking in personality_debug["slot_rankings"].values()
+                for item in ranking[:1]
+            }
+            self.assertIn(personality_debug["selected"], ranked_tags)
 
     def test_max_items_respected(self):
         """max_itemsの上限が守られること"""

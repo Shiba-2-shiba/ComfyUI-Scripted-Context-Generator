@@ -61,6 +61,42 @@ class TestActionSemantics(unittest.TestCase):
 
         self.assertIn("thumb keeping the page open", options)
 
+    def test_semantic_descriptor_options_match_relation_keys(self):
+        from pipeline import action_semantics
+
+        original_lookup = action_semantics._descriptor_lookup
+
+        def fake_lookup(slot_name):
+            self.assertEqual(slot_name, "hand_action")
+            return {
+                "keeping the cup steady near her hands": {
+                    "text": "keeping the cup steady near her hands",
+                    "roles": ["hand_action"],
+                    "relation_keys": ["drink:sipping"],
+                },
+                "turning a page with one finger": {
+                    "text": "turning a page with one finger",
+                    "roles": ["hand_action"],
+                    "relation_keys": ["book:reading"],
+                },
+            }
+
+        action_semantics._descriptor_lookup = fake_lookup
+        try:
+            options = action_semantics.semantic_descriptor_options_for_slot(
+                "hand_action",
+                relation_key="drink:sipping",
+            )
+            unrelated = action_semantics.semantic_descriptor_options_for_slot(
+                "hand_action",
+                relation_key="phone:checking",
+            )
+        finally:
+            action_semantics._descriptor_lookup = original_lookup
+
+        self.assertEqual(options, ["keeping the cup steady near her hands"])
+        self.assertEqual(unrelated, [])
+
     def test_debug_payload_is_compact_and_uses_config_mode(self):
         from pipeline.action_semantics import build_action_target_vector, rank_action_slot_options, semantic_action_debug_payload
 

@@ -142,11 +142,11 @@ small_derived_data_subsets_should_be_added_now=False
 Run from repo root:
 
 ```bash
-python tools\audit_epig_reference_alignment.py --reference-root "C:\Users\inott\Downloads\新しいフォルダー (3)\参考" --output assets\results\epig_reference_alignment.json
-python tools\extract_epig_reference_overlay.py --reference-root "C:\Users\inott\Downloads\新しいフォルダー (3)\参考" --output assets\results\epig_reference_overlay.local.json
-python tools\audit_subject_centric_descriptors.py --reference-root "C:\Users\inott\Downloads\新しいフォルダー (3)\参考" --output assets\results\subject_centric_descriptor_candidates.json
-python tools\audit_reference_dimension_projection.py --reference-root "C:\Users\inott\Downloads\新しいフォルダー (3)\参考" --output assets\results\reference_dimension_projection.json
-python tools\audit_llm_expanded_prompt_policy.py --reference-root "C:\Users\inott\Downloads\新しいフォルダー (3)\参考" --output assets\results\llm_expanded_prompt_policy_audit.json
+python tools\audit_epig_reference_alignment.py --reference-root "..\参考" --output assets\results\epig_reference_alignment.json
+python tools\extract_epig_reference_overlay.py --reference-root "..\参考" --output assets\results\epig_reference_overlay.local.json
+python tools\audit_subject_centric_descriptors.py --reference-root "..\参考" --output assets\results\subject_centric_descriptor_candidates.json
+python tools\audit_reference_dimension_projection.py --reference-root "..\参考" --output assets\results\reference_dimension_projection.json
+python tools\audit_llm_expanded_prompt_policy.py --reference-root "..\参考" --output assets\results\llm_expanded_prompt_policy_audit.json
 python tools\review_reference_refresh_adoption.py --results-dir assets\results --output assets\results\reference_refresh_adoption_decision.json
 ```
 

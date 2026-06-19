@@ -58,6 +58,7 @@ _SEMANTIC_BANNED_ASSETS = _SEMANTIC_AXIS_ASSETS + (
     "object_relation_profiles.json",
 )
 _OBJECT_RELATION_FILE = "object_relation_profiles.json"
+_SUBJECT_CENTRIC_DESCRIPTOR_FILE = "subject_centric_descriptor_overrides.json"
 ALLOWED_OBJECT_RELATION_ROLES = {
     "posture",
     "hand_action",
@@ -65,6 +66,23 @@ ALLOWED_OBJECT_RELATION_ROLES = {
     "object_relation",
     "object_state",
     "optional_micro_action",
+}
+ALLOWED_SUBJECT_CENTRIC_DESCRIPTOR_SLOTS = {
+    "expression",
+    "gaze",
+    "posture",
+    "hands",
+}
+_SUBJECT_CENTRIC_FORBIDDEN_FIELDS = {
+    "valence",
+    "arousal",
+    "dominance",
+    "vad",
+    "score",
+    "scores",
+    "vector",
+    "reference_score",
+    "reference_scores",
 }
 _ALLOWED_UNCONNECTED_PROFILES = {
     "Diana (Noble)",
@@ -300,6 +318,21 @@ def validate_semantic_epig_config(payload: Any | None = None) -> list[str]:
         mode = str(domain_payload.get("mode", default_mode)).strip().lower()
         if mode not in _SEMANTIC_MODES:
             warnings.append(f"{_SEMANTIC_CONFIG_FILE}:domains.{domain_key}.mode must be one of {sorted(_SEMANTIC_MODES)}")
+        if domain_key == "personality_behavior" and "subject_centric_overrides" in domain_payload:
+            override_config = domain_payload.get("subject_centric_overrides")
+            if not isinstance(override_config, dict):
+                warnings.append(f"{_SEMANTIC_CONFIG_FILE}:domains.{domain_key}.subject_centric_overrides must be an object")
+                continue
+            override_mode = str(override_config.get("mode", "off")).strip().lower()
+            if override_mode not in _SEMANTIC_MODES:
+                warnings.append(
+                    f"{_SEMANTIC_CONFIG_FILE}:domains.{domain_key}.subject_centric_overrides.mode must be one of {sorted(_SEMANTIC_MODES)}"
+                )
+            max_candidates = override_config.get("max_candidates_per_slot", 1)
+            if not isinstance(max_candidates, int) or max_candidates < 0:
+                warnings.append(
+                    f"{_SEMANTIC_CONFIG_FILE}:domains.{domain_key}.subject_centric_overrides.max_candidates_per_slot must be a non-negative integer"
+                )
 
     return warnings
 
@@ -382,6 +415,82 @@ def validate_object_relation_profiles(payload: Any | None = None) -> list[str]:
     return warnings
 
 
+def _validate_optional_string_list(asset_name: str, path: str, value: Any, warnings: list[str]) -> None:
+    if value is None:
+        return
+    if not isinstance(value, list):
+        warnings.append(f"{asset_name}:{path} must be a list")
+        return
+    if not all(isinstance(item, str) and item.strip() for item in value):
+        warnings.append(f"{asset_name}:{path} must contain non-empty strings")
+
+
+def validate_subject_centric_descriptor_overrides(payload: Any | None = None) -> list[str]:
+    data = _read_json_asset(_SUBJECT_CENTRIC_DESCRIPTOR_FILE) if payload is None else payload
+    warnings: list[str] = []
+    asset_name = _SUBJECT_CENTRIC_DESCRIPTOR_FILE
+    if not isinstance(data, dict):
+        return [f"{asset_name} must be a JSON object"]
+
+    if not data.get("schema_version"):
+        warnings.append(f"{asset_name} missing schema_version")
+
+    descriptors = data.get("descriptors")
+    if not isinstance(descriptors, list):
+        warnings.append(f"{asset_name}:descriptors must be a list")
+        warnings.extend(validate_banned_terms_in_asset(asset_name, data))
+        return warnings
+
+    seen_ids: set[str] = set()
+    for index, descriptor in enumerate(descriptors):
+        path = f"descriptors[{index}]"
+        if not isinstance(descriptor, dict):
+            warnings.append(f"{asset_name}:{path} must be an object")
+            continue
+
+        forbidden_fields = sorted(set(descriptor) & _SUBJECT_CENTRIC_FORBIDDEN_FIELDS)
+        if forbidden_fields:
+            warnings.append(
+                f"{asset_name}:{path} contains forbidden score-bearing fields: {', '.join(forbidden_fields)}"
+            )
+
+        descriptor_id = str(descriptor.get("id", "")).strip()
+        if not descriptor_id:
+            warnings.append(f"{asset_name}:{path}.id is required")
+        elif descriptor_id in seen_ids:
+            warnings.append(f"{asset_name}:{path}.id duplicate '{descriptor_id}'")
+        else:
+            seen_ids.add(descriptor_id)
+
+        slot = str(descriptor.get("slot", "")).strip()
+        if slot not in ALLOWED_SUBJECT_CENTRIC_DESCRIPTOR_SLOTS:
+            warnings.append(
+                f"{asset_name}:{path}.slot must be one of {sorted(ALLOWED_SUBJECT_CENTRIC_DESCRIPTOR_SLOTS)}"
+            )
+
+        text = str(descriptor.get("text", "")).strip()
+        if not text:
+            warnings.append(f"{asset_name}:{path}.text is required")
+
+        mode = str(descriptor.get("mode", "")).strip().lower()
+        if mode not in _SEMANTIC_MODES:
+            warnings.append(f"{asset_name}:{path}.mode must be one of {sorted(_SEMANTIC_MODES)}")
+
+        for required_field in ("source_hint", "rewrite_reason", "risk_note"):
+            value = descriptor.get(required_field)
+            if required_field == "source_hint":
+                if not isinstance(value, list) or not value or not all(isinstance(item, str) and item.strip() for item in value):
+                    warnings.append(f"{asset_name}:{path}.{required_field} must be a non-empty list of strings")
+            elif not isinstance(value, str) or not value.strip():
+                warnings.append(f"{asset_name}:{path}.{required_field} is required")
+
+        for optional_field in ("personality", "mood_keys", "reject_context_terms", "debug_tags"):
+            _validate_optional_string_list(asset_name, f"{path}.{optional_field}", descriptor.get(optional_field), warnings)
+
+    warnings.extend(validate_banned_terms_in_asset(asset_name, data))
+    return warnings
+
+
 def validate_semantic_epig_assets() -> list[str]:
     warnings: list[str] = []
     warnings.extend(validate_semantic_epig_config())
@@ -396,6 +505,9 @@ def validate_semantic_epig_assets() -> list[str]:
 
     if _asset_exists(_OBJECT_RELATION_FILE):
         warnings.extend(validate_object_relation_profiles())
+
+    if _asset_exists(_SUBJECT_CENTRIC_DESCRIPTOR_FILE):
+        warnings.extend(validate_subject_centric_descriptor_overrides())
 
     return warnings
 

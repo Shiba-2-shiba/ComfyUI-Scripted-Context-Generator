@@ -5,8 +5,9 @@ if __package__ and "." in __package__:
     from ..core.context_ops import append_history, ensure_context, patch_context
     from ..core.schema import DebugInfo
     from ..core.semantic_policy import filter_candidate_strings, sanitize_text
+    from ..core.solo_safety import filter_solo_safe_candidates
     from ..location_service import resolve_location_key
-    from ..object_focus_service import extract_object_flags
+    from ..object_focus_service import background_repeat_risk_flags, extract_object_flags
     from ..history_service import recent_prompt_objects
     from ..vocab.seed_utils import mix_seed
     from .location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
@@ -31,8 +32,9 @@ else:
     from core.context_ops import append_history, ensure_context, patch_context
     from core.schema import DebugInfo
     from core.semantic_policy import filter_candidate_strings, sanitize_text
+    from core.solo_safety import filter_solo_safe_candidates
     from location_service import resolve_location_key
-    from object_focus_service import extract_object_flags
+    from object_focus_service import background_repeat_risk_flags, extract_object_flags
     from history_service import recent_prompt_objects
     from vocab.seed_utils import mix_seed
     from pipeline.location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
@@ -54,9 +56,9 @@ else:
     from pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 
 if __package__ and "." in __package__:
-    from .. import background_vocab
+    from ..vocab import background as background_vocab
 else:
-    import background_vocab
+    from vocab import background as background_vocab
 
 TEXTURE_DEFAULT_BLEND_PROB = 0.25
 TEXTURE_SEGMENT_SELECT_PROB = 0.55
@@ -82,7 +84,7 @@ def expand_location_prompt(
     if mode not in ["detailed", "simple"]:
         mode = "detailed"
     if not background_vocab:
-        return "[ERR: background_vocab.py not found]"
+        return "[ERR: vocab.background not found]"
 
     rng = random.Random(mix_seed(seed, "loc"))
     raw_tag = str(loc_tag).lower().strip()
@@ -138,7 +140,7 @@ def expand_location_prompt(
             "selected_candidate_rank": selected_rank,
         }
 
-    env_options = filter_candidate_strings(pack_data.get("environment", []))
+    env_options = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("environment", [])))
     record_segment_ranking("environment", env_options)
     if env_options:
         rng_state = rng.getstate()
@@ -166,8 +168,33 @@ def expand_location_prompt(
         return (prompt, debug) if return_debug else prompt
 
     segments = []
+    selected_repeat_risk_objects = set()
     decision = {"pack_key": cleaned_tag, "objects": [], "selected_props": [], "template_key": "detailed"}
-    core_opts = filter_candidate_strings(pack_data.get("core", []))
+
+    def keep_repeat_risk_budget(options):
+        kept = []
+        for option in options:
+            if background_repeat_risk_flags(option) and selected_repeat_risk_objects:
+                continue
+            kept.append(option)
+        return kept
+
+    def remember_repeat_risk(options):
+        for option in options:
+            selected_repeat_risk_objects.update(background_repeat_risk_flags(option))
+
+    def enforce_repeat_risk_budget(options):
+        accepted = []
+        local_repeat_risk_objects = set(selected_repeat_risk_objects)
+        for option in options:
+            flags = background_repeat_risk_flags(option)
+            if flags and local_repeat_risk_objects:
+                continue
+            accepted.append(option)
+            local_repeat_risk_objects.update(flags)
+        return accepted
+
+    core_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("core", [])))
     record_segment_ranking("core", core_opts)
     if core_opts and rng.random() < 0.95:
         num_core = 2 if len(core_opts) > 1 and rng.random() < 0.50 else 1
@@ -175,14 +202,16 @@ def expand_location_prompt(
         baseline_core = _weighted_sample(core_opts, rng, min(num_core, len(core_opts)), cleaned_tag, "core", semantic_scores={})
         rng.setstate(rng_state)
         chosen_core = _weighted_sample(core_opts, rng, min(num_core, len(core_opts)), cleaned_tag, "core", semantic_scores=semantic_scores_for("core"))
+        chosen_core = enforce_repeat_risk_budget(chosen_core)
         record_section_change("core", baseline_core, chosen_core)
+        remember_repeat_risk(chosen_core)
         if len(chosen_core) == 1:
             segments.append(f"featuring {chosen_core[0]}")
         else:
-            connector = rng.choice(["and", "plus", "featuring"])
-            segments.append(f"featuring {chosen_core[0]} {connector} {chosen_core[1]}")
+            segments.append(f"featuring {chosen_core[0]} and {chosen_core[1]}")
 
-    props_opts = filter_candidate_strings(pack_data.get("props", []))
+    props_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("props", [])))
+    props_opts = keep_repeat_risk_budget(props_opts)
     record_segment_ranking("props", props_opts)
     include_prob, second_prop_prob = _props_sampling_policy(props_opts)
     if props_opts and rng.random() < include_prob:
@@ -210,18 +239,18 @@ def expand_location_prompt(
             semantic_scores=semantic_scores_for("props"),
         )
         record_section_change("props", baseline_props, chosen_props)
-        connector_word = rng.choice(["with", "scattered with", "filled with", "adorned with"])
+        remember_repeat_risk(chosen_props)
+        connector_word = rng.choice(["with", "adorned with"])
         if len(chosen_props) == 1:
             segments.append(f"{connector_word} {chosen_props[0]}")
         else:
-            joiner = rng.choice(["and", "plus", "as well as"])
-            segments.append(f"{connector_word} {chosen_props[0]} {joiner} {chosen_props[1]}")
+            segments.append(f"{connector_word} {chosen_props[0]} and {chosen_props[1]}")
         decision["selected_props"] = list(chosen_props)
 
-    texture_candidates = list(filter_candidate_strings(pack_data.get("texture", []) or []))
+    texture_candidates = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("texture", []) or []))
     general_defaults = getattr(background_vocab, "GENERAL_DEFAULTS", {})
     if rng.random() < TEXTURE_DEFAULT_BLEND_PROB:
-        texture_candidates.extend(filter_candidate_strings(general_defaults.get("texture", [])))
+        texture_candidates.extend(filter_solo_safe_candidates(filter_candidate_strings(general_defaults.get("texture", []))))
     if lighting_mode == "off":
         texture_candidates = _filter_off_mode_options(texture_candidates, fallback_all=False)
     record_segment_ranking("texture", texture_candidates)
@@ -234,7 +263,7 @@ def expand_location_prompt(
         segments.append(texture)
 
     if rng.random() < 0.35:
-        details_defaults = filter_candidate_strings(general_defaults.get("details", []))
+        details_defaults = filter_solo_safe_candidates(filter_candidate_strings(general_defaults.get("details", [])))
         if lighting_mode == "off":
             details_defaults = _filter_off_mode_options(details_defaults, fallback_all=False)
         record_segment_ranking("details", details_defaults)
@@ -247,7 +276,7 @@ def expand_location_prompt(
             segments.append(details)
 
     is_daily_life = _is_daily_life_loc(cleaned_tag)
-    time_opts = filter_candidate_strings(pack_data.get("time", []))
+    time_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("time", [])))
     if lighting_mode == "off":
         time_opts = _filter_off_mode_options(time_opts, fallback_all=False)
     record_segment_ranking("time", time_opts)
@@ -259,7 +288,7 @@ def expand_location_prompt(
         time_choice = _semantic_choice(bright_time_options, rng, semantic_scores_for("time"))
         record_section_change("time", baseline_time, time_choice)
         segments.append(f"during {time_choice}")
-    weather_opts = filter_candidate_strings(pack_data.get("weather", []))
+    weather_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("weather", [])))
     record_segment_ranking("weather", weather_opts)
     preferred_weather, rare_weather = _split_weather_options(weather_opts)
     weather_probability = 0.18 if is_daily_life else 0.12
@@ -277,7 +306,7 @@ def expand_location_prompt(
         weather = _semantic_choice(rare_weather, rng, semantic_scores_for("weather"))
         record_section_change("weather", baseline_weather, weather)
         segments.append(weather)
-    crowd_opts = filter_candidate_strings(pack_data.get("crowd", []))
+    crowd_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("crowd", [])))
     record_segment_ranking("crowd", crowd_opts)
     if crowd_opts and rng.random() < (0.58 if is_daily_life else 0.30):
         rng_state = rng.getstate()
@@ -287,11 +316,11 @@ def expand_location_prompt(
         record_section_change("crowd", baseline_crowd, crowd)
         segments.append(crowd)
 
-    fx_candidates = _filter_fx_candidates(filter_candidate_strings(pack_data.get("fx", []) or []))
+    fx_candidates = _filter_fx_candidates(filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("fx", []) or [])))
     if lighting_mode == "off":
         fx_candidates = _filter_off_mode_options(fx_candidates, fallback_all=False)
     if rng.random() < FX_DEFAULT_BLEND_PROB:
-        fx_candidates.extend(_filter_fx_candidates(filter_candidate_strings(general_defaults.get("fx", []))))
+        fx_candidates.extend(_filter_fx_candidates(filter_solo_safe_candidates(filter_candidate_strings(general_defaults.get("fx", [])))))
     if lighting_mode == "off":
         fx_candidates = _filter_off_mode_options(fx_candidates, fallback_all=False)
     record_segment_ranking("fx", fx_candidates)

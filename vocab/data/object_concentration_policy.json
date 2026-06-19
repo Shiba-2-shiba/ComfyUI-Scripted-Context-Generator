@@ -87,6 +87,26 @@
     "shopping_mall_atrium": ["screen"],
     "cozy_living_room": ["coffee"]
   },
+  "solo_safety_artifact": [
+    "bag",
+    "towel",
+    "napkin",
+    "display",
+    "generic_object",
+    "people",
+    "spill",
+    "stain"
+  ],
+  "background_repeat_risk": [
+    "display",
+    "poster",
+    "kiosk",
+    "exhibit_case",
+    "panel",
+    "plant",
+    "cat",
+    "ventilation_unit"
+  ],
   "audit_normalization": {
     "screen": {
       "exclude_phrases": [

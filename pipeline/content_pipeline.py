@@ -5,6 +5,15 @@ imports keep working while the real implementation lives in narrower modules.
 Repo-owned runtime code should import those narrower modules directly; the only
 intentional repo-owned caller left is `assets/test_deprecated_behavior.py`,
 which guards this compatibility surface.
+
+Boundary contract:
+- New runtime code must import `pipeline.clothing_builder`,
+  `pipeline.location_builder`, `pipeline.mood_builder`, or
+  `pipeline.prompt_orchestrator` directly.
+- `assets/test_compatibility_boundaries.py` guards against repo-owned runtime
+  imports of this facade.
+- Keep this facade until external workflow or extension compatibility no longer
+  needs the old import path.
 """
 
 from .clothing_builder import apply_clothing_expansion, expand_clothing_prompt

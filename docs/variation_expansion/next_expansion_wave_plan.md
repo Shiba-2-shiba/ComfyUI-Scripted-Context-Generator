@@ -187,6 +187,15 @@ compatibility rows: 5,926
 base variations: 105,612
 ```
 
+Later variation restrictions reduced the active counted surface to:
+
+```text
+subjects: 120
+locations: 90
+compatibility rows: 5,806
+base variations: 103,212
+```
+
 See:
 
 - `docs/variation_expansion/base_variations_100k_plan.md`

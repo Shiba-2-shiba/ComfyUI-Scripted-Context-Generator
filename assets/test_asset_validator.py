@@ -19,6 +19,7 @@ from asset_validator import (
     validate_object_relation_profiles,
     validate_semantic_axis_asset,
     validate_semantic_epig_config,
+    validate_subject_centric_descriptor_overrides,
 )
 from tools.capture_asset_validator_baseline import (
     build_validator_baseline_text,
@@ -271,6 +272,30 @@ class TestAssetValidator(unittest.TestCase):
         self.assertTrue(any("domains.action.mode" in item for item in warnings))
         self.assertTrue(any("domains missing 'clothing_tpo'" in item for item in warnings))
 
+    def test_validate_semantic_epig_config_flags_bad_subject_centric_override_config(self):
+        warnings = validate_semantic_epig_config(
+            {
+                "schema_version": "1.0",
+                "default_mode": "passive",
+                "domains": {
+                    "action": {"mode": "active"},
+                    "object_relation": {"mode": "active"},
+                    "location_scene": {"mode": "active"},
+                    "clothing_tpo": {"mode": "active"},
+                    "personality_behavior": {
+                        "mode": "active",
+                        "subject_centric_overrides": {
+                            "mode": "maybe",
+                            "max_candidates_per_slot": -1,
+                        },
+                    },
+                },
+            }
+        )
+
+        self.assertTrue(any("subject_centric_overrides.mode" in item for item in warnings))
+        self.assertTrue(any("max_candidates_per_slot" in item for item in warnings))
+
     def test_validate_semantic_axis_asset_flags_vector_policy_errors(self):
         warnings = validate_semantic_axis_asset(
             "fixture_semantic.json",
@@ -321,6 +346,51 @@ class TestAssetValidator(unittest.TestCase):
         self.assertTrue(any("gaze_target" in item and "non-empty strings" in item for item in warnings))
         self.assertTrue(any("forbidden_patterns must be a list" in item for item in warnings))
         self.assertTrue(any("must match relation key object" in item for item in warnings))
+        self.assertTrue(any("close-up" in item for item in warnings))
+
+    def test_validate_subject_centric_descriptor_overrides_accepts_current_asset(self):
+        warnings = validate_subject_centric_descriptor_overrides(
+            _read_json_asset("subject_centric_descriptor_overrides.json")
+        )
+        self.assertEqual(warnings, [])
+
+    def test_validate_subject_centric_descriptor_overrides_flags_schema_errors(self):
+        warnings = validate_subject_centric_descriptor_overrides(
+            {
+                "schema_version": "1.0",
+                "descriptors": [
+                    {
+                        "id": "duplicate",
+                        "slot": "camera_angle",
+                        "text": "close-up stare",
+                        "source_hint": [],
+                        "rewrite_reason": "",
+                        "risk_note": "",
+                        "mode": "maybe",
+                        "personality": "shy",
+                        "score": 0.9,
+                    },
+                    {
+                        "id": "duplicate",
+                        "slot": "gaze",
+                        "text": "steady gaze",
+                        "source_hint": ["fixture"],
+                        "rewrite_reason": "fixture",
+                        "risk_note": "fixture",
+                        "mode": "passive",
+                    },
+                ],
+            }
+        )
+
+        self.assertTrue(any("duplicate" in item for item in warnings))
+        self.assertTrue(any(".slot must be one of" in item for item in warnings))
+        self.assertTrue(any(".mode must be one of" in item for item in warnings))
+        self.assertTrue(any("source_hint must be a non-empty list" in item for item in warnings))
+        self.assertTrue(any("rewrite_reason is required" in item for item in warnings))
+        self.assertTrue(any("risk_note is required" in item for item in warnings))
+        self.assertTrue(any("personality must be a list" in item for item in warnings))
+        self.assertTrue(any("forbidden score-bearing fields" in item for item in warnings))
         self.assertTrue(any("close-up" in item for item in warnings))
 
 

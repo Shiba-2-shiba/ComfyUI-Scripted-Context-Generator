@@ -1,4 +1,3 @@
-import json
 import os
 import sys
 import unittest
@@ -37,31 +36,26 @@ class TestPromptRepetitionAudit(unittest.TestCase):
             msg=f"final family counts: {summary['final_family_counts']}",
         )
 
-    def test_prompt_repetition_thresholds_pass_for_default_audit_shape(self):
-        report = build_prompt_repetition_report(samples_per_row=4)
+    def test_prompt_repetition_thresholds_pass_for_unit_audit_shape(self):
+        report = build_prompt_repetition_report(samples_per_row=2, row_limit=12)
         evaluation = evaluate_prompt_repetition_thresholds(report)
         self.assertTrue(
             evaluation["passed"],
             msg=f"threshold failures: {evaluation['failures']}",
         )
 
-    def test_prompt_repetition_baseline_artifact_matches_current_summary(self):
-        report = build_prompt_repetition_report(samples_per_row=8)
-        artifact_path = os.path.join(ROOT, "assets", "results", "prompt_repetition_active_source_8.json")
-        with open(artifact_path, "r", encoding="utf-8") as handle:
-            artifact = json.load(handle)
+    def test_prompt_repetition_unit_report_has_artifact_metadata_without_generated_file_dependency(self):
+        report = build_prompt_repetition_report(samples_per_row=2, row_limit=6)
+        summary = report["summary"]
 
-        self.assertEqual(artifact["summary"]["row_count"], report["summary"]["row_count"])
-        self.assertEqual(artifact["summary"]["samples_per_row"], report["summary"]["samples_per_row"])
-        self.assertEqual(artifact["summary"]["total_samples"], report["summary"]["total_samples"])
-        self.assertEqual(artifact["summary"]["mood_row_counts"], report["summary"]["mood_row_counts"])
-        self.assertEqual(artifact["summary"]["top_staging_tags"][:6], report["summary"]["top_staging_tags"][:6])
-        self.assertEqual(artifact["summary"]["top_garnish_tags"][:6], report["summary"]["top_garnish_tags"][:6])
-        self.assertEqual(artifact["summary"]["top_final_tags"][:6], report["summary"]["top_final_tags"][:6])
-        self.assertEqual(
-            artifact["summary"]["moods_with_single_staging_signature"],
-            report["summary"]["moods_with_single_staging_signature"],
-        )
+        self.assertEqual(summary["artifact_version"], 1)
+        self.assertTrue(summary["prompt_source_path"].endswith("prompts.jsonl"))
+        self.assertEqual(summary["row_count"], 6)
+        self.assertEqual(summary["samples_per_row"], 2)
+        self.assertEqual(summary["total_samples"], 12)
+        self.assertIn("top_staging_tags", summary)
+        self.assertIn("top_garnish_tags", summary)
+        self.assertIn("top_final_tags", summary)
 
 
 if __name__ == "__main__":

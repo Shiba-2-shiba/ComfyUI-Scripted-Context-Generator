@@ -109,6 +109,13 @@ class TestMoodBuilder(unittest.TestCase):
             DEFAULT_STAGING_TAG_LIMIT,
         )
 
+    def test_energetic_joy_avoids_quick_step_prompt_fragments(self):
+        energetic = self.mood_map["energetic_joy"]
+        combined = " ".join(energetic["description"] + energetic["staging_tags"]).lower()
+
+        self.assertNotIn("quick step", combined)
+        self.assertNotIn("quick steps", combined)
+
 
 if __name__ == "__main__":
     unittest.main()

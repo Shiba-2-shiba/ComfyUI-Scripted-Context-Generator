@@ -14,6 +14,7 @@ if __package__:
         split_semantic_tags,
     )
     from .core.semantic_policy import filter_candidate_strings, sanitize_text
+    from .core.solo_safety import filter_solo_safe_candidates, has_location_first_template_conflict, is_solo_action_safe_text
     from .location_service import load_background_packs, resolve_location_key
     from .pipeline.action_generator import action_verb as normalize_action_verb
 else:
@@ -23,6 +24,7 @@ else:
         split_semantic_tags,
     )
     from core.semantic_policy import filter_candidate_strings, sanitize_text
+    from core.solo_safety import filter_solo_safe_candidates, has_location_first_template_conflict, is_solo_action_safe_text
     from location_service import load_background_packs, resolve_location_key
     from pipeline.action_generator import action_verb as normalize_action_verb
 
@@ -95,6 +97,10 @@ _NON_GERUND_BODY_KEYS = {
     "body_carrying_action",
     "body_room_for_action",
 }
+_SOLO_SUPPORT_CUE_PATTERN = re.compile(
+    r"\b(?:hands?|fingers?|posture|step|lean(?:ing)?|moving|gesture|shoulders?|stance)\b",
+    re.IGNORECASE,
+)
 _TEMPLATE_ROLE_PRIORITY = ("focused", "transition", "social", "quiet")
 _TEMPLATE_ROLE_HINTS = {
     "focused": _ACTION_FOCUSED_HINTS,
@@ -311,6 +317,53 @@ def _template_entries(section_name):
     return fallback_map.get(section_name, [])
 
 
+def _filter_solo_template_entries(entries):
+    kept = []
+    dropped = []
+    for entry in entries:
+        text = str((entry or {}).get("text", "")).strip()
+        if has_location_first_template_conflict(text):
+            dropped.append(entry)
+        else:
+            kept.append(entry)
+    return kept or list(entries), dropped
+
+
+def _is_solo_prompt_context(subj: str, staging_tags: str = "") -> bool:
+    source = f"{subj or ''} {staging_tags or ''}".lower()
+    return "solo" in source or "1girl" in source
+
+
+def _compact_solo_support_tags(garnish: str, staging_tags: str):
+    kept_garnish = []
+    kept_staging = []
+    dropped = []
+    support_used = False
+
+    def accept_tag(tag: str) -> bool:
+        nonlocal support_used
+        if not is_solo_action_safe_text(tag):
+            return False
+        if _SOLO_SUPPORT_CUE_PATTERN.search(tag):
+            if support_used:
+                return False
+            support_used = True
+        return True
+
+    for tag in split_semantic_tags(garnish):
+        if accept_tag(tag):
+            kept_garnish.append(tag)
+        else:
+            dropped.append(tag)
+    for tag in split_semantic_tags(staging_tags):
+        if accept_tag(tag):
+            kept_staging.append(tag)
+        else:
+            dropped.append(tag)
+
+    return sanitize_text(", ".join(kept_garnish)), sanitize_text(", ".join(kept_staging)), dropped
+
+
 def _select_template_entry(
     entries,
     default_text,
@@ -441,7 +494,7 @@ def _make_consistency_checker(rules, context_values):
     return is_consistent
 
 
-def _expand_location_key_for_builder(loc, rng, context_values, is_consistent):
+def _expand_location_key_for_builder(loc, rng, context_values, is_consistent, solo_prompt_context=False):
     if not loc or not isinstance(loc, str):
         return loc
     try:
@@ -455,6 +508,8 @@ def _expand_location_key_for_builder(loc, rng, context_values, is_consistent):
 
         def pick_consistent(candidates):
             safe_candidates = filter_candidate_strings(candidates)
+            if solo_prompt_context:
+                safe_candidates = filter_solo_safe_candidates(safe_candidates)
             if not safe_candidates:
                 return None
             for _ in range(10):
@@ -529,6 +584,10 @@ def build_prompt_text(
     garnish = semantic_layers["garnish"]
     meta_mood = semantic_layers["meta_mood"]
     staging_tags = semantic_layers["staging_tags"]
+    solo_prompt_context = _is_solo_prompt_context(subj, staging_tags)
+    solo_support_dropped_tags = []
+    if solo_prompt_context:
+        garnish, staging_tags, solo_support_dropped_tags = _compact_solo_support_tags(garnish, staging_tags)
     subject_clause = sanitize_text(_join_nonempty([subj, f"in {costume}" if costume else ""], " "))
     action_clause = sanitize_text(_join_nonempty([action, garnish]))
     scene_clause = sanitize_text(_join_nonempty([f"in {loc}" if loc else "", meta_mood]))
@@ -538,7 +597,7 @@ def build_prompt_text(
     recent_templates = {str(item) for item in (recent_templates or []) if item}
     selected_template_key = ""
 
-    loc = _expand_location_key_for_builder(loc, rng, context_vals, is_consistent)
+    loc = _expand_location_key_for_builder(loc, rng, context_vals, is_consistent, solo_prompt_context=solo_prompt_context)
     context_vals = [subj, costume, loc, action, garnish, meta_mood, staging_tags]
     is_consistent = _make_consistency_checker(rules, context_vals)
     scene_clause = sanitize_text(_join_nonempty([f"in {loc}" if loc else "", meta_mood]))
@@ -548,8 +607,22 @@ def build_prompt_text(
         logger.info("Using Composition Mode")
         template_roles = _derive_template_roles(action, garnish, meta_mood, loc)
         action_surface = _derive_action_surface(action)
+        solo_template_filter_applied = solo_prompt_context
+        solo_template_filtered_keys = {}
+        intro_entries = template_entries_fn("intro")
+        body_entries = template_entries_fn("body")
+        end_entries = template_entries_fn("end")
+        if solo_template_filter_applied:
+            intro_entries, dropped_intro_entries = _filter_solo_template_entries(intro_entries)
+            body_entries, dropped_body_entries = _filter_solo_template_entries(body_entries)
+            end_entries, dropped_end_entries = _filter_solo_template_entries(end_entries)
+            solo_template_filtered_keys = {
+                "intro": [str(entry.get("key", "")) for entry in dropped_intro_entries],
+                "body": [str(entry.get("key", "")) for entry in dropped_body_entries],
+                "end": [str(entry.get("key", "")) for entry in dropped_end_entries],
+            }
         intro_entry = _select_template_entry(
-            template_entries_fn("intro"),
+            intro_entries,
             "{subject_clause}",
             "intro_default",
             template_roles["intro_roles"],
@@ -563,7 +636,7 @@ def build_prompt_text(
             action_surface=action_surface,
         )
         body_entry = _select_template_entry(
-            template_entries_fn("body"),
+            body_entries,
             "{action_clause}",
             "body_default",
             template_roles["body_roles"],
@@ -577,7 +650,7 @@ def build_prompt_text(
             action_surface=action_surface,
         )
         end_entry = _select_template_entry(
-            template_entries_fn("end"),
+            end_entries,
             DEFAULT_END_TEMPLATE,
             "end_default",
             template_roles["end_roles"],
@@ -635,6 +708,7 @@ def build_prompt_text(
             "template_key": selected_template_key or str(template),
             "composition_mode": bool(composition_mode),
             "semantic_family_budget": semantic_layers["debug"],
+            "solo_support_dropped_tags": solo_support_dropped_tags,
         }
         if composition_mode:
             debug_payload.update(
@@ -644,6 +718,8 @@ def build_prompt_text(
                     "end_key": end_entry["key"],
                     "template_roles": template_roles,
                     "action_surface": action_surface,
+                    "solo_template_filter_applied": solo_template_filter_applied,
+                    "solo_template_filtered_keys": solo_template_filtered_keys,
                 }
             )
         return result, debug_payload

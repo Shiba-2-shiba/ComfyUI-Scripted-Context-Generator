@@ -46,14 +46,19 @@ def semantic_epig_mode(forced_mode: str):
         "pipeline.clothing_builder",
         "vocab.garnish.logic",
     ]
+    modules = [__import__(module_name, fromlist=["*"]) for module_name in module_names]
     with ExitStack() as stack:
-        for module_name in module_names:
-            module = __import__(module_name, fromlist=["*"])
+        for module in modules:
             if hasattr(module, "semantic_mode"):
                 stack.enter_context(patch.object(module, "semantic_mode", semantic_mode))
             if hasattr(module, "domain_enabled"):
                 stack.enter_context(patch.object(module, "domain_enabled", domain_enabled))
-        yield
+        try:
+            yield
+        finally:
+            context_pipeline = sys.modules.get("pipeline.context_pipeline")
+            if context_pipeline is not None and hasattr(context_pipeline, "_garnish_vocab_module"):
+                context_pipeline._garnish_vocab_module = None
 
 
 def load_cases(path: str | Path) -> list[dict[str, Any]]:

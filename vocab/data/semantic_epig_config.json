@@ -18,7 +18,11 @@
       "mode": "active"
     },
     "personality_behavior": {
-      "mode": "active"
+      "mode": "active",
+      "subject_centric_overrides": {
+        "mode": "active",
+        "max_candidates_per_slot": 1
+      }
     }
   }
 }
