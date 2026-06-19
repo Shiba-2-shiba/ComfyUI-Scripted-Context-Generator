@@ -44,6 +44,9 @@ class TestSoloDuplicateRiskDetection(unittest.TestCase):
             "waving to a friend approaching the cafe",
             "hands moving as she talks",
             "talking quietly with classmates over lunch",
+            "bustling with customers near the table",
+            "framed family photos on the wall",
+            "cleaning staff working in the background",
             "standing by the mirror, adjusting clothes",
             "brushing hair in front of a mirror",
             "checking reflection in the mirrored wall",
@@ -121,6 +124,58 @@ class TestSoloDuplicateRiskDetection(unittest.TestCase):
             debug["semantic_family_budget"]["garnish_dropped_tags"]
         )
         self.assertIn("hands moving as she talks", dropped_tags)
+
+    def test_solo_prompt_assembly_drops_ineffective_quick_step_when_it_is_the_only_staging_tag(self):
+        from prompt_renderer import build_prompt_text
+
+        prompt, debug = build_prompt_text(
+            template="{subject_clause}, {action_clause}, {scene_clause}.",
+            composition_mode=False,
+            seed=5,
+            subj="a solo girl",
+            costume="blue dress",
+            loc="quiet room",
+            action="standing near the table",
+            staging_tags="quick step",
+            return_debug=True,
+        )
+
+        self.assertNotIn("quick step", prompt.lower())
+        self.assertIn("quick step", debug["solo_support_dropped_tags"])
+
+    def test_solo_prompt_builder_raw_location_expansion_filters_people_crowd_terms(self):
+        from unittest.mock import patch
+
+        from prompt_renderer import build_prompt_text
+
+        packs = {
+            "solo_test_cafe": {
+                "label": "solo test cafe",
+                "environment": ["small quiet cafe"],
+                "crowd": ["friends sharing a booth nearby", "quiet corner table"],
+                "time": [],
+                "weather": [],
+            }
+        }
+
+        with patch("prompt_renderer.load_background_packs", return_value=packs), patch(
+            "prompt_renderer.resolve_location_key",
+            return_value="solo_test_cafe",
+        ):
+            prompt = build_prompt_text(
+                template="{subject_clause}, {action_clause}, {scene_clause}.",
+                composition_mode=False,
+                seed=1,
+                subj="a solo girl",
+                costume="blue dress",
+                loc="solo_test_cafe",
+                action="standing near the table",
+            )
+
+        lowered = prompt.lower()
+        self.assertIn("small quiet cafe", lowered)
+        self.assertNotIn("friends", lowered)
+        self.assertNotIn("booth nearby", lowered)
 
     def test_solo_pool_generation_filters_friend_and_mirror_actions(self):
         import random

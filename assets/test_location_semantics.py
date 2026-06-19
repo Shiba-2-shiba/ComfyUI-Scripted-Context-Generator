@@ -85,7 +85,7 @@ class TestLocationSemantics(unittest.TestCase):
                 "environment": ["quiet private room", "crowded train"],
                 "core": ["single desk", "students pass through the corridor"],
                 "props": ["plain notebook", "people waiting near display"],
-                "crowd": ["line of people waiting"],
+                "crowd": ["line of people waiting", "friends sharing a booth nearby"],
                 "time": [],
                 "weather": [],
                 "texture": [],
@@ -107,6 +107,7 @@ class TestLocationSemantics(unittest.TestCase):
         self.assertNotIn("crowded", lowered)
         self.assertNotIn("students pass", lowered)
         self.assertNotIn("people", lowered)
+        self.assertNotIn("friends", lowered)
 
     def test_location_expansion_uses_plain_connectors_for_core_and_props(self):
         from unittest.mock import patch

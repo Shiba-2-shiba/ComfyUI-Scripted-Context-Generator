@@ -14,7 +14,7 @@ if __package__:
         split_semantic_tags,
     )
     from .core.semantic_policy import filter_candidate_strings, sanitize_text
-    from .core.solo_safety import has_location_first_template_conflict, is_solo_action_safe_text
+    from .core.solo_safety import filter_solo_safe_candidates, has_location_first_template_conflict, is_solo_action_safe_text
     from .location_service import load_background_packs, resolve_location_key
     from .pipeline.action_generator import action_verb as normalize_action_verb
 else:
@@ -24,7 +24,7 @@ else:
         split_semantic_tags,
     )
     from core.semantic_policy import filter_candidate_strings, sanitize_text
-    from core.solo_safety import has_location_first_template_conflict, is_solo_action_safe_text
+    from core.solo_safety import filter_solo_safe_candidates, has_location_first_template_conflict, is_solo_action_safe_text
     from location_service import load_background_packs, resolve_location_key
     from pipeline.action_generator import action_verb as normalize_action_verb
 
@@ -494,7 +494,7 @@ def _make_consistency_checker(rules, context_values):
     return is_consistent
 
 
-def _expand_location_key_for_builder(loc, rng, context_values, is_consistent):
+def _expand_location_key_for_builder(loc, rng, context_values, is_consistent, solo_prompt_context=False):
     if not loc or not isinstance(loc, str):
         return loc
     try:
@@ -508,6 +508,8 @@ def _expand_location_key_for_builder(loc, rng, context_values, is_consistent):
 
         def pick_consistent(candidates):
             safe_candidates = filter_candidate_strings(candidates)
+            if solo_prompt_context:
+                safe_candidates = filter_solo_safe_candidates(safe_candidates)
             if not safe_candidates:
                 return None
             for _ in range(10):
@@ -595,7 +597,7 @@ def build_prompt_text(
     recent_templates = {str(item) for item in (recent_templates or []) if item}
     selected_template_key = ""
 
-    loc = _expand_location_key_for_builder(loc, rng, context_vals, is_consistent)
+    loc = _expand_location_key_for_builder(loc, rng, context_vals, is_consistent, solo_prompt_context=solo_prompt_context)
     context_vals = [subj, costume, loc, action, garnish, meta_mood, staging_tags]
     is_consistent = _make_consistency_checker(rules, context_vals)
     scene_clause = sanitize_text(_join_nonempty([f"in {loc}" if loc else "", meta_mood]))

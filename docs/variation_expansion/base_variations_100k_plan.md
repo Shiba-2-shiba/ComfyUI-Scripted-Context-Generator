@@ -22,8 +22,8 @@ Current status for P13:
 
 ```text
 100k target: achieved and stabilized
-current base variations: 105,612
-current surface: 120 subjects / 91 locations / 5,926 compatibility rows
+current base variations: 103,212
+current surface: 120 subjects / 90 locations / 5,806 compatibility rows
 current action depth: min 12 / median 16 / mean 15.6 / max 20
 active planning horizon: 500,000 base variations
 ```
@@ -269,7 +269,8 @@ Docs to update:
 
 Verification result:
 
-- current measured base variations: `105,612`
+- P12 measured base variations: `105,612`
+- current restricted measured base variations: `103,212`
 - target planner: target met for `100000`
 - scoped compatibility review, action-pool source rebuild, prompt data
   validation, full asset unittest discovery, and full flow verification passed

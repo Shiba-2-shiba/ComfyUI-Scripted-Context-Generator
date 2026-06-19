@@ -47,15 +47,15 @@ action pool count: 87
 dedicated action pool missing candidates: 9
 ```
 
-## Current Snapshot After P12
+## Current Snapshot After Later Variation Restrictions
 
-Measured on: 2026-05-08
+Measured on: 2026-06-19
 
 ```text
 unique subjects: 120
-unique locations: 91
-base variations: 105,612
-compatibility rows: 5,926
+unique locations: 90
+base variations: 103,212
+compatibility rows: 5,806
 action pool count: 96
 actions per location: min 12 / median 16 / mean 15.6 / max 20
 missing action pools: 0
@@ -89,6 +89,7 @@ final planning horizon: 500,000
 | P12 | Stabilize 100k verification gate | Done | 0 | verified at 105,612 |
 | P13 | Model the 500k expansion shape | Active planning | TBD | TBD |
 | P14 | Gate clothing state details by Location | Done | 0 | 0 |
+| P15 | Apply variation restrictions and refresh current baseline | Done | -2,400 | 103,212 |
 
 ## P13 Current Direction
 
@@ -232,6 +233,9 @@ P11 result:
 P12 stabilized this at `105,612` base variations. These notes are retained as
 history and input for P13, not as the active next implementation plan.
 
+Later variation restrictions intentionally reduced the current counted surface
+to `103,212` base variations while keeping the 100k target satisfied.
+
 ## Candidate Tracking
 
 Primary daily-life candidates:
@@ -294,6 +298,10 @@ High-coverage existing action additions:
 
 | Date | Command | Result | Notes |
 | --- | --- | --- | --- |
+| 2026-06-19 | `python tools/check_variation_scope.py` | Pass | `ERROR: []`, `WARNING: []`; base variations `103,212` |
+| 2026-06-19 | `python tools/build_compatibility_review.py --check` | Pass | generated/current rows `5,806`; pair drift `0` |
+| 2026-06-19 | `python assets/calc_variations.py --json` | Pass | current restricted surface: 120 subjects / 90 locations / 103,212 base variations |
+| 2026-06-19 | `python -m unittest assets.test_calc_variations assets.test_variation_target_planner assets.test_variation_scope assets.test_build_compatibility_review assets.test_build_action_pools` | Pass | 15 tests OK |
 | 2026-05-08 | `python assets/calc_variations.py --json` | Pass | baseline captured |
 | 2026-05-08 | `python tools/validate_prompt_data.py` | Pass | `ERROR: []`, `WARNING: []` |
 | 2026-05-08 | `python -m unittest assets.test_data_consistency assets.test_location_resolution assets.test_action_generator assets.test_calc_variations` | Pass | 27 tests OK |

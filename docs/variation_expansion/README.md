@@ -59,13 +59,13 @@ location candidates: 93
 dedicated action pool missing candidates: 9
 ```
 
-Current measured after P11:
+Current measured after later variation restrictions:
 
 ```text
 unique subjects: 120
-unique locations: 91
-base variations: 105,612
-compatibility rows: 5,926
+unique locations: 90
+base variations: 103,212
+compatibility rows: 5,806
 actions per location: min 12 / median 16 / mean 15.6 / max 20
 missing action pools: 0
 ```
@@ -90,7 +90,7 @@ python tools/plan_variation_target.py --target 500000
 
 ```text
 target base variations: 100,000
-target shape: reached and stabilized at 105,612 base variations
+target shape: reached and remains above target at 103,212 base variations
 final planning horizon: 500,000 base variations
 ```
 

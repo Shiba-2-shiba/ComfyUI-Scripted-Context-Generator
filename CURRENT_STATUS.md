@@ -1,6 +1,6 @@
 # Current Status
 
-Last verified: 2026-06-16
+Last verified: 2026-06-19
 
 このファイルは、毎回全スクリプトを読み直さずに現在地を把握するための短い入口です。
 詳細な構造は `REPO_STRUCTURE.md`、設計背景は `assets/ARCHITECTURE.md` と
@@ -92,9 +92,9 @@ python assets/calc_variations.py --json
 Current semantic-only summary:
 
 - unique subjects: `120`
-- unique locations: `91`
-- compatibility review rows: `5,926`
-- base variations: `105,612`
+- unique locations: `90`
+- compatibility review rows: `5,806`
+- base variations: `103,212`
 - actions per location: `min 12 / median 16 / mean 15.6 / max 20`
 - missing action pools: `0`
 - runtime action pools: `96`
@@ -118,8 +118,8 @@ Interpretation:
 
 - `base variations` is calculated from `assets/compatibility_review.csv`
   rows and dedicated action counts in `vocab/data/action_pools.json`.
-- Current base sizing is stable at `120 subjects × 91 locations` within
-  `vocab/data/variation_scope.json`, producing `105,612` counted base
+- Current base sizing is stable at `120 subjects × 90 locations` within
+  `vocab/data/variation_scope.json`, producing `103,212` counted base
   variations.
 - The split files in `vocab/source/action_pools/` are for editing/review only;
   runtime still reads the generated flat `vocab/data/action_pools.json`.
@@ -132,24 +132,28 @@ Interpretation:
 Last verified commands:
 
 ```bash
-python -m unittest discover -s assets -p "test_*.py"
+python -m unittest assets.test_calc_variations assets.test_variation_target_planner assets.test_variation_scope assets.test_build_compatibility_review assets.test_build_action_pools
+python -m unittest assets.test_context_nodes assets.test_workflow_samples assets.test_prompt_snapshots assets.test_context_pipeline assets.test_context_state_adapter assets.test_determinism
 python tools/validate_prompt_data.py
 python tools/verify_full_flow.py
 python tools/check_widgets_values.py
 python assets/calc_variations.py --json
+python tools/check_variation_scope.py
+python tools/build_compatibility_review.py --check
+python tools/build_action_pools.py --check
+python tools/plan_variation_target.py --target 100000
 python -c "from asset_validator import validate_assets; issues=validate_assets(); print(len(issues)); print(issues[:20])"
-python -m unittest assets.test_prompt_snapshots assets.test_context_pipeline assets.test_context_state_adapter assets.test_determinism
-python -m unittest assets.test_repetition_guard_audit
 ```
 
 Results:
 
-- assets unittest discovery: `334 tests OK`
-- prompt/context/determinism tests: `16 tests OK`
-- repetition guard audit: `5 tests OK`
+- variation regression tests: `15 tests OK`
+- context/workflow/prompt tests: `28 tests OK`
 - full flow: `OK`
 - prompt data validator: `ERROR: []`, `WARNING: []`
-- variation metrics: base variations `105,612`, missing action pools `0`
+- variation metrics: base variations `103,212`, missing action pools `0`
+- variation scope / compatibility generation / action pool checks: `ERROR: []`, `WARNING: []`
+- target planner: target `100000` still met at `103,212`
 - asset validator: `0` issues
 - workflow widget validation: `OK`
 
@@ -186,7 +190,8 @@ Recent expansion:
   and added missing daily-life action pools
 - P11 added shared action families and raised action depth to the 12/16/20 tier
 - base variations increased from `11,916` to `105,612`
-- `vocab/data/variation_scope.json` now records the active 120 subjects / 91 locations boundary
+- Later variation restrictions reduced the active counted boundary to 120 subjects / 90 locations.
+- `vocab/data/variation_scope.json` now records the active 120 subjects / 90 locations boundary
 - `tools/build_compatibility_review.py --check` now verifies scoped CSV regeneration with `ERROR: []`
 - `tools/build_action_pools.py --check` now verifies split action-pool source
   rebuilds the runtime JSON exactly
@@ -198,6 +203,7 @@ Current expansion state:
 - P11 result: action depth `min 12 / median 16 / mean 15.6 / max 20`,
   base variations `52,121 -> 105,612`.
 - P12 stabilization gate commands have passed at the 100k scale.
+- Current restricted sizing remains above the 100k target at `103,212`.
 - Next planning target: `500,000` base variations without making the 100k
   implementation noisy or repetitive.
 - Detailed current plan: `docs/variation_expansion/base_variations_100k_plan.md`.

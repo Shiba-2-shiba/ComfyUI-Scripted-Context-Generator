@@ -52,7 +52,7 @@ python -m unittest assets.test_variation_scope
 
 Current state:
 
-- Current P12 stabilized scope has 120 subjects and 91 locations.
+- Current restricted scope has 120 subjects and 90 locations.
 - All current variation-scope locations have direct background packs.
 - `tools/check_variation_scope.py` should stay clean (`ERROR: []`, `WARNING: []`)
   before any P13 promotion wave is accepted.
@@ -79,7 +79,7 @@ Current implementation:
   compares them to `assets/compatibility_review.csv`.
 - `assets/compatibility_review.csv` has been normalized from the generator output.
 - The check now reports `ERROR: []`, `WARNING: []`, and no row or pair drift.
-- Current generated rows after P12: `5,926`.
+- Current generated rows after later variation restrictions: `5,806`.
 - `prompts.jsonl` rows are aligned to the current variation scope.
 
 ### 3. Split Action Pool Authoring Surface
@@ -172,6 +172,16 @@ subjects: 120
 locations: 91
 compatibility rows: 5,926
 base variations: 105,612
+actions per location: min 12 / median 16 / mean 15.6 / max 20
+```
+
+Later variation restrictions reduced the active counted surface to:
+
+```text
+subjects: 120
+locations: 90
+compatibility rows: 5,806
+base variations: 103,212
 actions per location: min 12 / median 16 / mean 15.6 / max 20
 ```
 

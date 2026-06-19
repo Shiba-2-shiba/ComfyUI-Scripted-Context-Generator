@@ -156,10 +156,10 @@ python tools/build_compatibility_review.py --check
 python -m unittest assets.test_build_compatibility_review
 ```
 
-Current generator state after P11/P12:
+Current generator state after later variation restrictions:
 
-- generated rows: `5,926`
-- current rows: `5,926`
+- generated rows: `5,806`
+- current rows: `5,806`
 - missing current pairs: `0`
 - extra generated pairs: `0`
 - `python tools/build_compatibility_review.py --check` reports `ERROR: []`, `WARNING: []`
@@ -308,6 +308,18 @@ Active phase. Do not begin bulk subject, location, compatibility, or action-pool
 edits until this planning gate is recorded.
 
 - [ ] VE-1301 Run and summarize `python tools/plan_variation_target.py --target 500000`
+
+## P15: Variation Restriction Baseline Refresh
+
+- [x] VE-1501 Refresh active docs and regression baselines after intentional variation restrictions
+
+P15 current result:
+
+- unique subjects: `120`
+- unique locations: `90`
+- compatibility rows: `5,806`
+- base variations: `103,212`
+- 100k target remains met
 - [ ] VE-1302 Model subject/location/compatibility-density/action-depth shapes for `500000`
 - [ ] VE-1303 Identify whether compatibility density, location count, subject count, or action depth is the next limiter
 - [ ] VE-1304 Define guardrails for expanding beyond the 100k stabilized surface
