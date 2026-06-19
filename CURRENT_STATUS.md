@@ -10,6 +10,7 @@ subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` 
 100k base variations gate は通過済みです。次の拡張計画対象は 500k に向けた subject / location / action-depth の再設計です。
 現在の variation sizing 境界は `vocab/data/variation_scope.json` に固定されています。
 書類整理方針は `docs/documentation_cleanup_plan.md` を参照してください。
+repository cleanup の直近リファクタは `docs/repository_cleanup/` に仕様・進捗・タスクがあります。
 
 ## Runtime Surface
 
@@ -159,8 +160,9 @@ Results:
 
 Notes:
 
-- `assets/results/` is ignored by git. Some audit tests compare against generated baseline JSON files there.
-- If those files are missing, regenerate them with:
+- `assets/results/` is ignored by git and is reserved for generated audit outputs.
+- Normal unittest no longer depends on ignored `assets/results/` JSON artifacts.
+- Long audit artifacts can be regenerated explicitly with:
 
 ```bash
 python tools/audit_prompt_repetition.py --samples-per-row 8 --output assets/results/prompt_repetition_active_source_8.json --enforce-thresholds
@@ -179,6 +181,9 @@ Recent cleanup:
 - `assets/test_vocab_lint.py` now uses unittest assertions instead of print-only checks
 - `assets/test_char_profile_nl.py` now checks expected profile text programmatically
 - `assets/test_calc_variations.py` locks semantic-only metric shape
+- audit-style unittest coverage now uses unit-sized inputs; long prompt/template/repetition audits remain explicit `tools/audit_*.py` commands
+- compatibility facades are guarded by `assets/test_compatibility_boundaries.py`
+- empty `vocab/*/test.md` placeholders and the tracked generated `assets/results` baseline were removed
 - `pipeline/action_profiles.py` holds expansion-oriented daily-life/location action profile tables
 
 Recent expansion:
@@ -221,8 +226,7 @@ Medium-risk cleanup candidates:
 
 - splitting `pipeline/action_generator.py`
 - splitting `prompt_renderer.py`
-- tightening compatibility facade boundaries
-- making generated audit baseline handling explicit in tests
+- further relocation of Python tests out of `assets/` if the import churn is justified
 
 Higher-risk areas:
 

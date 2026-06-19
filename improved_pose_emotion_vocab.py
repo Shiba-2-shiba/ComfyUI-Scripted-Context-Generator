@@ -4,6 +4,12 @@ improved_pose_emotion_vocab.py — Facade
 ========================================
 All data and logic has been moved to ``vocab/garnish/``.
 This file re-exports every public symbol for backward compatibility.
+
+Boundary contract:
+- New runtime code must import from ``vocab.garnish`` directly.
+- Repo-owned runtime imports of this facade are guarded by
+  ``assets/test_compatibility_boundaries.py``.
+- Keep this facade only for external/backward-compatible imports.
 """
 
 if __package__:

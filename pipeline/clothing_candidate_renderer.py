@@ -4,18 +4,18 @@ import random
 from typing import Any
 
 try:
-    from .. import clothing_vocab
     from ..clothing_service import resolve_clothing_theme
     from ..core.semantic_policy import sanitize_text
     from ..history_service import clothing_signature_from_decision, extract_object_flags
     from ..location_service import resolve_location_key
+    from ..vocab import clothing as clothing_vocab
     from ..vocab.seed_utils import mix_seed
 except ImportError:
-    import clothing_vocab
     from clothing_service import resolve_clothing_theme
     from core.semantic_policy import sanitize_text
     from history_service import clothing_signature_from_decision, extract_object_flags
     from location_service import resolve_location_key
+    from vocab import clothing as clothing_vocab
     from vocab.seed_utils import mix_seed
 
 

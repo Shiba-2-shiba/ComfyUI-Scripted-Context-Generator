@@ -56,9 +56,9 @@ else:
     from pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 
 if __package__ and "." in __package__:
-    from .. import background_vocab
+    from ..vocab import background as background_vocab
 else:
-    import background_vocab
+    from vocab import background as background_vocab
 
 TEXTURE_DEFAULT_BLEND_PROB = 0.25
 TEXTURE_SEGMENT_SELECT_PROB = 0.55
@@ -84,7 +84,7 @@ def expand_location_prompt(
     if mode not in ["detailed", "simple"]:
         mode = "detailed"
     if not background_vocab:
-        return "[ERR: background_vocab.py not found]"
+        return "[ERR: vocab.background not found]"
 
     rng = random.Random(mix_seed(seed, "loc"))
     raw_tag = str(loc_tag).lower().strip()
