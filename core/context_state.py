@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 from typing import Any, Dict
 
 from .context_ops import ensure_context
+from .schema import ActionFrame
 
 
 def _coerce_text(value: Any) -> str:
@@ -58,6 +59,7 @@ class GenerationState:
     character: CharacterState = field(default_factory=CharacterState)
     clothing: ClothingState = field(default_factory=ClothingState)
     location: LocationState = field(default_factory=LocationState)
+    action: ActionFrame = field(default_factory=ActionFrame)
     fragments: PromptFragments = field(default_factory=PromptFragments)
 
     @classmethod
@@ -69,6 +71,10 @@ class GenerationState:
         palette = _coerce_palette_list(extras.get("color_palette", []), fallback_text=palette_text)
         if not palette_text and palette:
             palette_text = ", ".join(palette)
+
+        action = ActionFrame.from_dict(extras.get("action_frame", {}))
+        if action.has_content() and action.legacy_text != _coerce_text(ctx.action).strip():
+            action = ActionFrame()
 
         return cls(
             character=CharacterState(
@@ -89,6 +95,7 @@ class GenerationState:
                 resolved_location_key=_coerce_text(ctx.loc).strip(),
                 location_prompt=_coerce_text(extras.get("location_prompt", "")).strip(),
             ),
+            action=action,
             fragments=PromptFragments(
                 garnish=_coerce_text(extras.get("garnish", "")).strip(),
                 staging_tags=_coerce_text(extras.get("staging_tags", "")).strip(),
@@ -96,7 +103,7 @@ class GenerationState:
         )
 
     def to_extras_patch(self) -> Dict[str, Any]:
-        return {
+        patch = {
             "character_name": self.character.character_name,
             "character_id": self.character.character_id,
             "personality": self.character.personality,
@@ -110,6 +117,9 @@ class GenerationState:
             "garnish": self.fragments.garnish,
             "staging_tags": self.fragments.staging_tags,
         }
+        if self.action.has_content():
+            patch["action_frame"] = self.action.to_dict()
+        return patch
 
 
 def generation_state_from_context(context: Any) -> GenerationState:

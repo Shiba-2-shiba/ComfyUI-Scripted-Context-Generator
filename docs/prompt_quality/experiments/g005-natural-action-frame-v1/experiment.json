@@ -1,0 +1,51 @@
+{
+  "artifact_root": "assets/results/prompt_quality_loop",
+  "baseline_run_id": "g005-natural-action-frame-v1-incumbent",
+  "candidate_run_id": "g005-natural-action-frame-v1-candidate",
+  "cohort": {
+    "cohort_hash": "6d594f6c2620ca61582b3a54b4645284f1bd5ea51e7634a575ce67ca85058399",
+    "control_count": 64,
+    "control_seeds_file": "assets/fixtures/prompt_quality_control_seeds.json",
+    "experiment_seed": 9472026,
+    "exploration_count": 16,
+    "iteration_id": "g002-baseline",
+    "samples": 80
+  },
+  "expected_behavior_change": "composition_mode=True persists the existing action slots as a typed ActionFrame, exposes a role-aware content plan, uses named lexical/syntax streams, and normalizes composition-boundary punctuation before PromptCleaner.",
+  "expected_unchanged_behavior": "composition_mode=False, the base workflow default, legacy action strings, public node inputs/outputs, identity, consistency, fallback, replay, and legacy JSON remain unchanged.",
+  "experiment_id": "g005-natural-action-frame-v1",
+  "guard_metrics": [
+    "identity.missing_female_protagonist_count",
+    "identity.male_pronoun_drift_count",
+    "identity.other_person_solo_conflict_count",
+    "identity.duplicate_protagonist_mention_count",
+    "consistency.hard_conflict_count",
+    "diversity.exact_unique_ratio",
+    "runtime.fallback_rate",
+    "runtime.deterministic_replay_mismatch_count",
+    "runtime.context_json_bytes_p95",
+    "runtime.context_json_bytes_max"
+  ],
+  "hypothesis": "Typing the existing action slots into ActionFrame and moving composition-only planning and punctuation normalization behind a named-seed realizer boundary removes dangling punctuation anomalies without changing the legacy renderer or semantic content.",
+  "metric_scope": "control64",
+  "owned_files": [
+    "core/schema.py",
+    "core/context_state.py",
+    "pipeline/context_pipeline.py",
+    "pipeline/prompt_orchestrator.py",
+    "pipeline/prompt_realizer.py",
+    "prompt_renderer.py"
+  ],
+  "policy_version": "prompt-quality-policy/v2",
+  "profile": "verification/fixtures/prompt_quality_supported_profile.json",
+  "regression_test": "assets/test_action_frame_realizer.py",
+  "rollback_condition": "Reject if punctuation anomalies do not meet the effect-size contract, persisted ActionFrame diverges from debug payloads, legacy mode changes, required semantic slots are lost, or any identity, consistency, duplicate, fallback, context-size, determinism, public-contract, or review guard fails.",
+  "schema_version": "prompt-quality-experiment/v1",
+  "secondary_metrics": [
+    "naturalness.sentence_fragment_count",
+    "naturalness.high_comma_density_count"
+  ],
+  "target_kind": "behavior",
+  "target_metric": "naturalness.punctuation_anomaly_count",
+  "workflow": "ComfyUI-workflow-context.json"
+}

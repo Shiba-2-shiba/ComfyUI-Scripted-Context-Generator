@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass, field
-from typing import Any, Dict
+from typing import Any, Dict, Mapping
 import json
 
 
@@ -92,6 +92,92 @@ class DebugInfo:
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
+
+
+@dataclass
+class ActionFrame:
+    """Typed view of the existing action-slot contract.
+
+    ``legacy_slots`` remains the lossless compatibility projection.  The named
+    fields make the roles consumed by the natural renderer explicit without
+    creating a second action-generation model.
+    """
+
+    schema_version: str = "action-frame/v1"
+    legacy_text: str = ""
+    main_verb: str = ""
+    primary_object: str = ""
+    posture: str = ""
+    hand_action: str = ""
+    gaze_target: str = ""
+    progress: str = ""
+    stimulus_or_obstacle: str = ""
+    social_relation: str = ""
+    legacy_slots: Dict[str, Any] = field(default_factory=dict)
+
+    @classmethod
+    def from_slots(
+        cls,
+        slots: Mapping[str, Any] | None,
+        *,
+        legacy_text: str = "",
+        main_verb: str = "",
+        primary_object: str = "",
+    ) -> "ActionFrame":
+        normalized_slots = dict(slots) if isinstance(slots, Mapping) else {}
+        return cls(
+            legacy_text=_coerce_text(legacy_text),
+            main_verb=_coerce_text(main_verb),
+            primary_object=_coerce_text(primary_object),
+            posture=_coerce_text(normalized_slots.get("posture", "")),
+            hand_action=_coerce_text(normalized_slots.get("hand_action", "")),
+            gaze_target=_coerce_text(normalized_slots.get("gaze_target", "")),
+            progress=_coerce_text(
+                normalized_slots.get("progress_state", normalized_slots.get("progress_clause", ""))
+            ),
+            stimulus_or_obstacle=_coerce_text(
+                normalized_slots.get("obstacle_or_trigger", normalized_slots.get("obstacle_clause", ""))
+            ),
+            social_relation=_coerce_text(
+                normalized_slots.get("social_distance", normalized_slots.get("social_clause", ""))
+            ),
+            legacy_slots=normalized_slots,
+        )
+
+    @classmethod
+    def from_dict(cls, data: Mapping[str, Any] | None) -> "ActionFrame":
+        if not isinstance(data, Mapping):
+            return cls()
+        if data.get("schema_version", "action-frame/v1") != "action-frame/v1":
+            return cls()
+        slots = data.get("legacy_slots", {})
+        return cls(
+            schema_version="action-frame/v1",
+            legacy_text=_coerce_text(data.get("legacy_text", "")),
+            main_verb=_coerce_text(data.get("main_verb", "")),
+            primary_object=_coerce_text(data.get("primary_object", "")),
+            posture=_coerce_text(data.get("posture", "")),
+            hand_action=_coerce_text(data.get("hand_action", "")),
+            gaze_target=_coerce_text(data.get("gaze_target", "")),
+            progress=_coerce_text(data.get("progress", "")),
+            stimulus_or_obstacle=_coerce_text(data.get("stimulus_or_obstacle", "")),
+            social_relation=_coerce_text(data.get("social_relation", "")),
+            legacy_slots=dict(slots) if isinstance(slots, Mapping) else {},
+        )
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+    def to_slot_dict(self) -> Dict[str, Any]:
+        return dict(self.legacy_slots)
+
+    def has_content(self) -> bool:
+        return bool(
+            self.legacy_text
+            or self.main_verb
+            or self.primary_object
+            or self.legacy_slots
+        )
 
 
 @dataclass

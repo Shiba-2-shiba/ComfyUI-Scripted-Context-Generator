@@ -8,7 +8,7 @@ if __package__ and "." in __package__:
     from ..character_service import resolve_character
     from ..core.context_state import generation_state_from_context
     from ..core.context_ops import add_warning, append_history, ensure_context, patch_context
-    from ..core.schema import DebugInfo
+    from ..core.schema import ActionFrame, DebugInfo
     from ..location_service import resolve_location_key
     from ..pipeline.action_generator import (
         action_object_flags as generator_action_object_flags,
@@ -16,13 +16,14 @@ if __package__ and "." in __package__:
         can_generate_action_for_location as generator_can_generate_action_for_location,
         choose_action_with_bias_guard as generator_choose_action_with_bias_guard,
         generate_action_for_location,
+        parse_pool_action_to_slots as generator_parse_pool_action_to_slots,
     )
     from ..vocab.seed_utils import mix_seed
 else:
     from character_service import resolve_character
     from core.context_state import generation_state_from_context
     from core.context_ops import add_warning, append_history, ensure_context, patch_context
-    from core.schema import DebugInfo
+    from core.schema import ActionFrame, DebugInfo
     from location_service import resolve_location_key
     from pipeline.action_generator import (
         action_object_flags as generator_action_object_flags,
@@ -30,6 +31,7 @@ else:
         can_generate_action_for_location as generator_can_generate_action_for_location,
         choose_action_with_bias_guard as generator_choose_action_with_bias_guard,
         generate_action_for_location,
+        parse_pool_action_to_slots as generator_parse_pool_action_to_slots,
     )
     from vocab.seed_utils import mix_seed
 
@@ -262,6 +264,20 @@ def _compose_fallback_action(loc, compat, scene_axes, rng, decision_log, recent_
     return action_text, generated
 
 
+def _action_frame_from_legacy(action_text, loc, *, slots=None, compat=None):
+    resolved_slots = dict(slots) if isinstance(slots, dict) else {}
+    if not resolved_slots and action_text:
+        resolved_slots = generator_parse_pool_action_to_slots(action_text, loc=loc, compat=compat)
+    action_objects = sorted(generator_action_object_flags(action_text))
+    frame = ActionFrame.from_slots(
+        resolved_slots,
+        legacy_text=action_text,
+        main_verb=generator_action_verb(action_text),
+        primary_object=action_objects[0] if action_objects else "",
+    )
+    return frame, resolved_slots
+
+
 def apply_scene_variation(context: Any, seed: int, variation_mode: str):
     ctx = ensure_context(context, default_seed=int(seed))
     ctx.seed = int(seed)
@@ -276,6 +292,12 @@ def apply_scene_variation(context: Any, seed: int, variation_mode: str):
         "action": ctx.action,
     }
     if variation_mode == "original":
+        state = generation_state_from_context(ctx)
+        state.action, action_slots = _action_frame_from_legacy(ctx.action, ctx.loc)
+        decision_log["slots"] = action_slots
+        decision_log["action_frame"] = state.action.to_dict()
+        decision_log["action_frame_source"] = "legacy_action_adapter"
+        ctx = patch_context(ctx, extras=state.to_extras_patch())
         debug_info = DebugInfo(node="ContextSceneVariator", seed=seed, decision=decision_log)
         ctx = append_history(ctx, debug_info)
         return ctx, debug_info
@@ -415,6 +437,17 @@ def apply_scene_variation(context: Any, seed: int, variation_mode: str):
     state = generation_state_from_context(ctx)
     state.location.raw_loc_tag = chosen_loc
     state.location.resolved_location_key = chosen_loc
+    state.action, action_slots = _action_frame_from_legacy(
+        new_action,
+        chosen_loc,
+        slots=decision_log.get("slots", {}),
+        compat=compat,
+    )
+    decision_log["slots"] = action_slots
+    decision_log["action_frame"] = state.action.to_dict()
+    decision_log["action_frame_source"] = (
+        "generated_slots" if decision_log.get("action_updated") else "legacy_action_adapter"
+    )
     ctx = patch_context(
         ctx,
         updates={"loc": chosen_loc, "action": new_action, "seed": seed},

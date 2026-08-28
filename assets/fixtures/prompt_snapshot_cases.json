@@ -11,7 +11,7 @@
     "palette": "navy, cream",
     "nuance": "absorbed",
     "personality": "gentle",
-    "expected_prompt": "A solo girl with silver hair in forest green solid pleated skirt pleated pinafore dress, with school crest, white blouse worn underneath, right where her attention settles, reviewing notes at her desk before class, with small reassuring smile, attention locked forward, still posture, everything else widening into sun-drenched school classroom in late afternoon, during lunch break, smooth desk surfaces with graffiti, teacher supervising, featuring bulletin board with one neat notice cluster, after classes end"
+    "expected_prompt": "A solo girl with silver hair in forest green solid pleated skirt pleated pinafore dress, with school crest, white blouse worn underneath, keeping to the edge of the moment, reviewing notes at her desk before class, with small reassuring smile, attention locked forward, still posture, and the room around her staying in sun-drenched school classroom in late afternoon, during lunch break, smooth desk surfaces with graffiti, wide open aisle space, featuring bulletin board with one neat notice cluster, after classes end"
   },
   {
     "name": "office_daily_life",
@@ -25,7 +25,7 @@
     "palette": "navy, white",
     "nuance": "absorbed",
     "personality": "serious",
-    "expected_prompt": "A solo girl with black hair in navy wool knee-length tucked-in button-down shirt and pressed tailored trousers, keeping to the edge of the moment, checking what needs to be handled next, focused gaze, brows knit in concentration, in spacious modern open-plan office, small groups gathering, screen glare and reflections, with stacked lunch containers beside a tote bag and lanyards and ID cards hanging from a rack, featuring white office desk with pinned notes and a task tray, layered background depth, during a lunch break"
+    "expected_prompt": "A solo girl with black hair in navy wool knee-length tucked-in button-down shirt and pressed tailored trousers, caught in a brief pause, checking what needs to be handled next, focused gaze, brows knit in concentration, with the scene around her staying in spacious modern open-plan office, nearly empty, screen glare and reflections, with stacked lunch containers beside a tote bag and lanyards and ID cards hanging from a rack, featuring white office desk with pinned notes and a task tray, layered background depth, during a lunch break"
   },
   {
     "name": "suburban_daily_life",
@@ -39,7 +39,7 @@
     "palette": "beige, moss green",
     "nuance": "content",
     "personality": "gentle",
-    "expected_prompt": "A solo girl with chestnut hair in moss green solid cashmere long-sleeve warm turtleneck sweater dress, with ribbed texture, wearing a moss green warm wool coat over it, turned toward the next exchange, in the middle of walking home with a small grocery bag, small reassuring smile, eyes brightening, carrying the moment forward, the rest of the moment opening into peaceful suburban residential street, adorned with children's tricycle and garden hose, intricate background details, featuring paved driveway and street trees, during evening dog walk, during a walk home"
+    "expected_prompt": "A solo girl with chestnut hair in moss green solid cashmere long-sleeve warm turtleneck sweater dress, with ribbed texture, wearing a moss green warm wool coat over it, small reassuring smile, eyes brightening while walking home with a small grocery bag. The scene is set in peaceful suburban residential street, adorned with garden hose and parked family car, intricate background details, featuring paved driveway and street trees, during evening dog walk, during a walk home"
   },
   {
     "name": "japanese_scene",
@@ -53,7 +53,7 @@
     "palette": "crimson, white",
     "nuance": "content",
     "personality": "gentle",
-    "expected_prompt": "A solo shrine maiden with long black hair in crimson cotton long-sleeve traditional kimono, with floral hair ornament, sweeping fallen leaves into a neat pile, small reassuring smile, eyes crinkling softly, the moment gathering around her, in stone paved path leading to hall, featuring purification fountain (temizuya) and large sacred tree (shinboku), during morning shrine duties"
+    "expected_prompt": "A solo shrine maiden with long black hair in crimson cotton long-sleeve traditional kimono, with floral hair ornament, already in the middle of things, sweeping fallen leaves into a neat pile, small reassuring smile, eyes crinkling softly, the rest of the moment opening into stone paved path leading to hall, featuring purification fountain (temizuya) and large sacred tree (shinboku), during morning shrine duties"
   },
   {
     "name": "fantasy_scene",
@@ -67,7 +67,7 @@
     "palette": "forest green, brown",
     "nuance": "tense",
     "personality": "cool",
-    "expected_prompt": "A solo elf girl with blonde hair in forest green leather structured skirt mystical battle mage robe, restless expression, eyes flicking toward the exit, gripping a strap too tightly while tracking a faint trail between the trees, in ethereal enchanted woods glowing softly, featuring thick hanging vines like curtains and towering ancient trees with twisted roots, with single mossy ruin fragment from a lost civilization, on a careful patrol"
+    "expected_prompt": "A solo elf girl with blonde hair in forest green leather structured skirt mystical battle mage robe, moving with the next part of the day, tracking a faint trail between the trees, restless expression, eyes flicking toward the exit, gripping a strap too tightly, and the room around her staying in ethereal enchanted woods glowing softly, featuring thick hanging vines like curtains and towering ancient trees with twisted roots, with single mossy ruin fragment from a lost civilization, on a careful patrol"
   },
   {
     "name": "scifi_scene",
@@ -81,6 +81,6 @@
     "palette": "white, cobalt blue",
     "nuance": "absorbed",
     "personality": "serious",
-    "expected_prompt": "A solo space pilot with short blue hair in cobalt blue PVC high-neck tactical techwear mini dress, with buckles, translucent headpiece, in the middle of checking a route display before departure, focused gaze, attention locked forward, body held carefully still, leaving room for the rest of the scene, with the world around her settling into futuristic sci-fi cockpit, during deep space time, featuring touch control consoles and holographic 3d star map, layered background depth, before departure"
+    "expected_prompt": "A solo space pilot with short blue hair in cobalt blue PVC high-neck tactical techwear mini dress, with buckles, translucent headpiece, in the middle of checking a route display before departure, focused gaze, attention locked forward, body held carefully still, carrying the moment forward, the moment lingering in futuristic sci-fi cockpit, during deep space time, featuring touch control consoles and holographic 3d star map, layered background depth, before departure"
   }
 ]

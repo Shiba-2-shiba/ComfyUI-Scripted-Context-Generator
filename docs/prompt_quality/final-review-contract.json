@@ -1,0 +1,15 @@
+{
+  "experiment_id": "final-g004-g006-adoption-review-v2",
+  "guard_qualitative_dimensions": [
+    "protagonist_clarity",
+    "redundancy",
+    "diversity"
+  ],
+  "policy_version": "prompt-quality-policy/v2",
+  "schema_version": "prompt-quality-experiment-review-contract/v2",
+  "target_qualitative_dimensions": [
+    "consistency",
+    "naturalness",
+    "image_prompt_suitability"
+  ]
+}

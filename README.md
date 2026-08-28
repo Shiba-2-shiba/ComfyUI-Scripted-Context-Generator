@@ -49,7 +49,10 @@ Semantic EPIG の直近リファクタリング仕様・進捗・タスクは [`
   - 仕草や補助描写を追加
 - `ContextPromptBuilder`
   - `context_json` から最終 prompt を組み立て
-  - `composition_mode=true` の場合は `vocab/data/template_catalog.json` と `vocab/templates_*.txt` を使って template part を選択
+  - `composition_mode=true`（推奨・新規ノードの既定値）は、typed `ActionFrame` と named seed stream を使う natural renderer
+  - `composition_mode=false` は旧 renderer を明示的に使う rollback 設定
+  - 女性主体の表記は最終出力で `girl` に統一し、旧入力の `woman` / `women` / `lady` / `female` / `1girl` も `girl` に正規化
+  - 人種・民族・肌色を示す人物記述は最終出力から除去（`black dress`、髪色、背景色など人物属性でない色指定は保持）
 - `ContextInspector`
   - `context_json` の pretty print と summary を返す
 
@@ -61,6 +64,7 @@ Semantic EPIG の直近リファクタリング仕様・進捗・タスクは [`
 ## 推奨フロー
 
 同梱の推奨サンプルは [`ComfyUI-workflow-context.json`](./ComfyUI-workflow-context.json) です。
+このサンプルは `ContextPromptBuilder.composition_mode=true` を保存済みです。
 
 基本の流れ:
 
@@ -79,6 +83,8 @@ Semantic EPIG の直近リファクタリング仕様・進捗・タスクは [`
 
 - サンプル workflow には preview 用の外部ノードが入ることがありますが、このリポジトリの必須ノードではありません
 - downstream ノードの `context_json` は optional input として設計されており、段階的な接続や差し替えをしやすくしています
+- 旧出力へ戻す場合は `ContextPromptBuilder` の `composition_mode` を明示的に `false` にしてください。node I/O と `context_json` contract は変わりません
+- workflow-equivalent Python runner、frontend schema round-trip、ComfyUI GUI save/reload を採用gateとして検証しています。実ComfyUIでのprompt実行 parity は optional E2E です
 
 ## 現在の方針
 

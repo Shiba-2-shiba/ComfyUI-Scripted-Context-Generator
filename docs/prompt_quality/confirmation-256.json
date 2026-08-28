@@ -1,0 +1,33 @@
+{
+  "cohort_hash": "a54d37fd054cdeaa80436b8bdabf2bde97a3bf6f11c6758ea7d68fb2de6ac6cc",
+  "objectives": {
+    "g004": {
+      "artifact_hash": "518edec06c07b33c421073b28b2c93a1193a82b4ea03c1e79ea3518879e0013d",
+      "target_after": 0.0,
+      "target_before": 24.0,
+      "target_metric": "consistency.domains.location_action_object.hard_conflict_count",
+      "verdict": "pass"
+    },
+    "g005": {
+      "artifact_hash": "220b2674856ca556dc86b68c7d81977ced95d41dc82e7567031b3e460bbabf45",
+      "target_after": 0.0,
+      "target_before": 137.0,
+      "target_metric": "naturalness.punctuation_anomaly_count",
+      "verdict": "pass"
+    },
+    "g006": {
+      "artifact_hash": "a81b48f3b65637e4b7c8bde2543e8b04706ec1c4631db03a14d785dd203332cb",
+      "target_after": 0.778828,
+      "target_before": 0.0,
+      "target_metric": "diversity.syntax_entropy",
+      "verdict": "pass"
+    }
+  },
+  "record_count_per_objective": 256,
+  "schema_version": "prompt-quality-confirmation-summary/v1",
+  "source_tree_hash": "3009c2d0407b1a417362f50eb5d9c9a634850ca17377bfaa90ef370f5ed4c15b",
+  "excluded_seed_count": 112,
+  "excluded_seed_set_hash": "31a2f0bccf1de296dcbc6febb5ff11a69422b1c12728ec5603c611fd8ef26a6b",
+  "seed_fixture_hash": "33554f66ac486aaf81cc8143eca7cd3f041ac3fa5104ca5029992e6b09462b37",
+  "status": "pass"
+}

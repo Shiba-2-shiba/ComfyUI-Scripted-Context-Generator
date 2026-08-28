@@ -19,7 +19,7 @@
   },
   {
     "case_id": "rainy_bus_stop_commute",
-    "subj": "a woman",
+    "subj": "a girl",
     "loc": "rainy_bus_stop",
     "action": "commuting",
     "costume": "casual",

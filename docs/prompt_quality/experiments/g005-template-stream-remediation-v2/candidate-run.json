@@ -1,0 +1,16 @@
+{
+  "artifact_root": "assets/results/prompt_quality_loop",
+  "control_seeds_file": "assets/fixtures/prompt_quality_control_seeds.json",
+  "experiment_id": "g005-template-stream-remediation-v2",
+  "experiment_seed": 9472026,
+  "iteration_id": "g002-baseline",
+  "overrides": {
+    "8": {
+      "composition_mode": true
+    }
+  },
+  "profile": "verification/fixtures/prompt_quality_supported_profile.json",
+  "run_id": "g005-template-stream-remediation-v2-candidate",
+  "samples": 80,
+  "workflow": "ComfyUI-workflow-context.json"
+}

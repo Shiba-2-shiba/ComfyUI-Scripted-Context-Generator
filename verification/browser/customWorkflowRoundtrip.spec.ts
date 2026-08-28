@@ -105,6 +105,15 @@ async function setBackendSettings(request: APIRequestContext, baseUrl: string, u
       'Comfy.RightSidePanel.ShowErrorsTab': false
     }
   })
+  // Older/current backend packages may not expose this test-only settings route.
+  // Runtime settings are applied after the app loads, so 405 does not weaken
+  // the workflow save/reload assertion.
+  if (response.status() === 405) {
+    console.warn(
+      '[workflow-roundtrip] Backend has no devtools settings route; using runtime settings only.'
+    )
+    return
+  }
   if (response.status() !== 200) {
     throw new Error(`Failed to setup settings: ${await response.text()}`)
   }
@@ -127,6 +136,14 @@ async function setRuntimeSettings(page: Page) {
       'Sidebar'
     )
   })
+}
+
+
+async function dismissStartupOverlays(page: Page) {
+  const closeDialog = page.getByRole('button', { name: 'Close dialog' })
+  if (await closeDialog.isVisible()) {
+    await closeDialog.click()
+  }
 }
 
 
@@ -176,7 +193,9 @@ async function triggerTopbarCommand(page: Page, pathParts: string[]) {
 
 async function saveWorkflow(page: Page, workflowName: string) {
   await triggerTopbarCommand(page, ['File', 'Save'])
-  const input = page.locator('.p-dialog-content input')
+  const input = page
+    .getByRole('dialog', { name: 'Save workflow' })
+    .getByRole('textbox', { name: 'Enter the filename:' })
   await input.fill(workflowName)
   await page.keyboard.press('Enter')
   await page.waitForFunction(
@@ -244,6 +263,7 @@ test.describe('Custom workflow roundtrip', () => {
     await page.goto(baseUrl)
     await waitForAppReady(page)
     await setRuntimeSettings(page)
+    await dismissStartupOverlays(page)
     await openWorkflowsTab(page)
   })
 

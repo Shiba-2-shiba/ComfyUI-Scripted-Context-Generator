@@ -17,6 +17,17 @@ if __package__:
     from .core.solo_safety import filter_solo_safe_candidates, has_location_first_template_conflict, is_solo_action_safe_text
     from .location_service import load_background_packs, resolve_location_key
     from .pipeline.action_generator import action_verb as normalize_action_verb
+    from .pipeline.prompt_realizer import (
+        build_content_plan,
+        filter_redundant_garnish,
+        normalize_composition_punctuation,
+        normalize_subject_to_girl,
+        strip_person_demographic_descriptors,
+        realize_content_plan,
+        realize_template_parts,
+        select_syntax_family,
+    )
+    from .vocab.seed_utils import mix_seed
 else:
     from core.semantic_families import (
         filter_semantic_family_tags,
@@ -27,6 +38,17 @@ else:
     from core.solo_safety import filter_solo_safe_candidates, has_location_first_template_conflict, is_solo_action_safe_text
     from location_service import load_background_packs, resolve_location_key
     from pipeline.action_generator import action_verb as normalize_action_verb
+    from pipeline.prompt_realizer import (
+        build_content_plan,
+        filter_redundant_garnish,
+        normalize_composition_punctuation,
+        normalize_subject_to_girl,
+        strip_person_demographic_descriptors,
+        realize_content_plan,
+        realize_template_parts,
+        select_syntax_family,
+    )
+    from vocab.seed_utils import mix_seed
 
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -241,11 +263,12 @@ def _derive_action_surface(action):
         surface = "fragment"
     if verb and verb in _FRAGMENT_ACTION_STARTS:
         surface = "fragment"
+    full_tokens = re.findall(r"[a-z']+", str(action or "").lower())
     return {
         "surface": surface,
         "verb": verb,
         "first_token": first_token,
-        "word_count": len(tokens),
+        "word_count": len(full_tokens),
     }
 
 
@@ -383,6 +406,12 @@ def _select_template_entry(
 
     recent_part_keys = {str(item) for item in (recent_part_keys or []) if item}
     recent_templates = {str(item) for item in (recent_templates or []) if item}
+    recent_component_keys = {
+        component
+        for template_key in recent_templates
+        for component in template_key.split("||")
+        if component
+    }
     preferred_roles = [str(item) for item in (preferred_roles or []) if item]
 
     candidates = []
@@ -402,6 +431,12 @@ def _select_template_entry(
             continue
         if max_action_words and action_word_count > max_action_words:
             continue
+        if action_word_count > 20:
+            key = str(entry.get("key", ""))
+            if key.startswith("intro_") and key != "intro_plain_subject":
+                continue
+            if key.startswith("body_") and key != "body_direct_clause":
+                continue
 
         score = 1.0
         roles = entry.get("roles", [])
@@ -409,6 +444,12 @@ def _select_template_entry(
             if role in roles:
                 score += max(0.4, 2.0 - (index * 0.3))
         surface_name = str((action_surface or {}).get("surface", "")).strip()
+        first_action_token = str((action_surface or {}).get("first_token", "")).strip()
+        literal_template_text = re.sub(r"\{[^}]+\}", "", entry["text"]).lower()
+        if first_action_token and len(first_action_token) > 3 and re.search(
+            rf"\b{re.escape(first_action_token)}\b", literal_template_text
+        ):
+            continue
         if surface_name:
             if surface_name in entry.get("preferred_surfaces", []):
                 score += 1.1
@@ -416,12 +457,20 @@ def _select_template_entry(
                 score *= 0.25
         if entry["key"] in recent_part_keys and len(entries) > 1:
             score *= 0.15
-        if entry["key"] in recent_templates and len(entries) > 1:
+        if entry["key"] in recent_component_keys and len(entries) > 1:
             score *= 0.25
         candidates.append((entry, max(score, 0.01)))
 
     if not candidates:
         return {"key": default_key, "text": default_text, "roles": ["neutral"]}
+
+    non_recent_candidates = [
+        item for item in candidates
+        if item[0]["key"] not in recent_part_keys
+        and item[0]["key"] not in recent_component_keys
+    ]
+    if non_recent_candidates:
+        candidates = non_recent_candidates
 
     candidate_entries = [item[0] for item in candidates]
     weights = [item[1] for item in candidates]
@@ -566,6 +615,7 @@ def build_prompt_text(
     recent_intro_keys=None,
     recent_body_keys=None,
     recent_end_keys=None,
+    action_frame=None,
     return_debug=False,
     template_entries_fn: Callable[[str], list[dict]] | None = None,
 ):
@@ -578,6 +628,7 @@ def build_prompt_text(
     logger.debug(f"Composition Mode: {composition_mode}")
 
     template_entries_fn = template_entries_fn or _template_entries
+    subj = strip_person_demographic_descriptors(normalize_subject_to_girl(subj))
     rng = random.Random(seed)
     semantic_layers = _apply_semantic_family_budget(action, garnish, meta_mood, staging_tags)
     action = semantic_layers["action"]
@@ -588,6 +639,9 @@ def build_prompt_text(
     solo_support_dropped_tags = []
     if solo_prompt_context:
         garnish, staging_tags, solo_support_dropped_tags = _compact_solo_support_tags(garnish, staging_tags)
+    realizer_dropped_garnish = []
+    if composition_mode:
+        garnish, realizer_dropped_garnish = filter_redundant_garnish(action, garnish, action_frame)
     subject_clause = sanitize_text(_join_nonempty([subj, f"in {costume}" if costume else ""], " "))
     action_clause = sanitize_text(_join_nonempty([action, garnish]))
     scene_clause = sanitize_text(_join_nonempty([f"in {loc}" if loc else "", meta_mood]))
@@ -605,6 +659,10 @@ def build_prompt_text(
 
     if composition_mode:
         logger.info("Using Composition Mode")
+        template_seed = mix_seed(seed, "prompt_template")
+        intro_rng = random.Random(mix_seed(seed, "natural_intro_v2"))
+        body_rng = random.Random(mix_seed(seed, "prompt_syntax"))
+        end_rng = random.Random(mix_seed(template_seed, "end"))
         template_roles = _derive_template_roles(action, garnish, meta_mood, loc)
         action_surface = _derive_action_surface(action)
         solo_template_filter_applied = solo_prompt_context
@@ -628,7 +686,7 @@ def build_prompt_text(
             template_roles["intro_roles"],
             recent_intro_keys,
             recent_templates,
-            rng,
+            intro_rng,
             is_consistent,
             has_garnish=bool(str(garnish).strip()),
             has_loc=bool(str(loc).strip()),
@@ -642,7 +700,7 @@ def build_prompt_text(
             template_roles["body_roles"],
             recent_body_keys,
             recent_templates,
-            rng,
+            body_rng,
             is_consistent,
             has_garnish=bool(str(garnish).strip()),
             has_loc=bool(str(loc).strip()),
@@ -656,7 +714,7 @@ def build_prompt_text(
             template_roles["end_roles"],
             recent_end_keys,
             recent_templates,
-            rng,
+            end_rng,
             is_consistent,
             has_garnish=bool(str(garnish).strip()),
             has_loc=bool(str(loc).strip()),
@@ -668,7 +726,19 @@ def build_prompt_text(
         p_body = body_entry["text"]
         p_end = end_entry["text"]
         action_clause, action_surface = _render_action_clause(action, garnish, action_surface, body_entry)
-        template = _compose_visual_sentence(p_intro, p_body, p_end)
+        syntax_family = select_syntax_family(seed)
+        content_plan = build_content_plan(
+            seed=seed,
+            subject_clause=p_intro,
+            action_clause=p_body,
+            scene_clause=p_end,
+            action_frame=action_frame,
+            template_roles=template_roles,
+            template_keys=(intro_entry["key"], body_entry["key"], end_entry["key"]),
+            action_surface=action_surface,
+            syntax_family=syntax_family,
+        )
+        template = realize_content_plan(content_plan)
         selected_template_key = f"{intro_entry['key']}||{body_entry['key']}||{end_entry['key']}"
         logger.debug(f"Composed Template: {template}")
     else:
@@ -702,6 +772,10 @@ def build_prompt_text(
         result = result.replace("{staging_tags}", "")
 
     result = _normalize_prompt(result)
+    result = normalize_subject_to_girl(result)
+    result = strip_person_demographic_descriptors(result)
+    if composition_mode:
+        result = normalize_composition_punctuation(result)
     logger.info(f"Final Prompt: {result}")
     if return_debug:
         debug_payload = {
@@ -718,6 +792,9 @@ def build_prompt_text(
                     "end_key": end_entry["key"],
                     "template_roles": template_roles,
                     "action_surface": action_surface,
+                    "content_plan": content_plan.to_dict(),
+                    "action_frame": dict(action_frame) if isinstance(action_frame, dict) else {},
+                    "realizer_dropped_garnish": realizer_dropped_garnish,
                     "solo_template_filter_applied": solo_template_filter_applied,
                     "solo_template_filtered_keys": solo_template_filtered_keys,
                 }

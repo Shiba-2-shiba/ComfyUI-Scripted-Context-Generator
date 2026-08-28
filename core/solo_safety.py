@@ -23,6 +23,19 @@ SOLO_PEOPLE_PATTERNS = (
         re.IGNORECASE,
     ),
     re.compile(r"\bstudents?\s+(?:pass|passes|passing)\b", re.IGNORECASE),
+    re.compile(
+        r"\b(?:residents|groups|teachers|children|families|neighbors|shoppers|visitors|students|"
+        r"shopkeepers|clerks|couples|drivers|cyclists|guests|pedestrians|workers|teenagers|travel(?:er|ler)s|passengers)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(?:teacher|child|clerk|couple|resident|cyclist|guest|shopkeeper|neighbor|shopper|visitor|student)\s+"
+        r"(?:supervising|waiting|restocking|tidying|browsing|passing|arranging|checking|scanning|returning|looking|comparing)\b",
+        re.IGNORECASE,
+    ),
+    re.compile(r"\b(?:one\s+resident|one\s+waiting\s+guest)\b", re.IGNORECASE),
+    re.compile(r"\bstanding\s+room\s+only\b", re.IGNORECASE),
+    re.compile(r"\bpacked\s+like\s+sardines\b", re.IGNORECASE),
     re.compile(r"\bpass(?:es|ing)?\s+by\b", re.IGNORECASE),
     re.compile(r"\bpass(?:es|ing)?\s+through\b", re.IGNORECASE),
 )

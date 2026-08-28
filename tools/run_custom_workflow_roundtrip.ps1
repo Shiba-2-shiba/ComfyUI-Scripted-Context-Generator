@@ -1,12 +1,13 @@
 param(
   [string]$Python = 'python',
-  [int]$Port = 8188
+  [int]$Port = 8188,
+  [string]$ComfyRoot = ''
 )
 
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$comfyDir = Join-Path $repoRoot 'ComfyUI'
+$comfyDir = if ($ComfyRoot) { (Resolve-Path -LiteralPath $ComfyRoot).Path } else { Join-Path $repoRoot 'ComfyUI' }
 $frontendDir = Join-Path $repoRoot 'ComfyUI_frontend'
 $logRoot = Join-Path $repoRoot 'test_logs'
 $runStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
@@ -18,8 +19,11 @@ $modelsDir = Join-Path $runRoot 'models'
 $modelsCheckpointDir = Join-Path $modelsDir 'checkpoints'
 $outputDir = Join-Path $runRoot 'output'
 $tempDir = Join-Path $runRoot 'temp'
+$customNodesDir = Join-Path $runRoot 'custom_nodes'
+$customNodeLink = Join-Path $customNodesDir 'ComfyUI-Scripted-Context-Generator'
 
-New-Item -ItemType Directory -Force -Path $runRoot, $userDir, $modelsDir, $modelsCheckpointDir, $outputDir, $tempDir | Out-Null
+New-Item -ItemType Directory -Force -Path $runRoot, $userDir, $modelsDir, $modelsCheckpointDir, $outputDir, $tempDir, $customNodesDir | Out-Null
+New-Item -ItemType Junction -Path $customNodeLink -Target $repoRoot | Out-Null
 
 $server = $null
 $previousPlaywrightUrl = $env:PLAYWRIGHT_TEST_URL
@@ -36,6 +40,8 @@ try {
       '--multi-user',
       '--cpu',
       '--disable-auto-launch',
+      '--base-directory',
+      $runRoot,
       '--listen',
       '127.0.0.1',
       '--port',
@@ -70,7 +76,8 @@ try {
 
   Push-Location $frontendDir
   try {
-    corepack pnpm exec playwright test --config playwright.custom-node.config.mts --project chromium --reporter=line
+    $playwright = Join-Path $frontendDir 'node_modules/.bin/playwright.cmd'
+    & $playwright test --config playwright.custom-node.config.mts --project chromium --reporter=line
     if ($LASTEXITCODE -ne 0) {
       exit $LASTEXITCODE
     }

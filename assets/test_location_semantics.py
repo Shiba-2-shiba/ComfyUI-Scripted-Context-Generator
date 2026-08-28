@@ -109,6 +109,151 @@ class TestLocationSemantics(unittest.TestCase):
         self.assertNotIn("people", lowered)
         self.assertNotIn("friends", lowered)
 
+    def test_location_expansion_filters_ambient_secondary_people_candidates(self):
+        from unittest.mock import patch
+
+        from pipeline import location_builder
+
+        unsafe_phrases = [
+            "a few residents checking the bulletin board",
+            "small groups gathering",
+            "teacher supervising",
+            "one child waiting near the poster board",
+            "families sharing meals",
+            "neighbors browsing from store to store",
+            "a few shoppers scanning labels",
+            "visitors returning books at the counter",
+            "students looking for seats",
+            "shopkeepers arranging goods near the entrance",
+            "clerk tidying the display nearby",
+        ]
+        packs = {
+            "ambient_people_room": {
+                "environment": ["quiet private room"],
+                "core": [],
+                "props": [],
+                "crowd": unsafe_phrases + ["empty background"],
+                "time": [],
+                "weather": [],
+                "texture": [],
+                "fx": [],
+            }
+        }
+
+        with patch.object(location_builder.background_vocab, "CONCEPT_PACKS", packs):
+            prompts = [
+                location_builder.expand_location_prompt("ambient_people_room", seed, "detailed")
+                for seed in range(40)
+            ]
+
+        joined = "\n".join(prompts).lower()
+        for phrase in unsafe_phrases:
+            self.assertNotIn(phrase, joined)
+
+    def test_location_expansion_filters_implied_crowd_occupancy_candidates(self):
+        from unittest.mock import patch
+
+        from pipeline import location_builder
+
+        packs = {
+            "occupancy_room": {
+                "environment": ["quiet private room"],
+                "core": [],
+                "props": [],
+                "crowd": ["standing room only", "packed like sardines", "mostly empty seats"],
+                "time": ["quiet midday"],
+                "weather": [],
+                "texture": [],
+                "fx": [],
+            }
+        }
+
+        with patch.object(location_builder.background_vocab, "CONCEPT_PACKS", packs):
+            prompts = [
+                location_builder.expand_location_prompt("occupancy_room", seed, "detailed")
+                for seed in range(40)
+            ]
+
+        joined = "\n".join(prompts).lower()
+        self.assertNotIn("standing room only", joined)
+        self.assertNotIn("packed like sardines", joined)
+        self.assertTrue(any("mostly empty seats" in prompt for prompt in prompts))
+        self.assertTrue(all("quiet private room" in prompt for prompt in prompts))
+
+    def test_location_expansion_filters_time_candidates_that_conflict_with_environment_or_action(self):
+        from unittest.mock import patch
+
+        from pipeline import location_builder
+
+        packs = {
+            "time_consistency_room": {
+                "environment": ["swaying bus interior at night"],
+                "core": [],
+                "props": [],
+                "crowd": [],
+                "time": ["late night last train", "quiet midday"],
+                "weather": [],
+                "texture": [],
+                "fx": [],
+            },
+            "action_time_consistency_room": {
+                "environment": ["quiet station concourse"],
+                "core": [],
+                "props": [],
+                "crowd": [],
+                "time": ["quiet morning rush", "quiet midday"],
+                "weather": [],
+                "texture": [],
+                "fx": [],
+            },
+            "cross_segment_time_consistency_room": {
+                "environment": ["quiet station concourse"],
+                "core": [],
+                "props": [],
+                "crowd": ["quiet weekday morning"],
+                "time": ["evening stroll"],
+                "weather": [],
+                "texture": [],
+                "fx": [],
+            }
+        }
+
+        with patch.object(location_builder.background_vocab, "CONCEPT_PACKS", packs):
+            prompts = [
+                location_builder.expand_location_prompt(
+                    "time_consistency_room",
+                    seed,
+                    "detailed",
+                )
+                for seed in range(80)
+            ]
+            cross_segment_prompts = [
+                location_builder.expand_location_prompt(
+                    "cross_segment_time_consistency_room",
+                    seed,
+                    "detailed",
+                )
+                for seed in range(160)
+            ]
+            action_prompts = [
+                location_builder.expand_location_prompt(
+                    "action_time_consistency_room",
+                    seed,
+                    "detailed",
+                    action_text="during the evening rush",
+                )
+                for seed in range(80)
+            ]
+
+        midday_prompts = [prompt for prompt in prompts if "quiet midday" in prompt]
+        self.assertEqual(midday_prompts, [])
+        self.assertTrue(any("late night last train" in prompt for prompt in prompts))
+        self.assertTrue(all("quiet morning rush" not in prompt for prompt in action_prompts))
+        self.assertTrue(all("quiet midday" not in prompt for prompt in action_prompts))
+        self.assertTrue(any("evening stroll" in prompt for prompt in cross_segment_prompts))
+        evening_prompts = [prompt for prompt in cross_segment_prompts if "evening stroll" in prompt]
+        self.assertTrue(all("quiet weekday morning" not in prompt for prompt in evening_prompts))
+
     def test_location_expansion_uses_plain_connectors_for_core_and_props(self):
         from unittest.mock import patch
 

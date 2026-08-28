@@ -152,7 +152,19 @@ class TestSoloDuplicateRiskDetection(unittest.TestCase):
             "solo_test_cafe": {
                 "label": "solo test cafe",
                 "environment": ["small quiet cafe"],
-                "crowd": ["friends sharing a booth nearby", "quiet corner table"],
+                "crowd": [
+                    "friends sharing a booth nearby",
+                    "standing room only",
+                    "packed like sardines",
+                    "a few residents checking the bulletin board",
+                    "small groups gathering",
+                    "teacher supervising",
+                    "one child waiting near the poster board",
+                    "families sharing meals",
+                    "neighbors browsing from store to store",
+                    "a few shoppers scanning labels",
+                    "quiet corner table",
+                ],
                 "time": [],
                 "weather": [],
             }
@@ -176,6 +188,52 @@ class TestSoloDuplicateRiskDetection(unittest.TestCase):
         self.assertIn("small quiet cafe", lowered)
         self.assertNotIn("friends", lowered)
         self.assertNotIn("booth nearby", lowered)
+        self.assertNotIn("standing room only", lowered)
+        self.assertNotIn("packed like sardines", lowered)
+        self.assertNotIn("residents checking", lowered)
+        self.assertNotIn("groups gathering", lowered)
+        self.assertNotIn("teacher supervising", lowered)
+        self.assertNotIn("child waiting", lowered)
+        self.assertNotIn("families sharing", lowered)
+        self.assertNotIn("neighbors browsing", lowered)
+        self.assertNotIn("shoppers scanning", lowered)
+
+    def test_solo_prompt_builder_raw_location_fallback_filters_implied_crowd_occupancy(self):
+        from unittest.mock import patch
+
+        from prompt_renderer import build_prompt_text
+
+        packs = {
+            "solo_occupancy_room": {
+                "label": "quiet private room",
+                "environment": ["quiet private room"],
+                "crowd": ["standing room only", "packed like sardines", "mostly empty seats"],
+                "time": ["quiet midday"],
+                "weather": [],
+            }
+        }
+
+        with patch("prompt_renderer.load_background_packs", return_value=packs), patch(
+            "prompt_renderer.resolve_location_key",
+            return_value="solo_occupancy_room",
+        ):
+            prompts = [
+                build_prompt_text(
+                    template="{subject_clause}, {action_clause}, {scene_clause}.",
+                    composition_mode=False,
+                    seed=seed,
+                    subj="a solo girl",
+                    costume="blue dress",
+                    loc="solo_occupancy_room",
+                    action="standing near the table",
+                )
+                for seed in range(40)
+            ]
+
+        joined = "\n".join(prompts).lower()
+        self.assertNotIn("standing room only", joined)
+        self.assertNotIn("packed like sardines", joined)
+        self.assertIn("quiet private room", joined)
 
     def test_solo_pool_generation_filters_friend_and_mirror_actions(self):
         import random

@@ -352,7 +352,7 @@
       },
       "widgets_values": [
         "",
-        false,
+        true,
         0,
         "randomize"
       ]

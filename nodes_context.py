@@ -253,7 +253,7 @@ class ContextPromptBuilder:
         return {
             "required": {
                 "template": ("STRING", {"multiline": True, "default": ""}),
-                "composition_mode": ("BOOLEAN", {"default": False}),
+                "composition_mode": ("BOOLEAN", {"default": True}),
                 "seed": _seed_input(),
             },
             "optional": {

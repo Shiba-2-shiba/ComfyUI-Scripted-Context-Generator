@@ -47,7 +47,7 @@ class TestCharacterResolution(unittest.TestCase):
 
     def test_current_named_profiles_with_custom_costume_themes_now_resolve(self):
         expected = {
-            "Diana (Noble)": "noble lady",
+            "Diana (Noble)": "noble girl",
             "Hana (Idol)": "idol performer",
             "Jasmine (Dancer)": "dancer girl",
             "Nina (Tech)": "steampunk inventor",

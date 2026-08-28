@@ -1,0 +1,139 @@
+{
+  "analyzer": {
+    "comma_density_max": 0.12,
+    "context_json_bytes_max": 262144,
+    "female_terms": ["girl"],
+    "disallowed_female_terms": ["female", "lady", "woman", "women"],
+    "fallback_rate_max": 0.05,
+    "male_terms": ["boy", "he", "him", "his", "male", "man"],
+    "max_duplicate_subject_terms": 1,
+    "prompt_length_words_max": 220,
+    "prompt_length_words_min": 12,
+    "repeated_ngram_min_occurrences": 3,
+    "semantic_family_max_mentions": 2
+  },
+  "cohort": {
+    "control_count": 64,
+    "exploration_count": 16,
+    "formal_promotion_min_samples": 80,
+    "promotion_scope": "control64"
+  },
+  "comparison": {
+    "effect_sizes": {
+      "defect_count_min_reduction": 2,
+      "defect_rate_min_relative_improvement": 0.1,
+      "diversity_min_relative_improvement": 0.05
+    },
+    "guards": {
+      "exact_duplicate_rate_must_not_increase": true,
+      "fallback_rate_must_not_increase": true,
+      "max_absolute_rate_regression": 0.02,
+      "policy_thresholds_must_remain_satisfied": true
+    },
+    "hard_gates": {
+      "consistency.hard_conflict_count": 0,
+      "consistency.domains.clothing_tpo_weather.hard_conflict_count": 0,
+      "consistency.domains.location_action_object.hard_conflict_count": 0,
+      "consistency.domains.mood_action_garnish.hard_conflict_count": 0,
+      "identity.male_pronoun_drift_count": 0,
+      "identity.missing_female_protagonist_count": 0,
+      "identity.non_girl_female_term_count": 0,
+      "identity.other_person_solo_conflict_count": 0,
+      "identity.person_demographic_descriptor_count": 0,
+      "runtime.deterministic_replay_mismatch_count": 0,
+      "runtime.error_count": 0,
+      "runtime.record_contract_error_count": 0
+    }
+  },
+  "consistency_rule_annotations": {
+    "indoor|under the sky": {"domain": "location_action_object", "reason_code": "indoor_outdoor_scene_conflict"},
+    "evening|midday": {"domain": "location_action_object", "reason_code": "night_daylight_scene_conflict"},
+    "evening|morning": {"domain": "location_action_object", "reason_code": "night_daylight_scene_conflict"},
+    "night|blue sky": {"domain": "location_action_object", "reason_code": "night_daylight_scene_conflict"},
+    "night|midday": {"domain": "location_action_object", "reason_code": "night_daylight_scene_conflict"},
+    "night|morning": {"domain": "location_action_object", "reason_code": "night_daylight_scene_conflict"},
+    "night|sunny": {"domain": "location_action_object", "reason_code": "night_daylight_scene_conflict"},
+    "rain|dry ground": {"domain": "clothing_tpo_weather", "reason_code": "rain_surface_weather_conflict"},
+    "snow|hot day": {"domain": "clothing_tpo_weather", "reason_code": "snow_temperature_weather_conflict"},
+    "winter|warm sun": {"domain": "clothing_tpo_weather", "reason_code": "winter_temperature_weather_conflict"}
+  },
+  "consistency_rules_path": "rules/consistency_rules.json",
+  "issue_severity": {
+    "clothing_tpo_weather_conflict": "critical",
+    "consistency_rule_conflict": "critical",
+    "context_size_exceeded": "high",
+    "deterministic_replay_mismatch": "critical",
+    "duplicate_protagonist_mention": "high",
+    "exact_duplicate_prompt": "medium",
+    "high_comma_density": "medium",
+    "high_fallback_rate": "high",
+    "location_action_object_conflict": "critical",
+    "male_pronoun_drift": "critical",
+    "missing_female_protagonist": "critical",
+    "non_girl_female_term": "critical",
+    "mood_action_garnish_conflict": "critical",
+    "normalized_duplicate_prompt": "medium",
+    "other_person_solo_conflict": "critical",
+    "person_demographic_descriptor": "critical",
+    "prompt_length_outlier": "medium",
+    "punctuation_anomaly": "medium",
+    "repeated_ngram": "medium",
+    "runtime_error": "critical",
+    "runtime_warning": "medium",
+    "semantic_family_repetition": "medium",
+    "sentence_fragment": "medium"
+  },
+  "metrics": {
+    "consistency.domains.clothing_tpo_weather.hard_conflict_count": {"direction": "decrease"},
+    "consistency.domains.location_action_object.hard_conflict_count": {"direction": "decrease"},
+    "consistency.domains.mood_action_garnish.hard_conflict_count": {"direction": "decrease"},
+    "consistency.hard_conflict_count": {"direction": "decrease"},
+    "diversity.exact_unique_ratio": {"direction": "increase"},
+    "diversity.syntax_entropy": {"direction": "increase"},
+    "identity.duplicate_protagonist_mention_count": {"direction": "decrease"},
+    "identity.male_pronoun_drift_count": {"direction": "decrease"},
+    "identity.missing_female_protagonist_count": {"direction": "decrease"},
+    "identity.non_girl_female_term_count": {"direction": "decrease"},
+    "identity.other_person_solo_conflict_count": {"direction": "decrease"},
+    "identity.person_demographic_descriptor_count": {"direction": "decrease"},
+    "identity.single_female_coverage": {"direction": "increase"},
+    "naturalness.punctuation_anomaly_count": {"direction": "decrease"},
+    "naturalness.repeated_ngram_count": {"direction": "decrease"},
+    "runtime.deterministic_replay_mismatch_count": {"direction": "decrease"},
+    "runtime.fallback_rate": {"direction": "decrease"}
+  },
+  "policy_version": "prompt-quality-policy/v2",
+  "review": {
+    "candidate_only_hard_defect_max": 0,
+    "dimensions": {
+      "consistency": {"max_worse_rate": 0.1, "min_improvement_support": 0.65},
+      "image_prompt_suitability": {"hard_defect_max": 0, "max_worse_rate": 0.1},
+      "naturalness": {"max_worse_rate": 0.1, "min_improvement_support": 0.65},
+      "protagonist_clarity": {"hard_defect_max": 0, "max_worse_rate": 0.1}
+    },
+    "independent_lanes": 2,
+    "guard_dimension_contract": {
+      "max_candidate_worse_rate": 0.1,
+      "require_improvement": false,
+      "require_lane_direction_agreement": false
+    },
+    "hypothesis_scoped": true,
+    "minimum_valid_votes_per_required_dimension": 36,
+    "paired_samples": 20,
+    "require_lane_direction_agreement": true,
+    "require_prompt_and_rubric_hashes": true,
+    "side_assignment": "deterministic_blind_randomization",
+    "target_dimension_contract": {
+      "max_candidate_worse_rate": 0.1,
+      "minimum_valid_votes": 36,
+      "min_improvement_support": 0.65,
+      "require_lane_direction_agreement": true
+    }
+  },
+  "status": "frozen",
+  "threshold_review": {
+    "baseline_required_for_revision": true,
+    "rounding_digits": 6,
+    "source": ".omx/plans/prd-prompt-quality-engineering-loop.md"
+  }
+}

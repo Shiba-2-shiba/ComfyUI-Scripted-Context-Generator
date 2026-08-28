@@ -1,0 +1,11 @@
+{
+  "artifact_root": "assets/results/prompt_quality_loop",
+  "control_seeds_file": "assets/fixtures/prompt_quality_control_seeds.json",
+  "experiment_id": "g004-review-remediation-secondary-person-v1",
+  "experiment_seed": 9472026,
+  "iteration_id": "g002-baseline",
+  "profile": "verification/fixtures/prompt_quality_supported_profile.json",
+  "run_id": "g004-review-remediation-secondary-person-v1-candidate",
+  "samples": 80,
+  "workflow": "ComfyUI-workflow-context.json"
+}

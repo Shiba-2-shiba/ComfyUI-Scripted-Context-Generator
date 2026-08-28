@@ -32,6 +32,8 @@ FX_DENY_PATTERNS = (
     re.compile(r"\bsparkling(?!\s+eyes\b)\w*\b", re.IGNORECASE),
 )
 TIME_DARK_HINTS = ("night", "midnight", "twilight", "dusk", "late night", "stormy", "holiday night")
+TIME_BRIGHT_HINTS = ("morning", "midday", "noon", "daytime", "daylight", "sunrise")
+TIME_LATE_HINTS = TIME_DARK_HINTS + ("evening",)
 WEATHER_RARE_HINTS = ("rain", "snow", "storm", "fog", "acid", "winter")
 LIGHTING_HINTS = ("light", "glow", "fluorescent", "ambient", "sun", "spotlight", "daylight", "hour")
 
@@ -89,6 +91,22 @@ def prefer_bright_time_options(options: Sequence[str]) -> list[str]:
         if not any(token in str(option).lower() for token in TIME_DARK_HINTS)
     ]
     return preferred or list(options)
+
+
+def filter_time_options_for_context(options: Sequence[str], context_text: str) -> list[str]:
+    if not options:
+        return []
+    lowered_context = str(context_text).lower()
+    context_is_late = any(token in lowered_context for token in TIME_LATE_HINTS)
+    context_is_bright = any(token in lowered_context for token in TIME_BRIGHT_HINTS)
+    if context_is_late == context_is_bright:
+        return list(options)
+
+    conflicting_hints = TIME_BRIGHT_HINTS if context_is_late else TIME_LATE_HINTS
+    return [
+        option for option in options
+        if not any(token in str(option).lower() for token in conflicting_hints)
+    ]
 
 
 def split_weather_options(options: Sequence[str]) -> tuple[list[str], list[str]]:

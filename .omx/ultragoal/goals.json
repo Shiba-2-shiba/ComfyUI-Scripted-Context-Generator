@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "createdAt": "2026-08-24T05:37:49.643Z",
+  "updatedAt": "2026-08-28T00:15:34.155Z",
+  "briefPath": ".omx/ultragoal/brief.md",
+  "goalsPath": ".omx/ultragoal/goals.json",
+  "ledgerPath": ".omx/ultragoal/ledger.jsonl",
+  "codexGoalMode": "aggregate",
+  "goals": [
+    {
+      "id": "G001-l0-strict-loop-harness",
+      "title": "L0 strict loop harness",
+      "objective": "Implement the behavior-neutral workflow-faithful strict DAG runner, supported profile and output selectors, stable failure envelopes, compatibility adapter, canonical artifacts, deterministic cohorts, environment manifest, test-only sink, parity fixture, and L0 tests.",
+      "status": "complete",
+      "attempt": 1,
+      "createdAt": "2026-08-24T05:37:49.643Z",
+      "updatedAt": "2026-08-24T06:49:17.671Z",
+      "startedAt": "2026-08-24T05:37:56.462Z",
+      "completedAt": "2026-08-24T06:49:17.671Z",
+      "evidence": "Implemented workflow-faithful strict DAG runner, stable CLI failures, compatibility adapter with independent direct-chain oracle, canonical artifacts, deterministic 64+16 cohort, optional external parity harness, and test-only sink. Fresh evidence: 44 targeted tests pass; 80-record l0-checkpoint run replay checked=80 mismatch=0; records_sha256 aefff07a29eb22e861bc9956e890fb292a242f0200ddda4dbd351e6ea1017d87; earlier full 414-test suite and data/full-flow/widget/compat/action-pool checks pass. User clarification recorded: real ComfyUI install/parity is optional."
+    },
+    {
+      "id": "G002-l1-analyzer-and-baseline",
+      "title": "L1 analyzer and baseline",
+      "objective": "Implement analyzers, issues, policy, baseline contract, source-isolated experiment state and two reconstructable manual experiments with precision tests.",
+      "status": "complete",
+      "attempt": 1,
+      "createdAt": "2026-08-24T05:37:49.643Z",
+      "updatedAt": "2026-08-24T07:10:55.597Z",
+      "startedAt": "2026-08-24T06:49:28.928Z",
+      "completedAt": "2026-08-24T07:10:55.597Z",
+      "evidence": "Implemented deterministic analyzer/issues/policy, three-domain consistency and survivor observation metrics, paired comparison and non-mutating promote check, append-only hash-chained experiment state, and two reconstructable manual experiments with ledger attestation. Fresh evidence: 74 integrated tests pass; 80-record g002-baseline generation+analyze succeeds with four ranked issues and affected-seed evidence; hard identity/consistency/runtime gates clean; validate_prompt_data has no errors/warnings; policy/analyzer/manual ledger hashes attested."
+    },
+    {
+      "id": "G003-l2-identity-quality-loop",
+      "title": "L2 identity quality loop",
+      "objective": "Use the loop to eliminate supported natural-mode female protagonist, pronoun drift, other-person, solo conflict, and duplicate protagonist defects while preserving legacy JSON.",
+      "status": "complete",
+      "attempt": 1,
+      "createdAt": "2026-08-24T05:37:49.643Z",
+      "updatedAt": "2026-08-24T08:15:17.106Z",
+      "startedAt": "2026-08-24T07:11:04.007Z",
+      "completedAt": "2026-08-24T08:15:17.106Z",
+      "evidence": "Identity loop promoted through iteration-002. Production change is bounded to core/solo_safety.py plus expected regression fixtures: ambient secondary-person and implied crowd occupancy phrases are rejected in normal/fallback location paths. Formal control64 comparison under policy v2: other-person solo conflicts 8->0, all identity/hard/fallback/context guards pass. Targeted repro review attempt-003: incumbent 20/20 conflicts, candidate 0/20; two blind lanes, target dimensions 36 valid votes/100% support/0 regression, non-target guards 0 candidate-worse, candidate-only hard defects 0. Full 471 tests pass; focused 83 and all data/full-flow/widget/compat/action-pool checks pass. Legacy JSON/context tests pass; PROMOTED state hash 03c5bf63c6e5550333c38c08e0cc0a242a464356478702158d9aad3cf0217ae2."
+    },
+    {
+      "id": "G004-l3-semantic-consistency-loop",
+      "title": "L3 semantic consistency loop",
+      "objective": "Iteratively improve location/action/object, clothing/TPO/weather, and mood/action/garnish consistency with domain-owned rules and shared reason-code evidence.",
+      "status": "complete",
+      "attempt": 1,
+      "createdAt": "2026-08-24T05:37:49.643Z",
+      "updatedAt": "2026-08-25T00:29:58.259Z",
+      "startedAt": "2026-08-24T08:15:24.015Z",
+      "completedAt": "2026-08-25T00:29:58.259Z",
+      "evidence": "Promoted G004 through location-time consistency plus review remediation. Formal control64 location hard conflicts 4->0 (paired80 5->0), shared reason_code night_daylight_scene_conflict, seed 179 night/midday conflict removed, review-discovered clusters-of-teenagers defect remediated with other-person conflicts 1->0. Final source tree e5c8c9b29326b2d283642d88963944720604c280db751de9430620c277ca98a6; 474 tests pass; compile/data/full-flow/widget/compat/action-pool checks pass; durable evidence under docs/prompt_quality/experiments/g004-review-remediation-secondary-person-v1 and docs/prompt_quality/ledger.jsonl."
+    },
+    {
+      "id": "G005-l4-natural-language-loop",
+      "title": "L4 natural language loop",
+      "objective": "Type existing action slots into ActionFrame and improve opt-in composition-mode content planning, clause order, lexical choice, realization, and cleaner boundaries without breaking legacy mode.",
+      "status": "complete",
+      "attempt": 1,
+      "createdAt": "2026-08-24T05:37:49.643Z",
+      "updatedAt": "2026-08-25T01:13:38.609Z",
+      "startedAt": "2026-08-25T00:30:09.760Z",
+      "completedAt": "2026-08-25T01:13:38.609Z",
+      "evidence": "Promoted G005 through ActionFrame/content-plan/named-stream iterations. Final source 1bbf31291d60375a05194de1a35f8c360e37b2bc19f6bb3fc33389ac4e2d816a; 80/80 supported records persist ActionFrame with 0 debug mismatches; composition punctuation anomalies control64 39->0 in v1; final repeated n-gram control64 8->7 and paired80 12->10; intro dominance 0.2917 <= 0.30; six composition snapshots accepted; diversity comparison zero-improvement bug fixed; base workflow composition_mode remains False; 481 tests and compile/data/full-flow/widget/compat/action-pool checks pass. Durable evidence under docs/prompt_quality/experiments/g005-natural-action-frame-v4 and docs/prompt_quality/ledger.jsonl."
+    },
+    {
+      "id": "G006-l5-diversity-loop",
+      "title": "L5 diversity loop",
+      "objective": "Improve the weakest semantic, scene, lexical, and syntactic diversity metrics one hypothesis at a time while preserving synchronization and fallback guards.",
+      "status": "complete",
+      "attempt": 1,
+      "createdAt": "2026-08-24T05:37:49.643Z",
+      "updatedAt": "2026-08-25T01:39:44.695Z",
+      "startedAt": "2026-08-25T01:13:46.617Z",
+      "completedAt": "2026-08-25T01:39:44.695Z",
+      "evidence": "Promoted G006 syntax-family diversity. Final source a2dba94d598eb9f0adb09ec721e667ec6da6a75d6b9e302f83835c6f4501075f; control64 syntax entropy 0.116115->0.895601, syntax top1 0.9875->0.75-range, named syntax families reachable 25 single/7 two-sentence in 32-seed audit; repeated n-grams non-regressing 7->7 control and 10->10 paired; punctuation 0; explicit metric directions and sentence-segment analyzer precision added; source/runtime action pools and compatibility review synchronized; 484 tests and compile/data/full-flow/widget checks pass. Durable evidence under docs/prompt_quality/experiments/g006-syntax-family-diversity-v3 and docs/prompt_quality/ledger.jsonl."
+    },
+    {
+      "id": "G007-l6-adoption-gate",
+      "title": "L6 adoption gate",
+      "objective": "After promotion gates pass, update README and sample workflow recommendations, verify explicit legacy rollback and frontend/browser round-trip. Keep real-ComfyUI execution parity as an optional external E2E check; absence does not block adoption of the workflow-equivalent script.",
+      "status": "in_progress",
+      "attempt": 1,
+      "createdAt": "2026-08-24T05:37:49.643Z",
+      "updatedAt": "2026-08-28T00:15:34.155Z",
+      "steeringEvidence": "User clarified that the intended test surface is the workflow-equivalent script, not a ComfyUI installation.",
+      "steeringRationale": "Align the pending adoption goal with the clarified verification boundary.",
+      "startedAt": "2026-08-25T01:39:54.387Z"
+    }
+  ],
+  "codexObjective": "Complete the durable ultragoal plan in .omx/ultragoal/goals.json, including later accepted/appended stories, under the original brief constraints; use .omx/ultragoal/ledger.jsonl as the audit trail.",
+  "activeGoalId": "G007-l6-adoption-gate"
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "profile_id": "context-prompt-natural-v1",
+  "allowed_node_types": [
+    "ContextSource",
+    "ContextCharacterProfile",
+    "ContextSceneVariator",
+    "ContextClothingExpander",
+    "ContextLocationExpander",
+    "ContextMoodExpander",
+    "ContextGarnish",
+    "ContextPromptBuilder",
+    "PromptCleaner",
+    "ContextInspector"
+  ],
+  "outputs": {
+    "final_context": {"node_id": 7, "slot": 0, "encoding": "json"},
+    "raw_prompt": {"node_id": 8, "slot": 0},
+    "cleaned_prompt": {"node_id": 9, "slot": 0}
+  },
+  "excluded_terminal_nodes": [
+    {"node_id": 11, "node_type": "PreviewAny", "reason": "external preview terminal is outside canonical output closure"}
+  ],
+  "overrides": [
+    {"node_id": 8, "input_name": "composition_mode", "value": true}
+  ]
+}

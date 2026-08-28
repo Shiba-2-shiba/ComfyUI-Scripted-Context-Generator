@@ -38,6 +38,13 @@ class TestTemplateDiversityAudit(unittest.TestCase):
             msg=f"action surface counts: {counts}",
         )
 
+    def test_named_syntax_families_are_both_reachable(self):
+        report = build_template_diversity_report(seed_count=32, seed_start=0)
+        counts = report["summary"].get("syntax_family_counts", {})
+
+        self.assertGreater(counts.get("single-sentence-scene-tail", 0), 0)
+        self.assertGreater(counts.get("two-sentence-scene-tail", 0), 0)
+
     def test_template_diversity_framed_surface_stays_on_expected_body_templates(self):
         report = build_template_diversity_report(seed_count=16, seed_start=0)
         body_key_counts = report["summary"].get("action_surface_body_key_counts", {})

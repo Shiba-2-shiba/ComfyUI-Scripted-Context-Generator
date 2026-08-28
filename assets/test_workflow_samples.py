@@ -70,6 +70,10 @@ class TestWorkflowSamples(unittest.TestCase):
         node_types = {node.get("type") for node in workflow.get("nodes", [])}
         self.assertTrue(set(self.recommended_sample.expected_node_types).issubset(node_types))
 
+        prompt_node = next(node for node in workflow["nodes"] if node.get("type") == "ContextPromptBuilder")
+        self.assertIs(prompt_node["widgets_values"][1], True)
+        self.assertIs(ContextPromptBuilder.INPUT_TYPES()["required"]["composition_mode"][1]["default"], True)
+
     def test_context_workflow_is_the_only_active_sample(self):
         self.assertEqual([sample.id for sample in self.workflow_samples], ["context"])
         self.assertTrue(all(sample.surface == "primary" for sample in self.workflow_samples))

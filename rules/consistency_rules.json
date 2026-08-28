@@ -21,6 +21,26 @@
             "reason": "Night conflicts with blue sky"
         },
         {
+            "input_term": "night",
+            "template_term": "midday",
+            "reason": "Night conflicts with midday"
+        },
+        {
+            "input_term": "night",
+            "template_term": "morning",
+            "reason": "Night conflicts with morning"
+        },
+        {
+            "input_term": "evening",
+            "template_term": "morning",
+            "reason": "Evening conflicts with morning"
+        },
+        {
+            "input_term": "evening",
+            "template_term": "midday",
+            "reason": "Evening conflicts with midday"
+        },
+        {
             "input_term": "indoor",
             "template_term": "under the sky",
             "reason": "Indoor conflicts with under the sky"

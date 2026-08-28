@@ -1,0 +1,26 @@
+{
+  "candidate_only_hard_defects": [],
+  "experiment_id": "g005-natural-action-frame-v4",
+  "review_scope": {
+    "dimensions": [
+      "ActionFrame persistence",
+      "naturalness",
+      "template diversity",
+      "expected composition-mode diffs",
+      "legacy activation",
+      "context size"
+    ],
+    "method": "formal paired comparison, 80-record frame/debug audit, frozen template distribution audit, six-case snapshot review, and full regression"
+  },
+  "results": {
+    "action_frame_debug_mismatches": 0,
+    "intro_dominance_rate": 0.2917,
+    "missing_action_frames": 0,
+    "prompt_snapshot_cases_accepted": 6,
+    "supported_records": 80,
+    "workflow_default_composition_mode": false
+  },
+  "schema_version": "prompt-quality-review/v1",
+  "status": "pass",
+  "summary": "The final candidate completes ActionFrame persistence, passes the template distribution gate, and contains no candidate-only hard defect."
+}

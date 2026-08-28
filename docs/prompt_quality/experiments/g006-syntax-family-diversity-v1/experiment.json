@@ -1,0 +1,53 @@
+{
+  "artifact_root": "assets/results/prompt_quality_loop",
+  "baseline_run_id": "g005-natural-action-frame-v4-candidate",
+  "candidate_run_id": "g006-syntax-family-diversity-v1-candidate",
+  "cohort": {
+    "cohort_hash": "6d594f6c2620ca61582b3a54b4645284f1bd5ea51e7634a575ce67ca85058399",
+    "control_count": 64,
+    "control_seeds_file": "assets/fixtures/prompt_quality_control_seeds.json",
+    "experiment_seed": 9472026,
+    "exploration_count": 16,
+    "iteration_id": "g002-baseline",
+    "samples": 80
+  },
+  "direction": "increase",
+  "expected_behavior_change": "composition_mode=True uses a named syntax-family stream to realize the same subject/action/scene content plan as either a single-sentence or two-sentence scene-tail form, with both families reachable in the frozen audit corpus.",
+  "expected_unchanged_behavior": "Semantic slots, ActionFrame, template/lexical streams, base workflow default False, explicit legacy rendering, identity, consistency, repeated n-gram, fallback, replay, context size, source/runtime action pools, and public node contracts remain unchanged.",
+  "experiment_id": "g006-syntax-family-diversity-v1",
+  "guard_metrics": [
+    "naturalness.punctuation_anomaly_count",
+    "naturalness.repeated_ngram_count",
+    "identity.missing_female_protagonist_count",
+    "identity.male_pronoun_drift_count",
+    "identity.other_person_solo_conflict_count",
+    "identity.duplicate_protagonist_mention_count",
+    "consistency.hard_conflict_count",
+    "diversity.exact_unique_ratio",
+    "runtime.fallback_rate",
+    "runtime.deterministic_replay_mismatch_count",
+    "runtime.context_json_bytes_p95",
+    "runtime.context_json_bytes_max"
+  ],
+  "hypothesis": "Stratifying only clause-boundary realization through a named syntax-family stream increases syntax entropy without changing semantic content or worsening repetition and runtime guards.",
+  "metric_scope": "control64",
+  "owned_files": [
+    "prompt_renderer.py",
+    "pipeline/prompt_realizer.py",
+    "tools/audit_template_diversity.py",
+    "assets/test_template_diversity_audit.py",
+    "assets/fixtures/prompt_snapshot_cases.json"
+  ],
+  "policy_version": "prompt-quality-policy/v2",
+  "profile": "verification/fixtures/prompt_quality_supported_profile.json",
+  "regression_test": "assets/test_template_diversity_audit.py::TestTemplateDiversityAudit::test_named_syntax_families_are_both_reachable",
+  "rollback_condition": "Reject if syntax entropy does not improve by at least 5%, either syntax family is unreachable, semantic slot content changes, repeated n-grams or punctuation regress, or any identity, consistency, duplicate, fallback, context-size, determinism, legacy-mode, snapshot, synchronization, public-contract, or review guard fails.",
+  "schema_version": "prompt-quality-experiment/v1",
+  "secondary_metrics": [
+    "diversity.template_entropy",
+    "naturalness.high_comma_density_count"
+  ],
+  "target_kind": "diversity",
+  "target_metric": "diversity.syntax_entropy",
+  "workflow": "ComfyUI-workflow-context.json"
+}

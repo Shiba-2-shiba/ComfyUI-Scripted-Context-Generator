@@ -45,6 +45,7 @@ def build_template_diversity_report(seed_count: int = SEED_COUNT_DEFAULT, seed_s
     template_counter: Counter[str] = Counter()
     body_role_counter: Counter[str] = Counter()
     surface_counter: Counter[str] = Counter()
+    syntax_family_counter: Counter[str] = Counter()
     surface_body_counter: Dict[str, Counter[str]] = {}
     surface_examples: Dict[str, List[Dict[str, Any]]] = {}
     rows: List[Dict[str, Any]] = []
@@ -71,6 +72,7 @@ def build_template_diversity_report(seed_count: int = SEED_COUNT_DEFAULT, seed_s
         body_roles = decision.get("template_roles", {}).get("body_roles", []) or []
         leading_body_role = str(body_roles[0]).strip() if body_roles else "neutral"
         surface_name = str(decision.get("action_surface", {}).get("surface", "")).strip() or "unknown"
+        syntax_family = str(decision.get("content_plan", {}).get("syntax_family", "")).strip() or "unknown"
 
         intro_counter[intro_key] += 1
         body_counter[body_key] += 1
@@ -78,6 +80,7 @@ def build_template_diversity_report(seed_count: int = SEED_COUNT_DEFAULT, seed_s
         template_counter[template_key] += 1
         body_role_counter[leading_body_role] += 1
         surface_counter[surface_name] += 1
+        syntax_family_counter[syntax_family] += 1
         surface_body_counter.setdefault(surface_name, Counter())[body_key] += 1
         surface_examples.setdefault(surface_name, [])
         if len(surface_examples[surface_name]) < 3:
@@ -98,6 +101,7 @@ def build_template_diversity_report(seed_count: int = SEED_COUNT_DEFAULT, seed_s
                 "template_key": template_key,
                 "leading_body_role": leading_body_role,
                 "action_surface": surface_name,
+                "syntax_family": syntax_family,
                 "prompt": prompt,
             }
         )
@@ -115,6 +119,7 @@ def build_template_diversity_report(seed_count: int = SEED_COUNT_DEFAULT, seed_s
         "unique_leading_body_role_count": len([key for key in body_role_counter if key]),
         "leading_body_role_counts": dict(body_role_counter),
         "action_surface_counts": dict(surface_counter),
+        "syntax_family_counts": dict(syntax_family_counter),
         "action_surface_body_key_counts": {
             surface_name: dict(counter)
             for surface_name, counter in surface_body_counter.items()

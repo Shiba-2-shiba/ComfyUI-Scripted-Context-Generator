@@ -418,6 +418,30 @@ class TestContextContentPipeline(unittest.TestCase):
         self.assertEqual(debug["body_key"], "body_staying")
         self.assertEqual(debug["action_surface"]["surface"], "fragment")
 
+    def test_intro_literal_does_not_repeat_the_action_opening(self):
+        with patch("pipeline.prompt_orchestrator._template_entries") as mocked:
+            mocked.side_effect = [
+                [
+                    {"key": "intro_repeat", "text": "{subject_clause}, moving with the next part of the day", "roles": ["transition"]},
+                    {"key": "intro_pause", "text": "{subject_clause}, caught in a brief pause", "roles": ["transition"]},
+                ],
+                [{"key": "body_direct", "text": "{action_clause}", "roles": ["transition"]}],
+                [{"key": "end_direct", "text": "{scene_clause}", "roles": ["transition"]}],
+            ]
+            prompt, debug = build_prompt_text(
+                template="",
+                composition_mode=True,
+                seed=1962614176392810358,
+                subj="a solo girl",
+                costume="travel clothes",
+                loc="resort beach",
+                action="moving carefully along the edge of the scene",
+                return_debug=True,
+            )
+
+        self.assertEqual(debug["intro_key"], "intro_pause")
+        self.assertNotIn("moving with the next part of the day, moving carefully", prompt)
+
     def test_long_action_avoids_as_garnish_template(self):
         with patch("pipeline.prompt_orchestrator._template_entries") as mocked:
             mocked.side_effect = [

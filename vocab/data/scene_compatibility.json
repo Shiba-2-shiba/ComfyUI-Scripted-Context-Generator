@@ -453,7 +453,7 @@
       ],
       "default_costume": "fantasy_battle"
     },
-    "female knight": {
+    "girl knight": {
       "tags": [
         "fantasy",
         "nature"
@@ -518,7 +518,7 @@
       ],
       "default_costume": "gothic_lolita"
     },
-    "noble lady": {
+    "noble girl": {
       "tags": [
         "luxury",
         "urban",
