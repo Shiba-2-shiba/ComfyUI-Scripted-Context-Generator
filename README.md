@@ -6,13 +6,13 @@ LLM に依存せず、ルールベース + seed 再現で自然言語プロン�
 
 ## 現在地の把握
 
-毎回全スクリプトを読み直さずに状態を確認する入口として、[`CURRENT_STATUS.md`](./CURRENT_STATUS.md) を参照してください。
+この README は `2026-08-31` のリポジトリ状態に合わせています。
 
-- active runtime surface
-- semantic-only 方針
-- 現在の variation metrics
-- 直近の検証コマンドと結果
-- リファクタ時のリスクマップ
+- 公開ノード、semantic-only 方針、データ構成の基礎資料: [`CURRENT_STATUS.md`](./CURRENT_STATUS.md)
+- 2026-08 の prompt-quality リファクタと最終採用結果: [`.omx/ultragoal/goals.json`](./.omx/ultragoal/goals.json) と [`.omx/ultragoal/ledger.jsonl`](./.omx/ultragoal/ledger.jsonl)
+- 品質ポリシーと再現可能な実験証拠: [`docs/prompt_quality/`](./docs/prompt_quality/)
+
+`CURRENT_STATUS.md` の variation sizing と構造説明は 2026-06-19 に確定した基準を含みます。8 月の変更は主に prompt の自然さ、意味整合性、検証基盤、採用ゲートに対するもので、variation scope 自体の拡張ではありません。
 
 subject / location / base variations を増やす作業では、[`EXPANSION_GUIDE.md`](./EXPANSION_GUIDE.md) を先に参照してください。
 日常系 location / action pool の拡張計画と進捗は [`docs/variation_expansion/`](./docs/variation_expansion/README.md) にあります。
@@ -26,7 +26,8 @@ Semantic EPIG の直近リファクタリング仕様・進捗・タスクは [`
 - 乱択は `seed` ベースで再現可能
 - 生成ロジックは `pipeline/`、スキーマと変換は `core/`、語彙データは `vocab/data/` に分離
 - legacy / bridge ノードは退役済み
-- 検証資産は `assets/` `tools/` `verification/` に集約
+- workflow と同等の Python runner で、ComfyUI を起動せず決定論的な prompt 生成・再実行・比較が可能
+- 検証資産は `assets/`、`tools/`、`verification/`、`docs/prompt_quality/` に集約
 
 ## 現在の公開ノード
 
@@ -59,7 +60,7 @@ Semantic EPIG の直近リファクタリング仕様・進捗・タスクは [`
 ### Utility
 
 - `PromptCleaner`
-  - 句読点、重複、空白、禁止語混入をルールベースで整理
+  - `safe` / `nl` モードで、句読点、重複、空白、禁止語混入をルールベースで整理
 
 ## 推奨フロー
 
@@ -84,7 +85,8 @@ Semantic EPIG の直近リファクタリング仕様・進捗・タスクは [`
 - サンプル workflow には preview 用の外部ノードが入ることがありますが、このリポジトリの必須ノードではありません
 - downstream ノードの `context_json` は optional input として設計されており、段階的な接続や差し替えをしやすくしています
 - 旧出力へ戻す場合は `ContextPromptBuilder` の `composition_mode` を明示的に `false` にしてください。node I/O と `context_json` contract は変わりません
-- workflow-equivalent Python runner、frontend schema round-trip、ComfyUI GUI save/reload を採用gateとして検証しています。実ComfyUIでのprompt実行 parity は optional E2E です
+- workflow-equivalent Python runner、frontend schema round-trip、ComfyUI GUI save/reload を採用 gate として検証済みです
+- 実 ComfyUI での prompt execution parity は optional E2E です。環境定義は [`verification/environment.json`](./verification/environment.json)、実行ツールは [`tools/verify_prompt_execution_parity.py`](./tools/verify_prompt_execution_parity.py) にあります
 
 ## 現在の方針
 
@@ -94,6 +96,8 @@ Semantic EPIG の直近リファクタリング仕様・進捗・タスクは [`
 - `ContextGarnish.include_camera` は旧 workflow 復元用の hidden legacy arg としてのみ残り、実行時は no-op です
 - public prompt surface では camera / quality / body-type を前提にしません
 - semantic EPIG は config 管理で全 domain active です
+- location / action / object、clothing / TPO / weather、mood / action / garnish の不整合を品質 gate で検出します
+- workflow runner、比較、blind review、promotion は seed・source hash・artifact hash を結合し、stale または混在した証拠を fail-closed で拒否します
 - 新規機能追加先は `Context*` ノードと `pipeline/` です
 
 ## Source Of Truth
@@ -165,6 +169,16 @@ Active domains:
   - [`nodes_prompt_cleaner.py`](./nodes_prompt_cleaner.py)
   - [`asset_validator.py`](./asset_validator.py)
 
+### Prompt quality
+
+- 品質ポリシー: [`vocab/data/prompt_quality_policy.json`](./vocab/data/prompt_quality_policy.json)
+- 整合性ルール: [`rules/consistency_rules.json`](./rules/consistency_rules.json)
+- workflow-faithful runner: [`tools/workflow_prompt_runner.py`](./tools/workflow_prompt_runner.py)
+- 生成・分析・比較ループ: [`tools/prompt_quality_loop.py`](./tools/prompt_quality_loop.py)
+- 最終 review contract と durable evidence: [`docs/prompt_quality/`](./docs/prompt_quality/)
+
+2026-08-31 に G001–G010 の採用・補修・最終 receipt が完了しています。最終 gate では Python `540/540`、11 個の採用 gate、frontend `4/4`、GUI save/reload `2/2`、blind review attempt 015、独立 code review / architecture review が通過しました。
+
 ## リポジトリ構成
 
 ランタイムの入口は次です。
@@ -181,6 +195,7 @@ Active domains:
 - `assets/`: Python テスト、baseline、測定、検証スクリプト
 - `tools/`: workflow / data / audit 系ユーティリティ
 - `verification/`: frontend / browser round-trip 検証
+- `docs/prompt_quality/`: prompt-quality policy、実験 state、review contract、durable evidence
 
 詳しくは以下を参照してください。
 
@@ -188,18 +203,20 @@ Active domains:
 - [`CURRENT_STATUS.md`](./CURRENT_STATUS.md)
 - [`EXPANSION_GUIDE.md`](./EXPANSION_GUIDE.md)
 - [`docs/variation_expansion/README.md`](./docs/variation_expansion/README.md)
+- [`docs/prompt_quality/`](./docs/prompt_quality/)
 - [`assets/ARCHITECTURE.md`](./assets/ARCHITECTURE.md)
 - [`docs/context_refactor/README.md`](./docs/context_refactor/README.md)
 - [`codex_refactor_spec_ja.md`](./codex_refactor_spec_ja.md)
 
 ## バリエーション規模
 
-`2026-06-19` 時点で `python assets/calc_variations.py --json` を実行した値です。
+variation scope は `2026-06-19` に確定した基準です。次の値は、その現行データを `2026-08-31` に `python assets/calc_variations.py --json` で再計測した結果です。
 
 - unique subjects: `120`
 - unique locations: `90`
 - base variations: `103,212`
-- actions per location: `min 12 / median 16 / mean 15.6 / max 20`
+- compatibility review rows: `5,806`
+- actions per location: `min 12 / median 16 / mean 15.56 / max 20`
 - missing action pools: `0`
 - mood keys: `9`
 - unique mood tags: `172`
@@ -207,12 +224,12 @@ Active domains:
 - unique background context tags: `835`
 - semantic units: `1,287`
 - semantic garnish universe: `11,583`
-- theoretical max: `1,223,303,796`
+- theoretical max: `1,195,504,596`
 
 camera / effect 系は semantic-only ランタイムでは active variation に含めません。
 監査用の legacy-disabled 指標として `camera_configs=120`, `effect_tags=22` は残しています。
 
-この数値は語彙データ更新で変わるため、必要なら再計測してください。
+base variations は 6 月の counted scope と同じ `103,212` です。一方、theoretical max は現行の組み合わせロジックで再計測した値へ更新しています。数値は語彙データや算出ロジックの更新で変わるため、変更後は必ず再計測してください。
 
 直近の拡張では、100k target planning、P10 compatibility taxonomy expansion、P11 action authoring refactor を実施し、base variations を `105,612` まで増やしました。
 その後の variation restriction により、現在の counted surface は `103,212` base variations です。
@@ -247,12 +264,19 @@ python tools/validate_prompt_data.py
 python assets/calc_variations.py --json
 python tools/check_variation_scope.py
 python tools/check_widgets_values.py
+python tools/build_compatibility_review.py --check
+python tools/build_action_pools.py --check
 ```
 
-`python tools/build_compatibility_review.py --check` は scoped CSV 再生成の差分確認用です。
-現状は `ERROR: []`, `WARNING: []` が期待値です。
+全 Python 回帰テスト:
 
-frontend / browser round-trip は `verification/` と `tools/run_*.ps1` を使って実行できます。
+```bash
+python -m unittest discover -s assets -p "test_*.py"
+```
+
+2026-08-31 の最終採用時は `540/540` tests が通過しています。データ系 check の期待値は `ERROR: []`, `WARNING: []` です。
+
+frontend / browser round-trip は `verification/` と `tools/run_*.ps1` を使います。検証時に固定した環境は ComfyUI `v0.32.0` / ComfyUI_frontend `v1.46.3` です。これは採用時の再現環境であり、一般利用の必須バージョン範囲を意味しません。
 
 ## データ編集ポイント
 
@@ -270,6 +294,8 @@ frontend / browser round-trip は `verification/` と `tools/run_*.ps1` を使�
 - `vocab/data/clothing_packs.json`: clothing pack 定義
 - `vocab/data/garnish_base_vocab.json`
 - `vocab/data/garnish_micro_actions.json`
+- `vocab/data/prompt_quality_policy.json`: analyzer、比較、review、promotion の品質 gate
+- `rules/consistency_rules.json`: prompt 内の意味矛盾を検出する共有ルール
 
 asset 編集後は `asset_validator.py` と該当テストを必ず確認してください。
 
