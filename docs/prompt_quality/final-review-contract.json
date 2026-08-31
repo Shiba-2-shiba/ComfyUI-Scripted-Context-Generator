@@ -1,12 +1,26 @@
 {
-  "experiment_id": "final-g004-g006-adoption-review-v2",
+  "experiment_id": "final-g004-g006-adoption-review-v3",
   "guard_qualitative_dimensions": [
     "protagonist_clarity",
     "redundancy",
     "diversity"
   ],
+  "dimension_authority": {
+    "consistency": "affected_seed_pairwise",
+    "diversity": "current_source_corpus_confirmation",
+    "image_prompt_suitability": "selected_pairwise",
+    "naturalness": "selected_pairwise",
+    "protagonist_clarity": "selected_pairwise",
+    "redundancy": "selected_pairwise"
+  },
+  "hard_defect_contract": "closed_atomic_code_with_required_free_evidence",
+  "minimum_valid_vote_fraction": 0.9,
+  "minimum_valid_votes_cap": 36,
+  "selected_pairwise_guard_minimum_valid_votes": 0,
   "policy_version": "prompt-quality-policy/v2",
-  "schema_version": "prompt-quality-experiment-review-contract/v2",
+  "review_contract_schema_version": "prompt-quality-review-contract/v3",
+  "review_sampling": "comparison_bound_affected_first_deterministic_20",
+  "schema_version": "prompt-quality-experiment-review-contract/v3",
   "target_qualitative_dimensions": [
     "consistency",
     "naturalness",

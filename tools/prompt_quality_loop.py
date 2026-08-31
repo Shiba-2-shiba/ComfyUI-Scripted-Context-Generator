@@ -234,6 +234,27 @@ def _records_bytes(records: Sequence[Mapping[str, Any]]) -> bytes:
     return b"".join(canonical_json_bytes(record) for record in records)
 
 
+def _normalize_behavior_transform(behavior_transform: Mapping[str, Any] | None) -> dict[str, Any]:
+    if behavior_transform is None:
+        transform = {
+            "ablation_contract_hash": _sha256_bytes(canonical_json_bytes({"feature_ids": []})),
+            "feature_ids": [],
+            "variant": "current",
+        }
+    else:
+        transform = dict(behavior_transform)
+    if (
+        set(transform) != {"ablation_contract_hash", "feature_ids", "variant"}
+        or not isinstance(transform["feature_ids"], list)
+        or not all(isinstance(item, str) and item for item in transform["feature_ids"])
+        or not isinstance(transform["ablation_contract_hash"], str)
+        or len(transform["ablation_contract_hash"]) != 64
+        or transform["variant"] not in {"current", "combined_ablation_baseline"}
+    ):
+        raise WorkflowValidationError("invalid_behavior_transform", "run behavior transform contract is invalid")
+    return transform
+
+
 def replay_records(
     workflow: Mapping[str, Any],
     records: Sequence[Mapping[str, Any]],
@@ -597,6 +618,7 @@ def generate_run(
     overrides: Mapping[Any, Mapping[str, Any]] | None = None,
     run_kind: str = "generate",
     verify_replay: bool = True,
+    behavior_transform: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Generate canonical records plus separated manifest, metrics and telemetry."""
 
@@ -668,6 +690,8 @@ def generate_run(
         "runs": durations,
         "schema_version": "prompt-quality-telemetry/v1",
     }
+    transform = _normalize_behavior_transform(behavior_transform)
+    behavior_transform_hash = _sha256_bytes(canonical_json_bytes(transform))
     manifest = {
         "artifact_hashes": {
             "metrics.json": _sha256_bytes(metrics_content),
@@ -679,13 +703,23 @@ def generate_run(
         "created_at": datetime.now(timezone.utc).isoformat(),
         "dirty_state_marker": "content-addressed-snapshot",
         "effective_workflow_hash": effective_hash,
+        "override_hash": records[0]["override_hash"] if records else "",
         "host": {"hostname": socket.gethostname(), "platform": platform.platform(), "python": platform.python_version()},
         "profile_hash": selected_profile.hash,
+        "replay_evidence": {
+            "checked": replay["checked"],
+            "mismatch_count": replay["mismatch_count"],
+            "status": replay["status"],
+        },
         "run_id": output_dir.name,
         "run_kind": run_kind,
         "schema_version": LOOP_SCHEMA_VERSION,
         "source_tree_hash": source_before["source_tree_hash"],
         "workflow_hash": workflow_hash,
+        "ablation_contract_hash": transform["ablation_contract_hash"],
+        "behavior_feature_ids": transform["feature_ids"],
+        "behavior_transform_hash": behavior_transform_hash,
+        "behavior_variant": transform["variant"],
     }
     _atomic_write(output_dir / "records.jsonl", records_content)
     _atomic_write(output_dir / "metrics.json", metrics_content)
@@ -756,6 +790,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     compare.add_argument("--policy", required=True)
     compare.add_argument("--experiment", required=True)
     compare.add_argument("--output", required=True)
+    compare.add_argument("--ablation-pair")
     promote = subparsers.add_parser("promote-check")
     promote.add_argument("--comparison", required=True)
     promote.add_argument("--review")
@@ -887,7 +922,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             source_before = build_source_manifest()
             before_dir = _resolve_run_dir(args.before, artifact_root)
             after_dir = _resolve_run_dir(args.after, artifact_root)
-            result = compare_runs(before_dir, after_dir, policy=args.policy, experiment=args.experiment)
+            result = compare_runs(
+                before_dir, after_dir, policy=args.policy, experiment=args.experiment,
+                ablation_pair=args.ablation_pair,
+            )
             output_path = _write_loop_artifact(Path(args.output), artifact_root, result)
             _assert_source_unchanged(source_before)
             sys.stdout.buffer.write(canonical_json_bytes({"output": str(output_path), "verdict": result["automatic_verdict"]}))

@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -392,6 +393,23 @@ class TestCanonicalRunnerArtifacts(unittest.TestCase):
         self.assertIs(prompt_step["inputs"]["composition_mode"], False)
         self.assertEqual(canonical_json_bytes(first), canonical_json_bytes(second))
 
+    def test_master_seed_33_night_prompt_excludes_daylight_cues_deterministically(self):
+        overrides = {8: {"composition_mode": True}}
+        first = build_canonical_record(self.workflow, 33, self.profile, overrides=overrides)
+        second = build_canonical_record(self.workflow, 33, self.profile, overrides=overrides)
+        prompt = first["cleaned_prompt"].lower()
+        prompt_step = next(
+            item for item in first["execution_trace"]
+            if item["node_type"] == "ContextPromptBuilder"
+        )
+
+        self.assertIs(prompt_step["inputs"]["composition_mode"], True)
+        self.assertTrue(any(cue in prompt for cue in ("night", "evening")))
+        for daylight_cue in ("sunlit", "sunlight", "breakfast", "morning daylight"):
+            with self.subTest(daylight_cue=daylight_cue):
+                self.assertNotIn(daylight_cue, prompt)
+        self.assertEqual(canonical_json_bytes(first), canonical_json_bytes(second))
+
     def test_canonical_record_is_byte_identical_and_excludes_manifest_telemetry(self):
         first = build_canonical_record(self.workflow, 13, self.profile)
         second = build_canonical_record(self.workflow, 13, self.profile)
@@ -464,16 +482,18 @@ class TestCanonicalRunnerArtifacts(unittest.TestCase):
         temporary = Path(tempfile.mkdtemp(prefix="prompt-quality-l0-", dir=artifact_parent))
         self.addCleanup(lambda: shutil.rmtree(temporary, ignore_errors=True))
 
-        result = generate_run(
-            self.workflow,
-            temporary / "run",
-            artifact_root=temporary,
-            experiment_seed=11,
-            iteration_id="fixture",
-            control_seeds=json.loads(COHORT_PATH.read_text(encoding="utf-8"))["control_seeds"],
-            profile=self.profile,
-            verify_replay=False,
-        )
+        with patch("tools.prompt_quality_loop.replay_records", return_value={
+            "checked": 80, "mismatch_count": 0, "mismatched_seeds": [], "status": "pass",
+        }):
+            result = generate_run(
+                self.workflow,
+                temporary / "run",
+                artifact_root=temporary,
+                experiment_seed=11,
+                iteration_id="fixture",
+                control_seeds=json.loads(COHORT_PATH.read_text(encoding="utf-8"))["control_seeds"],
+                profile=self.profile,
+            )
 
         records_text = (temporary / "run" / "records.jsonl").read_text(encoding="utf-8")
         metrics = json.loads((temporary / "run" / "metrics.json").read_text(encoding="utf-8"))
@@ -487,6 +507,9 @@ class TestCanonicalRunnerArtifacts(unittest.TestCase):
         self.assertIn("run_id", manifest)
         self.assertIn("created_at", manifest)
         self.assertIn("host", manifest)
+        self.assertEqual(manifest["replay_evidence"], {
+            "checked": 80, "mismatch_count": 0, "status": "pass",
+        })
         self.assertIn("run_duration_ms", telemetry)
         self.assertIn("duration_ms", telemetry["runs"][0])
         for dynamic_key in ("run_id", "created_at", "host", "run_duration_ms", "duration_ms"):

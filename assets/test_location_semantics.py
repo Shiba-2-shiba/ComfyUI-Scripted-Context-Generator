@@ -1,6 +1,7 @@
 import os
 import sys
 import unittest
+from pathlib import Path
 
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -253,6 +254,185 @@ class TestLocationSemantics(unittest.TestCase):
         self.assertTrue(any("evening stroll" in prompt for prompt in cross_segment_prompts))
         evening_prompts = [prompt for prompt in cross_segment_prompts if "evening stroll" in prompt]
         self.assertTrue(all("quiet weekday morning" not in prompt for prompt in evening_prompts))
+
+    def test_location_expansion_filters_daylight_environment_for_evening_action_seed_33(self):
+        from pipeline.location_builder import expand_location_prompt
+
+        kwargs = {
+            "loc_tag": "clean_modern_kitchen",
+            # ContextLocationExpander's resolved seed for blind-review master seed 33.
+            "seed": 9463846182915048562,
+            "mode": "detailed",
+            "action_text": (
+                "opening the stainless steel fridge close to where she needs to be, "
+                "settling into a quieter pace, looking toward the next thing she needs, "
+                "letting the pause settle properly, keeping to herself, "
+                "as the last part falls into place, late in the evening"
+            ),
+        }
+        first = expand_location_prompt(**kwargs)
+        replay = expand_location_prompt(**kwargs)
+
+        self.assertEqual(first, replay)
+        self.assertIn("pristine modern kitchen with island", first)
+        self.assertNotIn("bright sunlit breakfast nook", first)
+        self.assertNotIn("morning sunlight", first)
+
+    def test_breakfast_nook_anchor_does_not_cancel_explicit_evening_time(self):
+        from pipeline.location_policy import filter_time_options_for_context
+
+        action = "sitting at the breakfast nook with coffee, late in the evening"
+        options = ["refreshing morning", "soft daylight", "warm ambient light"]
+
+        self.assertEqual(filter_time_options_for_context(options, action), ["warm ambient light"])
+
+    def test_g004_confirmation_conflict_seeds_filter_morning_location_segments(self):
+        from tools.workflow_prompt_runner import build_canonical_record, load_profile
+        from workflow_widget_validation import load_workflow
+
+        root = Path(ROOT)
+        workflow = load_workflow(root / "ComfyUI-workflow-context.json")
+        profile = load_profile(root / "verification/fixtures/prompt_quality_supported_profile.json")
+        failing_seeds = (10218210002619448939, 17005474289886835286)
+
+        for seed in failing_seeds:
+            with self.subTest(seed=seed):
+                first = build_canonical_record(workflow, seed, profile=profile, cohort="confirmation")
+                replay = build_canonical_record(workflow, seed, profile=profile, cohort="confirmation")
+                self.assertEqual(first, replay)
+                self.assertIn("late in the evening", first["context"]["action"])
+                location_prompt = first["context"]["extras"]["location_prompt"].lower()
+                self.assertNotIn("morning", location_prompt)
+                self.assertNotIn("sunlit", location_prompt)
+
+    def test_evening_context_filters_bright_terms_from_all_selectable_segment_categories(self):
+        from pipeline.location_builder import expand_location_prompt
+
+        cases = {
+            "school_classroom": ("lunch break", "reflecting sunlight"),
+            "bamboo_forest": ("sunlight filtering through leaves",),
+            "wave_barrel": ("bright sunlight at the tunnel end", "sunlit mist"),
+            "riverside_walk": ("sunlit asphalt path",),
+            "rooftop_laundry_area": ("sunlit concrete roof surface",),
+            "neighborhood_playground": ("sunlit painted metal equipment",),
+        }
+        action = "finishing the task late in the evening"
+
+        for location, forbidden in cases.items():
+            with self.subTest(location=location):
+                first = [expand_location_prompt(location, seed, "detailed", action_text=action) for seed in range(64)]
+                replay = [expand_location_prompt(location, seed, "detailed", action_text=action) for seed in range(64)]
+                self.assertEqual(first, replay)
+                joined = "\n".join(first).lower()
+                for phrase in forbidden:
+                    self.assertNotIn(phrase, joined)
+
+    def test_final_review_seed_30_suppresses_fx_redundant_with_energetic_mood(self):
+        from tools.workflow_prompt_runner import build_canonical_record, load_profile
+        from workflow_widget_validation import load_workflow
+
+        root = Path(ROOT)
+        workflow = load_workflow(root / "ComfyUI-workflow-context.json")
+        profile = load_profile(root / "verification/fixtures/prompt_quality_supported_profile.json")
+        first = build_canonical_record(workflow, 30, profile=profile, cohort="control")
+        replay = build_canonical_record(workflow, 30, profile=profile, cohort="control")
+
+        self.assertEqual(first, replay)
+        self.assertEqual(first["context"]["loc"], "karaoke_bar")
+        self.assertIn("kind of excitement", first["cleaned_prompt"])
+        self.assertNotIn("energetic party vibe", first["cleaned_prompt"])
+        self.assertNotIn("energetic party vibe", first["context"]["extras"]["location_prompt"])
+
+    def test_energetic_fx_is_retained_when_context_has_no_overlapping_family(self):
+        from unittest.mock import patch
+
+        from pipeline import location_builder
+
+        pack = {
+            "environment": ["plain rehearsal room"],
+            "core": [], "props": [], "texture": [], "time": [], "weather": [], "crowd": [],
+            "fx": ["energetic party vibe"],
+        }
+        with patch.object(location_builder.background_vocab, "CONCEPT_PACKS", {"nonredundant_fx_room": pack}):
+            first = [
+                location_builder.expand_location_prompt(
+                    "nonredundant_fx_room", seed, "detailed",
+                    action_text="standing quietly near the wall", mood_text="calm_focus",
+                )
+                for seed in range(128)
+            ]
+            replay = [
+                location_builder.expand_location_prompt(
+                    "nonredundant_fx_room", seed, "detailed",
+                    action_text="standing quietly near the wall", mood_text="calm_focus",
+                )
+                for seed in range(128)
+            ]
+
+        self.assertEqual(first, replay)
+        self.assertTrue(any("energetic party vibe" in prompt for prompt in first))
+
+    def test_fx_redundancy_classifier_uses_boundaries_and_does_not_match_substrings(self):
+        from pipeline.location_policy import filter_semantic_redundant_fx
+
+        self.assertEqual(
+            filter_semantic_redundant_fx(["mist over lake surface"], "a gentle facial expression"),
+            ["mist over lake surface"],
+        )
+        self.assertEqual(
+            filter_semantic_redundant_fx(["breathtaking mountain light"], "taking a slow breath"),
+            ["breathtaking mountain light"],
+        )
+        self.assertEqual(
+            filter_semantic_redundant_fx(["energetic party vibe", "rotating reflections"], "energetic_joy"),
+            ["rotating reflections"],
+        )
+
+    def test_shopping_mall_seed_27_filters_morning_crowd_after_night_weather(self):
+        from pipeline.location_builder import expand_location_prompt
+
+        first = expand_location_prompt("shopping_mall_atrium", 27, "detailed")
+        replay = expand_location_prompt("shopping_mall_atrium", 27, "detailed")
+
+        self.assertEqual(first, replay)
+        self.assertIn("night sky through glass roof", first)
+        self.assertNotIn("quiet weekday morning", first)
+
+    def test_weather_and_crowd_time_context_is_cumulative_in_both_directions(self):
+        from unittest.mock import patch
+
+        from pipeline import location_builder
+
+        def prompts_for(pack):
+            with patch.object(location_builder.background_vocab, "CONCEPT_PACKS", {"cumulative_room": pack}):
+                first = [location_builder.expand_location_prompt("cumulative_room", seed, "detailed") for seed in range(256)]
+                replay = [location_builder.expand_location_prompt("cumulative_room", seed, "detailed") for seed in range(256)]
+            self.assertEqual(first, replay)
+            return first
+
+        shared = {
+            "environment": ["plain indoor room"], "core": [], "props": [], "texture": [],
+            "time": [], "fx": [],
+        }
+        night_then_morning = prompts_for({
+            **shared, "weather": ["night sky beyond the windows"], "crowd": ["quiet weekday morning"],
+        })
+        morning_then_night = prompts_for({
+            **shared, "weather": ["soft morning sunlight"], "crowd": ["late night closing atmosphere"],
+        })
+
+        self.assertTrue(any("night sky beyond the windows" in prompt for prompt in night_then_morning))
+        self.assertTrue(any("quiet weekday morning" in prompt for prompt in night_then_morning))
+        self.assertFalse(any(
+            "night sky beyond the windows" in prompt and "quiet weekday morning" in prompt
+            for prompt in night_then_morning
+        ))
+        self.assertTrue(any("soft morning sunlight" in prompt for prompt in morning_then_night))
+        self.assertTrue(any("late night closing atmosphere" in prompt for prompt in morning_then_night))
+        self.assertFalse(any(
+            "soft morning sunlight" in prompt and "late night closing atmosphere" in prompt
+            for prompt in morning_then_night
+        ))
 
     def test_location_expansion_uses_plain_connectors_for_core_and_props(self):
         from unittest.mock import patch

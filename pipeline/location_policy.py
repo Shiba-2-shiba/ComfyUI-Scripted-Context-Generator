@@ -32,10 +32,21 @@ FX_DENY_PATTERNS = (
     re.compile(r"\bsparkling(?!\s+eyes\b)\w*\b", re.IGNORECASE),
 )
 TIME_DARK_HINTS = ("night", "midnight", "twilight", "dusk", "late night", "stormy", "holiday night")
-TIME_BRIGHT_HINTS = ("morning", "midday", "noon", "daytime", "daylight", "sunrise")
+TIME_BRIGHT_HINTS = (
+    "morning", "midday", "noon", "daytime", "daylight", "sunrise",
+    "sunlight", "sunlit", "lunch break",
+)
 TIME_LATE_HINTS = TIME_DARK_HINTS + ("evening",)
 WEATHER_RARE_HINTS = ("rain", "snow", "storm", "fog", "acid", "winter")
 LIGHTING_HINTS = ("light", "glow", "fluorescent", "ambient", "sun", "spotlight", "daylight", "hour")
+FX_ENERGY_FAMILY_PATTERNS = (
+    re.compile(r"\benergy\b", re.IGNORECASE),
+    re.compile(r"\benergetic\b", re.IGNORECASE),
+    re.compile(r"\bexcitement\b", re.IGNORECASE),
+    re.compile(r"\bexcited\b", re.IGNORECASE),
+    re.compile(r"\bquick\s+motion\b", re.IGNORECASE),
+    re.compile(r"\bparty\s+vibe\b", re.IGNORECASE),
+)
 
 
 def is_symbolic_prop(text: str) -> bool:
@@ -77,6 +88,16 @@ def filter_fx_candidates(options: Sequence[str]) -> list[str]:
         filtered.append(item_text)
         seen.add(item_text)
     return filtered
+
+
+def filter_semantic_redundant_fx(options: Sequence[str], context_text: str) -> list[str]:
+    def has_energy_excitement_family(text: str) -> bool:
+        normalized = re.sub(r"[_-]+", " ", str(text or ""))
+        return any(pattern.search(normalized) for pattern in FX_ENERGY_FAMILY_PATTERNS)
+
+    if not has_energy_excitement_family(context_text):
+        return list(options)
+    return [option for option in options if not has_energy_excitement_family(option)]
 
 
 def is_daily_life_loc(loc_tag: str) -> bool:

@@ -457,8 +457,13 @@ class TestPromptQualityComparison(unittest.TestCase):
         self.assertEqual(caught.exception.code, "comparison_contract_mismatch")
 
     def test_control_scope_resolves_external_consistency_rules(self):
+        from tools.analyze_prompt_quality import load_policy
+
         policy_path = ROOT / "vocab" / "data" / "prompt_quality_policy.json"
         policy_version = json.loads(policy_path.read_text(encoding="utf-8"))["policy_version"]
+        scoped_policy = load_policy(policy_path)
+        scoped_policy["review"] = dict(scoped_policy["review"])
+        scoped_policy["review"].pop("schema_version", None)
 
         def write_scoped_run(name, conflicting):
             run_dir = self.temporary / name
@@ -514,7 +519,7 @@ class TestPromptQualityComparison(unittest.TestCase):
         comparison = compare_runs(
             before,
             after,
-            policy=policy_path,
+            policy=scoped_policy,
             experiment={
                 "experiment_id": "external-consistency-policy",
                 "target_kind": "behavior",

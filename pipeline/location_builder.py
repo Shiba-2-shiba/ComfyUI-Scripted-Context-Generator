@@ -13,6 +13,7 @@ if __package__ and "." in __package__:
     from .location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
     from .location_policy import (
         filter_fx_candidates as _filter_fx_candidates,
+        filter_semantic_redundant_fx as _filter_semantic_redundant_fx,
         filter_off_mode_options as _filter_off_mode_options,
         filter_time_options_for_context as _filter_time_options_for_context,
         is_daily_life_loc as _is_daily_life_loc,
@@ -41,6 +42,7 @@ else:
     from pipeline.location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
     from pipeline.location_policy import (
         filter_fx_candidates as _filter_fx_candidates,
+        filter_semantic_redundant_fx as _filter_semantic_redundant_fx,
         filter_off_mode_options as _filter_off_mode_options,
         filter_time_options_for_context as _filter_time_options_for_context,
         is_daily_life_loc as _is_daily_life_loc,
@@ -143,6 +145,7 @@ def expand_location_prompt(
         }
 
     env_options = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("environment", [])))
+    env_options = _filter_time_options_for_context(env_options, action_text)
     record_segment_ranking("environment", env_options)
     if env_options:
         rng_state = rng.getstate()
@@ -197,6 +200,7 @@ def expand_location_prompt(
         return accepted
 
     core_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("core", [])))
+    core_opts = _filter_time_options_for_context(core_opts, action_text)
     record_segment_ranking("core", core_opts)
     if core_opts and rng.random() < 0.95:
         num_core = 2 if len(core_opts) > 1 and rng.random() < 0.50 else 1
@@ -213,6 +217,7 @@ def expand_location_prompt(
             segments.append(f"featuring {chosen_core[0]} and {chosen_core[1]}")
 
     props_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("props", [])))
+    props_opts = _filter_time_options_for_context(props_opts, action_text)
     props_opts = keep_repeat_risk_budget(props_opts)
     record_segment_ranking("props", props_opts)
     include_prob, second_prop_prob = _props_sampling_policy(props_opts)
@@ -255,6 +260,7 @@ def expand_location_prompt(
         texture_candidates.extend(filter_solo_safe_candidates(filter_candidate_strings(general_defaults.get("texture", []))))
     if lighting_mode == "off":
         texture_candidates = _filter_off_mode_options(texture_candidates, fallback_all=False)
+    texture_candidates = _filter_time_options_for_context(texture_candidates, action_text)
     record_segment_ranking("texture", texture_candidates)
     if texture_candidates and rng.random() < TEXTURE_SEGMENT_SELECT_PROB:
         rng_state = rng.getstate()
@@ -268,6 +274,7 @@ def expand_location_prompt(
         details_defaults = filter_solo_safe_candidates(filter_candidate_strings(general_defaults.get("details", [])))
         if lighting_mode == "off":
             details_defaults = _filter_off_mode_options(details_defaults, fallback_all=False)
+        details_defaults = _filter_time_options_for_context(details_defaults, action_text)
         record_segment_ranking("details", details_defaults)
         if details_defaults:
             rng_state = rng.getstate()
@@ -278,13 +285,13 @@ def expand_location_prompt(
             segments.append(details)
 
     is_daily_life = _is_daily_life_loc(cleaned_tag)
+    selected_scene_context = " ".join([env_part] + segments)
+    selected_context = " ".join((str(action_text), selected_scene_context)).strip()
     time_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("time", [])))
     if lighting_mode == "off":
         time_opts = _filter_off_mode_options(time_opts, fallback_all=False)
-    time_opts = _filter_time_options_for_context(time_opts, env_part)
-    time_opts = _filter_time_options_for_context(time_opts, action_text)
+    time_opts = _filter_time_options_for_context(time_opts, selected_context)
     record_segment_ranking("time", time_opts)
-    selected_time_context = ""
     if time_opts and rng.random() < (0.72 if is_daily_life else 0.5):
         bright_time_options = _prefer_bright_time_options(time_opts)
         rng_state = rng.getstate()
@@ -293,11 +300,9 @@ def expand_location_prompt(
         time_choice = _semantic_choice(bright_time_options, rng, semantic_scores_for("time"))
         record_section_change("time", baseline_time, time_choice)
         segments.append(f"during {time_choice}")
-        selected_time_context = time_choice
+        selected_context = " ".join((selected_context, time_choice)).strip()
     weather_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("weather", [])))
-    weather_opts = _filter_time_options_for_context(weather_opts, env_part)
-    weather_opts = _filter_time_options_for_context(weather_opts, action_text)
-    weather_opts = _filter_time_options_for_context(weather_opts, selected_time_context)
+    weather_opts = _filter_time_options_for_context(weather_opts, selected_context)
     record_segment_ranking("weather", weather_opts)
     preferred_weather, rare_weather = _split_weather_options(weather_opts)
     weather_probability = 0.18 if is_daily_life else 0.12
@@ -308,6 +313,7 @@ def expand_location_prompt(
         weather = _semantic_choice(preferred_weather, rng, semantic_scores_for("weather"))
         record_section_change("weather", baseline_weather, weather)
         segments.append(weather)
+        selected_context = " ".join((selected_context, weather)).strip()
     elif rare_weather and rng.random() < 0.03:
         rng_state = rng.getstate()
         baseline_weather = _semantic_choice(rare_weather, rng, {})
@@ -315,10 +321,9 @@ def expand_location_prompt(
         weather = _semantic_choice(rare_weather, rng, semantic_scores_for("weather"))
         record_section_change("weather", baseline_weather, weather)
         segments.append(weather)
+        selected_context = " ".join((selected_context, weather)).strip()
     crowd_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("crowd", [])))
-    crowd_opts = _filter_time_options_for_context(crowd_opts, env_part)
-    crowd_opts = _filter_time_options_for_context(crowd_opts, action_text)
-    crowd_opts = _filter_time_options_for_context(crowd_opts, selected_time_context)
+    crowd_opts = _filter_time_options_for_context(crowd_opts, selected_context)
     record_segment_ranking("crowd", crowd_opts)
     if crowd_opts and rng.random() < (0.58 if is_daily_life else 0.30):
         rng_state = rng.getstate()
@@ -327,12 +332,18 @@ def expand_location_prompt(
         crowd = _semantic_choice(crowd_opts, rng, semantic_scores_for("crowd"))
         record_section_change("crowd", baseline_crowd, crowd)
         segments.append(crowd)
+        selected_context = " ".join((selected_context, crowd)).strip()
 
     fx_candidates = _filter_fx_candidates(filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("fx", []) or [])))
     if lighting_mode == "off":
         fx_candidates = _filter_off_mode_options(fx_candidates, fallback_all=False)
     if rng.random() < FX_DEFAULT_BLEND_PROB:
         fx_candidates.extend(_filter_fx_candidates(filter_solo_safe_candidates(filter_candidate_strings(general_defaults.get("fx", [])))))
+    fx_candidates = _filter_time_options_for_context(fx_candidates, selected_context)
+    fx_candidates = _filter_semantic_redundant_fx(
+        fx_candidates,
+        " ".join((selected_context, str(mood_text))),
+    )
     if lighting_mode == "off":
         fx_candidates = _filter_off_mode_options(fx_candidates, fallback_all=False)
     record_segment_ranking("fx", fx_candidates)

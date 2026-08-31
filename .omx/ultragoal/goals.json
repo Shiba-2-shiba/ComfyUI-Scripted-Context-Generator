@@ -1,7 +1,7 @@
 {
   "version": 1,
   "createdAt": "2026-08-24T05:37:49.643Z",
-  "updatedAt": "2026-08-28T00:15:34.155Z",
+  "updatedAt": "2026-08-31T05:57:40.542Z",
   "briefPath": ".omx/ultragoal/brief.md",
   "goalsPath": ".omx/ultragoal/goals.json",
   "ledgerPath": ".omx/ultragoal/ledger.jsonl",
@@ -83,15 +83,101 @@
       "id": "G007-l6-adoption-gate",
       "title": "L6 adoption gate",
       "objective": "After promotion gates pass, update README and sample workflow recommendations, verify explicit legacy rollback and frontend/browser round-trip. Keep real-ComfyUI execution parity as an optional external E2E check; absence does not block adoption of the workflow-equivalent script.",
-      "status": "in_progress",
+      "status": "complete",
       "attempt": 1,
       "createdAt": "2026-08-24T05:37:49.643Z",
-      "updatedAt": "2026-08-28T00:15:34.155Z",
+      "updatedAt": "2026-08-31T05:55:51.582Z",
       "steeringEvidence": "User clarified that the intended test surface is the workflow-equivalent script, not a ComfyUI installation.",
       "steeringRationale": "Align the pending adoption goal with the clarified verification boundary.",
-      "startedAt": "2026-08-25T01:39:54.387Z"
+      "startedAt": "2026-08-25T01:39:54.387Z",
+      "reviewBlockedAt": "2026-08-31T02:18:59.067Z",
+      "evidence": "Native independent blind review attempt-010 aggregated with hash validation pass but verdict reject: consistency valid_votes 10 < 36 despite 10/10 candidate-better; diversity guard candidate_better 4/candidate_worse 4; one candidate-only defect caused by non-atomic defect wording; seed 33 still has late-evening versus bright-sunlit inconsistency. review.json is assets/results/prompt_quality_loop/final-blind-review-attempt-010/review.json.",
+      "reviewBlockerResolution": {
+        "resolverGoalId": "G008-resolve-g007-final-blind-review-bloc",
+        "status": "complete",
+        "resolvedAt": "2026-08-31T05:55:51.582Z",
+        "evidence": "Complete G008 resolver and G007 adoption chain under .omx/ultragoal/goals.json and ledger.jsonl. Final source 40848f5c9b37ffbcc7dec0e89f60d52e59a23ec5877536b24134a19b43fc3447; Python 540/540; exact 11 gates pass; confirmations G004 24->0, G005 137->0, G006 entropy 0->0.778828; blind review attempt-015 pass; verification SHA 05bf5c9c7d95c11e282b401805434e23e27b38805e3b7497735045c88fd838d3; promotion SHA d37b3f58df45987b6cb0165ab5d77eabee662069b9f83473e54a87690bbd552d promote failures0; ai-slop-cleaner passed; independent code-reviewer APPROVE issues0; architect CLEAR."
+      },
+      "completedAt": "2026-08-31T05:55:51.582Z"
+    },
+    {
+      "id": "G008-resolve-g007-final-blind-review-bloc",
+      "title": "Resolve G007 final blind-review blockers",
+      "objective": "Fix the remaining late-evening versus sunlit semantic inconsistency, repair the final qualitative review sampling/guard contract so sparse consistency changes and corpus-level diversity are evaluated by appropriate evidence, regenerate current-source confirmation/review/verification v2 artifacts, and rerun the adoption promotion gate.",
+      "status": "complete",
+      "attempt": 1,
+      "createdAt": "2026-08-31T02:18:59.067Z",
+      "updatedAt": "2026-08-31T05:57:09.463Z",
+      "evidence": "Complete G008 resolver and G007 adoption chain under .omx/ultragoal/goals.json and ledger.jsonl. Final source 40848f5c9b37ffbcc7dec0e89f60d52e59a23ec5877536b24134a19b43fc3447; Python 540/540; exact 11 gates pass; confirmations G004 24->0, G005 137->0, G006 entropy 0->0.778828; blind review attempt-015 pass; verification SHA 05bf5c9c7d95c11e282b401805434e23e27b38805e3b7497735045c88fd838d3; promotion SHA d37b3f58df45987b6cb0165ab5d77eabee662069b9f83473e54a87690bbd552d promote failures0; ai-slop-cleaner passed; independent code-reviewer APPROVE issues0; architect CLEAR.",
+      "resolvesReviewBlockedGoalId": "G007-l6-adoption-gate",
+      "startedAt": "2026-08-31T02:19:06.652Z",
+      "reviewBlockedAt": "2026-08-31T04:21:10.351Z",
+      "reviewBlockerResolution": {
+        "resolverGoalId": "G009-resolve-g008-independent-final-revie",
+        "status": "pending",
+        "evidence": "Independent final review non-clean. code-reviewer REQUEST CHANGES: HIGH location_builder leaves core/props/texture outside evening/daylight filtering; HIGH ablation pair accepts missing explicit replay via runtime mismatch-count fallback. architect BLOCK: selected_pairwise guard dimensions publish minimum_valid_votes but aggregate/promotion enforce minimum only for targets; pair/comparison/promotion do not recursively validate run-manifest artifact hashes for metrics/issues/records. Evidence source 4582b6ad..., Python 531/531 and verification SHA 595bbf... passed but validators are incomplete."
+      },
+      "steeringStatus": "superseded",
+      "steeringEvidence": "G008 and its parent G007 are complete through the strict quality-gated resolver chain. The remaining steeringStatus=blocked was introduced by a recovery directive without replacement children and is not an implementation, review, verification, or authority blocker.",
+      "steeringRationale": "Preserve the completed G008 history while replacing only the accidental steering blocker with a terminal receipt goal; quality gates remain mandatory and unchanged.",
+      "completedAt": "2026-08-31T05:55:51.582Z",
+      "blockedReason": "Preserve the completed G008 history while replacing only the accidental steering blocker with a terminal receipt goal; quality gates remain mandatory and unchanged.",
+      "supersededBy": [
+        "G010-finalize-strict-aggregate-receipt"
+      ]
+    },
+    {
+      "id": "G010-finalize-strict-aggregate-receipt",
+      "title": "Finalize strict aggregate receipt",
+      "objective": "Checkpoint the already verified and independently approved aggregate ultragoal result with the fresh completed Codex goal snapshot and the existing strict quality-gate artifact, without changing product source or weakening any completion invariant.",
+      "status": "complete",
+      "attempt": 1,
+      "createdAt": "2026-08-31T05:57:09.463Z",
+      "updatedAt": "2026-08-31T05:57:40.542Z",
+      "evidence": "Finalize G010 strict aggregate receipt for .omx/ultragoal/goals.json and ledger.jsonl without product changes. AI slop cleaner passed; final source 40848f5c9b37ffbcc7dec0e89f60d52e59a23ec5877536b24134a19b43fc3447; Python 540/540; exact 11 gates pass; verification SHA 05bf5c9c7d95c11e282b401805434e23e27b38805e3b7497735045c88fd838d3; promotion SHA d37b3f58df45987b6cb0165ab5d77eabee662069b9f83473e54a87690bbd552d promote failures0; independent code-reviewer APPROVE issues0; independent architect CLEAR; G001-G009 and resolved G007/G008 chain complete.",
+      "supersedes": [
+        "G008-resolve-g007-final-blind-review-bloc"
+      ],
+      "startedAt": "2026-08-31T05:57:16.861Z",
+      "completedAt": "2026-08-31T05:57:40.542Z"
+    },
+    {
+      "id": "G009-resolve-g008-independent-final-revie",
+      "title": "Resolve G008 independent final-review blockers",
+      "objective": "Filter all location segment categories against action time context; require explicit immutable replay evidence for ablation pairs; enforce frozen selected-pairwise vote minima for target and guard dimensions; recursively validate and bind run-manifest records/metrics/issues hashes through comparison and promotion; rerun cleanup, all verification, independent review, and final checkpoint.",
+      "status": "complete",
+      "attempt": 1,
+      "createdAt": "2026-08-31T04:21:10.352Z",
+      "updatedAt": "2026-08-31T05:50:17.932Z",
+      "evidence": "G009 blockers resolved. Location uses cumulative action/scene/time/weather/crowd context across all sections and bounded FX classifier; explicit replay evidence required; all selected-pairwise minima enforced; pair/manifests/records/metrics/issues/source/telemetry recursively hash validated. AI slop cleanup pass. Fresh source 40848f5c9b37ffbcc7dec0e89f60d52e59a23ec5877536b24134a19b43fc3447; Python 540/540; exact 11 gates pass; G004 24->0, G005 137->0, G006 entropy 0->0.778828; blind review attempt-015 pass; verification SHA 05bf5c9c7d95c11e282b401805434e23e27b38805e3b7497735045c88fd838d3; promotion SHA d37b3f58df45987b6cb0165ab5d77eabee662069b9f83473e54a87690bbd552d promote failures0; independent code-reviewer APPROVE issues0; architect CLEAR.",
+      "resolvesReviewBlockedGoalId": "G008-resolve-g007-final-blind-review-bloc",
+      "startedAt": "2026-08-31T04:21:18.677Z",
+      "completedAt": "2026-08-31T05:50:17.932Z"
     }
   ],
   "codexObjective": "Complete the durable ultragoal plan in .omx/ultragoal/goals.json, including later accepted/appended stories, under the original brief constraints; use .omx/ultragoal/ledger.jsonl as the audit trail.",
-  "activeGoalId": "G007-l6-adoption-gate"
+  "aggregateCompletion": {
+    "status": "complete",
+    "completedAt": "2026-08-31T05:57:40.542Z",
+    "evidence": "Finalize G010 strict aggregate receipt for .omx/ultragoal/goals.json and ledger.jsonl without product changes. AI slop cleaner passed; final source 40848f5c9b37ffbcc7dec0e89f60d52e59a23ec5877536b24134a19b43fc3447; Python 540/540; exact 11 gates pass; verification SHA 05bf5c9c7d95c11e282b401805434e23e27b38805e3b7497735045c88fd838d3; promotion SHA d37b3f58df45987b6cb0165ab5d77eabee662069b9f83473e54a87690bbd552d promote failures0; independent code-reviewer APPROVE issues0; independent architect CLEAR; G001-G009 and resolved G007/G008 chain complete.",
+    "codexGoal": {
+      "available": true,
+      "objective": "Complete the durable ultragoal plan in .omx/ultragoal/goals.json, including later accepted/appended stories, under the original brief constraints; use .omx/ultragoal/ledger.jsonl as the audit trail.",
+      "status": "complete",
+      "remainingTokens": null,
+      "raw": {
+        "goal": {
+          "threadId": "01a0558a-346f-7b10-bb8e-ebbab34d6e98",
+          "objective": "Complete the durable ultragoal plan in .omx/ultragoal/goals.json, including later accepted/appended stories, under the original brief constraints; use .omx/ultragoal/ledger.jsonl as the audit trail.",
+          "status": "complete",
+          "tokensUsed": 3579763,
+          "timeUsedSeconds": 13664,
+          "createdAt": 1788142023,
+          "updatedAt": 1788155693
+        },
+        "remainingTokens": null,
+        "completionBudgetReport": null
+      }
+    }
+  }
 }

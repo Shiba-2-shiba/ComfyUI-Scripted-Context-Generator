@@ -36,6 +36,141 @@ REQUIRED_VERIFICATION_GATES = {
 MIN_FULL_REGRESSION_TESTS = 505
 
 
+def _review_v3_selection(
+    experiment_id: str,
+    before: Sequence[Mapping[str, Any]],
+    after: Sequence[Mapping[str, Any]],
+    review_policy: Mapping[str, Any],
+    before_issues: Mapping[str, Any],
+    after_issues: Mapping[str, Any],
+    guard_dimensions: Sequence[str],
+) -> dict[str, Any]:
+    """Freeze the comparison-bound v3 review sample before any votes exist."""
+
+    before_by_seed = {int(item["run_seed"]): item for item in before}
+    after_by_seed = {int(item["run_seed"]): item for item in after}
+    prompt_changed = sorted(
+        seed for seed in before_by_seed
+        if before_by_seed[seed].get("cleaned_prompt") != after_by_seed[seed].get("cleaned_prompt")
+    )
+    issue_code_mapping = {
+        "consistency": ["consistency_rule_conflict", "location_action_object_conflict"],
+    }
+
+    def issue_seeds(artifact: Mapping[str, Any], codes: set[str]) -> set[int]:
+        if artifact.get("schema_version") != "prompt-quality-issues/v1" or not isinstance(artifact.get("issues"), list):
+            raise WorkflowValidationError("invalid_issues_artifact", "v3 review selection requires canonical issues/v1")
+        seeds: set[int] = set()
+        for issue in artifact["issues"]:
+            if not isinstance(issue, Mapping) or issue.get("issue_code") not in codes:
+                continue
+            affected_seeds = issue.get("affected_seeds")
+            if not isinstance(affected_seeds, list):
+                raise WorkflowValidationError("invalid_issues_artifact", "issue affected_seeds must be an array")
+            seeds.update(int(seed) for seed in affected_seeds)
+        return seeds
+
+    consistency_issue_codes = set(issue_code_mapping["consistency"])
+    consistency_eligible = sorted(
+        issue_seeds(before_issues, consistency_issue_codes)
+        | issue_seeds(after_issues, consistency_issue_codes)
+    )
+    outside_cohort = sorted(set(consistency_eligible) - set(before_by_seed))
+    if outside_cohort:
+        raise WorkflowValidationError(
+            "issue_seed_outside_cohort", "consistency issue seed is outside the paired cohort", seeds=outside_cohort
+        )
+    if len(consistency_eligible) > 20:
+        raise WorkflowValidationError(
+            "review_eligible_seed_overflow", "all consistency eligible seeds must fit the 20-pair review",
+            actual=len(consistency_eligible),
+        )
+
+    def rank(seed: int) -> tuple[str, int]:
+        digest = hashlib.sha256(f"{experiment_id}:review-sample:{seed}".encode()).hexdigest()
+        return digest, seed
+
+    selected = list(consistency_eligible)
+    selected.extend(sorted((seed for seed in prompt_changed if seed not in selected), key=rank)[:20 - len(selected)])
+    if len(selected) < 20:
+        selected.extend(sorted((seed for seed in before_by_seed if seed not in selected), key=rank)[:20 - len(selected)])
+    if len(selected) != 20:
+        raise WorkflowValidationError(
+            "insufficient_review_cohort", "review-contract/v3 requires 20 paired seeds", actual=len(selected)
+        )
+    dimension_authority = review_policy.get("dimension_authority", {})
+    expected_dimensions = {
+        "protagonist_clarity", "consistency", "naturalness",
+        "redundancy", "diversity", "image_prompt_suitability",
+    }
+    if not isinstance(dimension_authority, Mapping) or set(dimension_authority) != expected_dimensions:
+        raise WorkflowValidationError(
+            "invalid_review_contract", "v3 dimension_authority must cover the complete rubric exactly"
+        )
+    if (
+        dimension_authority.get("consistency") != "affected_seed_pairwise"
+        or dimension_authority.get("naturalness") != "selected_pairwise"
+        or dimension_authority.get("image_prompt_suitability") != "selected_pairwise"
+        or dimension_authority.get("diversity") != "current_source_corpus_confirmation"
+    ):
+        raise WorkflowValidationError("invalid_review_contract", "v3 target and diversity authorities are fixed")
+    lanes = review_policy.get("independent_lanes")
+    fraction = review_policy.get("minimum_valid_vote_fraction")
+    cap = review_policy.get("minimum_valid_votes_cap")
+    codes = review_policy.get("hard_defect_codes")
+    if lanes != 2 or not isinstance(fraction, (int, float)) or isinstance(fraction, bool) or not 0 < fraction <= 1:
+        raise WorkflowValidationError("invalid_review_contract", "v3 requires two lanes and a valid vote fraction")
+    if not isinstance(cap, int) or isinstance(cap, bool) or cap < 1 or cap > 40:
+        raise WorkflowValidationError("invalid_review_contract", "v3 minimum vote cap must be an integer from 1 through 40")
+    if (
+        not isinstance(codes, list) or not codes or len(codes) != len(set(codes))
+        or not all(isinstance(code, str) and code.strip() for code in codes)
+    ):
+        raise WorkflowValidationError("invalid_review_contract", "v3 hard defect codes must be a non-empty closed set")
+    prompt_changed_set = set(prompt_changed)
+    eligible: dict[str, Any] = {}
+    guard_set = set(guard_dimensions)
+    for dimension, authority in sorted(dimension_authority.items()):
+        if authority == "affected_seed_pairwise":
+            seeds = list(consistency_eligible) if dimension == "consistency" else [
+                seed for seed in selected if seed in prompt_changed_set
+            ]
+        elif authority == "selected_pairwise":
+            seeds = list(selected)
+        elif authority == "current_source_corpus_confirmation":
+            eligible[str(dimension)] = {"authority": authority, "minimum_valid_votes": 0, "seeds": []}
+            continue
+        else:
+            raise WorkflowValidationError(
+                "invalid_review_contract", "unknown v3 dimension authority", dimension=dimension, authority=authority
+            )
+        possible_votes = len(seeds) * lanes
+        if authority == "selected_pairwise" and dimension in guard_set:
+            minimum = int(review_policy.get("guard_dimension_contract", {}).get("minimum_valid_votes", 0))
+        else:
+            minimum = min(cap, math.ceil(possible_votes * float(fraction)))
+        eligible[str(dimension)] = {
+            "authority": authority,
+            "minimum_valid_votes": minimum,
+            "seeds": seeds,
+        }
+    eligible_seed_hashes = {
+        "consistency": hashlib.sha256(canonical_json_bytes(consistency_eligible)).hexdigest(),
+    }
+    eligible["consistency"]["eligible_seed_hash"] = eligible_seed_hashes["consistency"]
+    selection = {
+        "affected_seeds": prompt_changed,
+        "dimension_issue_code_mapping": issue_code_mapping,
+        "dimensions": eligible,
+        "eligible_seed_hashes": eligible_seed_hashes,
+        "prompt_changed_seeds": prompt_changed,
+        "selected_seeds": selected,
+        "strategy": "affected_first_deterministic_20",
+    }
+    selection["selection_hash"] = hashlib.sha256(canonical_json_bytes(selection)).hexdigest()
+    return selection
+
+
 def _load_object(value: Mapping[str, Any] | str | Path) -> dict[str, Any]:
     if isinstance(value, Mapping):
         return dict(value)
@@ -64,6 +199,14 @@ def _analysis_metrics(run_dir: Path) -> dict[str, Any]:
         return _load_object(path)
     except OSError as exc:
         raise WorkflowValidationError("missing_metrics_artifact", "run metrics are missing", path=str(path)) from exc
+
+
+def _analysis_issues(run_dir: Path) -> dict[str, Any]:
+    path = run_dir / "issues.json"
+    try:
+        return _load_object(path)
+    except OSError as exc:
+        raise WorkflowValidationError("missing_issues_artifact", "run issues are missing", path=str(path)) from exc
 
 
 def _manifest(run_dir: Path) -> dict[str, Any]:
@@ -178,6 +321,7 @@ def compare_runs(
     *,
     policy: Mapping[str, Any] | str | Path,
     experiment: Mapping[str, Any] | str | Path,
+    ablation_pair: str | Path | None = None,
 ) -> dict[str, Any]:
     """Compare two analyzer-populated run directories using a locked experiment."""
 
@@ -190,6 +334,8 @@ def compare_runs(
 
         policy_value = load_policy(policy)
     experiment_value = _load_object(experiment)
+    review_policy = policy_value.get("review", {})
+    is_v3 = isinstance(review_policy, Mapping) and review_policy.get("schema_version") == "prompt-quality-review-contract/v3"
     qualitative_targets = experiment_value.get("target_qualitative_dimensions")
     qualitative_guards = experiment_value.get("guard_qualitative_dimensions")
     qualitative_dimensions = {
@@ -214,6 +360,76 @@ def compare_runs(
     before_records, after_records = _load_records(before_path), _load_records(after_path)
     paired = _paired_records(before_records, after_records)
     compatibility = _compatibility(before_manifest, after_manifest, artifact_before_metrics, artifact_after_metrics)
+    ablation_binding: dict[str, Any] | None = None
+    if is_v3:
+        if not isinstance(ablation_pair, (str, Path)):
+            raise WorkflowValidationError(
+                "ablation_pair_required", "review-contract/v3 comparison requires a bound ablation pair artifact"
+            )
+        pair_path = Path(ablation_pair)
+        pair = _load_object(pair_path)
+        if pair.get("schema_version") != "prompt-quality-ablation-pair/v1":
+            raise WorkflowValidationError("invalid_ablation_pair", "ablation pair schema is invalid")
+        from tools.build_prompt_quality_ablation_pair import validate_pair
+        from tools.build_prompt_quality_confirmation import ABLATION_FEATURE_IDS, ablation_contract
+
+        expected_contract = ablation_contract()
+        expected_contract_hash = hashlib.sha256(canonical_json_bytes(expected_contract)).hexdigest()
+        if (
+            pair.get("ablation_contract") != expected_contract
+            or pair.get("ablation_contract_hash") != expected_contract_hash
+            or pair.get("baseline_feature_ids") != list(ABLATION_FEATURE_IDS)
+        ):
+            raise WorkflowValidationError("ablation_pair_contract_mismatch", "ablation pair contract drifted")
+        sides = pair.get("sides", {})
+        if not isinstance(sides, Mapping) or set(sides) != {"baseline", "current"}:
+            raise WorkflowValidationError("invalid_ablation_pair", "ablation pair sides are invalid")
+        expected = {"baseline": before_path.resolve(), "current": after_path.resolve()}
+        for side, run_path in expected.items():
+            side_value = sides.get(side, {})
+            declared = (ROOT / str(side_value.get("run_path", ""))).resolve()
+            if declared != run_path:
+                raise WorkflowValidationError("ablation_pair_run_mismatch", "comparison run is not bound by pair", side=side)
+            manifest_path = run_path / "run-manifest.json"
+            records_path = run_path / "records.jsonl"
+            if (
+                side_value.get("run_manifest_hash") != hashlib.sha256(manifest_path.read_bytes()).hexdigest()
+                or side_value.get("records_hash") != hashlib.sha256(records_path.read_bytes()).hexdigest()
+            ):
+                raise WorkflowValidationError("ablation_pair_hash_mismatch", "paired run artifact hash drifted", side=side)
+            manifest_value = _load_object(manifest_path)
+            if side_value.get("artifact_hashes") != manifest_value.get("artifact_hashes"):
+                raise WorkflowValidationError(
+                    "ablation_pair_consumed_artifact_mismatch", "pair does not bind the run artifact inventory", side=side
+                )
+        contract_hash = pair.get("ablation_contract_hash")
+        if (
+            contract_hash != before_manifest.get("ablation_contract_hash")
+            or contract_hash != after_manifest.get("ablation_contract_hash")
+            or before_manifest.get("behavior_feature_ids") != list(ABLATION_FEATURE_IDS)
+            or before_manifest.get("behavior_variant") != "combined_ablation_baseline"
+            or after_manifest.get("behavior_feature_ids") != []
+            or after_manifest.get("behavior_variant") != "current"
+            or before_manifest.get("behavior_transform_hash") == after_manifest.get("behavior_transform_hash")
+        ):
+            raise WorkflowValidationError("ablation_pair_variant_mismatch", "paired behavior variants are not declared exactly")
+        try:
+            recomputed_sentinel = validate_pair(after_path, before_path, contract_hash=str(contract_hash))
+        except ValueError as exc:
+            raise WorkflowValidationError(
+                "invalid_ablation_pair", "ablation pair validation failed", reason=str(exc)
+            ) from exc
+        if pair.get("sentinel") != recomputed_sentinel:
+            raise WorkflowValidationError("ablation_pair_sentinel_mismatch", "ablation pair sentinel drifted")
+        ablation_binding = {
+            "artifact_hash": hashlib.sha256(pair_path.read_bytes()).hexdigest(),
+            "artifact_path": pair_path.resolve().relative_to(ROOT.resolve()).as_posix(),
+            "contract_hash": contract_hash,
+            "consumed_artifact_hashes": {
+                "after": dict(sides["current"]["artifact_hashes"]),
+                "before": dict(sides["baseline"]["artifact_hashes"]),
+            },
+        }
     selected_policy_version = policy_value.get("policy_version", policy_value.get("version"))
     if selected_policy_version and artifact_before_metrics.get("policy_version") != selected_policy_version:
         raise WorkflowValidationError(
@@ -376,7 +592,7 @@ def compare_runs(
         if all_after[key] != all_before[key]
     }
     automatic_pass = target_passed and not hard_gate_failures and all(item["passed"] for item in guard_results)
-    return {
+    result = {
         "automatic_verdict": "pass" if automatic_pass else "reject",
         "compatibility": compatibility,
         "deltas": deltas,
@@ -388,8 +604,8 @@ def compare_runs(
         "policy_version": policy_value.get("policy_version", policy_value.get("version")),
         "qualitative_scope_hash": qualitative_scope_hash,
         "record_artifact_hashes": {
-            "after": __import__("hashlib").sha256((after_path / "records.jsonl").read_bytes()).hexdigest(),
-            "before": __import__("hashlib").sha256((before_path / "records.jsonl").read_bytes()).hexdigest(),
+            "after": hashlib.sha256((after_path / "records.jsonl").read_bytes()).hexdigest(),
+            "before": hashlib.sha256((before_path / "records.jsonl").read_bytes()).hexdigest(),
         },
         "review_contract_hash": hashlib.sha256(canonical_json_bytes(policy_value.get("review", {}))).hexdigest(),
         "source_tree_hashes": {
@@ -412,6 +628,15 @@ def compare_runs(
             "signed_improvement": round(signed_change, 12),
         },
     }
+    if ablation_binding is not None:
+        result["ablation_pair"] = ablation_binding
+    if is_v3:
+        result["review_selection"] = _review_v3_selection(
+            str(experiment_value.get("experiment_id", "")), before_records, after_records, review_policy,
+            _analysis_issues(before_path), _analysis_issues(after_path),
+            qualitative_guards,
+        )
+    return result
 
 
 def _review_failures(
@@ -422,12 +647,22 @@ def _review_failures(
     expected_review_contract_hash: str | None = None,
     expected_qualitative_scope_hash: str | None = None,
     expected_experiment_id: str | None = None,
+    expected_comparison_hash: str | None = None,
+    expected_review_selection: Mapping[str, Any] | None = None,
 ) -> list[str]:
     if not review:
         return ["review_missing"]
     failures: list[str] = []
-    if review.get("schema_version") != "prompt-quality-review/v1":
+    is_v3 = review.get("schema_version") == "prompt-quality-review/v3"
+    if review.get("schema_version") not in {"prompt-quality-review/v1", "prompt-quality-review/v3"}:
         failures.append("review_schema_invalid")
+    if expected_review_selection is not None:
+        if not is_v3:
+            failures.append("review_v3_required")
+        if review.get("comparison_artifact_hash") != expected_comparison_hash:
+            failures.append("review_comparison_hash_mismatch")
+        if review.get("selection_hash") != expected_review_selection.get("selection_hash"):
+            failures.append("review_selection_hash_mismatch")
     if review.get("pair_count_per_lane") != 20:
         failures.append("review_pair_count_invalid")
     reviewers = review.get("reviewers", [])
@@ -486,8 +721,26 @@ def _review_failures(
         for dimension, result in dimensions.items():
             if not isinstance(result, Mapping) or result.get("passed") is not True:
                 failures.append(f"review_dimension_failed:{dimension}")
-            if dimension in targets and int(result.get("valid_votes", 0)) < 36:
-                failures.append(f"review_votes_insufficient:{dimension}")
+            if expected_review_selection is not None:
+                eligibility = expected_review_selection.get("dimensions", {}).get(dimension, {})
+                if dimension in targets:
+                    if result.get("authority") != eligibility.get("authority"):
+                        failures.append(f"review_authority_mismatch:{dimension}")
+                required = int(eligibility.get("minimum_valid_votes", 0))
+                enforce_minimum = eligibility.get("authority") in {"affected_seed_pairwise", "selected_pairwise"}
+            elif dimension in targets:
+                required = 36
+                enforce_minimum = True
+            else:
+                required = 0
+                enforce_minimum = False
+            if enforce_minimum:
+                if int(result.get("valid_votes", 0)) < required:
+                    failures.append(f"review_votes_insufficient:{dimension}")
+        if expected_review_selection is not None:
+            diversity = dimensions.get("diversity", {})
+            if diversity.get("authority") != "current_source_corpus_confirmation" or diversity.get("valid_votes") != 0:
+                failures.append("review_diversity_authority_invalid")
     raw_failures = review.get("failures", [])
     if raw_failures:
         failures.append("qualitative_review_failed")
@@ -512,10 +765,33 @@ def _review_artifact_binding_failures(review_path: Path, review: Mapping[str, An
         failures.append("review_assignment_key_hash_mismatch")
     experiment_id = str(key.get("experiment_id", ""))
     key_lanes = key.get("lanes", []) if isinstance(key.get("lanes"), list) else []
-    if key.get("schema_version") != "prompt-quality-review-assignment-key/v1" or {
+    key_is_v3 = key.get("schema_version") == "prompt-quality-review-assignment-key/v3"
+    if key.get("schema_version") not in {
+        "prompt-quality-review-assignment-key/v1", "prompt-quality-review-assignment-key/v3"
+    } or {
         str(item.get("lane_id", "")) for item in key_lanes if isinstance(item, Mapping)
     } != {"lane-1", "lane-2"} or len(key_lanes) != 2:
         failures.append("review_assignment_lane_set_invalid")
+    if key_is_v3:
+        comparison_relative = Path(str(key.get("comparison_artifact_path", "")))
+        if comparison_relative.is_absolute() or ".." in comparison_relative.parts:
+            failures.append("review_comparison_path_invalid")
+        else:
+            comparison_path = (ROOT / comparison_relative).resolve()
+            try:
+                comparison_path.relative_to(ROOT.resolve())
+            except ValueError:
+                failures.append("review_comparison_path_invalid")
+            else:
+                if not comparison_path.is_file() or hashlib.sha256(comparison_path.read_bytes()).hexdigest() != key.get("comparison_artifact_hash"):
+                    failures.append("review_comparison_hash_mismatch")
+        selection = dict(key.get("selection", {}))
+        selection["dimensions"] = key.get("dimension_eligibility")
+        if hashlib.sha256(canonical_json_bytes(selection)).hexdigest() != key.get("selection_hash"):
+            failures.append("review_selection_hash_mismatch")
+        contract = key.get("review_contract")
+        if not isinstance(contract, Mapping) or hashlib.sha256(canonical_json_bytes(dict(contract))).hexdigest() != key.get("review_contract_hash"):
+            failures.append("review_contract_hash_mismatch")
     for lane_key in key_lanes:
         lane_id = str(lane_key.get("lane_id", ""))
         lane_path = review_dir / f"{lane_id}.json"
@@ -594,12 +870,17 @@ def _review_artifact_binding_failures(review_path: Path, review: Mapping[str, An
                 failures.append(f"review_aggregate_provenance_mismatch:{side}")
     if set(bound_records) == {"before", "after"}:
         selection = key.get("selection", {})
-        selected_seeds = {
-            int(seed)
-            for values in selection.values()
-            if isinstance(values, list)
-            for seed in values
-        } if isinstance(selection, Mapping) else set()
+        if key_is_v3:
+            selected_seeds = {
+                int(seed) for seed in selection.get("selected_seeds", [])
+            } if isinstance(selection, Mapping) and isinstance(selection.get("selected_seeds"), list) else set()
+        else:
+            selected_seeds = {
+                int(seed)
+                for values in selection.values()
+                if isinstance(values, list)
+                for seed in values
+            } if isinstance(selection, Mapping) else set()
         for lane_key in key_lanes:
             lane_id = str(lane_key.get("lane_id", ""))
             lane_path = review_dir / f"{lane_id}.json"
@@ -772,9 +1053,64 @@ def promote_check(
         failures.append("invalid_comparison_schema")
     if compared.get("automatic_verdict") != "pass":
         failures.append("automatic_comparison_failed")
+    binding = compared.get("ablation_pair")
+    if compared.get("review_selection") is not None:
+        if not isinstance(binding, Mapping):
+            failures.append("ablation_pair_binding_missing")
+        else:
+            relative = Path(str(binding.get("artifact_path", "")))
+            if relative.is_absolute() or ".." in relative.parts:
+                failures.append("ablation_pair_path_invalid")
+            else:
+                pair_path = (ROOT / relative).resolve()
+                try:
+                    pair_path.relative_to(ROOT.resolve())
+                except ValueError:
+                    failures.append("ablation_pair_path_invalid")
+                else:
+                    if not pair_path.is_file() or hashlib.sha256(pair_path.read_bytes()).hexdigest() != binding.get("artifact_hash"):
+                        failures.append("ablation_pair_hash_mismatch")
+                    else:
+                        try:
+                            from tools.build_prompt_quality_ablation_pair import validate_pair
+
+                            pair = _load_object(pair_path)
+                            if (
+                                pair.get("schema_version") != "prompt-quality-ablation-pair/v1"
+                                or pair.get("ablation_contract_hash") != binding.get("contract_hash")
+                            ):
+                                raise ValueError("ablation pair contract binding drifted")
+                            sides = pair.get("sides", {})
+                            current_dir = (ROOT / str(sides["current"]["run_path"])).resolve()
+                            baseline_dir = (ROOT / str(sides["baseline"]["run_path"])).resolve()
+                            current_dir.relative_to(ROOT.resolve())
+                            baseline_dir.relative_to(ROOT.resolve())
+                            for side_name, run_dir in (("current", current_dir), ("baseline", baseline_dir)):
+                                side = sides[side_name]
+                                if (
+                                    hashlib.sha256((run_dir / "run-manifest.json").read_bytes()).hexdigest()
+                                    != side.get("run_manifest_hash")
+                                    or hashlib.sha256((run_dir / "records.jsonl").read_bytes()).hexdigest()
+                                    != side.get("records_hash")
+                                ):
+                                    raise ValueError("paired run binding hash drifted")
+                            validate_pair(current_dir, baseline_dir, contract_hash=str(binding.get("contract_hash", "")))
+                            consumed = {
+                                "after": sides["current"]["artifact_hashes"],
+                                "before": sides["baseline"]["artifact_hashes"],
+                            }
+                            if binding.get("consumed_artifact_hashes") != consumed:
+                                failures.append("ablation_pair_consumed_artifact_mismatch")
+                        except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError):
+                            failures.append("ablation_pair_recursive_validation_failed")
     if not isinstance(comparison, (str, Path)):
         failures.append("comparison_artifact_path_required")
     review_value = _load_object(review) if review is not None else {}
+    comparison_hash = (
+        hashlib.sha256(Path(comparison).read_bytes()).hexdigest()
+        if isinstance(comparison, (str, Path)) and Path(comparison).is_file()
+        else hashlib.sha256(canonical_json_bytes(compared)).hexdigest()
+    )
     failures.extend(_review_failures(
         review_value,
         compared.get("record_artifact_hashes") if isinstance(compared.get("record_artifact_hashes"), Mapping) else None,
@@ -783,6 +1119,8 @@ def promote_check(
         compared.get("review_contract_hash") if isinstance(compared.get("review_contract_hash"), str) else None,
         compared.get("qualitative_scope_hash") if isinstance(compared.get("qualitative_scope_hash"), str) else None,
         compared.get("experiment_id") if isinstance(compared.get("experiment_id"), str) else None,
+        comparison_hash,
+        compared.get("review_selection") if isinstance(compared.get("review_selection"), Mapping) else None,
     ))
     if isinstance(review, (str, Path)):
         failures.extend(_review_artifact_binding_failures(Path(review), review_value))
@@ -799,7 +1137,7 @@ def promote_check(
         else:
             failures.append("verification_artifact_path_required")
     return {
-        "comparison_hash": __import__("hashlib").sha256(canonical_json_bytes(compared)).hexdigest(),
+        "comparison_hash": comparison_hash,
         "failures": sorted(set(failures)),
         "schema_version": PROMOTION_SCHEMA_VERSION,
         "source_mutated": False,
@@ -813,6 +1151,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--after", required=True)
     parser.add_argument("--policy", required=True)
     parser.add_argument("--experiment", required=True)
+    parser.add_argument("--ablation-pair")
     parser.add_argument("--output")
     return parser.parse_args(argv)
 
@@ -820,7 +1159,10 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 def main(argv: Sequence[str] | None = None) -> int:
     args = parse_args(argv)
     try:
-        result = compare_runs(args.before, args.after, policy=args.policy, experiment=args.experiment)
+        result = compare_runs(
+            args.before, args.after, policy=args.policy, experiment=args.experiment,
+            ablation_pair=args.ablation_pair,
+        )
         content = canonical_json_bytes(result)
         if args.output:
             Path(args.output).write_bytes(content)

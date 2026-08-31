@@ -275,7 +275,9 @@ class TestPromptQualityAnalyzer(unittest.TestCase):
         self.assertEqual(raw["comparison"]["guards"]["max_absolute_rate_regression"], 0.02)
         self.assertEqual(raw["review"]["independent_lanes"], 2)
         self.assertEqual(raw["review"]["paired_samples"], 20)
-        self.assertEqual(raw["review"]["minimum_valid_votes_per_required_dimension"], 36)
+        self.assertEqual(raw["review"]["minimum_valid_votes_per_required_dimension"], "computed_before_voting")
+        self.assertEqual(raw["review"]["minimum_valid_vote_fraction"], 0.9)
+        self.assertEqual(raw["review"]["minimum_valid_votes_cap"], 36)
         self.assertTrue(raw["comparison"]["hard_gates"])
 
     def test_analysis_artifacts_are_canonical_and_separated(self):

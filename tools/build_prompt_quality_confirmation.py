@@ -6,7 +6,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,6 +22,26 @@ from workflow_widget_validation import load_workflow
 WORKFLOW = ROOT / "ComfyUI-workflow-context.json"
 PROFILE = ROOT / "verification" / "fixtures" / "prompt_quality_supported_profile.json"
 POLICY = ROOT / "vocab" / "data" / "prompt_quality_policy.json"
+ABLATION_FEATURE_IDS = ("g004", "g005", "g006")
+
+
+def ablation_contract() -> dict[str, Any]:
+    return {
+        "adapters": {
+            "g004": "disable_location_time_context_filter",
+            "g005": "disable_composition_punctuation_normalization",
+            "g006": "force_single_sentence_scene_tail",
+        },
+        "feature_ids": list(ABLATION_FEATURE_IDS),
+        "schema_version": "prompt-quality-ablation-contract/v1",
+    }
+
+
+def apply_combined_baseline_ablation(feature_ids: Sequence[str]) -> list[str]:
+    selected = list(feature_ids)
+    if selected != list(ABLATION_FEATURE_IDS):
+        raise ValueError(f"combined ablation features must be exactly {','.join(ABLATION_FEATURE_IDS)} in order")
+    return [_apply_baseline_ablation(feature_id) for feature_id in selected]
 
 
 def _existing_seeds() -> set[int]:

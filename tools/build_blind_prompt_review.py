@@ -61,6 +61,7 @@ def build_review(
     target_dimensions: Sequence[str] | None = None,
     guard_dimensions: Sequence[str] | None = None,
     review_policy: Mapping[str, Any] | None = None,
+    comparison: Mapping[str, Any] | Path | None = None,
 ) -> dict[str, Any]:
     if not isinstance(review_policy, Mapping) or not review_policy:
         raise ValueError("blind review requires an explicit frozen review policy")
@@ -68,6 +69,39 @@ def build_review(
     if set(before) != set(after):
         raise ValueError("before and after review cohorts must contain identical seeds")
     affected = list(dict.fromkeys(int(seed) for seed in affected_seeds))
+    is_v3 = review_policy.get("schema_version") == "prompt-quality-review-contract/v3"
+    comparison_value: dict[str, Any] = {}
+    comparison_hash: str | None = None
+    comparison_path: str | None = None
+    if is_v3:
+        if not isinstance(comparison, Path):
+            raise ValueError("review-contract/v3 requires a comparison artifact path")
+        comparison_value = json.loads(comparison.read_text(encoding="utf-8"))
+        if comparison_value.get("schema_version") != "prompt-quality-comparison/v1":
+            raise ValueError("review-contract/v3 requires a canonical comparison/v1 artifact")
+        if comparison_value.get("experiment_id") != experiment_id:
+            raise ValueError("v3 comparison experiment does not match the review experiment")
+        frozen_contract_hash = hashlib.sha256(canonical_json_bytes(dict(review_policy))).hexdigest()
+        if comparison_value.get("review_contract_hash") != frozen_contract_hash:
+            raise ValueError("v3 comparison review contract does not match the supplied policy")
+        comparison_hash = hashlib.sha256(comparison.read_bytes()).hexdigest()
+        comparison_path = _repo_relative(comparison)
+        frozen = comparison_value.get("review_selection")
+        if not isinstance(frozen, Mapping):
+            raise ValueError("v3 comparison is missing its frozen review selection")
+        computed_selection = dict(frozen)
+        frozen_hash = computed_selection.pop("selection_hash", None)
+        if frozen_hash != hashlib.sha256(canonical_json_bytes(computed_selection)).hexdigest():
+            raise ValueError("v3 comparison selection hash is invalid")
+        expected_hashes = comparison_value.get("record_artifact_hashes", {})
+        actual_hashes = {
+            "before": hashlib.sha256(before_records.read_bytes()).hexdigest(),
+            "after": hashlib.sha256(after_records.read_bytes()).hexdigest(),
+        }
+        if expected_hashes != actual_hashes:
+            raise ValueError("v3 comparison does not bind the supplied review records")
+        affected = list(frozen.get("affected_seeds", []))
+        selected_seeds = list(frozen.get("selected_seeds", []))
 
     def rank(seed: int) -> str:
         return hashlib.sha256(f"{experiment_id}:review-sample:{seed}".encode()).hexdigest()
@@ -76,7 +110,6 @@ def build_review(
         selected = list(dict.fromkeys(int(seed) for seed in selected_seeds))
         if len(selected) != 20 or any(seed not in before for seed in selected):
             raise ValueError("targeted review requires exactly 20 unique paired seeds")
-        controls, exploration = [], []
         selection = {"repro_cohort": selected}
     else:
         if len(affected) > 16 or any(seed not in before or before[seed].get("cohort") != "control" for seed in affected):
@@ -102,11 +135,20 @@ def build_review(
         raise ValueError("target and guard qualitative dimensions must be unique and disjoint")
     if set(targets) | set(guards) != set(DIMENSIONS):
         raise ValueError("target and guard qualitative dimensions must partition the review rubric")
+    if is_v3:
+        scope_hash = hashlib.sha256(canonical_json_bytes({
+            "guard_qualitative_dimensions": guards,
+            "target_qualitative_dimensions": targets,
+        })).hexdigest()
+        if comparison_value.get("qualitative_scope_hash") != scope_hash:
+            raise ValueError("v3 comparison qualitative scope does not match the review assignment")
     rubric = (
         f"Blindly compare A and B for {', '.join(DIMENSIONS)}. "
         f"Hypothesis targets are {', '.join(targets)}; guards are {', '.join(guards)}. "
         "Vote A_better, B_better, equal, or abstain per dimension and record hard defects by side."
     )
+    if is_v3:
+        rubric += " Hard defects must use one closed atomic code and non-empty free-text evidence per observation."
     rubric_hash = hashlib.sha256(rubric.encode()).hexdigest()
     assignment_key: dict[str, Any] = {
         "experiment_id": experiment_id,
@@ -132,6 +174,19 @@ def build_review(
         "schema_version": "prompt-quality-review-assignment-key/v1",
         "selection": selection,
     }
+    if is_v3:
+        frozen = comparison_value["review_selection"]
+        assignment_key.update({
+            "comparison_artifact_hash": comparison_hash,
+            "comparison_artifact_path": comparison_path,
+            "dimension_eligibility": frozen["dimensions"],
+            "selection": {
+                key: value for key, value in frozen.items()
+                if key not in {"dimensions", "selection_hash"}
+            },
+            "selection_hash": frozen["selection_hash"],
+            "schema_version": "prompt-quality-review-assignment-key/v3",
+        })
     for lane_number in (1, 2):
         lane_id = f"lane-{lane_number}"
         pairs, assignments = [], []
@@ -177,9 +232,18 @@ def build_review(
             "guard_qualitative_dimensions": guards,
             "rubric": rubric,
             "rubric_version": "prompt-quality-review-rubric/v2",
-            "schema_version": "prompt-quality-blind-review-lane/v1",
+            "schema_version": "prompt-quality-blind-review-lane/v3" if is_v3 else "prompt-quality-blind-review-lane/v1",
             "target_qualitative_dimensions": targets,
         }
+        if is_v3:
+            lane["dimension_eligibility"] = assignment_key["dimension_eligibility"]
+            lane["selection_hash"] = assignment_key["selection_hash"]
+            lane["result_contract"]["schema_version"] = "prompt-quality-blind-review-result/v3"
+            lane["result_contract"]["hard_defects"] = {
+                "allowed_codes": list(review_policy.get("hard_defect_codes", [])),
+                "item_fields": ["code", "evidence"],
+                "unknown_codes": "reject",
+            }
         lane_content = canonical_json_bytes(lane)
         _atomic_write(output_dir / f"{lane_id}.json", lane_content)
         assignment_key["lanes"].append({
@@ -209,6 +273,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--target-dimensions")
     parser.add_argument("--guard-dimensions")
     parser.add_argument("--policy", required=True)
+    parser.add_argument("--comparison")
     args = parser.parse_args(argv)
     policy = json.loads(Path(args.policy).read_text(encoding="utf-8"))
     result = build_review(
@@ -219,6 +284,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         target_dimensions=args.target_dimensions.split(",") if args.target_dimensions else None,
         guard_dimensions=args.guard_dimensions.split(",") if args.guard_dimensions else None,
         review_policy=policy.get("review"),
+        comparison=Path(args.comparison) if args.comparison else None,
     )
     sys.stdout.buffer.write(canonical_json_bytes(result))
     return 0
