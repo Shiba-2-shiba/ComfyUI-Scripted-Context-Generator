@@ -1,0 +1,58 @@
+{
+  "schema_version": "variation-candidate-shape-handoff/v1",
+  "experiment_id": "v150-candidate-shape-iteration-003",
+  "state": "PLANNED",
+  "recorded_at": "2026-09-01",
+  "repository_head": "40cbe2645b96322be994320b31fba0f630a2de94",
+  "artifact_hashes": {
+    "docs/variation_expansion/experiments/v150-candidate-shape-iteration-003/location-additions.json": "eda37d0413af8d02194ab0fe5a00147f921aec0e1fec1c198f128ff516140949",
+    "docs/variation_expansion/experiments/v150-candidate-shape-iteration-003/location-addition-report.json": "c6deaec6ce298658abc4c64daf29b7ba04f2829156f4d268fa23518b423f32b8",
+    "docs/variation_expansion/experiments/v150-candidate-l3-iteration-001/contribution-report.json": "8053f38636b9b3e52e7822950a3c1693115313f4c1433cff5c0ec9a524cf26c7",
+    "tools/model_variation_candidate_contributions.py": "3e83bc285e9c8a64d3e1f77914d8ab039a6a4d2558e049990c4ab448bfa407e2",
+    "assets/test_variation_candidate_contribution_model.py": "390ba69c9f87ceed9986752104c409c236590e780982f2f87d1ad2b69eabeb27"
+  },
+  "content_hashes": {
+    "catalog_sha256": "bd9f7a7c57bc725891a3942091a8c7a0a30982f0b0df94a4c525b28c75fee0e5",
+    "base_report_sha256": "ed2b9a0916ebc5cc3d1bef15fcded63d7788adfe74674c3b069292798ebf4259",
+    "additions_sha256": "5e9662af7e6106d18929abcfcf2d29e4a5d4262c49d298a288e367b24d0ac50d"
+  },
+  "starting_state": {
+    "base_variations": 141984,
+    "target": 150000,
+    "target_gap": 8016
+  },
+  "planned_additions": [
+    {"id": "community_theater_backstage", "rows": 106, "actions": 20, "base_variations": 2120},
+    {"id": "greenhouse_nursery", "rows": 113, "actions": 20, "base_variations": 2260},
+    {"id": "postal_service_counter", "rows": 118, "actions": 20, "base_variations": 2360},
+    {"id": "vehicle_repair_garage", "rows": 73, "actions": 20, "base_variations": 1460}
+  ],
+  "estimated_result": {
+    "added_rows": 410,
+    "added_base_variations": 8200,
+    "total_base_variations": 150184,
+    "target_gap": -184,
+    "target_met": true
+  },
+  "scope": {
+    "new_subjects": [],
+    "new_locations": 4,
+    "racial_or_skin_color_subject_descriptors_added": false,
+    "action_depth_per_location": 20
+  },
+  "decision": {
+    "action_authoring_allowed": true,
+    "reason": "Exact artifact regression, hash validation, independent review, and independent verification passed for the four-location shape."
+  },
+  "review": {
+    "independent_code_review": "APPROVE shape and utility distinctness after evidence repair",
+    "independent_verifier": "APPROVE 410 rows / 8,200 variations / 150,184 total",
+    "subjects_added": 0,
+    "racial_or_skin_color_descriptors_added": false
+  },
+  "next_gate": [
+    "Independent review of utility distinctness and compatibility tags.",
+    "Exact tracked artifact regression and hash verification.",
+    "If approved, author 20 location-specific actions for each location without weakening duplicate or policy gates."
+  ]
+}

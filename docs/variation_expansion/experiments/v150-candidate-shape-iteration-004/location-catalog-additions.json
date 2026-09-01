@@ -1,0 +1,157 @@
+{
+  "schema_version": "variation-quality-location-additions/v1",
+  "locations": [
+    {
+      "id": "community_theater_backstage",
+      "utility_group": "civic_creative_work",
+      "compatibility_tags": ["music", "workplace", "leisure"],
+      "universal": false,
+      "environment_terms": ["community theater backstage", "prop shelves and rehearsal preparation tables"],
+      "utility_claim": {
+        "category": "community_performance_support",
+        "prompt_visible_terms": ["community theater backstage"],
+        "distinct_from": ["opera_house"],
+        "rationale": "Adds rehearsal preparation, prop handling, and scheduling behind a community performance space rather than another audience-facing hall."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {"text": "checking the rehearsal schedule on a wall board", "load": "calm"},
+          {"text": "sorting stage props by marked storage shelf", "load": "active"},
+          {"text": "folding a costume beside the preparation table", "load": "calm"},
+          {"text": "carrying a prop box toward the stage entrance", "load": "active"},
+          {"text": "reviewing a scene cue on a printed sheet", "load": "calm"},
+          {"text": "labeling a prop with its storage position", "load": "active"},
+          {"text": "checking the condition of a stage accessory", "load": "calm"},
+          {"text": "arranging rehearsal materials across a table", "load": "active"},
+          {"text": "marking a change on the performance schedule", "load": "calm"},
+          {"text": "hanging a costume on the backstage rack", "load": "active"},
+          {"text": "placing scripts into a labeled folder", "load": "calm"},
+          {"text": "moving a folded backdrop beside the storage wall", "load": "active"},
+          {"text": "checking a small stage lantern", "load": "calm"},
+          {"text": "stacking empty prop containers", "load": "active"},
+          {"text": "reading a backstage access notice", "load": "calm"},
+          {"text": "preparing a repair kit for stage materials", "load": "active"},
+          {"text": "checking the order of marked entrances", "load": "calm"},
+          {"text": "returning a hand prop to its labeled case", "load": "active"},
+          {"text": "reviewing notes beside the rehearsal desk", "load": "calm"},
+          {"text": "clearing the preparation table for the next task", "load": "active"}
+        ],
+        "family_refs": []
+      }
+    },
+    {
+      "id": "greenhouse_nursery",
+      "utility_group": "horticulture_service",
+      "compatibility_tags": ["nature", "workplace", "retail_service"],
+      "universal": false,
+      "environment_terms": ["greenhouse nursery", "propagation benches and labeled plant trays"],
+      "utility_claim": {
+        "category": "horticulture_service_space",
+        "prompt_visible_terms": ["greenhouse nursery"],
+        "distinct_from": ["botanical_garden"],
+        "rationale": "Adds plant propagation, stock care, and customer-facing nursery work rather than display-garden observation."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {"text": "checking roots in a small planting tray", "load": "calm"},
+          {"text": "carrying a seedling between greenhouse benches", "load": "active"},
+          {"text": "labeling pots with plant names", "load": "calm"},
+          {"text": "filling a tray with growing medium", "load": "active"},
+          {"text": "examining new leaves for healthy growth", "load": "calm"},
+          {"text": "moving a plant beneath the shade frame", "load": "active"},
+          {"text": "sorting seed packets beside the workbench", "load": "calm"},
+          {"text": "watering a row of young plants", "load": "active"},
+          {"text": "checking the propagation shelf", "load": "calm"},
+          {"text": "wrapping a potted plant for collection", "load": "active"},
+          {"text": "recording a plant batch in the nursery ledger", "load": "calm"},
+          {"text": "pruning a damaged stem with hand shears", "load": "active"},
+          {"text": "arranging labeled plants by size", "load": "calm"},
+          {"text": "filling a watering can at the utility sink", "load": "active"},
+          {"text": "checking a care card beside a display pot", "load": "calm"},
+          {"text": "moving empty pots onto the supply rack", "load": "active"},
+          {"text": "inspecting a tray of newly germinated seeds", "load": "calm"},
+          {"text": "placing a price tag beside a potted plant", "load": "active"},
+          {"text": "sorting clean containers near the potting bench", "load": "calm"},
+          {"text": "sweeping loose soil from the nursery floor", "load": "active"}
+        ],
+        "family_refs": []
+      }
+    },
+    {
+      "id": "postal_service_counter",
+      "utility_group": "civic_service",
+      "compatibility_tags": ["retail_service", "workplace", "daily_public"],
+      "universal": false,
+      "environment_terms": ["postal service counter", "parcel scales and labeled collection shelves"],
+      "utility_claim": {
+        "category": "parcel_service_space",
+        "prompt_visible_terms": ["postal service counter"],
+        "distinct_from": ["convenience_store"],
+        "rationale": "Adds parcel labeling, collection, and queue-based public service without duplicating general retail browsing."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {"text": "checking a parcel label at the service counter", "load": "calm"},
+          {"text": "placing a sealed package on the weighing scale", "load": "active"},
+          {"text": "reading the posted delivery options", "load": "calm"},
+          {"text": "filling out a mailing form", "load": "active"},
+          {"text": "sorting envelopes by service type", "load": "calm"},
+          {"text": "checking the address on a parcel", "load": "active"},
+          {"text": "placing stamps beside the transaction tray", "load": "calm"},
+          {"text": "carrying a package toward the collection shelf", "load": "active"},
+          {"text": "reviewing a customs declaration", "load": "calm"},
+          {"text": "sealing a padded mailer", "load": "active"},
+          {"text": "checking a numbered collection slip", "load": "calm"},
+          {"text": "organizing packing materials beneath the counter", "load": "active"},
+          {"text": "reading a notice about parcel dimensions", "load": "calm"},
+          {"text": "placing a completed form in the document tray", "load": "active"},
+          {"text": "checking the service window schedule", "load": "calm"},
+          {"text": "weighing a small box for postage", "load": "active"},
+          {"text": "sorting labels beside the printing terminal", "load": "calm"},
+          {"text": "moving an accepted parcel into a storage bin", "load": "active"},
+          {"text": "checking a receipt before folding it", "load": "calm"},
+          {"text": "restocking envelopes on the counter shelf", "load": "active"}
+        ],
+        "family_refs": []
+      }
+    },
+    {
+      "id": "vehicle_repair_garage",
+      "utility_group": "repair_workplace",
+      "compatibility_tags": ["craft", "workplace", "urban"],
+      "universal": false,
+      "environment_terms": ["vehicle repair garage", "tool boards and organized maintenance bays"],
+      "utility_claim": {
+        "category": "vehicle_repair_space",
+        "prompt_visible_terms": ["vehicle repair garage"],
+        "distinct_from": ["clockwork_workshop"],
+        "rationale": "Adds contemporary inspection and repair work distinct from speculative clockwork fabrication."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {"text": "checking the maintenance list beside the work bay", "load": "calm"},
+          {"text": "placing a tool on the repair bench", "load": "active"},
+          {"text": "inspecting a vehicle panel for loose fasteners", "load": "calm"},
+          {"text": "lifting a replacement part from its crate", "load": "active"},
+          {"text": "reading a service note on a clipboard", "load": "calm"},
+          {"text": "tightening a bolt beneath the open hood", "load": "active"},
+          {"text": "sorting sockets by size on the tool board", "load": "calm"},
+          {"text": "checking fluid levels with a dipstick", "load": "active"},
+          {"text": "marking a damaged component on the inspection form", "load": "calm"},
+          {"text": "carrying a removed part to the workbench", "load": "active"},
+          {"text": "checking a diagnostic display", "load": "calm"},
+          {"text": "wiping grease from a hand tool", "load": "active"},
+          {"text": "comparing a replacement part with the service note", "load": "calm"},
+          {"text": "securing a vehicle wheel before inspection", "load": "active"},
+          {"text": "organizing fasteners in a parts tray", "load": "calm"},
+          {"text": "removing a protective cover from the work area", "load": "active"},
+          {"text": "checking the repair bay safety notice", "load": "calm"},
+          {"text": "recording a completed maintenance step", "load": "active"},
+          {"text": "examining a belt for visible wear", "load": "calm"},
+          {"text": "returning tools to the labeled cabinet", "load": "active"}
+        ],
+        "family_refs": []
+      }
+    }
+  ]
+}

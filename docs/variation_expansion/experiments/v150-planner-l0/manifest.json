@@ -1,0 +1,78 @@
+{
+  "schema_version": "variation-planner-experiment-manifest/v1",
+  "experiment_id": "v150-planner-l0",
+  "state": "BASELINE_READY",
+  "captured_at": "2026-09-01",
+  "repository_head": "40cbe2645b96322be994320b31fba0f630a2de94",
+  "hypothesis": "The existing repository-backed planner can remain behavior-compatible while a separate pure projection path models staged growth without source-data mutation.",
+  "target_metric": {
+    "name": "base_variations",
+    "stage": "V150",
+    "target": 150000
+  },
+  "guard_metrics": [
+    "existing_report_compatibility",
+    "canonical_location_uniqueness",
+    "deterministic_projection",
+    "semantic_consistency",
+    "naturalness",
+    "image_prompt_suitability",
+    "protagonist_clarity",
+    "redundancy",
+    "diversity",
+    "no_source_mutation"
+  ],
+  "owned_files": [
+    "tools/plan_variation_target.py",
+    "assets/test_variation_target_planner.py",
+    "assets/fixtures/variation_target_planner/",
+    "docs/variation_expansion/experiments/v150-planner-l0/"
+  ],
+  "non_goals": [
+    "variation data expansion",
+    "runtime prompt behavior changes",
+    "public node or workflow contract changes",
+    "automatic source mutation or promotion"
+  ],
+  "input_hashes": {
+    "tools/plan_variation_target.py": "381d52f26b89ae56d946ed6a6f884409c368397fc83349c1914903dbe7856211",
+    "assets/test_variation_target_planner.py": "2d60edacefbfa50e9b1b92a557332dfec59198b71514144dd4a9a985bc4f1347",
+    "vocab/data/variation_scope.json": "a959e93f83aed4fedf2e1ae00b92566a97da76ad68c4945b680432a986ae5e6f",
+    "vocab/data/scene_compatibility.json": "de3aa1bbb5ee30aa87955acfee368fa677fd7a4abea83e27efb9953f2722524f",
+    "vocab/data/action_pools.json": "c50bb7dbea2726d43e84007cb46f629d9423aa7e83702d0dd9a3ac494c850b98",
+    "assets/compatibility_review.csv": "c5023fa1ccf1779d489f0473ece6d76deea32880cc8f4c7fb7fc6ea0f7142e2e",
+    "vocab/data/prompt_quality_policy.json": "2a58867b85ba6827cea848623f6214b767dea147265e155ea5110ab6ef31fae7",
+    "rules/consistency_rules.json": "24ca738287d0377ba6a6fd8d632b1cad34893eebbecca8c4591e364a113c4a63",
+    "tools/prompt_quality_loop.py": "ab6a242e055b862918cc21189f3bcb48e2cedba037e4b6ce2db9ce0c9faf069e",
+    "assets/fixtures/prompt_quality_control_seeds.json": "572d06a690c4bfbf71e175d82f9d595f4e6a6801364f95e9c3dc886101c330d7",
+    "docs/prompt_quality/final-review-contract.json": "f8eb397a01b99736b67b543d5cf6fada96cb346af78253eec078897cc185d2b1",
+    ".omx/ultragoal/goals.json": "b98cd87117d3cc619748b63887f0fb39a16d5e34dda2c5f0d06ec30e10534a13",
+    ".omx/ultragoal/ledger.jsonl": "a23440d91c9d735ceb01266417a02a3ec06bc33c6fcf5193a8dc35041827167c"
+  },
+  "artifact_hashes": {
+    "baseline-report.json": "56a627b2a5d34df91c8ec833571ea01c72ef846ce19d9dcaa0dddfa9cedc39ce",
+    "pool-policy.json": "313de9f485dda44dbcd59f2cd3d7b8a635a950c3134ed8efe5c4715100621f27",
+    "prompt-quality-cohort.json": "d67a04537e5697ede00d77581ecc3463f69ff443f3609e44d908f35df526d7a2",
+    "../../planner_refactor_spec.md": "0e76986bd3f080b2638db71d7ec56fedfe56ffc7beb7c4e1ef0e6ea37e534d77",
+    "../../../prompt_quality/README.md": "13d086027541984f49a8cc16b606ff0d2e034831a37e8e35a3818ad2429eee7e"
+  },
+  "prompt_quality_release": {
+    "release": "G010 strict aggregate receipt",
+    "protected_source_tree": "40848f5c9b37ffbcc7dec0e89f60d52e59a23ec5877536b24134a19b43fc3447",
+    "verification_sha256": "05bf5c9c7d95c11e282b401805434e23e27b38805e3b7497735045c88fd838d3",
+    "promotion_sha256": "d37b3f58df45987b6cb0165ab5d77eabee662069b9f83473e54a87690bbd552d",
+    "blind_review": "final-blind-review-attempt-015",
+    "confirmation_lanes": ["G004-256", "G005-256", "G006-256"],
+    "iteration_cohort": {
+      "schema_version": "prompt-quality-cohort/v1",
+      "experiment_seed": 9472026,
+      "iteration_id": "v150-planner-l0",
+      "control_seed_fixture": "assets/fixtures/prompt_quality_control_seeds.json",
+      "control_count": 64,
+      "exploration_count": 16,
+      "cohort_hash": "40af8beb08de1abb80f70f51264261a45e6683afb93ba24e323d910b906a7177"
+    }
+  },
+  "next_transition": "CANDIDATE_SNAPSHOT_LOCKED",
+  "next_action": "Implement L1 pure projection validation and math behind an optional --scenario-file path with regression tests first."
+}

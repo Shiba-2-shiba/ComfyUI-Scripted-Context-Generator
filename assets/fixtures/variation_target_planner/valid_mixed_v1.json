@@ -1,0 +1,75 @@
+{
+  "schema_version": "variation-target-scenarios/v1",
+  "stage_id": "V150",
+  "baseline_manifest_sha256": "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54",
+  "scenarios": [
+    {
+      "id": "balanced-growth-001",
+      "subject_count": 135,
+      "location_count": 105,
+      "compatibility_density_basis_points": 5600,
+      "action_depth_row_distribution": [
+        {
+          "actions": 12,
+          "row_share_basis_points": 1500
+        },
+        {
+          "actions": 16,
+          "row_share_basis_points": 4500
+        },
+        {
+          "actions": 20,
+          "row_share_basis_points": 3000
+        },
+        {
+          "actions": 24,
+          "row_share_basis_points": 1000
+        }
+      ],
+      "proposed_subject_ids": [
+        "v150_subject_001", "v150_subject_002", "v150_subject_003",
+        "v150_subject_004", "v150_subject_005", "v150_subject_006",
+        "v150_subject_007", "v150_subject_008", "v150_subject_009",
+        "v150_subject_010", "v150_subject_011", "v150_subject_012",
+        "v150_subject_013", "v150_subject_014", "v150_subject_015"
+      ],
+      "proposed_location_ids": [
+        "v150_location_001", "v150_location_002", "v150_location_003",
+        "v150_location_004", "v150_location_005", "v150_location_006",
+        "v150_location_007", "v150_location_008", "v150_location_009",
+        "v150_location_010", "v150_location_011", "v150_location_012",
+        "v150_location_013", "v150_location_014", "v150_location_015"
+      ],
+      "subject_utility_groups": [
+        "daily-adult-v1",
+        "daily-youth-v1"
+      ],
+      "location_utility_groups": [
+        "daily-transit-v1",
+        "daily-work-v1"
+      ],
+      "notes": "A bounded mixed action-depth projection for the V150 pre-screen."
+    },
+    {
+      "id": "tie-break-001",
+      "subject_count": 120,
+      "location_count": 90,
+      "compatibility_density_basis_points": 1,
+      "action_depth_row_distribution": [
+        {
+          "actions": 20,
+          "row_share_basis_points": 5000
+        },
+        {
+          "actions": 12,
+          "row_share_basis_points": 5000
+        }
+      ],
+      "proposed_subject_ids": [],
+      "proposed_location_ids": [],
+      "subject_utility_groups": [],
+      "location_utility_groups": [],
+      "notes": "One projected row makes the equal-remainder tie observable."
+    }
+  ]
+}

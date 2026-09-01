@@ -1,5 +1,8 @@
 # EPIG Reference Refresh Specification
 
+> Completed research wave. Current authority and future change gates are in
+> `docs/semantic_epig/README.md`.
+
 対象リポジトリ: `ComfyUI-Scripted-Context-Generator`
 作成日: 2026-06-16
 関連文書:

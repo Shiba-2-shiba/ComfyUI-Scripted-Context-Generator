@@ -1,0 +1,37 @@
+{
+  "schema_version": "variation-target-scenarios/v1",
+  "stage_id": "V150",
+  "baseline_manifest_sha256": "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54",
+  "scenarios": [
+    {
+      "id": "v150-balanced-canonical-004",
+      "subject_count": 135,
+      "location_count": 109,
+      "compatibility_density_basis_points": 5591,
+      "action_depth_row_distribution": [{"actions": 20, "row_share_basis_points": 10000}],
+      "proposed_subject_ids": [
+        "architect", "astronomer", "barber", "delivery courier", "farmer",
+        "fisher", "florist", "journalist", "mechanic", "nurse", "paramedic",
+        "photographer", "researcher", "shopkeeper", "teacher"
+      ],
+      "proposed_location_ids": [
+        "bike_station", "canal_walkway", "clinic_waiting_room",
+        "community_garden", "community_theater_backstage", "design_studio",
+        "ferry_terminal", "fire_station", "flower_market", "forest_cabin",
+        "greenhouse_nursery", "maker_space", "observatory_dome",
+        "postal_service_counter", "print_shop", "public_plaza", "rooftop_cafe",
+        "tram_platform", "vehicle_repair_garage"
+      ],
+      "subject_utility_groups": [
+        "care_and_service", "creative_professional", "education_and_research",
+        "rural_and_craft", "transit_and_public_work"
+      ],
+      "location_utility_groups": [
+        "care_and_civic", "civic_creative_work", "civic_service",
+        "craft_and_creative", "horticulture_service", "leisure_and_nature",
+        "public_transit", "repair_workplace", "retail_and_nature"
+      ],
+      "notes": "Iteration 004 adds four reviewed locations with 20 direct actions each. Runtime-equivalent contribution estimate is authoritative over uniform-depth projection."
+    }
+  ]
+}

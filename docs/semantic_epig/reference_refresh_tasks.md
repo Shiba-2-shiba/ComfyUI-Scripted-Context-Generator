@@ -1,5 +1,8 @@
 # EPIG Reference Refresh Tasks
 
+> Completed research task board. Start new work from
+> `docs/semantic_epig/README.md`; do not reopen this board.
+
 対象リポジトリ: `ComfyUI-Scripted-Context-Generator`
 作成日: 2026-06-16
 関連仕様: `reference_refresh_spec.md`

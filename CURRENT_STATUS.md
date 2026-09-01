@@ -1,6 +1,6 @@
 # Current Status
 
-Last verified: 2026-06-19
+Last verified: 2026-08-31
 
 このファイルは、毎回全スクリプトを読み直さずに現在地を把握するための短い入口です。
 詳細な構造は `REPO_STRUCTURE.md`、設計背景は `assets/ARCHITECTURE.md` と
@@ -8,6 +8,8 @@ Last verified: 2026-06-19
 subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` を先に参照してください。
 日常系 location / action pool の拡張作業は `docs/variation_expansion/README.md` に計画と進捗があります。
 100k base variations gate は通過済みです。次の拡張計画対象は 500k に向けた subject / location / action-depth の再設計です。
+段階的な500k計画と prompt-quality 維持gateは
+`docs/variation_expansion/500k_loop_plan.md` を正本とします。
 現在の variation sizing 境界は `vocab/data/variation_scope.json` に固定されています。
 書類整理方針は `docs/documentation_cleanup_plan.md` を参照してください。
 repository cleanup の直近リファクタは `docs/repository_cleanup/` に仕様・進捗・タスクがあります。
@@ -73,14 +75,18 @@ Active domains:
 
 Implementation/audit docs:
 
-- rollout docs: `docs/semantic_epig/progress.md`
-- refactor docs: `docs/semantic_epig/refactor_spec.md`, `docs/semantic_epig/refactor_progress.md`, `docs/semantic_epig/refactor_tasks.md`
+- canonical index and change gate: `docs/semantic_epig/README.md`
+- rollout docs: `docs/semantic_epig/progress.md`（完了履歴）
+- R0-R7 refactor docs: `docs/semantic_epig/refactor_spec.md`,
+  `docs/semantic_epig/refactor_progress.md`,
+  `docs/semantic_epig/refactor_tasks.md`（完了履歴）
 
 Current refactor state:
 
 - R1-R7 are complete.
 - Builders were split into action parser / relation binder / renderer, location policy / selector, and clothing candidate renderer / selector.
-- Remaining follow-up: add a relation-key-specific action descriptor fixture/test.
+- Relation-key-specific action descriptor matching has dedicated regression coverage.
+- Future changes start a new loop-engineering experiment; completed task boards are not reopened.
 
 ## Current Metrics
 
@@ -142,7 +148,7 @@ python assets/calc_variations.py --json
 python tools/check_variation_scope.py
 python tools/build_compatibility_review.py --check
 python tools/build_action_pools.py --check
-python tools/plan_variation_target.py --target 100000
+python tools/plan_variation_target.py --target 500000
 python -c "from asset_validator import validate_assets; issues=validate_assets(); print(len(issues)); print(issues[:20])"
 ```
 
@@ -154,7 +160,8 @@ Results:
 - prompt data validator: `ERROR: []`, `WARNING: []`
 - variation metrics: base variations `103,212`, missing action pools `0`
 - variation scope / compatibility generation / action pool checks: `ERROR: []`, `WARNING: []`
-- target planner: target `100000` still met at `103,212`
+- target planner: the `500000` baseline probe records the current `103,212`
+  surface and shows that new mixed-scenario modeling is required
 - asset validator: `0` issues
 - workflow widget validation: `OK`
 
@@ -211,7 +218,9 @@ Current expansion state:
 - Current restricted sizing remains above the 100k target at `103,212`.
 - Next planning target: `500,000` base variations without making the 100k
   implementation noisy or repetitive.
-- Detailed current plan: `docs/variation_expansion/base_variations_100k_plan.md`.
+- Canonical current plan: `docs/variation_expansion/500k_loop_plan.md`.
+- Every promoted expansion stage must retain the accepted prompt-quality
+  target/guard baseline from `docs/prompt_quality/`.
 
 ## Refactor Risk Map
 
@@ -274,7 +283,7 @@ Before expanding subjects / locations / actions:
 ```bash
 python -m unittest assets.test_data_consistency assets.test_character_resolution assets.test_location_resolution assets.test_action_generator assets.test_calc_variations
 python tools/validate_prompt_data.py
-python tools/plan_variation_target.py --target 100000
+python tools/plan_variation_target.py --target 500000
 python tools/check_variation_scope.py
 python tools/build_action_pools.py --check
 python assets/calc_variations.py --json

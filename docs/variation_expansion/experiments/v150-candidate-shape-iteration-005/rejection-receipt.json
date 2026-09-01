@@ -1,0 +1,97 @@
+{
+  "schema_version": "variation-coverage-schedule-rejection-receipt/v1",
+  "experiment_id": "v150-candidate-shape-iteration-005",
+  "terminal_state": "REJECTED",
+  "recorded_at": "2026-09-01",
+  "repository_head": "40cbe2645b96322be994320b31fba0f630a2de94",
+  "authority": {
+    "coverage_is_quality_evidence": false,
+    "fixed_quality_verdict": "reject",
+    "coverage_verdict": "reject",
+    "promotion_ready": false,
+    "parent_iteration_004_remains_terminal": true
+  },
+  "local_snapshot": {
+    "path": "assets/results/variation_candidate_l3/v150-i5-q6",
+    "snapshot_manifest_sha256": "71365697b65603a690ef2ef364f20a11b8094527218ac93448f8f1186d5fcdac",
+    "snapshot_plan_canonical_sha256": "b9d42d7b9ea71f6eecd08365f4b61bfdeb0398f49b69141177200130347b562c",
+    "prompt_schedule_sha256": "788c03fef0f1c3e7ab3645d5953944c5412bfc6161841ec0873d53714912bae9",
+    "active_source_before_sha256": "ea77a1ee8ca69fb3d884f5b0722bac2ac2762c51d47d4562201a13e4b5e37da8",
+    "active_source_after_sha256": "ea77a1ee8ca69fb3d884f5b0722bac2ac2762c51d47d4562201a13e4b5e37da8"
+  },
+  "tracked_artifacts": {
+    "coverage-contract.json": "7e4ee470ef22f671012678e3cd97b2801572fd4c26fe656860e4131b9f7bda01",
+    "coverage-plan.json": "d18e2a573a36cf47d81d1561615bfcd9600cc2aee62639bb906468f737a82c7f",
+    "prompt-quality-experiment.json": "64adb57698bdce54ab6effa96b71dc1ab6afffef6d16009c6eeee93bb8a369c7",
+    "coverage-comparison.json": "74c5b470b25b3054cacb993c17aa23b50168edd3e69719ea9da45da177d6b810"
+  },
+  "run_artifacts": {
+    "baseline_run_manifest_sha256": "42b8e221d5ad07b184b65216d28e915e52b0df5ddb4139f1c8104e687eea8eb1",
+    "candidate_run_manifest_sha256": "d421476d4dbb88a81ec803fbc7354c5a8c833997449d061fa37473b41863138a",
+    "comparison_canonical_sha256": "c71f7486582a87438f3e350d90790e48ae25577a8c08360ede220d4633784940",
+    "cohort_hash": "1b7017819fe1ff11c822b27e61d035b0ce0596dd6f06f85c27f6a45766912492",
+    "records_per_side": 80,
+    "control_count": 64,
+    "exploration_count": 16,
+    "replay_mismatch_count": 0
+  },
+  "schedule_preflight": {
+    "scheduled_rows": 19,
+    "scheduled_subjects": 15,
+    "scheduled_locations": 19,
+    "unique_direct_actions": 19,
+    "control_source_rows_reachable": 19,
+    "candidate_prompts_jsonl_sha256": "3e67bc3d793c947df8d8d6ce4cccd23bb3fcf009d73e09bf65c7eb45b8278c13"
+  },
+  "observed_workflow_coverage": {
+    "candidate_subjects_seen": 15,
+    "candidate_locations_seen": 12,
+    "candidate_locations_unseen": 7,
+    "candidate_action_pool_locations_seen": 9,
+    "candidate_action_pool_locations_unseen": 10,
+    "scheduled_exact_location_actions_expected": 19,
+    "scheduled_exact_location_actions_observed": 9,
+    "scheduled_exact_location_actions_missing": 10
+  },
+  "diagnostic_metrics": {
+    "location_signature_entropy_before": 4.831091,
+    "location_signature_entropy_after": 5.017694,
+    "repeated_ngram_count_before": 12,
+    "repeated_ngram_count_after": 9,
+    "context_json_bytes_max_before": 29094,
+    "context_json_bytes_max_after": 30392,
+    "context_json_bytes_p95_before": 28692.15,
+    "context_json_bytes_p95_after": 29061.05
+  },
+  "implementation_hashes": {
+    "tools/plan_variation_prompt_schedule.py": "e7d6fa5aaf5b3e53ac0bd82d0933a9b27aa7f142fb447bd35dbc6d0fe8f65ef3",
+    "tools/materialize_variation_candidate_snapshot.py": "0944548306588a51bf65dd17c2fd1ca01e03c0af48247a95ec80b97dc90d712f",
+    "tools/compare_variation_prompt_pair.py": "f74a652781f0d49ce95f8d10d483b548981a5aa7cddffb930424794938eb97a6",
+    "assets/test_variation_prompt_schedule.py": "7866835b59eaef73713c27a202cb2800f94d8e94e02e556679bd7e9718cefe5e",
+    "assets/test_variation_candidate_snapshot.py": "4d8f712f3e61350fd2981bdbfec717f8f540970f6da76072d72d52b3390f4896",
+    "assets/test_variation_prompt_pair.py": "ae27c88b15adce1ec2625fbc2dc077f83c057047bb6c5acf8b9da9d900430a19"
+  },
+  "post_snapshot_hardening": {
+    "reason": "Scheduled coverage success must not return CLI success while the authoritative fixed quality verdict remains reject.",
+    "tools/compare_variation_prompt_pair.py": "5a6593f1a38ef95940d53eee0b72d9afa7c19613d527a713de69d969609d4b5b",
+    "assets/test_variation_prompt_pair.py": "02881a31c4129381310dc9d4132c673cd03d442a06b672398df2a92f535885ae",
+    "focused_tests": "17 tests OK",
+    "next_snapshot_required": true
+  },
+  "verification": {
+    "targeted_tests": "45 tests OK",
+    "combined_l1_l3_tests": "113 tests OK",
+    "py_compile": "pass",
+    "snapshot_validation": "pass",
+    "active_source_unchanged": true,
+    "independent_code_review": "APPROVE rejection evidence; post-snapshot CLI authority gap corrected and requires the next snapshot",
+    "independent_verifier": "APPROVE q6 terminal REJECT evidence; all schedule, snapshot, experiment, run, comparison, and receipt hashes independently verified"
+  },
+  "next_iteration_requirements": [
+    "Model reachability through the complete fixed workflow, including ContextSceneVariator full-mode location selection, rather than ContextSource selection alone.",
+    "Bind final workflow witness seeds and actual final location-action pairs before materializing the next schedule.",
+    "Keep the fixed 64+16 seed set and q5 rejected quality verdict unchanged.",
+    "Do not use selected extra seeds or coverage success as prompt-quality evidence.",
+    "Retain the context p95/max remediation gate even though repeated n-gram count improved in this diagnostic run."
+  ]
+}

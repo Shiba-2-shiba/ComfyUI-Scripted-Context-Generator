@@ -1,0 +1,68 @@
+{
+  "schema_version": "variation-target-scenarios/v1",
+  "stage_id": "V150",
+  "baseline_manifest_sha256": "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54",
+  "scenarios": [
+    {
+      "id": "v150-balanced-canonical-001",
+      "subject_count": 135,
+      "location_count": 105,
+      "compatibility_density_basis_points": 6100,
+      "action_depth_row_distribution": [
+        {"actions": 12, "row_share_basis_points": 1500},
+        {"actions": 16, "row_share_basis_points": 4500},
+        {"actions": 20, "row_share_basis_points": 3000},
+        {"actions": 24, "row_share_basis_points": 1000}
+      ],
+      "proposed_subject_ids": [
+        "architect",
+        "astronomer",
+        "barber",
+        "delivery courier",
+        "farmer",
+        "fisher",
+        "florist",
+        "journalist",
+        "mechanic",
+        "nurse",
+        "paramedic",
+        "photographer",
+        "researcher",
+        "shopkeeper",
+        "teacher"
+      ],
+      "proposed_location_ids": [
+        "bike_station",
+        "canal_walkway",
+        "clinic_waiting_room",
+        "community_garden",
+        "design_studio",
+        "ferry_terminal",
+        "fire_station",
+        "flower_market",
+        "forest_cabin",
+        "maker_space",
+        "observatory_dome",
+        "print_shop",
+        "public_plaza",
+        "rooftop_cafe",
+        "tram_platform"
+      ],
+      "subject_utility_groups": [
+        "care_and_service",
+        "creative_professional",
+        "education_and_research",
+        "rural_and_craft",
+        "transit_and_public_work"
+      ],
+      "location_utility_groups": [
+        "care_and_civic",
+        "craft_and_creative",
+        "leisure_and_nature",
+        "public_transit",
+        "retail_and_nature"
+      ],
+      "notes": "L2 pre-screen for 15 distinct subject and 15 canonical location proposals. This is not a data promotion manifest."
+    }
+  ]
+}

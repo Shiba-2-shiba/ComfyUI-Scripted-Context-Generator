@@ -1,5 +1,8 @@
 # EPIG的 Semantic Enrichment 実装進捗
 
+> Completed rollout record. Current authority and future change gates are in
+> `docs/semantic_epig/README.md`.
+
 対象リポジトリ: `Shiba-2-shiba/ComfyUI-Scripted-Context-Generator`
 対象ブランチ: `dev`
 関連仕様: `implementation_spec.md`

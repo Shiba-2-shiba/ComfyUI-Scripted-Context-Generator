@@ -2,15 +2,30 @@
 
 このディレクトリは、base variations 拡張作業の入口です。
 
-現在の active work は **P13: 500k target planning** です。P8-P12 の
-100k stabilization までは完了済みなので、次の実装は subject / location /
-compatibility density / action depth の組み合わせを測ってから開始します。
+現在の active work は **P13: staged 500k loop planning** です。P8-P12 の
+100k stabilization までは完了済みです。現行 planner を核に、L0-L3 の
+capability pass と V150/V250/V350/V500 の段階gateを順に進めます。
 
 ## Active Documents
 
 - [Progress](./progress.md)
 - [Task Board](./tasks.md)
-- [100k Stabilization and 500k Forward Plan](./base_variations_100k_plan.md)
+- [Canonical Staged 500k Loop Plan](./500k_loop_plan.md)
+- [Planner Refactor Specification](./planner_refactor_spec.md)
+- [Promoted Planner L1 Contract](./planner_l1_contract.md)
+- [Variation Candidate L2 Contract](./candidate_l2_contract.md)
+- [Variation Candidate L3 Snapshot Contract](./candidate_l3_contract.md)
+- [V150 Planner L0 Baseline](./experiments/v150-planner-l0/manifest.json)
+- [V150 Planner L1 Receipt](./experiments/v150-planner-l1/receipt.json)
+- [V150 Candidate L2 Rejection](./experiments/v150-candidate-l2/rejection-receipt.json)
+- [V150 Candidate L2 Iteration 002 Handoff](./experiments/v150-candidate-l2-iteration-002/handoff-receipt.json)
+- [V150 Candidate L3 Snapshot Rejection](./experiments/v150-candidate-l3-iteration-001/rejection-receipt.json)
+- [V150 Shape Iteration 003 Handoff](./experiments/v150-candidate-shape-iteration-003/handoff-receipt.json)
+- [V150 Shape Iteration 004 Prompt Rejection](./experiments/v150-candidate-shape-iteration-004/rejection-receipt.json)
+- [V150 Coverage Schedule Iteration 005 Rejection](./experiments/v150-candidate-shape-iteration-005/rejection-receipt.json)
+- [V150 Full-Workflow Coverage Iteration 006](./experiments/v150-candidate-shape-iteration-006/rejection-receipt.json)
+- [V150 Guard Remediation Iteration 007](./experiments/v150-candidate-shape-iteration-007/guard-remediation-receipt.json)
+- [100k Stabilization and Historical 500k Notes](./base_variations_100k_plan.md)
 - [Clothing State Location Gate Refactor Plan](./clothing_state_location_gate_plan.md)
 
 Historical or completed-plan references:
@@ -26,8 +41,32 @@ Historical or completed-plan references:
 compatibility taxonomy expansion、P11 action authoring refactor、P12 100k
 stabilization gate は完了済みです。
 
-現在は P13 です。500k へ向けた拡張形状を再設計し、bulk data edit の前に
-target planner で候補形状を測ります。
+現在は P13 L3 full-workflow coverage iteration 006完了後のquality remediation設計です。L0 baseline と6件の非counted runtime pool分類は
+`experiments/v150-planner-l0/`、L1 pure projectionの昇格証拠は
+`experiments/v150-planner-l1/` にhash固定済みです。L2 iteration 001は
+coverage不足とduplicate pressure超過でreject済みです。iteration 002は
+structural gateを通過しましたが、isolated materializationのrealized値は
+`141,984`でV150未達でした。prompt生成はblockされ、snapshot iteration 001は
+reject済みです。
+
+Exact contribution modelにより4 location追加で`150,184`となるshapeを実装し、
+isolated 64+16比較まで完了しました。location entropyは改善しましたが、8 location / 13
+location-action pairのcoverage不足、repeated n-gram、context sizeの回帰により
+`REJECTED`です。subject追加はなく、active dataへの昇格もありません。
+
+Iteration 005ではfixed 64+16を維持した19-row scheduleを実装しましたが、
+`ContextSource`到達19/19に対して最終workflowはlocation 12/19、exact
+location-action 9/19でした。次は`ContextSceneVariator`を含むcomplete workflow
+outcomeを事前modelingします。品質正本のrejectとactive dataは変更していません。
+
+Iteration 006ではfixed 64+16内でfinal location/action witnessを19/19再現し、
+coverage gateを通過しました。ただしcoverageは品質証拠ではなく、semantic-family
+repetitionとcontext size guardが回帰したため品質判定は引き続き`REJECTED`です。
+
+Iteration 007ではcoverage scheduleを凍結したままdebug payloadを圧縮し、
+semantic-family/context sizeを含む全定量guardを非回帰へ戻しました。q9からの
+cleaned prompt変更は0件です。この結果はdiagnostic passであり、次は非選択の
+quality validation surfaceが必要です。
 
 並行する品質改善として、衣装 `states` が Location と衝突する問題を
 [`clothing_state_location_gate_plan.md`](./clothing_state_location_gate_plan.md)
@@ -39,11 +78,11 @@ target planner で候補形状を測ります。
 3. P10: compatibility taxonomy と variation scope を 100k 向けに拡張する - Done
 4. P11: action authoring source を 20+ effective actions に耐える形へ拡張する - Done
 5. P12: 100k stabilization gate で全体検証を固定する - Done
-6. P13: 500k target planning で次の拡張形状を決める - Active
+6. P13: staged 500k loop planning で planner と次の拡張形状を検証する - Active
 7. P14: clothing state location gate で Location と衣装状態語の衝突を抑える - Done
 
-10万達成までの再計画と、500kへ進むための制約は
-[`base_variations_100k_plan.md`](./base_variations_100k_plan.md) を参照してください。
+10万達成までの履歴は `base_variations_100k_plan.md`、現在の500k計画は
+[`500k_loop_plan.md`](./500k_loop_plan.md) を参照してください。
 
 ## Historical Baseline
 
@@ -72,7 +111,8 @@ missing action pools: 0
 
 ## P13 Planning Target
 
-500k planning は、次を先に測ってから実装に入ります。
+500k planning は、次を段階別に測り、`docs/prompt_quality/` の品質契約を
+維持できる候補だけを次のstageへ昇格します。
 
 - subject count
 - location count
@@ -103,7 +143,7 @@ final planning horizon: 500,000 base variations
 
 ## Completion Rule
 
-P13 planning は、次が満たされたとき実装計画へ進めます。
+P13 planning は、次が満たされたとき最初の V150 実装waveへ進めます。
 
 - `python tools/plan_variation_target.py --target 500000` の scenario output が記録されている
 - compatibility density と location count のどちらが次の limiter か明示されている
@@ -111,3 +151,6 @@ P13 planning は、次が満たされたとき実装計画へ進めます。
 - `vocab/data/variation_scope.json`, `assets/compatibility_review.csv`,
   `vocab/source/action_pools/` のどれを先に変えるかが決まっている
 - P12 baseline checks は引き続き clean である
+- L0-L3 planner capability の対象、テスト、stop condition が固定されている
+- baseline/candidate の prompt-quality control/exploration cohort、blind
+  review、confirmation、promotion/rejection evidence 契約が固定されている

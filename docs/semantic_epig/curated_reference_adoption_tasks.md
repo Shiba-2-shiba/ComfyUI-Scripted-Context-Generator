@@ -1,5 +1,8 @@
 # Curated Reference Adoption Tasks
 
+> Completed adoption task board. Start new work from
+> `docs/semantic_epig/README.md`; do not reopen this board.
+
 対象リポジトリ: `ComfyUI-Scripted-Context-Generator`  
 対象ブランチ: `dev2`  
 作成日: 2026-06-17 JST  

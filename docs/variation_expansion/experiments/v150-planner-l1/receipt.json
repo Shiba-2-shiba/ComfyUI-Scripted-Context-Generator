@@ -1,0 +1,33 @@
+{
+  "schema_version": "variation-planner-l1-receipt/v1",
+  "experiment_id": "v150-planner-l1",
+  "terminal_state": "PROMOTED",
+  "promoted_at": "2026-09-01",
+  "state_chain": [
+    "HYPOTHESIS_LOCKED",
+    "BASELINE_READY",
+    "CANDIDATE_SNAPSHOT_LOCKED",
+    "GENERATED",
+    "ANALYZED",
+    "COMPARED",
+    "REVIEWED",
+    "VERIFIED",
+    "PROMOTED"
+  ],
+  "baseline_manifest_sha256": "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54",
+  "verification_sha256": "40d7b6eaa6fa5ed79834f1f8937c8b39c8d4cf748589d78d003848e40db67f85",
+  "candidate_hashes": {
+    "planner": "dbe67f0919543d9110e43af9e6906b29d06edc57e22c1e670c97ac31dd57ef66",
+    "tests": "340ca0a6958d2a234b63bf9c056c9a7fb69298f8b434c67c17d56b8e42ce804a",
+    "fixture": "179eb1601394c3b255a839ff1060431d01d2ef6a4d870d445a2aa69b35092ae7",
+    "base_spec": "0e76986bd3f080b2638db71d7ec56fedfe56ffc7beb7c4e1ef0e6ea37e534d77",
+    "l1_contract": "483fed3dd06aa1d62c4443bc999161c9c5006b1fad1149ddbbe6c6199d628146"
+  },
+  "verdict": {
+    "planner_capability": "promote",
+    "variation_data_candidate": "not_selected",
+    "source_mutated_by_planner": false,
+    "failures": []
+  },
+  "next_action": "Begin L2 quality-aware scenario analysis and select or reject a real V150 candidate manifest."
+}

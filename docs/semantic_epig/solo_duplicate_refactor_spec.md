@@ -1,5 +1,8 @@
 # Solo Duplicate Suppression Refactor Specification
 
+> Completed focused-refactor wave. Current authority and future change gates
+> are in `docs/semantic_epig/README.md`.
+
 対象リポジトリ: `Shiba-2-shiba/ComfyUI-Scripted-Context-Generator`
 対象ブランチ: `dev2`
 作成日: 2026-06-18

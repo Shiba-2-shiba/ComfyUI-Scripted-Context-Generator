@@ -1,0 +1,87 @@
+{
+  "schema_version": "variation-planner-l1-verification/v1",
+  "experiment_id": "v150-planner-l1",
+  "state": "VERIFIED",
+  "verified_at": "2026-09-01",
+  "repository_head": "40cbe2645b96322be994320b31fba0f630a2de94",
+  "baseline_manifest_sha256": "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54",
+  "candidate_hashes": {
+    "tools/plan_variation_target.py": "dbe67f0919543d9110e43af9e6906b29d06edc57e22c1e670c97ac31dd57ef66",
+    "assets/test_variation_target_planner.py": "340ca0a6958d2a234b63bf9c056c9a7fb69298f8b434c67c17d56b8e42ce804a",
+    "assets/fixtures/variation_target_planner/valid_mixed_v1.json": "179eb1601394c3b255a839ff1060431d01d2ef6a4d870d445a2aa69b35092ae7",
+    "docs/variation_expansion/planner_refactor_spec.md": "0e76986bd3f080b2638db71d7ec56fedfe56ffc7beb7c4e1ef0e6ea37e534d77",
+    "docs/variation_expansion/planner_l1_contract.md": "483fed3dd06aa1d62c4443bc999161c9c5006b1fad1149ddbbe6c6199d628146"
+  },
+  "projection_evidence": {
+    "command": "python tools/plan_variation_target.py --target 150000 --scenario-file assets/fixtures/variation_target_planner/valid_mixed_v1.json",
+    "stage_id": "V150",
+    "scenario_manifest_sha256": "bc1b2be3f85876044de68b3c08538a5c14cc4d30323f31126d1bcddc44fb66f2",
+    "projection_model_version": "mixed-shape-largest-remainder/v1",
+    "balanced_growth": {
+      "eligible_pairs": 14175,
+      "projected_rows": 7938,
+      "projected_base_variations": 138120,
+      "target_gap": 11880,
+      "target_met": false
+    },
+    "tie_break": {
+      "projected_rows": 1,
+      "winner_action_depth": 12,
+      "rule": "largest remainder, ties by ascending action depth"
+    }
+  },
+  "verification": [
+    {
+      "command": "python -m unittest assets.test_variation_target_planner",
+      "result": "21 tests OK"
+    },
+    {
+      "command": "python -m unittest assets.test_variation_target_planner assets.test_variation_scope assets.test_calc_variations assets.test_build_compatibility_review assets.test_compatibility_boundaries assets.test_build_action_pools",
+      "result": "33 tests OK"
+    },
+    {
+      "command": "python -m py_compile tools/plan_variation_target.py assets/test_variation_target_planner.py",
+      "result": "Pass"
+    },
+    {
+      "command": "python tools/validate_prompt_data.py",
+      "result": "ERROR: [], WARNING: []"
+    },
+    {
+      "command": "python tools/verify_full_flow.py",
+      "result": "OK"
+    },
+    {
+      "command": "python tools/check_variation_scope.py",
+      "result": "ERROR: [], WARNING: []"
+    },
+    {
+      "command": "python tools/build_compatibility_review.py --check",
+      "result": "ERROR: [], WARNING: []"
+    },
+    {
+      "command": "python tools/build_action_pools.py --check",
+      "result": "ERROR: [], WARNING: []"
+    },
+    {
+      "command": "git diff --check",
+      "result": "Pass; line-ending notices only"
+    }
+  ],
+  "invariants": {
+    "legacy_base_variations": 103212,
+    "default_report_unchanged": true,
+    "protected_inputs_unchanged": true,
+    "valid_cli_non_mutating": true,
+    "invalid_cli_fail_closed": true,
+    "untrusted_stage_rejected": true,
+    "baseline_and_pool_policy_hash_bound": true,
+    "explicit_proposal_id_delta_bound": true,
+    "canonical_output_deterministic": true
+  },
+  "independent_review": {
+    "code_reviewer": "APPROVE after two HIGH findings were resolved",
+    "verifier": "APPROVE; no remaining P13-L1 gap"
+  },
+  "stop_condition": "L1 projection math, validation, CLI, drift rejection, and non-mutation are regression-locked. No variation data was changed."
+}

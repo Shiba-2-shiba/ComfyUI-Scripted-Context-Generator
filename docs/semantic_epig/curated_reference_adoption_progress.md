@@ -1,5 +1,8 @@
 # Curated Reference Adoption Progress
 
+> Completed adoption wave. Current authority and future change gates are in
+> `docs/semantic_epig/README.md`.
+
 対象リポジトリ: `ComfyUI-Scripted-Context-Generator`  
 対象ブランチ: `dev2`  
 作成日: 2026-06-17 JST  
@@ -180,13 +183,13 @@ Do not remove the explanation that `参考/` is repo-external and untracked.
 
 ### 6.2 Relation-key test target
 
-Known open follow-up:
+Resolved follow-up:
 
 ```text
-R4 relation-key-specific descriptor fixture/test remains open
+R4 relation-key-specific descriptor matching is covered by assets/test_action_semantics.py
 ```
 
-Likely files:
+Resolution files:
 
 ```text
 pipeline/action_semantics.py

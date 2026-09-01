@@ -18,7 +18,9 @@ subject / location / base variations を増やす作業では、[`EXPANSION_GUID
 日常系 location / action pool の拡張計画と進捗は [`docs/variation_expansion/`](./docs/variation_expansion/README.md) にあります。
 現在は 100k base variations gate を通過済みで、次の大きな計画対象は 500k へ向けた段階拡張です。
 
-Semantic EPIG の直近リファクタリング仕様・進捗・タスクは [`docs/semantic_epig/refactor_spec.md`](./docs/semantic_epig/refactor_spec.md)、[`refactor_progress.md`](./docs/semantic_epig/refactor_progress.md)、[`refactor_tasks.md`](./docs/semantic_epig/refactor_tasks.md) にあります。
+Semantic EPIG の現在地、文書の正本、変更時の loop-engineering gate は
+[`docs/semantic_epig/README.md`](./docs/semantic_epig/README.md) を参照してください。
+旧 `refactor_*` 文書は完了済み wave の履歴です。
 
 ## 概要
 
@@ -151,7 +153,8 @@ action pool は source 側で編集し、`tools/build_action_pools.py --write` �
 - `vocab/data/personality_behavior_profiles.json`
 - 共通 ranking: [`vocab/semantic_space.py`](./vocab/semantic_space.py)
 - config / debug helper: [`pipeline/semantic_epig.py`](./pipeline/semantic_epig.py)
-- 実装進捗と監査ログ: [`docs/semantic_epig/progress.md`](./docs/semantic_epig/progress.md)
+- canonical index / change gate: [`docs/semantic_epig/README.md`](./docs/semantic_epig/README.md)
+- 初期実装の進捗・監査ログ（完了履歴）: [`docs/semantic_epig/progress.md`](./docs/semantic_epig/progress.md)
 
 Active domains:
 
@@ -203,6 +206,8 @@ Active domains:
 - [`CURRENT_STATUS.md`](./CURRENT_STATUS.md)
 - [`EXPANSION_GUIDE.md`](./EXPANSION_GUIDE.md)
 - [`docs/variation_expansion/README.md`](./docs/variation_expansion/README.md)
+- [`docs/variation_expansion/500k_loop_plan.md`](./docs/variation_expansion/500k_loop_plan.md)
+- [`docs/semantic_epig/README.md`](./docs/semantic_epig/README.md)
 - [`docs/prompt_quality/`](./docs/prompt_quality/)
 - [`assets/ARCHITECTURE.md`](./assets/ARCHITECTURE.md)
 - [`docs/context_refactor/README.md`](./docs/context_refactor/README.md)
@@ -302,7 +307,7 @@ asset 編集後は `asset_validator.py` と該当テストを必ず確認して�
 variation 拡張時は次も確認してください。
 
 - `python tools/validate_prompt_data.py`
-- `python tools/plan_variation_target.py --target 100000`
+- `python tools/plan_variation_target.py --target 500000`
 - `python assets/calc_variations.py --json`
 - `python tools/check_variation_scope.py`
 - `python tools/build_compatibility_review.py --check`

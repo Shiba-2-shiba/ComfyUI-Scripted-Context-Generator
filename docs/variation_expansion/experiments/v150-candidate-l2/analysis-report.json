@@ -1,0 +1,108 @@
+{
+  "schema_version": "variation-quality-candidate-analysis/v1",
+  "catalog_sha256": "86ab462199d729aa5e3044b34f41280f8562b1b1ac2e830bf8fa63ad002dfe04",
+  "scenario_binding": {
+    "scenario_id": "v150-balanced-canonical-001",
+    "scenario_manifest_sha256": "4b089bd3065f75d3271acf02b8fc4ad628bbfcd404ef04ed2e98c1fd3106ca7a",
+    "projection_report_sha256": "5b766a3bf5012aa568dda4cf3593b2cce982f521fcd3bcd4b4b88c98e7b55cb8",
+    "baseline_manifest_sha256": "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54"
+  },
+  "structural_status": "fail",
+  "eligible_for_prompt_evaluation": false,
+  "promotion_ready": false,
+  "prompt_quality": {
+    "status": "not_evaluated",
+    "receipt_sha256": null
+  },
+  "identity_analysis": {
+    "subject_count": 15,
+    "location_count": 15,
+    "subject_ids": [
+      "architect", "astronomer", "barber", "delivery courier", "farmer",
+      "fisher", "florist", "journalist", "mechanic", "nurse", "paramedic",
+      "photographer", "researcher", "shopkeeper", "teacher"
+    ],
+    "location_ids": [
+      "bike_station", "canal_walkway", "clinic_waiting_room",
+      "community_garden", "design_studio", "ferry_terminal", "fire_station",
+      "flower_market", "forest_cabin", "maker_space", "observatory_dome",
+      "print_shop", "public_plaza", "rooftop_cafe", "tram_platform"
+    ]
+  },
+  "utility_analysis": {
+    "subject_signature_count": 15,
+    "location_signature_count": 15,
+    "human_semantic_review_required": true
+  },
+  "compatibility_coverage": {
+    "proposed_subject_existing_location_pairs": 589,
+    "existing_subject_proposed_location_pairs": 1296,
+    "proposed_cross_pairs": 126,
+    "estimated_total_rows": 7817,
+    "projected_rows": 8646,
+    "coverage_margin": -829,
+    "subject_pair_counts": {
+      "architect": 30, "astronomer": 46, "barber": 41,
+      "delivery courier": 40, "farmer": 36, "fisher": 41, "florist": 42,
+      "journalist": 46, "mechanic": 28, "nurse": 42, "paramedic": 33,
+      "photographer": 52, "researcher": 36, "shopkeeper": 41, "teacher": 35
+    },
+    "location_pair_counts": {
+      "bike_station": 107, "canal_walkway": 114, "clinic_waiting_room": 107,
+      "community_garden": 66, "design_studio": 37, "ferry_terminal": 107,
+      "fire_station": 107, "flower_market": 96, "forest_cabin": 36,
+      "maker_space": 26, "observatory_dome": 103, "print_shop": 84,
+      "public_plaza": 107, "rooftop_cafe": 92, "tram_platform": 107
+    }
+  },
+  "action_family_analysis": {
+    "candidate_family_refs": {
+      "cautious_tension": 1, "fitness_motion": 2, "home_rhythm": 2,
+      "leisure_participation": 2, "outdoor_observation": 3,
+      "performance_focus": 1, "public_navigation": 3, "public_presence": 2,
+      "quiet_study": 2, "refined_interior": 2, "resort_relaxation": 2,
+      "retail_service": 2, "speculative_exploration": 2, "transit_flow": 2,
+      "work_rhythm": 2
+    },
+    "resulting_existing_plus_candidate_reuse": {
+      "cautious_tension": 6, "fitness_motion": 7, "home_rhythm": 11,
+      "leisure_participation": 11, "outdoor_observation": 18,
+      "performance_focus": 4, "public_navigation": 14, "public_presence": 8,
+      "quiet_study": 15, "refined_interior": 12, "resort_relaxation": 7,
+      "retail_service": 16, "speculative_exploration": 8, "transit_flow": 8,
+      "work_rhythm": 9
+    },
+    "candidate_location_action_depths": {
+      "bike_station": 16, "canal_walkway": 16, "clinic_waiting_room": 16,
+      "community_garden": 16, "design_studio": 16, "ferry_terminal": 16,
+      "fire_station": 16, "flower_market": 16, "forest_cabin": 16,
+      "maker_space": 16, "observatory_dome": 16, "print_shop": 16,
+      "public_plaza": 16, "rooftop_cafe": 16, "tram_platform": 16
+    },
+    "candidate_action_depth_histogram": {"16": 15},
+    "shared_family_action_occurrences": 240,
+    "shared_family_existing_reuse_occurrences": 238
+  },
+  "duplicate_pressure": {
+    "candidate_total_actions": 240,
+    "candidate_duplicate_occurrences": 120,
+    "candidate_duplicate_pressure_basis_points": 5000,
+    "direct_action_count": 0,
+    "direct_existing_duplicate_occurrences": 0,
+    "direct_duplicate_pressure_basis_points": 0,
+    "intentional_shared_family_existing_reuse_occurrences": 238
+  },
+  "policy_findings": [],
+  "errors": [
+    {
+      "code": "insufficient_candidate_coverage",
+      "message": "candidate compatibility coverage cannot support projected rows",
+      "details": {"estimated": 7817, "projected": 8646}
+    },
+    {
+      "code": "duplicate_pressure_exceeded",
+      "message": "total exact duplicate pressure exceeds the catalog limit",
+      "details": {"actual": 5000, "limit": 1000}
+    }
+  ]
+}

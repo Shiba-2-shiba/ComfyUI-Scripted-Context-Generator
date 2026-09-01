@@ -131,20 +131,31 @@ def clothing_semantic_debug_payload(
     resolved_mode = mode or semantic_mode("clothing_tpo")
     baseline_index = selected_attempt_index if baseline_selected_attempt_index is None else int(baseline_selected_attempt_index)
     semantic_index = selected_attempt_index if semantic_selected_attempt_index is None else int(semantic_selected_attempt_index)
+    detailed_indices = {int(selected_attempt_index), baseline_index, semantic_index}
+    normalized_scores = []
+    for item in candidate_scores:
+        attempt_index = int(item.get("attempt_index", 0))
+        compact = {
+            "attempt_index": attempt_index,
+            "score": round(float(item.get("score", 0.0) or 0.0), 4),
+        }
+        if attempt_index in detailed_indices:
+            compact.update(
+                {
+                    "distance": round(float(item.get("distance", 0.0) or 0.0), 4),
+                    "semantic_penalty": int(item.get("semantic_penalty", 0) or 0),
+                    "repeat_penalty": int(item.get("repeat_penalty", 0) or 0),
+                    "final_penalty": int(
+                        item.get("final_penalty", item.get("repeat_penalty", 0)) or 0
+                    ),
+                }
+            )
+        normalized_scores.append(compact)
     return {
         "mode": resolved_mode,
         "target_vector": normalize_vector(target_vector, CLOTHING_AXES),
-        "candidate_scores": [
-            {
-                "attempt_index": int(item.get("attempt_index", 0)),
-                "score": round(float(item.get("score", 0.0) or 0.0), 4),
-                "distance": round(float(item.get("distance", 0.0) or 0.0), 4),
-                "semantic_penalty": int(item.get("semantic_penalty", 0) or 0),
-                "repeat_penalty": int(item.get("repeat_penalty", 0) or 0),
-                "final_penalty": int(item.get("final_penalty", item.get("repeat_penalty", 0)) or 0),
-            }
-            for item in candidate_scores
-        ],
+        "candidate_score_count": len(candidate_scores),
+        "candidate_scores": normalized_scores,
         "selected_attempt_index": int(selected_attempt_index),
         "baseline_selected_attempt_index": baseline_index,
         "semantic_selected_attempt_index": semantic_index,

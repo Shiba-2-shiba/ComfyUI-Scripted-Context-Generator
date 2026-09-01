@@ -136,6 +136,7 @@ def apply_clothing_expansion(context, seed, outfit_mode, outerwear_chance, chara
         updates={"seed": seed, "costume": theme_key},
         extras=state.to_extras_patch(),
     )
+    decision.pop("prompt", None)
     ctx = append_history(
         ctx,
         DebugInfo(

@@ -1,5 +1,9 @@
 # Prompt Quality Engineering Loop 引き継ぎ
 
+> Historical in-progress handoff. It was superseded on 2026-08-31 by the
+> completed G010 strict aggregate receipt. Use `docs/prompt_quality/README.md`
+> for the accepted release baseline; retain this file as audit history.
+
 更新時点: 2026-08-25（Asia/Tokyo）
 
 ## 0. 2026-08-25 chat終了時の正確な再開点

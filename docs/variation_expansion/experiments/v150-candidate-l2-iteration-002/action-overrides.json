@@ -1,0 +1,317 @@
+{
+  "bike_station": {
+    "direct_actions": [
+      {"text": "checking the rental dock status", "load": "calm"},
+      {"text": "unlocking a bicycle from the nearest rack", "load": "active"},
+      {"text": "securing a helmet beside the route map", "load": "calm"},
+      {"text": "returning a bicycle to an open dock", "load": "active"},
+      {"text": "reading the posted cycling rules", "load": "calm"},
+      {"text": "adjusting the seat before departure", "load": "active"},
+      {"text": "folding a route leaflet near the kiosk", "load": "calm"},
+      {"text": "scanning a pass at the rental terminal", "load": "active"},
+      {"text": "checking a bicycle basket for loose items", "load": "calm"},
+      {"text": "wiping rain from a bicycle handlebar", "load": "active"},
+      {"text": "studying the marked cycle lanes", "load": "calm"},
+      {"text": "rolling a bicycle toward the exit lane", "load": "active"}
+    ],
+    "family_refs": [
+      {"name": "public_navigation", "offset": 0, "take": 4},
+      {"name": "fitness_motion", "offset": 0, "take": 4}
+    ]
+  },
+  "canal_walkway": {
+    "direct_actions": [
+      {"text": "walking beside the canal railing", "load": "active"},
+      {"text": "pausing to inspect water plants", "load": "calm"},
+      {"text": "following the narrow path beneath an arch", "load": "active"},
+      {"text": "resting a hand on the weathered railing", "load": "calm"},
+      {"text": "reading a small waterside notice", "load": "calm"},
+      {"text": "stepping around a puddle near the towpath", "load": "active"},
+      {"text": "watching reflections move across the canal", "load": "calm"},
+      {"text": "crossing a low footbridge", "load": "active"},
+      {"text": "checking the route marker at a bend", "load": "calm"},
+      {"text": "brushing leaves from the edge of the path", "load": "active"},
+      {"text": "standing beneath the waterside trees", "load": "calm"},
+      {"text": "continuing along the illuminated walkway", "load": "active"}
+    ],
+    "family_refs": [
+      {"name": "public_navigation", "offset": 4, "take": 4},
+      {"name": "outdoor_observation", "offset": 0, "take": 4}
+    ]
+  },
+  "clinic_waiting_room": {
+    "direct_actions": [
+      {"text": "checking an appointment slip", "load": "calm"},
+      {"text": "taking a numbered ticket from reception", "load": "active"},
+      {"text": "reading a health information leaflet", "load": "calm"},
+      {"text": "placing a bag beside the waiting chair", "load": "active"},
+      {"text": "looking toward the reception clock", "load": "calm"},
+      {"text": "using the hand sanitizer station", "load": "active"},
+      {"text": "reviewing instructions on a noticeboard", "load": "calm"},
+      {"text": "filling in a short intake form", "load": "active"},
+      {"text": "holding a closed umbrella near the doorway", "load": "calm"},
+      {"text": "checking the room number on a sign", "load": "active"},
+      {"text": "sitting beneath the reception light", "load": "calm"},
+      {"text": "moving toward the indicated consultation room", "load": "active"}
+    ],
+    "family_refs": [
+      {"name": "quiet_study", "offset": 0, "take": 4},
+      {"name": "refined_interior", "offset": 0, "take": 4}
+    ]
+  },
+  "community_garden": {
+    "direct_actions": [
+      {"text": "loosening soil around a planting bed", "load": "active"},
+      {"text": "checking seedlings beneath a small marker", "load": "calm"},
+      {"text": "carrying a watering can between the beds", "load": "active"},
+      {"text": "sorting hand tools on the shared rack", "load": "calm"},
+      {"text": "tying a young stem to a support", "load": "active"},
+      {"text": "reading the seasonal planting chart", "load": "calm"},
+      {"text": "pulling weeds from the path edge", "load": "active"},
+      {"text": "examining a leaf for damage", "load": "calm"},
+      {"text": "filling a tray with compost", "load": "active"},
+      {"text": "labeling a newly planted row", "load": "calm"},
+      {"text": "sweeping soil from the garden walkway", "load": "active"},
+      {"text": "resting beside the shared tool shed", "load": "calm"}
+    ],
+    "family_refs": [
+      {"name": "outdoor_observation", "offset": 4, "take": 4},
+      {"name": "home_rhythm", "offset": 0, "take": 4}
+    ]
+  },
+  "design_studio": {
+    "direct_actions": [
+      {"text": "arranging material samples across a worktable", "load": "active"},
+      {"text": "comparing two color swatches", "load": "calm"},
+      {"text": "pinning a draft layout beside the review board", "load": "active"},
+      {"text": "checking measurements on a paper plan", "load": "calm"},
+      {"text": "sorting tools beside the prototype", "load": "active"},
+      {"text": "marking revisions on a printed layout", "load": "calm"},
+      {"text": "turning a sample beneath the studio light", "load": "active"},
+      {"text": "placing labels beside organized components", "load": "calm"},
+      {"text": "clearing scraps from the cutting surface", "load": "active"},
+      {"text": "reviewing a sequence of concept cards", "load": "calm"},
+      {"text": "assembling a small physical mockup", "load": "active"},
+      {"text": "filing completed drawings in a flat folder", "load": "calm"},
+      {"text": "checking a scale model from another angle", "load": "calm"},
+      {"text": "matching material codes to the sample board", "load": "active"},
+      {"text": "organizing tracing sheets by revision", "load": "calm"},
+      {"text": "measuring spacing on a prototype panel", "load": "active"}
+    ],
+    "family_refs": [
+      {"name": "refined_interior", "offset": 4, "take": 4}
+    ]
+  },
+  "ferry_terminal": {
+    "direct_actions": [
+      {"text": "checking the departure board beside the ramp", "load": "calm"},
+      {"text": "walking toward the marked boarding lane", "load": "active"},
+      {"text": "holding a ticket near the gate", "load": "calm"},
+      {"text": "watching the ferry approach the pier", "load": "active"},
+      {"text": "reading a waterside safety notice", "load": "calm"},
+      {"text": "rolling luggage across the terminal floor", "load": "active"},
+      {"text": "checking the weather display before boarding", "load": "calm"},
+      {"text": "moving beneath the covered boarding sign", "load": "active"},
+      {"text": "folding a ferry timetable", "load": "calm"},
+      {"text": "looking across the water from the railing", "load": "calm"},
+      {"text": "presenting a pass at the boarding point", "load": "active"},
+      {"text": "stepping onto the access ramp", "load": "active"}
+    ],
+    "family_refs": [
+      {"name": "transit_flow", "offset": 0, "take": 4},
+      {"name": "resort_relaxation", "offset": 0, "take": 4}
+    ]
+  },
+  "fire_station": {
+    "direct_actions": [
+      {"text": "checking the equipment readiness board", "load": "calm"},
+      {"text": "securing a strap on a response bag", "load": "active"},
+      {"text": "inspecting a coiled hose beside the bay", "load": "calm"},
+      {"text": "wiping dust from a helmet visor", "load": "active"},
+      {"text": "reviewing the vehicle departure checklist", "load": "calm"},
+      {"text": "testing a handheld radio", "load": "active"},
+      {"text": "organizing tools inside an equipment locker", "load": "calm"},
+      {"text": "lifting a supply case from the storage shelf", "load": "active"},
+      {"text": "checking the station clock", "load": "calm"},
+      {"text": "closing a bay cabinet after inspection", "load": "active"},
+      {"text": "studying a posted route diagram", "load": "calm"},
+      {"text": "walking toward the vehicle bay", "load": "active"},
+      {"text": "counting sealed response kits", "load": "calm"},
+      {"text": "checking flashlight batteries in the locker", "load": "active"},
+      {"text": "matching equipment tags to the checklist", "load": "calm"},
+      {"text": "fastening a label to a supply case", "load": "active"}
+    ],
+    "family_refs": [
+      {"name": "performance_focus", "offset": 4, "take": 4}
+    ]
+  },
+  "flower_market": {
+    "direct_actions": [
+      {"text": "trimming stems beside a wrapping counter", "load": "active"},
+      {"text": "checking moisture in a flower bucket", "load": "calm"},
+      {"text": "arranging a bundle by color", "load": "active"},
+      {"text": "reading a handwritten price card", "load": "calm"},
+      {"text": "carrying wrapped flowers between stalls", "load": "active"},
+      {"text": "removing wilted leaves from a bouquet", "load": "calm"},
+      {"text": "filling a small vase at the counter", "load": "active"},
+      {"text": "sorting ribbons beside the wrapping paper", "load": "calm"},
+      {"text": "spraying water over a display tray", "load": "active"},
+      {"text": "checking a delivery crate of flowers", "load": "calm"},
+      {"text": "tying a label onto a finished bouquet", "load": "active"},
+      {"text": "placing fresh stems in a shaded bucket", "load": "calm"}
+    ],
+    "family_refs": [
+      {"name": "retail_service", "offset": 0, "take": 4},
+      {"name": "public_presence", "offset": 0, "take": 4}
+    ]
+  },
+  "forest_cabin": {
+    "direct_actions": [
+      {"text": "stacking split wood beside the cabin door", "load": "active"},
+      {"text": "checking the latch on a wooden window", "load": "calm"},
+      {"text": "placing a kettle on the cabin stove", "load": "active"},
+      {"text": "reading a trail map on the table", "load": "calm"},
+      {"text": "brushing pine needles from the porch", "load": "active"},
+      {"text": "examining tracks near the clearing", "load": "calm"},
+      {"text": "folding a blanket beside the fireplace", "load": "active"},
+      {"text": "checking supplies inside a storage chest", "load": "calm"},
+      {"text": "carrying a lantern toward the doorway", "load": "active"},
+      {"text": "watching mist gather beyond the trees", "load": "calm"},
+      {"text": "sweeping leaves from the cabin steps", "load": "active"},
+      {"text": "placing a mug beside the window", "load": "calm"},
+      {"text": "refilling the wood basket beside the stove", "load": "active"},
+      {"text": "checking the cabin water container", "load": "calm"},
+      {"text": "folding trail supplies into a canvas bag", "load": "active"},
+      {"text": "latching the storage cupboard", "load": "calm"}
+    ],
+    "family_refs": [
+      {"name": "home_rhythm", "offset": 4, "take": 4}
+    ]
+  },
+  "maker_space": {
+    "direct_actions": [
+      {"text": "sorting components beside a prototype bench", "load": "calm"},
+      {"text": "tightening a fastener on a small device", "load": "active"},
+      {"text": "checking a parts list on a clipboard", "load": "calm"},
+      {"text": "moving a completed model to a storage shelf", "load": "active"},
+      {"text": "testing a switch on a circuit board", "load": "calm"},
+      {"text": "clearing filings from the work surface", "load": "active"},
+      {"text": "labeling containers of spare parts", "load": "calm"},
+      {"text": "clamping a piece into a bench vise", "load": "active"},
+      {"text": "comparing a prototype with its printed plan", "load": "calm"},
+      {"text": "charging a tool beside the workbench", "load": "active"},
+      {"text": "checking the ventilation control", "load": "calm"},
+      {"text": "returning measuring tools to their rack", "load": "active"},
+      {"text": "measuring a component with a caliper", "load": "calm"},
+      {"text": "fastening a panel onto the prototype", "load": "active"},
+      {"text": "checking power at the soldering station", "load": "calm"},
+      {"text": "placing safety glasses beside the tool mat", "load": "active"}
+    ],
+    "family_refs": [
+      {"name": "work_rhythm", "offset": 0, "take": 4}
+    ]
+  },
+  "observatory_dome": {
+    "direct_actions": [
+      {"text": "checking the telescope control panel", "load": "calm"},
+      {"text": "opening the dome shutter mechanism", "load": "active"},
+      {"text": "aligning a star chart beside the telescope", "load": "calm"},
+      {"text": "adjusting the focus control", "load": "active"},
+      {"text": "recording a reading in an observation log", "load": "calm"},
+      {"text": "checking the dome weather display", "load": "active"},
+      {"text": "watching the first stars emerge", "load": "calm"},
+      {"text": "moving a red lamp across the instrument table", "load": "active"},
+      {"text": "comparing two marked sky positions", "load": "calm"},
+      {"text": "securing the telescope cover", "load": "active"},
+      {"text": "reading a maintenance note near the console", "load": "calm"},
+      {"text": "closing the dome after observation", "load": "active"}
+    ],
+    "family_refs": [
+      {"name": "speculative_exploration", "offset": 4, "take": 4},
+      {"name": "quiet_study", "offset": 4, "take": 4}
+    ]
+  },
+  "print_shop": {
+    "direct_actions": [
+      {"text": "checking paper samples beside the counter", "load": "calm"},
+      {"text": "feeding a sheet into the printing machine", "load": "active"},
+      {"text": "comparing ink swatches on a sample card", "load": "calm"},
+      {"text": "stacking finished pages on a drying rack", "load": "active"},
+      {"text": "reviewing a layout proof", "load": "calm"},
+      {"text": "cutting a printed sheet along its guide", "load": "active"},
+      {"text": "sorting envelopes by size", "load": "calm"},
+      {"text": "binding a small set of documents", "load": "active"},
+      {"text": "checking an order note beside the register", "load": "calm"},
+      {"text": "placing a completed order in a paper sleeve", "load": "active"},
+      {"text": "wiping toner dust from the work counter", "load": "calm"},
+      {"text": "organizing paper rolls near the finishing station", "load": "active"}
+    ],
+    "family_refs": [
+      {"name": "retail_service", "offset": 4, "take": 4},
+      {"name": "work_rhythm", "offset": 4, "take": 4}
+    ]
+  },
+  "public_plaza": {
+    "direct_actions": [
+      {"text": "checking a plaza map beside the paving", "load": "calm"},
+      {"text": "walking toward a marked meeting point", "load": "active"},
+      {"text": "pausing beneath a civic information sign", "load": "calm"},
+      {"text": "crossing the open square between planters", "load": "active"},
+      {"text": "reading an event notice on the board", "load": "calm"},
+      {"text": "placing a folded leaflet on a bench", "load": "active"},
+      {"text": "looking toward the fountain at the center", "load": "calm"},
+      {"text": "following directional markers across the plaza", "load": "active"},
+      {"text": "checking the time beneath the clock tower", "load": "calm"},
+      {"text": "standing beside a low stone planter", "load": "calm"},
+      {"text": "moving toward the covered edge of the square", "load": "active"},
+      {"text": "examining a temporary public display", "load": "calm"}
+    ],
+    "family_refs": [
+      {"name": "public_presence", "offset": 4, "take": 4},
+      {"name": "leisure_participation", "offset": 0, "take": 4}
+    ]
+  },
+  "rooftop_cafe": {
+    "direct_actions": [
+      {"text": "choosing a table beside the rooftop rail", "load": "calm"},
+      {"text": "carrying a drink across the open terrace", "load": "active"},
+      {"text": "reading a menu beneath the awning", "load": "calm"},
+      {"text": "checking the skyline beyond the tables", "load": "calm"},
+      {"text": "placing a cup beside a small planter", "load": "active"},
+      {"text": "folding a receipt near the table edge", "load": "calm"},
+      {"text": "moving a chair away from the walkway", "load": "active"},
+      {"text": "watching clouds pass above the buildings", "load": "calm"},
+      {"text": "checking the rooftop closing notice", "load": "calm"},
+      {"text": "carrying a tray toward the service counter", "load": "active"},
+      {"text": "resting beside the lit parapet", "load": "calm"},
+      {"text": "returning an empty cup to the collection shelf", "load": "active"}
+    ],
+    "family_refs": [
+      {"name": "leisure_participation", "offset": 4, "take": 4},
+      {"name": "resort_relaxation", "offset": 4, "take": 4}
+    ]
+  },
+  "tram_platform": {
+    "direct_actions": [
+      {"text": "checking the tram arrival display", "load": "calm"},
+      {"text": "walking along the marked platform line", "load": "active"},
+      {"text": "reading a route map beside the shelter", "load": "calm"},
+      {"text": "holding a pass near the platform validator", "load": "active"},
+      {"text": "watching rails glisten after rainfall", "load": "calm"},
+      {"text": "moving beneath the shelter before departure", "load": "active"},
+      {"text": "checking a service notice on the pole", "load": "calm"},
+      {"text": "following the boarding marker to the front", "load": "active"},
+      {"text": "folding a printed transit map", "load": "calm"},
+      {"text": "looking toward the approaching tram lights", "load": "active"},
+      {"text": "standing beside the route information case", "load": "calm"},
+      {"text": "stepping toward the open tram doorway", "load": "active"},
+      {"text": "checking the boarding zone number", "load": "calm"},
+      {"text": "standing behind the platform edge marking", "load": "calm"},
+      {"text": "checking the service indicator beside the shelter", "load": "active"},
+      {"text": "placing the pass back in its card holder", "load": "calm"}
+    ],
+    "family_refs": [
+      {"name": "transit_flow", "offset": 4, "take": 4}
+    ]
+  }
+}

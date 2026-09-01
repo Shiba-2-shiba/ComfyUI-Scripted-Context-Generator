@@ -1,5 +1,8 @@
 # Curated Reference Adoption Specification
 
+> Completed adoption wave. Current authority and future change gates are in
+> `docs/semantic_epig/README.md`.
+
 対象リポジトリ: `ComfyUI-Scripted-Context-Generator`  
 対象ブランチ: `dev2`  
 作成日: 2026-06-17 JST  

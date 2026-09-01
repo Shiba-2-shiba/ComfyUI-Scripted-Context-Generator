@@ -44,6 +44,25 @@ class TestContextPipeline(unittest.TestCase):
         self.assertIsInstance(updated.loc, str)
         self.assertIsInstance(updated.action, str)
 
+    def test_scene_candidate_preview_is_bounded_but_keeps_total_count(self):
+        ctx = patch_context({}, updates={
+            "subj": "business girl",
+            "costume": "office_lady",
+            "loc": "modern_office",
+            "action": "writing at a desk",
+            "seed": 101,
+        })
+
+        _updated, debug = apply_scene_variation(ctx, 101, "full")
+
+        preview = debug.decision["candidates_preview"]
+        self.assertLessEqual(len(preview), 24)
+        self.assertEqual(debug.decision["candidates_count"], debug.decision["candidates_preview_total_count"])
+        self.assertEqual(
+            debug.decision["candidates_preview_truncated_count"],
+            debug.decision["candidates_count"] - len(preview),
+        )
+
     def test_apply_scene_variation_uses_source_subject_key_when_profile_overwrites_subj(self):
         ctx = patch_context(
             {},

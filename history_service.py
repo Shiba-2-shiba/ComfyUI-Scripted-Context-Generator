@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 from typing import Any
 
 if __package__:
@@ -74,11 +75,27 @@ def clothing_signature_from_decision(decision: dict | None) -> str:
     return f"{chosen_type}|{base_pack}|{base_variant}|{outerwear_pack}|{outerwear_variant}"
 
 
+def clothing_signature_digest(signature: str) -> str:
+    value = str(signature or "").strip()
+    if not value:
+        return ""
+    return "sha256:" + hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
 def recent_clothing_signatures(ctx: Any, limit: int = 4) -> list[str]:
     recent = []
     for decision in recent_history_decisions(ctx, "ContextClothingExpander", limit=limit):
-        signature = clothing_signature_from_decision(decision)
-        if signature and signature != "none|none|none":
+        raw_signature = clothing_signature_from_decision(decision)
+        stored_signature = str(decision.get("signature", "")).strip()
+        if raw_signature != "none|none|none|none|none":
+            signature = clothing_signature_digest(raw_signature)
+        elif stored_signature.startswith("sha256:"):
+            signature = stored_signature
+        elif stored_signature:
+            signature = clothing_signature_digest(stored_signature)
+        else:
+            continue
+        if signature:
             recent.append(signature)
     return recent
 

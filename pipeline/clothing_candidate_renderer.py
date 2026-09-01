@@ -6,14 +6,14 @@ from typing import Any
 try:
     from ..clothing_service import resolve_clothing_theme
     from ..core.semantic_policy import sanitize_text
-    from ..history_service import clothing_signature_from_decision, extract_object_flags
+    from ..history_service import clothing_signature_digest, clothing_signature_from_decision, extract_object_flags
     from ..location_service import resolve_location_key
     from ..vocab import clothing as clothing_vocab
     from ..vocab.seed_utils import mix_seed
 except ImportError:
     from clothing_service import resolve_clothing_theme
     from core.semantic_policy import sanitize_text
-    from history_service import clothing_signature_from_decision, extract_object_flags
+    from history_service import clothing_signature_digest, clothing_signature_from_decision, extract_object_flags
     from location_service import resolve_location_key
     from vocab import clothing as clothing_vocab
     from vocab.seed_utils import mix_seed
@@ -302,7 +302,7 @@ def render_clothing_candidate(
 
     prompt = sanitize_text(", ".join(final_parts))
     decision["objects"] = sorted(extract_object_flags(prompt))
-    decision["signature"] = clothing_signature_from_decision(decision)
+    decision["signature"] = clothing_signature_digest(clothing_signature_from_decision(decision))
     if recent_signatures and decision["signature"] in recent_signatures:
         decision["repeat_guard_hit"] = True
     decision["prompt"] = prompt

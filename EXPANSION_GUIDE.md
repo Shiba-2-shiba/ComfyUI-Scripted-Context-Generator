@@ -14,16 +14,41 @@
 - semantic-only prompt cleanliness
 
 現在値は `CURRENT_STATUS.md` と次のコマンドで確認します。
-日常系 location / action pool の具体的な拡張計画は `docs/variation_expansion/README.md` を参照します。
+日常系 location / action pool の入口は `docs/variation_expansion/README.md`、
+段階的500k計画の正本は `docs/variation_expansion/500k_loop_plan.md` です。
+PlannerのL1-L3基本境界は `docs/variation_expansion/planner_refactor_spec.md`、
+promoted L1差分は `docs/variation_expansion/planner_l1_contract.md` を参照します。
 現在は 100k gate を通過済みです。次の拡張では、500k を見据えて
 subject / location / compatibility density / action depth を事前に
 `tools/plan_variation_target.py` で測ってから進めます。
 
 ```bash
 python assets/calc_variations.py --json
-python tools/plan_variation_target.py --target 100000
+python tools/plan_variation_target.py --target 500000
 python tools/check_variation_scope.py
 ```
+
+V150の仮想shapeは、hash-bound scenario fileを明示して測ります。
+
+```bash
+python tools/plan_variation_target.py --target 150000 --scenario-file <scenario.json>
+```
+
+L1では `stage_id=V150` / target `150000` のみ受理します。V250以降は前段の
+promoted receiptをbaselineとして固定するL3 handoffまで有効化しません。
+
+V150候補はdata edit前にL2 analyzerへ渡します。
+
+```bash
+python tools/analyze_variation_candidates.py --catalog <catalog.json> --scenario-file <scenario.json> --projection-report <projection.json>
+```
+
+`structural_status=pass` かつ `eligible_for_prompt_evaluation=true` になるまで
+prompt生成へ進みません。L2でprompt-quality passを自己申告することはできません。
+
+L3ではisolated snapshotのrealized metricsを再計測します。Projection値ではなく
+snapshot実測がstage targetを満たし、manifestの
+`prompt_generation_allowed=true` が再検証できた場合だけ64+16生成へ進みます。
 
 ## Source Files
 
@@ -132,29 +157,37 @@ python -c "from asset_validator import validate_assets; print(validate_assets())
 python assets/calc_variations.py --json > assets/results/variation_before.json
 ```
 
-2. Edit the smallest data surface that expresses the new variation.
+2. Lock the stage hypothesis, target/guard metrics, owned files, input hashes,
+   and prompt-quality cohort before editing data.
+
+3. Edit the smallest data surface that expresses the locked candidate.
    For base variation sizing, update `vocab/data/variation_scope.json` and
    regenerate `assets/compatibility_review.csv` only through
    `tools/build_compatibility_review.py`.
 
-3. Run the matching focused checks from the sections above.
+   A new subject/location must first be representable by
+   `scene_compatibility.json` and, where applicable, `prompts.jsonl`; a scope-only
+   addition is not sufficient.
 
-4. Run the expansion validator:
+4. Run the matching focused checks from the sections above.
+
+5. Run the expansion validator:
 
 ```bash
 python tools/validate_prompt_data.py
-python tools/plan_variation_target.py --target 100000
+python tools/plan_variation_target.py --target 500000
 python tools/check_variation_scope.py
 ```
 
-5. Compare variation metrics:
+6. Compare variation metrics and run the locked prompt-quality baseline/candidate
+   loop. A numeric increase without prompt-quality evidence cannot be promoted:
 
 ```bash
 python assets/calc_variations.py --json > assets/results/variation_after.json
 python tools/report_expansion_delta.py assets/results/variation_before.json assets/results/variation_after.json
 ```
 
-6. Run the broader safety checks before committing:
+7. Run the broader safety checks before committing:
 
 ```bash
 python -m unittest discover -s assets -p "test_*.py"
@@ -180,7 +213,7 @@ The generator reads:
 Current state:
 
 - current generated rows match the checked-in CSV rows
-- current generated/current row count is `5,926`
+- current generated/current row count is `5,806`
 - subject/location pair drift is `0`
 - `prompts.jsonl` rows are expected to stay inside the current variation scope
 
@@ -234,6 +267,8 @@ file during intentional migration work.
 - Do not count a location in base variation sizing unless it is in `variation_scope.json` and `assets/compatibility_review.csv`.
 - Do not run the legacy `assets/validate_compatibility.py` as a regeneration step; it targets the full compatibility surface and writes the CSV directly.
 - Keep public `Context*` node inputs stable unless workflow round-trip tests are updated together.
+- Do not promote a variation stage unless the current `docs/prompt_quality/`
+  target and guard dimensions pass on locked control/exploration and confirmation cohorts.
 
 ## Reading The Validator Summary
 

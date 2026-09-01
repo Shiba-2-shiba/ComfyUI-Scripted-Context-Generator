@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import Dict, Iterable, List, Sequence, Set, Tuple
 
 
@@ -21,7 +22,10 @@ def semantic_families_for_text(text: str) -> Set[str]:
     lowered = str(text or "").lower()
     families = set()
     for family, keywords in SEMANTIC_FAMILY_KEYWORDS.items():
-        if any(keyword in lowered for keyword in keywords):
+        if any(
+            re.search(rf"(?<![a-z0-9]){re.escape(keyword)}(?![a-z0-9])", lowered)
+            for keyword in keywords
+        ):
             families.add(family)
     return families
 

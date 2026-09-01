@@ -1,7 +1,11 @@
 # Semantic EPIG Refactor Tasks
 
+> Completed historical task board (R0-R7, 2026-06-16). Do not reopen it for a
+> new change. Start from `docs/semantic_epig/README.md` and create a new
+> loop-engineering experiment/wave.
+
 対象リポジトリ: `Shiba-2-shiba/ComfyUI-Scripted-Context-Generator`
-対象ブランチ: `dev2`
+対象ブランチ（当時）: `dev2`
 作成日: 2026-06-16
 関連仕様: `refactor_spec.md`
 関連進捗: `refactor_progress.md`
@@ -341,6 +345,10 @@ Acceptance:
 
 - [x] Matching action key returns descriptors
 - [ ] Matching relation key returns descriptors
+
+Post-wave resolution: completed later by the curated-reference adoption wave;
+see `curated_reference_adoption_progress.md` section 6.2 and
+`assets/test_action_semantics.py`.
 - [x] Unknown slot/action returns empty list
 
 ### R4.3 Integrate descriptor options into action slot selection

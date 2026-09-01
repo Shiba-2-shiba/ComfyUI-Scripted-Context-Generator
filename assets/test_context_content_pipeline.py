@@ -7,7 +7,11 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from core.context_ops import append_history, patch_context
 from core.schema import DebugInfo
-from history_service import clothing_signature_from_decision
+from history_service import (
+    clothing_signature_digest,
+    clothing_signature_from_decision,
+    recent_clothing_signatures,
+)
 from pipeline.mood_builder import apply_mood_expansion
 from pipeline.clothing_builder import apply_clothing_expansion, expand_clothing_prompt
 from pipeline.location_builder import apply_location_expansion
@@ -68,6 +72,7 @@ class TestContextContentPipeline(unittest.TestCase):
         self.assertTrue(clothing_debug["selected_by_semantic"])
         self.assertIn("target_vector", clothing_debug)
         self.assertGreaterEqual(len(clothing_debug["candidate_scores"]), 1)
+        self.assertNotIn("prompt", updated.history[-1].decision)
 
     def test_apply_clothing_expansion_suppresses_outerwear_for_home_locations(self):
         ctx = patch_context(
@@ -197,6 +202,7 @@ class TestContextContentPipeline(unittest.TestCase):
                 self._assert_any_state_term_present(theme, loc, terms, mode=mode)
 
     def test_clothing_signature_tracks_variant_details_within_same_pack(self):
+        from history_service import clothing_signature_digest
         first = clothing_signature_from_decision(
             {
                 "chosen_type": "separates",
@@ -216,6 +222,28 @@ class TestContextContentPipeline(unittest.TestCase):
             }
         )
         self.assertNotEqual(first, second)
+        self.assertNotEqual(clothing_signature_digest(first), clothing_signature_digest(second))
+        self.assertEqual(len(clothing_signature_digest(first)), 71)
+
+    def test_legacy_raw_clothing_signature_normalizes_to_current_digest(self):
+        decision = {
+            "chosen_type": "separates",
+            "base_pack": "modern_office_attire",
+            "base_variant": "silk_blouse~pencil_skirt~navy",
+            "outerwear_pack": "none",
+            "outerwear_variant": "none",
+        }
+        raw_signature = clothing_signature_from_decision(decision)
+        legacy = {**decision, "signature": raw_signature}
+        current = {**decision, "signature": clothing_signature_digest(raw_signature)}
+        ctx = patch_context({})
+        ctx = append_history(ctx, DebugInfo(node="ContextClothingExpander", seed=1, decision=legacy))
+        ctx = append_history(ctx, DebugInfo(node="ContextClothingExpander", seed=2, decision=current))
+
+        recent = recent_clothing_signatures(ctx)
+
+        self.assertEqual(recent[0], clothing_signature_digest(raw_signature))
+        self.assertEqual(recent[1], clothing_signature_digest(raw_signature))
 
     def test_apply_location_expansion_writes_extras(self):
         ctx = patch_context(

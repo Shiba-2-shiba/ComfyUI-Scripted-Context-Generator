@@ -1,0 +1,20 @@
+{
+  "schema_version": "variation-quality-candidate-iteration/v2",
+  "catalog_id": "v150-candidate-004",
+  "stage_id": "V150",
+  "base_catalog_path": "docs/variation_expansion/experiments/v150-candidate-l2-iteration-002/candidate-iteration.json",
+  "base_catalog_sha256": "501294caf430a172022b70c677708daa366e3f73a34bf23e747fda4bc0ca6165",
+  "location_additions_path": "docs/variation_expansion/experiments/v150-candidate-shape-iteration-004/location-catalog-additions.json",
+  "location_additions_sha256": "919a9ac02e74b1f6f9ed5e0dfedeea96cfa043f9ccc15b96b9e5c4b0f82665f9",
+  "scenario_binding": {
+    "scenario_manifest_sha256": "207eeac965bfb9d0f5229301bd3f2323e77d55f9cc9f08e1f9d5b91a073db740",
+    "projection_report_sha256": "a777c72af345f6dca180cfd37afcf5ace53a82d33b5502a67c3c25927ba5099d",
+    "scenario_id": "v150-balanced-canonical-004",
+    "baseline_manifest_sha256": "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54"
+  },
+  "quality_limits": {
+    "max_exact_duplicate_pressure_basis_points": 1000,
+    "max_shared_family_location_reuse": 30
+  },
+  "prompt_quality_receipt": null
+}

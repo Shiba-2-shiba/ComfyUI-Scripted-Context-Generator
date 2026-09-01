@@ -1,0 +1,57 @@
+{
+  "schema_version": "variation-candidate-l2-receipt/v1",
+  "experiment_id": "v150-candidate-l2-iteration-001",
+  "terminal_state": "REJECTED",
+  "recorded_at": "2026-09-01",
+  "repository_head": "40cbe2645b96322be994320b31fba0f630a2de94",
+  "baseline_manifest_sha256": "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54",
+  "artifact_hashes": {
+    "scenario-manifest.json": "28564cb55b5af4755b8ddf206c36e1105128c6eb7199d18cda56dc14c6ecb4c7",
+    "projection-report.json": "422de052f89cbc33c126797d17cc4a0176568d5f535c2598d67c35ae9e8bf9cf",
+    "candidate-catalog.json": "507d36b447e9cb1ebda482f474e370c4107162f9a1a4df6d9656e207e1fb31fa",
+    "analysis-report.json": "6b06604f5cd04cf4be213467801697cacf466ee68eb50f397c69f5f3c4434c5f",
+    "tools/analyze_variation_candidates.py": "5544a9cd2f7eb5857cc97d42fff840ea2f09258b6c749e01955b5c74176fdae5",
+    "assets/test_variation_candidate_analyzer.py": "d9ceb283a9a2cd1cdd0d9f2bab413a325381f6497ed7a0504b0cb515b14130d5",
+    "assets/fixtures/variation_candidate_analyzer/valid_catalog_v1.json": "4ee0813239e292501bb02f6628393d6e0c2a3da31d2a6abe4dcbe99c7c0b96d4"
+  },
+  "content_hashes": {
+    "catalog_canonical_sha256": "86ab462199d729aa5e3044b34f41280f8562b1b1ac2e830bf8fa63ad002dfe04",
+    "scenario_manifest_canonical_sha256": "4b089bd3065f75d3271acf02b8fc4ad628bbfcd404ef04ed2e98c1fd3106ca7a",
+    "projection_report_canonical_sha256": "5b766a3bf5012aa568dda4cf3593b2cce982f521fcd3bcd4b4b88c98e7b55cb8"
+  },
+  "projection": {
+    "projected_rows": 8646,
+    "projected_base_variations": 150436,
+    "target_met": true
+  },
+  "analysis": {
+    "structural_status": "fail",
+    "eligible_for_prompt_evaluation": false,
+    "promotion_ready": false,
+    "prompt_quality_status": "not_evaluated",
+    "estimated_coverage_rows": 7817,
+    "coverage_margin": -829,
+    "candidate_action_count": 240,
+    "candidate_duplicate_occurrences": 120,
+    "candidate_duplicate_pressure_basis_points": 5000,
+    "duplicate_pressure_limit_basis_points": 1000
+  },
+  "rejection_reasons": [
+    "insufficient_candidate_coverage",
+    "duplicate_pressure_exceeded"
+  ],
+  "verification": {
+    "focused_tests": "41 tests OK",
+    "tracked_report_reproduction": "canonical byte-equivalent",
+    "prompt_data": "ERROR: [], WARNING: []",
+    "full_flow": "OK",
+    "independent_verifier": "Analyzer APPROVE; candidate REJECT",
+    "independent_code_review": "APPROVE; all five analyzer boundary findings resolved"
+  },
+  "next_iteration_requirements": [
+    "Reduce projected compatibility density or add semantically justified coverage until estimated rows meet the scenario.",
+    "Replace broad repeated family expansion with more location-specific actions or narrower family slices until total exact duplicate pressure is at most 1000 basis points.",
+    "Keep prompt quality unevaluated until structural gates pass and candidate data can be generated on the locked cohort.",
+    "Create a new iteration directory; do not overwrite this rejected evidence."
+  ]
+}

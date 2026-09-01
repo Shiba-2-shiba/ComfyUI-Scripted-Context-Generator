@@ -1,0 +1,91 @@
+{
+  "schema_version": "variation-candidate-prompt-rejection-receipt/v1",
+  "experiment_id": "v150-candidate-shape-iteration-004",
+  "terminal_state": "REJECTED",
+  "recorded_at": "2026-09-01",
+  "repository_head": "40cbe2645b96322be994320b31fba0f630a2de94",
+  "local_snapshot": {
+    "path": "assets/results/variation_candidate_l3/v150-i4-q5",
+    "snapshot_plan_canonical_sha256": "ed16090752f1a2a19bb6c8821f318d62e1be1d078fd4b2642654f46fdbc890e2",
+    "snapshot_manifest_sha256": "51842da607f91328d21506742f38ae45e6391460ca0563d89bbadd8ab90e4eea"
+  },
+  "snapshot_hashes": {
+    "baseline_source_tree_sha256": "ba01f312c8248ce26d8c1954672a09700a75c67ede275eaf8fd9eb58c338aa8c",
+    "candidate_source_tree_sha256": "92160a1e25c3a9ed328d8369781f2d32a399b9312866bfb9bedb9522194229f8",
+    "baseline_snapshot_content_sha256": "87d7f7d9ce64bb1ee6b1533a60f54a16e1410a3925fbfd6a3cce591797c0b013",
+    "candidate_snapshot_content_sha256": "f697c450aaa67aa7917a7cb4411d606e317bf353edee647b402d935f090b7f49",
+    "active_source_before_sha256": "01612a2985b789cbc901a06227076277c93db10283519f231a96fd806d2ce2b7",
+    "active_source_after_sha256": "01612a2985b789cbc901a06227076277c93db10283519f231a96fd806d2ce2b7"
+  },
+  "prompt_evidence": {
+    "experiment_path": "docs/variation_expansion/experiments/v150-candidate-shape-iteration-004/prompt-quality-experiment.json",
+    "experiment_canonical_sha256": "7cbd1d30ff002a4f67e51d1b41481c681f3c55ded96a4d9af8de1a9a5c10b55d",
+    "experiment_file_sha256": "289106fd049ccbdd8c09428e25b6134d146a5beb8e0f0e9e019475a589398cdb",
+    "baseline_run_manifest_sha256": "5947b34f3743631a5b2289a4ac6b3dacaab130073ea65e2251970a67b7105118",
+    "candidate_run_manifest_sha256": "1564ebd6e36d78f6b252057b99644ffe83a93a310a1ba9f75da35da8e8a9fde7",
+    "comparison_path": "docs/variation_expansion/experiments/v150-candidate-shape-iteration-004/prompt-pair-comparison.json",
+    "comparison_canonical_sha256": "1a0ee07178afad3af7f1fdd68830d902dda27751fffa0bffcdc62a610f69a9e1",
+    "comparison_file_sha256": "f2606da8820992629f298a9032d55120ea20c4e9c1ebef5cb9e57753610a01bf",
+    "cohort_hash": "1b7017819fe1ff11c822b27e61d035b0ce0596dd6f06f85c27f6a45766912492",
+    "records_per_side": 80,
+    "control_count": 64,
+    "exploration_count": 16,
+    "replay_mismatch_count": 0
+  },
+  "implementation_hashes": {
+    "tools/compare_variation_prompt_pair.py": "34f6cfdc3ca81f16882ef724310a91a5d561ec2dfd359793db22eaae121ffb2f",
+    "assets/test_variation_prompt_pair.py": "29af07898f885d7c983a572b58776510602d0f9c2f002dab759e42c1f85c1e57"
+  },
+  "realized_metrics": {
+    "unique_subjects": 135,
+    "unique_locations": 109,
+    "compatibility_rows": 8227,
+    "realized_base_variations": 150184,
+    "target": 150000,
+    "target_met": true,
+    "location_signature_entropy_before": 4.831091,
+    "location_signature_entropy_after": 5.242171,
+    "candidate_subjects_unseen": 0,
+    "candidate_locations_unseen": 8,
+    "candidate_action_pool_locations_unseen": 13,
+    "repeated_ngram_count_before": 12,
+    "repeated_ngram_count_after": 16,
+    "context_json_bytes_max_before": 29094,
+    "context_json_bytes_max_after": 30430,
+    "context_json_bytes_p95_before": 28692.15,
+    "context_json_bytes_p95_after": 29297.5
+  },
+  "decision": {
+    "state": "REJECTED",
+    "prompt_quality_state": "COMPARED",
+    "promotion_ready": false,
+    "blind_review_run": false,
+    "confirmation_run": false,
+    "failures": [
+      "candidate_action_pool_coverage_incomplete",
+      "candidate_location_coverage_incomplete",
+      "guard_regressed:naturalness.repeated_ngram_count",
+      "guard_regressed:runtime.context_json_bytes_max",
+      "guard_regressed:runtime.context_json_bytes_p95"
+    ]
+  },
+  "verification": {
+    "focused_comparator_tests": "16 tests OK",
+    "combined_l1_l3_tests": "100 tests OK",
+    "snapshot_manifest_validation": "pass",
+    "run_contract_recomputed_from_snapshot": true,
+    "active_source_unchanged": true,
+    "active_variation_scope_check": "pass; 120 subjects / 90 locations / 5,806 rows / 103,212 base variations",
+    "active_compatibility_review_check": "pass; zero row or pair drift",
+    "active_action_pool_check": "pass; 96 runtime/source locations",
+    "independent_verifier": "APPROVE terminal REJECT evidence; all bindings valid",
+    "independent_code_review": "APPROVE; no remaining findings after authenticated run-contract hardening"
+  },
+  "next_iteration_requirements": [
+    "Design a deterministic coverage supplement for the eight unseen candidate locations and thirteen unseen candidate location/action pairs.",
+    "Reduce repeated n-gram pressure without weakening the accepted prompt-quality guards.",
+    "Reduce candidate context p95 and maximum size before any review or confirmation stage.",
+    "Do not promote active subjects, locations, compatibility rows, or action pools from this rejected snapshot.",
+    "Keep subject additions at zero unless a later utility hypothesis independently justifies them."
+  ]
+}

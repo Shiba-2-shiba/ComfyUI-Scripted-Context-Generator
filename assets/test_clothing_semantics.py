@@ -62,6 +62,36 @@ class TestClothingSemantics(unittest.TestCase):
         self.assertEqual(payload["baseline_selected_attempt_index"], 0)
         self.assertEqual(payload["semantic_selected_attempt_index"], 0)
         self.assertEqual(payload["candidate_scores"][0]["repeat_penalty"], 2)
+        self.assertEqual(payload["candidate_score_count"], 1)
+
+    def test_debug_payload_compacts_unselected_candidate_details(self):
+        from pipeline.clothing_semantics import clothing_semantic_debug_payload
+
+        scores = [
+            {
+                "attempt_index": index,
+                "score": 0.8 - index * 0.05,
+                "distance": 0.1 + index * 0.05,
+                "semantic_penalty": index,
+                "repeat_penalty": index,
+                "final_penalty": index,
+            }
+            for index in range(5)
+        ]
+        payload = clothing_semantic_debug_payload(
+            target_vector={},
+            candidate_scores=scores,
+            selected_attempt_index=2,
+            baseline_selected_attempt_index=0,
+            semantic_selected_attempt_index=2,
+            selected_by_semantic=True,
+        )
+
+        self.assertEqual(payload["candidate_score_count"], 5)
+        self.assertEqual(len(payload["candidate_scores"]), 5)
+        self.assertIn("distance", payload["candidate_scores"][0])
+        self.assertNotIn("distance", payload["candidate_scores"][1])
+        self.assertIn("distance", payload["candidate_scores"][2])
 
     def test_clothing_candidate_renderer_filters_state_details_by_location(self):
         from pipeline.clothing_candidate_renderer import location_allows_state_detail, render_clothing_candidate

@@ -1,5 +1,8 @@
 # Solo Duplicate Suppression Refactor Tasks
 
+> Completed focused-refactor task board. Start new work from
+> `docs/semantic_epig/README.md`; do not reopen this board.
+
 対象リポジトリ: `Shiba-2-shiba/ComfyUI-Scripted-Context-Generator`
 対象ブランチ: `dev2`
 作成日: 2026-06-18

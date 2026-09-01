@@ -1,11 +1,11 @@
-# 100k Stabilization and 500k Forward Plan
+# 100k Stabilization and Historical 500k Forward Notes
 
 Last updated: 2026-05-08
 
 ## Goal
 
-Record the completed 100k stabilization lane and define the current P13
-planning surface for 500k.
+Record the completed 100k stabilization lane and the assumptions that led into
+P13. The canonical active 500k plan is `500k_loop_plan.md`.
 
 Current targets:
 
@@ -277,10 +277,11 @@ Verification result:
 
 ### P13: 500k Target Planning
 
-Status: `active planning`
+Status: `superseded by the canonical staged plan in 500k_loop_plan.md`
 
 Before adding more data, model the next shape with the same discipline used for
-the 100k lane. The likely variables are:
+the 100k lane and the loop-engineering gates adopted from `docs/prompt_quality/`.
+The likely variables are:
 
 - subject count
 - location count
@@ -292,7 +293,8 @@ Do not begin by bulk-adding subjects or actions. First measure what combination
 can reach `500,000` without weakening semantic quality or making action text
 feel repetitive.
 
-P13 should produce a scenario note before implementation. At minimum, record:
+The active plan expands these notes into L0-L3 planner passes and sequential
+V150/V250/V350/V500 gates. At minimum, each stage records:
 
 - current `--target 500000` planner output
 - subject-only, location-only, compatibility-density, and action-depth scenarios
@@ -300,6 +302,8 @@ P13 should produce a scenario note before implementation. At minimum, record:
 - rejected inflation routes, especially near-duplicate subjects or action-only growth
 - verification commands that will prove the selected route did not drift from
   the P12 clean baseline
+- prompt-quality baseline/candidate comparison, blind review, confirmation, and
+  evidence-bound terminal verdict
 
 ## 500k Forward Constraint
 
@@ -325,7 +329,8 @@ That requires the 100k work to leave these foundations in place:
 
 ## P13 Acceptance Criteria
 
-Planning is complete when:
+Planning is complete when the canonical `500k_loop_plan.md` acceptance and stop
+conditions are met, including:
 
 - `python tools/plan_variation_target.py --target 500000` has been run and summarized
 - the chosen 500k route identifies which files will change first
@@ -334,6 +339,8 @@ Planning is complete when:
   by metric impact
 - guardrails for action-family reuse are written before expanding pools again
 - P12 checks remain the baseline for any later implementation pass
+- the accepted `docs/prompt_quality/` target and guard dimensions remain the
+  quality floor for every promoted stage
 
 ## Guardrails
 

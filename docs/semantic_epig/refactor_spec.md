@@ -1,7 +1,10 @@
 # Semantic EPIG Refactor Specification
 
+> Completed historical wave (R0-R7, 2026-06-16). The canonical current index
+> and future change gate are in `docs/semantic_epig/README.md`.
+
 対象リポジトリ: `Shiba-2-shiba/ComfyUI-Scripted-Context-Generator`
-対象ブランチ: `dev2`
+対象ブランチ（当時）: `dev2`
 作成日: 2026-06-16
 関連文書:
 
@@ -40,7 +43,7 @@ builder を小さく分割する
 
 - `vocab/semantic_space.py` に共通 ranking utility がある
 - `pipeline/semantic_epig.py` に config / debug helper がある
-- `semantic_epig_config.json` で `off` / `passive` / `active` を切り替えられる
+- `vocab/data/semantic_epig_config.json` で `off` / `passive` / `active` を切り替えられる
 - public `Context*` node I/O は変更されていない
 - semantic-only 方針は維持されている
 - Semantic EPIG 直結テストは通る
@@ -365,11 +368,10 @@ Builder split は最後に行う。
 
 ### 9.1 `pipeline/action_generator.py`
 
-分割候補:
+実装済み分割:
 
 ```text
 pipeline/action_parser.py
-pipeline/action_slot_selector.py
 pipeline/action_relation_binder.py
 pipeline/action_renderer.py
 ```
@@ -386,22 +388,20 @@ Public compatibility:
 
 ### 9.2 `pipeline/location_builder.py`
 
-分割候補:
+実装済み分割:
 
 ```text
 pipeline/location_segment_selector.py
 pipeline/location_policy.py
-pipeline/location_renderer.py
 ```
 
 ### 9.3 `pipeline/clothing_builder.py`
 
-分割候補:
+実装済み分割:
 
 ```text
 pipeline/clothing_candidate_renderer.py
 pipeline/clothing_candidate_selector.py
-pipeline/clothing_tpo_adapter.py
 ```
 
 ---

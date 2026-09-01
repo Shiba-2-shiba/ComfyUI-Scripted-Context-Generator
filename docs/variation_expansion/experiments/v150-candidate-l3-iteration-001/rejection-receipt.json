@@ -1,0 +1,67 @@
+{
+  "schema_version": "variation-candidate-l3-receipt/v1",
+  "experiment_id": "v150-candidate-l3-iteration-001",
+  "terminal_state": "REJECTED",
+  "recorded_at": "2026-09-01",
+  "repository_head": "40cbe2645b96322be994320b31fba0f630a2de94",
+  "local_snapshot": {
+    "path": "assets/results/variation_candidate_l3/v150-i2-qgate-v5",
+    "snapshot_plan_sha256": "77c7e3827d8edba6bcefe798bfa798e23582d370f7ef8b716f7fb32e368cf000",
+    "snapshot_manifest_sha256": "b81e3d84abca4b905c30cd3738b85619ee4fbcaaecb2816c1a004c3ae48cc69e"
+  },
+  "implementation_hashes": {
+    "tools/materialize_variation_candidate_snapshot.py": "7e346823abe146cfd263709b160b1c37ae83d7d051bbbab3b521aee4659e3a10",
+    "assets/test_variation_candidate_snapshot.py": "fe2ecc23b6a7d6ae3f55e62d0b0d99db49912c638f070d1d8a2949b68f2072b0",
+    "tools/model_variation_candidate_contributions.py": "3e83bc285e9c8a64d3e1f77914d8ab039a6a4d2558e049990c4ab448bfa407e2",
+    "assets/test_variation_candidate_contribution_model.py": "390ba69c9f87ceed9986752104c409c236590e780982f2f87d1ad2b69eabeb27"
+  },
+  "tracked_artifacts": {
+    "contribution-report.json": "8053f38636b9b3e52e7822950a3c1693115313f4c1433cff5c0ec9a524cf26c7"
+  },
+  "snapshot_hashes": {
+    "baseline_source_tree_sha256": "b5f24af759f796737d3f4747fe37862425b82e8074674f8ed223bf095c92f278",
+    "candidate_source_tree_sha256": "e0477f748b46ff6970be0ccf17966bc79dc34f7905280b5a9bfe41ed33c65ba8",
+    "baseline_snapshot_content_sha256": "9402ce4be7a1689031a1a1aec6caa9ab7ebbb4e08b60a7d63e4ff097b12cf370",
+    "candidate_snapshot_content_sha256": "6a36e0d14f916fb7d4d386ef67280f884b621a5d67608212879d606798c96566",
+    "active_source_before_sha256": "95cf3233fe1e2361c379d867ecc3854bd53aadc3ff13079e214667507ed7cfcc",
+    "active_source_after_sha256": "95cf3233fe1e2361c379d867ecc3854bd53aadc3ff13079e214667507ed7cfcc"
+  },
+  "declared_delta": {
+    "subjects": 15,
+    "locations": 15,
+    "action_pools": 15,
+    "actions_per_location": 20
+  },
+  "realized_metrics": {
+    "unique_subjects": 135,
+    "unique_locations": 105,
+    "compatibility_rows": 7817,
+    "missing_action_pools": 0,
+    "projected_base_variations": 155920,
+    "realized_base_variations": 141984,
+    "projection_delta": -13936,
+    "target": 150000,
+    "target_gap": 8016,
+    "target_met": false
+  },
+  "decision": {
+    "state": "REJECTED",
+    "prompt_generation_allowed": false,
+    "prompt_artifacts_generated": 0,
+    "error_code": "candidate_snapshot_target_not_met"
+  },
+  "verification": {
+    "snapshot_tests": "16 tests OK",
+    "combined_l1_l3_tests": "89 tests OK",
+    "snapshot_manifest_validation": "pass",
+    "active_source_unchanged": true,
+    "independent_verifier": "APPROVE rejection and stop decision",
+    "independent_code_review": "APPROVE after plan, decision-field, and runtime-extra evidence hardening"
+  },
+  "next_iteration_requirements": [
+    "Model existing-location action depth separately from candidate-location action depth.",
+    "Recompute the V150 shape from realized compatibility contributions.",
+    "Do not run the 64+16 prompt loop until a fresh snapshot reaches 150,000 base variations.",
+    "A future paired runner must call validate_snapshot_manifest and enforce prompt_generation_allowed before child execution."
+  ]
+}

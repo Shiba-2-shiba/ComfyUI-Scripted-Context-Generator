@@ -40,6 +40,7 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file_
 
 _compat_cache = None
 _action_pools_cache = None
+SCENE_CANDIDATE_PREVIEW_LIMIT = 24
 _scene_axis_cache = None
 _garnish_vocab_module = None
 
@@ -356,7 +357,12 @@ def apply_scene_variation(context: Any, seed: int, variation_mode: str):
     )
 
     decision_log["candidates_count"] = len(candidates)
-    decision_log["candidates_preview"] = [f"{c[1]} ({c[0]})" for c in candidates]
+    candidate_preview = [f"{candidate[1]} ({candidate[0]})" for candidate in candidates]
+    decision_log["candidates_preview"] = candidate_preview[:SCENE_CANDIDATE_PREVIEW_LIMIT]
+    decision_log["candidates_preview_total_count"] = len(candidate_preview)
+    decision_log["candidates_preview_truncated_count"] = max(
+        0, len(candidate_preview) - SCENE_CANDIDATE_PREVIEW_LIMIT
+    )
     decision_log["candidate_source_counts"] = {
         "existing": sum(1 for source, _loc in candidates if _scene_candidate_family(source) == "existing"),
         "tag": sum(1 for source, _loc in candidates if _scene_candidate_family(source) == "tag"),

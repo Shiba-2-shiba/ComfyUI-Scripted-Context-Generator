@@ -1,0 +1,36 @@
+{
+  "schema_version": "variation-candidate-contribution-model/v1",
+  "catalog_sha256": "9198ca739e1014f35884452c003e9d1332836784618eb71f929cfb0f77dfd70a",
+  "scenario_id": "v150-balanced-canonical-004",
+  "baseline": {"rows": 5806, "base_variations": 103212},
+  "contributions": {
+    "new_subject_existing_location": {"rows": 589, "base_variations": 10332},
+    "existing_subject_new_location": {"rows": 1660},
+    "new_subject_new_location": {"rows": 172},
+    "all_new_location_rows": {"rows": 1832, "base_variations": 36640}
+  },
+  "estimated": {"rows": 8227, "base_variations": 150184, "target": 150000, "target_gap": -184, "target_met": true},
+  "projection_comparison": {"projected_rows": 8227, "projected_base_variations": 164540, "row_delta": 0, "base_variation_delta": -14356},
+  "subject_breakdown": {"architect": {"rows": 30, "base_variations": 520}, "astronomer": {"rows": 46, "base_variations": 788}, "barber": {"rows": 41, "base_variations": 732}, "delivery courier": {"rows": 40, "base_variations": 740}, "farmer": {"rows": 36, "base_variations": 640}, "fisher": {"rows": 41, "base_variations": 712}, "florist": {"rows": 42, "base_variations": 756}, "journalist": {"rows": 46, "base_variations": 812}, "mechanic": {"rows": 28, "base_variations": 488}, "nurse": {"rows": 42, "base_variations": 716}, "paramedic": {"rows": 33, "base_variations": 604}, "photographer": {"rows": 52, "base_variations": 892}, "researcher": {"rows": 36, "base_variations": 596}, "shopkeeper": {"rows": 41, "base_variations": 756}, "teacher": {"rows": 35, "base_variations": 580}},
+  "location_breakdown": {
+    "bike_station": {"existing_subject_rows": 107, "proposed_subject_rows": 8, "rows": 115, "actions": 20, "base_variations": 2300},
+    "canal_walkway": {"existing_subject_rows": 114, "proposed_subject_rows": 10, "rows": 124, "actions": 20, "base_variations": 2480},
+    "clinic_waiting_room": {"existing_subject_rows": 107, "proposed_subject_rows": 12, "rows": 119, "actions": 20, "base_variations": 2380},
+    "community_garden": {"existing_subject_rows": 66, "proposed_subject_rows": 4, "rows": 70, "actions": 20, "base_variations": 1400},
+    "community_theater_backstage": {"existing_subject_rows": 95, "proposed_subject_rows": 11, "rows": 106, "actions": 20, "base_variations": 2120},
+    "design_studio": {"existing_subject_rows": 37, "proposed_subject_rows": 9, "rows": 46, "actions": 20, "base_variations": 920},
+    "ferry_terminal": {"existing_subject_rows": 107, "proposed_subject_rows": 8, "rows": 115, "actions": 20, "base_variations": 2300},
+    "fire_station": {"existing_subject_rows": 107, "proposed_subject_rows": 11, "rows": 118, "actions": 20, "base_variations": 2360},
+    "flower_market": {"existing_subject_rows": 96, "proposed_subject_rows": 8, "rows": 104, "actions": 20, "base_variations": 2080},
+    "forest_cabin": {"existing_subject_rows": 36, "proposed_subject_rows": 4, "rows": 40, "actions": 20, "base_variations": 800},
+    "greenhouse_nursery": {"existing_subject_rows": 100, "proposed_subject_rows": 13, "rows": 113, "actions": 20, "base_variations": 2260},
+    "maker_space": {"existing_subject_rows": 26, "proposed_subject_rows": 9, "rows": 35, "actions": 20, "base_variations": 700},
+    "observatory_dome": {"existing_subject_rows": 103, "proposed_subject_rows": 7, "rows": 110, "actions": 20, "base_variations": 2200},
+    "postal_service_counter": {"existing_subject_rows": 107, "proposed_subject_rows": 11, "rows": 118, "actions": 20, "base_variations": 2360},
+    "print_shop": {"existing_subject_rows": 84, "proposed_subject_rows": 12, "rows": 96, "actions": 20, "base_variations": 1920},
+    "public_plaza": {"existing_subject_rows": 107, "proposed_subject_rows": 10, "rows": 117, "actions": 20, "base_variations": 2340},
+    "rooftop_cafe": {"existing_subject_rows": 92, "proposed_subject_rows": 6, "rows": 98, "actions": 20, "base_variations": 1960},
+    "tram_platform": {"existing_subject_rows": 107, "proposed_subject_rows": 8, "rows": 115, "actions": 20, "base_variations": 2300},
+    "vehicle_repair_garage": {"existing_subject_rows": 62, "proposed_subject_rows": 11, "rows": 73, "actions": 20, "base_variations": 1460}
+  }
+}

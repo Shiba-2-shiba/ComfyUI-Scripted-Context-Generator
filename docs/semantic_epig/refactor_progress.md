@@ -1,7 +1,10 @@
 # Semantic EPIG Refactor Progress
 
+> Completed historical wave (R0-R7, 2026-06-16). The canonical current index
+> and future change gate are in `docs/semantic_epig/README.md`.
+
 対象リポジトリ: `Shiba-2-shiba/ComfyUI-Scripted-Context-Generator`
-対象ブランチ: `dev2`
+対象ブランチ（当時）: `dev2`
 作成日: 2026-06-16
 関連仕様: `refactor_spec.md`
 関連タスク: `refactor_tasks.md`
@@ -59,10 +62,10 @@ Notes:
 | R1 | Debug meaning cleanup | Done | Added explicit scoring/change/baseline/semantic debug fields |
 | R2 | Prompt-level audit tool | Done | Added active/passive prompt audit fixture, tool, and tests |
 | R3 | Object relation validator | Done | Added dedicated schema validator and validation tests |
-| R4 | Action descriptor candidate supply | Done | Descriptor metadata can supply slot candidates; relation-key-specific fixture remains a follow-up |
+| R4 | Action descriptor candidate supply | Done | Descriptor metadata can supply slot candidates; relation-key-specific fixture remained a follow-up at R7 close |
 | R5 | Personality top-k context filter | Done | Ranked candidates are tried before fallback with reject debug |
 | R6 | Builder responsibility split | Done | R6.1 parser, R6.2 relation binder, R6.3 renderer, R6.4 location split, and R6.5 clothing split completed |
-| R7 | Final verification and docs update | Done | R6後の full verification passed; remaining follow-ups are documented |
+| R7 | Final verification and docs update | Done | R6後の full verification passed; historical follow-ups are resolved or documented |
 
 Status vocabulary:
 
@@ -111,11 +114,11 @@ Status vocabulary:
 | Personality context arguments were underused | R5 added ranked candidate stream and context rejection before fallback |
 | Builders were large and mixed responsibilities | R6 split parser, relation binder, renderer, location policy/selector, and clothing candidate renderer/selector |
 
-### 5.3 Remaining follow-ups
+### 5.3 Remaining follow-ups at R7 close
 
 | Follow-up | Status |
 |---|---|
-| Relation-key-specific action descriptor fixture/test | Open; matcher supports `relation_keys`, but no dedicated relation-key descriptor case was added |
+| Relation-key-specific action descriptor fixture/test | Open at R7 close; matcher supported `relation_keys`, but no dedicated relation-key descriptor case had been added |
 | Broader docs (`README.md`, `CURRENT_STATUS.md`) | Updated with refactor doc entry points and current verification snapshot |
 | Ignored audit artifacts under `assets/results/` | Generated locally as needed; intentionally not tracked |
 
@@ -197,9 +200,10 @@ Verification:
 - `python -m unittest assets.test_action_semantics assets.test_action_generator assets.test_asset_validator`
 - `asset_validator.validate_assets()` returns `0` issues.
 
-Remaining R4 note:
+Remaining R4 note at R7 close:
 
-- The function supports `relation_keys`, but a dedicated relation-key descriptor fixture/test remains open.
+- The function supported `relation_keys`, but a dedicated relation-key
+  descriptor fixture/test remained open in this wave.
 
 ### 7.5 R5 Personality top-k context filter
 
@@ -301,10 +305,19 @@ Verification:
 | `python -m unittest assets.test_prompt_snapshots assets.test_context_pipeline assets.test_context_state_adapter assets.test_determinism` | Pass: 16 tests OK |
 | `python -m unittest assets.test_repetition_guard_audit` | Pass: 5 tests OK |
 
-R7 remaining follow-ups:
+R7 remaining follow-ups at wave close:
 
-- R4 relation-key-specific descriptor fixture/test remains open because the matcher supports `relation_keys` but no dedicated relation-key descriptor case was added.
+- R4 relation-key-specific descriptor fixture/test remained open because the
+  matcher supported `relation_keys` but no dedicated relation-key descriptor
+  case had been added.
 - Generated audit artifacts under `assets/results/` remain ignored and are not part of the diff.
+
+### 7.13 Post-wave resolution
+
+The later curated-reference adoption wave added dedicated matching and
+non-matching relation-key coverage in `assets/test_action_semantics.py`. See
+`curated_reference_adoption_progress.md` section 6.2. This resolves the current
+repository follow-up without rewriting the R7-close state above.
 
 ---
 

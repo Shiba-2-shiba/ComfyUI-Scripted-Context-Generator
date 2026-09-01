@@ -1,6 +1,6 @@
 # Variation Expansion Task Board
 
-Last updated: 2026-05-09
+Last updated: 2026-09-01
 
 Legend:
 
@@ -304,10 +304,60 @@ P12 result:
 
 ## P13: 500k Target Planning
 
-Active phase. Do not begin bulk subject, location, compatibility, or action-pool
-edits until this planning gate is recorded.
+Active phase. Canonical plan: `docs/variation_expansion/500k_loop_plan.md`.
+Do not begin bulk subject, location, compatibility, or action-pool edits until
+the L0-L3 planning gates and a V150 candidate manifest are recorded.
 
-- [ ] VE-1301 Run and summarize `python tools/plan_variation_target.py --target 500000`
+- [x] VE-1301 Run and summarize the current `--target 500000` baseline
+- [x] VE-1302 Lock L0 baseline inputs, hashes, prompt-quality cohort, and staged/excluded policy for the six out-of-scope pools
+- [x] VE-1303 Add tested hypothetical subject/location and compatibility-density modeling without changing current planner defaults
+- [x] VE-1304 Add tested action-depth distribution and mixed-scenario modeling
+- [~] VE-1305 Add quality-aware candidate metadata and prompt-quality target/guard evaluation; first authenticated prompt comparison rejected, remediation pending
+- [x] VE-1306 Emit a frozen V150 candidate manifest and contribution report
+- [~] VE-1307 Run baseline/candidate generation, analysis, comparison, blind review, and confirmation through the current prompt-quality contract; iteration 004 stopped correctly at rejected comparison before review/confirmation
+- [x] VE-1308 Record iteration 004 V150 `REJECTED` verdict with snapshot, experiment, run, comparison, implementation, and test hashes
+- [ ] VE-1309 Repeat the loop sequentially for V250, V350, and V500; do not skip a stage
+- [x] VE-1310 Add runtime-equivalent contribution modeling and reproduce isolated snapshot metrics
+- [x] VE-1311 Select a four-location V150 gap-closing shape with exact hash-bound evidence
+- [x] VE-1312 Author 20 location-specific actions for each approved addition in an isolated iteration
+- [x] VE-1313 Design a deterministic fixed-cohort supplement covering the unseen locations and location-action pairs
+- [x] VE-1315 Model and verify complete-workflow final location/action witness reachability for the fixed 64+16 cohort
+- [x] VE-1314 Reduce semantic-family repetition and context p95/max without weakening prompt-quality guards
+- [ ] VE-1316 Run a separately declared non-selected quality validation after guard remediation
+
+L0 evidence:
+
+- `docs/variation_expansion/experiments/v150-planner-l0/manifest.json`
+- `docs/variation_expansion/experiments/v150-planner-l0/baseline-report.json`
+- `docs/variation_expansion/experiments/v150-planner-l0/pool-policy.json`
+- `docs/variation_expansion/experiments/v150-planner-l0/prompt-quality-cohort.json`
+- `docs/variation_expansion/planner_refactor_spec.md`
+- `docs/variation_expansion/planner_l1_contract.md`
+- `docs/variation_expansion/experiments/v150-planner-l1/verification.json`
+- `docs/variation_expansion/experiments/v150-planner-l1/receipt.json`
+- `docs/variation_expansion/candidate_l2_contract.md`
+- `docs/variation_expansion/experiments/v150-candidate-l2/analysis-report.json`
+- `docs/variation_expansion/experiments/v150-candidate-l2/rejection-receipt.json`
+- `docs/variation_expansion/experiments/v150-candidate-l2-iteration-002/analysis-report.json`
+- `docs/variation_expansion/experiments/v150-candidate-l2-iteration-002/handoff-receipt.json`
+- `docs/variation_expansion/candidate_l3_contract.md`
+- `docs/variation_expansion/experiments/v150-candidate-l3-iteration-001/rejection-receipt.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-003/location-addition-report.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-003/handoff-receipt.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-004/prompt-pair-comparison.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-004/rejection-receipt.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-005/coverage-contract.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-005/coverage-plan.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-005/coverage-comparison.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-005/rejection-receipt.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-006/full-workflow-coverage-contract.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-006/witness-matrix.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-006/full-workflow-schedule.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-006/coverage-comparison.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-006/rejection-receipt.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-007/prompt-quality-experiment.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-007/guard-comparison.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-007/guard-remediation-receipt.json`
 
 ## P15: Variation Restriction Baseline Refresh
 
@@ -320,10 +370,6 @@ P15 current result:
 - compatibility rows: `5,806`
 - base variations: `103,212`
 - 100k target remains met
-- [ ] VE-1302 Model subject/location/compatibility-density/action-depth shapes for `500000`
-- [ ] VE-1303 Identify whether compatibility density, location count, subject count, or action depth is the next limiter
-- [ ] VE-1304 Define guardrails for expanding beyond the 100k stabilized surface
-- [ ] VE-1305 Record rejected inflation routes before implementation starts
 
 ## P14: Clothing State Location Gate
 
