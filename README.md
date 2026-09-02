@@ -19,7 +19,8 @@ subject / location / base variations を増やす作業では、[`EXPANSION_GUID
 現在は 100k base variations gate を通過済みで、次の大きな計画対象は 500k へ向けた段階拡張です。
 V150 candidate は isolated snapshot で `150,184` variations、19/19 coverage、
 default80/control64 automatic quality validationを通過し、blind reviewと
-3x256 confirmation待ちです。active dataは引き続き`103,212`です。
+3x256 confirmation待ちです。両方の合格後、VE-1319がactive dataを
+`103,212`から`150,184`へ昇格します。
 
 Semantic EPIG の現在地、文書の正本、変更時の loop-engineering gate は
 [`docs/semantic_epig/README.md`](./docs/semantic_epig/README.md) を参照してください。

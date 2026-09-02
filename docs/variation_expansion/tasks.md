@@ -312,9 +312,9 @@ the L0-L3 planning gates and a V150 candidate manifest are recorded.
 - [x] VE-1302 Lock L0 baseline inputs, hashes, prompt-quality cohort, and staged/excluded policy for the six out-of-scope pools
 - [x] VE-1303 Add tested hypothetical subject/location and compatibility-density modeling without changing current planner defaults
 - [x] VE-1304 Add tested action-depth distribution and mixed-scenario modeling
-- [~] VE-1305 Add quality-aware candidate metadata and prompt-quality target/guard evaluation; first authenticated prompt comparison rejected, remediation pending
+- [x] VE-1305 Add quality-aware candidate metadata and prompt-quality target/guard evaluation; automatic non-selected quality validation passed in iteration 008
 - [x] VE-1306 Emit a frozen V150 candidate manifest and contribution report
-- [~] VE-1307 Run baseline/candidate generation, analysis, comparison, blind review, and confirmation through the current prompt-quality contract; iteration 004 stopped correctly at rejected comparison before review/confirmation
+- [~] VE-1307 Run baseline/candidate generation, analysis, comparison, blind review, and confirmation through the current prompt-quality contract; generation/analysis/comparison passed, review/confirmation pending
 - [x] VE-1308 Record iteration 004 V150 `REJECTED` verdict with snapshot, experiment, run, comparison, implementation, and test hashes
 - [ ] VE-1309 Repeat the loop sequentially for V250, V350, and V500; do not skip a stage
 - [x] VE-1310 Add runtime-equivalent contribution modeling and reproduce isolated snapshot metrics
@@ -326,6 +326,20 @@ the L0-L3 planning gates and a V150 candidate manifest are recorded.
 - [x] VE-1316 Run a separately declared non-selected quality validation after guard remediation
 - [ ] VE-1317 Run comparison-bound blind review on the frozen q19 source and comparison
 - [ ] VE-1318 Run fresh 3x256 confirmation lanes and full verification before promotion
+- [ ] VE-1319 Promote the approved V150 candidate into active data and verify `150,184` active base variations
+
+VE-1319 is blocked until both VE-1317 and VE-1318 have hash-bound passing
+receipts. When unblocked it must:
+
+- apply the frozen candidate subjects, locations, compatibility rows,
+  backgrounds, location profiles, and action pools to active sources;
+- regenerate runtime action pools and compatibility review artifacts;
+- verify active metrics at 135 subjects, 109 locations, 8,227 compatibility
+  rows, and 150,184 base variations;
+- rerun prompt data, variation scope, action-pool, compatibility, full-flow,
+  targeted, and complete regression checks;
+- record a terminal `PROMOTED` or rollback receipt binding the review,
+  confirmation, verification, source, generated-artifact, and metric hashes.
 
 L0 evidence:
 

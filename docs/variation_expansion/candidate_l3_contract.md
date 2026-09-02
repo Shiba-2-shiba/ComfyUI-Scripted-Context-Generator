@@ -215,3 +215,8 @@ Default-surface coverage remains informational (8 locations and 8 action-pool
 locations unseen); the separately hash-bound current-source certificate proves
 19/19 reachability. Automatic validation is complete, but blind review, fresh
 3x256 confirmation, and full verification remain required before promotion.
+
+Once those gates pass, VE-1319 owns the active-data mutation. No earlier task
+may copy isolated candidate subjects, locations, compatibility, backgrounds, or
+action pools into the active source tree. VE-1319 must reproduce the frozen
+`150,184` result and emit the terminal promotion/rollback receipt.

@@ -346,6 +346,11 @@ Evidence:
 Next action: freeze q19 and run comparison-bound blind review, fresh 3x256
 confirmation lanes, and full verification before a V150 promotion decision.
 
+After VE-1317 and VE-1318 both pass, VE-1319 performs the actual active-data
+promotion. It is the task that changes the repository from the current active
+`103,212` surface to the verified V150 candidate (`150,184`). VE-1319 remains
+blocked until both prerequisite receipts are present and valid.
+
 ## P14 Clothing State Location Gate
 
 Status: `verified`

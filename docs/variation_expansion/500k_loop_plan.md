@@ -179,6 +179,16 @@ remains the generation/replay contract. The result is review-ready but not
 promotable until blind review, fresh 3x256 confirmation, and full verification
 are complete.
 
+### V150 Active Promotion Gate
+
+VE-1319 is the only task authorized to mutate active variation data for V150.
+It remains blocked until VE-1317 and VE-1318 produce passing, hash-bound
+receipts. Promotion applies the frozen candidate data, regenerates derived
+artifacts, verifies 135 subjects / 109 locations / 8,227 rows / 150,184 base
+variations, reruns the complete quality and runtime verification surfaces, and
+records a terminal promotion or rollback receipt. V250 planning cannot use V150
+as its baseline until this receipt is `PROMOTED`.
+
 ### L0: Reproducible Baseline
 
 - preserve current 100k behavior and `assets.test_variation_target_planner`

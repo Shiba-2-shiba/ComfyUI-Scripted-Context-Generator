@@ -74,6 +74,10 @@ default80 surfaceでcontrol64 quality metricsを評価し、target改善と全gu
 非回帰を確認しました。`review_ready=true`ですが、blind reviewと3x256
 confirmationが未完了なのでpromotionはまだ行いません。
 
+実際にactive dataを`103,212`から`150,184`へ変更する作業はVE-1319です。
+VE-1319はVE-1317 blind reviewとVE-1318 3x256 confirmation/full verification
+の両方がpassした後だけ開始します。
+
 並行する品質改善として、衣装 `states` が Location と衝突する問題を
 [`clothing_state_location_gate_plan.md`](./clothing_state_location_gate_plan.md)
 で扱います。これは prompt quality cleanup であり、base variation sizing
