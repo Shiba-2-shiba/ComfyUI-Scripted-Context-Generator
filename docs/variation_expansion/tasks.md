@@ -324,8 +324,8 @@ the L0-L3 planning gates and a V150 candidate manifest are recorded.
 - [x] VE-1315 Model and verify complete-workflow final location/action witness reachability for the fixed 64+16 cohort
 - [x] VE-1314 Reduce semantic-family repetition and context p95/max without weakening prompt-quality guards
 - [x] VE-1316 Run a separately declared non-selected quality validation after guard remediation
-- [ ] VE-1317 Run comparison-bound blind review on the frozen q19 source and comparison
-- [ ] VE-1318 Run fresh 3x256 confirmation lanes and full verification before promotion
+- [~] VE-1317 Run comparison-bound blind review; attempt 001 rejected with 8 candidate hard-defect observations, remediation required
+- [ ] VE-1318 Run fresh 3x256 confirmation lanes and full verification before promotion (blocked by VE-1317)
 - [ ] VE-1319 Promote the approved V150 candidate into active data and verify `150,184` active base variations
 
 VE-1319 is blocked until both VE-1317 and VE-1318 have hash-bound passing
@@ -340,6 +340,11 @@ receipts. When unblocked it must:
   targeted, and complete regression checks;
 - record a terminal `PROMOTED` or rollback receipt binding the review,
   confirmation, verification, source, generated-artifact, and metric hashes.
+
+VE-1317 attempt 001 evidence:
+
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-008/blind-review-attempt-001/review.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-008/blind-review-attempt-001/rejection-receipt.json`
 
 L0 evidence:
 

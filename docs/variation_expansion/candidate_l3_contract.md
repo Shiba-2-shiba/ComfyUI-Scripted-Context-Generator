@@ -220,3 +220,20 @@ Once those gates pass, VE-1319 owns the active-data mutation. No earlier task
 may copy isolated candidate subjects, locations, compatibility, backgrounds, or
 action pools into the active source tree. VE-1319 must reproduce the frozen
 `150,184` result and emit the terminal promotion/rollback receipt.
+
+## Blind Review Attempt 001
+
+The q19 comparison-bound review used two independent blinded 20-pair lanes.
+Hash and lane validation passed, but the aggregate verdict was `reject`:
+
+```text
+candidate-only hard-defect observations: 8
+unique affected candidate seeds: 5
+location/action/object observations: 3
+mood/action/garnish observations: 5
+blind review verdict: reject
+```
+
+VE-1317 remains active for remediation. VE-1318 and VE-1319 are blocked until a
+fresh comparison and blind-review attempt pass; attempt-001 votes cannot be
+reused.

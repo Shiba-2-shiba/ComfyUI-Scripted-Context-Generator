@@ -189,6 +189,12 @@ variations, reruns the complete quality and runtime verification surfaces, and
 records a terminal promotion or rollback receipt. V250 planning cannot use V150
 as its baseline until this receipt is `PROMOTED`.
 
+Blind-review attempt 001 rejected q19 despite its automatic quality pass. Five
+candidate seeds produced eight hard-defect observations, and qualitative
+naturalness/redundancy/image-suitability thresholds failed. The loop returns to
+isolated remediation and must create a fresh comparison and two new blinded
+lanes before VE-1318 or VE-1319 can start.
+
 ### L0: Reproducible Baseline
 
 - preserve current 100k behavior and `assets.test_variation_target_planner`

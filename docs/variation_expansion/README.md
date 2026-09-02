@@ -78,6 +78,10 @@ confirmationが未完了なのでpromotionはまだ行いません。
 VE-1319はVE-1317 blind reviewとVE-1318 3x256 confirmation/full verification
 の両方がpassした後だけ開始します。
 
+VE-1317 blind review attempt 001は、candidate-only hard defect 8件のため
+`REJECTED`です。現在は5 seedのlocation/action/objectおよび
+mood/action/garnish矛盾を修正するloopに戻っており、VE-1318/1319はblockedです。
+
 並行する品質改善として、衣装 `states` が Location と衝突する問題を
 [`clothing_state_location_gate_plan.md`](./clothing_state_location_gate_plan.md)
 で扱います。これは prompt quality cleanup であり、base variation sizing
