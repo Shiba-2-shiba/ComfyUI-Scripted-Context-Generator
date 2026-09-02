@@ -187,3 +187,31 @@ diagnostic failures: 0
 This verifies remediation on the selected coverage surface. It remains
 non-promotable evidence: fixed quality verdict is still `reject`, and the next
 quality validation must use a separately declared non-selected surface.
+
+## Non-Selected Quality Validation Iteration 008
+
+VE-1316 refreshes the 19/19 coverage certificate on current source, then
+materializes a separate default 80-row candidate surface with no coverage
+schedule. Prior coverage is eligibility evidence only; quality metrics are
+recomputed from the declared 64 control records.
+
+```text
+surface: default_fixed_64_16 / default_unselected
+generation and replay: 64 control + 16 exploration
+quality metric scope: control64
+location entropy: 4.626124 -> 4.956344
+repeated n-grams: 0 -> 0
+semantic-family repetition: 2 -> 2
+context max: 27,812 -> 27,736
+context p95: 27,225.2 -> 26,318.55
+quality failures: 0
+quality verdict: pass
+coverage eligibility: pass
+review ready: true
+promotion ready: false
+```
+
+Default-surface coverage remains informational (8 locations and 8 action-pool
+locations unseen); the separately hash-bound current-source certificate proves
+19/19 reachability. Automatic validation is complete, but blind review, fresh
+3x256 confirmation, and full verification remain required before promotion.

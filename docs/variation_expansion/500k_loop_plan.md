@@ -172,6 +172,13 @@ and maximum became non-regressing. Because the surface was selected for
 coverage, the fixed quality rejection remains authoritative. A separate
 non-selected quality validation is required before review or confirmation.
 
+Iteration 008 completed that non-selected validation. A current-source 19/19
+coverage refresh is bound separately from a default unscheduled 80-row quality
+surface. Control64 target and guard metrics pass, while the full 64+16 cohort
+remains the generation/replay contract. The result is review-ready but not
+promotable until blind review, fresh 3x256 confirmation, and full verification
+are complete.
+
 ### L0: Reproducible Baseline
 
 - preserve current 100k behavior and `assets.test_variation_target_planner`

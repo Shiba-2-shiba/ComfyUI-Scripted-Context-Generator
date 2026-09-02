@@ -6,7 +6,7 @@ LLM に依存せず、ルールベース + seed 再現で自然言語プロン�
 
 ## 現在地の把握
 
-この README は `2026-08-31` のリポジトリ状態に合わせています。
+この README は `2026-09-02` のリポジトリ状態に合わせています。
 
 - 公開ノード、semantic-only 方針、データ構成の基礎資料: [`CURRENT_STATUS.md`](./CURRENT_STATUS.md)
 - 2026-08 の prompt-quality リファクタと最終採用結果: [`.omx/ultragoal/goals.json`](./.omx/ultragoal/goals.json) と [`.omx/ultragoal/ledger.jsonl`](./.omx/ultragoal/ledger.jsonl)
@@ -17,6 +17,9 @@ LLM に依存せず、ルールベース + seed 再現で自然言語プロン�
 subject / location / base variations を増やす作業では、[`EXPANSION_GUIDE.md`](./EXPANSION_GUIDE.md) を先に参照してください。
 日常系 location / action pool の拡張計画と進捗は [`docs/variation_expansion/`](./docs/variation_expansion/README.md) にあります。
 現在は 100k base variations gate を通過済みで、次の大きな計画対象は 500k へ向けた段階拡張です。
+V150 candidate は isolated snapshot で `150,184` variations、19/19 coverage、
+default80/control64 automatic quality validationを通過し、blind reviewと
+3x256 confirmation待ちです。active dataは引き続き`103,212`です。
 
 Semantic EPIG の現在地、文書の正本、変更時の loop-engineering gate は
 [`docs/semantic_epig/README.md`](./docs/semantic_epig/README.md) を参照してください。

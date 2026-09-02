@@ -544,6 +544,162 @@ class TestVariationPromptPair(unittest.TestCase):
         self.assertFalse(report["promotion_ready"])
         self.assertEqual(comparator.comparison_exit_code(report), 1)
 
+    def test_nonselected_quality_authority_uses_prior_coverage_as_eligibility(self):
+        self.experiment.update(
+            {
+                "schema_version": "variation-nonselected-quality-experiment/v2",
+                "comparison_authority": "quality_non_selected",
+                "surface_kind": "default_fixed_64_16",
+                "prompt_selection": "default_unselected",
+                "metric_scope": "control64",
+            }
+        )
+        contract = {
+            "contract_sha256": "quality-contract-hash",
+            "coverage_receipt_sha256": "coverage-receipt-hash",
+            "guard_remediation_receipt_sha256": "remediation-receipt-hash",
+            "_validated_coverage_eligibility": {
+                "candidate_action_pool_locations": 19,
+                "candidate_locations": 19,
+                "candidate_subjects": 15,
+                "extra_seed_count": 0,
+                "fixed_seed_count": 80,
+                "prompt_schedule_sha256": "schedule-hash",
+                "status": "pass",
+                "witness_matrix_sha256": "matrix-hash",
+            },
+        }
+        incomplete = {
+            "subjects_seen": [],
+            "locations_seen": [],
+            "action_pool_locations_seen": [],
+            "unseen_subjects": ["candidate_subject_a"],
+            "unseen_locations": ["candidate_location_a"],
+            "unseen_action_pool_locations": ["candidate_location_a"],
+        }
+
+        with (
+            patch.object(comparator, "_load_bound_quality_contract", return_value=contract),
+            patch.object(comparator, "candidate_coverage", return_value=incomplete),
+        ):
+            report = self._compare()
+
+        self.assertEqual(report["schema_version"], "variation-nonselected-quality-comparison/v2")
+        self.assertEqual(report["quality_verdict"], "pass")
+        self.assertEqual(report["coverage_eligibility_verdict"], "pass")
+        self.assertEqual(report["validation_verdict"], "pass")
+        self.assertEqual(report["verdict"], "pass")
+        self.assertTrue(report["review_ready"])
+        self.assertFalse(report["promotion_ready"])
+        self.assertEqual(len(report["informational_coverage_failures"]), 3)
+        self.assertNotIn("candidate_location_coverage_incomplete", report["quality_failures"])
+        self.assertEqual(comparator.comparison_exit_code(report), 0)
+
+    def test_v2_quality_experiment_without_bound_contract_fails_closed(self):
+        self.experiment.update(
+            {
+                "schema_version": "variation-nonselected-quality-experiment/v2",
+                "comparison_authority": "quality_non_selected",
+                "surface_kind": "default_fixed_64_16",
+                "prompt_selection": "default_unselected",
+                "metric_scope": "control64",
+            }
+        )
+
+        with self.assertRaises(WorkflowValidationError) as raised:
+            self._compare()
+
+        self.assertEqual(raised.exception.code, "variation_quality_contract_required")
+
+    def test_nonselected_quality_guard_failure_returns_authoritative_reject(self):
+        self.experiment.update(
+            {
+                "schema_version": "variation-nonselected-quality-experiment/v2",
+                "comparison_authority": "quality_non_selected",
+                "surface_kind": "default_fixed_64_16",
+                "prompt_selection": "default_unselected",
+                "metric_scope": "control64",
+            }
+        )
+        contract = {
+            "contract_sha256": "quality-contract-hash",
+            "coverage_receipt_sha256": "coverage-receipt-hash",
+            "guard_remediation_receipt_sha256": "remediation-receipt-hash",
+            "_validated_coverage_eligibility": {
+                "candidate_action_pool_locations": 19,
+                "candidate_locations": 19,
+                "candidate_subjects": 15,
+                "extra_seed_count": 0,
+                "fixed_seed_count": 80,
+                "prompt_schedule_sha256": "schedule-hash",
+                "status": "pass",
+                "witness_matrix_sha256": "matrix-hash",
+            },
+        }
+        records = self._records(candidate=True)
+        for record in records:
+            record["final_context"]["loc"] = "candidate_location_a"
+            record["final_context"]["history"][0]["decision"]["selected_loc"] = (
+                "candidate_location_a"
+            )
+        self._replace_records_and_recompute(self.candidate_run, records)
+
+        with patch.object(
+            comparator, "_load_bound_quality_contract", return_value=contract
+        ):
+            report = self._compare()
+
+        self.assertEqual(report["quality_verdict"], "reject")
+        self.assertEqual(report["validation_verdict"], "reject")
+        self.assertEqual(report["verdict"], "reject")
+        self.assertFalse(report["review_ready"])
+        self.assertEqual(comparator.comparison_exit_code(report), 1)
+
+    def test_control64_metric_scope_excludes_exploration_only_regression(self):
+        self.experiment.update(
+            {
+                "schema_version": "variation-nonselected-quality-experiment/v2",
+                "comparison_authority": "quality_non_selected",
+                "surface_kind": "default_fixed_64_16",
+                "prompt_selection": "default_unselected",
+                "metric_scope": "control64",
+            }
+        )
+        contract = {
+            "contract_sha256": "quality-contract-hash",
+            "coverage_receipt_sha256": "coverage-receipt-hash",
+            "guard_remediation_receipt_sha256": "remediation-receipt-hash",
+            "_validated_coverage_eligibility": {
+                "candidate_action_pool_locations": 19,
+                "candidate_locations": 19,
+                "candidate_subjects": 15,
+                "extra_seed_count": 0,
+                "fixed_seed_count": 80,
+                "prompt_schedule_sha256": "schedule-hash",
+                "status": "pass",
+                "witness_matrix_sha256": "matrix-hash",
+            },
+        }
+        records = self._records(candidate=True)
+        for record in records[64:]:
+            record["cleaned_prompt"] = (
+                "a girl keeps saying softly keeps saying calmly keeps saying slowly"
+            )
+        self._replace_records_and_recompute(self.candidate_run, records)
+
+        with patch.object(
+            comparator, "_load_bound_quality_contract", return_value=contract
+        ):
+            report = self._compare()
+
+        self.assertEqual(report["metric_scope"], "control64")
+        self.assertEqual(report["metric_record_count"], 64)
+        self.assertEqual(report["quality_verdict"], "pass")
+        self.assertEqual(
+            report["metric_comparisons"]["naturalness.repeated_ngram_count"]["delta"],
+            0.0,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

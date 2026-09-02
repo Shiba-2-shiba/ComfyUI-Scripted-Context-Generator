@@ -141,7 +141,11 @@ def semantic_location_debug_payload(
 ) -> dict[str, Any]:
     resolved_mode = mode or semantic_mode("location_scene")
     compact_rankings: dict[str, list[dict[str, Any]]] = {}
+    ranking_counts: dict[str, int] = {}
+    ranking_truncated_counts: dict[str, int] = {}
     for section_name, ranking in (segment_rankings or {}).items():
+        ranking_counts[section_name] = len(ranking)
+        ranking_truncated_counts[section_name] = max(0, len(ranking) - 3)
         compact_rankings[section_name] = [
             {
                 "text": str(item.get("text", "")),
@@ -150,7 +154,7 @@ def semantic_location_debug_payload(
                 "source": str(item.get("source", "")),
                 "role": str(item.get("role", section_name)),
             }
-            for item in ranking[:5]
+            for item in ranking[:3]
         ]
     compact_changes: dict[str, dict[str, Any]] = {}
     for section_name, change in (section_changes or {}).items():
@@ -168,6 +172,8 @@ def semantic_location_debug_payload(
         "mode": resolved_mode,
         "target_vector": normalize_vector(target_vector or {}, SCENE_AXES),
         "segment_rankings": compact_rankings,
+        "segment_ranking_counts": ranking_counts,
+        "segment_ranking_truncated_counts": ranking_truncated_counts,
         "section_changes": compact_changes,
         "changed_sections": changed_sections,
         "selected_by_semantic": bool(selected_by_semantic),

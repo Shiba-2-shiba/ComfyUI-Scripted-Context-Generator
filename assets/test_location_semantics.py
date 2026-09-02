@@ -64,6 +64,54 @@ class TestLocationSemantics(unittest.TestCase):
         self.assertEqual(payload["changed_sections"], [])
         self.assertEqual(payload["segment_rankings"]["core"][0]["text"], "quiet reading tables")
 
+    def test_debug_payload_caps_each_segment_ranking_and_keeps_counts(self):
+        from pipeline.location_semantics import semantic_location_debug_payload
+
+        ranking = [
+            {
+                "text": f"candidate {index}",
+                "score": 1.0 - index * 0.1,
+                "distance": index * 0.1,
+                "source": f"fixture[{index}]",
+                "role": "core",
+            }
+            for index in range(5)
+        ]
+        payload = semantic_location_debug_payload(segment_rankings={"core": ranking})
+
+        self.assertEqual(len(payload["segment_rankings"]["core"]), 3)
+        self.assertEqual(payload["segment_ranking_counts"]["core"], 5)
+        self.assertEqual(payload["segment_ranking_truncated_counts"]["core"], 2)
+
+    def test_compacted_ranking_keeps_selected_identity_outside_top_three(self):
+        from pipeline.location_semantics import semantic_location_debug_payload
+
+        ranking = [
+            {
+                "text": f"candidate {index}",
+                "score": 1.0 - index * 0.1,
+                "distance": index * 0.1,
+                "source": f"fixture[{index}]",
+                "role": "core",
+            }
+            for index in range(5)
+        ]
+        payload = semantic_location_debug_payload(
+            segment_rankings={"core": ranking},
+            section_changes={
+                "core": {
+                    "baseline": "candidate 0",
+                    "semantic": "candidate 4",
+                    "changed": True,
+                    "semantic_top_candidate": "candidate 0",
+                    "selected_candidate_rank": 4,
+                }
+            },
+        )
+
+        self.assertEqual(payload["section_changes"]["core"]["semantic"], "candidate 4")
+        self.assertEqual(payload["section_changes"]["core"]["selected_candidate_rank"], 4)
+
     def test_location_policy_filters_lighting_and_disallowed_fx(self):
         from pipeline.location_policy import filter_fx_candidates, filter_off_mode_options
 

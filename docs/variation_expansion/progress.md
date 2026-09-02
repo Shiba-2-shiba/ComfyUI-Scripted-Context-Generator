@@ -6,7 +6,7 @@ Last updated: 2026-09-01
 
 Overall status: `P12 verified; P13 staged loop planning active`
 
-Current phase: `P13 L3 guard remediation verified diagnostically; non-selected quality validation next`
+Current phase: `P13 V150 automatic quality validation passed; blind review and confirmation next`
 
 Active sidecar cleanup: `P14 clothing state location gate` - verified
 
@@ -321,6 +321,30 @@ Evidence:
 
 Next action: run a separately declared non-selected quality validation surface
 before any blind review or confirmation decision.
+
+L3 non-selected quality validation iteration 008:
+
+- Refreshed the 19/19 coverage certificate against current source and bound the
+  exact candidate source tree into a closed quality contract.
+- Materialized default 80-row baseline/candidate inputs with no prompt schedule.
+- Generated and replayed the unchanged fixed 64+16 cohort while recomputing
+  automatic quality metrics from control64 only.
+- Kept current-run partial coverage informational and used the separate 19/19
+  certificate solely as eligibility evidence.
+- Passed target and all quality guards; automatic quality and combined
+  validation verdicts are `pass`, and the comparison is review-ready.
+- Promotion remains false; no blind review or confirmation has run.
+
+Evidence:
+
+- `experiments/v150-candidate-shape-iteration-008/current-source-coverage-refresh.json`
+- `experiments/v150-candidate-shape-iteration-008/nonselected-quality-contract.json`
+- `experiments/v150-candidate-shape-iteration-008/quality-experiment.json`
+- `experiments/v150-candidate-shape-iteration-008/quality-comparison.json`
+- `experiments/v150-candidate-shape-iteration-008/quality-validation-receipt.json`
+
+Next action: freeze q19 and run comparison-bound blind review, fresh 3x256
+confirmation lanes, and full verification before a V150 promotion decision.
 
 ## P14 Clothing State Location Gate
 

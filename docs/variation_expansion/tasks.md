@@ -323,7 +323,9 @@ the L0-L3 planning gates and a V150 candidate manifest are recorded.
 - [x] VE-1313 Design a deterministic fixed-cohort supplement covering the unseen locations and location-action pairs
 - [x] VE-1315 Model and verify complete-workflow final location/action witness reachability for the fixed 64+16 cohort
 - [x] VE-1314 Reduce semantic-family repetition and context p95/max without weakening prompt-quality guards
-- [ ] VE-1316 Run a separately declared non-selected quality validation after guard remediation
+- [x] VE-1316 Run a separately declared non-selected quality validation after guard remediation
+- [ ] VE-1317 Run comparison-bound blind review on the frozen q19 source and comparison
+- [ ] VE-1318 Run fresh 3x256 confirmation lanes and full verification before promotion
 
 L0 evidence:
 
@@ -358,6 +360,11 @@ L0 evidence:
 - `docs/variation_expansion/experiments/v150-candidate-shape-iteration-007/prompt-quality-experiment.json`
 - `docs/variation_expansion/experiments/v150-candidate-shape-iteration-007/guard-comparison.json`
 - `docs/variation_expansion/experiments/v150-candidate-shape-iteration-007/guard-remediation-receipt.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-008/current-source-coverage-refresh.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-008/nonselected-quality-contract.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-008/quality-experiment.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-008/quality-comparison.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-008/quality-validation-receipt.json`
 
 ## P15: Variation Restriction Baseline Refresh
 

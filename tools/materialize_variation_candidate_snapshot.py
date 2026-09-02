@@ -19,6 +19,7 @@ if str(ROOT) not in sys.path:
 
 from tools.analyze_variation_candidates import analyze_candidate_catalog, load_candidate_catalog
 from tools.plan_variation_prompt_schedule import validate_prompt_schedule
+from tools.variation_quality_contract import validate_variation_quality_contract
 from tools.prompt_quality_loop import _source_files, build_source_manifest
 from tools.workflow_prompt_runner import WorkflowValidationError, canonical_json_bytes
 
@@ -83,6 +84,7 @@ def build_snapshot_plan(
     projection_report: Path,
     analysis_report: Path,
     prompt_schedule: Path | None = None,
+    quality_contract: Path | None = None,
     source_root: Path = ROOT,
 ) -> dict:
     source_root = source_root.resolve()
@@ -91,6 +93,12 @@ def build_snapshot_plan(
     projection_path = projection_report.resolve()
     analysis_path = analysis_report.resolve()
     schedule_path = prompt_schedule.resolve() if prompt_schedule is not None else None
+    quality_contract_path = quality_contract.resolve() if quality_contract is not None else None
+    if schedule_path is not None and quality_contract_path is not None:
+        raise WorkflowValidationError(
+            "snapshot_quality_surface_conflict",
+            "prompt schedule and non-selected quality contract are mutually exclusive",
+        )
     catalog = load_candidate_catalog(iteration)
     scenario = _read_json(scenario_path)
     projection = _read_json(projection_path)
@@ -120,6 +128,7 @@ def build_snapshot_plan(
         "analysis_report": _bound_input(analysis_path, source_root),
     }
     schedule_hash = None
+    quality_contract_hash = None
     if schedule_path is not None:
         schedule = _read_json(schedule_path)
         validate_prompt_schedule(schedule, source_root=source_root)
@@ -135,12 +144,23 @@ def build_snapshot_plan(
             )
         inputs["prompt_schedule"] = _bound_input(schedule_path, source_root)
         schedule_hash = schedule.get("schedule_sha256")
+    if quality_contract_path is not None:
+        quality_value = _read_json(quality_contract_path)
+        validate_variation_quality_contract(quality_value, repository_root=source_root)
+        if quality_value.get("effective_catalog_sha256") != _hash_value(catalog):
+            raise WorkflowValidationError(
+                "snapshot_quality_catalog_mismatch",
+                "non-selected quality contract does not bind the effective catalog",
+            )
+        inputs["quality_contract"] = _bound_input(quality_contract_path, source_root)
+        quality_contract_hash = quality_value.get("contract_sha256")
     return {
         "schema_version": PLAN_SCHEMA_VERSION,
         "snapshot_id": str(catalog["catalog_id"]),
         "materializer_version": MATERIALIZER_VERSION,
         "inputs": inputs,
         "prompt_schedule_sha256": schedule_hash,
+        "quality_contract_sha256": quality_contract_hash,
         "effective_catalog_sha256": _hash_value(catalog),
         "active_source_tree_sha256": build_source_manifest(source_root)["source_tree_hash"],
         "active_source_content_sha256": _hash_value(_manifest_entries(source_root)),
@@ -170,7 +190,7 @@ def _validate_plan_inputs(plan: Mapping[str, Any], source_root: Path) -> None:
         raise WorkflowValidationError("invalid_snapshot_plan", "snapshot plan schema is unsupported")
     inputs = plan.get("inputs", {})
     required_inputs = {"candidate_iteration", "scenario_manifest", "projection_report", "analysis_report"}
-    allowed_inputs = required_inputs | {"prompt_schedule"}
+    allowed_inputs = required_inputs | {"prompt_schedule", "quality_contract"}
     if not isinstance(inputs, Mapping) or not required_inputs.issubset(inputs) or not set(inputs).issubset(allowed_inputs):
         raise WorkflowValidationError(
             "invalid_snapshot_inputs",
@@ -196,6 +216,7 @@ def _validate_plan_inputs(plan: Mapping[str, Any], source_root: Path) -> None:
         projection_report=resolved_inputs["projection_report"],
         analysis_report=resolved_inputs["analysis_report"],
         prompt_schedule=resolved_inputs.get("prompt_schedule"),
+        quality_contract=resolved_inputs.get("quality_contract"),
         source_root=source_root,
     )
     if canonical_json_bytes(expected_plan) != canonical_json_bytes(dict(plan)):
@@ -531,6 +552,7 @@ def materialize_candidate_snapshots(
                 "candidate": len(candidate_prompt_rows),
             },
             "prompt_schedule_sha256": plan.get("prompt_schedule_sha256"),
+            "quality_contract_sha256": plan.get("quality_contract_sha256"),
             "prompt_schedule_verification": prompt_schedule_verification,
         }
         manifest["state"] = "SNAPSHOT_READY" if manifest["quantitative_gate"]["target_met"] else "REJECTED"
@@ -669,6 +691,7 @@ def validate_snapshot_manifest(
         "quantitative_gate": quantitative_gate,
         "prompt_rows": prompt_rows,
         "prompt_schedule_sha256": stored_plan.get("prompt_schedule_sha256"),
+        "quality_contract_sha256": stored_plan.get("quality_contract_sha256"),
         "prompt_schedule_verification": prompt_schedule_verification,
         "state": expected_state,
         "prompt_generation_allowed": expected_prompt_allowed,
@@ -704,6 +727,7 @@ def main() -> int:
     parser.add_argument("--projection-report", required=True)
     parser.add_argument("--analysis-report", required=True)
     parser.add_argument("--prompt-schedule")
+    parser.add_argument("--quality-contract")
     parser.add_argument("--output-root", required=True)
     args = parser.parse_args()
     try:
@@ -713,6 +737,7 @@ def main() -> int:
             projection_report=ROOT / args.projection_report,
             analysis_report=ROOT / args.analysis_report,
             prompt_schedule=ROOT / args.prompt_schedule if args.prompt_schedule else None,
+            quality_contract=ROOT / args.quality_contract if args.quality_contract else None,
         )
         manifest = materialize_candidate_snapshots(
             plan,

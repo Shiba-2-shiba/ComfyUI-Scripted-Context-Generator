@@ -15,6 +15,7 @@ if str(ROOT) not in sys.path:
 
 from tools.materialize_variation_candidate_snapshot import validate_snapshot_manifest
 from tools.plan_variation_prompt_schedule import validate_prompt_schedule
+from tools.variation_quality_contract import validate_variation_quality_contract
 from core.semantic_policy import find_banned_terms
 from tools.analyze_prompt_quality import analyze_records, load_policy
 from tools.prompt_quality_loop import build_source_manifest
@@ -23,6 +24,8 @@ from workflow_widget_validation import load_workflow
 
 
 REPORT_SCHEMA_VERSION = "variation-prompt-pair-comparison/v1"
+QUALITY_REPORT_SCHEMA_VERSION = "variation-nonselected-quality-comparison/v2"
+QUALITY_EXPERIMENT_SCHEMA_VERSION = "variation-nonselected-quality-experiment/v2"
 REQUIRED_RUN_ARTIFACTS = (
     "records.jsonl",
     "metrics.json",
@@ -295,6 +298,72 @@ def _load_bound_prompt_schedule(
     return schedule
 
 
+def _load_bound_quality_contract(
+    snapshot_root: Path,
+    snapshot_manifest: Mapping[str, Any],
+    experiment: Mapping[str, Any],
+) -> dict[str, Any] | None:
+    snapshot_plan_path = snapshot_root / "snapshot-plan.json"
+    if not snapshot_plan_path.is_file():
+        return None
+    snapshot_plan = _read_json(snapshot_plan_path)
+    binding = snapshot_plan.get("inputs", {}).get("quality_contract")
+    if binding is None:
+        if experiment.get("quality_contract_sha256") is not None:
+            raise WorkflowValidationError(
+                "variation_experiment_quality_contract_mismatch",
+                "experiment declares a quality contract but snapshot does not",
+            )
+        return None
+    if snapshot_plan.get("inputs", {}).get("prompt_schedule") is not None:
+        raise WorkflowValidationError(
+            "variation_quality_surface_scheduled",
+            "non-selected quality surface cannot bind a prompt schedule",
+        )
+    contract_path = (ROOT / str(binding.get("path", ""))).resolve()
+    try:
+        contract_path.relative_to(ROOT.resolve())
+    except ValueError:
+        raise WorkflowValidationError(
+            "variation_quality_contract_path_escape",
+            "quality contract escapes repository",
+        ) from None
+    if not contract_path.is_file() or _hash_path(contract_path) != binding.get("sha256"):
+        raise WorkflowValidationError(
+            "variation_quality_contract_input_drift",
+            "bound quality contract file drifted",
+        )
+    contract = _read_json(contract_path)
+    validation = validate_variation_quality_contract(contract, repository_root=ROOT)
+    contract_hash = contract.get("contract_sha256")
+    if (
+        contract_hash != snapshot_plan.get("quality_contract_sha256")
+        or contract_hash != snapshot_manifest.get("quality_contract_sha256")
+        or contract_hash != experiment.get("quality_contract_sha256")
+        or experiment.get("comparison_authority") != "quality_non_selected"
+        or experiment.get("surface_kind") != "default_fixed_64_16"
+        or experiment.get("prompt_selection") != "default_unselected"
+        or experiment.get("schema_version") != QUALITY_EXPERIMENT_SCHEMA_VERSION
+        or snapshot_manifest.get("prompt_rows") != {"baseline": 80, "candidate": 80}
+        or snapshot_manifest.get("prompt_schedule_sha256") is not None
+        or snapshot_manifest.get("candidate_source_tree_sha256")
+        != contract.get("candidate_source_tree_sha256")
+        or snapshot_manifest.get("candidate_ids") != contract.get("candidate_ids")
+        or experiment.get("run_contract") != contract.get("run_contract")
+        or experiment.get("default_candidate_prompts_sha256")
+        != _hash_path(snapshot_root / "candidate-root/prompts.jsonl")
+    ):
+        raise WorkflowValidationError(
+            "variation_experiment_quality_contract_mismatch",
+            "experiment, snapshot, and non-selected quality contract differ",
+        )
+    bound_contract = dict(contract)
+    bound_contract["_validated_coverage_eligibility"] = validation[
+        "coverage_eligibility"
+    ]
+    return bound_contract
+
+
 def scheduled_location_action_coverage(records: list[dict], schedule: Mapping[str, Any]) -> dict[str, Any]:
     expected = {
         (str(item["location"]), str(item["action"]))
@@ -339,13 +408,37 @@ def compare_variation_prompt_pair(
     if snapshot_manifest.get("state") != "SNAPSHOT_READY" or not snapshot_manifest.get("prompt_generation_allowed"):
         raise WorkflowValidationError("snapshot_prompt_generation_blocked", "snapshot does not permit prompt comparison")
     experiment_value = _read_json(experiment) if isinstance(experiment, Path) else dict(experiment)
-    if experiment_value.get("schema_version") != "prompt-quality-experiment/v1":
+    if experiment_value.get("schema_version") not in {
+        "prompt-quality-experiment/v1",
+        QUALITY_EXPERIMENT_SCHEMA_VERSION,
+    }:
         raise WorkflowValidationError("invalid_variation_experiment", "variation experiment schema is invalid")
     expected_snapshot_hash = experiment_value.get("snapshot_manifest_sha256")
     actual_snapshot_hash = _hash_path(snapshot_root / "snapshot-manifest.json")
     if expected_snapshot_hash != actual_snapshot_hash:
         raise WorkflowValidationError("variation_experiment_snapshot_mismatch", "experiment snapshot binding drifted")
     prompt_schedule = _load_bound_prompt_schedule(snapshot_root, snapshot_manifest, experiment_value)
+    quality_contract = _load_bound_quality_contract(
+        snapshot_root, snapshot_manifest, experiment_value
+    )
+    if prompt_schedule is not None and quality_contract is not None:
+        raise WorkflowValidationError(
+            "variation_quality_surface_conflict",
+            "comparison cannot use scheduled coverage and non-selected quality authority together",
+        )
+    is_quality_experiment = (
+        experiment_value.get("schema_version") == QUALITY_EXPERIMENT_SCHEMA_VERSION
+    )
+    if is_quality_experiment and quality_contract is None:
+        raise WorkflowValidationError(
+            "variation_quality_contract_required",
+            "v2 non-selected quality experiment requires a bound quality contract",
+        )
+    if not is_quality_experiment and quality_contract is not None:
+        raise WorkflowValidationError(
+            "variation_quality_contract_forbidden",
+            "v1 variation experiment cannot use non-selected quality authority",
+        )
     baseline_run_contract = _declared_run_contract(snapshot_root / "baseline-root", experiment_value)
     candidate_run_contract = _declared_run_contract(snapshot_root / "candidate-root", experiment_value)
     if baseline_run_contract != candidate_run_contract:
@@ -410,15 +503,44 @@ def compare_variation_prompt_pair(
     ):
         raise WorkflowValidationError("variation_experiment_cohort_mismatch", "experiment cohort binding drifted")
 
-    baseline_metrics = dict(baseline_metrics)
-    candidate_metrics = dict(candidate_metrics)
+    metric_scope = str(experiment_value.get("metric_scope", "all80"))
+    if is_quality_experiment and metric_scope != "control64":
+        raise WorkflowValidationError(
+            "variation_quality_metric_scope_mismatch",
+            "v2 non-selected quality experiment must use control64 metrics",
+        )
+    if metric_scope == "control64":
+        baseline_metric_records = [
+            record for record in baseline_records if record.get("cohort") == "control"
+        ]
+        candidate_metric_records = [
+            record for record in candidate_records if record.get("cohort") == "control"
+        ]
+        if len(baseline_metric_records) != 64 or len(candidate_metric_records) != 64:
+            raise WorkflowValidationError(
+                "variation_metric_scope_record_mismatch",
+                "control64 metric scope requires exactly 64 records per side",
+            )
+        baseline_metrics = analyze_records(baseline_metric_records, policy)["metrics"]
+        candidate_metrics = analyze_records(candidate_metric_records, policy)["metrics"]
+    elif metric_scope == "all80":
+        baseline_metric_records = baseline_records
+        candidate_metric_records = candidate_records
+        baseline_metrics = dict(baseline_metrics)
+        candidate_metrics = dict(candidate_metrics)
+    else:
+        raise WorkflowValidationError(
+            "variation_metric_scope_unsupported",
+            "variation comparison metric scope is unsupported",
+            metric_scope=metric_scope,
+        )
     baseline_metrics.setdefault(
         "policy",
-        {"policy_issue_count": sum(1 for record in baseline_records if find_banned_terms(str(record.get("cleaned_prompt", ""))))},
+        {"policy_issue_count": sum(1 for record in baseline_metric_records if find_banned_terms(str(record.get("cleaned_prompt", ""))))},
     )
     candidate_metrics.setdefault(
         "policy",
-        {"policy_issue_count": sum(1 for record in candidate_records if find_banned_terms(str(record.get("cleaned_prompt", ""))))},
+        {"policy_issue_count": sum(1 for record in candidate_metric_records if find_banned_terms(str(record.get("cleaned_prompt", ""))))},
     )
 
     target_path = "diversity.location_signature_entropy"
@@ -469,12 +591,15 @@ def compare_variation_prompt_pair(
         snapshot_root / "candidate-root",
         snapshot_manifest["candidate_ids"],
     )
+    coverage_failures = []
     if coverage["unseen_subjects"]:
-        failures.append("candidate_subject_coverage_incomplete")
+        coverage_failures.append("candidate_subject_coverage_incomplete")
     if coverage["unseen_locations"]:
-        failures.append("candidate_location_coverage_incomplete")
+        coverage_failures.append("candidate_location_coverage_incomplete")
     if coverage["unseen_action_pool_locations"]:
-        failures.append("candidate_action_pool_coverage_incomplete")
+        coverage_failures.append("candidate_action_pool_coverage_incomplete")
+    if quality_contract is None:
+        failures.extend(coverage_failures)
     scheduled_coverage = None
     if prompt_schedule is not None:
         scheduled_coverage = scheduled_location_action_coverage(candidate_records, prompt_schedule)
@@ -491,6 +616,8 @@ def compare_variation_prompt_pair(
         "candidate_run_manifest_sha256": _hash_path(candidate_run / "run-manifest.json"),
         "cohort_hash": baseline_manifest["cohort_hash"],
         "record_count": len(baseline_index),
+        "metric_scope": metric_scope,
+        "metric_record_count": len(baseline_metric_records),
         "changed_seed_count": len(changed_seeds),
         "changed_seeds": changed_seeds,
         "candidate_coverage": coverage,
@@ -518,6 +645,42 @@ def compare_variation_prompt_pair(
         report["diagnostic_pair_verdict"] = diagnostic_pair_verdict
         report["fixed_quality_verdict"] = "reject"
         report["verdict"] = "reject"
+    if quality_contract is not None:
+        quality_failures = sorted(failures)
+        quality_verdict = "pass" if not quality_failures else "reject"
+        coverage_eligibility_verdict = "pass"
+        validation_verdict = (
+            "pass"
+            if quality_verdict == "pass" and coverage_eligibility_verdict == "pass"
+            else "reject"
+        )
+        report["schema_version"] = QUALITY_REPORT_SCHEMA_VERSION
+        report["comparison_authority"] = "quality_non_selected"
+        report["surface_kind"] = "default_fixed_64_16"
+        report["prompt_selection"] = "default_unselected"
+        report["quality_contract_sha256"] = quality_contract["contract_sha256"]
+        report["quality_evidence"] = True
+        report["coverage_is_quality_evidence"] = False
+        report["coverage_eligibility"] = {
+            "coverage_receipt_sha256": quality_contract["coverage_receipt_sha256"],
+            "guard_remediation_receipt_sha256": quality_contract[
+                "guard_remediation_receipt_sha256"
+            ],
+            **quality_contract["_validated_coverage_eligibility"],
+        }
+        report["informational_current_coverage"] = coverage
+        report["informational_coverage_failures"] = coverage_failures
+        report["quality_failures"] = quality_failures
+        report["coverage_evidence_failures"] = []
+        report["parent_fixed_quality_verdict"] = "reject"
+        report["quality_verdict"] = quality_verdict
+        report["coverage_eligibility_verdict"] = coverage_eligibility_verdict
+        report["validation_verdict"] = validation_verdict
+        report["verdict"] = validation_verdict
+        report["review_ready"] = validation_verdict == "pass"
+        report["blind_review_run"] = False
+        report["confirmation_run"] = False
+        report["promotion_ready"] = False
     report["comparison_sha256"] = hashlib.sha256(canonical_json_bytes(report)).hexdigest()
     return report
 

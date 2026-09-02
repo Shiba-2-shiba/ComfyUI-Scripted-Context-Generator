@@ -27,6 +27,7 @@ ITERATION_ROOT = ROOT / "docs" / "variation_expansion" / "experiments" / "v150-c
 SCHEDULE_ITERATION_ROOT = ROOT / "docs" / "variation_expansion" / "experiments" / "v150-candidate-shape-iteration-004"
 SCHEDULE_PATH = ROOT / "docs" / "variation_expansion" / "experiments" / "v150-candidate-shape-iteration-005" / "coverage-plan.json"
 FINAL_SCHEDULE_PATH = ROOT / "docs" / "variation_expansion" / "experiments" / "v150-candidate-shape-iteration-006" / "full-workflow-schedule.json"
+QUALITY_CONTRACT_PATH = ROOT / "docs" / "variation_expansion" / "experiments" / "v150-candidate-shape-iteration-008" / "nonselected-quality-contract.json"
 
 
 def _build_plan():
@@ -57,6 +58,17 @@ def _build_final_scheduled_plan():
         projection_report=SCHEDULE_ITERATION_ROOT / "projection-report.json",
         analysis_report=SCHEDULE_ITERATION_ROOT / "analysis-report.json",
         prompt_schedule=FINAL_SCHEDULE_PATH,
+        source_root=ROOT,
+    )
+
+
+def _build_quality_plan():
+    return build_snapshot_plan(
+        candidate_iteration=SCHEDULE_ITERATION_ROOT / "candidate-iteration.json",
+        scenario_manifest=SCHEDULE_ITERATION_ROOT / "scenario-manifest.json",
+        projection_report=SCHEDULE_ITERATION_ROOT / "projection-report.json",
+        analysis_report=SCHEDULE_ITERATION_ROOT / "analysis-report.json",
+        quality_contract=QUALITY_CONTRACT_PATH,
         source_root=ROOT,
     )
 
@@ -108,6 +120,29 @@ class TestVariationCandidateSnapshotPlan(unittest.TestCase):
         self.assertEqual(plan["prompt_schedule_sha256"], schedule["schedule_sha256"])
         self.assertEqual(plan["candidate_ids"]["subjects"], schedule["expected_subjects"])
         self.assertEqual(plan["candidate_ids"]["locations"], schedule["expected_locations"])
+
+    def test_nonselected_quality_contract_is_bound_without_prompt_schedule(self):
+        plan = _build_quality_plan()
+        contract = json.loads(QUALITY_CONTRACT_PATH.read_text(encoding="utf-8"))
+
+        self.assertIn("quality_contract", plan["inputs"])
+        self.assertNotIn("prompt_schedule", plan["inputs"])
+        self.assertIsNone(plan["prompt_schedule_sha256"])
+        self.assertEqual(plan["quality_contract_sha256"], contract["contract_sha256"])
+
+    def test_quality_contract_and_prompt_schedule_are_mutually_exclusive(self):
+        with self.assertRaises(WorkflowValidationError) as raised:
+            build_snapshot_plan(
+                candidate_iteration=SCHEDULE_ITERATION_ROOT / "candidate-iteration.json",
+                scenario_manifest=SCHEDULE_ITERATION_ROOT / "scenario-manifest.json",
+                projection_report=SCHEDULE_ITERATION_ROOT / "projection-report.json",
+                analysis_report=SCHEDULE_ITERATION_ROOT / "analysis-report.json",
+                prompt_schedule=FINAL_SCHEDULE_PATH,
+                quality_contract=QUALITY_CONTRACT_PATH,
+                source_root=ROOT,
+            )
+
+        self.assertEqual(raised.exception.code, "snapshot_quality_surface_conflict")
 
 
 class TestVariationCandidateSnapshotMaterialization(unittest.TestCase):
@@ -419,6 +454,31 @@ class TestFinalCoverageVariationCandidateSnapshot(unittest.TestCase):
         self.assertFalse(verification["promotion_ready"])
 
     def test_final_coverage_snapshot_revalidates_certificate(self):
+        self.assertEqual(
+            validate_snapshot_manifest(self.destination, self.manifest)["status"],
+            "pass",
+        )
+
+
+class TestNonSelectedQualityCandidateSnapshot(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.temp_dir = tempfile.TemporaryDirectory(prefix="vs-quality-", dir=RESULTS_ROOT)
+        cls.addClassCleanup(cls.temp_dir.cleanup)
+        cls.destination = Path(cls.temp_dir.name) / "s"
+        cls.manifest = materialize_candidate_snapshots(
+            _build_quality_plan(),
+            source_root=ROOT,
+            destination_root=cls.destination,
+        )
+
+    def test_quality_surface_uses_default_eighty_rows_without_schedule(self):
+        self.assertEqual(self.manifest["prompt_rows"], {"baseline": 80, "candidate": 80})
+        self.assertIsNone(self.manifest["prompt_schedule_sha256"])
+        self.assertIsNone(self.manifest["prompt_schedule_verification"])
+        self.assertIsNotNone(self.manifest["quality_contract_sha256"])
+
+    def test_quality_snapshot_revalidates_contract_and_hashes(self):
         self.assertEqual(
             validate_snapshot_manifest(self.destination, self.manifest)["status"],
             "pass",

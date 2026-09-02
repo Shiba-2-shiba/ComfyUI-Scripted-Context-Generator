@@ -30,6 +30,23 @@ from tools.workflow_prompt_runner import WorkflowValidationError, canonical_json
 
 
 ANALYZER_VERSION = "prompt-quality-analyzer/v1"
+LOW_INFORMATION_REPEATED_BIGRAMS = frozenset(
+    {
+        "a quiet",
+        "around her",
+        "at the",
+        "near the",
+        "of the",
+        "the moment",
+        "the next",
+        "the park",
+        "the room",
+        "the scene",
+        "to the",
+        "with a",
+        "with the",
+    }
+)
 METRICS_SCHEMA_VERSION = "prompt-quality-analysis-metrics/v1"
 ISSUES_SCHEMA_VERSION = "prompt-quality-issues/v1"
 DEFAULT_POLICY_PATH = ROOT / "vocab" / "data" / "prompt_quality_policy.json"
@@ -420,9 +437,22 @@ def analyze_records(
             findings["high_comma_density"][seed] = f"comma_density={_round(comma_density, digits)}"
         repeated: list[str] = []
         min_occurrences = int(analyzer.get("repeated_ngram_min_occurrences", 3))
+        ignored_bigrams = {
+            str(item).strip().lower()
+            for item in analyzer.get(
+                "repeated_ngram_ignored_bigrams",
+                LOW_INFORMATION_REPEATED_BIGRAMS,
+            )
+            if str(item).strip()
+        }
         for width in (2, 3, 4):
             counts = Counter(" ".join(words[index:index + width]) for index in range(max(0, len(words) - width + 1)))
-            repeated.extend(f"{width}-gram {gram!r} x{count}" for gram, count in counts.items() if count >= min_occurrences)
+            repeated.extend(
+                f"{width}-gram {gram!r} x{count}"
+                for gram, count in counts.items()
+                if count >= min_occurrences
+                and not (width == 2 and gram in ignored_bigrams)
+            )
         if repeated:
             findings["repeated_ngram"][seed] = "; ".join(sorted(repeated)[:3])
         family_counts: Counter[str] = Counter()

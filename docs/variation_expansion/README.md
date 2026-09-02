@@ -25,6 +25,7 @@ capability pass と V150/V250/V350/V500 の段階gateを順に進めます。
 - [V150 Coverage Schedule Iteration 005 Rejection](./experiments/v150-candidate-shape-iteration-005/rejection-receipt.json)
 - [V150 Full-Workflow Coverage Iteration 006](./experiments/v150-candidate-shape-iteration-006/rejection-receipt.json)
 - [V150 Guard Remediation Iteration 007](./experiments/v150-candidate-shape-iteration-007/guard-remediation-receipt.json)
+- [V150 Non-Selected Quality Validation Iteration 008](./experiments/v150-candidate-shape-iteration-008/quality-validation-receipt.json)
 - [100k Stabilization and Historical 500k Notes](./base_variations_100k_plan.md)
 - [Clothing State Location Gate Refactor Plan](./clothing_state_location_gate_plan.md)
 
@@ -41,7 +42,7 @@ Historical or completed-plan references:
 compatibility taxonomy expansion、P11 action authoring refactor、P12 100k
 stabilization gate は完了済みです。
 
-現在は P13 L3 full-workflow coverage iteration 006完了後のquality remediation設計です。L0 baseline と6件の非counted runtime pool分類は
+現在は P13 V150 iteration 008 の非選択quality validation完了後で、comparison-bound blind reviewと3x256 confirmation待ちです。L0 baseline と6件の非counted runtime pool分類は
 `experiments/v150-planner-l0/`、L1 pure projectionの昇格証拠は
 `experiments/v150-planner-l1/` にhash固定済みです。L2 iteration 001は
 coverage不足とduplicate pressure超過でreject済みです。iteration 002は
@@ -67,6 +68,11 @@ Iteration 007ではcoverage scheduleを凍結したままdebug payloadを圧縮�
 semantic-family/context sizeを含む全定量guardを非回帰へ戻しました。q9からの
 cleaned prompt変更は0件です。この結果はdiagnostic passであり、次は非選択の
 quality validation surfaceが必要です。
+
+Iteration 008ではcurrent-source coverage certificateを更新後、scheduleなしの
+default80 surfaceでcontrol64 quality metricsを評価し、target改善と全guard
+非回帰を確認しました。`review_ready=true`ですが、blind reviewと3x256
+confirmationが未完了なのでpromotionはまだ行いません。
 
 並行する品質改善として、衣装 `states` が Location と衝突する問題を
 [`clothing_state_location_gate_plan.md`](./clothing_state_location_gate_plan.md)
