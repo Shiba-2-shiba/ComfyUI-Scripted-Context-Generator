@@ -36,7 +36,9 @@ from tools.workflow_prompt_runner import WorkflowValidationError, canonical_json
 CATALOG_SCHEMA_VERSION = "variation-quality-candidate-catalog/v1"
 ITERATION_SCHEMA_VERSION = "variation-quality-candidate-iteration/v1"
 EXTENDED_ITERATION_SCHEMA_VERSION = "variation-quality-candidate-iteration/v2"
+ENRICHED_ITERATION_SCHEMA_VERSION = "variation-quality-candidate-iteration/v3"
 LOCATION_ADDITIONS_SCHEMA_VERSION = "variation-quality-location-additions/v1"
+LOCATION_OVERRIDES_SCHEMA_VERSION = "variation-quality-location-overrides/v1"
 REPORT_SCHEMA_VERSION = "variation-quality-candidate-analysis/v1"
 _ITERATION_FIELDS = frozenset(
     {
@@ -66,6 +68,20 @@ _EXTENDED_ITERATION_FIELDS = frozenset(
         "prompt_quality_receipt",
     }
 )
+_ENRICHED_ITERATION_FIELDS = frozenset(
+    {
+        "schema_version",
+        "catalog_id",
+        "stage_id",
+        "base_catalog_path",
+        "base_catalog_sha256",
+        "location_overrides_path",
+        "location_overrides_sha256",
+        "scenario_binding",
+        "quality_limits",
+        "prompt_quality_receipt",
+    }
+)
 _TOP_FIELDS = frozenset(
     {
         "schema_version",
@@ -86,10 +102,26 @@ _LOCATION_FIELDS = frozenset(
         "compatibility_tags",
         "universal",
         "environment_terms",
+        "background_pack",
         "utility_claim",
         "action_plan",
     }
 )
+_LOCATION_OVERRIDE_FIELDS = frozenset({"id", "background_pack", "action_plan"})
+_BACKGROUND_PACK_FIELDS = frozenset(
+    {"environment", "core", "texture", "props", "fx", "time", "crowd", "weather", "lighting", "aliases"}
+)
+_BACKGROUND_PACK_MINIMUM_COUNTS = {
+    "environment": 2,
+    "core": 4,
+    "texture": 2,
+    "props": 3,
+    "fx": 2,
+    "time": 2,
+    "crowd": 2,
+    "weather": 2,
+    "lighting": 2,
+}
 _CLAIM_FIELDS = frozenset({"category", "prompt_visible_terms", "distinct_from", "rationale"})
 _ACTION_PLAN_FIELDS = frozenset({"direct_actions", "family_refs"})
 _DIRECT_ACTION_FIELDS = frozenset({"text", "load"})
@@ -192,6 +224,66 @@ def load_candidate_catalog(path: str | Path, _seen: set[Path] | None = None) -> 
         ) from exc
     if not isinstance(payload, dict):
         raise WorkflowValidationError("invalid_candidate_catalog", "candidate catalog must be a JSON object")
+    if payload.get("schema_version") == ENRICHED_ITERATION_SCHEMA_VERSION:
+        unknown = sorted(set(payload) - _ENRICHED_ITERATION_FIELDS)
+        if unknown:
+            raise WorkflowValidationError(
+                "unknown_candidate_iteration_field",
+                "enriched candidate iteration contains unknown fields",
+                fields=unknown,
+            )
+        base_path, _base_raw = _load_bound_catalog_artifact(
+            payload.get("base_catalog_path"), payload.get("base_catalog_sha256"), kind="base_catalog"
+        )
+        _override_path, overrides = _load_bound_catalog_artifact(
+            payload.get("location_overrides_path"),
+            payload.get("location_overrides_sha256"),
+            kind="location_overrides",
+        )
+        base = load_candidate_catalog(base_path, seen)
+        if not isinstance(overrides, dict) or overrides.get("schema_version") != LOCATION_OVERRIDES_SCHEMA_VERSION:
+            raise WorkflowValidationError(
+                "invalid_location_overrides_schema",
+                "location overrides must use the supported quality catalog schema",
+            )
+        if set(overrides) != {"schema_version", "locations"} or not isinstance(overrides.get("locations"), list):
+            raise WorkflowValidationError(
+                "invalid_location_overrides_catalog",
+                "location overrides catalog must contain only a locations array",
+            )
+        materialized = copy.deepcopy(base)
+        location_map = {
+            str(item.get("id", "")): item
+            for item in materialized.get("locations", [])
+            if isinstance(item, dict) and str(item.get("id", ""))
+        }
+        override_map: dict[str, dict[str, Any]] = {}
+        for item in overrides["locations"]:
+            if not isinstance(item, dict) or set(item) != _LOCATION_OVERRIDE_FIELDS or not str(item.get("id", "")):
+                raise WorkflowValidationError(
+                    "invalid_location_override",
+                    "each location override must contain only id, background_pack, and action_plan",
+                )
+            location_id = str(item["id"])
+            if location_id in override_map:
+                raise WorkflowValidationError("location_override_id_collision", "location override IDs must be unique")
+            override_map[location_id] = item
+        if set(override_map) != set(location_map):
+            raise WorkflowValidationError(
+                "location_override_id_mismatch",
+                "location overrides must exactly cover base catalog locations",
+                missing=sorted(set(location_map) - set(override_map)),
+                extra=sorted(set(override_map) - set(location_map)),
+            )
+        for location_id, item in override_map.items():
+            location_map[location_id]["background_pack"] = copy.deepcopy(item["background_pack"])
+            location_map[location_id]["action_plan"] = copy.deepcopy(item["action_plan"])
+        materialized["catalog_id"] = payload.get("catalog_id")
+        materialized["stage_id"] = payload.get("stage_id")
+        materialized["scenario_binding"] = copy.deepcopy(payload.get("scenario_binding"))
+        materialized["quality_limits"] = copy.deepcopy(payload.get("quality_limits"))
+        materialized["prompt_quality_receipt"] = payload.get("prompt_quality_receipt")
+        return materialized
     if payload.get("schema_version") == EXTENDED_ITERATION_SCHEMA_VERSION:
         unknown = sorted(set(payload) - _EXTENDED_ITERATION_FIELDS)
         if unknown:
@@ -550,6 +642,19 @@ def _evaluate_catalog(
         if not _valid_string_list(environment_terms):
             errors.append(_error("invalid_environment_terms", "environment terms must be non-empty strings", id=location_id))
             environment_terms = []
+        background_pack = item.get("background_pack")
+        if background_pack is not None:
+            if not isinstance(background_pack, Mapping) or set(background_pack) != _BACKGROUND_PACK_FIELDS:
+                errors.append(_error("invalid_background_pack", "background pack fields are not closed", id=location_id))
+            else:
+                for field in sorted(_BACKGROUND_PACK_FIELDS):
+                    values = background_pack.get(field)
+                    if not isinstance(values, list) or any(not isinstance(value, str) or not value.strip() for value in values):
+                        errors.append(_error("invalid_background_pack_values", "background pack values must be strings", id=location_id, field=field))
+                        continue
+                    minimum = _BACKGROUND_PACK_MINIMUM_COUNTS.get(field, 0)
+                    if len(values) < minimum:
+                        errors.append(_error("background_pack_density_below_minimum", "background pack field is too sparse", id=location_id, field=field, expected=minimum, actual=len(values)))
         action_plan = item.get("action_plan")
         _append_unknown_fields(errors, action_plan, _ACTION_PLAN_FIELDS, path=f"{path}.action_plan")
         direct_actions = action_plan.get("direct_actions", []) if isinstance(action_plan, Mapping) else []

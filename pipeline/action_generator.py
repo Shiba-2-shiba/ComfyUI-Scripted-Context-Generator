@@ -203,7 +203,9 @@ def build_daily_life_profile(loc, compat):
     profile = {}
     for tag in matching_tags:
         profile = merge_profile(profile, TAG_BASED_DAILY_LIFE_PROFILES.get(tag, {}))
-    profile = merge_profile(profile, LOC_SPECIFIC_DAILY_LIFE_PROFILES.get(loc, {}))
+    specific_profile = LOC_SPECIFIC_DAILY_LIFE_PROFILES.get(loc, {})
+    for key, values in specific_profile.items():
+        profile[key] = list(dict.fromkeys(values))
     return profile, matching_tags
 
 
@@ -247,7 +249,7 @@ def _location_context_profile(loc):
         if any(keyword in lowered for keyword in keywords):
             return profile
     return {
-        "anchors": ["near the part of the scene she is using", "close to where she needs to be"],
+        "anchors": [],
         "gaze_target": ["checking what is happening nearby", "looking toward the next thing she needs"],
     }
 
@@ -313,6 +315,59 @@ def _slot_sources(slots: Dict[str, str], slot_overrides: Dict[str, str]) -> Dict
     return sources
 
 
+def filter_obstacle_options_for_action_load(options, action_load):
+    values = [str(option) for option in options if str(option).strip()]
+    if str(action_load or "").strip().lower() != "calm":
+        return values
+    return [
+        option
+        for option in values
+        if not any(
+            marker in option.lower()
+            for marker in ("frantically", "suddenly", "face-palm", "panic")
+        )
+    ]
+
+
+STREET_CAFE_COHERENT_REPLACEMENTS = (
+    ("browsing slowly while comparing nearby choices", "reading the specials board beside the terrace"),
+    ("standing and deciding what to check next", "setting a cup beside a folded napkin"),
+    ("walking along the display area while looking from side to side", "moving a chair closer to the table"),
+    ("pausing to weigh one option against another", "checking the table number on a small stand"),
+    ("checking the arrangement before moving to the next section", "placing a receipt beneath the saucer"),
+    ("turning back after noticing a small detail she missed", "waiting beside the terrace entrance"),
+    ("waiting her turn while keeping her place in the flow", "adjusting the parasol shade over the table"),
+    ("leaning closer to review the choice in front of her", "looking over the cafe menu by the railing"),
+)
+
+COMMUTER_TRANSPORT_NEUTRAL_REPLACEMENTS = (
+    ("standing in the train", "standing inside public transit"),
+    ("station names", "stop names"),
+    ("the train moves", "the vehicle moves"),
+    ("the train turns", "the vehicle turns"),
+    ("the train doors", "the doors"),
+)
+
+
+def normalize_action_pool_for_location(loc, pool):
+    """Repair location-specific legacy pool text without mutating locked L0 data."""
+
+    loc_key = resolve_location_key(loc) or str(loc or "").strip()
+    normalized = []
+    for item in pool or []:
+        text = action_text(item)
+        if loc_key == "street_cafe":
+            text = dict(STREET_CAFE_COHERENT_REPLACEMENTS).get(text, text)
+        if loc_key == "commuter_transport":
+            for source, replacement in COMMUTER_TRANSPORT_NEUTRAL_REPLACEMENTS:
+                text = text.replace(source, replacement)
+        if isinstance(item, dict):
+            normalized.append({**item, "text": text})
+        else:
+            normalized.append(text)
+    return normalized
+
+
 def build_action_slots(
     loc,
     compat,
@@ -323,6 +378,7 @@ def build_action_slots(
     slot_overrides=None,
     semantic_debug=None,
     solo_safety=True,
+    action_load="",
 ):
     slot_overrides = {
         str(key): _normalize_action_phrase(value)
@@ -394,6 +450,10 @@ def build_action_slots(
         semantic_top_candidate = ""
         selected_candidate_rank = None
         option_values = [str(option) for option in options if str(option).strip()]
+        if name == "obstacle_clause":
+            option_values = filter_obstacle_options_for_action_load(
+                option_values, action_load
+            )
         if domain_enabled("action"):
             descriptor_options = semantic_descriptor_options_for_slot(
                 name,
@@ -406,6 +466,12 @@ def build_action_slots(
                     option_values.append(descriptor_option)
         if solo_safety:
             option_values = filter_solo_action_safe_candidates(option_values)
+        if name == "anchor" and not option_values:
+            # Removing generic fallback anchors must not shift every later
+            # deterministic slot choice. A one-item weighted choice consumed
+            # one random draw in the legacy sequence even though the anchor is
+            # now intentionally omitted from rendered actions.
+            rng.random()
         if domain_enabled("action") and option_values:
             action_slot_rankings[name] = rank_action_slot_options(
                 name,
@@ -467,6 +533,7 @@ def build_action_slots(
         "social_distance": social_distance,
         "obstacle_or_trigger": obstacle_or_trigger,
         "daily_life_tags": list(matching_tags),
+        "primary_action": slot_overrides.get("primary_action", ""),
         "anchor": choose_slot("anchor", context_profile.get("anchors", [])),
         "posture": choose_slot("posture", POSTURE_BY_PURPOSE.get(purpose, [])),
         "hand_action": choose_slot("hand_action", HAND_ACTION_BY_PURPOSE.get(purpose, [])),
@@ -524,6 +591,7 @@ def generate_action_for_location(
     solo_safety=True,
 ):
     loc_key = resolve_location_key(loc) or str(loc or "").strip()
+    pool = normalize_action_pool_for_location(loc_key, pool)
     filtered_pool_count = 0
     if solo_safety and pool:
         original_pool_size = len(pool)
@@ -560,6 +628,7 @@ def generate_action_for_location(
             slot_overrides=pool_slots,
             semantic_debug=semantic_debug,
             solo_safety=solo_safety,
+            action_load=action_load,
         )
         relation_debug = apply_object_relation_slots(slots, render_action_slots(slots, activity_first=True)) if domain_enabled("object_relation") else None
         normalized_action = render_action_slots(slots, activity_first=True)

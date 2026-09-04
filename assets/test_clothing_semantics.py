@@ -8,6 +8,39 @@ sys.path.insert(0, ROOT)
 
 
 class TestClothingSemantics(unittest.TestCase):
+    def test_contextual_theme_fallback_escapes_hard_tpo_conflicts(self):
+        from pipeline.clothing_semantics import resolve_contextual_clothing_theme
+
+        cases = (
+            ("vehicle_repair_garage", "tightening a bolt beneath the open hood"),
+            ("fire_station", "walking toward the vehicle bay"),
+            ("bedroom_boudoir", "waking up and stretching arms"),
+            ("forest_cabin", "checking the cabin water container after a long walk"),
+        )
+        for location, action in cases:
+            with self.subTest(location=location):
+                self.assertEqual(
+                    resolve_contextual_clothing_theme(location, action, "office_lady"),
+                    "casual",
+                )
+
+        for location, action in (
+            ("university_campus_courtyard", "while reviewing what she needs next"),
+            ("karaoke_bar", "sitting on a sofa humming softly"),
+            ("clean_modern_kitchen", "walking slowly while checking what still needs doing"),
+            ("street_cafe", "checking the table number on a small stand"),
+        ):
+            with self.subTest(location=location):
+                self.assertEqual(
+                    resolve_contextual_clothing_theme(location, action, "office_lady"),
+                    "casual",
+                )
+
+        self.assertEqual(
+            resolve_contextual_clothing_theme("modern_office", "reviewing documents", "office_lady"),
+            "office_lady",
+        )
+
     def test_rainy_bus_stop_target_has_high_weather_fit(self):
         from pipeline.clothing_semantics import build_clothing_target_vector
 
@@ -92,6 +125,17 @@ class TestClothingSemantics(unittest.TestCase):
         self.assertIn("distance", payload["candidate_scores"][0])
         self.assertNotIn("distance", payload["candidate_scores"][1])
         self.assertIn("distance", payload["candidate_scores"][2])
+
+    def test_debug_payload_rounds_target_vector_noise(self):
+        from pipeline.clothing_semantics import clothing_semantic_debug_payload
+
+        payload = clothing_semantic_debug_payload(
+            target_vector={"activity_fit": 0.7000000000000001},
+            candidate_scores=[],
+            selected_attempt_index=0,
+        )
+
+        self.assertEqual(payload["target_vector"]["activity_fit"], 0.7)
 
     def test_clothing_candidate_renderer_filters_state_details_by_location(self):
         from pipeline.clothing_candidate_renderer import location_allows_state_detail, render_clothing_candidate

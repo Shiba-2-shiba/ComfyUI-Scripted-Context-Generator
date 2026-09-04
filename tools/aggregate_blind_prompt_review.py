@@ -29,6 +29,10 @@ LANE_FIELDS = {
     "schema_version", "target_qualitative_dimensions",
 }
 V3_LANE_FIELDS = LANE_FIELDS | {"dimension_eligibility", "selection_hash"}
+V4_LANE_FIELDS = {
+    "blinded", "dimensions", "implementation_details_visible", "lane_id", "pair_count", "pairs",
+    "result_contract", "review_prompt_hash", "rubric", "rubric_version", "schema_version",
+}
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -117,11 +121,26 @@ def aggregate_review(
     if not isinstance(target_contract, Mapping) or not isinstance(guard_contract, Mapping):
         raise ValueError("frozen review contract is incomplete")
     computed_review_contract_hash = hashlib.sha256(canonical_json_bytes(dict(review_policy))).hexdigest()
-    is_v3 = review_policy.get("schema_version") == "prompt-quality-review-contract/v3"
-    allowed_hard_defect_codes = set(review_policy.get("hard_defect_codes", [])) if is_v3 else set()
-    dimension_eligibility = key.get("dimension_eligibility", {}) if is_v3 else {}
+    contract_schema = review_policy.get("schema_version")
+    if contract_schema not in {
+        None,
+        "prompt-quality-review-contract/v1", "prompt-quality-review-contract/v3",
+        "prompt-quality-review-contract/v4", "prompt-quality-review-contract/v5",
+        "prompt-quality-review-contract/v6",
+    }:
+        raise ValueError(f"unsupported review contract schema: {contract_schema!r}")
+    is_v3 = contract_schema == "prompt-quality-review-contract/v3"
+    is_v4 = contract_schema == "prompt-quality-review-contract/v4"
+    is_v5 = contract_schema == "prompt-quality-review-contract/v5"
+    is_v6 = contract_schema == "prompt-quality-review-contract/v6"
+    is_semantic = is_v4 or is_v5 or is_v6
+    expected_key_schema = "prompt-quality-review-assignment-key/v6" if is_v6 else "prompt-quality-review-assignment-key/v5" if is_v5 else "prompt-quality-review-assignment-key/v4" if is_v4 else "prompt-quality-review-assignment-key/v3" if is_v3 else "prompt-quality-review-assignment-key/v1"
+    if key.get("schema_version") != expected_key_schema:
+        raise ValueError("assignment-key schema does not match its frozen review contract")
+    allowed_hard_defect_codes = set(review_policy.get("hard_defect_codes", [])) if is_v3 or is_semantic else set()
+    dimension_eligibility = key.get("dimension_eligibility", {}) if is_v3 or is_semantic else {}
     eligible_seed_sets = {
-        dimension: set(eligibility.get("seeds", []))
+        dimension: set(eligibility.get("pair_ids" if is_semantic else "seeds", []))
         for dimension, eligibility in dimension_eligibility.items()
         if isinstance(eligibility, Mapping)
     }
@@ -131,7 +150,7 @@ def aggregate_review(
         failures.append({"code": "review_contract_hash_mismatch"})
     selection_hash = key.get("selection_hash")
     comparison_hash = key.get("comparison_artifact_hash")
-    if is_v3:
+    if is_v3 or is_semantic:
         selection_value = dict(key.get("selection", {}))
         selection_value["dimensions"] = key.get("dimension_eligibility")
         expected_selection_hash = hashlib.sha256(canonical_json_bytes(selection_value)).hexdigest()
@@ -167,8 +186,8 @@ def aggregate_review(
         if missing:
             failures.append({"code": "missing_result_metadata", "lane_id": lane_id, "missing_fields": missing})
         if (
-            set(lane) != (V3_LANE_FIELDS if is_v3 else LANE_FIELDS)
-            or lane.get("schema_version") != ("prompt-quality-blind-review-lane/v3" if is_v3 else "prompt-quality-blind-review-lane/v1")
+            set(lane) != (V4_LANE_FIELDS if is_semantic else V3_LANE_FIELDS if is_v3 else LANE_FIELDS)
+            or lane.get("schema_version") != ("prompt-quality-blind-review-lane/v6" if is_v6 else "prompt-quality-blind-review-lane/v5" if is_v5 else "prompt-quality-blind-review-lane/v4" if is_v4 else "prompt-quality-blind-review-lane/v3" if is_v3 else "prompt-quality-blind-review-lane/v1")
             or lane.get("lane_id") != lane_id
             or lane.get("pair_count") != 20
             or lane.get("blinded") is not True
@@ -178,7 +197,7 @@ def aggregate_review(
             or len(lane["pairs"]) != 20
             or any(
                 not isinstance(pair, Mapping)
-                or set(pair) != {"cohort", "pair_id", "prompts", "run_seed"}
+                or set(pair) != ({"pair_id", "prompts"} if is_semantic else {"cohort", "pair_id", "prompts", "run_seed"})
                 or not isinstance(pair.get("prompts"), Mapping)
                 or set(pair["prompts"]) != {"A", "B"}
                 for pair in lane.get("pairs", [])
@@ -216,30 +235,36 @@ def aggregate_review(
             "reviewer_id": result.get("reviewer_id"),
             "reviewer_model_version": result.get("reviewer_model_version"),
             "reviewer_type": result.get("reviewer_type"),
+            **({"review_session_id": result.get("review_session_id")} if is_semantic else {}),
         })
-        expected_pairs = {(item["pair_id"], int(item["run_seed"])) for item in lane.get("pairs", [])}
+        expected_pairs = {item["pair_id"] for item in lane.get("pairs", [])} if is_semantic else {
+            (item["pair_id"], int(item["run_seed"])) for item in lane.get("pairs", [])
+        }
         votes = result.get("votes", []) if isinstance(result.get("votes"), list) else []
         valid_votes = [
             item for item in votes
             if isinstance(item, Mapping)
-            and set(item) == {"dimensions", "hard_defects", "pair_id", "run_seed"}
+            and set(item) == ({"dimensions", "hard_defects", "pair_id"} if is_semantic else {"dimensions", "hard_defects", "pair_id", "run_seed"})
             and isinstance(item.get("dimensions"), Mapping)
             and set(item["dimensions"]) == set(ALL_DIMENSIONS)
             and all(value in {"A_better", "B_better", "equal", "abstain"} for value in item["dimensions"].values())
             and (
                 _valid_v3_hard_defects(item.get("hard_defects"), allowed_hard_defect_codes)
-                if is_v3 else _valid_hard_defects(item.get("hard_defects"))
+                if is_v3 or is_semantic else _valid_hard_defects(item.get("hard_defects"))
             )
         ]
         if len(valid_votes) != len(votes) or len(valid_votes) != 20:
             failures.append({"code": "invalid_vote_contract", "lane_id": lane_id})
-        actual_pairs = {(item["pair_id"], int(item["run_seed"])) for item in valid_votes}
+        actual_pairs = {item["pair_id"] for item in valid_votes} if is_semantic else {
+            (item["pair_id"], int(item["run_seed"])) for item in valid_votes
+        }
         if expected_pairs != actual_pairs or len(actual_pairs) != 20 or len(valid_votes) != 20:
             failures.append({"code": "review_pair_mismatch", "lane_id": lane_id})
         assignments = {item["pair_id"]: item for item in lane_key["assignments"]}
         for assignment in assignments.values():
-            seed = int(assignment["run_seed"])
-            digest = hashlib.sha256(f"{key.get('experiment_id')}:{lane_id}:{seed}".encode()).digest()
+            seed = int(assignment["run_seed"]) if not is_semantic else None
+            material = f"{comparison_hash}:{lane_id}:{assignment['pair_id']}" if is_semantic else f"{key.get('experiment_id')}:{lane_id}:{seed}"
+            digest = hashlib.sha256(material.encode()).digest()
             expected_candidate = "A" if int.from_bytes(digest[:8], "big") % 2 == 0 else "B"
             if (
                 assignment.get("candidate_side") != expected_candidate
@@ -250,7 +275,7 @@ def aggregate_review(
                     "lane_id": lane_id,
                     "pair_id": assignment.get("pair_id"),
                 })
-        if lane.get("target_qualitative_dimensions") != target_dimensions or lane.get("guard_qualitative_dimensions") != guard_dimensions:
+        if not is_semantic and (lane.get("target_qualitative_dimensions") != target_dimensions or lane.get("guard_qualitative_dimensions") != guard_dimensions):
             failures.append({"code": "qualitative_scope_mismatch", "lane_id": lane_id})
         lane_counts = {dimension: collections.Counter() for dimension in ALL_DIMENSIONS}
         for vote in valid_votes:
@@ -259,9 +284,10 @@ def aggregate_review(
             for dimension in ALL_DIMENSIONS:
                 eligibility = dimension_eligibility.get(dimension, {})
                 authority = eligibility.get("authority")
-                if is_v3 and authority == "current_source_corpus_confirmation":
+                if (is_v3 or is_semantic) and authority == "current_source_corpus_confirmation":
                     continue
-                if is_v3 and int(vote["run_seed"]) not in eligible_seed_sets.get(dimension, ()):
+                eligibility_key = vote["pair_id"] if is_semantic else int(vote["run_seed"])
+                if (is_v3 or is_semantic) and eligibility_key not in eligible_seed_sets.get(dimension, ()):
                     continue
                 raw_vote = vote.get("dimensions", {}).get(dimension)
                 if raw_vote in {"equal", "abstain"}:
@@ -292,36 +318,55 @@ def aggregate_review(
         or len(set(reviewer_ids)) != 2
     ):
         failures.append({"code": "reviewer_identity_not_independent"})
+    if is_semantic:
+        session_ids = [item.get("review_session_id") for item in reviewers]
+        if (
+            len(session_ids) != 2 or any(not isinstance(value, str) or not value.strip() for value in session_ids)
+            or len(set(session_ids)) != 2 or set(session_ids) & set(reviewer_ids)
+        ):
+            failures.append({"code": "review_session_not_independent"})
     dimensions: dict[str, Any] = {}
     for dimension, counts in aggregate.items():
         better, worse = counts["candidate_better"], counts["candidate_worse"]
-        valid = better + worse
-        support = better / valid if valid else 0.0
-        worse_rate = worse / valid if valid else 0.0
+        directional = better + worse
+        non_abstain = directional + counts["equal"]
+        valid = directional
+        support = better / directional if directional else 0.0
+        worse_rate = worse / (non_abstain if is_v6 else directional) if (non_abstain if is_v6 else directional) else 0.0
         is_target = dimension in target_dimensions
         contract = target_contract if is_target else guard_contract
         eligibility = dimension_eligibility.get(dimension, {})
         authority = eligibility.get("authority", "selected_pairwise")
-        if is_v3 and authority == "current_source_corpus_confirmation":
+        if (is_v3 or is_semantic) and authority == "current_source_corpus_confirmation":
             dimensions[dimension] = {
                 "authority": authority,
                 "candidate_better": 0, "candidate_worse": 0, "equal": 0, "abstain": 0,
                 "improvement_support": 0.0, "lane_directions": {}, "passed": True,
-                "scope": "corpus_confirmation", "valid_votes": 0, "worse_rate": 0.0,
+                "scope": "corpus_confirmation",
+                **({"candidate_regression_rate": 0.0} if is_v6 else {"worse_rate": 0.0}),
+                **({"non_abstain_votes": 0, "directional_votes": 0} if is_v5 or is_v6 else {"valid_votes": 0}),
             }
             continue
         max_worse = float(contract.get("max_candidate_worse_rate", 0.10))
         passed = worse_rate <= max_worse
-        minimum_valid = int(eligibility.get("minimum_valid_votes", 0)) if is_v3 else 0
-        if is_v3 and authority in {"affected_seed_pairwise", "selected_pairwise"}:
+        minimum_valid = int(eligibility.get("minimum_valid_votes", 0)) if is_v3 or is_v4 else 0
+        if (is_v5 or is_v6) and authority == "semantic_pairwise":
+            minimum_non_abstain = int(eligibility["minimum_non_abstain_votes"])
+            minimum_directional = int(eligibility["minimum_directional_votes"])
+            passed = passed and non_abstain >= minimum_non_abstain and directional >= minimum_directional
+            if non_abstain < minimum_non_abstain:
+                failures.append({"code": "insufficient_non_abstain_votes", "dimension": dimension, "actual": non_abstain, "required": minimum_non_abstain})
+            if directional < minimum_directional:
+                failures.append({"code": "insufficient_directional_votes", "dimension": dimension, "actual": directional, "required": minimum_directional})
+        elif (is_v3 or is_v4) and authority in {"affected_seed_pairwise", "selected_pairwise", "semantic_pairwise"}:
             passed = passed and valid >= minimum_valid
             if valid < minimum_valid:
                 failures.append({"code": "insufficient_valid_votes", "dimension": dimension, "actual": valid, "required": minimum_valid})
         if is_target:
-            minimum_valid = minimum_valid if is_v3 else int(contract.get("minimum_valid_votes", 36))
+            minimum_valid = minimum_valid if is_v3 or is_semantic else int(contract.get("minimum_valid_votes", 36))
             minimum_support = float(contract.get("min_improvement_support", 0.65))
-            passed = passed and valid >= minimum_valid and support >= minimum_support
-            if not is_v3 and valid < minimum_valid:
+            passed = passed and (True if is_v5 or is_v6 else valid >= minimum_valid) and support >= minimum_support
+            if not is_v3 and not is_semantic and valid < minimum_valid:
                 failures.append({"code": "insufficient_valid_votes", "dimension": dimension, "actual": valid, "required": minimum_valid})
             if support < minimum_support:
                 failures.append({"code": "insufficient_improvement_support", "dimension": dimension, "actual": round(support, 6), "required": minimum_support})
@@ -336,7 +381,8 @@ def aggregate_review(
             "equal": counts["equal"], "abstain": counts["abstain"],
             "improvement_support": round(support, 6), "lane_directions": lane_directions[dimension],
             "passed": passed, "scope": "target" if is_target else "guard",
-            "valid_votes": valid, "worse_rate": round(worse_rate, 6),
+            **({"candidate_regression_rate": round(worse_rate, 6)} if is_v6 else {"worse_rate": round(worse_rate, 6)}),
+            **({"non_abstain_votes": non_abstain, "directional_votes": directional} if is_v5 or is_v6 else {"valid_votes": valid}),
         }
     candidate_hard_count = sum(hard_defects["candidate_only"].values())
     if candidate_hard_count:
@@ -358,15 +404,21 @@ def aggregate_review(
         "review_contract_hash": computed_review_contract_hash,
         "reviewed_record_hashes": key.get("reviewed_record_hashes", {}),
         "reviewed_run_provenance": key.get("reviewed_run_provenance", {}),
-        "schema_version": "prompt-quality-review/v3" if is_v3 else "prompt-quality-review/v1",
+        "schema_version": "prompt-quality-review/v6" if is_v6 else "prompt-quality-review/v5" if is_v5 else "prompt-quality-review/v4" if is_v4 else "prompt-quality-review/v3" if is_v3 else "prompt-quality-review/v1",
         "status": "pass" if not failures else "fail",
         "verdict": "pass" if not failures else "reject",
         "target_qualitative_dimensions": target_dimensions,
     }
-    if is_v3:
+    if is_v3 or is_semantic:
         result.update({
             "comparison_artifact_hash": comparison_hash,
             "selection_hash": selection_hash,
+        })
+    if is_semantic:
+        pair_bindings = key.get("pair_evidence_bindings", {})
+        result.update({
+            "candidate_source_tree_sha256": pair_bindings.get("candidate_source_tree_sha256"),
+            "candidate_snapshot_content_sha256": pair_bindings.get("candidate_snapshot_content_sha256"),
         })
     if output is not None:
         _atomic_write(output, canonical_json_bytes(result))

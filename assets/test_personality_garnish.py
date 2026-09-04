@@ -154,6 +154,61 @@ class TestContextGarnishPersonality(unittest.TestCase):
                 self.assertLessEqual(len(tags), max_items,
                     f"max_items={max_items}: too many tags: {tags}")
 
+    def test_active_actions_exclude_stillness_posture_tags(self):
+        stillness_tags = {"still posture", "body held carefully still", "lingering in stillness"}
+        for seed in range(32):
+            garnish, _ = self.sample_garnish(
+                action_text="carrying harvested vegetables toward the tool shed",
+                meta_mood_key="quiet_focused",
+                seed=seed,
+                max_items=3,
+                include_camera=False,
+                context_loc="community_garden",
+                context_costume="casual",
+                scene_tags="{}",
+                personality="mysterious",
+            )
+            tags = {tag.strip() for tag in garnish.split(",") if tag.strip()}
+            self.assertTrue(stillness_tags.isdisjoint(tags), msg=f"seed={seed}: {garnish}")
+
+    def test_action_load_keywords_require_word_boundaries(self):
+        _garnish, debug = self.sample_garnish(
+            action_text="matching seed packets to the labeled beds",
+            meta_mood_key="peaceful_relaxed",
+            seed=0,
+            max_items=3,
+            include_camera=False,
+            context_loc="community_garden",
+            context_costume="mori_natural",
+            scene_tags="{}",
+            personality="mysterious",
+        )
+        decision = debug.get("decision", debug)
+        self.assertEqual(decision["action_load"], "calm")
+
+    def test_calm_task_actions_use_at_most_two_non_generic_garnish_tags(self):
+        for action_text in (
+            "checking condensation on a chilled glass",
+            "reading a service note on a clipboard",
+            "inspecting a tray of newly germinated seeds",
+            "matching seed packets to the labeled beds",
+        ):
+            for seed in range(16):
+                garnish, _debug = self.sample_garnish(
+                    action_text=action_text,
+                    meta_mood_key="energetic_joy",
+                    seed=seed,
+                    max_items=3,
+                    include_camera=False,
+                    context_loc="modern_office",
+                    context_costume="office_lady",
+                    scene_tags="{}",
+                    personality="mysterious",
+                )
+                tags = [tag.strip() for tag in garnish.split(",") if tag.strip()]
+                self.assertLessEqual(len(tags), 2, msg=f"seed={seed}, {action_text}: {garnish}")
+                self.assertNotIn("holding herself with easy energy", tags)
+
 
 class TestPersonalityDiversityPhase1(unittest.TestCase):
     """

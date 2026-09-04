@@ -13,6 +13,7 @@ if __package__ and "." in __package__:
     from .location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
     from .location_policy import (
         filter_fx_candidates as _filter_fx_candidates,
+        filter_location_core_options as _filter_location_core_options,
         filter_semantic_redundant_fx as _filter_semantic_redundant_fx,
         filter_off_mode_options as _filter_off_mode_options,
         filter_time_options_for_context as _filter_time_options_for_context,
@@ -42,6 +43,7 @@ else:
     from pipeline.location_semantics import build_scene_target_vector, rank_location_segment_options, semantic_location_debug_payload
     from pipeline.location_policy import (
         filter_fx_candidates as _filter_fx_candidates,
+        filter_location_core_options as _filter_location_core_options,
         filter_semantic_redundant_fx as _filter_semantic_redundant_fx,
         filter_off_mode_options as _filter_off_mode_options,
         filter_time_options_for_context as _filter_time_options_for_context,
@@ -69,6 +71,71 @@ TEXTURE_SEGMENT_SELECT_PROB = 0.55
 FX_DEFAULT_BLEND_PROB = 0.10
 FX_SEGMENT_SELECT_PROB = 0.20
 MAX_FX_SEGMENTS = 1
+
+EXTERIOR_ACTION_ANCHORS = (
+    "cabin steps",
+    "fresh tracks",
+    "outside",
+    "porch",
+    "waterside",
+)
+EXTERIOR_ENVIRONMENT_MARKERS = (
+    "clearing",
+    "exterior",
+    "outdoor",
+    "porch",
+    "waterside",
+)
+ACTION_ANCHOR_STOPWORDS = {
+    "about",
+    "after",
+    "along",
+    "around",
+    "before",
+    "beside",
+    "checking",
+    "hand",
+    "into",
+    "near",
+    "resting",
+    "the",
+    "toward",
+    "while",
+    "with",
+}
+
+
+def _content_terms(text):
+    normalized = "".join(char if char.isalnum() else " " for char in str(text or "").casefold())
+    return {
+        token
+        for token in normalized.split()
+        if len(token) >= 5 and token not in ACTION_ANCHOR_STOPWORDS
+    }
+
+
+def _filter_action_redundant_options(options, action_text):
+    action_terms = _content_terms(action_text)
+    if len(action_terms) < 2:
+        return list(options)
+    filtered = [
+        option
+        for option in options
+        if len(action_terms & _content_terms(option)) < 2
+    ]
+    return filtered or list(options)
+
+
+def _filter_spatial_environment_options(options, action_text):
+    action = str(action_text or "").casefold()
+    if not any(anchor in action for anchor in EXTERIOR_ACTION_ANCHORS):
+        return list(options)
+    exterior = [
+        option
+        for option in options
+        if any(marker in str(option).casefold() for marker in EXTERIOR_ENVIRONMENT_MARKERS)
+    ]
+    return exterior or list(options)
 
 
 def expand_location_prompt(
@@ -145,6 +212,7 @@ def expand_location_prompt(
         }
 
     env_options = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("environment", [])))
+    env_options = _filter_spatial_environment_options(env_options, action_text)
     env_options = _filter_time_options_for_context(env_options, action_text)
     record_segment_ranking("environment", env_options)
     if env_options:
@@ -200,7 +268,9 @@ def expand_location_prompt(
         return accepted
 
     core_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("core", [])))
+    core_opts = _filter_location_core_options(cleaned_tag, core_opts)
     core_opts = _filter_time_options_for_context(core_opts, action_text)
+    core_opts = _filter_action_redundant_options(core_opts, action_text)
     record_segment_ranking("core", core_opts)
     if core_opts and rng.random() < 0.95:
         num_core = 2 if len(core_opts) > 1 and rng.random() < 0.50 else 1
@@ -218,6 +288,7 @@ def expand_location_prompt(
 
     props_opts = filter_solo_safe_candidates(filter_candidate_strings(pack_data.get("props", [])))
     props_opts = _filter_time_options_for_context(props_opts, action_text)
+    props_opts = _filter_action_redundant_options(props_opts, action_text)
     props_opts = keep_repeat_risk_budget(props_opts)
     record_segment_ranking("props", props_opts)
     include_prob, second_prop_prob = _props_sampling_policy(props_opts)

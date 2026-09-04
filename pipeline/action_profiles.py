@@ -5,7 +5,7 @@ profiles here so `action_generator.py` can focus on parsing, slot assembly, and
 rendering behavior.
 """
 
-DEFAULT_DAILY_LIFE_TAGS = {"school", "office", "urban", "domestic", "suburban", "resort", "japanese"}
+DEFAULT_DAILY_LIFE_TAGS = {"school", "office", "workplace", "urban", "domestic", "suburban", "resort", "japanese"}
 
 TAG_BASED_DAILY_LIFE_PROFILES = {
     "school": {
@@ -23,6 +23,14 @@ TAG_BASED_DAILY_LIFE_PROFILES = {
         "time": ["before the meeting begins", "during a short break", "near the end of the workday"],
         "weather": ["the city light reflecting through the glass", "rain streaks showing on the windows"],
         "obstacle": ["delay", "forgot", "luggage"],
+    },
+    "workplace": {
+        "purpose": ["work"],
+        "progress": ["preparing", "midway", "wrapping_up"],
+        "social_distance": ["alone", "acquaintance"],
+        "time": ["before the next task", "during the workday", "as the task wraps up"],
+        "weather": [],
+        "obstacle": ["delay", "forgot"],
     },
     "urban": {
         "purpose": ["shop", "wait", "commute", "rest"],
@@ -67,10 +75,34 @@ TAG_BASED_DAILY_LIFE_PROFILES = {
 }
 
 LOC_SPECIFIC_DAILY_LIFE_PROFILES = {
+    "elegant_dining_room": {
+        "purpose": ["rest", "wait"],
+        "social_distance": ["alone", "acquaintance"],
+        "time": ["before dinner", "between courses", "as the meal wraps up"],
+        "obstacle": ["delay", "spill"],
+    },
+    "karaoke_bar": {
+        "purpose": ["rest", "wait"],
+        "social_distance": ["alone", "acquaintance"],
+        "time": ["between songs", "before the next song", "late in the evening"],
+        "obstacle": ["delay"],
+    },
+    "recording_studio": {
+        "purpose": ["work"],
+        "social_distance": ["alone", "acquaintance"],
+        "time": ["before recording", "during the current take", "as the session wraps up"],
+        "obstacle": ["delay", "forgot"],
+    },
+    "vehicle_repair_garage": {
+        "purpose": ["work"],
+        "social_distance": ["alone", "acquaintance"],
+        "time": ["before the next inspection", "during the repair", "as the repair wraps up"],
+        "obstacle": ["delay", "forgot"],
+    },
     "commuter_transport": {
         "purpose": ["commute", "wait"],
         "social_distance": ["stranger", "crowd", "alone"],
-        "time": ["during the morning rush", "between train stops", "on the ride home"],
+        "time": ["during the morning rush", "between stops", "on the ride home"],
         "weather": ["the windows fogged from the weather outside", "rainwater shaking loose at each stop"],
         "obstacle": ["delay", "luggage"],
     },
@@ -153,6 +185,13 @@ LOC_SPECIFIC_DAILY_LIFE_PROFILES = {
 
 LOCATION_CONTEXT_HINTS = [
     (
+        ("courtyard", "public_plaza", "community_garden"),
+        {
+            "anchors": ["along the open walkway", "near the edge of the plaza", "beside the path ahead"],
+            "gaze_target": ["looking across the open space", "watching what is happening farther along the path"],
+        },
+    ),
+    (
         ("platform", "terminal", "ticket_gate", "transport", "crosswalk"),
         {
             "anchors": ["near the route display", "by the edge of the walkway", "close to the next exit"],
@@ -167,7 +206,7 @@ LOCATION_CONTEXT_HINTS = [
         },
     ),
     (
-        ("library", "hallway", "courtyard", "cafeteria", "clubroom", "community_center"),
+        ("library", "hallway", "cafeteria", "clubroom", "community_center"),
         {
             "anchors": ["near the side of the room", "along the quieter part of the space", "by the nearest table"],
             "gaze_target": ["looking toward the part of the room she needs", "checking the people moving around her"],

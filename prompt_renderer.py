@@ -599,6 +599,110 @@ def _expand_location_key_for_builder(loc, rng, context_values, is_consistent, so
         return loc
 
 
+def _arbitrate_prompt_cues(
+    *,
+    action,
+    garnish,
+    meta_mood,
+    staging_tags,
+    action_frame,
+    composition_mode,
+):
+    exact_dropped = []
+    if composition_mode:
+        garnish, exact_dropped = filter_redundant_garnish(action, garnish, action_frame)
+
+    layers = _apply_semantic_family_budget(action, garnish, meta_mood, staging_tags)
+    layers["debug"]["exact_redundancy_dropped"] = exact_dropped
+    return layers
+
+
+LOW_VALUE_COMPOSITION_FILLERS = {
+    "already in the middle of things",
+    "caught in a brief pause",
+    "gathering herself for what comes next",
+    "holding herself with easy energy",
+    "keeping to the edge of the moment",
+    "measured pause",
+    "moving with the next part of the day",
+    "right where her attention settles",
+    "the moment gathering around her",
+    "the moment kept deliberate rather than urgent",
+    "the moment staying with her",
+    "turned toward the next exchange",
+    "leaving room for the rest of the scene",
+    "with everything else held at the edge",
+}
+COMPOSITION_FILLER_PREFIX_REWRITES = {
+    "the moment lingering in ": "in ",
+    "with the next part of the day waiting in ": "in ",
+}
+ACTIVE_ACTION_VERBS = {
+    "carrying",
+    "cleaning",
+    "cooking",
+    "filling",
+    "lifting",
+    "moving",
+    "placing",
+    "pruning",
+    "rolling",
+    "running",
+    "stepping",
+    "sweeping",
+    "turning",
+    "walking",
+}
+ACTIVE_STASIS_FILLERS = {
+    "caught in a brief pause",
+    "the moment kept deliberate rather than urgent",
+}
+ACTIVE_STASIS_PREFIX_REWRITES = {
+    "the moment lingering in ": "in ",
+}
+
+
+def _prune_redundant_prompt_fillers(text):
+    parts = [part.strip() for part in str(text or "").split(",")]
+    kept = []
+    for part in parts:
+        for prefix, replacement in COMPOSITION_FILLER_PREFIX_REWRITES.items():
+            if part.casefold().startswith(prefix):
+                part = replacement + part[len(prefix):]
+                break
+        if part.casefold() in LOW_VALUE_COMPOSITION_FILLERS:
+            continue
+        if part:
+            kept.append(part)
+    return ", ".join(kept)
+
+
+def _prune_action_incompatible_fillers(text, action):
+    if normalize_action_verb(action) not in ACTIVE_ACTION_VERBS:
+        return str(text or "")
+    kept = []
+    for raw_part in str(text or "").split(","):
+        part = raw_part.strip()
+        for prefix, replacement in ACTIVE_STASIS_PREFIX_REWRITES.items():
+            if part.casefold().startswith(prefix):
+                part = replacement + part[len(prefix):]
+                break
+        if part.casefold() in ACTIVE_STASIS_FILLERS:
+            continue
+        if part:
+            kept.append(part)
+    return ", ".join(kept)
+
+
+def _append_staging_tags(result, staging_tags):
+    if "{staging_tags}" in result:
+        return result.replace("{staging_tags}", staging_tags)
+    base_result = str(result).rstrip()
+    terminal = "." if base_result.endswith(".") else ""
+    base_result = base_result.rstrip(".")
+    return f"{base_result}, {sanitize_text(staging_tags)}{terminal}"
+
+
 def build_prompt_text(
     template,
     composition_mode,
@@ -630,7 +734,14 @@ def build_prompt_text(
     template_entries_fn = template_entries_fn or _template_entries
     subj = strip_person_demographic_descriptors(normalize_subject_to_girl(subj))
     rng = random.Random(seed)
-    semantic_layers = _apply_semantic_family_budget(action, garnish, meta_mood, staging_tags)
+    semantic_layers = _arbitrate_prompt_cues(
+        action=action,
+        garnish=garnish,
+        meta_mood=meta_mood,
+        staging_tags=staging_tags,
+        action_frame=action_frame,
+        composition_mode=composition_mode,
+    )
     action = semantic_layers["action"]
     garnish = semantic_layers["garnish"]
     meta_mood = semantic_layers["meta_mood"]
@@ -639,9 +750,7 @@ def build_prompt_text(
     solo_support_dropped_tags = []
     if solo_prompt_context:
         garnish, staging_tags, solo_support_dropped_tags = _compact_solo_support_tags(garnish, staging_tags)
-    realizer_dropped_garnish = []
-    if composition_mode:
-        garnish, realizer_dropped_garnish = filter_redundant_garnish(action, garnish, action_frame)
+    realizer_dropped_garnish = semantic_layers["debug"]["exact_redundancy_dropped"]
     subject_clause = sanitize_text(_join_nonempty([subj, f"in {costume}" if costume else ""], " "))
     action_clause = sanitize_text(_join_nonempty([action, garnish]))
     scene_clause = sanitize_text(_join_nonempty([f"in {loc}" if loc else "", meta_mood]))
@@ -764,13 +873,12 @@ def build_prompt_text(
     result = result.replace("{meta_style}", "")
 
     if staging_tags and isinstance(staging_tags, str) and staging_tags.strip():
-        if "{staging_tags}" in result:
-            result = result.replace("{staging_tags}", staging_tags)
-        else:
-            result = f"{result}, {sanitize_text(staging_tags)}"
+        result = _append_staging_tags(result, staging_tags)
     else:
         result = result.replace("{staging_tags}", "")
 
+    result = _prune_redundant_prompt_fillers(result)
+    result = _prune_action_incompatible_fillers(result, action)
     result = _normalize_prompt(result)
     result = normalize_subject_to_girl(result)
     result = strip_person_demographic_descriptors(result)

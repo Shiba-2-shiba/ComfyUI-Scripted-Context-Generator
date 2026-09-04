@@ -1,0 +1,15 @@
+{
+  "schema_version": "variation-action-semantic-classifier/v1",
+  "classifier_id": "v150-semantic-actions-001",
+  "normalization": {"casefold": true, "collapse_whitespace": true, "strip_terminal_punctuation": true},
+  "rules": [
+    {"id": "inspect", "verbs": ["browsing", "checking", "comparing", "counting", "examining", "following", "inspecting", "looking", "matching", "measuring", "reading", "reviewing", "scanning", "studying", "testing", "watching", "weighing"], "action_family": "inspect", "purpose": "task", "primary_object_family": "information_or_fixture"},
+    {"id": "organize", "verbs": ["aligning", "arranging", "binding", "clearing", "closing", "folding", "hanging", "labeling", "organizing", "pinning", "returning", "sealing", "sorting", "stacking", "wrapping"], "action_family": "organize", "purpose": "task", "primary_object_family": "material_or_fixture"},
+    {"id": "maintain", "verbs": ["brushing", "charging", "clamping", "cleaning", "cutting", "fastening", "feeding", "filling", "latching", "loosening", "placing", "pruning", "pulling", "refilling", "removing", "restocking", "rolling", "securing", "spraying", "sweeping", "tightening", "trimming", "tying", "unlocking", "watering", "wiping"], "action_family": "maintain", "purpose": "task", "primary_object_family": "material_or_fixture"},
+    {"id": "move", "verbs": ["carrying", "crossing", "moving", "slowing", "stepping", "turning", "walking"], "action_family": "move", "purpose": "transit", "primary_object_family": "route_or_load"},
+    {"id": "select", "verbs": ["choosing"], "action_family": "select", "purpose": "task", "primary_object_family": "place_or_item"},
+    {"id": "record", "verbs": ["filing", "marking", "recording", "writing"], "action_family": "record", "purpose": "task", "primary_object_family": "information_or_fixture"},
+    {"id": "operate", "verbs": ["adjusting", "assembling", "continuing", "holding", "lifting", "opening", "preparing", "presenting", "reaching", "settling", "taking", "using"], "action_family": "operate", "purpose": "task", "primary_object_family": "tool_or_fixture"},
+    {"id": "rest", "verbs": ["leaning", "pausing", "resting", "sitting", "standing", "stretching", "waiting"], "action_family": "pose", "purpose": "pause", "primary_object_family": "none"}
+  ]
+}

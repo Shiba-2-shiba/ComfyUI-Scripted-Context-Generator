@@ -227,7 +227,7 @@ def render_clothing_candidate(
     theme = resolve_clothing_theme(raw_key) or raw_key
     packs_map = clothing_vocab.THEME_TO_PACKS.get(theme)
     if not packs_map:
-        prompt = sanitize_text(f"{theme_key}, generic outfit")
+        prompt = sanitize_text(f"{theme_key} layered top and practical trousers")
         debug = {"theme": theme, "base_pack": "", "chosen_type": "", "outerwear_pack": "", "objects": []}
         return prompt, debug
 

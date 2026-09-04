@@ -1,0 +1,96 @@
+{
+  "schema_version": "variation-nonselected-quality-validation-receipt/v2",
+  "experiment_id": "v150-candidate-shape-iteration-010",
+  "terminal_state": "QUALITY_VALIDATED_REVIEW_READY",
+  "recorded_at": "2026-09-03",
+  "authority": {
+    "comparison_authority": "quality_non_selected",
+    "quality_evidence": true,
+    "coverage_is_quality_evidence": false,
+    "coverage_eligibility_verdict": "pass",
+    "quality_verdict": "pass",
+    "validation_verdict": "pass",
+    "review_ready": true,
+    "blind_review_run": false,
+    "confirmation_run": false,
+    "promotion_ready": false
+  },
+  "surface": {
+    "kind": "default_fixed_64_16",
+    "prompt_selection": "default_unselected",
+    "metric_scope": "control64",
+    "metric_record_count": 64,
+    "baseline_rows": 80,
+    "candidate_rows": 80,
+    "uses_output_metrics_for_selection": false
+  },
+  "local_snapshot": {
+    "path": "assets/results/vfc/q25-default-quality",
+    "snapshot_manifest_sha256": "44d92246a6008af2ac095b50b1dd7d8da9f66b9becf19618909f1d789910acc8",
+    "prompt_schedule_sha256": null,
+    "quality_contract_sha256": "75519cadc7ee55534822e6f14a99ffd26cbbd7ec2baade41ffebef045510bdb0",
+    "prompt_rows": {"baseline": 80, "candidate": 80},
+    "active_source_unchanged": true
+  },
+  "tracked_artifacts": {
+    "current-source-coverage-refresh.json": "6b79863e8e06d41043c37c77d17ddee33e630a75de28e1c9085c925c4496e365",
+    "nonselected-quality-contract.json": "896608baad07d52443a9b6989187a8ecd1d721187c8b0e9e78eb47a1454e5ed0",
+    "quality-experiment.json": "1a4eec80efe3b936bca107838822fd15b8108481607aa8a5728bde67573537b6",
+    "quality-comparison.json": "85a43cf4b2c701677ade558b96af3680d1076a7ea744f18fe1541a06f34f7944"
+  },
+  "run_artifacts": {
+    "baseline_run_manifest_sha256": "e9b0c0de83c1a247c709488080829f8619af15515979bbe61ff6278f7c5bc80b",
+    "candidate_run_manifest_sha256": "0a03328471670432533b424bc31e3724e6850c4a8d076bc00b3f064dedef1641",
+    "comparison_canonical_sha256": "7429b485bb5ad7c427075517249b956303d700a50a46213bbc8312dec5603c8a",
+    "experiment_canonical_sha256": "1a4eec80efe3b936bca107838822fd15b8108481607aa8a5728bde67573537b6",
+    "cohort_hash": "1b7017819fe1ff11c822b27e61d035b0ce0596dd6f06f85c27f6a45766912492",
+    "records_per_side": 80,
+    "control_count": 64,
+    "exploration_count": 16,
+    "replay_mismatch_count": 0
+  },
+  "coverage_eligibility": {
+    "status": "pass",
+    "candidate_subjects": 15,
+    "candidate_locations": 19,
+    "candidate_action_pool_locations": 19,
+    "fixed_seed_count": 80,
+    "extra_seed_count": 0,
+    "prompt_schedule_sha256": "0c5ce848e03ef4eefc3cb083c6d5649223d317399d371ef68535172571ba8453",
+    "witness_matrix_sha256": "4eb36f10c164e285e18f418cbda5b0df7f8244a9695b478d80b2521019a7e423"
+  },
+  "quality_results": {
+    "failures": [],
+    "location_signature_entropy_before": 4.626124,
+    "location_signature_entropy_after": 4.956344,
+    "repeated_ngram_count_before": 0,
+    "repeated_ngram_count_after": 0,
+    "semantic_family_repetition_count_before": 2,
+    "semantic_family_repetition_count_after": 2,
+    "context_json_bytes_max_before": 27468,
+    "context_json_bytes_max_after": 27392,
+    "context_json_bytes_p95_before": 26873.35,
+    "context_json_bytes_p95_after": 26144.65,
+    "identity_regressions": 0,
+    "hard_consistency_regressions": 0,
+    "policy_regressions": 0,
+    "fallback_regressions": 0
+  },
+  "attempt_002_seed_replay": {
+    "seeds": [30, 40, 41, 2584006080659484769, 16086608232758145338],
+    "included_in_fixed_cohort": true,
+    "candidate_full80_hard_conflict_count": 0,
+    "status": "pass"
+  },
+  "verification": {
+    "behavior_lock_tests": "pass",
+    "candidate_default80_generation": "80 records; replay mismatch 0",
+    "pair_comparison": "pass; failures=[]; review_ready=true; promotion_ready=false",
+    "action_pool_generation_check": "pass; ERROR=[]; WARNING=[]",
+    "prompt_data_validation": "pass; ERROR=[]; WARNING=[]; variation_row_count=5806"
+  },
+  "next_iteration_requirements": [
+    "Run comparison-bound blind-review attempt 003 without changing the validated source.",
+    "Keep VE-1318 and VE-1319 blocked until blind review, confirmation, and verification receipts pass."
+  ]
+}

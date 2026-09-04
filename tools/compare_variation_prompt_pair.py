@@ -26,6 +26,23 @@ from workflow_widget_validation import load_workflow
 REPORT_SCHEMA_VERSION = "variation-prompt-pair-comparison/v1"
 QUALITY_REPORT_SCHEMA_VERSION = "variation-nonselected-quality-comparison/v2"
 QUALITY_EXPERIMENT_SCHEMA_VERSION = "variation-nonselected-quality-experiment/v2"
+SEMANTIC_COMPARISON_SCHEMA_VERSION = "prompt-quality-comparison/v2"
+SEMANTIC_COMPARISON_V5_SCHEMA_VERSION = "prompt-quality-comparison/v3"
+SEMANTIC_COMPARISON_V6_SCHEMA_VERSION = "prompt-quality-comparison/v4"
+SEMANTIC_CONTRACT_SCHEMA_VERSION = "variation-semantic-pair-contract/v1"
+SEMANTIC_GENERATION_SCHEMA_VERSION = "variation-semantic-pair-generation-receipt/v1"
+SEMANTIC_VALIDATION_SCHEMA_VERSION = "variation-semantic-pair-validation/v1"
+SEMANTIC_REVIEW_POLICY_SCHEMA_VERSION = "prompt-quality-review-contract/v4"
+SEMANTIC_REVIEW_POLICY_V5_SCHEMA_VERSION = "prompt-quality-review-contract/v5"
+SEMANTIC_REVIEW_POLICY_V6_SCHEMA_VERSION = "prompt-quality-review-contract/v6"
+SEMANTIC_REVIEW_DIMENSIONS = (
+    "protagonist_clarity",
+    "consistency",
+    "naturalness",
+    "redundancy",
+    "diversity",
+    "image_prompt_suitability",
+)
 REQUIRED_RUN_ARTIFACTS = (
     "records.jsonl",
     "metrics.json",
@@ -45,6 +62,233 @@ def _hash_path(path: Path) -> str:
 
 def _content_hash(value: Any) -> str:
     return hashlib.sha256(canonical_json_bytes(value)).hexdigest()
+
+
+def _semantic_value_hash(value: Any) -> str:
+    payload = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def _validate_embedded_hash(value: Mapping[str, Any], field: str, code: str) -> None:
+    body = dict(value)
+    declared = body.pop(field, None)
+    if declared != _semantic_value_hash(body):
+        raise WorkflowValidationError(code, "artifact canonical hash is invalid", field=field)
+
+
+def build_semantic_pair_comparison(
+    *,
+    automatic_comparison_path: Path,
+    contract_path: Path,
+    generation_receipt_path: Path,
+    validation_path: Path,
+    baseline_records_path: Path,
+    candidate_records_path: Path,
+    review_policy: Mapping[str, Any],
+) -> dict[str, Any]:
+    automatic = _read_json(automatic_comparison_path)
+    contract = _read_json(contract_path)
+    generation = _read_json(generation_receipt_path)
+    validation = _read_json(validation_path)
+    if automatic.get("schema_version") != QUALITY_REPORT_SCHEMA_VERSION:
+        raise WorkflowValidationError(
+            "semantic_automatic_comparison_schema_mismatch",
+            "semantic comparison requires the passing non-selected automatic comparison",
+        )
+    if (
+        automatic.get("quality_verdict") != "pass"
+        or automatic.get("validation_verdict") != "pass"
+        or automatic.get("review_ready") is not True
+        or automatic.get("promotion_ready") is not False
+    ):
+        raise WorkflowValidationError(
+            "semantic_automatic_comparison_not_ready",
+            "automatic comparison is not eligible for semantic review",
+        )
+    if contract.get("schema_version") != SEMANTIC_CONTRACT_SCHEMA_VERSION:
+        raise WorkflowValidationError(
+            "semantic_pair_contract_schema_mismatch",
+            "semantic pair contract schema is unsupported",
+        )
+    _validate_embedded_hash(contract, "contract_sha256", "semantic_pair_contract_hash_mismatch")
+    automatic_binding = contract.get("automatic_comparison")
+    if (
+        not isinstance(automatic_binding, Mapping)
+        or automatic_binding.get("sha256") != _hash_path(automatic_comparison_path)
+    ):
+        raise WorkflowValidationError(
+            "semantic_automatic_comparison_binding_mismatch",
+            "semantic contract does not bind the supplied automatic comparison",
+        )
+    experiment_id = str(contract.get("experiment_id") or "")
+    if not experiment_id or automatic.get("experiment_id", experiment_id) != experiment_id:
+        raise WorkflowValidationError(
+            "semantic_pair_experiment_mismatch",
+            "semantic artifacts do not share one experiment id",
+        )
+    if generation.get("schema_version") != SEMANTIC_GENERATION_SCHEMA_VERSION:
+        raise WorkflowValidationError(
+            "semantic_pair_generation_schema_mismatch",
+            "semantic pair generation receipt schema is unsupported",
+        )
+    _validate_embedded_hash(
+        generation,
+        "generation_receipt_sha256",
+        "semantic_pair_generation_hash_mismatch",
+    )
+    if (
+        generation.get("status") != "generated"
+        or generation.get("experiment_id") != experiment_id
+        or generation.get("contract_sha256") != contract.get("contract_sha256")
+    ):
+        raise WorkflowValidationError(
+            "semantic_pair_generation_binding_mismatch",
+            "generation receipt does not bind the semantic contract",
+        )
+    if validation.get("schema_version") != SEMANTIC_VALIDATION_SCHEMA_VERSION:
+        raise WorkflowValidationError(
+            "semantic_pair_validation_schema_mismatch",
+            "semantic pair validation schema is unsupported",
+        )
+    _validate_embedded_hash(
+        validation,
+        "validation_sha256",
+        "semantic_pair_validation_hash_mismatch",
+    )
+    if (
+        validation.get("status") != "pass"
+        or validation.get("experiment_id") != experiment_id
+        or validation.get("contract_sha256") != contract.get("contract_sha256")
+        or validation.get("generation_receipt_sha256")
+        != generation.get("generation_receipt_sha256")
+        or validation.get("validated_pair_count") != 20
+        or any(
+            validation.get(field) != 0
+            for field in (
+                "identity_mismatch_count",
+                "seed_mismatch_count",
+                "record_hash_mismatch_count",
+            )
+        )
+        or validation.get("mismatches") != []
+    ):
+        raise WorkflowValidationError(
+            "semantic_pair_validation_failed",
+            "semantic pair validation is not a passing twenty-pair receipt",
+        )
+    actual_record_hashes = {
+        "baseline_records_sha256": _hash_path(baseline_records_path),
+        "candidate_records_sha256": _hash_path(candidate_records_path),
+    }
+    if any(generation.get(field) != value for field, value in actual_record_hashes.items()):
+        raise WorkflowValidationError(
+            "semantic_pair_record_hash_mismatch",
+            "semantic pair record bytes drifted from the generation receipt",
+        )
+    snapshot = contract.get("candidate_snapshot")
+    if not isinstance(snapshot, Mapping):
+        raise WorkflowValidationError(
+            "semantic_pair_snapshot_binding_missing",
+            "semantic contract omits the candidate snapshot binding",
+        )
+    candidate_source_hash = snapshot.get("candidate_source_tree_sha256")
+    candidate_content_hash = snapshot.get("candidate_snapshot_content_sha256")
+    if not all(isinstance(item, str) and len(item) == 64 for item in (candidate_source_hash, candidate_content_hash)):
+        raise WorkflowValidationError(
+            "semantic_pair_snapshot_binding_invalid",
+            "candidate snapshot source/content hashes are invalid",
+        )
+    review_contract_schema = review_policy.get("schema_version")
+    if review_contract_schema not in {
+        SEMANTIC_REVIEW_POLICY_SCHEMA_VERSION,
+        SEMANTIC_REVIEW_POLICY_V5_SCHEMA_VERSION,
+        SEMANTIC_REVIEW_POLICY_V6_SCHEMA_VERSION,
+    }:
+        raise WorkflowValidationError(
+            "semantic_review_policy_schema_mismatch",
+            "semantic review requires review-contract/v4, review-contract/v5, or review-contract/v6",
+        )
+    is_v5 = review_contract_schema == SEMANTIC_REVIEW_POLICY_V5_SCHEMA_VERSION
+    is_v6 = review_contract_schema == SEMANTIC_REVIEW_POLICY_V6_SCHEMA_VERSION
+    pairs = contract.get("pairs")
+    if (
+        not isinstance(pairs, list)
+        or len(pairs) != 20
+        or len({str(item.get("pair_id")) for item in pairs if isinstance(item, Mapping)}) != 20
+    ):
+        raise WorkflowValidationError(
+            "semantic_pair_contract_pair_count_invalid",
+            "semantic review requires twenty unique contract pairs",
+        )
+    pair_specs = [
+        {
+            "pair_id": str(pair["pair_id"]),
+            "cohort": str(pair["cohort"]),
+            "run_seed": int(pair["run_seed"]),
+        }
+        for pair in pairs
+    ]
+    pair_ids = [item["pair_id"] for item in pair_specs]
+    target_dimensions = {
+        "consistency", "naturalness", "image_prompt_suitability",
+    } if is_v6 else {
+        "protagonist_clarity", "consistency", "naturalness", "image_prompt_suitability",
+    }
+    dimensions = {
+        dimension: {
+            "authority": (
+                "current_source_corpus_confirmation"
+                if dimension == "diversity"
+                else "semantic_pairwise"
+            ),
+            **(
+                {
+                    "minimum_non_abstain_votes": 36 if (dimension in target_dimensions or (is_v6 and dimension != "diversity")) else 0,
+                    "minimum_directional_votes": 20 if dimension in target_dimensions else 0,
+                }
+                if is_v5 or is_v6 else
+                {"minimum_valid_votes": 36 if dimension in target_dimensions else 0}
+            ),
+            "pair_ids": [] if dimension == "diversity" else pair_ids,
+        }
+        for dimension in SEMANTIC_REVIEW_DIMENSIONS
+    }
+    selection = {"pairs": pair_specs, "dimensions": dimensions}
+    selection["selection_hash"] = _content_hash(selection)
+    scope = {
+        "guard_qualitative_dimensions": (
+            ["protagonist_clarity", "redundancy", "diversity"]
+            if is_v6 else ["redundancy", "diversity"]
+        ),
+        "target_qualitative_dimensions": (
+            ["consistency", "naturalness", "image_prompt_suitability"]
+            if is_v6 else ["consistency", "naturalness", "protagonist_clarity", "image_prompt_suitability"]
+        ),
+    }
+    return {
+        "schema_version": SEMANTIC_COMPARISON_V6_SCHEMA_VERSION if is_v6 else SEMANTIC_COMPARISON_V5_SCHEMA_VERSION if is_v5 else SEMANTIC_COMPARISON_SCHEMA_VERSION,
+        "experiment_id": experiment_id,
+        "review_contract_hash": _content_hash(dict(review_policy)),
+        "qualitative_scope_hash": _content_hash(scope),
+        "automatic_comparison_path": str(automatic_comparison_path),
+        "automatic_comparison_hash": _hash_path(automatic_comparison_path),
+        "automatic_comparison_verdict": "pass",
+        "candidate_source_tree_sha256": candidate_source_hash,
+        "candidate_snapshot_content_sha256": candidate_content_hash,
+        "uses_output_metrics_for_selection": False,
+        "semantic_pair_contract_sha256": _hash_path(contract_path),
+        "pair_generation_receipt_sha256": _hash_path(generation_receipt_path),
+        "pair_validation_sha256": _hash_path(validation_path),
+        "selection_salt_sha256": contract.get("selection_salt_sha256"),
+        "compatibility_graph_sha256": contract.get("compatibility_graph_sha256"),
+        **actual_record_hashes,
+        "review_selection": selection,
+    }
 
 
 def _resolve_contract_path(source_root: Path, value: Any, field: str) -> Path:
@@ -691,18 +935,71 @@ def comparison_exit_code(report: Mapping[str, Any]) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Compare prompt-quality runs from a declared variation snapshot pair.")
-    parser.add_argument("--snapshot-root", required=True)
-    parser.add_argument("--baseline-run", required=True)
-    parser.add_argument("--candidate-run", required=True)
-    parser.add_argument("--experiment", required=True)
+    parser.add_argument("--snapshot-root")
+    parser.add_argument("--baseline-run")
+    parser.add_argument("--candidate-run")
+    parser.add_argument("--experiment")
+    parser.add_argument("--automatic-comparison")
+    parser.add_argument("--semantic-contract")
+    parser.add_argument("--generation-receipt")
+    parser.add_argument("--pair-validation")
+    parser.add_argument("--baseline-records")
+    parser.add_argument("--candidate-records")
+    parser.add_argument("--review-policy")
+    parser.add_argument("--output")
     args = parser.parse_args()
     try:
-        report = compare_variation_prompt_pair(
-            snapshot_root=Path(args.snapshot_root),
-            baseline_run=Path(args.baseline_run),
-            candidate_run=Path(args.candidate_run),
-            experiment=Path(args.experiment),
-        )
+        if args.semantic_contract:
+            required = {
+                "automatic_comparison": args.automatic_comparison,
+                "generation_receipt": args.generation_receipt,
+                "pair_validation": args.pair_validation,
+                "baseline_records": args.baseline_records,
+                "candidate_records": args.candidate_records,
+                "review_policy": args.review_policy,
+            }
+            missing = sorted(name for name, value in required.items() if not value)
+            if missing:
+                raise WorkflowValidationError(
+                    "semantic_comparison_argument_missing",
+                    "semantic comparison arguments are incomplete",
+                    fields=missing,
+                )
+            policy_file = _read_json(Path(args.review_policy))
+            review_policy = policy_file.get("review", policy_file)
+            report = build_semantic_pair_comparison(
+                automatic_comparison_path=Path(args.automatic_comparison),
+                contract_path=Path(args.semantic_contract),
+                generation_receipt_path=Path(args.generation_receipt),
+                validation_path=Path(args.pair_validation),
+                baseline_records_path=Path(args.baseline_records),
+                candidate_records_path=Path(args.candidate_records),
+                review_policy=review_policy,
+            )
+            if args.output:
+                Path(args.output).write_bytes(canonical_json_bytes(report))
+        else:
+            required = {
+                "snapshot_root": args.snapshot_root,
+                "baseline_run": args.baseline_run,
+                "candidate_run": args.candidate_run,
+                "experiment": args.experiment,
+            }
+            missing = sorted(name for name, value in required.items() if not value)
+            if missing:
+                raise WorkflowValidationError(
+                    "variation_comparison_argument_missing",
+                    "variation comparison arguments are incomplete",
+                    fields=missing,
+                )
+            report = compare_variation_prompt_pair(
+                snapshot_root=Path(args.snapshot_root),
+                baseline_run=Path(args.baseline_run),
+                candidate_run=Path(args.candidate_run),
+                experiment=Path(args.experiment),
+            )
+            if args.output:
+                Path(args.output).write_bytes(canonical_json_bytes(report))
     except (OSError, ValueError, json.JSONDecodeError, WorkflowValidationError) as exc:
         envelope = exc.to_envelope() if isinstance(exc, WorkflowValidationError) else WorkflowValidationError(
             "variation_pair_comparison_failed",
@@ -712,7 +1009,7 @@ def main() -> int:
         sys.stderr.buffer.write(canonical_json_bytes(envelope))
         return 2
     sys.stdout.buffer.write(canonical_json_bytes(report))
-    return comparison_exit_code(report)
+    return 0 if args.semantic_contract else comparison_exit_code(report)
 
 
 if __name__ == "__main__":

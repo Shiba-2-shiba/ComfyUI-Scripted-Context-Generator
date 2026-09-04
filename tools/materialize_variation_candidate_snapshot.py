@@ -331,19 +331,26 @@ def _materialize_candidate_data(candidate_root: Path, catalog: Mapping[str, Any]
     for location in catalog["locations"]:
         location_id = str(location["id"])
         terms = list(location["environment_terms"])
-        packs[location_id] = {
-            "label": location_id.replace("_", " "),
-            "environment": [terms[0]],
-            "core": terms[1:] or [terms[0]],
-            "texture": ["maintained surfaces appropriate to the setting"],
-            "props": terms[1:] or ["clearly arranged local fixtures"],
-            "fx": [],
-            "time": ["daytime"],
-            "crowd": ["quiet single-subject atmosphere"],
-            "weather": [],
-            "aliases": [],
-            "lighting": ["natural ambient light"],
-        }
+        background_pack = location.get("background_pack")
+        if isinstance(background_pack, Mapping):
+            packs[location_id] = {
+                "label": location_id.replace("_", " "),
+                **copy.deepcopy(dict(background_pack)),
+            }
+        else:
+            packs[location_id] = {
+                "label": location_id.replace("_", " "),
+                "environment": [terms[0]],
+                "core": terms[1:] or [terms[0]],
+                "texture": [],
+                "props": [],
+                "fx": [],
+                "time": [],
+                "crowd": [],
+                "weather": [],
+                "aliases": [],
+                "lighting": ["natural ambient light"],
+            }
     _write_json(packs_path, packs)
 
     axis_path = candidate_root / "vocab/data/location_axis_profiles.json"

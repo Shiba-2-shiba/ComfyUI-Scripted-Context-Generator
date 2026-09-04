@@ -2,5 +2,5 @@
 {action}, with {garnish}
 {action}, {garnish}
 {garnish} while {action}
-{action} as {garnish}
+{action}, {garnish}
 {garnish}, and {action}

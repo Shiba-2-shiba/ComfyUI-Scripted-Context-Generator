@@ -43,7 +43,10 @@ class PromptCleaner:
             re.compile(r"\bglittering air\b", re.IGNORECASE),
             re.compile(r"\bbokeh\b", re.IGNORECASE),
             re.compile(r"\bfilm grain\b", re.IGNORECASE),
-            re.compile(r"\bbloom\b", re.IGNORECASE),
+            re.compile(
+                r"\bbloom\b(?!\s+(?:size|sizes|stage|stages|color|colors|petal|petals)\b)",
+                re.IGNORECASE,
+            ),
             re.compile(r"\bambient occlusion\b", re.IGNORECASE),
             re.compile(r"\bvolumetric lighting?\b", re.IGNORECASE),
             re.compile(r"\bprismatic light leaks?\b", re.IGNORECASE),

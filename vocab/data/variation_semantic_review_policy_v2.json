@@ -1,0 +1,44 @@
+{
+  "schema_version": "variation-semantic-review-policy/v2",
+  "review": {
+    "schema_version": "prompt-quality-review-contract/v5",
+    "dimension_authority": {
+      "consistency": "semantic_pairwise",
+      "diversity": "current_source_corpus_confirmation",
+      "image_prompt_suitability": "semantic_pairwise",
+      "naturalness": "semantic_pairwise",
+      "protagonist_clarity": "semantic_pairwise",
+      "redundancy": "semantic_pairwise"
+    },
+    "hard_defect_codes": [
+      "clothing_tpo_weather_conflict",
+      "consistency_rule_conflict",
+      "deterministic_replay_mismatch",
+      "location_action_object_conflict",
+      "male_pronoun_drift",
+      "missing_female_protagonist",
+      "mood_action_garnish_conflict",
+      "non_girl_female_term",
+      "other_person_solo_conflict",
+      "person_demographic_descriptor",
+      "runtime_error"
+    ],
+    "sampling_strategy": "predeclared_semantic_pairing_20",
+    "candidate_only_hard_defect_max": 0,
+    "independent_lanes": 2,
+    "guard_dimension_contract": {
+      "max_candidate_worse_rate": 0.1,
+      "require_improvement": false,
+      "require_lane_direction_agreement": false
+    },
+    "hypothesis_scoped": true,
+    "paired_samples": 20,
+    "require_prompt_and_rubric_hashes": true,
+    "side_assignment": "comparison_hash_lane_pair_deterministic",
+    "target_dimension_contract": {
+      "max_candidate_worse_rate": 0.1,
+      "min_improvement_support": 0.65,
+      "require_lane_direction_agreement": true
+    }
+  }
+}

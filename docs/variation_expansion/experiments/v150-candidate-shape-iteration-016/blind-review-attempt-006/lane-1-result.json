@@ -1,0 +1,274 @@
+{
+  "schema_version": "prompt-quality-blind-review-result/v3",
+  "lane_id": "lane-1",
+  "reviewer_id": "blind-attempt-006-lane-1",
+  "reviewer_type": "codex-independent-blind",
+  "reviewer_model_version": "gpt-5.6-sol",
+  "blinded": true,
+  "rubric_version": "prompt-quality-review-rubric/v2",
+  "rubric_hash": "bbedd6af0c5d1e6c4689be311cb30d98d8231da5964b045bc84b7a2f9c8e10ce",
+  "review_prompt_hash": "bbedd6af0c5d1e6c4689be311cb30d98d8231da5964b045bc84b7a2f9c8e10ce",
+  "input_hash": "3683b1c757d332121f038210a3b5c340aaab63ade129b59ed04ccf789f0ebac7",
+  "votes": [
+    {
+      "pair_id": "pair-01",
+      "run_seed": 2,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "equal",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-02",
+      "run_seed": 30,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-03",
+      "run_seed": 40,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-04",
+      "run_seed": 41,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "A_better",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-05",
+      "run_seed": 61,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-06",
+      "run_seed": 16086608232758145338,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-07",
+      "run_seed": 1,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-08",
+      "run_seed": 9435136036924046218,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "equal",
+        "naturalness": "A_better",
+        "redundancy": "A_better",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-09",
+      "run_seed": 1149853648275787818,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-10",
+      "run_seed": 8,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-11",
+      "run_seed": 11,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-12",
+      "run_seed": 31,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-13",
+      "run_seed": 46,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "A_better",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-14",
+      "run_seed": 19,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-15",
+      "run_seed": 56,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-16",
+      "run_seed": 5873361895440711225,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "equal",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-17",
+      "run_seed": 38,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "equal",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-18",
+      "run_seed": 42,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-19",
+      "run_seed": 26,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-20",
+      "run_seed": 15,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    }
+  ]
+}

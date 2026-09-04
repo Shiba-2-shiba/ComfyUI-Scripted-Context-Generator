@@ -26,6 +26,13 @@ capability pass と V150/V250/V350/V500 の段階gateを順に進めます。
 - [V150 Full-Workflow Coverage Iteration 006](./experiments/v150-candidate-shape-iteration-006/rejection-receipt.json)
 - [V150 Guard Remediation Iteration 007](./experiments/v150-candidate-shape-iteration-007/guard-remediation-receipt.json)
 - [V150 Non-Selected Quality Validation Iteration 008](./experiments/v150-candidate-shape-iteration-008/quality-validation-receipt.json)
+- [V150 Post-Attempt-002 Quality Validation Iteration 010](./experiments/v150-candidate-shape-iteration-010/quality-validation-receipt.json)
+- [V150 Iteration 015 Quality Validation](./experiments/v150-candidate-shape-iteration-015/quality-validation-receipt.json)
+- [V150 Blind Review Attempt 005 Rejection](./experiments/v150-candidate-shape-iteration-015/blind-review-attempt-005/rejection-receipt.json)
+- [V150 Iteration 016 Quality Validation](./experiments/v150-candidate-shape-iteration-016/quality-validation-receipt.json)
+- [V150 Blind Review Attempt 006 Rejection](./experiments/v150-candidate-shape-iteration-016/blind-review-attempt-006/rejection-receipt.json)
+- [V150 Iteration 017 Quality Validation](./experiments/v150-candidate-shape-iteration-017/quality-validation-receipt.json)
+- [V150 Blind Review Attempt 007 Rejection](./experiments/v150-candidate-shape-iteration-017/blind-review-attempt-007/rejection-receipt.json)
 - [100k Stabilization and Historical 500k Notes](./base_variations_100k_plan.md)
 - [Clothing State Location Gate Refactor Plan](./clothing_state_location_gate_plan.md)
 
@@ -42,7 +49,7 @@ Historical or completed-plan references:
 compatibility taxonomy expansion、P11 action authoring refactor、P12 100k
 stabilization gate は完了済みです。
 
-現在は P13 V150 iteration 008 の非選択quality validation完了後で、comparison-bound blind reviewと3x256 confirmation待ちです。L0 baseline と6件の非counted runtime pool分類は
+現在は P13 V150 iteration 017 の自動quality validation完了後で、blind-review attempt 007のrejectを受けたsemantic-paired comparison設計待ちです。L0 baseline と6件の非counted runtime pool分類は
 `experiments/v150-planner-l0/`、L1 pure projectionの昇格証拠は
 `experiments/v150-planner-l1/` にhash固定済みです。L2 iteration 001は
 coverage不足とduplicate pressure超過でreject済みです。iteration 002は
@@ -78,9 +85,11 @@ confirmationが未完了なのでpromotionはまだ行いません。
 VE-1319はVE-1317 blind reviewとVE-1318 3x256 confirmation/full verification
 の両方がpassした後だけ開始します。
 
-VE-1317 blind review attempt 001は、candidate-only hard defect 8件のため
-`REJECTED`です。現在は5 seedのlocation/action/objectおよび
-mood/action/garnish矛盾を修正するloopに戻っており、VE-1318/1319はblockedです。
+VE-1317 blind review attempts 001-007はいずれも`REJECTED`です。iteration 017
+q39 automatic validationは全guard非回帰でpassしましたが、attempt 007はunrelated
+scene同士の比較でworse-rateが安定収束しないことを示しました。既存閾値を維持した
+semantic-paired comparison contractの設計・独立承認が次のgateです。VE-1318/1319は
+引き続きblockedです。
 
 並行する品質改善として、衣装 `states` が Location と衝突する問題を
 [`clothing_state_location_gate_plan.md`](./clothing_state_location_gate_plan.md)

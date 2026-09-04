@@ -106,6 +106,21 @@ class TestActionGenerator(unittest.TestCase):
         self.assertEqual(debug["semantic_epig"]["action"]["mode"], "active")
         self.assertTrue(debug["semantic_epig"]["action"]["selected_by_semantic"])
 
+    def test_pool_action_preserves_authored_primary_text(self):
+        authored = "sitting on a sofa humming softly"
+        action, debug = generate_action_for_location(
+            "karaoke_bar",
+            self.compat,
+            self.scene_axes,
+            random.Random(7),
+            pool=[{"text": authored, "load": "calm"}],
+            recent_verbs=[],
+            recent_objects=[],
+        )
+
+        self.assertEqual(debug["pool_slots"]["primary_action"], authored)
+        self.assertTrue(action.startswith(authored))
+
     def test_solo_safety_filters_people_and_spill_pool_actions(self):
         pool = [
             {"text": "standing aside as students pass through the corridor", "load": "calm"},
@@ -510,6 +525,110 @@ class TestActionGenerator(unittest.TestCase):
             if "book" in value:
                 book_hits += 1
         self.assertLess(book_hits / total, 0.40)
+
+
+class TestActionLocationProfiles(unittest.TestCase):
+    def test_courtyard_anchors_are_outdoor_safe(self):
+        from pipeline.action_generator import _location_context_profile
+
+        profile = _location_context_profile("university_campus_courtyard")
+
+        self.assertTrue(profile["anchors"])
+        for anchor in profile["anchors"]:
+            self.assertNotIn("room", anchor.lower())
+
+    def test_unknown_location_does_not_add_generic_anchor(self):
+        from pipeline.action_generator import _location_context_profile
+
+        profile = _location_context_profile("forest_cabin")
+
+        self.assertEqual(profile["anchors"], [])
+
+    def test_workplace_profile_includes_work_purpose(self):
+        from pipeline.action_generator import build_daily_life_profile
+
+        profile, matching_tags = build_daily_life_profile(
+            "vehicle_repair_garage",
+            {
+                "daily_life_tags": ["workplace", "urban"],
+                "loc_tags": {
+                    "workplace": ["vehicle_repair_garage"],
+                    "urban": ["vehicle_repair_garage"],
+                },
+            },
+        )
+
+        self.assertIn("workplace", matching_tags)
+        self.assertIn("work", profile["purpose"])
+
+    def test_location_specific_profile_replaces_tag_axes(self):
+        from pipeline.action_generator import build_daily_life_profile
+
+        profile, _matching_tags = build_daily_life_profile(
+            "modern_office",
+            {
+                "daily_life_tags": ["office", "workplace"],
+                "loc_tags": {
+                    "office": ["modern_office"],
+                    "workplace": ["modern_office"],
+                },
+            },
+        )
+
+        self.assertEqual(profile["purpose"], ["work", "wait", "rest"])
+        self.assertNotIn("commute", profile["purpose"])
+        self.assertNotIn("luggage", profile["obstacle"])
+
+    def test_reviewed_locations_have_specific_profiles(self):
+        from pipeline.action_profiles import LOC_SPECIFIC_DAILY_LIFE_PROFILES
+
+        expected_purposes = {
+            "elegant_dining_room": "rest",
+            "karaoke_bar": "rest",
+            "recording_studio": "work",
+            "vehicle_repair_garage": "work",
+        }
+        for location, purpose in expected_purposes.items():
+            with self.subTest(location=location):
+                profile = LOC_SPECIFIC_DAILY_LIFE_PROFILES[location]
+                self.assertEqual(profile["purpose"][0], purpose)
+                self.assertTrue(profile["time"])
+
+    def test_activity_first_renderer_uses_bounded_concrete_clauses(self):
+        rendered = renderer_render_action_slots(
+            {
+                "anchor": "near the part of the scene she is using",
+                "posture": "braced to move at any second",
+                "hand_action": "tightening a bolt beneath the open hood",
+                "gaze_target": "watching the bolt head",
+                "optional_micro_action": "checking what is happening nearby",
+                "social_clause": "as if responding directly to the viewer",
+                "progress_clause": "as she gets herself ready",
+                "obstacle_clause": "after the wrench slips",
+                "time_or_weather": "in the late afternoon",
+            },
+            activity_first=True,
+        )
+
+        self.assertEqual(
+            rendered,
+            "tightening a bolt beneath the open hood, braced to move at any second, watching the bolt head, after the wrench slips, in the late afternoon",
+        )
+
+    def test_activity_first_renderer_drops_repeated_clause_opening(self):
+        rendered = renderer_render_action_slots(
+            {
+                "hand_action": "moving toward the indicated consultation room",
+                "progress_clause": "as the last part falls into place",
+                "time_or_weather": "as the task wraps up",
+            },
+            activity_first=True,
+        )
+
+        self.assertEqual(
+            rendered,
+            "moving toward the indicated consultation room, as the last part falls into place",
+        )
 
 
 if __name__ == "__main__":

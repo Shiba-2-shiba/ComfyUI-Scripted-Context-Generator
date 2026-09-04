@@ -74,7 +74,7 @@
     },
     {
       "key": "body_action_as_garnish",
-      "text": "{action} as {garnish}",
+      "text": "{action}, {garnish}",
       "roles": ["social", "transition"],
       "needs_garnish": true,
       "preferred_surfaces": ["gerund", "clause"],

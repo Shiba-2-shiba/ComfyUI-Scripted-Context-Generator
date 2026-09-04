@@ -1,0 +1,286 @@
+{
+  "schema_version": "prompt-quality-blind-review-result/v3",
+  "lane_id": "lane-1",
+  "reviewer_id": "blind-attempt-007-lane-1",
+  "reviewer_type": "codex-independent-blind",
+  "reviewer_model_version": "gpt-5.6-sol",
+  "blinded": true,
+  "rubric_version": "prompt-quality-review-rubric/v2",
+  "rubric_hash": "bbedd6af0c5d1e6c4689be311cb30d98d8231da5964b045bc84b7a2f9c8e10ce",
+  "review_prompt_hash": "bbedd6af0c5d1e6c4689be311cb30d98d8231da5964b045bc84b7a2f9c8e10ce",
+  "input_hash": "0fe3b98361f05e7fe413a654201b2f03e2a96874fbede996606f769fc6e6c4b0",
+  "votes": [
+    {
+      "pair_id": "pair-01",
+      "run_seed": 2,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "A_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-02",
+      "run_seed": 30,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "equal",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-03",
+      "run_seed": 40,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "abstain",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "abstain",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {
+        "A": [{"code": "location_action_object_conflict", "evidence": "The outdoor rural bus shelter is described by the indoor-room garnish 'a quiet room holding around her'."}],
+        "B": [{"code": "location_action_object_conflict", "evidence": "The outdoor sunny college quad is described with 'the rest of the room falls gently aside'."}]
+      }
+    },
+    {
+      "pair_id": "pair-04",
+      "run_seed": 41,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-05",
+      "run_seed": 61,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "abstain",
+        "image_prompt_suitability": "equal"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-06",
+      "run_seed": 16086608232758145338,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {
+        "A": [],
+        "B": [{"code": "location_action_object_conflict", "evidence": "The outdoor coffee-shop terrace is explicitly introduced as 'The room around her'."}]
+      }
+    },
+    {
+      "pair_id": "pair-07",
+      "run_seed": 1,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "abstain",
+        "naturalness": "A_better",
+        "redundancy": "A_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-08",
+      "run_seed": 9435136036924046218,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "abstain",
+        "naturalness": "equal",
+        "redundancy": "A_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-09",
+      "run_seed": 1149853648275787818,
+      "dimensions": {
+        "protagonist_clarity": "equal",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-10",
+      "run_seed": 8,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "abstain",
+        "naturalness": "A_better",
+        "redundancy": "A_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-11",
+      "run_seed": 11,
+      "dimensions": {
+        "protagonist_clarity": "equal",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-12",
+      "run_seed": 31,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-13",
+      "run_seed": 46,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-14",
+      "run_seed": 19,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {
+        "A": [{"code": "consistency_rule_conflict", "evidence": "The prompt places her at the breakfast nook with coffee immediately 'before heading to bed'."}],
+        "B": []
+      }
+    },
+    {
+      "pair_id": "pair-15",
+      "run_seed": 56,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-16",
+      "run_seed": 5873361895440711225,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-17",
+      "run_seed": 38,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-18",
+      "run_seed": 42,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "A_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "equal"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-19",
+      "run_seed": 26,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {
+        "A": [{"code": "location_action_object_conflict", "evidence": "The outdoor local market street is explicitly described as 'the room around her'."}],
+        "B": []
+      }
+    },
+    {
+      "pair_id": "pair-20",
+      "run_seed": 15,
+      "dimensions": {
+        "protagonist_clarity": "equal",
+        "consistency": "abstain",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "abstain",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    }
+  ]
+}

@@ -237,3 +237,10 @@ blind review verdict: reject
 VE-1317 remains active for remediation. VE-1318 and VE-1319 are blocked until a
 fresh comparison and blind-review attempt pass; attempt-001 votes cannot be
 reused.
+
+Attempt 002 used fresh q22/q23 source snapshots, fresh runs, a new selection
+hash, new side assignments, and two new independent lanes. Automatic
+validation and the original five-seed replay passed, but the aggregate blind
+review rejected the candidate with 8 candidate-only hard-defect observations.
+Attempt-002 votes and artifacts are immutable evidence and cannot be reused by
+attempt 003. VE-1318 and active-data promotion remain blocked.

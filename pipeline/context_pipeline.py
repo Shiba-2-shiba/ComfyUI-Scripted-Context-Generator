@@ -279,6 +279,17 @@ def _action_frame_from_legacy(action_text, loc, *, slots=None, compat=None):
     return frame, resolved_slots
 
 
+def resolved_action_meta_tags(existing_tags, action_slots):
+    tags = dict(existing_tags) if isinstance(existing_tags, dict) else {}
+    if action_slots.get("purpose"):
+        tags["purpose"] = action_slots["purpose"]
+    if action_slots.get("progress_state"):
+        tags["progress"] = action_slots["progress_state"]
+    if action_slots.get("social_distance"):
+        tags["social_distance"] = action_slots["social_distance"]
+    return tags
+
+
 def apply_scene_variation(context: Any, seed: int, variation_mode: str):
     ctx = ensure_context(context, default_seed=int(seed))
     ctx.seed = int(seed)
@@ -457,6 +468,9 @@ def apply_scene_variation(context: Any, seed: int, variation_mode: str):
     ctx = patch_context(
         ctx,
         updates={"loc": chosen_loc, "action": new_action, "seed": seed},
+        meta={
+            "tags": resolved_action_meta_tags(ctx.meta.tags, action_slots)
+        },
         extras=state.to_extras_patch(),
     )
     debug_info = DebugInfo(node="ContextSceneVariator", seed=seed, decision=decision_log)
@@ -535,7 +549,7 @@ def apply_garnish(context: Any, seed: int, max_items: int, include_camera: bool,
             normalized_nuance = ""
         tags = vocab_module.sample_garnish(
             seed=seed,
-            meta_mood=ctx.meta.mood,
+            meta_mood=str(ctx.extras.get("raw_mood_key") or ctx.meta.mood),
             action_text=ctx.action,
             max_items=max_items,
             include_camera=False,

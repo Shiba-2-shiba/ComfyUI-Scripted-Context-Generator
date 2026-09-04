@@ -123,7 +123,7 @@ class TestActionFrameRealizer(unittest.TestCase):
         self.assertEqual(frame, scene_debug["action_frame"])
         self.assertEqual(frame["legacy_slots"], scene_debug["slots"])
 
-    def test_composition_punctuation_normalization_does_not_change_legacy_mode(self):
+    def test_staging_append_avoids_period_comma_in_both_modes(self):
         kwargs = {
             "template": "{subject_clause}, {action_clause}, {scene_clause}.",
             "seed": 19,
@@ -138,7 +138,8 @@ class TestActionFrameRealizer(unittest.TestCase):
         legacy = build_prompt_text(composition_mode=False, **kwargs)
         natural = build_prompt_text(composition_mode=True, **kwargs)
 
-        self.assertIn(".,", legacy)
+        self.assertNotIn(".,", legacy)
+        self.assertNotIn(",.", legacy)
         self.assertNotIn(".,", natural)
         self.assertNotIn(",.", natural)
 

@@ -312,9 +312,9 @@ the L0-L3 planning gates and a V150 candidate manifest are recorded.
 - [x] VE-1302 Lock L0 baseline inputs, hashes, prompt-quality cohort, and staged/excluded policy for the six out-of-scope pools
 - [x] VE-1303 Add tested hypothetical subject/location and compatibility-density modeling without changing current planner defaults
 - [x] VE-1304 Add tested action-depth distribution and mixed-scenario modeling
-- [x] VE-1305 Add quality-aware candidate metadata and prompt-quality target/guard evaluation; automatic non-selected quality validation passed in iteration 008
+- [x] VE-1305 Add quality-aware candidate metadata and prompt-quality target/guard evaluation; automatic non-selected quality validation passed through post-attempt-002 iteration 010
 - [x] VE-1306 Emit a frozen V150 candidate manifest and contribution report
-- [~] VE-1307 Run baseline/candidate generation, analysis, comparison, blind review, and confirmation through the current prompt-quality contract; generation/analysis/comparison passed, review/confirmation pending
+- [~] VE-1307 Run baseline/candidate generation, analysis, comparison, blind review, and confirmation through the current prompt-quality contract; iteration 010 generation/analysis/comparison passed, blind-review attempt 003 and confirmation pending
 - [x] VE-1308 Record iteration 004 V150 `REJECTED` verdict with snapshot, experiment, run, comparison, implementation, and test hashes
 - [ ] VE-1309 Repeat the loop sequentially for V250, V350, and V500; do not skip a stage
 - [x] VE-1310 Add runtime-equivalent contribution modeling and reproduce isolated snapshot metrics
@@ -324,7 +324,7 @@ the L0-L3 planning gates and a V150 candidate manifest are recorded.
 - [x] VE-1315 Model and verify complete-workflow final location/action witness reachability for the fixed 64+16 cohort
 - [x] VE-1314 Reduce semantic-family repetition and context p95/max without weakening prompt-quality guards
 - [x] VE-1316 Run a separately declared non-selected quality validation after guard remediation
-- [~] VE-1317 Run comparison-bound blind review; attempt 001 rejected with 8 candidate hard-defect observations, remediation required
+- [~] VE-1317 Run comparison-bound blind review; attempt 007 rejected and exposed unstable unrelated-scene pairing, so semantic-paired contract design/review is required before another blind run
 - [ ] VE-1318 Run fresh 3x256 confirmation lanes and full verification before promotion (blocked by VE-1317)
 - [ ] VE-1319 Promote the approved V150 candidate into active data and verify `150,184` active base variations
 
@@ -345,6 +345,37 @@ VE-1317 attempt 001 evidence:
 
 - `docs/variation_expansion/experiments/v150-candidate-shape-iteration-008/blind-review-attempt-001/review.json`
 - `docs/variation_expansion/experiments/v150-candidate-shape-iteration-008/blind-review-attempt-001/rejection-receipt.json`
+
+VE-1317 attempt 002 evidence:
+
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-009/quality-validation-receipt.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-009/blind-review-attempt-002/review.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-009/blind-review-attempt-002/rejection-receipt.json`
+
+Post-attempt-002 iteration 010 evidence:
+
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-010/current-source-coverage-refresh.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-010/nonselected-quality-contract.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-010/quality-comparison.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-010/quality-validation-receipt.json`
+
+Latest iteration 015 evidence:
+
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-015/quality-validation-receipt.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-015/blind-review-attempt-005/review.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-015/blind-review-attempt-005/rejection-receipt.json`
+
+Latest iteration 016 evidence:
+
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-016/quality-validation-receipt.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-016/blind-review-attempt-006/review.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-016/blind-review-attempt-006/rejection-receipt.json`
+
+Latest iteration 017 evidence:
+
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-017/quality-validation-receipt.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-017/blind-review-attempt-007/review.json`
+- `docs/variation_expansion/experiments/v150-candidate-shape-iteration-017/blind-review-attempt-007/rejection-receipt.json`
 
 L0 evidence:
 

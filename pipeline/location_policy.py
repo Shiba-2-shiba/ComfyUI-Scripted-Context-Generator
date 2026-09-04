@@ -36,7 +36,10 @@ TIME_BRIGHT_HINTS = (
     "morning", "midday", "noon", "daytime", "daylight", "sunrise",
     "sunlight", "sunlit", "lunch break",
 )
-TIME_LATE_HINTS = TIME_DARK_HINTS + ("evening",)
+TIME_BEDTIME_HINTS = ("before sleeping", "before heading to bed", "before bed", "getting ready for bed")
+TIME_LATE_HINTS = TIME_DARK_HINTS + ("evening",) + TIME_BEDTIME_HINTS
+TIME_MORNING_HINTS = ("morning", "sunrise", "breakfast")
+TIME_AFTERNOON_HINTS = ("afternoon",)
 WEATHER_RARE_HINTS = ("rain", "snow", "storm", "fog", "acid", "winter")
 LIGHTING_HINTS = ("light", "glow", "fluorescent", "ambient", "sun", "spotlight", "daylight", "hour")
 FX_ENERGY_FAMILY_PATTERNS = (
@@ -47,6 +50,9 @@ FX_ENERGY_FAMILY_PATTERNS = (
     re.compile(r"\bquick\s+motion\b", re.IGNORECASE),
     re.compile(r"\bparty\s+vibe\b", re.IGNORECASE),
 )
+LOCATION_CORE_DENY_TERMS = {
+    "recording_studio": ("mixing console",),
+}
 
 
 def is_symbolic_prop(text: str) -> bool:
@@ -100,6 +106,16 @@ def filter_semantic_redundant_fx(options: Sequence[str], context_text: str) -> l
     return [option for option in options if not has_energy_excitement_family(option)]
 
 
+def filter_location_core_options(loc_tag: str, options: Sequence[str]) -> list[str]:
+    denied = LOCATION_CORE_DENY_TERMS.get(str(loc_tag or "").strip().lower(), ())
+    if not denied:
+        return list(options)
+    return [
+        option for option in options
+        if not any(term in str(option).lower() for term in denied)
+    ]
+
+
 def is_daily_life_loc(loc_tag: str) -> bool:
     return str(loc_tag).lower().strip() in DAILY_LIFE_LOCS
 
@@ -118,14 +134,25 @@ def filter_time_options_for_context(options: Sequence[str], context_text: str) -
     if not options:
         return []
     lowered_context = str(context_text).lower()
+    filtered = list(options)
+    context_is_morning = any(token in lowered_context for token in TIME_MORNING_HINTS)
+    context_is_afternoon = any(token in lowered_context for token in TIME_AFTERNOON_HINTS)
+    if context_is_morning != context_is_afternoon:
+        conflicting_phase = TIME_AFTERNOON_HINTS if context_is_morning else TIME_MORNING_HINTS
+        phase_filtered = [
+            option for option in filtered
+            if not any(token in str(option).lower() for token in conflicting_phase)
+        ]
+        if phase_filtered:
+            filtered = phase_filtered
     context_is_late = any(token in lowered_context for token in TIME_LATE_HINTS)
     context_is_bright = any(token in lowered_context for token in TIME_BRIGHT_HINTS)
     if context_is_late == context_is_bright:
-        return list(options)
+        return filtered
 
     conflicting_hints = TIME_BRIGHT_HINTS if context_is_late else TIME_LATE_HINTS
     return [
-        option for option in options
+        option for option in filtered
         if not any(token in str(option).lower() for token in conflicting_hints)
     ]
 

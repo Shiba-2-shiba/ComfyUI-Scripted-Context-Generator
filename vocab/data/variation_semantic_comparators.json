@@ -1,0 +1,76 @@
+{
+  "schema_version": "variation-semantic-comparator-taxonomy/v1",
+  "taxonomy_id": "v150-semantic-comparators-001",
+  "aliases": {
+    "costume_theme": {"casual": "contemporary", "office_lady": "contemporary", "school_uniform": "uniform", "business": "contemporary"},
+    "emotion_core": {"absorbed": "focused", "content": "positive", "tense": "tense"}
+  },
+  "shared_defaults": {"protagonist_role": "solo_female", "character_profile": "adult_female", "emotion_core": "focused", "emotion_intensity": "moderate", "time_phase": "day", "weather_class": "neutral", "social_distance": "alone", "progress": "midway"},
+  "subject_classes": {
+    "solo_female": ["CEO", "afternoon reader", "airship captain", "architect", "astronomer", "barber", "blonde elf archer", "bookworm girl", "business girl", "cafe barista", "cafe customer", "chef girl", "clockwork artisan", "cyberpunk girl", "cyberpunk hacker", "cyberpunk mercenary", "delivery courier", "detective", "doll-like girl", "fantasy warrior", "farmer", "fashionista", "fisher", "fitness model", "florist", "flower girl", "geisha", "girl knight", "gothic doll", "gothic girl", "guitarist", "gym girl", "injured knight", "inventor girl", "journalist", "kendo girl", "library girl", "mechanic", "mori girl", "nature wanderer", "nurse", "office worker", "opera singer", "paramedic", "photographer", "rainy day girl", "recording artist", "researcher", "rock singer", "rock star", "runner", "secret agent", "shopkeeper", "shrine maiden", "silver-haired girl", "sleepy girl", "solarpunk girl", "sorceress", "space engineer", "space pilot", "spy agent", "stargazer", "street dancer", "student", "surfer girl", "teacher", "urban shopper", "vacation girl", "vacationer", "window shopper", "winter date girl", "winter traveler", "yoga instructor"]
+  },
+  "candidate_subject_comparators": {
+    "architect": ["business girl", "office worker", "inventor girl"],
+    "astronomer": ["stargazer", "space engineer", "bookworm girl", "urban shopper", "cafe customer"],
+    "barber": ["fashionista", "cafe barista", "office worker"],
+    "delivery courier": ["runner", "urban shopper", "office worker"],
+    "farmer": ["mori girl", "nature wanderer", "flower girl"],
+    "fisher": ["nature wanderer", "surfer girl", "vacation girl"],
+    "florist": ["flower girl", "cafe barista", "mori girl"],
+    "journalist": ["detective", "business girl", "office worker"],
+    "mechanic": ["inventor girl", "clockwork artisan", "space engineer"],
+    "nurse": ["office worker", "business girl", "space engineer"],
+    "paramedic": ["fitness model", "runner", "office worker"],
+    "photographer": ["nature wanderer", "urban shopper", "vacation girl", "afternoon reader"],
+    "researcher": ["bookworm girl", "cyberpunk hacker", "space engineer", "business girl"],
+    "shopkeeper": ["cafe barista", "business girl", "office worker"],
+    "teacher": ["bookworm girl", "office worker", "silver-haired girl"]
+  },
+  "candidate_location_comparators": {
+    "bike_station": ["bus_terminal", "commuter_transport", "shopping_mall_atrium"],
+    "canal_walkway": ["illuminated_park", "picnic_park", "japanese_garden"],
+    "clinic_waiting_room": ["luxury_hotel_lobby", "modern_office", "campus_hallway"],
+    "community_garden": ["botanical_garden", "japanese_garden", "picnic_park"],
+    "community_theater_backstage": ["opera_house", "concert_stage", "karaoke_bar", "fitness_gym", "modern_office"],
+    "design_studio": ["modern_office", "workshop", "fashion_boutique"],
+    "ferry_terminal": ["bus_terminal", "commuter_transport", "shopping_mall_atrium", "wave_barrel"],
+    "fire_station": ["modern_office", "workshop", "surveillance_room"],
+    "flower_market": ["botanical_garden", "street_cafe", "fashion_boutique"],
+    "forest_cabin": ["cozy_living_room", "cozy_bookstore", "workshop", "fantasy_forest", "luxury_hotel_lobby"],
+    "greenhouse_nursery": ["botanical_garden", "japanese_garden", "fashion_boutique", "school_classroom", "modern_office"],
+    "maker_space": ["workshop", "clockwork_workshop", "cyber_lab"],
+    "observatory_dome": ["spaceship", "cyber_lab", "alien_planet"],
+    "postal_service_counter": ["convenience_store", "drugstore_aisle", "modern_office"],
+    "print_shop": ["messy_copy_room", "modern_office", "workshop", "cyber_lab", "surveillance_room"],
+    "public_plaza": ["shopping_mall_atrium", "illuminated_park", "campus_hallway", "airship_deck"],
+    "rooftop_cafe": ["street_cafe", "school_rooftop", "campus_cafeteria", "airship_deck"],
+    "tram_platform": ["bus_terminal", "commuter_transport", "shopping_mall_atrium"],
+    "vehicle_repair_garage": ["workshop", "clockwork_workshop", "modern_office"]
+  },
+  "candidate_location_costumes": {
+    "bike_station": ["urban_shopping", "gym_workout", "rainy_day", "office_lady", "winter_date"],
+    "canal_walkway": ["mori_natural", "rainy_day", "urban_shopping", "winter_date", "cozy_cafe"],
+    "clinic_waiting_room": ["office_lady", "urban_shopping", "rainy_day", "winter_date"],
+    "community_garden": ["mori_natural", "cozy_cafe", "rainy_day", "urban_shopping", "school_uniform"],
+    "community_theater_backstage": ["rock_concert", "gothic_lolita", "office_lady", "urban_shopping"],
+    "design_studio": ["office_lady", "urban_shopping", "gothic_lolita", "steampunk"],
+    "ferry_terminal": ["beach_resort", "office_lady", "rainy_day", "winter_date", "urban_shopping"],
+    "fire_station": ["office_lady", "gym_workout", "urban_shopping", "rainy_day"],
+    "flower_market": ["mori_natural", "cozy_cafe", "urban_shopping", "rainy_day"],
+    "forest_cabin": ["mori_natural", "winter_date", "cozy_cafe", "rainy_day"],
+    "greenhouse_nursery": ["mori_natural", "school_uniform", "office_lady", "cozy_cafe", "rainy_day"],
+    "maker_space": ["steampunk", "scifi_space", "office_lady", "secret_agent", "urban_shopping"],
+    "observatory_dome": ["scifi_space", "winter_date", "office_lady", "steampunk"],
+    "postal_service_counter": ["office_lady", "urban_shopping", "rainy_day", "winter_date"],
+    "print_shop": ["office_lady", "urban_shopping", "steampunk", "gothic_lolita"],
+    "public_plaza": ["urban_shopping", "office_lady", "rainy_day", "winter_date", "cozy_cafe"],
+    "rooftop_cafe": ["urban_shopping", "cozy_cafe", "office_lady", "winter_date", "beach_resort"],
+    "tram_platform": ["office_lady", "urban_shopping", "rainy_day", "winter_date"],
+    "vehicle_repair_garage": ["office_lady", "gym_workout", "urban_shopping", "steampunk", "rainy_day"]
+  },
+  "location_classes": {
+    "indoor": ["antique_shop", "aquarium", "bakery_shop", "bedroom_boudoir", "boardroom", "campus_cafeteria", "campus_hallway", "cinema_lobby", "clean_modern_kitchen", "clinic_waiting_room", "clockwork_workshop", "commuter_transport", "community_theater_backstage", "convenience_store", "cozy_bookstore", "cozy_living_room", "cyber_lab", "design_studio", "dragon_lair", "drugstore_aisle", "dungeon_crypt", "family_restaurant", "fashion_boutique", "fire_station", "fitness_gym", "forest_cabin", "game_arcade", "greenhouse_nursery", "karaoke_bar", "luxury_hotel_lobby", "maker_space", "messy_copy_room", "modern_office", "observatory_dome", "office_elevator", "opera_house", "postal_service_counter", "print_shop", "recording_studio", "school_classroom", "school_gym_hall", "school_library", "shopping_mall", "spaceship", "stadium_court", "supermarket_aisle", "surveillance_room", "vehicle_repair_garage", "workshop", "yoga_studio"],
+    "outdoor": ["airship_deck", "alien_planet", "bike_station", "botanical_garden", "burning_battlefield", "bus_terminal", "canal_walkway", "community_garden", "concert_stage", "fantasy_forest", "ferry_terminal", "flower_market", "illuminated_park", "japanese_garden", "neon_city_street", "picnic_park", "poolside_resort", "public_plaza", "rainy_alley", "rooftop_cafe", "school_rooftop", "shinto_shrine", "shopping_mall_atrium", "street_cafe", "tram_platform", "tropical_beach", "wave_barrel", "winter_street"]
+  },
+  "review_domains": {"default": ["location_action_object"], "workplace": ["naturalness", "protagonist_clarity", "image_prompt_suitability"]}
+}

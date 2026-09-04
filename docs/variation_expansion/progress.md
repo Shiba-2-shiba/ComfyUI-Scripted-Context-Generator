@@ -319,8 +319,7 @@ Evidence:
 - `experiments/v150-candidate-shape-iteration-007/guard-comparison.json`
 - `experiments/v150-candidate-shape-iteration-007/guard-remediation-receipt.json`
 
-Next action: run a separately declared non-selected quality validation surface
-before any blind review or confirmation decision.
+This action was completed by iteration 008 before blind-review attempt 001.
 
 L3 non-selected quality validation iteration 008:
 
@@ -361,6 +360,113 @@ VE-1317 blind review attempt 001:
   did not meet the qualitative thresholds.
 - VE-1318 and VE-1319 remain blocked. The next loop remediates the five seeds,
   reruns automatic validation, and creates blind-review attempt 002.
+
+VE-1317 blind review attempt 002:
+
+- Remediated and replayed the five attempt-001 defect seeds; the reviewed
+  conflict phrases are absent from the fresh full-workflow outputs.
+- Fresh q22 coverage replay passed 19/19, and fresh q23 default80 automatic
+  validation passed with control64 location entropy `4.626124 -> 4.956344`,
+  zero guard failures, and zero replay mismatches.
+- Built a new comparison-bound selection, assignment, and two blinded lanes.
+  Hash validation passed, but the aggregate review verdict was `reject`.
+- Candidate-only hard defects: 8 observations across 5 seeds, now centered on
+  clothing/TPO, time-of-day, and outdoor-room wording. Naturalness,
+  consistency, redundancy, protagonist clarity, and image suitability remain
+  below their qualitative gates.
+- VE-1318 and VE-1319 remain blocked. The next loop must remediate attempt-002
+  evidence and rerun automatic validation before attempt 003.
+
+L3 post-attempt-002 quality validation iteration 010:
+
+- Refreshed the current-source 19/19 coverage certificate and bound candidate
+  source tree `f7902e0b...434c9` to a new non-selected quality contract.
+- Materialized q25 default80 without a prompt schedule and preserved active
+  source byte-for-byte.
+- Generated and replayed fresh baseline/candidate 64+16 cohorts with zero
+  deterministic replay mismatches and zero runtime fallbacks.
+- Passed automatic comparison with `failures=[]`, quality and validation
+  verdicts `pass`, and control64 location entropy `4.626124 -> 4.956344`.
+- Repeated n-gram, semantic-family repetition, identity, hard consistency,
+  context-size, policy, and fallback guards are non-regressing.
+- The result is `review_ready=true` and `promotion_ready=false`. Blind-review
+  attempt 003 has not started; VE-1318 and VE-1319 remain blocked.
+
+Evidence:
+
+- `experiments/v150-candidate-shape-iteration-010/current-source-coverage-refresh.json`
+- `experiments/v150-candidate-shape-iteration-010/nonselected-quality-contract.json`
+- `experiments/v150-candidate-shape-iteration-010/quality-experiment.json`
+- `experiments/v150-candidate-shape-iteration-010/quality-comparison.json`
+- `experiments/v150-candidate-shape-iteration-010/quality-validation-receipt.json`
+
+VE-1317 blind review attempts 003-005 and remediation:
+
+- Attempt 003 was hash-valid but rejected with 8 candidate-only hard-defect
+  observations across seeds 40, 41, 61, 2584006080659484769, and
+  16086608232758145338.
+- Added context-aware clothing fallback, morning/afternoon filtering, outdoor
+  courtyard/mood wording, and disjoint candidate location details. The five
+  attempt-003 defect prompts no longer reproduce.
+- Attempt 004 had zero candidate-only hard defects but remained qualitatively
+  rejected across clarity, consistency, naturalness, redundancy, and image
+  suitability.
+- Added bounded concrete pool-action realization, a workplace action profile,
+  removal of generic unknown-location anchors, broader reviewed-setting
+  clothing fallback, candidate boilerplate removal, and repeated clause-opening
+  suppression.
+- Iteration 015 q35 passed automatic quality with `failures=[]`, location
+  entropy `4.626124 -> 4.956344`, context max `26853 -> 26396`, context p95
+  `26126.35 -> 25144.75`, and all guards non-regressing.
+- Attempt 005 was hash-valid but rejected. Candidate-only defects fell to 3
+  across seeds 2, 30, and 274927640092229229; qualitative direction still did
+  not meet the unchanged review thresholds.
+- VE-1318 and VE-1319 remain blocked. No confirmation or active-data mutation
+  has run.
+
+Current evidence:
+
+- `experiments/v150-candidate-shape-iteration-015/quality-validation-receipt.json`
+- `experiments/v150-candidate-shape-iteration-015/blind-review-attempt-005/review.json`
+- `experiments/v150-candidate-shape-iteration-015/blind-review-attempt-005/rejection-receipt.json`
+
+VE-1317 blind review attempt 006:
+
+- Fixed bedtime/morning scene-phase conflicts and removed control-room mixing
+  consoles from recording-booth location descriptions.
+- Iteration 016 q37 automatic validation passed with no guard regressions,
+  19/19 coverage eligibility, and active variation data unchanged.
+- Attempt 006 was hash-valid and reached zero candidate-only hard defects.
+- Target improvement support passed for consistency (`0.75`), naturalness
+  (`0.684211`), protagonist clarity (`0.717949`), and image suitability
+  (`0.692308`).
+- The unchanged `0.1` maximum candidate-worse-rate contract still failed:
+  consistency `0.25`, naturalness `0.315789`, clarity `0.282051`, image
+  suitability `0.307692`, and redundancy `0.5`.
+- VE-1318 and VE-1319 remain blocked. No confirmation or active-data mutation
+  has run.
+
+Latest evidence:
+
+- `experiments/v150-candidate-shape-iteration-016/quality-validation-receipt.json`
+- `experiments/v150-candidate-shape-iteration-016/blind-review-attempt-006/review.json`
+- `experiments/v150-candidate-shape-iteration-016/blind-review-attempt-006/rejection-receipt.json`
+
+VE-1317 blind review attempt 007:
+
+- Added authored pool-action fidelity and location-specific profile precedence;
+  focused regression coverage increased to 140 passing tests.
+- Iteration 017 q39 automatic validation passed with all guards non-regressing,
+  context max `26922 -> 26370`, and context p95 `26205.1 -> 25085.7`.
+- Attempt 007 remained rejected: one candidate hard defect, target worse rates
+  `0.33-0.37`, redundancy worse rate `0.4375`, and insufficient valid
+  consistency votes.
+- Attempts 006 and 007 show that shared generator improvement also improves the
+  baseline. The current blind lanes compare unrelated scenes, so relative
+  worse-rate convergence is not stable under further seed-specific fixes.
+- Next architecture step is a separately declared, independently approved
+  semantic-paired comparison contract retaining the existing thresholds.
+- VE-1318 and VE-1319 remain blocked; no confirmation or promotion has run.
 
 ## P14 Clothing State Location Gate
 

@@ -14,6 +14,7 @@ if __package__ and "." in __package__:
     from .clothing_semantics import (
         build_clothing_target_vector,
         clothing_semantic_debug_payload,
+        resolve_contextual_clothing_theme,
     )
     from .semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 else:
@@ -32,6 +33,7 @@ else:
     from pipeline.clothing_semantics import (
         build_clothing_target_vector,
         clothing_semantic_debug_payload,
+        resolve_contextual_clothing_theme,
     )
     from pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
 
@@ -65,16 +67,23 @@ def expand_clothing_prompt(
     clothing_tpo_enabled = domain_enabled("clothing_tpo")
     clothing_tpo_mode = semantic_mode("clothing_tpo")
     clothing_tpo_active = clothing_tpo_enabled and clothing_tpo_mode == "active"
+    resolved_location = resolve_location_key(loc) or loc
+    requested_theme = resolve_clothing_theme(theme_key) or theme_key
+    selection_theme = (
+        resolve_contextual_clothing_theme(resolved_location, action_text, requested_theme)
+        if clothing_tpo_active
+        else requested_theme
+    )
     clothing_target_vector = {}
     if clothing_tpo_enabled:
         clothing_target_vector = build_clothing_target_vector(
-            resolve_location_key(loc) or loc,
+            resolved_location,
             action_text=action_text,
-            theme_key=resolve_clothing_theme(theme_key) or theme_key,
+            theme_key=selection_theme,
         )
 
     prompt, decision, candidate_scores, baseline_selected_attempt_index = select_clothing_candidate(
-        theme_key,
+        selection_theme,
         seed,
         outfit_mode,
         outerwear_chance,
@@ -88,6 +97,9 @@ def expand_clothing_prompt(
         clothing_target_vector=clothing_target_vector,
         loc=loc,
     )
+    if selection_theme != requested_theme:
+        decision["requested_theme"] = requested_theme
+        decision["contextual_theme_fallback"] = selection_theme
     if clothing_tpo_enabled:
         add_semantic_debug(
             decision,
@@ -129,7 +141,7 @@ def apply_clothing_expansion(context, seed, outfit_mode, outerwear_chance, chara
     state.character.palette_text = palette_value
     state.character.palette = [item.strip() for item in palette_value.split(",") if item.strip()] if palette_value else []
     state.clothing.raw_costume_key = raw_theme_key
-    state.clothing.resolved_theme = theme_key
+    state.clothing.resolved_theme = decision.get("theme") or theme_key
     state.clothing.clothing_prompt = clothing_prompt
     ctx = patch_context(
         ctx,

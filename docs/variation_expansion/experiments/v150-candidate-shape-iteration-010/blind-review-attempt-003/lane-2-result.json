@@ -1,0 +1,289 @@
+{
+  "schema_version": "prompt-quality-blind-review-result/v3",
+  "lane_id": "lane-2",
+  "reviewer_id": "blind-attempt-003-lane-2",
+  "reviewer_type": "codex-independent-blind",
+  "reviewer_model_version": "gpt-5.6-sol",
+  "blinded": true,
+  "rubric_version": "prompt-quality-review-rubric/v2",
+  "rubric_hash": "bbedd6af0c5d1e6c4689be311cb30d98d8231da5964b045bc84b7a2f9c8e10ce",
+  "review_prompt_hash": "bbedd6af0c5d1e6c4689be311cb30d98d8231da5964b045bc84b7a2f9c8e10ce",
+  "input_hash": "a4def35403d7936eaf93d917f4eb0357740677bbd022dc5b9d246778d8ce59ed",
+  "votes": [
+    {
+      "pair_id": "pair-01",
+      "run_seed": 30,
+      "dimensions": {
+        "protagonist_clarity": "equal",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "A_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-02",
+      "run_seed": 40,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-03",
+      "run_seed": 41,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "A_better",
+        "image_prompt_suitability": "equal"
+      },
+      "hard_defects": {
+        "A": [{"code": "clothing_tpo_weather_conflict", "evidence": "A formal sheath dress and long wool coat conflict with the hands-on task of tightening a bolt beneath an open hood in a repair garage."}],
+        "B": []
+      }
+    },
+    {
+      "pair_id": "pair-04",
+      "run_seed": 2584006080659484769,
+      "dimensions": {
+        "protagonist_clarity": "equal",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {
+        "A": [{"code": "clothing_tpo_weather_conflict", "evidence": "The structured pinstripe sheath dress conflicts with the just-waking and stretching bedroom scenario."}],
+        "B": []
+      }
+    },
+    {
+      "pair_id": "pair-05",
+      "run_seed": 16086608232758145338,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "B_better",
+        "naturalness": "equal",
+        "redundancy": "A_better",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {
+        "A": [{"code": "consistency_rule_conflict", "evidence": "The same scene is explicitly placed both in the late afternoon and during a fresh morning."}],
+        "B": []
+      }
+    },
+    {
+      "pair_id": "pair-06",
+      "run_seed": 1,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "equal"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-07",
+      "run_seed": 2,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "equal"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-08",
+      "run_seed": 9435136036924046218,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "equal",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "equal"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-09",
+      "run_seed": 1149853648275787818,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "A_better",
+        "diversity": "B_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-10",
+      "run_seed": 274927640092229229,
+      "dimensions": {
+        "protagonist_clarity": "equal",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-11",
+      "run_seed": 11,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-12",
+      "run_seed": 31,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "equal",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-13",
+      "run_seed": 61,
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {
+        "A": [{"code": "clothing_tpo_weather_conflict", "evidence": "The structured wrap dress and tote styling conflict with checking a cabin water container immediately after a long walk in a forest-cabin setting."}],
+        "B": []
+      }
+    },
+    {
+      "pair_id": "pair-14",
+      "run_seed": 46,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "A_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-15",
+      "run_seed": 19,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {
+        "A": [{"code": "consistency_rule_conflict", "evidence": "A bright sunlit breakfast-nook coffee scene is explicitly framed as occurring before heading to bed."}],
+        "B": []
+      }
+    },
+    {
+      "pair_id": "pair-16",
+      "run_seed": 56,
+      "dimensions": {
+        "protagonist_clarity": "equal",
+        "consistency": "equal",
+        "naturalness": "equal",
+        "redundancy": "equal",
+        "diversity": "equal",
+        "image_prompt_suitability": "equal"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-17",
+      "run_seed": 5873361895440711225,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "equal",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "equal"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-18",
+      "run_seed": 38,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "equal",
+        "redundancy": "A_better",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-19",
+      "run_seed": 42,
+      "dimensions": {
+        "protagonist_clarity": "equal",
+        "consistency": "A_better",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "B_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "pair-20",
+      "run_seed": 26,
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    }
+  ]
+}

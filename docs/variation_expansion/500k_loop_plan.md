@@ -120,7 +120,7 @@ Current execution state:
 L0: BASELINE_READY (completed 2026-09-01)
 L1: PROMOTED (completed 2026-09-01; planner capability only)
 L2: complete for structural selection; iteration 001 rejected, iteration 002 eligible
-L3: shape iteration 004 rejected at authenticated prompt comparison
+L3: iteration 017 automatic quality validation passed; blind-review attempt 007 rejected
 ```
 
 L0 evidence is frozen under `experiments/v150-planner-l0/`; the base L1-L3
@@ -178,6 +178,42 @@ surface. Control64 target and guard metrics pass, while the full 64+16 cohort
 remains the generation/replay contract. The result is review-ready but not
 promotable until blind review, fresh 3x256 confirmation, and full verification
 are complete.
+
+Blind-review attempt 002 rejected the iteration 009 comparison despite its
+automatic quality pass. The original five-seed defects remained fixed, but five
+new seeds produced eight candidate-only hard-defect observations involving
+clothing/TPO, time-of-day, and outdoor-room wording.
+
+Iteration 010 completed the post-attempt-002 automatic validation on a fresh
+q25 default80 surface. The fixed 64+16 cohort replayed with zero mismatches,
+control64 location entropy improved from `4.626124` to `4.956344`, all guards
+were non-regressing, and the comparison is review-ready. Promotion remains
+blocked pending comparison-bound blind-review attempt 003, fresh 3x256
+confirmation, and full verification.
+
+Attempts 003 and 004 drove root-cause remediation across clothing TPO,
+time-phase filtering, outdoor wording, candidate location-detail duplication,
+and pool-action realization. Attempt 004 reached zero candidate-only hard
+defects but remained below the qualitative direction thresholds.
+
+Iteration 015 passed fresh q35 automatic validation with every guard
+non-regressing and materially smaller context payloads. Blind-review attempt
+005 nevertheless rejected the candidate with three candidate-only defects and
+remaining qualitative direction gaps. VE-1318 and VE-1319 remain blocked; no
+confirmation or active-data promotion is authorized.
+
+Iteration 016 removed the remaining bedtime/morning and recording-booth hard
+defects. Fresh q37 automatic validation passed, and blind-review attempt 006
+reported zero candidate-only hard defects plus passing target improvement
+support. The verdict remains rejected because candidate-worse rates are still
+above the unchanged `0.1` limit. Confirmation and promotion remain blocked.
+
+Iteration 017 preserved authored pool actions and made location-specific
+profiles override broad tag axes. Fresh q39 automatic validation passed, but
+attempt 007 remained rejected and showed unstable convergence when unrelated
+scenes are compared under a directional worse-rate contract. The next gate is
+an independently approved semantic-paired comparison contract that keeps the
+existing thresholds. VE-1318 and VE-1319 remain blocked.
 
 ### V150 Active Promotion Gate
 

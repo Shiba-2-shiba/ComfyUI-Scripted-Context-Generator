@@ -1,0 +1,48 @@
+{
+  "schema_version": "variation-blind-review-rejection-receipt/v1",
+  "experiment_id": "v150-candidate-shape-iteration-016",
+  "review_attempt": 6,
+  "terminal_state": "REVIEW_REJECTED",
+  "recorded_at": "2026-09-03",
+  "authority": {
+    "automatic_quality_verdict": "pass",
+    "blind_review_verdict": "reject",
+    "confirmation_authorized": false,
+    "promotion_ready": false,
+    "active_data_mutation_authorized": false
+  },
+  "binding": {
+    "quality_comparison_sha256": "526b363008ead24e2cd17540b667f461ad923113382704a5fe2a8c842d8a93c8",
+    "review_comparison_adapter_sha256": "976ebd143e09a5ee0187411d435fe692c2365043ef822959a82b127a1c938e0b",
+    "blind_review_experiment_sha256": "fa644eae8da4b414330c2392d85923926716abaddc9260b7814b070f718433de",
+    "assignment_key_sha256": "469926ed0ef41d39d36c5fba9160614141b72b0293c5189cd9179848d2040c94",
+    "lane_1_sha256": "3683b1c757d332121f038210a3b5c340aaab63ade129b59ed04ccf789f0ebac7",
+    "lane_2_sha256": "60a6eed387cac5bd8df13d705e1acf2025d962dbcf437e936cbc9f3ddaaf4aa5",
+    "lane_1_result_sha256": "1f11ea4fc8ffaf9d06a83b52dae9041dd03aabfd43066a5159d781458ae0c57c",
+    "lane_2_result_sha256": "529d3fe6175b1972d4f04fb9ff5d30fc53aa41cc238fca3b868fa98b56e67cb5",
+    "aggregate_review_sha256": "208fdbc8b95fc41d5a7717f0744fa575645ac64f9829a1a0b391a8110750910f",
+    "review_contract_sha256": "2e13191ede3f4810007190c76b54c95ee837d4c8b288bd379120c450d6a097c2",
+    "selection_sha256": "dc6f2f52d1bf2ca57073356f7d8124526a502c368ec072e9616175f22f68d185"
+  },
+  "review_result": {
+    "status": "fail",
+    "pair_count_per_lane": 20,
+    "candidate_hard_defect_observations": 0,
+    "candidate_hard_defect_seeds": [],
+    "candidate_hard_defects": {},
+    "dimension_results": {
+      "protagonist_clarity": {"passed": false, "improvement_support": 0.717949, "worse_rate": 0.282051},
+      "consistency": {"passed": false, "improvement_support": 0.75, "worse_rate": 0.25},
+      "naturalness": {"passed": false, "improvement_support": 0.684211, "worse_rate": 0.315789},
+      "redundancy": {"passed": false, "improvement_support": 0.5, "worse_rate": 0.5},
+      "diversity": {"passed": true, "authority": "current_source_corpus_confirmation"},
+      "image_prompt_suitability": {"passed": false, "improvement_support": 0.692308, "worse_rate": 0.307692}
+    }
+  },
+  "next_iteration_requirements": [
+    "Preserve attempt-006 evidence and active variation data unchanged.",
+    "Keep candidate hard-defect count at zero.",
+    "Reduce qualitative candidate-worse rates below 0.1 without weakening review thresholds.",
+    "Do not start VE-1318 or VE-1319 until a comparison-bound blind review passes."
+  ]
+}

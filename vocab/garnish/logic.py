@@ -4,6 +4,7 @@ Builds emotion-led physical expression tags while preserving deterministic seed 
 """
 
 import random
+import re
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
 if __package__ and __package__.count(".") >= 2:
@@ -51,7 +52,7 @@ INTENSITIES = ["mild", "medium", "strong"]
 LOAD_KEYWORDS = {
     "intimate": ["hugging", "holding hands", "kissing", "cuddling", "bed", "bedroom", "bath", "soaking"],
     "tense": ["fighting", "arguing", "hiding", "sneaking", "battle", "danger", "crying", "scared", "frustration", "rage"],
-    "active": ["running", "walking", "dancing", "jumping", "flying", "playing", "cleaning", "cooking", "sweeping", "exercising", "lifting"],
+    "active": ["running", "walking", "carrying", "moving", "crossing", "stepping", "rolling", "dancing", "jumping", "flying", "playing", "cleaning", "cooking", "sweeping", "exercising", "lifting", "pruning", "filling", "placing", "turning"],
     "calm": ["sitting", "standing", "lying", "reading", "sleeping", "waiting", "looking", "watching", "listening"],
 }
 
@@ -236,6 +237,9 @@ GAZE_CONFLICTS = {
 }
 FACE_FORWARD_FAMILIES = {"gaze", "expression", "smile_mouth"}
 CALM_FACE_CAP_CATEGORIES = {"focus", "relax", "care", "joy", "playful", "moved"}
+ACTIVE_STILLNESS_TAGS = {"still posture", "body held carefully still", "lingering in stillness"}
+TASK_FOCUSED_ACTION_VERBS = {"checking", "comparing", "reading", "inspecting", "matching", "testing", "studying", "watching", "reviewing", "examining"}
+GENERIC_TASK_GARNISH_TAGS = {"holding herself with easy energy"}
 
 
 def _guess_action_load(action_text: str) -> str:
@@ -243,13 +247,13 @@ def _guess_action_load(action_text: str) -> str:
         return "calm"
     text = action_text.lower()
     for keyword in LOAD_KEYWORDS["intimate"]:
-        if keyword in text:
+        if re.search(rf"(?<!\w){re.escape(keyword)}(?!\w)", text):
             return "intimate"
     for keyword in LOAD_KEYWORDS["tense"]:
-        if keyword in text:
+        if re.search(rf"(?<!\w){re.escape(keyword)}(?!\w)", text):
             return "tense"
     for keyword in LOAD_KEYWORDS["active"]:
-        if keyword in text:
+        if re.search(rf"(?<!\w){re.escape(keyword)}(?!\w)", text):
             return "active"
     return "calm"
 
@@ -868,6 +872,28 @@ def sample_garnish(
         if is_solo_safe_text(tag) and not _is_out_of_context(tag, context_loc, context_costume, action_text, filtered_tags):
             filtered_tags.append(tag)
 
+    if action_load == "active":
+        active_stillness_dropped = [tag for tag in filtered_tags if tag.casefold() in ACTIVE_STILLNESS_TAGS]
+        if active_stillness_dropped:
+            filtered_tags = [tag for tag in filtered_tags if tag.casefold() not in ACTIVE_STILLNESS_TAGS]
+            debug_log["active_stillness_dropped"] = active_stillness_dropped
+
+    first_action_match = re.match(r"\s*([a-z]+)", str(action_text or "").casefold())
+    task_focused_action = (
+        action_load == "calm"
+        and first_action_match is not None
+        and first_action_match.group(1) in TASK_FOCUSED_ACTION_VERBS
+    )
+    if task_focused_action:
+        generic_task_tags_dropped = [
+            tag for tag in filtered_tags if tag.casefold() in GENERIC_TASK_GARNISH_TAGS
+        ]
+        if generic_task_tags_dropped:
+            filtered_tags = [
+                tag for tag in filtered_tags if tag.casefold() not in GENERIC_TASK_GARNISH_TAGS
+            ]
+            debug_log["generic_task_tags_dropped"] = generic_task_tags_dropped
+
     if action_load == "calm" and category in CALM_FACE_CAP_CATEGORIES:
         filtered_tags, dropped_face_forward_tags = _limit_face_forward_tags(filtered_tags, max_face_tags=1)
         if dropped_face_forward_tags:
@@ -875,6 +901,10 @@ def sample_garnish(
 
     if not _has_physical_expression(filtered_tags):
         filtered_tags.insert(0, _fallback_physical_tag(category, rng))
+
+    if task_focused_action and len(filtered_tags) > 2:
+        debug_log["task_garnish_budget_dropped"] = filtered_tags[2:]
+        filtered_tags = filtered_tags[:2]
 
     if len(filtered_tags) > max_items:
         filtered_tags = filtered_tags[:max_items]

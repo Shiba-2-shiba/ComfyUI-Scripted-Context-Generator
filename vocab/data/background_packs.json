@@ -1078,8 +1078,8 @@
   "commuter_transport": {
     "label": "通勤電車/バス",
     "environment": [
-      "crowded commuter train interior",
-      "swaying bus interior at night"
+      "crowded public-transit interior",
+      "swaying public-transit interior at night"
     ],
     "core": [
       "rows of hanging plastic straps",
@@ -1101,7 +1101,7 @@
     ],
     "time": [
       "rush hour",
-      "late night last train",
+      "late-night transit service",
       "quiet midday"
     ],
     "crowd": [

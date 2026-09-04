@@ -199,6 +199,19 @@ class TestVariationCandidateSnapshotMaterialization(unittest.TestCase):
                 self.assertEqual(len(action_pools[location]), 20)
                 self.assertTrue((self.candidate_root / f"vocab/source/action_pools/{location}.json").is_file())
 
+    def test_candidate_background_core_and_props_are_disjoint(self):
+        packs = json.loads((self.candidate_root / "vocab/data/background_packs.json").read_text(encoding="utf-8"))
+
+        for location in self.plan["candidate_ids"]["locations"]:
+            with self.subTest(location=location):
+                core = set(packs[location]["core"])
+                props = set(packs[location]["props"])
+                self.assertTrue(core)
+                self.assertTrue(core.isdisjoint(props))
+                self.assertEqual(packs[location]["texture"], [])
+                self.assertEqual(packs[location]["time"], [])
+                self.assertEqual(packs[location]["crowd"], [])
+
     def test_candidate_rebuild_and_compatibility_metrics_are_reproducible(self):
         action_check = subprocess.run(
             [sys.executable, "tools/build_action_pools.py", "--check"],

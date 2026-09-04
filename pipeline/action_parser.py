@@ -344,7 +344,9 @@ def parse_pool_action_to_slots(
 
     main_text, contextual_clause, contextual_kind = split_contextual_clause(clean)
     segments = [normalize_action_phrase(part) for part in main_text.split(",") if normalize_action_phrase(part)]
-    slots: Dict[str, str] = {"location": loc_key} if loc_key else {}
+    slots: Dict[str, str] = {"primary_action": clean}
+    if loc_key:
+        slots["location"] = loc_key
     if not segments:
         return slots
 

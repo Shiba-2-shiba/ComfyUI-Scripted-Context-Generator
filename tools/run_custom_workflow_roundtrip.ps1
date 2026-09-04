@@ -1,12 +1,21 @@
 param(
   [string]$Python = 'python',
   [int]$Port = 8188,
-  [string]$ComfyRoot = ''
+  [string]$ComfyRoot = '',
+  [string]$CustomNodeRoot = '',
+  [string]$SourceSentinelPath = ''
 )
 
 $ErrorActionPreference = 'Stop'
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$sourceRoot = if ($CustomNodeRoot) { (Resolve-Path -LiteralPath $CustomNodeRoot).Path } else { $repoRoot }
+if ($CustomNodeRoot -and $sourceRoot -eq $repoRoot) {
+  throw '-CustomNodeRoot must name an isolated candidate root, not the active plugin root.'
+}
+if (-not (Test-Path -LiteralPath (Join-Path $sourceRoot '__init__.py') -PathType Leaf)) {
+  throw "Custom node root is incomplete: $sourceRoot"
+}
 $comfyDir = if ($ComfyRoot) { (Resolve-Path -LiteralPath $ComfyRoot).Path } else { Join-Path $repoRoot 'ComfyUI' }
 $frontendDir = Join-Path $repoRoot 'ComfyUI_frontend'
 $logRoot = Join-Path $repoRoot 'test_logs'
@@ -23,7 +32,34 @@ $customNodesDir = Join-Path $runRoot 'custom_nodes'
 $customNodeLink = Join-Path $customNodesDir 'ComfyUI-Scripted-Context-Generator'
 
 New-Item -ItemType Directory -Force -Path $runRoot, $userDir, $modelsDir, $modelsCheckpointDir, $outputDir, $tempDir, $customNodesDir | Out-Null
-New-Item -ItemType Junction -Path $customNodeLink -Target $repoRoot | Out-Null
+New-Item -ItemType Junction -Path $customNodeLink -Target $sourceRoot | Out-Null
+
+$sourceFiles = Get-ChildItem -LiteralPath $sourceRoot -File -Recurse | Where-Object {
+  $_.FullName -notmatch '[\\/](\.git|\.omx|__pycache__|assets[\\/]results)[\\/]'
+} | Sort-Object FullName
+$sourceHashLines = foreach ($file in $sourceFiles) {
+  $relative = $file.FullName.Substring($sourceRoot.Length).TrimStart('\','/').Replace('\','/')
+  "$relative`0$((Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant())"
+}
+$sourceHashBytes = [Text.Encoding]::UTF8.GetBytes(($sourceHashLines -join "`n"))
+$sourceHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($sourceHashBytes)).ToLowerInvariant()
+$mountedTarget = (Get-Item -LiteralPath $customNodeLink).Target
+if ((Resolve-Path -LiteralPath $mountedTarget).Path -ne $sourceRoot) {
+  throw 'Candidate custom-node junction target mismatch.'
+}
+$sentinel = [ordered]@{
+  schema_version = 'candidate-custom-node-source-sentinel/v1'
+  active_plugin_root = $repoRoot
+  loaded_active_plugin = $false
+  loaded_candidate_root = $sourceRoot
+  mount_path = $customNodeLink
+  source_content_sha256 = $sourceHash
+}
+$sentinelJson = $sentinel | ConvertTo-Json -Compress
+$sentinel.sentinel_sha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($sentinelJson))).ToLowerInvariant()
+if ($SourceSentinelPath) {
+  $sentinel | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $SourceSentinelPath -Encoding utf8
+}
 
 $server = $null
 $previousPlaywrightUrl = $env:PLAYWRIGHT_TEST_URL

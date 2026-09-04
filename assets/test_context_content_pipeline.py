@@ -297,6 +297,21 @@ class TestContextContentPipeline(unittest.TestCase):
         self.assertTrue(debug["semantic_epig"]["location_scene"]["selected_by_semantic"])
         self.assertIn("core", debug["semantic_epig"]["location_scene"]["segment_rankings"])
 
+    def test_recording_booth_excludes_control_room_console(self):
+        from pipeline.location_builder import expand_location_prompt
+
+        for seed in range(32):
+            prompt, _debug = expand_location_prompt(
+                "recording_studio",
+                seed,
+                "detailed",
+                "auto",
+                return_debug=True,
+                action_text="checking her timing",
+                mood_text="focused",
+            )
+            self.assertNotIn("mixing console", prompt.lower())
+
     def test_build_prompt_from_context_prefers_expanded_fields(self):
         ctx = patch_context(
             {},
@@ -442,7 +457,8 @@ class TestContextContentPipeline(unittest.TestCase):
                 meta_mood="late in the day",
                 return_debug=True,
             )
-        self.assertIn("the moment staying with her", prompt)
+        self.assertIn("hands settling and then shifting again", prompt)
+        self.assertNotIn("the moment staying with her", prompt)
         self.assertEqual(debug["body_key"], "body_staying")
         self.assertEqual(debug["action_surface"]["surface"], "fragment")
 

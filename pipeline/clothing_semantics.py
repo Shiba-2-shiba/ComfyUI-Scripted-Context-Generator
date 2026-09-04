@@ -23,6 +23,37 @@ CLOTHING_AXES = (
     "activity_fit",
     "visual_prominence",
 )
+CONTEXTUAL_THEME_FALLBACKS = (
+    {
+        "locations": {"vehicle_repair_garage", "maker_space", "clockwork_workshop"},
+        "action_terms": ("repair", "tightening a bolt", "open hood", "maintenance", "tool"),
+        "theme": "casual",
+    },
+    {
+        "locations": {"bedroom_boudoir", "bedroom", "luxury_hotel_room"},
+        "action_terms": ("waking up", "stretching arms", "before sleeping", "getting ready for bed"),
+        "theme": "casual",
+    },
+    {
+        "locations": {"forest_cabin", "mountain_resort"},
+        "action_terms": ("long walk", "water container", "hiking", "trail"),
+        "theme": "casual",
+    },
+)
+NON_FORMAL_OFFICE_THEME_FALLBACK_LOCATIONS = {
+    "clean_modern_kitchen",
+    "karaoke_bar",
+    "shopping_mall_atrium",
+    "street_cafe",
+    "university_campus_courtyard",
+}
+OPERATIONAL_NON_FORMAL_LOCATIONS = {
+    "community_garden",
+    "fire_station",
+    "greenhouse_nursery",
+    "maker_space",
+    "vehicle_repair_garage",
+}
 
 
 def _load_profiles() -> dict[str, Any]:
@@ -66,6 +97,22 @@ def _action_key(action_text: str) -> str:
     if any(token in text for token in ("shop", "browsing", "checking out")):
         return "shop"
     return ""
+
+
+def resolve_contextual_clothing_theme(loc: str, action_text: str, theme_key: str) -> str:
+    requested = str(theme_key or "").strip().lower()
+    if requested != "office_lady":
+        return requested
+    location = str(loc or "").strip().lower()
+    action = str(action_text or "").strip().lower()
+    if location in OPERATIONAL_NON_FORMAL_LOCATIONS:
+        return "casual"
+    for fallback in CONTEXTUAL_THEME_FALLBACKS:
+        if location in fallback["locations"] and any(term in action for term in fallback["action_terms"]):
+            return str(fallback["theme"])
+    if location in NON_FORMAL_OFFICE_THEME_FALLBACK_LOCATIONS and _action_key(action) != "work":
+        return "casual"
+    return requested
 
 
 def build_clothing_target_vector(loc: str, action_text: str = "", theme_key: str = "") -> Vector:
@@ -129,6 +176,10 @@ def clothing_semantic_debug_payload(
     selected_by_semantic: bool = False,
 ) -> dict[str, Any]:
     resolved_mode = mode or semantic_mode("clothing_tpo")
+    normalized_target = {
+        axis: round(float(value), 4)
+        for axis, value in normalize_vector(target_vector, CLOTHING_AXES).items()
+    }
     baseline_index = selected_attempt_index if baseline_selected_attempt_index is None else int(baseline_selected_attempt_index)
     semantic_index = selected_attempt_index if semantic_selected_attempt_index is None else int(semantic_selected_attempt_index)
     detailed_indices = {int(selected_attempt_index), baseline_index, semantic_index}
@@ -153,7 +204,7 @@ def clothing_semantic_debug_payload(
         normalized_scores.append(compact)
     return {
         "mode": resolved_mode,
-        "target_vector": normalize_vector(target_vector, CLOTHING_AXES),
+        "target_vector": normalized_target,
         "candidate_score_count": len(candidate_scores),
         "candidate_scores": normalized_scores,
         "selected_attempt_index": int(selected_attempt_index),

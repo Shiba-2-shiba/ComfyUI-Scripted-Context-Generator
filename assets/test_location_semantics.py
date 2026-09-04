@@ -348,7 +348,10 @@ class TestLocationSemantics(unittest.TestCase):
                 first = build_canonical_record(workflow, seed, profile=profile, cohort="confirmation")
                 replay = build_canonical_record(workflow, seed, profile=profile, cohort="confirmation")
                 self.assertEqual(first, replay)
-                self.assertIn("late in the evening", first["context"]["action"])
+                self.assertTrue(
+                    any(cue in first["context"]["action"] for cue in ("evening", "night", "bed")),
+                    msg=first["context"]["action"],
+                )
                 location_prompt = first["context"]["extras"]["location_prompt"].lower()
                 self.assertNotIn("morning", location_prompt)
                 self.assertNotIn("sunlit", location_prompt)
@@ -565,6 +568,32 @@ class TestLocationSemantics(unittest.TestCase):
             semantic_choice(options, random.Random(4), semantic_scores),
             semantic_choice(options, random.Random(4), semantic_scores),
         )
+
+
+class TestTimePhaseFiltering(unittest.TestCase):
+    def test_morning_and_afternoon_options_are_mutually_exclusive(self):
+        from pipeline.location_policy import filter_time_options_for_context
+
+        options = ["fresh morning", "daytime", "late afternoon", "during the evening"]
+        afternoon = filter_time_options_for_context(options, "in the late afternoon")
+        morning = filter_time_options_for_context(options, "during fresh morning")
+
+        self.assertNotIn("fresh morning", afternoon)
+        self.assertIn("late afternoon", afternoon)
+        self.assertNotIn("late afternoon", morning)
+        self.assertIn("fresh morning", morning)
+
+    def test_bedtime_context_rejects_morning_options(self):
+        from pipeline.location_policy import filter_time_options_for_context
+
+        options = ["lazy morning", "refreshing morning", "during quiet night"]
+
+        for context in ("before sleeping", "before heading to bed"):
+            with self.subTest(context=context):
+                filtered = filter_time_options_for_context(options, context)
+                self.assertNotIn("lazy morning", filtered)
+                self.assertNotIn("refreshing morning", filtered)
+                self.assertIn("during quiet night", filtered)
 
 
 if __name__ == "__main__":

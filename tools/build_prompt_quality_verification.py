@@ -22,6 +22,7 @@ if str(ROOT) not in sys.path:
 
 from tools.workflow_prompt_runner import WorkflowValidationError, canonical_json_bytes
 from tools.prompt_quality_loop import build_source_manifest
+from tools.build_prompt_quality_confirmation import _snapshot_content_hash
 
 
 REQUIRED_GATES = frozenset({
@@ -40,6 +41,15 @@ REQUIRED_GATES = frozenset({
 CONFIRMATION_OBJECTIVES = frozenset({"g004", "g005", "g006"})
 MIN_FULL_REGRESSION_TESTS = 505
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
+V150_COMPARISON_SCHEMAS = {
+    "prompt-quality-comparison/v2": "prompt-quality-review/v4",
+    "prompt-quality-comparison/v3": "prompt-quality-review/v5",
+    "prompt-quality-comparison/v4": "prompt-quality-review/v6",
+}
+V150_COMPARISON_SCHEMA = "prompt-quality-comparison/v2"
+V150_REVIEW_SCHEMA = "prompt-quality-review/v4"
+V150_CONFIRMATION_SCHEMA = "variation-v150-confirmation-bundle/v1"
+V150_RECEIPT_SCHEMA = "variation-v150-verification-receipt/v1"
 
 
 def _fail(code: str, message: str, **details: Any) -> None:
@@ -203,6 +213,92 @@ def _collect_evidence_files(evidence_dir: Path) -> dict[str, Path]:
     return evidence_files
 
 
+def candidate_gate_inventory(candidate_root: Path, *, python: str = sys.executable, pwsh: str = "pwsh") -> dict[str, list[str] | None]:
+    """Return the closed eleven-gate dispatch table for a candidate root."""
+    root = str(candidate_root.resolve())
+    return {
+        "action_pools": [python, str(candidate_root / "tools/build_action_pools.py"), "--check"],
+        "blind_review": None,
+        "browser": [pwsh, "-File", str(candidate_root / "tools/run_custom_workflow_roundtrip.ps1"), "-CustomNodeRoot", root],
+        "compatibility_review": [python, str(candidate_root / "tools/build_compatibility_review.py"), "--check"],
+        "data_validation": [python, str(candidate_root / "tools/validate_prompt_data.py")],
+        "frontend": [pwsh, "-File", str(candidate_root / "tools/run_frontend_workflow_validation.ps1"), "-CustomNodeRoot", root],
+        "full_flow": [python, str(candidate_root / "tools/verify_full_flow.py")],
+        "prompt_quality_confirmation": None,
+        "python_tests": [python, "-m", "unittest", "discover", "-s", "assets", "-p", "test_*.py"],
+        "target_comparison": None,
+        "widgets": [python, str(candidate_root / "tools/check_widgets_values.py")],
+    }
+
+
+def _candidate_root_identity(candidate_root: Path) -> str:
+    return hashlib.sha256(str(candidate_root.resolve()).encode("utf-8")).hexdigest()
+
+
+def _validate_v150_confirmation(
+    bundle: Mapping[str, Any], *, experiment_id: str, source_hash: str, content_hash: str,
+    candidate_root: Path, comparison_hash: str, review_hash: str,
+) -> None:
+    objectives = bundle.get("objectives")
+    if (
+        bundle.get("schema_version") != V150_CONFIRMATION_SCHEMA
+        or bundle.get("status") != "pass"
+        or bundle.get("experiment_id") != experiment_id
+        or bundle.get("candidate_root") != str(candidate_root.resolve())
+        or bundle.get("candidate_root_identity_sha256") != _candidate_root_identity(candidate_root)
+        or bundle.get("candidate_source_tree_sha256") != source_hash
+        or bundle.get("candidate_snapshot_content_sha256") != content_hash
+        or bundle.get("comparison_artifact_sha256") != comparison_hash
+        or bundle.get("review_artifact_sha256") != review_hash
+        or bundle.get("record_count") != 256
+        or not isinstance(objectives, Mapping)
+        or set(objectives) != CONFIRMATION_OBJECTIVES
+    ):
+        _fail("invalid_v150_confirmation_bundle", "confirmation bundle does not bind this candidate")
+    cohort_hash = bundle.get("cohort_hash")
+    if not _is_sha256(cohort_hash) or not _is_sha256(bundle.get("cohort_file_sha256")):
+        _fail("invalid_v150_confirmation_cohort", "confirmation bundle cohort hashes are invalid")
+    for objective, binding in objectives.items():
+        if (
+            not isinstance(binding, Mapping)
+            or binding.get("verdict") != "pass"
+            or binding.get("exit_code") != 0
+            or binding.get("cwd") != str(candidate_root.resolve())
+            or binding.get("entrypoint") != str((candidate_root / "tools/build_prompt_quality_confirmation.py").resolve())
+            or not _is_sha256(binding.get("artifact_sha256"))
+            or not _is_sha256(binding.get("import_sentinel_sha256"))
+        ):
+            _fail("invalid_v150_confirmation_objective", "confirmation objective binding is invalid", objective=objective)
+
+
+def _validate_v150_evidence(
+    gate_name: str, evidence: Mapping[str, Any], *, candidate_root: Path,
+    source_hash: str, content_hash: str,
+) -> None:
+    if (
+        evidence.get("schema_version") != "prompt-quality-verification-evidence/v2"
+        or evidence.get("gate_name") != gate_name
+        or evidence.get("candidate_root") != str(candidate_root.resolve())
+        or evidence.get("candidate_root_identity_sha256") != _candidate_root_identity(candidate_root)
+        or evidence.get("candidate_source_tree_sha256") != source_hash
+        or evidence.get("candidate_snapshot_content_sha256") != content_hash
+        or evidence.get("status") != "pass"
+        or evidence.get("exit_code") != 0
+        or not isinstance(evidence.get("command"), list)
+    ):
+        _fail("invalid_v150_verification_evidence", "gate evidence is not candidate-root bound", gate_name=gate_name)
+    if gate_name not in {"blind_review", "prompt_quality_confirmation", "target_comparison"}:
+        isolation = evidence.get("process_isolation")
+        if (
+            not isinstance(isolation, Mapping)
+            or isolation.get("cwd") != str(candidate_root.resolve())
+            or isolation.get("loaded_active_plugin") is not False
+            or isolation.get("loaded_candidate_root") != str(candidate_root.resolve())
+            or not _is_sha256(isolation.get("sentinel_sha256"))
+        ):
+            _fail("invalid_candidate_process_isolation", "gate did not prove candidate process isolation", gate_name=gate_name)
+
+
 def _validate_review_binding(
     review: Mapping[str, Any], comparison: Mapping[str, Any], comparison_path: Path, source_tree_hash: str
 ) -> None:
@@ -253,7 +349,8 @@ def _validate_review_binding(
 
 
 def build_verification(
-    *, comparison_path: Path, review_path: Path, evidence_dir: Path, output_path: Path
+    *, comparison_path: Path, review_path: Path, evidence_dir: Path, output_path: Path,
+    candidate_root: Path | None = None,
 ) -> dict[str, Any]:
     """Validate all gate bindings and atomically write a verification v2 manifest."""
 
@@ -269,6 +366,19 @@ def build_verification(
     output_path = _repo_path(output_path, code="invalid_output_path", must_exist=False)
 
     comparison = _load_object(comparison_path, code="invalid_comparison_artifact")
+    if comparison.get("schema_version") in V150_COMPARISON_SCHEMAS:
+        if candidate_root is None:
+            _fail("candidate_root_required", "comparison/v2 verification requires an explicit candidate root")
+        return _build_v150_verification(
+            comparison=comparison,
+            comparison_path=comparison_path,
+            review_path=review_path,
+            evidence_dir=evidence_dir,
+            output_path=output_path,
+            candidate_root=candidate_root,
+        )
+    if comparison.get("schema_version") != "prompt-quality-comparison/v1":
+        _fail("invalid_comparison_artifact", "comparison schema is unsupported")
     source_hashes = comparison.get("source_tree_hashes")
     source_tree_hash = source_hashes.get("after") if isinstance(source_hashes, Mapping) else None
     if (
@@ -348,12 +458,120 @@ def build_verification(
     return manifest
 
 
+def _build_v150_verification(
+    *, comparison: Mapping[str, Any], comparison_path: Path, review_path: Path,
+    evidence_dir: Path, output_path: Path, candidate_root: Path,
+) -> dict[str, Any]:
+    candidate_root = candidate_root.resolve()
+    if candidate_root == ROOT.resolve() or not candidate_root.is_dir():
+        _fail("invalid_candidate_root", "V150 verification requires a separate candidate root")
+    source_hash = build_source_manifest(candidate_root)["source_tree_hash"]
+    content_hash = _snapshot_content_hash(candidate_root)
+    experiment_id = comparison.get("experiment_id")
+    automatic_verdict = comparison.get("automatic_comparison_verdict", comparison.get("automatic_verdict"))
+    if (
+        not isinstance(experiment_id, str) or not experiment_id
+        or automatic_verdict != "pass"
+        or comparison.get("candidate_source_tree_sha256") != source_hash
+        or comparison.get("candidate_snapshot_content_sha256") != content_hash
+        or comparison.get("uses_output_metrics_for_selection") is not False
+    ):
+        _fail("invalid_v150_comparison", "comparison/v2 is not a passing binding for the candidate root")
+    review = _load_object(review_path, code="invalid_review_artifact")
+    comparison_hash = _sha256(comparison_path)
+    review_comparison_hash = review.get("comparison_artifact_sha256", review.get("comparison_artifact_hash"))
+    if (
+        review.get("schema_version") != V150_COMPARISON_SCHEMAS[comparison["schema_version"]]
+        or review.get("experiment_id") != experiment_id
+        or review.get("candidate_source_tree_sha256") != source_hash
+        or review_comparison_hash != comparison_hash
+        or review.get("status", review.get("verdict")) != "pass"
+        or review.get("verdict", "pass") != "pass"
+    ):
+        _fail("invalid_v150_review", "review schema is not the matching passing comparison binding")
+    review_hash = _sha256(review_path)
+
+    evidence_files: dict[str, Path] = {}
+    for path in sorted(evidence_dir.glob("*.json")):
+        value = _load_object(path, code="invalid_verification_evidence")
+        if value.get("schema_version") != "prompt-quality-verification-evidence/v2":
+            continue
+        gate_name = value.get("gate_name")
+        if not isinstance(gate_name, str) or gate_name in evidence_files:
+            _fail("duplicate_verification_gate", "V150 evidence gate is invalid or duplicated", path=str(path))
+        evidence_files[gate_name] = path.resolve()
+    if set(evidence_files) != REQUIRED_GATES:
+        _fail(
+            "verification_gate_inventory_invalid", "V150 verification requires exactly eleven gates",
+            missing=sorted(REQUIRED_GATES - set(evidence_files)), unexpected=sorted(set(evidence_files) - REQUIRED_GATES),
+        )
+
+    expected_results = {"target_comparison": comparison_path, "blind_review": review_path}
+    gates: dict[str, Any] = {}
+    for gate_name, evidence_path in sorted(evidence_files.items()):
+        evidence = _load_object(evidence_path, code="invalid_verification_evidence")
+        _validate_v150_evidence(
+            gate_name, evidence, candidate_root=candidate_root, source_hash=source_hash, content_hash=content_hash,
+        )
+        result_path = Path(str(evidence.get("result_path", ""))).resolve()
+        if not result_path.is_file() or evidence.get("result_sha256", evidence.get("result_hash")) != _sha256(result_path):
+            _fail("verification_result_hash_mismatch", "V150 gate result hash does not match", gate_name=gate_name)
+        expected = expected_results.get(gate_name)
+        if expected is not None and result_path != expected:
+            _fail("verification_artifact_binding_mismatch", "comparison/review binding is incorrect", gate_name=gate_name)
+        elif gate_name == "prompt_quality_confirmation":
+            _validate_v150_confirmation(
+                _load_object(result_path, code="invalid_v150_confirmation_bundle"),
+                experiment_id=experiment_id, source_hash=source_hash, content_hash=content_hash,
+                candidate_root=candidate_root, comparison_hash=comparison_hash, review_hash=review_hash,
+            )
+        elif gate_name not in expected_results:
+            result = _load_object(result_path, code="invalid_gate_result")
+            if (
+                result.get("schema_version") != "prompt-quality-gate-result/v2"
+                or result.get("candidate_root_identity_sha256") != _candidate_root_identity(candidate_root)
+                or result.get("candidate_source_tree_sha256") != source_hash
+                or result.get("candidate_snapshot_content_sha256") != content_hash
+            ):
+                _fail("invalid_gate_result", "V150 gate result is not candidate-root bound", gate_name=gate_name)
+            _validate_gate_result(
+                gate_name,
+                {**result, "schema_version": "prompt-quality-gate-result/v1", "source_tree_hash": source_hash},
+                source_hash,
+            )
+        gates[gate_name] = {
+            "evidence_path": str(evidence_path), "evidence_sha256": _sha256(evidence_path),
+            "result_path": str(result_path), "result_sha256": _sha256(result_path), "status": "pass",
+        }
+
+    if build_source_manifest(candidate_root)["source_tree_hash"] != source_hash or _snapshot_content_hash(candidate_root) != content_hash:
+        _fail("candidate_changed_during_verification", "candidate root changed while evidence was validated")
+    receipt = {
+        "schema_version": V150_RECEIPT_SCHEMA,
+        "status": "pass",
+        "experiment_id": experiment_id,
+        "candidate_root": str(candidate_root),
+        "candidate_root_identity_sha256": _candidate_root_identity(candidate_root),
+        "candidate_source_tree_sha256": source_hash,
+        "candidate_snapshot_content_sha256": content_hash,
+        "comparison_artifact_sha256": comparison_hash,
+        "review_artifact_sha256": review_hash,
+        "quality_gates": gates,
+    }
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = output_path.with_name(f".{output_path.name}.tmp")
+    temporary.write_bytes(canonical_json_bytes(receipt))
+    temporary.replace(output_path)
+    return receipt
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--comparison", type=Path, required=True)
     parser.add_argument("--review", type=Path, required=True)
     parser.add_argument("--evidence-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--candidate-root", type=Path)
     args = parser.parse_args(argv)
     try:
         manifest = build_verification(
@@ -361,6 +579,7 @@ def main(argv: list[str] | None = None) -> int:
             review_path=args.review,
             evidence_dir=args.evidence_dir,
             output_path=args.output,
+            candidate_root=args.candidate_root,
         )
     except WorkflowValidationError as exc:
         print(json.dumps(exc.to_envelope(), ensure_ascii=False, sort_keys=True), file=sys.stderr)

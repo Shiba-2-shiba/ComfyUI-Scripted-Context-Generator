@@ -649,16 +649,23 @@ def _review_failures(
     expected_experiment_id: str | None = None,
     expected_comparison_hash: str | None = None,
     expected_review_selection: Mapping[str, Any] | None = None,
+    expected_review_schema: str | None = None,
 ) -> list[str]:
     if not review:
         return ["review_missing"]
     failures: list[str] = []
     is_v3 = review.get("schema_version") == "prompt-quality-review/v3"
-    if review.get("schema_version") not in {"prompt-quality-review/v1", "prompt-quality-review/v3"}:
+    is_v4 = review.get("schema_version") == "prompt-quality-review/v4"
+    is_v5 = review.get("schema_version") == "prompt-quality-review/v5"
+    is_v6 = review.get("schema_version") == "prompt-quality-review/v6"
+    is_semantic = is_v4 or is_v5 or is_v6
+    if review.get("schema_version") not in {"prompt-quality-review/v1", "prompt-quality-review/v3", "prompt-quality-review/v4", "prompt-quality-review/v5", "prompt-quality-review/v6"}:
+        failures.append("review_schema_invalid")
+    if expected_review_schema is not None and review.get("schema_version") != expected_review_schema:
         failures.append("review_schema_invalid")
     if expected_review_selection is not None:
-        if not is_v3:
-            failures.append("review_v3_required")
+        if not is_v3 and not is_semantic:
+            failures.append("review_bound_schema_required")
         if review.get("comparison_artifact_hash") != expected_comparison_hash:
             failures.append("review_comparison_hash_mismatch")
         if review.get("selection_hash") != expected_review_selection.get("selection_hash"):
@@ -669,6 +676,10 @@ def _review_failures(
     reviewer_ids = [item.get("reviewer_id") for item in reviewers if isinstance(item, Mapping)] if isinstance(reviewers, list) else []
     if len(reviewer_ids) != 2 or None in reviewer_ids or len(set(reviewer_ids)) != 2:
         failures.append("reviewer_identity_not_independent")
+    if is_semantic:
+        session_ids = [item.get("review_session_id") for item in reviewers if isinstance(item, Mapping)] if isinstance(reviewers, list) else []
+        if len(session_ids) != 2 or None in session_ids or len(set(session_ids)) != 2 or set(session_ids) & set(reviewer_ids):
+            failures.append("review_session_not_independent")
     for key in ("assignment_key_hash",):
         value = review.get(key)
         if not isinstance(value, str) or len(value) != 64:
@@ -695,7 +706,10 @@ def _review_failures(
     elif expected_record_hashes is None or dict(record_hashes) != dict(expected_record_hashes):
         failures.append("reviewed_record_hashes_mismatch")
     provenance = review.get("reviewed_run_provenance")
-    if not isinstance(provenance, Mapping) or set(provenance) != {"before", "after"}:
+    if is_semantic:
+        if provenance != {}:
+            failures.append("reviewed_run_provenance_invalid")
+    elif not isinstance(provenance, Mapping) or set(provenance) != {"before", "after"}:
         failures.append("reviewed_run_provenance_invalid")
     else:
         source_hashes = {side: provenance.get(side, {}).get("source_tree_hash") for side in ("before", "after")}
@@ -726,8 +740,8 @@ def _review_failures(
                 if dimension in targets:
                     if result.get("authority") != eligibility.get("authority"):
                         failures.append(f"review_authority_mismatch:{dimension}")
-                required = int(eligibility.get("minimum_valid_votes", 0))
-                enforce_minimum = eligibility.get("authority") in {"affected_seed_pairwise", "selected_pairwise"}
+                required = int(eligibility.get("minimum_non_abstain_votes" if is_v5 or is_v6 else "minimum_valid_votes", 0))
+                enforce_minimum = eligibility.get("authority") in {"affected_seed_pairwise", "selected_pairwise", "semantic_pairwise"}
             elif dimension in targets:
                 required = 36
                 enforce_minimum = True
@@ -735,11 +749,15 @@ def _review_failures(
                 required = 0
                 enforce_minimum = False
             if enforce_minimum:
-                if int(result.get("valid_votes", 0)) < required:
+                observed = int(result.get("non_abstain_votes" if is_v5 or is_v6 else "valid_votes", 0))
+                if observed < required:
                     failures.append(f"review_votes_insufficient:{dimension}")
+                if (is_v5 or is_v6) and int(result.get("directional_votes", 0)) < int(eligibility.get("minimum_directional_votes", 0)):
+                    failures.append(f"review_directional_votes_insufficient:{dimension}")
         if expected_review_selection is not None:
             diversity = dimensions.get("diversity", {})
-            if diversity.get("authority") != "current_source_corpus_confirmation" or diversity.get("valid_votes") != 0:
+            diversity_votes = diversity.get("non_abstain_votes" if is_v5 or is_v6 else "valid_votes")
+            if diversity.get("authority") != "current_source_corpus_confirmation" or diversity_votes != 0:
                 failures.append("review_diversity_authority_invalid")
     raw_failures = review.get("failures", [])
     if raw_failures:
@@ -766,13 +784,19 @@ def _review_artifact_binding_failures(review_path: Path, review: Mapping[str, An
     experiment_id = str(key.get("experiment_id", ""))
     key_lanes = key.get("lanes", []) if isinstance(key.get("lanes"), list) else []
     key_is_v3 = key.get("schema_version") == "prompt-quality-review-assignment-key/v3"
+    key_is_v4 = key.get("schema_version") == "prompt-quality-review-assignment-key/v4"
+    key_is_v5 = key.get("schema_version") == "prompt-quality-review-assignment-key/v5"
+    key_is_v6 = key.get("schema_version") == "prompt-quality-review-assignment-key/v6"
+    key_is_semantic = key_is_v4 or key_is_v5 or key_is_v6
     if key.get("schema_version") not in {
-        "prompt-quality-review-assignment-key/v1", "prompt-quality-review-assignment-key/v3"
+        "prompt-quality-review-assignment-key/v1", "prompt-quality-review-assignment-key/v3",
+        "prompt-quality-review-assignment-key/v4", "prompt-quality-review-assignment-key/v5",
+        "prompt-quality-review-assignment-key/v6",
     } or {
         str(item.get("lane_id", "")) for item in key_lanes if isinstance(item, Mapping)
     } != {"lane-1", "lane-2"} or len(key_lanes) != 2:
         failures.append("review_assignment_lane_set_invalid")
-    if key_is_v3:
+    if key_is_v3 or key_is_semantic:
         comparison_relative = Path(str(key.get("comparison_artifact_path", "")))
         if comparison_relative.is_absolute() or ".." in comparison_relative.parts:
             failures.append("review_comparison_path_invalid")
@@ -785,6 +809,17 @@ def _review_artifact_binding_failures(review_path: Path, review: Mapping[str, An
             else:
                 if not comparison_path.is_file() or hashlib.sha256(comparison_path.read_bytes()).hexdigest() != key.get("comparison_artifact_hash"):
                     failures.append("review_comparison_hash_mismatch")
+                elif key_is_semantic:
+                    try:
+                        bound_comparison = _load_object(comparison_path)
+                        if (
+                            bound_comparison.get("schema_version") != ("prompt-quality-comparison/v4" if key_is_v6 else "prompt-quality-comparison/v3" if key_is_v5 else "prompt-quality-comparison/v2")
+                            or review.get("candidate_source_tree_sha256") != bound_comparison.get("candidate_source_tree_sha256")
+                            or review.get("candidate_snapshot_content_sha256") != bound_comparison.get("candidate_snapshot_content_sha256")
+                        ):
+                            failures.append("review_candidate_binding_mismatch")
+                    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+                        failures.append("review_comparison_recursive_validation_failed")
         selection = dict(key.get("selection", {}))
         selection["dimensions"] = key.get("dimension_eligibility")
         if hashlib.sha256(canonical_json_bytes(selection)).hexdigest() != key.get("selection_hash"):
@@ -813,15 +848,23 @@ def _review_artifact_binding_failures(review_path: Path, review: Mapping[str, An
             continue
         if result.get("input_hash") != lane_hash:
             failures.append(f"review_result_input_hash_mismatch:{lane_id}")
-        pairs = {str(item.get("pair_id")): int(item.get("run_seed")) for item in lane.get("pairs", [])}
+        pairs = (
+            {str(item.get("pair_id")): True for item in lane.get("pairs", [])}
+            if key_is_semantic else
+            {str(item.get("pair_id")): int(item.get("run_seed")) for item in lane.get("pairs", [])}
+        )
         assignments = lane_key.get("assignments", []) if isinstance(lane_key.get("assignments"), list) else []
         for assignment in assignments:
             pair_id = str(assignment.get("pair_id", ""))
-            seed = int(assignment.get("run_seed", -1))
-            digest = hashlib.sha256(f"{experiment_id}:{lane_id}:{seed}".encode()).digest()
+            seed = int(assignment.get("run_seed", -1)) if not key_is_semantic else None
+            material = (
+                f"{key.get('comparison_artifact_hash')}:{lane_id}:{pair_id}"
+                if key_is_semantic else f"{experiment_id}:{lane_id}:{seed}"
+            )
+            digest = hashlib.sha256(material.encode()).digest()
             expected_candidate = "A" if int.from_bytes(digest[:8], "big") % 2 == 0 else "B"
             if (
-                pairs.get(pair_id) != seed
+                (pairs.get(pair_id) is not True if key_is_semantic else pairs.get(pair_id) != seed)
                 or assignment.get("candidate_side") != expected_candidate
                 or assignment.get("incumbent_side") != ("B" if expected_candidate == "A" else "A")
             ):
@@ -830,7 +873,8 @@ def _review_artifact_binding_failures(review_path: Path, review: Mapping[str, An
     hashes = key.get("reviewed_record_hashes")
     provenance = key.get("reviewed_run_provenance")
     bound_records: dict[str, dict[int, str]] = {}
-    if not all(isinstance(value, Mapping) and set(value) == {"before", "after"} for value in (paths, hashes, provenance)):
+    provenance_valid = provenance == {} if key_is_semantic else isinstance(provenance, Mapping) and set(provenance) == {"before", "after"}
+    if not all(isinstance(value, Mapping) and set(value) == {"before", "after"} for value in (paths, hashes)) or not provenance_valid:
         failures.append("review_record_binding_invalid")
     else:
         for side in ("before", "after"):
@@ -850,13 +894,15 @@ def _review_artifact_binding_failures(review_path: Path, review: Mapping[str, An
                 try:
                     records = [json.loads(line) for line in record_path.read_text(encoding="utf-8").splitlines() if line.strip()]
                     bound_records[side] = {
-                        int(item["run_seed"]): str(item["cleaned_prompt"])
+                        (str(item["pair_id"]) if key_is_semantic else int(item["run_seed"])): str(item["cleaned_prompt"])
                         for item in records
                     }
                 except (KeyError, TypeError, ValueError, json.JSONDecodeError):
                     failures.append(f"review_record_content_invalid:{side}")
             if review.get("reviewed_record_hashes", {}).get(side) != hashes[side]:
                 failures.append(f"review_aggregate_record_hash_mismatch:{side}")
+            if key_is_semantic:
+                continue
             manifest = None
             for name in ("run-manifest.json", "confirmation.json"):
                 candidate = record_path.parent / name
@@ -870,7 +916,12 @@ def _review_artifact_binding_failures(review_path: Path, review: Mapping[str, An
                 failures.append(f"review_aggregate_provenance_mismatch:{side}")
     if set(bound_records) == {"before", "after"}:
         selection = key.get("selection", {})
-        if key_is_v3:
+        if key_is_semantic:
+            selected_pair_ids = {
+                str(item["pair_id"]) for item in selection.get("pairs", [])
+            } if isinstance(selection, Mapping) and isinstance(selection.get("pairs"), list) else set()
+            selected_seeds = set()
+        elif key_is_v3:
             selected_seeds = {
                 int(seed) for seed in selection.get("selected_seeds", [])
             } if isinstance(selection, Mapping) and isinstance(selection.get("selected_seeds"), list) else set()
@@ -889,28 +940,130 @@ def _review_artifact_binding_failures(review_path: Path, review: Mapping[str, An
             lane = json.loads(lane_path.read_text(encoding="utf-8"))
             pairs = {str(item["pair_id"]): item for item in lane.get("pairs", [])}
             assignments = {str(item["pair_id"]): item for item in lane_key.get("assignments", [])}
-            lane_seeds = {int(item["run_seed"]) for item in pairs.values()}
-            if lane_seeds != selected_seeds or len(lane_seeds) != 20:
-                failures.append(f"review_selected_seed_set_mismatch:{lane_id}")
+            if key_is_semantic:
+                lane_pair_ids = set(pairs)
+                if lane_pair_ids != selected_pair_ids or len(lane_pair_ids) != 20:
+                    failures.append(f"review_selected_pair_set_mismatch:{lane_id}")
+            else:
+                lane_seeds = {int(item["run_seed"]) for item in pairs.values()}
+                if lane_seeds != selected_seeds or len(lane_seeds) != 20:
+                    failures.append(f"review_selected_seed_set_mismatch:{lane_id}")
             for pair_id, assignment in assignments.items():
                 pair = pairs.get(pair_id, {})
-                seed = int(assignment.get("run_seed", -1))
+                record_key = pair_id if key_is_semantic else int(assignment.get("run_seed", -1))
                 prompts = pair.get("prompts", {}) if isinstance(pair.get("prompts"), Mapping) else {}
                 candidate_side = str(assignment.get("candidate_side", ""))
                 incumbent_side = str(assignment.get("incumbent_side", ""))
                 if (
-                    prompts.get(candidate_side) != bound_records["after"].get(seed)
-                    or prompts.get(incumbent_side) != bound_records["before"].get(seed)
+                    prompts.get(candidate_side) != bound_records["after"].get(record_key)
+                    or prompts.get(incumbent_side) != bound_records["before"].get(record_key)
                 ):
                     failures.append(f"review_prompt_record_mismatch:{lane_id}:{pair_id}")
     try:
         from tools.aggregate_blind_prompt_review import aggregate_review
 
-        recomputed = aggregate_review(review_dir, None, experiment={}, policy={})
+        recomputed = aggregate_review(
+            review_dir,
+            None,
+            experiment={
+                "target_qualitative_dimensions": review.get("target_qualitative_dimensions", []),
+                "guard_qualitative_dimensions": review.get("guard_qualitative_dimensions", []),
+            } if key_is_semantic else {},
+            policy={},
+        )
+        if key_is_semantic:
+            recomputed.update({
+                "candidate_source_tree_sha256": review.get("candidate_source_tree_sha256"),
+                "candidate_snapshot_content_sha256": review.get("candidate_snapshot_content_sha256"),
+            })
         if canonical_json_bytes(recomputed) != canonical_json_bytes(review):
             failures.append("review_aggregate_recomputation_mismatch")
     except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError):
         failures.append("review_aggregate_recomputation_failed")
+    return sorted(set(failures))
+
+
+def _v150_verification_failures(
+    verification_path: Path, verified: Mapping[str, Any], compared: Mapping[str, Any],
+    comparison_path: Path, review_path: Path,
+) -> list[str]:
+    failures: list[str] = []
+    expected_fields = {
+        "schema_version", "status", "experiment_id", "candidate_root", "candidate_root_identity_sha256",
+        "candidate_source_tree_sha256", "candidate_snapshot_content_sha256", "comparison_artifact_sha256",
+        "review_artifact_sha256", "quality_gates",
+    }
+    if set(verified) != expected_fields or verified.get("schema_version") != "variation-v150-verification-receipt/v1" or verified.get("status") != "pass":
+        return ["verification_schema_or_status_invalid"]
+    if (
+        verified.get("experiment_id") != compared.get("experiment_id")
+        or verified.get("candidate_source_tree_sha256") != compared.get("candidate_source_tree_sha256")
+        or verified.get("candidate_snapshot_content_sha256") != compared.get("candidate_snapshot_content_sha256")
+        or verified.get("comparison_artifact_sha256") != hashlib.sha256(comparison_path.read_bytes()).hexdigest()
+        or verified.get("review_artifact_sha256") != hashlib.sha256(review_path.read_bytes()).hexdigest()
+    ):
+        failures.append("verification_artifacts_invalid")
+    gates = verified.get("quality_gates")
+    if not isinstance(gates, Mapping) or set(gates) != REQUIRED_VERIFICATION_GATES:
+        return failures + ["verification_gate_inventory_invalid"]
+    for gate_name, gate in gates.items():
+        if not isinstance(gate, Mapping) or set(gate) != {"evidence_path", "evidence_sha256", "result_path", "result_sha256", "status"} or gate.get("status") != "pass":
+            failures.append(f"verification_gate_invalid:{gate_name}")
+            continue
+        for kind in ("evidence", "result"):
+            path = Path(str(gate.get(f"{kind}_path", ""))).resolve()
+            try:
+                path.relative_to(ROOT.resolve())
+            except ValueError:
+                failures.append(f"verification_{kind}_path_invalid:{gate_name}")
+                continue
+            if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != gate.get(f"{kind}_sha256"):
+                failures.append(f"verification_{kind}_hash_mismatch:{gate_name}")
+        expected = comparison_path.resolve() if gate_name == "target_comparison" else review_path.resolve() if gate_name == "blind_review" else None
+        if expected is not None and Path(str(gate.get("result_path", ""))).resolve() != expected:
+            failures.append(f"verification_{'comparison' if gate_name == 'target_comparison' else 'review'}_binding_mismatch")
+    return sorted(set(failures))
+
+
+def _v150_promote_failures(
+    compared: Mapping[str, Any], comparison_path: Path, review: Mapping[str, Any], review_path: Path,
+    verified: Mapping[str, Any], verification_path: Path,
+) -> list[str]:
+    failures: list[str] = []
+    required_hashes = {
+        "automatic_comparison_hash", "candidate_source_tree_sha256", "candidate_snapshot_content_sha256",
+        "semantic_pair_contract_sha256", "pair_generation_receipt_sha256", "pair_validation_sha256",
+        "selection_salt_sha256", "compatibility_graph_sha256", "baseline_records_sha256",
+        "candidate_records_sha256", "review_contract_hash", "qualitative_scope_hash",
+    }
+    if compared.get("automatic_comparison_verdict") != "pass" or compared.get("uses_output_metrics_for_selection") is not False:
+        failures.append("automatic_comparison_failed")
+    if any(not isinstance(compared.get(field), str) or len(compared[field]) != 64 for field in required_hashes):
+        failures.append("comparison_binding_invalid")
+    automatic_relative = Path(str(compared.get("automatic_comparison_path", "")))
+    if automatic_relative.is_absolute() or ".." in automatic_relative.parts:
+        failures.append("automatic_comparison_path_invalid")
+    else:
+        automatic_path = (ROOT / automatic_relative).resolve()
+        if not automatic_path.is_file() or hashlib.sha256(automatic_path.read_bytes()).hexdigest() != compared.get("automatic_comparison_hash"):
+            failures.append("automatic_comparison_hash_mismatch")
+    expected_records = {"before": compared.get("baseline_records_sha256"), "after": compared.get("candidate_records_sha256")}
+    failures.extend(_review_failures(
+        review, expected_records, None, None, compared.get("review_contract_hash"),
+        compared.get("qualitative_scope_hash"), compared.get("experiment_id"),
+        hashlib.sha256(comparison_path.read_bytes()).hexdigest(), compared.get("review_selection"),
+        expected_review_schema=(
+            "prompt-quality-review/v6"
+            if compared.get("schema_version") == "prompt-quality-comparison/v4"
+            else "prompt-quality-review/v5"
+            if compared.get("schema_version") == "prompt-quality-comparison/v3"
+            else "prompt-quality-review/v4"
+        ),
+    ))
+    if review.get("candidate_source_tree_sha256") != compared.get("candidate_source_tree_sha256") or review.get("candidate_snapshot_content_sha256") != compared.get("candidate_snapshot_content_sha256"):
+        failures.append("review_candidate_binding_mismatch")
+    failures.extend(_review_artifact_binding_failures(review_path, review))
+    failures.extend(_v150_verification_failures(verification_path, verified, compared, comparison_path, review_path))
     return sorted(set(failures))
 
 
@@ -1049,8 +1202,32 @@ def promote_check(
 
     compared = _load_object(comparison)
     failures: list[str] = []
-    if compared.get("schema_version") != COMPARISON_SCHEMA_VERSION:
+    comparison_schema = compared.get("schema_version")
+    if comparison_schema not in {COMPARISON_SCHEMA_VERSION, "prompt-quality-comparison/v2", "prompt-quality-comparison/v3", "prompt-quality-comparison/v4"}:
         failures.append("invalid_comparison_schema")
+        comparison_hash = hashlib.sha256(canonical_json_bytes(compared)).hexdigest()
+        return {
+            "comparison_hash": comparison_hash, "failures": failures,
+            "schema_version": PROMOTION_SCHEMA_VERSION, "source_mutated": False, "verdict": "reject",
+        }
+    if comparison_schema in {"prompt-quality-comparison/v2", "prompt-quality-comparison/v3", "prompt-quality-comparison/v4"}:
+        if not all(isinstance(value, (str, Path)) for value in (comparison, review, verification)):
+            missing = [
+                name for name, value in (("comparison", comparison), ("review", review), ("verification", verification))
+                if not isinstance(value, (str, Path))
+            ]
+            failures.extend(f"{name}_artifact_path_required" for name in missing)
+            comparison_hash = hashlib.sha256(canonical_json_bytes(compared)).hexdigest()
+        else:
+            comparison_path, review_path, verification_path = Path(comparison), Path(review), Path(verification)
+            comparison_hash = hashlib.sha256(comparison_path.read_bytes()).hexdigest()
+            review_value, verified = _load_object(review_path), _load_object(verification_path)
+            failures.extend(_v150_promote_failures(compared, comparison_path, review_value, review_path, verified, verification_path))
+        return {
+            "comparison_hash": comparison_hash, "failures": sorted(set(failures)),
+            "schema_version": PROMOTION_SCHEMA_VERSION, "source_mutated": False,
+            "verdict": "promote" if not failures else "reject",
+        }
     if compared.get("automatic_verdict") != "pass":
         failures.append("automatic_comparison_failed")
     binding = compared.get("ablation_pair")
