@@ -345,9 +345,9 @@ def _validate_unique_strings(value: Any, field: str) -> list[dict]:
     return []
 
 
-def _non_countable_location_pools() -> set[str]:
+def _non_countable_location_pools(baseline_manifest_path: Path | None = None) -> set[str]:
     try:
-        baseline_manifest = _load_l0_baseline_manifest()
+        baseline_manifest = _load_l0_baseline_manifest(baseline_manifest_path)
         payload = json.loads(L0_POOL_POLICY_PATH.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise WorkflowValidationError(
@@ -379,14 +379,15 @@ def _non_countable_location_pools() -> set[str]:
     }
 
 
-def _load_l0_baseline_manifest() -> dict:
+def _load_l0_baseline_manifest(path: Path | None = None) -> dict:
+    path = L0_BASELINE_MANIFEST_PATH if path is None else Path(path)
     try:
-        payload = json.loads(L0_BASELINE_MANIFEST_PATH.read_text(encoding="utf-8"))
+        payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise WorkflowValidationError(
             "baseline_manifest_unavailable",
             "locked V150 baseline manifest is unavailable",
-            path=str(L0_BASELINE_MANIFEST_PATH),
+            path=str(path),
             exception_type=type(exc).__name__,
         ) from exc
     if not isinstance(payload, dict):
@@ -397,11 +398,12 @@ def _load_l0_baseline_manifest() -> dict:
 def validate_locked_input_hashes(
     manifest: Mapping[str, Any] | None = None,
     *,
-    root: Path = ROOT,
+    root: Path | None = None,
     protected_paths: Sequence[str] = L0_PROTECTED_INPUT_PATHS,
 ) -> None:
     """Fail closed when protected L0 data/policy inputs drift."""
 
+    root = ROOT if root is None else Path(root)
     manifest = dict(_load_l0_baseline_manifest() if manifest is None else manifest)
     expected_hashes = manifest.get("input_hashes", {})
     if not isinstance(expected_hashes, Mapping):
@@ -437,6 +439,7 @@ def validate_locked_input_hashes(
 def validate_projection_scenario(
     payload: Mapping[str, Any],
     baseline: Mapping[str, Any] | None = None,
+    *, baseline_manifest_path: Path | None = None,
 ) -> list[dict]:
     """Return stable validation errors for one hypothetical scenario."""
 
@@ -583,7 +586,7 @@ def validate_projection_scenario(
                 )
             )
         blocked = sorted(
-            proposed_locations & _non_countable_location_pools()
+            proposed_locations & _non_countable_location_pools(baseline_manifest_path)
         )
         if blocked:
             errors.append(
@@ -673,7 +676,10 @@ def load_projection_manifest(path: str | Path) -> dict:
     return payload
 
 
-def _validate_projection_manifest(payload: Mapping[str, Any], baseline: Mapping[str, Any]) -> dict:
+def _validate_projection_manifest(
+    payload: Mapping[str, Any], baseline: Mapping[str, Any],
+    *, baseline_manifest_path: Path | None = None,
+) -> dict:
     if not isinstance(payload, Mapping):
         raise WorkflowValidationError("invalid_projection_manifest", "projection manifest must be a JSON object")
     allowed = {"schema_version", "stage_id", "baseline_manifest_sha256", "scenarios"}
@@ -711,15 +717,16 @@ def _validate_projection_manifest(payload: Mapping[str, Any], baseline: Mapping[
             "invalid_baseline_manifest_hash",
             "baseline_manifest_sha256 must be a lowercase SHA-256 value",
         )
-    expected_baseline_hash = baseline.get("baseline_manifest_sha256")
+    bound_baseline_path = L0_BASELINE_MANIFEST_PATH if baseline_manifest_path is None else Path(baseline_manifest_path)
+    expected_baseline_hash = baseline.get("baseline_manifest_sha256") if baseline_manifest_path is None else None
     if expected_baseline_hash is None and str(stage_id).strip() == "V150":
         try:
-            expected_baseline_hash = hashlib.sha256(L0_BASELINE_MANIFEST_PATH.read_bytes()).hexdigest()
+            expected_baseline_hash = hashlib.sha256(bound_baseline_path.read_bytes()).hexdigest()
         except OSError as exc:
             raise WorkflowValidationError(
                 "baseline_manifest_unavailable",
                 "locked V150 baseline manifest is unavailable",
-                path=str(L0_BASELINE_MANIFEST_PATH),
+                path=str(bound_baseline_path),
                 exception_type=type(exc).__name__,
             ) from exc
     if expected_baseline_hash is not None and baseline_hash != str(expected_baseline_hash):
@@ -730,14 +737,14 @@ def _validate_projection_manifest(payload: Mapping[str, Any], baseline: Mapping[
             actual=baseline_hash,
         )
     if stage_id.strip() == "V150":
-        validate_locked_input_hashes()
+        validate_locked_input_hashes(_load_l0_baseline_manifest(bound_baseline_path))
     scenarios = payload.get("scenarios")
     if not isinstance(scenarios, list) or not scenarios:
         raise WorkflowValidationError("missing_projection_scenarios", "projection manifest must contain scenarios")
     errors: list[dict] = []
     ids: list[str] = []
     for index, scenario in enumerate(scenarios):
-        scenario_errors = validate_projection_scenario(scenario, baseline)
+        scenario_errors = validate_projection_scenario(scenario, baseline, baseline_manifest_path=baseline_manifest_path)
         for error in scenario_errors:
             error = dict(error)
             error["scenario_index"] = index
@@ -783,12 +790,13 @@ def project_hypothetical_scenario(
     *,
     baseline: Mapping[str, Any],
     target: int = 100000,
+    baseline_manifest_path: Path | None = None,
 ) -> dict:
     """Project one validated mixed scenario using integer-only deterministic math."""
 
     if not _is_int(target) or target <= 0:
         raise WorkflowValidationError("invalid_projection_target", "projection target must be a positive integer")
-    _raise_projection_errors(validate_projection_scenario(payload, baseline))
+    _raise_projection_errors(validate_projection_scenario(payload, baseline, baseline_manifest_path=baseline_manifest_path))
     scenario = _normalized_projection_scenario(payload)
     eligible_pairs = scenario["subject_count"] * scenario["location_count"]
     projected_rows = eligible_pairs * scenario["compatibility_density_basis_points"] // 10000
@@ -820,6 +828,7 @@ def build_projection_report(
     *,
     target: int,
     baseline: Mapping[str, Any] | None = None,
+    baseline_manifest_path: Path | None = None,
 ) -> dict:
     """Build an order-stable, content-addressed hypothetical projection report."""
 
@@ -827,7 +836,7 @@ def build_projection_report(
         raise WorkflowValidationError("invalid_projection_target", "projection target must be a positive integer")
     if baseline is None:
         baseline = build_target_report(target=target)["current_metrics"]
-    normalized = _validate_projection_manifest(manifest, baseline)
+    normalized = _validate_projection_manifest(manifest, baseline, baseline_manifest_path=baseline_manifest_path)
     if normalized["stage_id"] == "V150" and target != 150000:
         raise WorkflowValidationError(
             "projection_stage_target_mismatch",
@@ -836,7 +845,7 @@ def build_projection_report(
             actual=target,
         )
     scenarios = [
-        project_hypothetical_scenario(item, baseline=baseline, target=target)
+        project_hypothetical_scenario(item, baseline=baseline, target=target, baseline_manifest_path=baseline_manifest_path)
         for item in normalized["scenarios"]
     ]
     return {
@@ -885,9 +894,15 @@ def main() -> int:
         "--scenario-file",
         help="Optional versioned JSON manifest for pure hypothetical projection scenarios.",
     )
+    parser.add_argument(
+        "--baseline-manifest", type=Path,
+        help="Explicit frozen input manifest for --scenario-file; its hash and protected inputs must match.",
+    )
     args = parser.parse_args()
 
     try:
+        if args.baseline_manifest and not args.scenario_file:
+            raise WorkflowValidationError("missing_scenario_file", "--baseline-manifest requires --scenario-file")
         if args.target <= 0:
             raise WorkflowValidationError("invalid_target", "target must be a positive integer")
         if args.top < 0:
@@ -902,6 +917,7 @@ def main() -> int:
                 load_projection_manifest(args.scenario_file),
                 target=args.target,
                 baseline=report["current_metrics"],
+                baseline_manifest_path=args.baseline_manifest,
             )
     except (ValueError, WorkflowValidationError) as exc:
         envelope = (

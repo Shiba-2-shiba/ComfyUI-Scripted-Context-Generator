@@ -379,14 +379,22 @@ class TestLocationSemantics(unittest.TestCase):
                     self.assertNotIn(phrase, joined)
 
     def test_final_review_seed_30_suppresses_fx_redundant_with_energetic_mood(self):
+        import json
         from tools.workflow_prompt_runner import build_canonical_record, load_profile
         from workflow_widget_validation import load_workflow
 
         root = Path(ROOT)
         workflow = load_workflow(root / "ComfyUI-workflow-context.json")
         profile = load_profile(root / "verification/fixtures/prompt_quality_supported_profile.json")
-        first = build_canonical_record(workflow, 30, profile=profile, cohort="control")
-        replay = build_canonical_record(workflow, 30, profile=profile, cohort="control")
+        source = {
+            "subj": "fitness model", "costume": "gym_workout", "loc": "karaoke_bar",
+            "action": "checking a song title on the karaoke screen",
+            "meta": {"mood": "energetic_joy", "tags": {"purpose": "leisure"}},
+        }
+        overrides = {"1": {"json_string": json.dumps(source), "source_mode": "json_only"},
+                     "3": {"variation_mode": "original"}}
+        first = build_canonical_record(workflow, 30, profile=profile, cohort="control", overrides=overrides)
+        replay = build_canonical_record(workflow, 30, profile=profile, cohort="control", overrides=overrides)
 
         self.assertEqual(first, replay)
         self.assertEqual(first["context"]["loc"], "karaoke_bar")

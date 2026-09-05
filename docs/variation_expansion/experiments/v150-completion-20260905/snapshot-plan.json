@@ -1,0 +1,93 @@
+{
+  "schema_version": "variation-candidate-snapshot-plan/v1",
+  "snapshot_id": "v150-completion-20260905",
+  "materializer_version": "variation-snapshot-materializer/v1",
+  "baseline_prompt_mode": "active",
+  "inputs": {
+    "candidate_iteration": {
+      "path": "docs/variation_expansion/experiments/v150-completion-20260905/candidate-iteration.json",
+      "sha256": "29c40573edf2c174108ff909575ec44a7a167a8f28f61fedd7866978427c4939"
+    },
+    "scenario_manifest": {
+      "path": "docs/variation_expansion/experiments/v150-completion-20260905/scenario-manifest.json",
+      "sha256": "c86b84f8f4eea5cb4b801ef8fc822ccb5692fe42e53210360b9c15f4f7def0de"
+    },
+    "projection_report": {
+      "path": "docs/variation_expansion/experiments/v150-completion-20260905/projection-report.json",
+      "sha256": "bcb386167f21e26fd33e77c0bc72f33f0904c44c3e8a0bc97908858b99688760"
+    },
+    "analysis_report": {
+      "path": "docs/variation_expansion/experiments/v150-completion-20260905/analysis-report.json",
+      "sha256": "7e74912a675e36bc1c58e5a57424c1fca36c2c8b545c2ccc2c9fc8e12ce4244c"
+    },
+    "baseline_manifest": {
+      "path": "docs/variation_expansion/experiments/v150-completion-20260905/baseline-manifest.json",
+      "sha256": "80781984d483b29dfdd100f93355a6951f0e573f1e55a67b26eb55ac169ad2b7"
+    }
+  },
+  "prompt_schedule_sha256": null,
+  "quality_contract_sha256": null,
+  "effective_catalog_sha256": "47111677e0011b0ecfb94f1ccac8b6fcf3e597b200f9e2f3c396febce960e7df",
+  "active_source_tree_sha256": "d84b84704a1364879da7e8158d83f55a0ac0945dd0c1843900b9004e30bff610",
+  "active_source_content_sha256": "b1f4f40e08fd27cb07ba3731f735e107f079f8e977e9bfab983f34aac89529eb",
+  "candidate_ids": {
+    "subjects": [
+      "architect",
+      "astronomer",
+      "barber",
+      "delivery courier",
+      "farmer",
+      "fisher",
+      "florist",
+      "journalist",
+      "mechanic",
+      "nurse",
+      "paramedic",
+      "photographer",
+      "researcher",
+      "shopkeeper",
+      "teacher"
+    ],
+    "locations": [
+      "bike_station",
+      "canal_walkway",
+      "clinic_waiting_room",
+      "community_garden",
+      "community_theater_backstage",
+      "design_studio",
+      "ferry_terminal",
+      "fire_station",
+      "flower_market",
+      "forest_cabin",
+      "greenhouse_nursery",
+      "maker_space",
+      "observatory_dome",
+      "postal_service_counter",
+      "print_shop",
+      "public_plaza",
+      "rooftop_cafe",
+      "tram_platform",
+      "vehicle_repair_garage"
+    ]
+  },
+  "declared_delta": {
+    "subjects": 15,
+    "locations": 19,
+    "action_pools": 19,
+    "actions_per_location": [
+      20
+    ]
+  },
+  "projection_target": 150000,
+  "projected_base_variations": 164540,
+  "mutable_candidate_files": [
+    "assets/compatibility_review.csv",
+    "prompts.jsonl",
+    "vocab/data/action_pools.json",
+    "vocab/data/background_packs.json",
+    "vocab/data/location_axis_profiles.json",
+    "vocab/data/scene_compatibility.json",
+    "vocab/data/variation_scope.json",
+    "vocab/source/action_pools/_manifest.json"
+  ]
+}

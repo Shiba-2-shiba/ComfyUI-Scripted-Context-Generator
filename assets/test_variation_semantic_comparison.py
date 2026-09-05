@@ -154,6 +154,20 @@ class VariationSemanticComparisonTests(unittest.TestCase):
             self.build()
         self.assertEqual(caught.exception.code, "semantic_pair_record_hash_mismatch")
 
+    def test_v7_comparison_changes_only_consistency_to_guard(self):
+        root = Path(__file__).resolve().parents[1]
+        self.review_policy = json.loads((root / "vocab/data/variation_semantic_review_policy_v4.json").read_text(encoding="utf-8"))["review"]
+        comparison = self.build()
+        self.assertEqual(comparison["schema_version"], "prompt-quality-comparison/v5")
+        dimensions = comparison["review_selection"]["dimensions"]
+        for name in ("consistency", "protagonist_clarity", "redundancy"):
+            self.assertEqual((dimensions[name]["minimum_non_abstain_votes"], dimensions[name]["minimum_directional_votes"]), (36, 0))
+        for name in ("naturalness", "image_prompt_suitability"):
+            self.assertEqual((dimensions[name]["minimum_non_abstain_votes"], dimensions[name]["minimum_directional_votes"]), (36, 20))
+        self.review_policy["target_dimension_contract"]["min_improvement_support"] = 0
+        with self.assertRaises(ValueError):
+            self.build()
+
     def test_rejects_unknown_schema(self):
         value = json.loads(self.validation.read_text(encoding="utf-8"))
         value["schema_version"] = "variation-semantic-pair-validation/v999"

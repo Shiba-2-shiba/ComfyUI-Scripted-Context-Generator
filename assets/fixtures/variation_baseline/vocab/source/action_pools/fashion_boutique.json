@@ -1,0 +1,51 @@
+{
+  "location": "fashion_boutique",
+  "actions": [
+    {
+      "text": "trying on clothes beside the fitting room bench",
+      "load": "calm"
+    },
+    {
+      "text": "holding up a dress, examining it",
+      "load": "calm"
+    },
+    {
+      "text": "browsing through a rack of clothes",
+      "load": "calm"
+    },
+    {
+      "text": "standing at the counter, making a purchase",
+      "load": "calm"
+    },
+    {
+      "text": "looking at a price tag with a frown",
+      "load": "calm"
+    },
+    {
+      "text": "walking out with a shopping bag",
+      "load": "active"
+    },
+    {
+      "text": "holding two dresses, comparing them",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting a hat beside the display shelf",
+      "load": "calm"
+    },
+    {
+      "text": "stepping out from the fitting room curtain to check the hem",
+      "load": "calm"
+    },
+    {
+      "text": "smoothing a sleeve while waiting for a second opinion",
+      "load": "calm"
+    }
+  ],
+  "families": [
+    {
+      "name": "retail_service",
+      "take": 6
+    }
+  ]
+}

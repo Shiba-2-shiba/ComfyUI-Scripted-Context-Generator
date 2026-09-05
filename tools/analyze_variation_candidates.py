@@ -26,6 +26,7 @@ from tools.build_action_pools import (
 from tools.build_compatibility_review import resolve_canonical_location
 from tools.check_variation_scope import load_variation_scope
 from tools.plan_variation_target import (
+    _load_l0_baseline_manifest,
     L0_POOL_POLICY_PATH,
     build_projection_report,
     validate_locked_input_hashes,
@@ -477,6 +478,7 @@ def _evaluate_catalog(
     *,
     scenario_manifest: Mapping[str, Any],
     projection_report: Mapping[str, Any],
+    baseline_manifest_path: Path | None = None,
 ) -> dict:
     errors: list[dict] = []
     policy_findings: list[dict] = []
@@ -488,7 +490,7 @@ def _evaluate_catalog(
     if not isinstance(catalog.get("catalog_id"), str) or not str(catalog.get("catalog_id")).strip():
         errors.append(_error("missing_catalog_id", "catalog_id is required"))
 
-    validate_locked_input_hashes()
+    validate_locked_input_hashes(_load_l0_baseline_manifest(baseline_manifest_path))
     projection = _projection_payload(projection_report)
     binding = catalog.get("scenario_binding")
     _append_unknown_fields(errors, binding, _BINDING_FIELDS, path="scenario_binding")
@@ -499,6 +501,7 @@ def _evaluate_catalog(
             scenario_manifest,
             target=int(projection.get("target", 0)),
             baseline=projection.get("baseline_metrics") if isinstance(projection.get("baseline_metrics"), Mapping) else None,
+            baseline_manifest_path=baseline_manifest_path,
         )
         if canonical_json_bytes(recomputed_projection) != canonical_json_bytes(dict(projection)):
             errors.append(_error("projection_report_mismatch", "projection report does not match the scenario manifest"))
@@ -926,8 +929,12 @@ def analyze_candidate_catalog(
     *,
     scenario_manifest: Mapping[str, Any],
     projection_report: Mapping[str, Any],
+    baseline_manifest_path: Path | None = None,
 ) -> dict:
-    return _evaluate_catalog(catalog, scenario_manifest=scenario_manifest, projection_report=projection_report)
+    return _evaluate_catalog(
+        catalog, scenario_manifest=scenario_manifest, projection_report=projection_report,
+        baseline_manifest_path=baseline_manifest_path,
+    )
 
 
 def main() -> int:
@@ -935,12 +942,16 @@ def main() -> int:
     parser.add_argument("--catalog", required=True)
     parser.add_argument("--scenario-file", required=True)
     parser.add_argument("--projection-report", required=True)
+    parser.add_argument("--baseline-manifest", type=Path)
     args = parser.parse_args()
     try:
         catalog = load_candidate_catalog(args.catalog)
         scenario = load_candidate_catalog(args.scenario_file)
         projection = load_candidate_catalog(args.projection_report)
-        report = analyze_candidate_catalog(catalog, scenario_manifest=scenario, projection_report=projection)
+        report = analyze_candidate_catalog(
+            catalog, scenario_manifest=scenario, projection_report=projection,
+            baseline_manifest_path=args.baseline_manifest,
+        )
     except (OSError, json.JSONDecodeError, WorkflowValidationError) as exc:
         if isinstance(exc, WorkflowValidationError):
             envelope = exc.to_envelope()

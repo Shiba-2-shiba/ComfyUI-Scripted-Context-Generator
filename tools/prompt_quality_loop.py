@@ -632,6 +632,8 @@ def generate_run(
     }
     seeds = cohort["control_seeds"] + cohort["exploration_seeds"]
     source_before = build_source_manifest()
+    corpus_path = ROOT / "prompts.jsonl"
+    corpus_before = _sha256_bytes(corpus_path.read_bytes()) if corpus_path.is_file() else None
     records = []
     durations = []
     started = time.perf_counter()
@@ -662,6 +664,12 @@ def generate_run(
             mismatched_seeds=replay["mismatched_seeds"],
         )
     source_after = build_source_manifest()
+    corpus_after = _sha256_bytes(corpus_path.read_bytes()) if corpus_path.is_file() else None
+    if corpus_before != corpus_after:
+        raise WorkflowValidationError(
+            "prompt_corpus_changed", "prompt corpus bytes changed while generating or replaying records",
+            before=corpus_before, after=corpus_after,
+        )
     if source_before["source_tree_hash"] != source_after["source_tree_hash"]:
         raise WorkflowValidationError(
             "protected_source_changed",
@@ -715,6 +723,7 @@ def generate_run(
         "run_kind": run_kind,
         "schema_version": LOOP_SCHEMA_VERSION,
         "source_tree_hash": source_before["source_tree_hash"],
+        "prompt_corpus_sha256": corpus_before,
         "workflow_hash": workflow_hash,
         "ablation_contract_hash": transform["ablation_contract_hash"],
         "behavior_feature_ids": transform["feature_ids"],

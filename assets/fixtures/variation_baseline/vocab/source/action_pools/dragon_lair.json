@@ -1,0 +1,35 @@
+{
+  "location": "dragon_lair",
+  "actions": [
+    {
+      "text": "standing and hiding behind a rock",
+      "load": "tense"
+    },
+    {
+      "text": "crouching with a weapon ready",
+      "load": "calm"
+    },
+    {
+      "text": "standing at the entrance, looking in",
+      "load": "calm"
+    },
+    {
+      "text": "sitting and tending to wounds",
+      "load": "calm"
+    },
+    {
+      "text": "shielding eyes from the heat",
+      "load": "calm"
+    },
+    {
+      "text": "spotting a shiny gem on the floor",
+      "load": "calm"
+    }
+  ],
+  "families": [
+    {
+      "name": "cautious_tension",
+      "take": 6
+    }
+  ]
+}

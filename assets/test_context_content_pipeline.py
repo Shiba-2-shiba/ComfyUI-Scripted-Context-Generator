@@ -462,6 +462,56 @@ class TestContextContentPipeline(unittest.TestCase):
         self.assertEqual(debug["body_key"], "body_staying")
         self.assertEqual(debug["action_surface"]["surface"], "fragment")
 
+    def _attention_wrapper_prompt(self, action, garnish="", staging_tags="", action_frame=None, body=None, seed=51):
+        entries = [
+            [{"key": "intro_plain", "text": "{subject_clause}", "roles": ["neutral"]}],
+            [{"key": "body_focus", "text": body or "{action_clause}, her attention fixed on it", "roles": ["focused"]}],
+            [{"key": "end_plain", "text": "{scene_clause}", "roles": ["neutral"]}],
+        ]
+        with patch("pipeline.prompt_orchestrator._template_entries", side_effect=entries):
+            return build_prompt_text(template="", composition_mode=True, seed=seed, subj="girl", costume="dress",
+                                     loc="garden", action=action, garnish=garnish, meta_mood="a peaceful afternoon",
+                                     staging_tags=staging_tags, action_frame=action_frame, return_debug=True)
+
+    def test_attention_wrapper_does_not_repeat_inspection_or_explicit_gaze(self):
+        for action, garnish, staging, frame in (
+            ("reading the rain gauge beside the fence", "downcast eyes, relaxed posture", "gentle smile", None),
+            ("studying the planting plan", "", "", None),
+            ("examining a leaf", "", "", None),
+            ("inspecting the fence hinge", "", "", None),
+            ("waiting beside the fence", "focused gaze", "", None),
+            ("waiting beside the fence", "", "eyes on the gate", None),
+            ("waiting beside the fence", "", "", {"gaze_target": "watching the gate"}),
+        ):
+            with self.subTest(action=action, garnish=garnish, staging=staging, frame=frame):
+                prompt, _ = self._attention_wrapper_prompt(action, garnish, staging, frame)
+                self.assertNotIn("her attention fixed on it", prompt)
+                self.assertIn(action, prompt)
+                self.assertIn("a peaceful afternoon", prompt)
+        prompt, _ = self._attention_wrapper_prompt("reading the rain gauge beside the fence", "downcast eyes, relaxed posture", "gentle smile")
+        for detail in ("downcast eyes", "relaxed posture", "gentle smile"):
+            self.assertIn(detail, prompt)
+
+    def test_attention_wrapper_retains_optional_focus_for_nonattention_action(self):
+        for action in ("fingers easing out of their tension", "waiting beside the fence", "carrying a basket"):
+            with self.subTest(action=action):
+                prompt, _ = self._attention_wrapper_prompt(action)
+                self.assertIn("her attention fixed on it", prompt)
+        prompt, _ = self._attention_wrapper_prompt("reading the planting plan", body="{action_clause}, while a bell rings nearby")
+        self.assertIn("while a bell rings nearby", prompt)
+
+    def test_attention_tail_pruning_preserves_template_selection_seed_streams_and_syntax(self):
+        for seed in range(8):
+            prompt, debug = self._attention_wrapper_prompt("reading the rain gauge", seed=seed)
+            plain, plain_debug = self._attention_wrapper_prompt("reading the rain gauge", body="{action_clause}", seed=seed)
+            replay, replay_debug = self._attention_wrapper_prompt("reading the rain gauge", seed=seed)
+            self.assertEqual((prompt, debug), (replay, replay_debug))
+            self.assertEqual(prompt, plain)
+            for field in ("intro_key", "body_key", "end_key", "template_key", "template_roles", "action_surface"):
+                self.assertEqual(debug[field], plain_debug[field])
+            for field in ("named_seed_streams", "syntax_family", "clause_order"):
+                self.assertEqual(debug["content_plan"][field], plain_debug["content_plan"][field])
+
     def test_intro_literal_does_not_repeat_the_action_opening(self):
         with patch("pipeline.prompt_orchestrator._template_entries") as mocked:
             mocked.side_effect = [

@@ -1,0 +1,86 @@
+{
+  "location": "canal_walkway",
+  "actions": [
+    {
+      "load": "active",
+      "text": "walking beside the canal railing"
+    },
+    {
+      "load": "calm",
+      "text": "checking a water plant against a folded canal guide"
+    },
+    {
+      "load": "active",
+      "text": "following the narrow path beneath an arch"
+    },
+    {
+      "load": "calm",
+      "text": "reading a folded towpath map beside the weathered railing"
+    },
+    {
+      "load": "calm",
+      "text": "reading a small waterside notice"
+    },
+    {
+      "load": "active",
+      "text": "stepping around a puddle near the towpath"
+    },
+    {
+      "load": "calm",
+      "text": "watching reflections move across the canal"
+    },
+    {
+      "load": "active",
+      "text": "crossing a low footbridge"
+    },
+    {
+      "load": "calm",
+      "text": "checking the route marker at a bend"
+    },
+    {
+      "load": "active",
+      "text": "brushing leaves from the edge of the path"
+    },
+    {
+      "load": "calm",
+      "text": "walking beside the mossy towpath embankment"
+    },
+    {
+      "load": "active",
+      "text": "continuing along the illuminated walkway"
+    },
+    {
+      "load": "calm",
+      "text": "counting mooring rings along the stone embankment"
+    },
+    {
+      "load": "active",
+      "text": "stepping up the short stairs onto the footbridge"
+    },
+    {
+      "load": "calm",
+      "text": "checking the canal level against a marked gauge"
+    },
+    {
+      "load": "active",
+      "text": "moving a fallen branch from the towpath edge"
+    },
+    {
+      "load": "calm",
+      "text": "checking the next bend on a waterside map"
+    },
+    {
+      "load": "active",
+      "text": "walking beneath the brick arch toward the lock"
+    },
+    {
+      "load": "calm",
+      "text": "watching a narrowboat pass below the railing"
+    },
+    {
+      "load": "active",
+      "text": "crossing the damp paving toward the tree-lined bank"
+    }
+  ],
+  "families": []
+}

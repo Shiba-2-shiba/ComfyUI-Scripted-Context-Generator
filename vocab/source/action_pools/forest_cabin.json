@@ -1,0 +1,86 @@
+{
+  "location": "forest_cabin",
+  "actions": [
+    {
+      "load": "active",
+      "text": "stacking split wood beside the cabin door"
+    },
+    {
+      "load": "calm",
+      "text": "checking the latch on a wooden window"
+    },
+    {
+      "load": "active",
+      "text": "placing a kettle on the cabin stove"
+    },
+    {
+      "load": "calm",
+      "text": "reading a trail map on the table"
+    },
+    {
+      "load": "active",
+      "text": "brushing pine needles from the porch"
+    },
+    {
+      "load": "calm",
+      "text": "examining tracks near the clearing"
+    },
+    {
+      "load": "active",
+      "text": "folding a blanket beside the fireplace"
+    },
+    {
+      "load": "calm",
+      "text": "checking supplies inside a storage chest"
+    },
+    {
+      "load": "active",
+      "text": "carrying a lantern toward the doorway"
+    },
+    {
+      "load": "calm",
+      "text": "checking a trail map beside the cabin door"
+    },
+    {
+      "load": "active",
+      "text": "sweeping leaves from the cabin steps"
+    },
+    {
+      "load": "calm",
+      "text": "placing a mug beside the window"
+    },
+    {
+      "load": "active",
+      "text": "refilling the wood basket beside the stove"
+    },
+    {
+      "load": "calm",
+      "text": "checking the water-level gauge on the cabin storage tank"
+    },
+    {
+      "load": "active",
+      "text": "folding trail supplies into a canvas bag"
+    },
+    {
+      "load": "calm",
+      "text": "latching the storage cupboard"
+    },
+    {
+      "load": "calm",
+      "text": "checking the stove damper before lighting the fire"
+    },
+    {
+      "load": "active",
+      "text": "carrying split logs in from the porch"
+    },
+    {
+      "load": "calm",
+      "text": "studying fresh tracks across the cabin floor"
+    },
+    {
+      "load": "active",
+      "text": "brushing pine needles from the entrance mat"
+    }
+  ],
+  "families": []
+}

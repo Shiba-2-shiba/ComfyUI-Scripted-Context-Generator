@@ -8,6 +8,31 @@ sys.path.insert(0, ROOT)
 
 
 class TestClothingSemantics(unittest.TestCase):
+    def test_garment_material_takes_precedence_over_optional_palette_material(self):
+        import random
+        from unittest.mock import patch
+        from pipeline import clothing_candidate_renderer as renderer
+
+        for garment, material, expected in (
+            ("elegant chiffon blouse", "knit", "orange elegant chiffon blouse"),
+            ("soft knit cardigan", "chiffon", "orange soft knit cardigan"),
+            ("cotton shirt", "cotton", "orange cotton shirt"),
+        ):
+            with self.subTest(garment=garment), patch.object(
+                renderer.clothing_vocab, "PALETTE_DEFAULT_PROBABILITIES", {"colors": 1.0, "materials": 1.0}
+            ):
+                pack = {"choices": {"top": [garment]}, "palette": {"colors": ["orange"], "materials": [material]}}
+                rng = random.Random(7)
+                prompt, signature = renderer.build_item_description(rng, pack)
+                self.assertEqual(prompt, expected)
+                self.assertNotIn(material, signature.split("~"))
+                # Removing an optional modifier must not reroll any palette slot.
+                reference = random.Random(7)
+                pack["choices"]["top"] = ["blouse"]
+                plain_prompt, _ = renderer.build_item_description(reference, pack)
+                self.assertEqual(plain_prompt, f"orange {material} blouse")
+                self.assertEqual(rng.getstate(), reference.getstate())
+
     def test_contextual_theme_fallback_escapes_hard_tpo_conflicts(self):
         from pipeline.clothing_semantics import resolve_contextual_clothing_theme
 

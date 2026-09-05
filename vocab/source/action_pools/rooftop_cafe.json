@@ -1,0 +1,86 @@
+{
+  "location": "rooftop_cafe",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "choosing a table beside the rooftop rail"
+    },
+    {
+      "load": "active",
+      "text": "carrying a drink across the open terrace"
+    },
+    {
+      "load": "calm",
+      "text": "reading a menu beneath the awning"
+    },
+    {
+      "load": "calm",
+      "text": "checking the skyline beyond the tables"
+    },
+    {
+      "load": "active",
+      "text": "placing a cup beside a small planter"
+    },
+    {
+      "load": "calm",
+      "text": "folding a receipt near the table edge"
+    },
+    {
+      "load": "active",
+      "text": "moving a chair away from the walkway"
+    },
+    {
+      "load": "calm",
+      "text": "watching clouds pass above the buildings"
+    },
+    {
+      "load": "calm",
+      "text": "checking the rooftop closing notice"
+    },
+    {
+      "load": "active",
+      "text": "carrying a tray toward the service counter"
+    },
+    {
+      "load": "calm",
+      "text": "checking the skyline map beside the lit parapet"
+    },
+    {
+      "load": "active",
+      "text": "returning an empty cup to the collection shelf"
+    },
+    {
+      "load": "calm",
+      "text": "checking the table number against a receipt"
+    },
+    {
+      "load": "active",
+      "text": "opening the canvas awning above the terrace"
+    },
+    {
+      "load": "calm",
+      "text": "watching traffic move far below the parapet"
+    },
+    {
+      "load": "active",
+      "text": "carrying clean cups to the rooftop counter"
+    },
+    {
+      "load": "calm",
+      "text": "reading the specials card beside the herb planter"
+    },
+    {
+      "load": "active",
+      "text": "moving a terrace table behind the windscreen"
+    },
+    {
+      "load": "calm",
+      "text": "checking condensation on a chilled glass"
+    },
+    {
+      "load": "active",
+      "text": "returning a folded menu to the service stand"
+    }
+  ],
+  "families": []
+}

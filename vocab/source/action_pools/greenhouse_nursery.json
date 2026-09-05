@@ -1,0 +1,86 @@
+{
+  "location": "greenhouse_nursery",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "checking roots in a small planting tray"
+    },
+    {
+      "load": "active",
+      "text": "carrying a seedling between greenhouse benches"
+    },
+    {
+      "load": "calm",
+      "text": "labeling pots with plant names"
+    },
+    {
+      "load": "active",
+      "text": "filling a tray with growing medium"
+    },
+    {
+      "load": "calm",
+      "text": "examining new leaves for healthy growth"
+    },
+    {
+      "load": "active",
+      "text": "moving a plant beneath the shade frame"
+    },
+    {
+      "load": "calm",
+      "text": "sorting seed packets beside the workbench"
+    },
+    {
+      "load": "active",
+      "text": "watering a row of young plants"
+    },
+    {
+      "load": "calm",
+      "text": "checking the propagation shelf"
+    },
+    {
+      "load": "active",
+      "text": "wrapping a potted plant for collection"
+    },
+    {
+      "load": "calm",
+      "text": "recording a plant batch in the nursery ledger"
+    },
+    {
+      "load": "active",
+      "text": "pruning a damaged stem with hand shears"
+    },
+    {
+      "load": "calm",
+      "text": "arranging labeled plants by size"
+    },
+    {
+      "load": "active",
+      "text": "filling a watering can at the utility sink"
+    },
+    {
+      "load": "calm",
+      "text": "checking a care card beside a display pot"
+    },
+    {
+      "load": "active",
+      "text": "moving empty pots onto the supply rack"
+    },
+    {
+      "load": "calm",
+      "text": "inspecting a tray of newly germinated seeds"
+    },
+    {
+      "load": "active",
+      "text": "placing a price tag beside a potted plant"
+    },
+    {
+      "load": "calm",
+      "text": "sorting clean containers near the potting bench"
+    },
+    {
+      "load": "active",
+      "text": "sweeping loose soil from the nursery floor"
+    }
+  ],
+  "families": []
+}

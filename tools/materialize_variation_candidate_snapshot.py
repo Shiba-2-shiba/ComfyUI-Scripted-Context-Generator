@@ -21,6 +21,7 @@ from tools.analyze_variation_candidates import analyze_candidate_catalog, load_c
 from tools.plan_variation_prompt_schedule import validate_prompt_schedule
 from tools.variation_quality_contract import validate_variation_quality_contract
 from tools.prompt_quality_loop import _source_files, build_source_manifest
+from tools.build_prompt_quality_confirmation import _sanitized_environment, _verification_input_entries
 from tools.workflow_prompt_runner import WorkflowValidationError, canonical_json_bytes
 
 
@@ -85,8 +86,12 @@ def build_snapshot_plan(
     analysis_report: Path,
     prompt_schedule: Path | None = None,
     quality_contract: Path | None = None,
+    baseline_manifest_path: Path | None = None,
+    baseline_prompt_mode: str = "synthetic",
     source_root: Path = ROOT,
 ) -> dict:
+    if baseline_prompt_mode not in {"synthetic", "active"}:
+        raise WorkflowValidationError("invalid_baseline_prompt_mode", "baseline prompt mode must be synthetic or active")
     source_root = source_root.resolve()
     iteration = candidate_iteration.resolve()
     scenario_path = scenario_manifest.resolve()
@@ -103,7 +108,10 @@ def build_snapshot_plan(
     scenario = _read_json(scenario_path)
     projection = _read_json(projection_path)
     tracked_analysis = _read_json(analysis_path)
-    fresh_analysis = analyze_candidate_catalog(catalog, scenario_manifest=scenario, projection_report=projection)
+    fresh_analysis = analyze_candidate_catalog(
+        catalog, scenario_manifest=scenario, projection_report=projection,
+        baseline_manifest_path=baseline_manifest_path,
+    )
     if canonical_json_bytes(fresh_analysis) != canonical_json_bytes(tracked_analysis):
         raise WorkflowValidationError(
             "candidate_analysis_drift",
@@ -127,6 +135,8 @@ def build_snapshot_plan(
         "projection_report": _bound_input(projection_path, source_root),
         "analysis_report": _bound_input(analysis_path, source_root),
     }
+    if baseline_manifest_path is not None:
+        inputs["baseline_manifest"] = _bound_input(baseline_manifest_path, source_root)
     schedule_hash = None
     quality_contract_hash = None
     if schedule_path is not None:
@@ -158,6 +168,7 @@ def build_snapshot_plan(
         "schema_version": PLAN_SCHEMA_VERSION,
         "snapshot_id": str(catalog["catalog_id"]),
         "materializer_version": MATERIALIZER_VERSION,
+        **({"baseline_prompt_mode": "active"} if baseline_prompt_mode == "active" else {}),
         "inputs": inputs,
         "prompt_schedule_sha256": schedule_hash,
         "quality_contract_sha256": quality_contract_hash,
@@ -190,7 +201,7 @@ def _validate_plan_inputs(plan: Mapping[str, Any], source_root: Path) -> None:
         raise WorkflowValidationError("invalid_snapshot_plan", "snapshot plan schema is unsupported")
     inputs = plan.get("inputs", {})
     required_inputs = {"candidate_iteration", "scenario_manifest", "projection_report", "analysis_report"}
-    allowed_inputs = required_inputs | {"prompt_schedule", "quality_contract"}
+    allowed_inputs = required_inputs | {"prompt_schedule", "quality_contract", "baseline_manifest"}
     if not isinstance(inputs, Mapping) or not required_inputs.issubset(inputs) or not set(inputs).issubset(allowed_inputs):
         raise WorkflowValidationError(
             "invalid_snapshot_inputs",
@@ -217,6 +228,8 @@ def _validate_plan_inputs(plan: Mapping[str, Any], source_root: Path) -> None:
         analysis_report=resolved_inputs["analysis_report"],
         prompt_schedule=resolved_inputs.get("prompt_schedule"),
         quality_contract=resolved_inputs.get("quality_contract"),
+        baseline_manifest_path=resolved_inputs.get("baseline_manifest"),
+        baseline_prompt_mode=str(plan.get("baseline_prompt_mode", "synthetic")),
         source_root=source_root,
     )
     if canonical_json_bytes(expected_plan) != canonical_json_bytes(dict(plan)):
@@ -227,8 +240,16 @@ def _validate_plan_inputs(plan: Mapping[str, Any], source_root: Path) -> None:
 
 
 def _copy_filtered_source(source_root: Path, destination_root: Path) -> None:
-    for source in _source_files(source_root):
-        if source.is_symlink():
+    support = set(source_root.glob("*.md"))
+    support.update(path for path in (source_root / "docs").rglob("*") if path.is_file())
+    support.update(path for path in (source_root / "assets").glob("*") if path.is_file())
+    support.update(
+        source_root / relative for relative in (
+            "pytest.ini", ".gitattributes", ".omx/ultragoal/goals.json", ".omx/ultragoal/ledger.jsonl",
+        ) if (source_root / relative).is_file()
+    )
+    for source in set(_source_files(source_root)) | support:
+        if source.is_symlink() or not source.resolve().is_relative_to(source_root.resolve()):
             raise WorkflowValidationError("snapshot_symlink_rejected", "source snapshot cannot include symlinks")
         relative = source.relative_to(source_root)
         destination = destination_root / relative
@@ -240,6 +261,10 @@ def _copy_filtered_source(source_root: Path, destination_root: Path) -> None:
             destination = destination_root / relative_value
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source, destination)
+    _write_json(destination_root / ".verification-inputs.json", {
+        "schema_version": "snapshot-verification-inputs/v1",
+        "files": sorted(path.relative_to(source_root).as_posix() for path in support),
+    })
 
 
 def _candidate_pairs(catalog: Mapping[str, Any]) -> list[tuple[Mapping[str, Any], Mapping[str, Any]]]:
@@ -382,6 +407,14 @@ def _materialize_candidate_data(candidate_root: Path, catalog: Mapping[str, Any]
 
     scope_path = candidate_root / "vocab/data/variation_scope.json"
     scope = _read_json(scope_path)
+    generation = scope.setdefault("compatibility_review_generation", {})
+    seeds = generation.setdefault("existing_prompt_rows", [])
+    for line in (candidate_root / "prompts.jsonl").read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            prompt = json.loads(line)
+            seed = {key: str(prompt.get(key, "")) for key in ("subj", "loc", "costume")}
+            if seed not in seeds:
+                seeds.append(seed)
     for subject in catalog["subjects"]:
         if subject["id"] not in scope["variation_subjects"]:
             scope["variation_subjects"].append(subject["id"])
@@ -397,6 +430,8 @@ def _run_snapshot_command(root: Path, *arguments: str) -> str:
         cwd=root,
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        env=_sanitized_environment(root),
         check=False,
     )
     if completed.returncode != 0:
@@ -419,6 +454,7 @@ def _manifest_entries(root: Path) -> dict[str, str]:
         path = root / relative_value
         if path.is_file():
             entries[relative_value] = _sha256_path(path)
+    entries.update(_verification_input_entries(root))
     return dict(sorted(entries.items()))
 
 
@@ -459,14 +495,19 @@ def materialize_candidate_snapshots(
         _copy_filtered_source(source_root, candidate_root)
         iteration_path = source_root / plan["inputs"]["candidate_iteration"]["path"]
         catalog = load_candidate_catalog(iteration_path)
-        baseline_prompt_rows = _prompt_rows(catalog, candidate=False)
+        baseline_prompt_rows = (
+            [json.loads(line) for line in (baseline_root / "prompts.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+            if plan.get("baseline_prompt_mode") == "active" else _prompt_rows(catalog, candidate=False)
+        )
         candidate_prompt_rows = _prompt_rows(catalog, candidate=True)
         if "prompt_schedule" in plan["inputs"]:
             schedule = _read_json(source_root / plan["inputs"]["prompt_schedule"]["path"])
             validate_prompt_schedule(schedule, source_root=source_root)
             candidate_prompt_rows = list(schedule["candidate_rows"])
-        _write_jsonl(baseline_root / "prompts.jsonl", baseline_prompt_rows)
+        if plan.get("baseline_prompt_mode") != "active":
+            _write_jsonl(baseline_root / "prompts.jsonl", baseline_prompt_rows)
         _materialize_candidate_data(candidate_root, catalog)
+        _write_jsonl(candidate_root / "prompts.jsonl", candidate_prompt_rows)
 
         _run_snapshot_command(candidate_root, "tools/build_action_pools.py", "--write")
         _run_snapshot_command(
@@ -489,7 +530,6 @@ def materialize_candidate_snapshots(
         _write_json(scope_path, scope)
         _run_snapshot_command(candidate_root, "tools/check_variation_scope.py")
         _run_snapshot_command(candidate_root, "tools/build_action_pools.py", "--check")
-        _write_jsonl(candidate_root / "prompts.jsonl", candidate_prompt_rows)
         prompt_schedule_verification = None
         if "prompt_schedule" in plan["inputs"]:
             expected_prompt_hash = schedule.get("candidate_prompts_jsonl_sha256")
@@ -735,6 +775,8 @@ def main() -> int:
     parser.add_argument("--analysis-report", required=True)
     parser.add_argument("--prompt-schedule")
     parser.add_argument("--quality-contract")
+    parser.add_argument("--baseline-manifest", type=Path)
+    parser.add_argument("--baseline-prompt-mode", choices=("synthetic", "active"), default="synthetic")
     parser.add_argument("--output-root", required=True)
     args = parser.parse_args()
     try:
@@ -745,6 +787,8 @@ def main() -> int:
             analysis_report=ROOT / args.analysis_report,
             prompt_schedule=ROOT / args.prompt_schedule if args.prompt_schedule else None,
             quality_contract=ROOT / args.quality_contract if args.quality_contract else None,
+            baseline_manifest_path=args.baseline_manifest,
+            baseline_prompt_mode=args.baseline_prompt_mode,
         )
         manifest = materialize_candidate_snapshots(
             plan,

@@ -7,6 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from assets.variation_test_fixtures import fixture_environment, fixture_repository
 from tools import plan_variation_target as planner
 from tools.plan_variation_target import (
     action_backed_compatible_locations,
@@ -19,12 +20,12 @@ from tools.check_variation_scope import load_variation_scope
 from tools.workflow_prompt_runner import WorkflowValidationError, canonical_json_bytes
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = fixture_repository()
 FIXTURE_ROOT = ROOT / "assets" / "fixtures" / "variation_target_planner"
 LOCKED_BASELINE_MANIFEST = (
     ROOT / "docs" / "variation_expansion" / "experiments" / "v150-planner-l0" / "manifest.json"
 )
-LOCKED_BASELINE_SHA256 = "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54"
+LOCKED_BASELINE_SHA256 = hashlib.sha256(LOCKED_BASELINE_MANIFEST.read_bytes()).hexdigest()
 BASELINE = {
     "unique_subjects": 120,
     "unique_locations": 90,
@@ -59,6 +60,35 @@ def _error_code(manifest):
 
 
 class TestVariationTargetPlanner(unittest.TestCase):
+    def test_fixture_environment_restores_data_paths_and_caches_after_failure(self):
+        import location_service
+        import scene_service
+        from tools import build_compatibility_review
+
+        original_actions = scene_service.load_action_pools()
+        original_backgrounds = location_service.load_background_packs()
+        original_scope = load_variation_scope()
+        original_prompts = build_compatibility_review._load_prompt_rows()
+        with tempfile.TemporaryDirectory(prefix="variation-isolation-") as directory:
+            root = Path(directory)
+            data = root / "vocab/data"
+            data.mkdir(parents=True)
+            (data / "action_pools.json").write_text('{"fixture": []}', encoding="utf-8")
+            (data / "background_packs.json").write_text('{"fixture": {}}', encoding="utf-8")
+            (data / "variation_scope.json").write_text('{"variation_subjects": ["fixture"]}', encoding="utf-8")
+            (root / "prompts.jsonl").write_text('{"subj": "fixture"}\n', encoding="utf-8")
+            with self.assertRaisesRegex(RuntimeError, "fixture failure"):
+                with fixture_environment(root):
+                    self.assertEqual(scene_service.load_action_pools(), {"fixture": []})
+                    self.assertEqual(location_service.load_background_packs(), {"fixture": {}})
+                    self.assertEqual(load_variation_scope(), {"variation_subjects": ["fixture"]})
+                    self.assertEqual(build_compatibility_review._load_prompt_rows(), [{"subj": "fixture"}])
+                    raise RuntimeError("fixture failure")
+        self.assertEqual(scene_service.load_action_pools(), original_actions)
+        self.assertEqual(location_service.load_background_packs(), original_backgrounds)
+        self.assertEqual(load_variation_scope(), original_scope)
+        self.assertEqual(build_compatibility_review._load_prompt_rows(), original_prompts)
+
     def test_current_scope_matches_base_variation_baseline(self):
         scope = load_variation_scope()
         metrics = scenario_metrics(scope["variation_subjects"], scope["variation_locations"], scope=scope)
@@ -388,6 +418,37 @@ class TestVariationTargetProjection(unittest.TestCase):
 
         self.assertEqual(raised.exception.code, "baseline_input_hash_mismatch")
 
+    def test_explicit_baseline_manifest_binds_actual_inputs_and_rejects_tampering(self):
+        manifest = _valid_manifest()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            baseline_path = Path(temp_dir) / "baseline.json"
+            baseline = json.loads(LOCKED_BASELINE_MANIFEST.read_text(encoding="utf-8"))
+            baseline["experiment_id"] = "explicit-regression-baseline"
+            baseline_path.write_bytes(canonical_json_bytes(baseline))
+            manifest["baseline_manifest_sha256"] = hashlib.sha256(baseline_path.read_bytes()).hexdigest()
+            report = planner.build_projection_report(
+                manifest, target=150000, baseline=BASELINE, baseline_manifest_path=baseline_path,
+            )
+            self.assertEqual(report["baseline_manifest_sha256"], manifest["baseline_manifest_sha256"])
+            self.assertEqual(_scenario(report, "balanced-growth-001")["projected_base_variations"], 138120)
+
+            # The scenario still binds the original file bytes.
+            baseline["input_hashes"]["vocab/data/action_pools.json"] = "0" * 64
+            baseline_path.write_bytes(canonical_json_bytes(baseline))
+            with self.assertRaises(WorkflowValidationError) as raised:
+                planner.build_projection_report(
+                    manifest, target=150000, baseline=BASELINE, baseline_manifest_path=baseline_path,
+                )
+            self.assertEqual(raised.exception.code, "baseline_manifest_hash_mismatch")
+
+            # Rebinding the manifest cannot conceal an incorrect input hash.
+            manifest["baseline_manifest_sha256"] = hashlib.sha256(baseline_path.read_bytes()).hexdigest()
+            with self.assertRaises(WorkflowValidationError) as raised:
+                planner.build_projection_report(
+                    manifest, target=150000, baseline=BASELINE, baseline_manifest_path=baseline_path,
+                )
+            self.assertEqual(raised.exception.code, "baseline_input_hash_mismatch")
+
     def test_cli_scenario_file_emits_current_report_and_valid_projection(self):
         completed = subprocess.run(
             [
@@ -397,6 +458,8 @@ class TestVariationTargetProjection(unittest.TestCase):
                 "150000",
                 "--scenario-file",
                 str(FIXTURE_ROOT / "valid_mixed_v1.json"),
+                "--baseline-manifest",
+                str(LOCKED_BASELINE_MANIFEST),
             ],
             cwd=ROOT,
             check=False,
@@ -451,6 +514,16 @@ class TestVariationTargetProjection(unittest.TestCase):
         self.assertEqual(second.stdout, "")
         self.assertEqual(first.stderr, second.stderr)
         self.assertEqual(json.loads(first.stderr)["error"]["code"], "invalid_compatibility_density")
+
+
+def setUpModule():
+    global _fixture_context
+    _fixture_context = fixture_environment(ROOT)
+    _fixture_context.__enter__()
+
+
+def tearDownModule():
+    _fixture_context.__exit__(None, None, None)
 
 
 if __name__ == "__main__":

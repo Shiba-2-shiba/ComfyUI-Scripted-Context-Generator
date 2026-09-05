@@ -15,7 +15,8 @@ if str(ROOT) not in sys.path:
 
 from tools.materialize_variation_candidate_snapshot import validate_snapshot_manifest
 from tools.plan_variation_prompt_schedule import validate_prompt_schedule
-from tools.variation_quality_contract import validate_variation_quality_contract
+from tools.variation_quality_contract import PROSPECTIVE_SCHEMA_VERSION, validate_variation_quality_contract
+from tools.semantic_review_contract import V7_TARGETS, V7_GUARDS, validate_v7_review_contract, v7_dimension_eligibility
 from core.semantic_policy import find_banned_terms
 from tools.analyze_prompt_quality import analyze_records, load_policy
 from tools.prompt_quality_loop import build_source_manifest
@@ -29,12 +30,14 @@ QUALITY_EXPERIMENT_SCHEMA_VERSION = "variation-nonselected-quality-experiment/v2
 SEMANTIC_COMPARISON_SCHEMA_VERSION = "prompt-quality-comparison/v2"
 SEMANTIC_COMPARISON_V5_SCHEMA_VERSION = "prompt-quality-comparison/v3"
 SEMANTIC_COMPARISON_V6_SCHEMA_VERSION = "prompt-quality-comparison/v4"
+SEMANTIC_COMPARISON_V7_SCHEMA_VERSION = "prompt-quality-comparison/v5"
 SEMANTIC_CONTRACT_SCHEMA_VERSION = "variation-semantic-pair-contract/v1"
 SEMANTIC_GENERATION_SCHEMA_VERSION = "variation-semantic-pair-generation-receipt/v1"
 SEMANTIC_VALIDATION_SCHEMA_VERSION = "variation-semantic-pair-validation/v1"
 SEMANTIC_REVIEW_POLICY_SCHEMA_VERSION = "prompt-quality-review-contract/v4"
 SEMANTIC_REVIEW_POLICY_V5_SCHEMA_VERSION = "prompt-quality-review-contract/v5"
 SEMANTIC_REVIEW_POLICY_V6_SCHEMA_VERSION = "prompt-quality-review-contract/v6"
+SEMANTIC_REVIEW_POLICY_V7_SCHEMA_VERSION = "prompt-quality-review-contract/v7"
 SEMANTIC_REVIEW_DIMENSIONS = (
     "protagonist_clarity",
     "consistency",
@@ -208,13 +211,17 @@ def build_semantic_pair_comparison(
         SEMANTIC_REVIEW_POLICY_SCHEMA_VERSION,
         SEMANTIC_REVIEW_POLICY_V5_SCHEMA_VERSION,
         SEMANTIC_REVIEW_POLICY_V6_SCHEMA_VERSION,
+        SEMANTIC_REVIEW_POLICY_V7_SCHEMA_VERSION,
     }:
         raise WorkflowValidationError(
             "semantic_review_policy_schema_mismatch",
-            "semantic review requires review-contract/v4, review-contract/v5, or review-contract/v6",
+            "semantic review requires review-contract/v4, v5, v6, or v7",
         )
     is_v5 = review_contract_schema == SEMANTIC_REVIEW_POLICY_V5_SCHEMA_VERSION
     is_v6 = review_contract_schema == SEMANTIC_REVIEW_POLICY_V6_SCHEMA_VERSION
+    is_v7 = review_contract_schema == SEMANTIC_REVIEW_POLICY_V7_SCHEMA_VERSION
+    if is_v7:
+        validate_v7_review_contract(review_policy)
     pairs = contract.get("pairs")
     if (
         not isinstance(pairs, list)
@@ -258,6 +265,8 @@ def build_semantic_pair_comparison(
         }
         for dimension in SEMANTIC_REVIEW_DIMENSIONS
     }
+    if is_v7:
+        dimensions = v7_dimension_eligibility(pair_ids)
     selection = {"pairs": pair_specs, "dimensions": dimensions}
     selection["selection_hash"] = _content_hash(selection)
     scope = {
@@ -270,8 +279,10 @@ def build_semantic_pair_comparison(
             if is_v6 else ["consistency", "naturalness", "protagonist_clarity", "image_prompt_suitability"]
         ),
     }
+    if is_v7:
+        scope = {"target_qualitative_dimensions": V7_TARGETS, "guard_qualitative_dimensions": V7_GUARDS}
     return {
-        "schema_version": SEMANTIC_COMPARISON_V6_SCHEMA_VERSION if is_v6 else SEMANTIC_COMPARISON_V5_SCHEMA_VERSION if is_v5 else SEMANTIC_COMPARISON_SCHEMA_VERSION,
+        "schema_version": SEMANTIC_COMPARISON_V7_SCHEMA_VERSION if is_v7 else SEMANTIC_COMPARISON_V6_SCHEMA_VERSION if is_v6 else SEMANTIC_COMPARISON_V5_SCHEMA_VERSION if is_v5 else SEMANTIC_COMPARISON_SCHEMA_VERSION,
         "experiment_id": experiment_id,
         "review_contract_hash": _content_hash(dict(review_policy)),
         "qualitative_scope_hash": _content_hash(scope),
@@ -373,6 +384,7 @@ def _validate_run(
     expected_source_hash: str,
     snapshot_source_root: Path,
     policy: Mapping[str, Any],
+    require_prompt_corpus: bool = False,
 ) -> tuple[dict, dict, list[dict]]:
     manifest = _read_json(run_dir / "run-manifest.json")
     declared = manifest.get("artifact_hashes", {})
@@ -388,6 +400,11 @@ def _validate_run(
             "run source tree does not match its snapshot",
             expected=expected_source_hash,
             actual=manifest.get("source_tree_hash"),
+        )
+    if require_prompt_corpus and manifest.get("prompt_corpus_sha256") != _hash_path(snapshot_source_root / "prompts.jsonl"):
+        raise WorkflowValidationError(
+            "run_snapshot_prompt_corpus_mismatch",
+            "run omits or differs from the snapshot prompt corpus binding",
         )
     replay = manifest.get("replay_evidence", {})
     if replay != {"checked": 80, "mismatch_count": 0, "status": "pass"}:
@@ -580,6 +597,27 @@ def _load_bound_quality_contract(
     contract = _read_json(contract_path)
     validation = validate_variation_quality_contract(contract, repository_root=ROOT)
     contract_hash = contract.get("contract_sha256")
+    prompt_rows = snapshot_manifest.get("prompt_rows", {})
+    if contract.get("schema_version") == PROSPECTIVE_SCHEMA_VERSION:
+        # Input corpus size is independent of the exact 80 generated records.
+        # Prospective evaluation preserves the active baseline corpus verbatim.
+        valid_prompt_surface = (
+            snapshot_plan.get("baseline_prompt_mode") == "active"
+            and prompt_rows.get("candidate") == 80
+            and isinstance(prompt_rows.get("baseline"), int)
+            and prompt_rows["baseline"] > 0
+            and _hash_path(snapshot_root / "baseline-root/prompts.jsonl") == _hash_path(ROOT / "prompts.jsonl")
+        )
+        frozen_cohort = contract["cohort"]
+        if experiment.get("cohort") != {
+            "cohort_hash": frozen_cohort["cohort_hash"],
+            "experiment_seed": frozen_cohort["experiment_seed"],
+            "iteration_id": frozen_cohort["iteration_id"],
+            "control_count": 64, "exploration_count": 16, "samples": 80,
+        }:
+            raise WorkflowValidationError("variation_quality_cohort_drift", "experiment does not bind the frozen quality cohort")
+    else:
+        valid_prompt_surface = prompt_rows == {"baseline": 80, "candidate": 80}
     if (
         contract_hash != snapshot_plan.get("quality_contract_sha256")
         or contract_hash != snapshot_manifest.get("quality_contract_sha256")
@@ -588,7 +626,7 @@ def _load_bound_quality_contract(
         or experiment.get("surface_kind") != "default_fixed_64_16"
         or experiment.get("prompt_selection") != "default_unselected"
         or experiment.get("schema_version") != QUALITY_EXPERIMENT_SCHEMA_VERSION
-        or snapshot_manifest.get("prompt_rows") != {"baseline": 80, "candidate": 80}
+        or not valid_prompt_surface
         or snapshot_manifest.get("prompt_schedule_sha256") is not None
         or snapshot_manifest.get("candidate_source_tree_sha256")
         != contract.get("candidate_source_tree_sha256")
@@ -606,6 +644,14 @@ def _load_bound_quality_contract(
         "coverage_eligibility"
     ]
     return bound_contract
+
+
+def _validate_quality_cohort_records(contract: Mapping[str, Any], records: list[dict], cohort_hash: Any) -> None:
+    cohort = contract["cohort"]
+    expected = {int(seed): name for name in ("control", "exploration") for seed in cohort[name + "_seeds"]}
+    actual = {int(row["run_seed"]): row.get("cohort") for row in records}
+    if cohort_hash != cohort["cohort_hash"] or len(records) != 80 or actual != expected:
+        raise WorkflowValidationError("variation_quality_cohort_drift", "run seeds or cohort labels differ from the frozen quality cohort")
 
 
 def scheduled_location_action_coverage(records: list[dict], schedule: Mapping[str, Any]) -> dict[str, Any]:
@@ -700,13 +746,18 @@ def compare_variation_prompt_pair(
         expected_source_hash=str(snapshot_manifest["baseline_source_tree_sha256"]),
         snapshot_source_root=snapshot_root / "baseline-root",
         policy=policy,
+        require_prompt_corpus=quality_contract is not None and quality_contract.get("schema_version") == PROSPECTIVE_SCHEMA_VERSION,
     )
     candidate_manifest, candidate_metrics, candidate_records = _validate_run(
         candidate_run,
         expected_source_hash=str(snapshot_manifest["candidate_source_tree_sha256"]),
         snapshot_source_root=snapshot_root / "candidate-root",
         policy=policy,
+        require_prompt_corpus=quality_contract is not None and quality_contract.get("schema_version") == PROSPECTIVE_SCHEMA_VERSION,
     )
+    if quality_contract is not None and quality_contract.get("schema_version") == PROSPECTIVE_SCHEMA_VERSION:
+        _validate_quality_cohort_records(quality_contract, baseline_records, baseline_manifest.get("cohort_hash"))
+        _validate_quality_cohort_records(quality_contract, candidate_records, candidate_manifest.get("cohort_hash"))
     shared_fields = ("cohort_hash", "workflow_hash", "effective_workflow_hash", "profile_hash", "override_hash")
     drift = [field for field in shared_fields if baseline_manifest.get(field) != candidate_manifest.get(field)]
     if drift:
@@ -906,17 +957,23 @@ def compare_variation_prompt_pair(
         report["quality_evidence"] = True
         report["coverage_is_quality_evidence"] = False
         report["coverage_eligibility"] = {
-            "coverage_receipt_sha256": quality_contract["coverage_receipt_sha256"],
-            "guard_remediation_receipt_sha256": quality_contract[
-                "guard_remediation_receipt_sha256"
-            ],
+            **{
+                field: quality_contract[field]
+                for field in (
+                    "coverage_receipt_sha256", "guard_remediation_receipt_sha256",
+                    "coverage_snapshot_manifest_sha256", "coverage_snapshot_content_sha256",
+                    "coverage_schedule_sha256",
+                )
+                if field in quality_contract
+            },
             **quality_contract["_validated_coverage_eligibility"],
         }
         report["informational_current_coverage"] = coverage
         report["informational_coverage_failures"] = coverage_failures
         report["quality_failures"] = quality_failures
         report["coverage_evidence_failures"] = []
-        report["parent_fixed_quality_verdict"] = "reject"
+        if "coverage_receipt_sha256" in quality_contract:
+            report["parent_fixed_quality_verdict"] = "reject"
         report["quality_verdict"] = quality_verdict
         report["coverage_eligibility_verdict"] = coverage_eligibility_verdict
         report["validation_verdict"] = validation_verdict

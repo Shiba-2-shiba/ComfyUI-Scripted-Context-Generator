@@ -23,6 +23,7 @@ if str(ROOT) not in sys.path:
 from tools.workflow_prompt_runner import WorkflowValidationError, canonical_json_bytes
 from tools.prompt_quality_loop import build_source_manifest
 from tools.build_prompt_quality_confirmation import _snapshot_content_hash
+from tools.semantic_review_contract import SEMANTIC_COMPARISON_TO_REVIEW
 
 
 REQUIRED_GATES = frozenset({
@@ -41,11 +42,7 @@ REQUIRED_GATES = frozenset({
 CONFIRMATION_OBJECTIVES = frozenset({"g004", "g005", "g006"})
 MIN_FULL_REGRESSION_TESTS = 505
 SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
-V150_COMPARISON_SCHEMAS = {
-    "prompt-quality-comparison/v2": "prompt-quality-review/v4",
-    "prompt-quality-comparison/v3": "prompt-quality-review/v5",
-    "prompt-quality-comparison/v4": "prompt-quality-review/v6",
-}
+V150_COMPARISON_SCHEMAS = SEMANTIC_COMPARISON_TO_REVIEW
 V150_COMPARISON_SCHEMA = "prompt-quality-comparison/v2"
 V150_REVIEW_SCHEMA = "prompt-quality-review/v4"
 V150_CONFIRMATION_SCHEMA = "variation-v150-confirmation-bundle/v1"
@@ -219,10 +216,10 @@ def candidate_gate_inventory(candidate_root: Path, *, python: str = sys.executab
     return {
         "action_pools": [python, str(candidate_root / "tools/build_action_pools.py"), "--check"],
         "blind_review": None,
-        "browser": [pwsh, "-File", str(candidate_root / "tools/run_custom_workflow_roundtrip.ps1"), "-CustomNodeRoot", root],
+        "browser": [pwsh, "-File", str(candidate_root / "tools/run_custom_workflow_roundtrip.ps1"), "-ActivePluginRoot", str(ROOT.resolve()), "-CustomNodeRoot", root],
         "compatibility_review": [python, str(candidate_root / "tools/build_compatibility_review.py"), "--check"],
         "data_validation": [python, str(candidate_root / "tools/validate_prompt_data.py")],
-        "frontend": [pwsh, "-File", str(candidate_root / "tools/run_frontend_workflow_validation.ps1"), "-CustomNodeRoot", root],
+        "frontend": [pwsh, "-File", str(candidate_root / "tools/run_frontend_workflow_validation.ps1"), "-ActivePluginRoot", str(ROOT.resolve()), "-CustomNodeRoot", root],
         "full_flow": [python, str(candidate_root / "tools/verify_full_flow.py")],
         "prompt_quality_confirmation": None,
         "python_tests": [python, "-m", "unittest", "discover", "-s", "assets", "-p", "test_*.py"],

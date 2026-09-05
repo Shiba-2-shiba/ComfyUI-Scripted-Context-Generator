@@ -34,6 +34,23 @@ def _load_prompt_rows():
     return rows
 
 
+ACTION_ANCHORS = frozenset({
+    "arranging", "browsing", "carrying", "checking", "comparing", "cutting",
+    "dancing", "examining", "filling", "folding", "gripping", "holding",
+    "kneeling", "latching", "leaning", "lifting", "lying", "marking", "moving",
+    "organizing", "pausing", "pinning", "placing", "reading", "recording",
+    "resting", "returning", "reviewing", "rolling", "running", "securing",
+    "settling", "singing", "sitting", "slipping", "sorting", "stacking",
+    "standing", "staying", "stepping", "stretching", "sweeping", "turning",
+    "using", "walking", "watching", "wiping", "working", "wrapping",
+})
+
+
+def _has_action_anchor(action):
+    words = re.findall(r"[A-Za-z']+", action.lower())
+    return bool(words and words[0] in ACTION_ANCHORS)
+
+
 def _collect_string_violations(obj, path=""):
     banned_patterns = {
         "meta_style": re.compile(r"\bmeta_style\b"),
@@ -172,43 +189,19 @@ class TestVocabLint(unittest.TestCase):
         self.assertEqual(missing_emotion_pool, [])
 
     def test_prompt_actions_keep_basic_anchor_verbs(self):
-        anchor_words = {
-            "browsing",
-            "checking",
-            "comparing",
-            "dancing",
-            "gripping",
-            "holding",
-            "kneeling",
-            "leaning",
-            "lying",
-            "moving",
-            "organizing",
-            "pausing",
-            "pinning",
-            "resting",
-            "reviewing",
-            "running",
-            "settling",
-            "singing",
-            "sitting",
-            "slipping",
-            "sorting",
-            "staying",
-            "standing",
-            "stretching",
-            "walking",
-            "watching",
-            "working",
-        }
         missing = []
         for payload in _load_prompt_rows():
             action = payload.get("action", "")
-            words = re.findall(r"[A-Za-z']+", action.lower())
-            if action and (not words or words[0] not in anchor_words):
+            if action and not _has_action_anchor(action):
                 missing.append(action)
 
         self.assertEqual(missing, [])
+
+    def test_action_anchor_requires_explicit_physical_verb(self):
+        for action in ("reading a health leaflet", "folding a paper map", "latching a tool case"):
+            self.assertTrue(_has_action_anchor(action), action)
+        for action in ("feeling a sense of purpose", "dreaming about tomorrow", "beautiful clinic room", "123"):
+            self.assertFalse(_has_action_anchor(action), action)
 
 
 if __name__ == "__main__":

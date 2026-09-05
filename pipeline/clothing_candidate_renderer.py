@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import random
+import re
 from typing import Any
 
 try:
@@ -17,6 +18,14 @@ except ImportError:
     from location_service import resolve_location_key
     from vocab import clothing as clothing_vocab
     from vocab.seed_utils import mix_seed
+
+
+_GARMENT_MATERIAL = re.compile(
+    r"\b(?:" + "|".join(re.escape(material) for material in sorted({
+        material for packs in clothing_vocab.CONCEPT_PACKS.values() for pack in packs.values()
+        for material in pack.get("palette", {}).get("materials", []) if material
+    })) + r")\b", re.IGNORECASE,
+)
 
 
 OUTERWEAR_BLOCKED_LOCATION_KEYS = {
@@ -140,6 +149,10 @@ def build_item_description(rng, concept_data: dict[str, Any], char_colors=None, 
 
     color = pick_palette("colors")
     material = pick_palette("materials")
+    # Garment wording owns its material; a shared optional prefix must not
+    # contradict it. Consume the draw first so all later choices remain stable.
+    if material and any(_GARMENT_MATERIAL.search(item) for item in selected_items):
+        material = ""
     pattern = pick_palette("patterns")
     style = pick_palette("styles")
     embellishments = palette.get("embellishments", [])

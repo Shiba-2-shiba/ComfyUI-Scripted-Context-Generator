@@ -1,0 +1,1603 @@
+{
+  "schema_version": "1.0",
+  "universal_locs": [
+    "street_cafe",
+    "commuter_transport",
+    "bedroom_boudoir",
+    "cozy_living_room",
+    "clean_modern_kitchen",
+    "picnic_park",
+    "cozy_bookstore",
+    "school_library",
+    "winter_street",
+    "illuminated_park",
+    "rainy_bus_stop",
+    "suburban_neighborhood",
+    "rural_town_street",
+    "art_gallery",
+    "museum_hall",
+    "shopping_mall_atrium",
+    "botanical_garden",
+    "aquarium"
+  ],
+  "loc_tags": {
+    "school": [
+      "school_classroom",
+      "school_rooftop",
+      "school_library",
+      "school_gym_hall",
+      "university_campus_courtyard",
+      "campus_hallway",
+      "campus_cafeteria",
+      "school_clubroom"
+    ],
+    "office": [
+      "modern_office",
+      "boardroom",
+      "office_elevator",
+      "surveillance_room",
+      "messy_copy_room",
+      "luxury_hotel_lobby",
+      "elegant_dining_room",
+      "coworking_space",
+      "train_station_platform"
+    ],
+    "urban": [
+      "neon_city_street",
+      "rainy_alley",
+      "karaoke_bar",
+      "fashion_boutique",
+      "shopping_mall_atrium",
+      "underground_bar",
+      "street_cafe",
+      "cozy_bookstore",
+      "aquarium",
+      "illuminated_park",
+      "train_station_platform",
+      "convenience_store",
+      "food_court",
+      "subway_ticket_gate",
+      "shopping_arcade",
+      "bakery_shop",
+      "supermarket_aisle",
+      "drugstore_aisle",
+      "family_restaurant",
+      "cinema_lobby",
+      "game_arcade",
+      "local_market_street"
+    ],
+    "nature": [
+      "fantasy_forest",
+      "bamboo_forest",
+      "tropical_beach",
+      "wave_barrel",
+      "shinto_shrine",
+      "enchanted_lake",
+      "japanese_garden",
+      "abandoned_shrine"
+    ],
+    "fantasy": [
+      "burning_battlefield",
+      "dungeon_crypt",
+      "dragon_lair",
+      "alien_planet",
+      "castle_hall",
+      "enchanted_lake",
+      "magic_academy_library"
+    ],
+    "music": [
+      "concert_stage",
+      "recording_studio",
+      "opera_house",
+      "karaoke_bar"
+    ],
+    "sport": [
+      "fitness_gym",
+      "yoga_studio",
+      "stadium_court"
+    ],
+    "domestic": [
+      "bedroom_boudoir",
+      "clean_modern_kitchen",
+      "cozy_living_room",
+      "laundromat",
+      "apartment_balcony",
+      "apartment_entryway",
+      "rooftop_laundry_area"
+    ],
+    "resort": [
+      "poolside_resort",
+      "tropical_beach",
+      "luxury_hotel_lobby",
+      "luxury_hotel_room",
+      "shopping_mall_atrium",
+      "botanical_garden"
+    ],
+    "suburban": [
+      "suburban_neighborhood",
+      "rural_town_street",
+      "rainy_bus_stop",
+      "riverside_walk",
+      "bus_terminal",
+      "neighborhood_crosswalk",
+      "community_center",
+      "public_library_lobby",
+      "neighborhood_playground"
+    ],
+    "luxury": [
+      "luxury_hotel_room",
+      "elegant_dining_room",
+      "luxury_bathroom"
+    ],
+    "japanese": [
+      "japanese_bath",
+      "shinto_shrine",
+      "bamboo_forest",
+      "japanese_garden",
+      "tea_room",
+      "abandoned_shrine"
+    ],
+    "steampunk": [
+      "steampunk_airship"
+    ],
+    "scifi": [
+      "spaceship_bridge",
+      "cyber_lab",
+      "airship_deck",
+      "neon_city_street",
+      "starship_quarters",
+      "high_tech_medbay",
+      "alien_planet"
+    ],
+    "craft": [
+      "clockwork_workshop",
+      "messy_copy_room",
+      "antique_shop"
+    ],
+    "retail_service": [
+      "convenience_store",
+      "bakery_shop",
+      "supermarket_aisle",
+      "drugstore_aisle",
+      "family_restaurant",
+      "food_court",
+      "shopping_mall_atrium",
+      "fashion_boutique",
+      "shopping_arcade",
+      "local_market_street",
+      "street_cafe",
+      "cozy_bookstore",
+      "antique_shop"
+    ],
+    "daily_public": [
+      "street_cafe",
+      "commuter_transport",
+      "picnic_park",
+      "cozy_bookstore",
+      "school_library",
+      "winter_street",
+      "illuminated_park",
+      "rainy_bus_stop",
+      "suburban_neighborhood",
+      "rural_town_street",
+      "art_gallery",
+      "museum_hall",
+      "shopping_mall_atrium",
+      "botanical_garden",
+      "aquarium",
+      "bus_terminal",
+      "community_center",
+      "public_library_lobby",
+      "riverside_walk",
+      "neighborhood_crosswalk",
+      "neighborhood_playground",
+      "local_market_street"
+    ],
+    "transit": [
+      "commuter_transport",
+      "bus_terminal",
+      "train_station_platform",
+      "subway_ticket_gate",
+      "rainy_bus_stop",
+      "neighborhood_crosswalk"
+    ],
+    "home_life": [
+      "bedroom_boudoir",
+      "cozy_living_room",
+      "clean_modern_kitchen",
+      "laundromat",
+      "apartment_balcony",
+      "apartment_entryway",
+      "rooftop_laundry_area",
+      "luxury_bathroom"
+    ],
+    "workplace": [
+      "modern_office",
+      "boardroom",
+      "office_elevator",
+      "surveillance_room",
+      "messy_copy_room",
+      "coworking_space",
+      "train_station_platform"
+    ],
+    "leisure": [
+      "karaoke_bar",
+      "underground_bar",
+      "cinema_lobby",
+      "game_arcade",
+      "food_court",
+      "concert_stage",
+      "recording_studio",
+      "opera_house",
+      "fitness_gym",
+      "yoga_studio",
+      "stadium_court",
+      "poolside_resort",
+      "luxury_hotel_lobby",
+      "luxury_hotel_room",
+      "mountain_resort",
+      "tropical_beach",
+      "wave_barrel",
+      "botanical_garden",
+      "aquarium",
+      "art_gallery",
+      "museum_hall"
+    ],
+    "quiet_indoor": [
+      "school_library",
+      "public_library_lobby",
+      "cozy_bookstore",
+      "tea_room",
+      "art_gallery",
+      "museum_hall",
+      "aquarium",
+      "antique_shop",
+      "school_clubroom"
+    ]
+  },
+  "characters": {
+    "silver-haired girl": {
+      "tags": [
+        "school",
+        "daily_public",
+        "quiet_indoor",
+        "transit"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "student": {
+      "tags": [
+        "school",
+        "suburban",
+        "urban",
+        "daily_public",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "office worker": {
+      "tags": [
+        "office",
+        "suburban",
+        "urban",
+        "daily_public",
+        "workplace",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "office_lady"
+    },
+    "CEO": {
+      "tags": [
+        "office",
+        "luxury",
+        "daily_public",
+        "workplace",
+        "transit"
+      ],
+      "default_costume": "office_lady"
+    },
+    "shrine maiden": {
+      "tags": [
+        "nature",
+        "japanese",
+        "daily_public"
+      ],
+      "default_costume": "traditional_japanese"
+    },
+    "geisha": {
+      "tags": [
+        "nature",
+        "japanese",
+        "daily_public"
+      ],
+      "default_costume": "traditional_japanese"
+    },
+    "inventor girl": {
+      "tags": [
+        "craft",
+        "scifi",
+        "steampunk"
+      ],
+      "default_costume": "steampunk"
+    },
+    "airship captain": {
+      "tags": [
+        "scifi",
+        "craft",
+        "steampunk"
+      ],
+      "default_costume": "steampunk"
+    },
+    "library girl": {
+      "tags": [
+        "school",
+        "suburban",
+        "daily_public",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "bookworm girl": {
+      "tags": [
+        "school",
+        "suburban",
+        "daily_public",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "kendo girl": {
+      "tags": [
+        "school",
+        "nature",
+        "daily_public",
+        "quiet_indoor",
+        "transit"
+      ],
+      "default_costume": "traditional_japanese"
+    },
+    "business girl": {
+      "tags": [
+        "office",
+        "urban",
+        "daily_public",
+        "workplace",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "office_lady"
+    },
+    "cyberpunk girl": {
+      "tags": [
+        "urban",
+        "scifi",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cyberpunk_night"
+    },
+    "cyberpunk mercenary": {
+      "tags": [
+        "urban",
+        "scifi",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cyberpunk_night"
+    },
+    "cyberpunk hacker": {
+      "tags": [
+        "urban",
+        "scifi",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cyberpunk_night"
+    },
+    "gothic girl": {
+      "tags": [
+        "urban",
+        "fantasy",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "gothic_lolita"
+    },
+    "gothic doll": {
+      "tags": [
+        "urban",
+        "fantasy",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "gothic_lolita"
+    },
+    "doll-like girl": {
+      "tags": [
+        "urban",
+        "fantasy",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "gothic_lolita"
+    },
+    "blonde elf archer": {
+      "tags": [
+        "fantasy",
+        "nature"
+      ],
+      "default_costume": "fantasy_battle"
+    },
+    "sorceress": {
+      "tags": [
+        "fantasy",
+        "nature"
+      ],
+      "default_costume": "fantasy_battle"
+    },
+    "girl knight": {
+      "tags": [
+        "fantasy",
+        "nature"
+      ],
+      "default_costume": "fantasy_battle"
+    },
+    "injured knight": {
+      "tags": [
+        "fantasy",
+        "nature"
+      ],
+      "default_costume": "fantasy_battle"
+    },
+    "fantasy warrior": {
+      "tags": [
+        "fantasy",
+        "nature"
+      ],
+      "default_costume": "fantasy_battle"
+    },
+    "rock singer": {
+      "tags": [
+        "music",
+        "urban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "rock_concert"
+    },
+    "guitarist": {
+      "tags": [
+        "music",
+        "daily_public",
+        "leisure"
+      ],
+      "default_costume": "rock_concert"
+    },
+    "rock star": {
+      "tags": [
+        "music",
+        "urban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "rock_concert"
+    },
+    "recording artist": {
+      "tags": [
+        "music",
+        "daily_public",
+        "leisure"
+      ],
+      "default_costume": "rock_concert"
+    },
+    "opera singer": {
+      "tags": [
+        "music",
+        "daily_public",
+        "leisure"
+      ],
+      "default_costume": "gothic_lolita"
+    },
+    "noble girl": {
+      "tags": [
+        "luxury",
+        "urban",
+        "resort",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "sleek_evening_gown"
+    },
+    "idol performer": {
+      "tags": [
+        "music",
+        "urban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "idols_stage"
+    },
+    "dancer girl": {
+      "tags": [
+        "music",
+        "urban",
+        "resort",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "exotic_dancer"
+    },
+    "fitness model": {
+      "tags": [
+        "sport",
+        "daily_public",
+        "leisure"
+      ],
+      "default_costume": "gym_workout"
+    },
+    "runner": {
+      "tags": [
+        "sport",
+        "daily_public",
+        "leisure"
+      ],
+      "default_costume": "gym_workout"
+    },
+    "yoga instructor": {
+      "tags": [
+        "sport",
+        "nature",
+        "daily_public",
+        "leisure"
+      ],
+      "default_costume": "gym_workout"
+    },
+    "gym girl": {
+      "tags": [
+        "sport",
+        "daily_public",
+        "leisure"
+      ],
+      "default_costume": "gym_workout"
+    },
+    "surfer girl": {
+      "tags": [
+        "sport",
+        "resort",
+        "daily_public",
+        "leisure"
+      ],
+      "default_costume": "beach_resort"
+    },
+    "spy agent": {
+      "tags": [
+        "office",
+        "urban",
+        "daily_public",
+        "workplace",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "secret_agent"
+    },
+    "detective": {
+      "tags": [
+        "office",
+        "urban",
+        "daily_public",
+        "workplace",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "secret_agent"
+    },
+    "secret agent": {
+      "tags": [
+        "office",
+        "urban",
+        "daily_public",
+        "workplace",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "secret_agent"
+    },
+    "vacationer": {
+      "tags": [
+        "resort",
+        "urban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "beach_resort"
+    },
+    "vacation girl": {
+      "tags": [
+        "resort",
+        "urban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "beach_resort"
+    },
+    "winter traveler": {
+      "tags": [
+        "urban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "winter_date"
+    },
+    "winter date girl": {
+      "tags": [
+        "urban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "winter_date"
+    },
+    "sleepy girl": {
+      "tags": [
+        "domestic",
+        "school",
+        "suburban",
+        "daily_public",
+        "home_life",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "winter_date"
+    },
+    "cafe customer": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "urban shopper": {
+      "tags": [
+        "urban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "mori girl": {
+      "tags": [
+        "nature",
+        "daily_public"
+      ],
+      "default_costume": "mori_natural"
+    },
+    "chef girl": {
+      "tags": [
+        "domestic",
+        "urban",
+        "suburban",
+        "daily_public",
+        "home_life",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "rainy_day"
+    },
+    "rainy day girl": {
+      "tags": [
+        "urban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "rainy_day"
+    },
+    "space pilot": {
+      "tags": [
+        "scifi"
+      ],
+      "default_costume": "scifi_space"
+    },
+    "solarpunk girl": {
+      "tags": [
+        "nature",
+        "scifi"
+      ],
+      "default_costume": "beach_resort"
+    },
+    "street dancer": {
+      "tags": [
+        "urban",
+        "music",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cyberpunk_night"
+    },
+    "cafe barista": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "afternoon reader": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "fashionista": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "window shopper": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "flower girl": {
+      "tags": [
+        "nature",
+        "daily_public"
+      ],
+      "default_costume": "mori_natural"
+    },
+    "nature wanderer": {
+      "tags": [
+        "nature",
+        "daily_public"
+      ],
+      "default_costume": "mori_natural"
+    },
+    "space engineer": {
+      "tags": [
+        "scifi"
+      ],
+      "default_costume": "scifi_space"
+    },
+    "steampunk inventor": {
+      "tags": [
+        "craft",
+        "scifi",
+        "steampunk"
+      ],
+      "default_costume": "steampunk_inventor"
+    },
+    "stargazer": {
+      "tags": [
+        "scifi",
+        "nature"
+      ],
+      "default_costume": "scifi_space"
+    },
+    "street girl": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "street_casual"
+    },
+    "quiet reader": {
+      "tags": [
+        "school",
+        "suburban",
+        "domestic",
+        "daily_public",
+        "home_life",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "library_girl"
+    },
+    "clockwork artisan": {
+      "tags": [
+        "craft",
+        "steampunk"
+      ],
+      "default_costume": "steampunk"
+    },
+    "after school walker": {
+      "tags": [
+        "school",
+        "suburban",
+        "nature",
+        "daily_public",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "after work shopper": {
+      "tags": [
+        "office",
+        "urban",
+        "suburban",
+        "daily_public",
+        "workplace",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "office_lady"
+    },
+    "apartment resident": {
+      "tags": [
+        "domestic",
+        "suburban",
+        "daily_public",
+        "home_life",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "arcade girl": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "cafeteria student": {
+      "tags": [
+        "school",
+        "suburban",
+        "daily_public",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "campus girl": {
+      "tags": [
+        "school",
+        "suburban",
+        "daily_public",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "campus student": {
+      "tags": [
+        "school",
+        "suburban",
+        "daily_public",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "city girl": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "club member": {
+      "tags": [
+        "school",
+        "suburban",
+        "daily_public",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "commuter": {
+      "tags": [
+        "office",
+        "urban",
+        "suburban",
+        "daily_public",
+        "workplace",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "office_lady"
+    },
+    "food court visitor": {
+      "tags": [
+        "urban",
+        "suburban",
+        "resort",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "home girl": {
+      "tags": [
+        "domestic",
+        "suburban",
+        "daily_public",
+        "home_life",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "room_loungewear"
+    },
+    "late shopper": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "library visitor": {
+      "tags": [
+        "school",
+        "suburban",
+        "urban",
+        "daily_public",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "local volunteer": {
+      "tags": [
+        "suburban",
+        "domestic",
+        "daily_public",
+        "home_life",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "lunch break girl": {
+      "tags": [
+        "office",
+        "urban",
+        "suburban",
+        "daily_public",
+        "workplace",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "office_lady"
+    },
+    "market shopper": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "morning customer": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "morning girl": {
+      "tags": [
+        "domestic",
+        "suburban",
+        "daily_public",
+        "home_life",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "room_loungewear"
+    },
+    "moviegoer": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "neighborhood student": {
+      "tags": [
+        "school",
+        "suburban",
+        "daily_public",
+        "quiet_indoor",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "office girl": {
+      "tags": [
+        "office",
+        "urban",
+        "suburban",
+        "daily_public",
+        "workplace",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "office_lady"
+    },
+    "park girl": {
+      "tags": [
+        "suburban",
+        "nature",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "project assistant": {
+      "tags": [
+        "office",
+        "urban",
+        "suburban",
+        "daily_public",
+        "workplace",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "office_lady"
+    },
+    "resident": {
+      "tags": [
+        "domestic",
+        "suburban",
+        "daily_public",
+        "home_life",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "room_loungewear"
+    },
+    "shopping girl": {
+      "tags": [
+        "urban",
+        "suburban",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "weekend traveler": {
+      "tags": [
+        "suburban",
+        "urban",
+        "resort",
+        "daily_public",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "train commuter": {
+      "tags": [
+        "transit",
+        "daily_public",
+        "workplace"
+      ],
+      "default_costume": "office_lady"
+    },
+    "subway passenger": {
+      "tags": [
+        "transit",
+        "daily_public",
+        "urban",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "street_casual"
+    },
+    "station traveler": {
+      "tags": [
+        "transit",
+        "daily_public",
+        "suburban",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "convenience clerk": {
+      "tags": [
+        "retail_service",
+        "daily_public",
+        "urban",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "bakery clerk": {
+      "tags": [
+        "retail_service",
+        "daily_public",
+        "urban",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "supermarket shopper": {
+      "tags": [
+        "retail_service",
+        "daily_public",
+        "suburban",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "pharmacy customer": {
+      "tags": [
+        "retail_service",
+        "daily_public",
+        "suburban",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "family diner": {
+      "tags": [
+        "retail_service",
+        "leisure",
+        "daily_public"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "cinema visitor": {
+      "tags": [
+        "leisure",
+        "daily_public",
+        "urban",
+        "retail_service"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "arcade regular": {
+      "tags": [
+        "leisure",
+        "daily_public",
+        "urban",
+        "retail_service"
+      ],
+      "default_costume": "street_casual"
+    },
+    "mall browser": {
+      "tags": [
+        "retail_service",
+        "leisure",
+        "daily_public"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "boutique customer": {
+      "tags": [
+        "retail_service",
+        "daily_public",
+        "urban",
+        "leisure"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "coworking freelancer": {
+      "tags": [
+        "workplace",
+        "daily_public",
+        "office",
+        "transit"
+      ],
+      "default_costume": "office_lady"
+    },
+    "community organizer": {
+      "tags": [
+        "daily_public",
+        "suburban",
+        "workplace",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "public librarian": {
+      "tags": [
+        "quiet_indoor",
+        "daily_public",
+        "workplace"
+      ],
+      "default_costume": "library_girl"
+    },
+    "riverside walker": {
+      "tags": [
+        "daily_public",
+        "suburban",
+        "nature",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "laundry day girl": {
+      "tags": [
+        "home_life",
+        "daily_public",
+        "domestic"
+      ],
+      "default_costume": "room_loungewear"
+    },
+    "apartment neighbor": {
+      "tags": [
+        "home_life",
+        "daily_public",
+        "domestic"
+      ],
+      "default_costume": "room_loungewear"
+    },
+    "balcony gardener": {
+      "tags": [
+        "home_life",
+        "daily_public",
+        "nature"
+      ],
+      "default_costume": "mori_natural"
+    },
+    "neighborhood walker": {
+      "tags": [
+        "daily_public",
+        "suburban",
+        "transit",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "street_casual"
+    },
+    "playground caretaker": {
+      "tags": [
+        "daily_public",
+        "suburban",
+        "leisure",
+        "retail_service"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "local market vendor": {
+      "tags": [
+        "retail_service",
+        "daily_public",
+        "urban",
+        "leisure"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "shopping arcade visitor": {
+      "tags": [
+        "retail_service",
+        "leisure",
+        "daily_public"
+      ],
+      "default_costume": "urban_shopping"
+    },
+    "campus club member": {
+      "tags": [
+        "school",
+        "quiet_indoor",
+        "daily_public",
+        "transit"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "university student": {
+      "tags": [
+        "school",
+        "transit",
+        "daily_public",
+        "quiet_indoor"
+      ],
+      "default_costume": "school_uniform"
+    },
+    "rooftop neighbor": {
+      "tags": [
+        "home_life",
+        "daily_public",
+        "suburban",
+        "retail_service",
+        "leisure"
+      ],
+      "default_costume": "street_casual"
+    },
+    "museum docent": {
+      "tags": [
+        "quiet_indoor",
+        "leisure",
+        "daily_public"
+      ],
+      "default_costume": "cozy_cafe"
+    },
+    "gallery sketcher": {
+      "tags": [
+        "quiet_indoor",
+        "leisure",
+        "daily_public"
+      ],
+      "default_costume": "mori_natural"
+    },
+    "mountain resort guest": {
+      "tags": [
+        "leisure",
+        "resort",
+        "nature",
+        "daily_public"
+      ],
+      "default_costume": "beach_resort"
+    }
+  },
+  "exclusions": [
+    {
+      "reason": "ファンタジー戦闘キャラがオフィス環境に不自然",
+      "characters": [
+        "blonde elf archer",
+        "sorceress",
+        "injured knight",
+        "fantasy warrior"
+      ],
+      "denied_locs": [
+        "modern_office",
+        "boardroom",
+        "office_elevator",
+        "surveillance_room"
+      ]
+    },
+    {
+      "reason": "伝統キャラがサイバー/SF空間に不自然",
+      "characters": [
+        "shrine maiden",
+        "geisha",
+        "kendo girl"
+      ],
+      "denied_locs": [
+        "cyber_lab",
+        "spaceship_bridge",
+        "airship_deck"
+      ]
+    },
+    {
+      "reason": "SF/サイバーパンクキャラが伝統環境に不自然",
+      "characters": [
+        "cyberpunk girl",
+        "cyberpunk mercenary",
+        "cyberpunk hacker",
+        "space pilot"
+      ],
+      "denied_locs": [
+        "shinto_shrine",
+        "bamboo_forest"
+      ]
+    },
+    {
+      "reason": "ファンタジー戦闘キャラが現代日常空間に不自然",
+      "characters": [
+        "blonde elf archer",
+        "sorceress",
+        "injured knight",
+        "fantasy warrior"
+      ],
+      "denied_locs": [
+        "commuter_transport",
+        "shopping_mall_atrium",
+        "street_cafe",
+        "cozy_bookstore"
+      ]
+    },
+    {
+      "reason": "SF/サイバーパンクキャラが自然環境に不自然",
+      "characters": [
+        "cyberpunk girl",
+        "cyberpunk mercenary",
+        "cyberpunk hacker",
+        "space pilot"
+      ],
+      "denied_locs": [
+        "picnic_park",
+        "botanical_garden"
+      ]
+    },
+    {
+      "reason": "伝統装束キャラが商業/スポーツ施設に不自然",
+      "characters": [
+        "shrine maiden",
+        "geisha"
+      ],
+      "denied_locs": [
+        "commuter_transport",
+        "shopping_mall_atrium"
+      ]
+    }
+  ],
+  "daily_life_tags": [
+    "school",
+    "office",
+    "urban",
+    "domestic",
+    "suburban",
+    "resort",
+    "japanese",
+    "retail_service",
+    "daily_public",
+    "transit",
+    "home_life",
+    "workplace",
+    "leisure",
+    "quiet_indoor"
+  ],
+  "daily_life_locs": [
+    "school_classroom",
+    "school_rooftop",
+    "school_library",
+    "school_gym_hall",
+    "modern_office",
+    "boardroom",
+    "office_elevator",
+    "commuter_transport",
+    "street_cafe",
+    "cozy_bookstore",
+    "antique_shop",
+    "shopping_mall_atrium",
+    "fashion_boutique",
+    "karaoke_bar",
+    "bedroom_boudoir",
+    "clean_modern_kitchen",
+    "cozy_living_room",
+    "rainy_bus_stop",
+    "suburban_neighborhood",
+    "rural_town_street",
+    "picnic_park",
+    "illuminated_park",
+    "winter_street",
+    "botanical_garden",
+    "aquarium",
+    "fitness_gym",
+    "yoga_studio",
+    "stadium_court",
+    "luxury_hotel_lobby",
+    "elegant_dining_room",
+    "recording_studio",
+    "poolside_resort",
+    "japanese_garden",
+    "tea_room",
+    "university_campus_courtyard",
+    "train_station_platform",
+    "convenience_store",
+    "food_court",
+    "riverside_walk",
+    "laundromat",
+    "coworking_space",
+    "apartment_balcony",
+    "bus_terminal",
+    "subway_ticket_gate",
+    "neighborhood_crosswalk",
+    "shopping_arcade",
+    "bakery_shop",
+    "supermarket_aisle",
+    "drugstore_aisle",
+    "family_restaurant",
+    "cinema_lobby",
+    "game_arcade",
+    "campus_hallway",
+    "campus_cafeteria",
+    "school_clubroom",
+    "community_center",
+    "public_library_lobby",
+    "apartment_entryway",
+    "rooftop_laundry_area",
+    "neighborhood_playground",
+    "local_market_street",
+    "art_gallery",
+    "museum_hall",
+    "luxury_bathroom",
+    "surveillance_room",
+    "messy_copy_room",
+    "underground_bar",
+    "concert_stage",
+    "opera_house",
+    "luxury_hotel_room",
+    "mountain_resort",
+    "tropical_beach",
+    "wave_barrel"
+  ],
+  "priority_weights": {
+    "existing": 50,
+    "genre_gated": 35,
+    "universal": 15
+  }
+}

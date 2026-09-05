@@ -7,7 +7,9 @@ import { validateComfyWorkflow } from '@/platform/workflow/validation/schemas/wo
 
 
 const TEST_DIR = path.dirname(fileURLToPath(import.meta.url))
-const REPO_ROOT = path.resolve(TEST_DIR, '../../../../../../')
+const REPO_ROOT = process.env.VSCG_CUSTOM_NODE_ROOT
+  ? path.resolve(process.env.VSCG_CUSTOM_NODE_ROOT)
+  : path.resolve(TEST_DIR, '../../../../../../')
 const SAMPLE_WORKFLOWS = JSON.parse(
   fs.readFileSync(path.join(REPO_ROOT, 'workflow_samples.json'), 'utf-8')
 ) as Array<{
@@ -22,7 +24,7 @@ const DEFAULT_WORKFLOWS = SAMPLE_WORKFLOWS.filter(
 
 
 describe('custom node workflow compatibility', () => {
-  it.each(DEFAULT_WORKFLOWS)(
+  it.for(DEFAULT_WORKFLOWS)(
     'frontend schema accepts default baseline $id [$surface]',
     async (sample) => {
       const workflow = JSON.parse(

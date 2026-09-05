@@ -64,7 +64,15 @@
       "family_restaurant",
       "cinema_lobby",
       "game_arcade",
-      "local_market_street"
+      "local_market_street",
+      "bike_station",
+      "canal_walkway",
+      "flower_market",
+      "print_shop",
+      "public_plaza",
+      "rooftop_cafe",
+      "tram_platform",
+      "vehicle_repair_garage"
     ],
     "nature": [
       "fantasy_forest",
@@ -74,7 +82,12 @@
       "shinto_shrine",
       "enchanted_lake",
       "japanese_garden",
-      "abandoned_shrine"
+      "abandoned_shrine",
+      "canal_walkway",
+      "community_garden",
+      "flower_market",
+      "forest_cabin",
+      "greenhouse_nursery"
     ],
     "fantasy": [
       "burning_battlefield",
@@ -89,7 +102,8 @@
       "concert_stage",
       "recording_studio",
       "opera_house",
-      "karaoke_bar"
+      "karaoke_bar",
+      "community_theater_backstage"
     ],
     "sport": [
       "fitness_gym",
@@ -103,7 +117,9 @@
       "laundromat",
       "apartment_balcony",
       "apartment_entryway",
-      "rooftop_laundry_area"
+      "rooftop_laundry_area",
+      "community_garden",
+      "forest_cabin"
     ],
     "resort": [
       "poolside_resort",
@@ -111,7 +127,9 @@
       "luxury_hotel_lobby",
       "luxury_hotel_room",
       "shopping_mall_atrium",
-      "botanical_garden"
+      "botanical_garden",
+      "ferry_terminal",
+      "forest_cabin"
     ],
     "suburban": [
       "suburban_neighborhood",
@@ -122,12 +140,14 @@
       "neighborhood_crosswalk",
       "community_center",
       "public_library_lobby",
-      "neighborhood_playground"
+      "neighborhood_playground",
+      "community_garden"
     ],
     "luxury": [
       "luxury_hotel_room",
       "elegant_dining_room",
-      "luxury_bathroom"
+      "luxury_bathroom",
+      "rooftop_cafe"
     ],
     "japanese": [
       "japanese_bath",
@@ -147,12 +167,17 @@
       "neon_city_street",
       "starship_quarters",
       "high_tech_medbay",
-      "alien_planet"
+      "alien_planet",
+      "maker_space",
+      "observatory_dome"
     ],
     "craft": [
       "clockwork_workshop",
       "messy_copy_room",
-      "antique_shop"
+      "antique_shop",
+      "design_studio",
+      "maker_space",
+      "vehicle_repair_garage"
     ],
     "retail_service": [
       "convenience_store",
@@ -167,7 +192,11 @@
       "local_market_street",
       "street_cafe",
       "cozy_bookstore",
-      "antique_shop"
+      "antique_shop",
+      "flower_market",
+      "greenhouse_nursery",
+      "postal_service_counter",
+      "print_shop"
     ],
     "daily_public": [
       "street_cafe",
@@ -191,7 +220,15 @@
       "riverside_walk",
       "neighborhood_crosswalk",
       "neighborhood_playground",
-      "local_market_street"
+      "local_market_street",
+      "bike_station",
+      "canal_walkway",
+      "clinic_waiting_room",
+      "ferry_terminal",
+      "fire_station",
+      "postal_service_counter",
+      "public_plaza",
+      "tram_platform"
     ],
     "transit": [
       "commuter_transport",
@@ -199,7 +236,10 @@
       "train_station_platform",
       "subway_ticket_gate",
       "rainy_bus_stop",
-      "neighborhood_crosswalk"
+      "neighborhood_crosswalk",
+      "bike_station",
+      "ferry_terminal",
+      "tram_platform"
     ],
     "home_life": [
       "bedroom_boudoir",
@@ -218,7 +258,16 @@
       "surveillance_room",
       "messy_copy_room",
       "coworking_space",
-      "train_station_platform"
+      "train_station_platform",
+      "clinic_waiting_room",
+      "community_theater_backstage",
+      "design_studio",
+      "fire_station",
+      "greenhouse_nursery",
+      "maker_space",
+      "postal_service_counter",
+      "print_shop",
+      "vehicle_repair_garage"
     ],
     "leisure": [
       "karaoke_bar",
@@ -241,7 +290,11 @@
       "botanical_garden",
       "aquarium",
       "art_gallery",
-      "museum_hall"
+      "museum_hall",
+      "community_theater_backstage",
+      "observatory_dome",
+      "public_plaza",
+      "rooftop_cafe"
     ],
     "quiet_indoor": [
       "school_library",
@@ -252,7 +305,10 @@
       "museum_hall",
       "aquarium",
       "antique_shop",
-      "school_clubroom"
+      "school_clubroom",
+      "clinic_waiting_room",
+      "design_studio",
+      "observatory_dome"
     ]
   },
   "characters": {
@@ -1420,6 +1476,127 @@
         "daily_public"
       ],
       "default_costume": "beach_resort"
+    },
+    "architect": {
+      "tags": [
+        "workplace",
+        "craft",
+        "quiet_indoor"
+      ],
+      "default_costume": "office_lady"
+    },
+    "astronomer": {
+      "tags": [
+        "scifi",
+        "quiet_indoor",
+        "leisure"
+      ],
+      "default_costume": "street_casual"
+    },
+    "barber": {
+      "tags": [
+        "retail_service",
+        "workplace",
+        "daily_public"
+      ],
+      "default_costume": "street_casual"
+    },
+    "delivery courier": {
+      "tags": [
+        "transit",
+        "urban",
+        "daily_public"
+      ],
+      "default_costume": "street_casual"
+    },
+    "farmer": {
+      "tags": [
+        "suburban",
+        "nature",
+        "domestic"
+      ],
+      "default_costume": "street_casual"
+    },
+    "fisher": {
+      "tags": [
+        "nature",
+        "resort",
+        "leisure"
+      ],
+      "default_costume": "street_casual"
+    },
+    "florist": {
+      "tags": [
+        "retail_service",
+        "daily_public",
+        "nature"
+      ],
+      "default_costume": "street_casual"
+    },
+    "journalist": {
+      "tags": [
+        "urban",
+        "workplace",
+        "daily_public"
+      ],
+      "default_costume": "office_lady"
+    },
+    "mechanic": {
+      "tags": [
+        "craft",
+        "workplace",
+        "steampunk"
+      ],
+      "default_costume": "street_casual"
+    },
+    "nurse": {
+      "tags": [
+        "workplace",
+        "daily_public",
+        "quiet_indoor",
+        "scifi"
+      ],
+      "default_costume": "street_casual"
+    },
+    "paramedic": {
+      "tags": [
+        "workplace",
+        "daily_public",
+        "transit"
+      ],
+      "default_costume": "street_casual"
+    },
+    "photographer": {
+      "tags": [
+        "urban",
+        "nature",
+        "leisure"
+      ],
+      "default_costume": "street_casual"
+    },
+    "researcher": {
+      "tags": [
+        "workplace",
+        "scifi",
+        "quiet_indoor"
+      ],
+      "default_costume": "office_lady"
+    },
+    "shopkeeper": {
+      "tags": [
+        "retail_service",
+        "urban",
+        "daily_public"
+      ],
+      "default_costume": "street_casual"
+    },
+    "teacher": {
+      "tags": [
+        "school",
+        "workplace",
+        "quiet_indoor"
+      ],
+      "default_costume": "office_lady"
     }
   },
   "exclusions": [
@@ -1593,11 +1770,51 @@
     "luxury_hotel_room",
     "mountain_resort",
     "tropical_beach",
-    "wave_barrel"
+    "wave_barrel",
+    "bike_station",
+    "canal_walkway",
+    "clinic_waiting_room",
+    "community_garden",
+    "community_theater_backstage",
+    "design_studio",
+    "ferry_terminal",
+    "fire_station",
+    "flower_market",
+    "forest_cabin",
+    "greenhouse_nursery",
+    "maker_space",
+    "observatory_dome",
+    "postal_service_counter",
+    "print_shop",
+    "public_plaza",
+    "rooftop_cafe",
+    "tram_platform",
+    "vehicle_repair_garage"
   ],
   "priority_weights": {
     "existing": 50,
     "genre_gated": 35,
     "universal": 15
-  }
+  },
+  "locations": [
+    "bike_station",
+    "canal_walkway",
+    "clinic_waiting_room",
+    "community_garden",
+    "community_theater_backstage",
+    "design_studio",
+    "ferry_terminal",
+    "fire_station",
+    "flower_market",
+    "forest_cabin",
+    "greenhouse_nursery",
+    "maker_space",
+    "observatory_dome",
+    "postal_service_counter",
+    "print_shop",
+    "public_plaza",
+    "rooftop_cafe",
+    "tram_platform",
+    "vehicle_repair_garage"
+  ]
 }

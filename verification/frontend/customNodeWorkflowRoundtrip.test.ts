@@ -6,15 +6,15 @@ import { fileURLToPath } from 'url'
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { LGraph } from '@/lib/litegraph/src/litegraph'
-import type { ISerialisedNode, SerialisableGraph } from '@/lib/litegraph/src/types/serialisation'
-import {
-  type ComfyWorkflowJSON,
-  validateComfyWorkflow,
-} from '@/platform/workflow/validation/schemas/workflowSchema'
+import type { ISerialisedGraph, ISerialisedNode, SerialisableGraph } from '@/lib/litegraph/src/types/serialisation'
+import type { ComfyWorkflowJSON } from '@/platform/workflow/validation/schemas/workflowSchema'
+import { validateComfyWorkflow } from '@/platform/workflow/validation/schemas/workflowSchema'
 
 
 const TEST_DIR = path.dirname(fileURLToPath(import.meta.url))
-const REPO_ROOT = path.resolve(TEST_DIR, '../../../../../../')
+const REPO_ROOT = process.env.VSCG_CUSTOM_NODE_ROOT
+  ? path.resolve(process.env.VSCG_CUSTOM_NODE_ROOT)
+  : path.resolve(TEST_DIR, '../../../../../../')
 const SAMPLE_WORKFLOWS = JSON.parse(
   fs.readFileSync(path.join(REPO_ROOT, 'workflow_samples.json'), 'utf-8')
 ) as Array<{
@@ -33,7 +33,7 @@ function loadWorkflow(workflowPath: string) {
 }
 
 
-function nodeSnapshot(node: ISerialisedNode) {
+function nodeSnapshot(node: ISerialisedNode | ComfyWorkflowJSON['nodes'][number]) {
   return {
     id: node.id,
     type: node.type,
@@ -41,7 +41,7 @@ function nodeSnapshot(node: ISerialisedNode) {
       name: input.name,
       type: input.type,
       link: input.link ?? null,
-      slot_index: input.slot_index ?? null,
+      slot_index: 'slot_index' in input ? input.slot_index ?? null : null,
     })),
     outputs: (node.outputs ?? []).map((output) => ({
       name: output.name,
@@ -54,7 +54,7 @@ function nodeSnapshot(node: ISerialisedNode) {
 }
 
 
-function workflowSnapshot(workflow: ComfyWorkflowJSON | SerialisableGraph) {
+function workflowSnapshot(workflow: ComfyWorkflowJSON | ISerialisedGraph) {
   const nodes = [...(workflow.nodes ?? [])]
     .sort((a, b) => String(a.id).localeCompare(String(b.id)))
     .map(nodeSnapshot)
@@ -70,7 +70,7 @@ describe('custom node workflow frontend roundtrip', () => {
     setActivePinia(createTestingPinia({ stubActions: false }))
   })
 
-  it.each(DEFAULT_WORKFLOWS)(
+  it.for(DEFAULT_WORKFLOWS)(
     'configure -> serialize keeps default baseline $id [$surface] workflow stable',
     async (sample) => {
       const workflowPath = path.join(REPO_ROOT, sample.path)
@@ -81,7 +81,7 @@ describe('custom node workflow frontend roundtrip', () => {
       const graph = new LGraph()
       graph.configure(validatedWorkflow as unknown as SerialisableGraph)
 
-      const serialized = graph.serialize() as SerialisableGraph
+      const serialized = graph.serialize()
       const revalidatedWorkflow = await validateComfyWorkflow(serialized)
 
       expect(revalidatedWorkflow).not.toBeNull()

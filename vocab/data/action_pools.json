@@ -6032,5 +6032,1563 @@
             "text": "pausing before continuing the task at hand",
             "load": "calm"
         }
+    ],
+    "bike_station": [
+        {
+            "load": "calm",
+            "text": "checking the rental dock status"
+        },
+        {
+            "load": "active",
+            "text": "unlocking a bicycle from the nearest rack"
+        },
+        {
+            "load": "calm",
+            "text": "securing a helmet beside the route map"
+        },
+        {
+            "load": "active",
+            "text": "returning a bicycle to an open dock"
+        },
+        {
+            "load": "calm",
+            "text": "reading the posted cycling rules"
+        },
+        {
+            "load": "active",
+            "text": "adjusting the seat before departure"
+        },
+        {
+            "load": "calm",
+            "text": "folding a route leaflet near the kiosk"
+        },
+        {
+            "load": "active",
+            "text": "scanning a pass at the rental terminal"
+        },
+        {
+            "load": "calm",
+            "text": "checking a bicycle basket for loose items"
+        },
+        {
+            "load": "active",
+            "text": "wiping rain from a bicycle handlebar"
+        },
+        {
+            "load": "calm",
+            "text": "checking the route map before departure"
+        },
+        {
+            "load": "active",
+            "text": "rolling a bicycle toward the exit lane"
+        },
+        {
+            "load": "calm",
+            "text": "checking the tire pressure guide against the pump gauge"
+        },
+        {
+            "load": "active",
+            "text": "moving a bicycle into the marked return channel"
+        },
+        {
+            "load": "calm",
+            "text": "checking the headlamp mounted above the front wheel"
+        },
+        {
+            "load": "active",
+            "text": "lifting a helmet from the return cabinet"
+        },
+        {
+            "load": "calm",
+            "text": "reading the dock number on the kiosk screen"
+        },
+        {
+            "load": "active",
+            "text": "fastening a basket strap before riding"
+        },
+        {
+            "load": "calm",
+            "text": "checking the brake levers beside the rack"
+        },
+        {
+            "load": "active",
+            "text": "rolling a bicycle past the painted exit arrow"
+        }
+    ],
+    "canal_walkway": [
+        {
+            "load": "active",
+            "text": "walking beside the canal railing"
+        },
+        {
+            "load": "calm",
+            "text": "checking a water plant against a folded canal guide"
+        },
+        {
+            "load": "active",
+            "text": "following the narrow path beneath an arch"
+        },
+        {
+            "load": "calm",
+            "text": "reading a folded towpath map beside the weathered railing"
+        },
+        {
+            "load": "calm",
+            "text": "reading a small waterside notice"
+        },
+        {
+            "load": "active",
+            "text": "stepping around a puddle near the towpath"
+        },
+        {
+            "load": "calm",
+            "text": "watching reflections move across the canal"
+        },
+        {
+            "load": "active",
+            "text": "crossing a low footbridge"
+        },
+        {
+            "load": "calm",
+            "text": "checking the route marker at a bend"
+        },
+        {
+            "load": "active",
+            "text": "brushing leaves from the edge of the path"
+        },
+        {
+            "load": "calm",
+            "text": "walking beside the mossy towpath embankment"
+        },
+        {
+            "load": "active",
+            "text": "continuing along the illuminated walkway"
+        },
+        {
+            "load": "calm",
+            "text": "counting mooring rings along the stone embankment"
+        },
+        {
+            "load": "active",
+            "text": "stepping up the short stairs onto the footbridge"
+        },
+        {
+            "load": "calm",
+            "text": "checking the canal level against a marked gauge"
+        },
+        {
+            "load": "active",
+            "text": "moving a fallen branch from the towpath edge"
+        },
+        {
+            "load": "calm",
+            "text": "checking the next bend on a waterside map"
+        },
+        {
+            "load": "active",
+            "text": "walking beneath the brick arch toward the lock"
+        },
+        {
+            "load": "calm",
+            "text": "watching a narrowboat pass below the railing"
+        },
+        {
+            "load": "active",
+            "text": "crossing the damp paving toward the tree-lined bank"
+        }
+    ],
+    "clinic_waiting_room": [
+        {
+            "load": "calm",
+            "text": "checking an appointment slip"
+        },
+        {
+            "load": "active",
+            "text": "taking a numbered ticket from reception"
+        },
+        {
+            "load": "calm",
+            "text": "reading a health information leaflet"
+        },
+        {
+            "load": "active",
+            "text": "placing a bag beside the waiting chair"
+        },
+        {
+            "load": "calm",
+            "text": "looking toward the reception clock"
+        },
+        {
+            "load": "active",
+            "text": "using the hand sanitizer station"
+        },
+        {
+            "load": "calm",
+            "text": "reviewing instructions on a noticeboard"
+        },
+        {
+            "load": "active",
+            "text": "filling in a short intake form"
+        },
+        {
+            "load": "calm",
+            "text": "holding a closed umbrella near the doorway"
+        },
+        {
+            "load": "active",
+            "text": "checking the room number on a sign"
+        },
+        {
+            "load": "calm",
+            "text": "checking an appointment slip against the reception display"
+        },
+        {
+            "load": "active",
+            "text": "checking the room number while opening the consultation door"
+        },
+        {
+            "load": "calm",
+            "text": "checking a surname on the queue display"
+        },
+        {
+            "load": "active",
+            "text": "returning a clipboard to the reception tray"
+        },
+        {
+            "load": "calm",
+            "text": "checking the consultation door numbers"
+        },
+        {
+            "load": "active",
+            "text": "moving an empty chair back into line"
+        },
+        {
+            "load": "calm",
+            "text": "reading preparation notes on an appointment card"
+        },
+        {
+            "load": "active",
+            "text": "placing a completed intake form in the privacy slot"
+        },
+        {
+            "load": "calm",
+            "text": "watching for the next number above reception"
+        },
+        {
+            "load": "active",
+            "text": "carrying a leaflet back to the information rack"
+        }
+    ],
+    "community_garden": [
+        {
+            "load": "active",
+            "text": "loosening soil around a planting bed"
+        },
+        {
+            "load": "calm",
+            "text": "checking seedlings beneath a small marker"
+        },
+        {
+            "load": "active",
+            "text": "carrying a watering can between the beds"
+        },
+        {
+            "load": "calm",
+            "text": "sorting hand tools on the shared rack"
+        },
+        {
+            "load": "active",
+            "text": "tying a young stem to a support"
+        },
+        {
+            "load": "calm",
+            "text": "reading the seasonal planting chart"
+        },
+        {
+            "load": "active",
+            "text": "pulling weeds from the path edge"
+        },
+        {
+            "load": "calm",
+            "text": "examining a leaf for damage"
+        },
+        {
+            "load": "active",
+            "text": "filling a tray with compost"
+        },
+        {
+            "load": "calm",
+            "text": "labeling a newly planted row"
+        },
+        {
+            "load": "active",
+            "text": "sweeping soil from the garden walkway"
+        },
+        {
+            "load": "calm",
+            "text": "checking the planting chart beside the tool shed"
+        },
+        {
+            "load": "calm",
+            "text": "checking moisture beneath the mulch layer"
+        },
+        {
+            "load": "active",
+            "text": "turning compost with a garden fork"
+        },
+        {
+            "load": "calm",
+            "text": "matching seed packets to the labeled beds"
+        },
+        {
+            "load": "active",
+            "text": "rolling the hose onto its wall reel"
+        },
+        {
+            "load": "calm",
+            "text": "examining blossoms for visiting pollinators"
+        },
+        {
+            "load": "active",
+            "text": "carrying harvested vegetables toward the tool shed"
+        },
+        {
+            "load": "calm",
+            "text": "reading the rain gauge beside the fence"
+        },
+        {
+            "load": "active",
+            "text": "placing fresh mulch around the raised bed"
+        }
+    ],
+    "community_theater_backstage": [
+        {
+            "load": "calm",
+            "text": "checking the rehearsal schedule on a wall board"
+        },
+        {
+            "load": "active",
+            "text": "sorting stage props by marked storage shelf"
+        },
+        {
+            "load": "calm",
+            "text": "checking a costume label beside the preparation table"
+        },
+        {
+            "load": "active",
+            "text": "carrying a prop box toward the stage entrance"
+        },
+        {
+            "load": "calm",
+            "text": "checking a marked scene cue beside the stage entrance"
+        },
+        {
+            "load": "active",
+            "text": "labeling a prop with its storage position"
+        },
+        {
+            "load": "calm",
+            "text": "checking the condition of a stage accessory"
+        },
+        {
+            "load": "active",
+            "text": "arranging rehearsal materials across a table"
+        },
+        {
+            "load": "calm",
+            "text": "marking a change on the performance schedule"
+        },
+        {
+            "load": "active",
+            "text": "hanging a costume on the backstage rack"
+        },
+        {
+            "load": "calm",
+            "text": "placing scripts into a labeled folder"
+        },
+        {
+            "load": "active",
+            "text": "carrying a folded backdrop toward the marked storage wall"
+        },
+        {
+            "load": "calm",
+            "text": "checking a small stage lantern"
+        },
+        {
+            "load": "active",
+            "text": "stacking empty prop containers"
+        },
+        {
+            "load": "calm",
+            "text": "reading a backstage access notice"
+        },
+        {
+            "load": "active",
+            "text": "preparing a repair kit for stage materials"
+        },
+        {
+            "load": "calm",
+            "text": "checking the order of marked entrances"
+        },
+        {
+            "load": "active",
+            "text": "returning a hand prop to its labeled case"
+        },
+        {
+            "load": "calm",
+            "text": "reviewing notes beside the rehearsal desk"
+        },
+        {
+            "load": "active",
+            "text": "clearing the preparation table for the next task"
+        }
+    ],
+    "design_studio": [
+        {
+            "load": "active",
+            "text": "arranging material samples across a worktable"
+        },
+        {
+            "load": "calm",
+            "text": "comparing two color swatches"
+        },
+        {
+            "load": "active",
+            "text": "pinning a draft layout beside the review board"
+        },
+        {
+            "load": "calm",
+            "text": "checking measurements on a paper plan"
+        },
+        {
+            "load": "active",
+            "text": "sorting tools beside the prototype"
+        },
+        {
+            "load": "calm",
+            "text": "marking revisions on a printed layout"
+        },
+        {
+            "load": "active",
+            "text": "turning a sample beneath the studio light"
+        },
+        {
+            "load": "calm",
+            "text": "placing labels beside organized components"
+        },
+        {
+            "load": "active",
+            "text": "clearing scraps from the cutting surface"
+        },
+        {
+            "load": "calm",
+            "text": "reviewing a sequence of concept cards"
+        },
+        {
+            "load": "active",
+            "text": "assembling a small physical mockup"
+        },
+        {
+            "load": "calm",
+            "text": "filing completed drawings in a flat folder"
+        },
+        {
+            "load": "calm",
+            "text": "checking a scale model from another angle"
+        },
+        {
+            "load": "active",
+            "text": "matching material codes to the sample board"
+        },
+        {
+            "load": "calm",
+            "text": "organizing tracing sheets by revision"
+        },
+        {
+            "load": "active",
+            "text": "measuring spacing on a prototype panel"
+        },
+        {
+            "load": "calm",
+            "text": "reviewing join lines on the scale model"
+        },
+        {
+            "load": "active",
+            "text": "cutting a fresh template from tracing paper"
+        },
+        {
+            "load": "calm",
+            "text": "comparing prototype dimensions with the flat drawing"
+        },
+        {
+            "load": "active",
+            "text": "pinning a revised concept card on the review wall"
+        }
+    ],
+    "ferry_terminal": [
+        {
+            "load": "calm",
+            "text": "checking the departure board beside the ramp"
+        },
+        {
+            "load": "active",
+            "text": "walking toward the marked boarding lane"
+        },
+        {
+            "load": "calm",
+            "text": "holding a ticket near the gate"
+        },
+        {
+            "load": "active",
+            "text": "watching the ferry approach the pier"
+        },
+        {
+            "load": "calm",
+            "text": "reading a waterside safety notice"
+        },
+        {
+            "load": "active",
+            "text": "rolling luggage across the terminal floor"
+        },
+        {
+            "load": "calm",
+            "text": "checking the weather display before boarding"
+        },
+        {
+            "load": "active",
+            "text": "moving beneath the covered boarding sign"
+        },
+        {
+            "load": "calm",
+            "text": "folding a ferry timetable"
+        },
+        {
+            "load": "calm",
+            "text": "looking across the water from the railing"
+        },
+        {
+            "load": "active",
+            "text": "presenting a pass at the boarding point"
+        },
+        {
+            "load": "active",
+            "text": "stepping onto the access ramp"
+        },
+        {
+            "load": "calm",
+            "text": "checking the berth number on the departure screen"
+        },
+        {
+            "load": "active",
+            "text": "rolling a suitcase into the assigned boarding lane"
+        },
+        {
+            "load": "calm",
+            "text": "reading the tide warning beside the gangway"
+        },
+        {
+            "load": "active",
+            "text": "fastening a luggage tag before boarding"
+        },
+        {
+            "load": "calm",
+            "text": "watching the ferry settle against the pier"
+        },
+        {
+            "load": "active",
+            "text": "lifting a travel bag onto the ramp threshold"
+        },
+        {
+            "load": "calm",
+            "text": "checking the route color on a boarding pass"
+        },
+        {
+            "load": "active",
+            "text": "watching ferry lights ripple across the water beneath the pier canopy"
+        }
+    ],
+    "fire_station": [
+        {
+            "load": "calm",
+            "text": "checking the equipment readiness board"
+        },
+        {
+            "load": "active",
+            "text": "securing a strap on a response bag"
+        },
+        {
+            "load": "calm",
+            "text": "inspecting a coiled hose beside the bay"
+        },
+        {
+            "load": "active",
+            "text": "wiping dust from a helmet visor"
+        },
+        {
+            "load": "calm",
+            "text": "reviewing the vehicle departure checklist"
+        },
+        {
+            "load": "active",
+            "text": "testing a handheld radio"
+        },
+        {
+            "load": "calm",
+            "text": "reviewing an equipment checklist beside the locker"
+        },
+        {
+            "load": "active",
+            "text": "lifting a supply case from the storage shelf"
+        },
+        {
+            "load": "calm",
+            "text": "checking the station clock against a readiness checklist"
+        },
+        {
+            "load": "active",
+            "text": "closing a bay cabinet after inspection"
+        },
+        {
+            "load": "calm",
+            "text": "studying a posted route diagram"
+        },
+        {
+            "load": "active",
+            "text": "walking toward the vehicle bay"
+        },
+        {
+            "load": "calm",
+            "text": "counting sealed response kits"
+        },
+        {
+            "load": "active",
+            "text": "checking flashlight batteries in the locker"
+        },
+        {
+            "load": "calm",
+            "text": "matching equipment tags to the checklist"
+        },
+        {
+            "load": "active",
+            "text": "fastening a label to a supply case"
+        },
+        {
+            "load": "calm",
+            "text": "reviewing pressure readings on a hose gauge"
+        },
+        {
+            "load": "active",
+            "text": "rolling a checked hose onto its bay rack"
+        },
+        {
+            "load": "calm",
+            "text": "checking radio call signs on the readiness sheet"
+        },
+        {
+            "load": "active",
+            "text": "placing a response bag into the vehicle compartment"
+        }
+    ],
+    "flower_market": [
+        {
+            "load": "active",
+            "text": "trimming stems beside a wrapping counter"
+        },
+        {
+            "load": "calm",
+            "text": "checking stem moisture before arranging the flower bucket"
+        },
+        {
+            "load": "active",
+            "text": "arranging a bundle by color"
+        },
+        {
+            "load": "calm",
+            "text": "reading a handwritten price card"
+        },
+        {
+            "load": "active",
+            "text": "carrying wrapped flowers between stalls"
+        },
+        {
+            "load": "calm",
+            "text": "removing wilted leaves from a bouquet"
+        },
+        {
+            "load": "active",
+            "text": "filling a small vase at the counter"
+        },
+        {
+            "load": "calm",
+            "text": "sorting ribbons beside the wrapping paper"
+        },
+        {
+            "load": "active",
+            "text": "spraying water over a display tray"
+        },
+        {
+            "load": "calm",
+            "text": "checking a delivery crate of flowers"
+        },
+        {
+            "load": "active",
+            "text": "tying a label onto a finished bouquet"
+        },
+        {
+            "load": "calm",
+            "text": "placing fresh stems in a shaded bucket"
+        },
+        {
+            "load": "calm",
+            "text": "comparing bloom sizes across two display buckets"
+        },
+        {
+            "load": "active",
+            "text": "carrying fresh flower crates beneath the awning"
+        },
+        {
+            "load": "calm",
+            "text": "checking a bouquet against the written order card"
+        },
+        {
+            "load": "active",
+            "text": "wrapping a finished arrangement in kraft paper"
+        },
+        {
+            "load": "calm",
+            "text": "examining unopened buds under the stall light"
+        },
+        {
+            "load": "active",
+            "text": "carrying an empty bucket to the water tap"
+        },
+        {
+            "load": "calm",
+            "text": "counting stems for a mixed bouquet"
+        },
+        {
+            "load": "active",
+            "text": "moving a shaded flower stand into the aisle"
+        }
+    ],
+    "forest_cabin": [
+        {
+            "load": "active",
+            "text": "stacking split wood beside the cabin door"
+        },
+        {
+            "load": "calm",
+            "text": "checking the latch on a wooden window"
+        },
+        {
+            "load": "active",
+            "text": "placing a kettle on the cabin stove"
+        },
+        {
+            "load": "calm",
+            "text": "reading a trail map on the table"
+        },
+        {
+            "load": "active",
+            "text": "brushing pine needles from the porch"
+        },
+        {
+            "load": "calm",
+            "text": "examining tracks near the clearing"
+        },
+        {
+            "load": "active",
+            "text": "folding a blanket beside the fireplace"
+        },
+        {
+            "load": "calm",
+            "text": "checking supplies inside a storage chest"
+        },
+        {
+            "load": "active",
+            "text": "carrying a lantern toward the doorway"
+        },
+        {
+            "load": "calm",
+            "text": "checking a trail map beside the cabin door"
+        },
+        {
+            "load": "active",
+            "text": "sweeping leaves from the cabin steps"
+        },
+        {
+            "load": "calm",
+            "text": "placing a mug beside the window"
+        },
+        {
+            "load": "active",
+            "text": "refilling the wood basket beside the stove"
+        },
+        {
+            "load": "calm",
+            "text": "checking the water-level gauge on the cabin storage tank"
+        },
+        {
+            "load": "active",
+            "text": "folding trail supplies into a canvas bag"
+        },
+        {
+            "load": "calm",
+            "text": "latching the storage cupboard"
+        },
+        {
+            "load": "calm",
+            "text": "checking the stove damper before lighting the fire"
+        },
+        {
+            "load": "active",
+            "text": "carrying split logs in from the porch"
+        },
+        {
+            "load": "calm",
+            "text": "studying fresh tracks across the cabin floor"
+        },
+        {
+            "load": "active",
+            "text": "brushing pine needles from the entrance mat"
+        }
+    ],
+    "greenhouse_nursery": [
+        {
+            "load": "calm",
+            "text": "checking roots in a small planting tray"
+        },
+        {
+            "load": "active",
+            "text": "carrying a seedling between greenhouse benches"
+        },
+        {
+            "load": "calm",
+            "text": "labeling pots with plant names"
+        },
+        {
+            "load": "active",
+            "text": "filling a tray with growing medium"
+        },
+        {
+            "load": "calm",
+            "text": "examining new leaves for healthy growth"
+        },
+        {
+            "load": "active",
+            "text": "moving a plant beneath the shade frame"
+        },
+        {
+            "load": "calm",
+            "text": "sorting seed packets beside the workbench"
+        },
+        {
+            "load": "active",
+            "text": "watering a row of young plants"
+        },
+        {
+            "load": "calm",
+            "text": "checking the propagation shelf"
+        },
+        {
+            "load": "active",
+            "text": "wrapping a potted plant for collection"
+        },
+        {
+            "load": "calm",
+            "text": "recording a plant batch in the nursery ledger"
+        },
+        {
+            "load": "active",
+            "text": "pruning a damaged stem with hand shears"
+        },
+        {
+            "load": "calm",
+            "text": "arranging labeled plants by size"
+        },
+        {
+            "load": "active",
+            "text": "filling a watering can at the utility sink"
+        },
+        {
+            "load": "calm",
+            "text": "checking a care card beside a display pot"
+        },
+        {
+            "load": "active",
+            "text": "moving empty pots onto the supply rack"
+        },
+        {
+            "load": "calm",
+            "text": "inspecting a tray of newly germinated seeds"
+        },
+        {
+            "load": "active",
+            "text": "placing a price tag beside a potted plant"
+        },
+        {
+            "load": "calm",
+            "text": "sorting clean containers near the potting bench"
+        },
+        {
+            "load": "active",
+            "text": "sweeping loose soil from the nursery floor"
+        }
+    ],
+    "maker_space": [
+        {
+            "load": "calm",
+            "text": "sorting components beside a prototype bench"
+        },
+        {
+            "load": "active",
+            "text": "tightening a fastener on a small device"
+        },
+        {
+            "load": "calm",
+            "text": "checking a parts list on a clipboard"
+        },
+        {
+            "load": "active",
+            "text": "moving a completed model to a storage shelf"
+        },
+        {
+            "load": "calm",
+            "text": "testing a switch on a circuit board"
+        },
+        {
+            "load": "active",
+            "text": "clearing filings from the work surface"
+        },
+        {
+            "load": "calm",
+            "text": "labeling containers of spare parts"
+        },
+        {
+            "load": "active",
+            "text": "clamping a piece into a mounted vise"
+        },
+        {
+            "load": "calm",
+            "text": "comparing a prototype with its printed plan"
+        },
+        {
+            "load": "active",
+            "text": "charging a tool beside the workbench"
+        },
+        {
+            "load": "calm",
+            "text": "checking the ventilation control"
+        },
+        {
+            "load": "active",
+            "text": "returning measuring tools to their rack"
+        },
+        {
+            "load": "calm",
+            "text": "measuring a component with a caliper"
+        },
+        {
+            "load": "active",
+            "text": "fastening a panel onto the prototype"
+        },
+        {
+            "load": "calm",
+            "text": "checking power at the soldering station"
+        },
+        {
+            "load": "active",
+            "text": "placing safety glasses beside the tool mat"
+        },
+        {
+            "load": "calm",
+            "text": "checking solder joints beneath a magnifying lamp"
+        },
+        {
+            "load": "active",
+            "text": "placing a cable through the prototype housing"
+        },
+        {
+            "load": "calm",
+            "text": "comparing a machined part with its dimension sheet"
+        },
+        {
+            "load": "active",
+            "text": "turning on the bench extractor before soldering"
+        }
+    ],
+    "observatory_dome": [
+        {
+            "load": "calm",
+            "text": "checking the telescope control panel"
+        },
+        {
+            "load": "active",
+            "text": "opening the dome shutter mechanism"
+        },
+        {
+            "load": "calm",
+            "text": "aligning a star chart beside the telescope"
+        },
+        {
+            "load": "active",
+            "text": "adjusting the focus control"
+        },
+        {
+            "load": "calm",
+            "text": "recording a reading in an observation log"
+        },
+        {
+            "load": "active",
+            "text": "checking the dome weather display"
+        },
+        {
+            "load": "calm",
+            "text": "watching the first stars emerge"
+        },
+        {
+            "load": "active",
+            "text": "moving a red lamp across the instrument table"
+        },
+        {
+            "load": "calm",
+            "text": "comparing two marked sky positions"
+        },
+        {
+            "load": "active",
+            "text": "securing the telescope cover"
+        },
+        {
+            "load": "calm",
+            "text": "reading a maintenance note near the console"
+        },
+        {
+            "load": "active",
+            "text": "closing the dome after observation"
+        },
+        {
+            "load": "calm",
+            "text": "checking the target coordinates on the control screen"
+        },
+        {
+            "load": "active",
+            "text": "turning the dome slit toward the selected star field"
+        },
+        {
+            "load": "calm",
+            "text": "reviewing humidity readings before a telescope exposure"
+        },
+        {
+            "load": "active",
+            "text": "fastening a camera adapter on the telescope"
+        },
+        {
+            "load": "calm",
+            "text": "comparing the finder scope with the printed chart"
+        },
+        {
+            "load": "active",
+            "text": "moving the instrument ladder beside the eyepiece"
+        },
+        {
+            "load": "calm",
+            "text": "recording the exposure time in the observation log"
+        },
+        {
+            "load": "active",
+            "text": "placing the protective cover from its hook"
+        }
+    ],
+    "postal_service_counter": [
+        {
+            "load": "calm",
+            "text": "checking a parcel label at the service counter"
+        },
+        {
+            "load": "active",
+            "text": "placing a sealed package on the weighing scale"
+        },
+        {
+            "load": "calm",
+            "text": "reading the posted delivery options"
+        },
+        {
+            "load": "active",
+            "text": "filling out a mailing form"
+        },
+        {
+            "load": "calm",
+            "text": "sorting envelopes by service type"
+        },
+        {
+            "load": "active",
+            "text": "checking the address on a parcel"
+        },
+        {
+            "load": "calm",
+            "text": "placing stamps beside the transaction tray"
+        },
+        {
+            "load": "active",
+            "text": "carrying a package toward the collection shelf"
+        },
+        {
+            "load": "calm",
+            "text": "reviewing a customs declaration"
+        },
+        {
+            "load": "active",
+            "text": "sealing a padded mailer"
+        },
+        {
+            "load": "calm",
+            "text": "checking a numbered collection slip"
+        },
+        {
+            "load": "active",
+            "text": "organizing packing materials beneath the counter"
+        },
+        {
+            "load": "calm",
+            "text": "reading a notice about parcel dimensions"
+        },
+        {
+            "load": "active",
+            "text": "placing a completed form in the document tray"
+        },
+        {
+            "load": "calm",
+            "text": "checking the service window schedule"
+        },
+        {
+            "load": "active",
+            "text": "weighing a small box for postage"
+        },
+        {
+            "load": "calm",
+            "text": "sorting labels beside the printing terminal"
+        },
+        {
+            "load": "active",
+            "text": "moving an accepted parcel into a storage bin"
+        },
+        {
+            "load": "calm",
+            "text": "checking a receipt before folding it"
+        },
+        {
+            "load": "active",
+            "text": "restocking envelopes on the counter shelf"
+        }
+    ],
+    "print_shop": [
+        {
+            "load": "calm",
+            "text": "checking paper samples beside the counter"
+        },
+        {
+            "load": "active",
+            "text": "feeding a sheet into the printing machine"
+        },
+        {
+            "load": "calm",
+            "text": "comparing ink swatches on a sample card"
+        },
+        {
+            "load": "active",
+            "text": "stacking finished pages on a drying rack"
+        },
+        {
+            "load": "calm",
+            "text": "reviewing a layout proof"
+        },
+        {
+            "load": "active",
+            "text": "cutting a printed sheet along its guide"
+        },
+        {
+            "load": "calm",
+            "text": "sorting envelopes by size"
+        },
+        {
+            "load": "active",
+            "text": "binding a small set of documents"
+        },
+        {
+            "load": "calm",
+            "text": "checking an order note beside the register"
+        },
+        {
+            "load": "active",
+            "text": "placing a completed order in a paper sleeve"
+        },
+        {
+            "load": "calm",
+            "text": "wiping toner dust from the work counter"
+        },
+        {
+            "load": "active",
+            "text": "organizing paper rolls near the finishing station"
+        },
+        {
+            "load": "calm",
+            "text": "checking crop marks on a fresh proof sheet"
+        },
+        {
+            "load": "active",
+            "text": "feeding a new paper stack into the feed tray"
+        },
+        {
+            "load": "calm",
+            "text": "comparing the printed color against a reference swatch"
+        },
+        {
+            "load": "active",
+            "text": "turning the guillotine guide to the required width"
+        },
+        {
+            "load": "calm",
+            "text": "reviewing page order before binding"
+        },
+        {
+            "load": "active",
+            "text": "carrying trimmed sheets to the finishing table"
+        },
+        {
+            "load": "calm",
+            "text": "checking the toner level on the machine display"
+        },
+        {
+            "load": "active",
+            "text": "placing a completed booklet into its order sleeve"
+        }
+    ],
+    "public_plaza": [
+        {
+            "load": "calm",
+            "text": "checking a plaza map beside the paving"
+        },
+        {
+            "load": "active",
+            "text": "walking toward a marked meeting point"
+        },
+        {
+            "load": "calm",
+            "text": "reading the event map beneath a civic information sign"
+        },
+        {
+            "load": "active",
+            "text": "crossing the open square between planters"
+        },
+        {
+            "load": "calm",
+            "text": "reading an event notice on the board"
+        },
+        {
+            "load": "active",
+            "text": "placing a folded leaflet on a bench"
+        },
+        {
+            "load": "calm",
+            "text": "looking toward the fountain at the center"
+        },
+        {
+            "load": "active",
+            "text": "following directional markers across the plaza"
+        },
+        {
+            "load": "calm",
+            "text": "checking the time beneath the clock tower"
+        },
+        {
+            "load": "calm",
+            "text": "standing beside a low stone planter"
+        },
+        {
+            "load": "active",
+            "text": "walking toward the monument steps across the plaza"
+        },
+        {
+            "load": "calm",
+            "text": "examining a temporary public display"
+        },
+        {
+            "load": "calm",
+            "text": "reading the inscription beneath the civic monument"
+        },
+        {
+            "load": "active",
+            "text": "crossing the fountain plaza toward the clock tower"
+        },
+        {
+            "load": "calm",
+            "text": "checking the event time on the public display"
+        },
+        {
+            "load": "active",
+            "text": "moving a lightweight exhibition panel into alignment"
+        },
+        {
+            "load": "calm",
+            "text": "reading the bronze inscription beside the fountain"
+        },
+        {
+            "load": "active",
+            "text": "carrying a folded poster toward the notice board"
+        },
+        {
+            "load": "calm",
+            "text": "studying the engraved monument map beside the fountain"
+        },
+        {
+            "load": "active",
+            "text": "walking around the raised planter to the meeting point"
+        }
+    ],
+    "rooftop_cafe": [
+        {
+            "load": "calm",
+            "text": "choosing a table beside the rooftop rail"
+        },
+        {
+            "load": "active",
+            "text": "carrying a drink across the open terrace"
+        },
+        {
+            "load": "calm",
+            "text": "reading a menu beneath the awning"
+        },
+        {
+            "load": "calm",
+            "text": "checking the skyline beyond the tables"
+        },
+        {
+            "load": "active",
+            "text": "placing a cup beside a small planter"
+        },
+        {
+            "load": "calm",
+            "text": "folding a receipt near the table edge"
+        },
+        {
+            "load": "active",
+            "text": "moving a chair away from the walkway"
+        },
+        {
+            "load": "calm",
+            "text": "watching clouds pass above the buildings"
+        },
+        {
+            "load": "calm",
+            "text": "checking the rooftop closing notice"
+        },
+        {
+            "load": "active",
+            "text": "carrying a tray toward the service counter"
+        },
+        {
+            "load": "calm",
+            "text": "checking the skyline map beside the lit parapet"
+        },
+        {
+            "load": "active",
+            "text": "returning an empty cup to the collection shelf"
+        },
+        {
+            "load": "calm",
+            "text": "checking the table number against a receipt"
+        },
+        {
+            "load": "active",
+            "text": "opening the canvas awning above the terrace"
+        },
+        {
+            "load": "calm",
+            "text": "watching traffic move far below the parapet"
+        },
+        {
+            "load": "active",
+            "text": "carrying clean cups to the rooftop counter"
+        },
+        {
+            "load": "calm",
+            "text": "reading the specials card beside the herb planter"
+        },
+        {
+            "load": "active",
+            "text": "moving a terrace table behind the windscreen"
+        },
+        {
+            "load": "calm",
+            "text": "checking condensation on a chilled glass"
+        },
+        {
+            "load": "active",
+            "text": "returning a folded menu to the service stand"
+        }
+    ],
+    "tram_platform": [
+        {
+            "load": "calm",
+            "text": "reading the next tram time from the arrival display"
+        },
+        {
+            "load": "active",
+            "text": "walking along the marked platform line"
+        },
+        {
+            "load": "calm",
+            "text": "reading a route map beside the shelter"
+        },
+        {
+            "load": "active",
+            "text": "holding a pass near the platform validator"
+        },
+        {
+            "load": "calm",
+            "text": "checking the arrival display beside the wet rails"
+        },
+        {
+            "load": "active",
+            "text": "moving beneath the shelter before departure"
+        },
+        {
+            "load": "calm",
+            "text": "checking a service notice on the pole"
+        },
+        {
+            "load": "active",
+            "text": "following the boarding marker to the front"
+        },
+        {
+            "load": "calm",
+            "text": "folding a printed transit map"
+        },
+        {
+            "load": "active",
+            "text": "looking toward the approaching tram lights"
+        },
+        {
+            "load": "calm",
+            "text": "standing beside the route information case"
+        },
+        {
+            "load": "active",
+            "text": "stepping toward the open tram doorway"
+        },
+        {
+            "load": "calm",
+            "text": "checking the boarding zone number"
+        },
+        {
+            "load": "calm",
+            "text": "standing behind the platform edge marking"
+        },
+        {
+            "load": "active",
+            "text": "checking the service indicator beside the shelter"
+        },
+        {
+            "load": "calm",
+            "text": "placing the pass back in its card holder"
+        },
+        {
+            "load": "calm",
+            "text": "checking the destination on the overhead display"
+        },
+        {
+            "load": "active",
+            "text": "walking to the marked accessible boarding zone"
+        },
+        {
+            "load": "calm",
+            "text": "checking the validator light after tapping a pass"
+        },
+        {
+            "load": "active",
+            "text": "lifting a travel bag away from the platform edge"
+        }
+    ],
+    "vehicle_repair_garage": [
+        {
+            "load": "calm",
+            "text": "checking the maintenance list beside the work bay"
+        },
+        {
+            "load": "active",
+            "text": "placing a tool on the repair bench"
+        },
+        {
+            "load": "calm",
+            "text": "checking a vehicle service note against the panel label"
+        },
+        {
+            "load": "active",
+            "text": "lifting a replacement part from its crate"
+        },
+        {
+            "load": "calm",
+            "text": "checking a service note against the repair bay checklist"
+        },
+        {
+            "load": "active",
+            "text": "tightening a bolt beneath the open hood"
+        },
+        {
+            "load": "calm",
+            "text": "sorting sockets by size on the tool board"
+        },
+        {
+            "load": "active",
+            "text": "checking fluid levels with a dipstick"
+        },
+        {
+            "load": "calm",
+            "text": "marking a damaged component on the inspection form"
+        },
+        {
+            "load": "active",
+            "text": "carrying a removed part to the workbench"
+        },
+        {
+            "load": "calm",
+            "text": "checking a diagnostic display"
+        },
+        {
+            "load": "active",
+            "text": "wiping grease from a hand tool"
+        },
+        {
+            "load": "calm",
+            "text": "comparing a replacement part with the service note"
+        },
+        {
+            "load": "active",
+            "text": "securing a vehicle wheel before inspection"
+        },
+        {
+            "load": "calm",
+            "text": "organizing fasteners in a parts tray"
+        },
+        {
+            "load": "active",
+            "text": "removing a protective cover from the work area"
+        },
+        {
+            "load": "calm",
+            "text": "checking the repair bay safety notice"
+        },
+        {
+            "load": "active",
+            "text": "recording a completed maintenance step"
+        },
+        {
+            "load": "calm",
+            "text": "examining a belt for visible wear"
+        },
+        {
+            "load": "active",
+            "text": "returning tools to the labeled cabinet"
+        }
     ]
 }

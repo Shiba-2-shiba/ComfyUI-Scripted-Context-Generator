@@ -9,7 +9,9 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
+from assets.variation_test_fixtures import fixture_environment, fixture_repository
 from tools import materialize_variation_candidate_snapshot as materializer
+from tools import plan_variation_target as planner
 from tools.materialize_variation_candidate_snapshot import (
     MUTABLE_CANDIDATE_FILES,
     _manifest_entries,
@@ -21,7 +23,7 @@ from tools.prompt_quality_loop import _source_files
 from tools.workflow_prompt_runner import WorkflowValidationError, canonical_json_bytes
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = fixture_repository()
 RESULTS_ROOT = ROOT / "assets" / "results"
 ITERATION_ROOT = ROOT / "docs" / "variation_expansion" / "experiments" / "v150-candidate-l2-iteration-002"
 SCHEDULE_ITERATION_ROOT = ROOT / "docs" / "variation_expansion" / "experiments" / "v150-candidate-shape-iteration-004"
@@ -74,6 +76,47 @@ def _build_quality_plan():
 
 
 class TestVariationCandidateSnapshotPlan(unittest.TestCase):
+    def test_active_prompt_mode_preserves_original_corpus_bytes(self):
+        plan = build_snapshot_plan(
+            candidate_iteration=ITERATION_ROOT / "candidate-iteration.json",
+            scenario_manifest=ITERATION_ROOT / "scenario-manifest.json",
+            projection_report=ITERATION_ROOT / "projection-report.json",
+            analysis_report=ITERATION_ROOT / "analysis-report.json",
+            baseline_prompt_mode="active", source_root=ROOT,
+        )
+        with tempfile.TemporaryDirectory(prefix="vs-active-", dir=RESULTS_ROOT) as directory:
+            destination = Path(directory) / "snapshot"
+            manifest = materialize_candidate_snapshots(plan, source_root=ROOT, destination_root=destination)
+            original = (ROOT / "prompts.jsonl").read_bytes()
+            self.assertEqual((destination / "baseline-root/prompts.jsonl").read_bytes(), original)
+            self.assertEqual(manifest["prompt_rows"]["baseline"], len(original.splitlines()))
+            self.assertEqual(manifest["prompt_rows"]["candidate"], 80)
+            self.assertEqual(validate_snapshot_manifest(destination, manifest, source_root=ROOT)["status"], "pass")
+
+    def test_explicit_baseline_manifest_is_bound_and_materializer_rejects_tampering(self):
+        with tempfile.TemporaryDirectory(prefix="vs-baseline-", dir=RESULTS_ROOT) as temp_dir:
+            baseline_path = Path(temp_dir) / "baseline.json"
+            baseline_path.write_bytes(planner.L0_BASELINE_MANIFEST_PATH.read_bytes())
+            with patch.object(planner, "L0_BASELINE_MANIFEST_PATH", Path(temp_dir) / "missing.json"):
+                plan = build_snapshot_plan(
+                    candidate_iteration=ITERATION_ROOT / "candidate-iteration.json",
+                    scenario_manifest=ITERATION_ROOT / "scenario-manifest.json",
+                    projection_report=ITERATION_ROOT / "projection-report.json",
+                    analysis_report=ITERATION_ROOT / "analysis-report.json",
+                    baseline_manifest_path=baseline_path,
+                    source_root=ROOT,
+                )
+            self.assertEqual(plan["inputs"]["baseline_manifest"], {
+                "path": baseline_path.relative_to(ROOT).as_posix(),
+                "sha256": hashlib.sha256(baseline_path.read_bytes()).hexdigest(),
+            })
+            baseline_path.write_bytes(baseline_path.read_bytes() + b"\n")
+            destination = Path(temp_dir) / "snapshot"
+            with self.assertRaises(WorkflowValidationError) as raised:
+                materialize_candidate_snapshots(plan, source_root=ROOT, destination_root=destination)
+            self.assertEqual(raised.exception.code, "snapshot_input_hash_mismatch")
+            self.assertFalse(destination.exists())
+
     def test_plan_binds_exact_l2_inputs_and_declared_delta(self):
         plan = _build_plan()
 
@@ -237,7 +280,7 @@ class TestVariationCandidateSnapshotMaterialization(unittest.TestCase):
         self.assertEqual(metrics["total_base_variations"], 141984)
         self.assertEqual(self.manifest["candidate_metrics"], metrics)
 
-    def test_compatibility_keeps_active_prompt_pairs_before_candidate_prompts_are_installed(self):
+    def test_compatibility_keeps_active_and_candidate_prompt_pairs_after_cohort_install(self):
         candidate_prompts = [
             json.loads(line)
             for line in (self.candidate_root / "prompts.jsonl").read_text(encoding="utf-8").splitlines()
@@ -283,14 +326,19 @@ class TestVariationCandidateSnapshotMaterialization(unittest.TestCase):
             )
         )
         self.assertTrue(
-            {(row["subj"], row["loc"]) for row in candidate_prompts}.isdisjoint(existing_pairs)
+            {(row["subj"], row["loc"]) for row in candidate_prompts}.issubset(existing_pairs)
         )
+        regenerated = json.loads(materializer._run_snapshot_command(
+            self.candidate_root, "tools/build_compatibility_review.py", "--check",
+        ))
+        self.assertEqual(regenerated["ERROR"], [])
+        self.assertEqual(regenerated["WARNING"], [])
 
     def test_manifest_is_canonical_and_validates_snapshot_hashes(self):
         tracked = json.loads((self.destination / "snapshot-manifest.json").read_text(encoding="utf-8"))
 
         self.assertEqual(canonical_json_bytes(tracked), canonical_json_bytes(self.manifest))
-        validation = validate_snapshot_manifest(self.destination, self.manifest)
+        validation = validate_snapshot_manifest(self.destination, self.manifest, source_root=ROOT)
         self.assertEqual(validation["status"], "pass")
         self.assertEqual(validation["baseline_source_tree_sha256"], self.manifest["baseline_source_tree_sha256"])
         self.assertEqual(validation["candidate_source_tree_sha256"], self.manifest["candidate_source_tree_sha256"])
@@ -301,7 +349,7 @@ class TestVariationCandidateSnapshotMaterialization(unittest.TestCase):
         try:
             target.write_bytes(original + b"\n")
             with self.assertRaises(WorkflowValidationError) as raised:
-                validate_snapshot_manifest(self.destination, self.manifest)
+                validate_snapshot_manifest(self.destination, self.manifest, source_root=ROOT)
         finally:
             target.write_bytes(original)
 
@@ -318,7 +366,7 @@ class TestVariationCandidateSnapshotMaterialization(unittest.TestCase):
                 tampered = copy.deepcopy(self.manifest)
                 tampered[field] = value
                 with self.assertRaises(WorkflowValidationError) as raised:
-                    validate_snapshot_manifest(self.destination, tampered)
+                    validate_snapshot_manifest(self.destination, tampered, source_root=ROOT)
                 self.assertEqual(raised.exception.code, "snapshot_decision_field_mismatch")
 
     def test_materializer_rejects_bound_input_hash_drift_and_path_escape(self):
@@ -415,7 +463,7 @@ class TestScheduledVariationCandidateSnapshot(unittest.TestCase):
         self.assertEqual(self.manifest["prompt_schedule_sha256"], schedule["schedule_sha256"])
 
     def test_scheduled_snapshot_revalidates_all_hashes_and_decisions(self):
-        validation = validate_snapshot_manifest(self.destination, self.manifest)
+        validation = validate_snapshot_manifest(self.destination, self.manifest, source_root=ROOT)
 
         self.assertEqual(validation["status"], "pass")
         self.assertTrue(self.manifest["prompt_generation_allowed"])
@@ -468,7 +516,7 @@ class TestFinalCoverageVariationCandidateSnapshot(unittest.TestCase):
 
     def test_final_coverage_snapshot_revalidates_certificate(self):
         self.assertEqual(
-            validate_snapshot_manifest(self.destination, self.manifest)["status"],
+            validate_snapshot_manifest(self.destination, self.manifest, source_root=ROOT)["status"],
             "pass",
         )
 
@@ -493,9 +541,19 @@ class TestNonSelectedQualityCandidateSnapshot(unittest.TestCase):
 
     def test_quality_snapshot_revalidates_contract_and_hashes(self):
         self.assertEqual(
-            validate_snapshot_manifest(self.destination, self.manifest)["status"],
+            validate_snapshot_manifest(self.destination, self.manifest, source_root=ROOT)["status"],
             "pass",
         )
+
+
+def setUpModule():
+    global _fixture_context
+    _fixture_context = fixture_environment(ROOT)
+    _fixture_context.__enter__()
+
+
+def tearDownModule():
+    _fixture_context.__exit__(None, None, None)
 
 
 if __name__ == "__main__":

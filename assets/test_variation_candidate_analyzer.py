@@ -4,17 +4,21 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
+from assets.variation_test_fixtures import fixture_environment, fixture_repository
 from tools import analyze_variation_candidates as analyzer
+from tools import plan_variation_target as planner
 from tools.plan_variation_target import build_projection_report, load_projection_manifest
 from tools.workflow_prompt_runner import WorkflowValidationError, canonical_json_bytes
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = fixture_repository()
 FIXTURE = ROOT / "assets" / "fixtures" / "variation_candidate_analyzer" / "valid_catalog_v1.json"
 SCENARIO_FIXTURE = ROOT / "assets" / "fixtures" / "variation_target_planner" / "valid_mixed_v1.json"
 SCENARIO_MANIFEST = load_projection_manifest(SCENARIO_FIXTURE)
-PROJECTION_REPORT = build_projection_report(SCENARIO_MANIFEST, target=150000)
+with fixture_environment(ROOT):
+    PROJECTION_REPORT = build_projection_report(SCENARIO_MANIFEST, target=150000)
 REAL_ITERATION_ROOT = (
     ROOT / "docs" / "variation_expansion" / "experiments" / "v150-candidate-l2-iteration-002"
 )
@@ -65,6 +69,24 @@ def _analyze(catalog):
 
 
 class TestVariationCandidateAnalyzer(unittest.TestCase):
+    def test_explicit_baseline_manifest_is_used_by_candidate_analysis(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            baseline_path = Path(temp_dir) / "baseline.json"
+            baseline_path.write_bytes(planner.L0_BASELINE_MANIFEST_PATH.read_bytes())
+            with patch.object(planner, "L0_BASELINE_MANIFEST_PATH", Path(temp_dir) / "missing.json"):
+                report = analyzer.analyze_candidate_catalog(
+                    _catalog(), scenario_manifest=SCENARIO_MANIFEST,
+                    projection_report=PROJECTION_REPORT, baseline_manifest_path=baseline_path,
+                )
+                self.assertEqual(report["structural_status"], "pass")
+                baseline_path.write_bytes(baseline_path.read_bytes() + b"\n")
+                rejected = analyzer.analyze_candidate_catalog(
+                    _catalog(), scenario_manifest=SCENARIO_MANIFEST,
+                    projection_report=PROJECTION_REPORT, baseline_manifest_path=baseline_path,
+                )
+                self.assertEqual(rejected["structural_status"], "fail")
+                self.assertIn("baseline_manifest_hash_mismatch", [error["code"] for error in rejected["errors"]])
+
     def test_hash_bound_iteration_catalog_materializes_action_overrides(self):
         catalog = analyzer.load_candidate_catalog(REAL_ITERATION_ROOT / "candidate-iteration.json")
 
@@ -390,6 +412,16 @@ class TestVariationCandidateCatalogComposition(unittest.TestCase):
         self.assertEqual(report["structural_status"], "fail")
         self.assertFalse(report["eligible_for_prompt_evaluation"])
         self.assertFalse(report["promotion_ready"])
+
+
+def setUpModule():
+    global _fixture_context
+    _fixture_context = fixture_environment(ROOT)
+    _fixture_context.__enter__()
+
+
+def tearDownModule():
+    _fixture_context.__exit__(None, None, None)
 
 
 if __name__ == "__main__":

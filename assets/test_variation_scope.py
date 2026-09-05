@@ -16,10 +16,11 @@ class TestVariationScope(unittest.TestCase):
         self.assertEqual(report["ERROR"], [])
 
         summary = [item for item in report["INFO"] if item.get("code") == "variation_scope_summary"][0]
-        self.assertEqual(summary["scope_subject_count"], 120)
-        self.assertEqual(summary["scope_location_count"], 90)
-        self.assertEqual(summary["compatibility_review_row_count"], 5806)
-        self.assertEqual(summary["total_base_variations"], 103212)
+        expected = load_variation_scope()["expected_metrics"]
+        self.assertEqual(summary["scope_subject_count"], expected["unique_subjects"])
+        self.assertEqual(summary["scope_location_count"], expected["unique_locations"])
+        self.assertEqual(summary["compatibility_review_row_count"], expected["row_count"])
+        self.assertEqual(summary["total_base_variations"], expected["total_base_variations"])
 
     def test_next_candidate_locations_are_not_already_in_scope(self):
         scope = load_variation_scope()

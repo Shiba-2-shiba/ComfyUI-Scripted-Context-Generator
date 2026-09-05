@@ -1,12 +1,15 @@
 import os
 import sys
 import unittest
+from unittest.mock import patch
 
 
 ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 sys.path.append(ROOT)
 
 from tools.audit_template_diversity import build_template_diversity_report, evaluate_template_diversity_thresholds
+from assets.variation_test_fixtures import BASELINE_FIXTURE
+from pipeline import source_pipeline
 
 
 class TestTemplateDiversityAudit(unittest.TestCase):
@@ -19,7 +22,9 @@ class TestTemplateDiversityAudit(unittest.TestCase):
         self.assertTrue(report["samples"])
 
     def test_template_diversity_thresholds_pass_for_unit_audit_shape(self):
-        report = build_template_diversity_report(seed_count=24, seed_start=0)
+        # Keep the original small-sample regression bound to its source corpus.
+        with patch.object(source_pipeline, "ROOT_DIR", str(BASELINE_FIXTURE)):
+            report = build_template_diversity_report(seed_count=24, seed_start=0)
         evaluation = evaluate_template_diversity_thresholds(
             report,
             min_unique_template_count=23,
@@ -28,6 +33,26 @@ class TestTemplateDiversityAudit(unittest.TestCase):
             evaluation["passed"],
             msg=f"threshold failures: {evaluation['failures']}",
         )
+
+    def test_current_source_eighty_sample_audit_meets_unchanged_thresholds(self):
+        # Fixed 80-run volume, seed start/order unchanged; this audit has no
+        # 64+16 cohort API and does not replace formal quality confirmation.
+        report = build_template_diversity_report(seed_count=80, seed_start=0)
+        evaluation = evaluate_template_diversity_thresholds(report)
+        self.assertTrue(evaluation["passed"], msg=f"threshold failures: {evaluation['failures']}")
+
+    def test_concentrated_end_templates_are_rejected(self):
+        report = {"summary": {
+            "unique_intro_count": 8, "unique_body_count": 9, "unique_end_count": 7,
+            "unique_template_count": 24, "intro_dominance_rate": 0.2,
+            "body_dominance_rate": 0.2, "end_dominance_rate": 1.0,
+            "unique_leading_body_role_count": 3,
+            "action_surface_counts": {"gerund": 60, "framed": 20},
+        }}
+        evaluation = evaluate_template_diversity_thresholds(report)
+        self.assertFalse(evaluation["passed"])
+        self.assertEqual([failure["code"] for failure in evaluation["failures"]], ["end_dominance_rate"])
+        self.assertEqual(evaluation["thresholds"]["max_end_dominance_rate"], 0.28)
 
     def test_template_diversity_reports_multiple_action_surfaces(self):
         report = build_template_diversity_report(seed_count=16, seed_start=0)

@@ -18,6 +18,7 @@ ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 DATA_DIR = os.path.join(ROOT_DIR, "vocab", "data")
 
 _PREFERRED_ARCHETYPE_BY_COSTUME = {
+    "street_casual": "street girl",
     "school_uniform": "student",
     "office_lady": "business girl",
     "gothic_lolita": "gothic girl",

@@ -110,7 +110,10 @@ def build_existing_prompt_map(scope: dict, aliases: Dict[str, List[str]]) -> Tup
     existing: Dict[Tuple[str, str], dict] = {}
     skipped: List[dict] = []
 
-    for prompt in _load_prompt_rows():
+    # Snapshot evaluation replaces the runtime prompt cohort. Keep the original
+    # prompt-derived pairs as explicit authoring inputs, independent of the CSV.
+    seed_rows = _generation_config(scope).get("existing_prompt_rows", [])
+    for prompt in [*seed_rows, *_load_prompt_rows()]:
         subject = str(prompt.get("subj", "")).strip()
         original_location = str(prompt.get("loc", "")).strip()
         canonical_location = resolve_canonical_location(original_location, aliases, scope_locations)

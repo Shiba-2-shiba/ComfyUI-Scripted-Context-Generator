@@ -1,6 +1,10 @@
 # Variation Expansion Task Board
 
-Last updated: 2026-09-01
+Last updated: 2026-09-06
+
+Current execution order: [README](./README.md). V150 is promoted and verified:
+[completion handoff](./HANDOFF_2026-09-06_V150_PROMOTED.md).
+Completed tasks and earlier attempt links below are historical evidence.
 
 Legend:
 
@@ -304,7 +308,7 @@ P12 result:
 
 ## P13: 500k Target Planning
 
-Active phase. Canonical plan: `docs/variation_expansion/500k_loop_plan.md`.
+V150 milestone complete; V250/V350/V500 not started. Canonical plan: `docs/variation_expansion/500k_loop_plan.md`.
 Do not begin bulk subject, location, compatibility, or action-pool edits until
 the L0-L3 planning gates and a V150 candidate manifest are recorded.
 
@@ -314,7 +318,7 @@ the L0-L3 planning gates and a V150 candidate manifest are recorded.
 - [x] VE-1304 Add tested action-depth distribution and mixed-scenario modeling
 - [x] VE-1305 Add quality-aware candidate metadata and prompt-quality target/guard evaluation; automatic non-selected quality validation passed through post-attempt-002 iteration 010
 - [x] VE-1306 Emit a frozen V150 candidate manifest and contribution report
-- [~] VE-1307 Run baseline/candidate generation, analysis, comparison, blind review, and confirmation through the current prompt-quality contract; iteration 010 generation/analysis/comparison passed, blind-review attempt 003 and confirmation pending
+- [x] VE-1307 Complete the V150 quality lifecycle; fresh v7 review, confirmation, eleven gates and protected post-apply checks passed on 2026-09-06
 - [x] VE-1308 Record iteration 004 V150 `REJECTED` verdict with snapshot, experiment, run, comparison, implementation, and test hashes
 - [ ] VE-1309 Repeat the loop sequentially for V250, V350, and V500; do not skip a stage
 - [x] VE-1310 Add runtime-equivalent contribution modeling and reproduce isolated snapshot metrics
@@ -324,12 +328,14 @@ the L0-L3 planning gates and a V150 candidate manifest are recorded.
 - [x] VE-1315 Model and verify complete-workflow final location/action witness reachability for the fixed 64+16 cohort
 - [x] VE-1314 Reduce semantic-family repetition and context p95/max without weakening prompt-quality guards
 - [x] VE-1316 Run a separately declared non-selected quality validation after guard remediation
-- [~] VE-1317 Run comparison-bound blind review; attempt 007 rejected and exposed unstable unrelated-scene pairing, so semantic-paired contract design/review is required before another blind run
-- [ ] VE-1318 Run fresh 3x256 confirmation lanes and full verification before promotion (blocked by VE-1317)
-- [ ] VE-1319 Promote the approved V150 candidate into active data and verify `150,184` active base variations
+- [x] VE-1317 Fresh comparison-bound v7 blind review passed for `v150-gaze-release-20260905`; prior rejected reviews retained
+- [x] VE-1318 Fresh 3x256 confirmation and all eleven hash-bound verification gates passed; Python 874 / frontend 4 / browser 2
+- [x] VE-1319 Promote 27 files into active data; `PROMOTED`, postcheck pass, exact 135/109/8227/150184 and fixed 80-record replay verified
 
-VE-1319 is blocked until both VE-1317 and VE-1318 have hash-bound passing
-receipts. When unblocked it must:
+Q87 review/confirmation do not authorize a changed source tree. VE-1319 completed
+using the fresh [verification receipt](../../assets/results/v150-gaze-release-20260905/verification-receipt.json)
+and [promotion receipt](../../assets/results/v150-gaze-release-20260905/promotion-receipt.json).
+The following requirements were satisfied:
 
 - apply the frozen candidate subjects, locations, compatibility rows,
   backgrounds, location profiles, and action pools to active sources;

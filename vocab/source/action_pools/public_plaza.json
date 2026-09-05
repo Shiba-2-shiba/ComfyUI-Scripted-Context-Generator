@@ -1,0 +1,86 @@
+{
+  "location": "public_plaza",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "checking a plaza map beside the paving"
+    },
+    {
+      "load": "active",
+      "text": "walking toward a marked meeting point"
+    },
+    {
+      "load": "calm",
+      "text": "reading the event map beneath a civic information sign"
+    },
+    {
+      "load": "active",
+      "text": "crossing the open square between planters"
+    },
+    {
+      "load": "calm",
+      "text": "reading an event notice on the board"
+    },
+    {
+      "load": "active",
+      "text": "placing a folded leaflet on a bench"
+    },
+    {
+      "load": "calm",
+      "text": "looking toward the fountain at the center"
+    },
+    {
+      "load": "active",
+      "text": "following directional markers across the plaza"
+    },
+    {
+      "load": "calm",
+      "text": "checking the time beneath the clock tower"
+    },
+    {
+      "load": "calm",
+      "text": "standing beside a low stone planter"
+    },
+    {
+      "load": "active",
+      "text": "walking toward the monument steps across the plaza"
+    },
+    {
+      "load": "calm",
+      "text": "examining a temporary public display"
+    },
+    {
+      "load": "calm",
+      "text": "reading the inscription beneath the civic monument"
+    },
+    {
+      "load": "active",
+      "text": "crossing the fountain plaza toward the clock tower"
+    },
+    {
+      "load": "calm",
+      "text": "checking the event time on the public display"
+    },
+    {
+      "load": "active",
+      "text": "moving a lightweight exhibition panel into alignment"
+    },
+    {
+      "load": "calm",
+      "text": "reading the bronze inscription beside the fountain"
+    },
+    {
+      "load": "active",
+      "text": "carrying a folded poster toward the notice board"
+    },
+    {
+      "load": "calm",
+      "text": "studying the engraved monument map beside the fountain"
+    },
+    {
+      "load": "active",
+      "text": "walking around the raised planter to the meeting point"
+    }
+  ],
+  "families": []
+}

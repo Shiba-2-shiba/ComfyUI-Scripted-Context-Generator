@@ -65,6 +65,17 @@ class TestCharacterResolution(unittest.TestCase):
                     any("No compatibility archetype found" in warning for warning in resolved["warnings"])
                 )
 
+    def test_adding_casual_profession_does_not_change_named_profile_archetype(self):
+        scene = {"characters": {
+            "street girl": {"default_costume": "street_casual", "tags": ["urban"]},
+            "nurse": {"default_costume": "street_casual", "tags": ["medical"]},
+        }}
+        with patch("character_service.load_scene_compatibility", return_value=scene):
+            for profile_name in ("Rin (Cool)", "Zara (Exotic)"):
+                with self.subTest(profile_name=profile_name):
+                    self.assertEqual(resolve_character(character_name=profile_name)["compatibility_key"], "street girl")
+                    self.assertEqual(resolve_character(character_name=profile_name, source_subj_key="nurse")["compatibility_key"], "nurse")
+
     def test_all_named_profiles_resolve_without_orphan_warning(self):
         orphan_profiles = []
 

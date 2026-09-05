@@ -308,6 +308,7 @@
       },
       "widgets_values": [
         0,
+        "fixed",
         3,
         "random"
       ]

@@ -17,6 +17,7 @@ if str(ROOT) not in sys.path:
 
 from tools.analyze_prompt_quality import analyze_records, load_policy
 from tools.prompt_quality_loop import _atomic_write, build_confirmation_cohort, build_source_manifest
+from tools.semantic_review_contract import SEMANTIC_COMPARISON_TO_REVIEW
 from tools.workflow_prompt_runner import WorkflowValidationError, build_canonical_record, canonical_json_bytes, load_profile
 from workflow_widget_validation import load_workflow
 
@@ -25,11 +26,7 @@ WORKFLOW = ROOT / "ComfyUI-workflow-context.json"
 PROFILE = ROOT / "verification" / "fixtures" / "prompt_quality_supported_profile.json"
 POLICY = ROOT / "vocab" / "data" / "prompt_quality_policy.json"
 ABLATION_FEATURE_IDS = ("g004", "g005", "g006")
-V150_COMPARISON_SCHEMAS = {
-    "prompt-quality-comparison/v2": "prompt-quality-review/v4",
-    "prompt-quality-comparison/v3": "prompt-quality-review/v5",
-    "prompt-quality-comparison/v4": "prompt-quality-review/v6",
-}
+V150_COMPARISON_SCHEMAS = SEMANTIC_COMPARISON_TO_REVIEW
 V150_COMPARISON_SCHEMA = "prompt-quality-comparison/v2"
 V150_REVIEW_SCHEMA = "prompt-quality-review/v4"
 V150_BUNDLE_SCHEMA = "variation-v150-confirmation-bundle/v1"
@@ -88,15 +85,16 @@ def _existing_seeds() -> set[int]:
 
 
 def _load_or_create_seeds(path: Path) -> dict[str, Any]:
+    existing_seeds = _existing_seeds()
     if path.exists():
         cohort = json.loads(path.read_text(encoding="utf-8"))
     else:
-        cohort = build_confirmation_cohort(sorted(_existing_seeds()))
+        cohort = build_confirmation_cohort(sorted(existing_seeds))
         _atomic_write(path, canonical_json_bytes(cohort))
     seeds = [int(seed) for seed in cohort.get("confirmation_seeds", [])]
     if len(seeds) != 256 or len(seeds) != len(set(seeds)):
         raise ValueError("confirmation cohort must contain exactly 256 unique seeds")
-    overlap = _existing_seeds() & set(seeds)
+    overlap = existing_seeds & set(seeds)
     if overlap:
         raise ValueError(f"confirmation seeds overlap prior iteration cohorts: {sorted(overlap)[:5]}")
     return cohort
@@ -106,12 +104,58 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def _snapshot_content_hash(root: Path) -> str:
+def _verification_input_entries(
+    root: Path, *, verification_manifest_text: str | None = None,
+) -> dict[str, str]:
+    """Bind optional snapshot test support without changing legacy snapshot hashes."""
+    marker = root / ".verification-inputs.json"
+    if verification_manifest_text is None and not marker.exists():
+        return {}
+    try:
+        if marker.is_symlink():
+            raise ValueError("verification manifest must not be a symlink")
+        if verification_manifest_text is None:
+            raw = marker.read_bytes()
+        else:
+            if not isinstance(verification_manifest_text, str):
+                raise ValueError("verification manifest text must be a string")
+            raw = verification_manifest_text.encode("utf-8")
+            if marker.exists() and marker.read_bytes() != raw:
+                raise ValueError("verification manifest differs from the bound promotion context")
+        payload = json.loads(raw)
+        if (
+            not isinstance(payload, dict)
+            or payload.get("schema_version") != "snapshot-verification-inputs/v1"
+            or set(payload) != {"schema_version", "files"}
+            or not isinstance(payload["files"], list)
+        ):
+            raise ValueError("unsupported verification input manifest")
+        entries = {marker.name: hashlib.sha256(raw).hexdigest()}
+        for relative in payload["files"]:
+            if not isinstance(relative, str) or not relative:
+                raise ValueError("verification input path must be a non-empty string")
+            path = root / relative
+            if Path(relative).is_absolute() or ".." in Path(relative).parts or relative in entries:
+                raise ValueError("verification input path is unsafe or duplicated")
+            path.resolve().relative_to(root.resolve())
+            if path.is_symlink():
+                raise ValueError("verification input must not be a symlink")
+            entries[relative] = _sha256(path)
+        return entries
+    except (OSError, ValueError) as exc:
+        raise WorkflowValidationError(
+            "invalid_snapshot_verification_inputs", "snapshot verification inputs are missing or invalid",
+            path=str(marker), reason=str(exc),
+        ) from exc
+
+
+def _snapshot_content_hash(root: Path, *, verification_manifest_text: str | None = None) -> str:
     entries = {entry["path"]: entry["sha256"] for entry in build_source_manifest(root)["entries"]}
     for relative in EXTRA_RUNTIME_FILES:
         path = root / relative
         if path.is_file():
             entries[relative] = _sha256(path)
+    entries.update(_verification_input_entries(root, verification_manifest_text=verification_manifest_text))
     return hashlib.sha256(canonical_json_bytes(dict(sorted(entries.items())))).hexdigest()
 
 
@@ -157,6 +201,8 @@ def _sanitized_environment(candidate_root: Path) -> dict[str, str]:
     environment["PYTHONPATH"] = str(candidate_root.resolve())
     environment["PYTHONNOUSERSITE"] = "1"
     environment["PYTHONSAFEPATH"] = "1"
+    environment["PYTHONUTF8"] = "1"
+    environment["PYTHONIOENCODING"] = "utf-8"
     return environment
 
 
@@ -295,8 +341,8 @@ def build_confirmation(
         "cohort_hash": cohort["cohort_hash"],
         "comparison": _compare(objective, sides["baseline"], sides["candidate"], policy),
         "excluded_seed_count": len(excluded_seeds),
-        "excluded_seed_set_hash": __import__("hashlib").sha256(canonical_json_bytes(excluded_seeds)).hexdigest(),
-        "feature_ablation": _apply_baseline_ablation(objective),
+        "excluded_seed_set_hash": hashlib.sha256(canonical_json_bytes(excluded_seeds)).hexdigest(),
+        "feature_ablation": ablation_contract()["adapters"][objective],
         "objective": objective,
         "record_count": 256,
         "schema_version": "prompt-quality-confirmation/v1",
@@ -402,6 +448,7 @@ def build_candidate_confirmation(
             env=_sanitized_environment(candidate_root),
             capture_output=True,
             text=True,
+            encoding="utf-8",
             check=False,
         )
         if completed.returncode != 0:

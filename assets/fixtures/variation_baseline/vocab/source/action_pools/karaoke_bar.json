@@ -1,0 +1,43 @@
+{
+  "location": "karaoke_bar",
+  "actions": [
+    {
+      "text": "sitting on a sofa humming softly",
+      "load": "calm"
+    },
+    {
+      "text": "standing and holding a microphone",
+      "load": "calm"
+    },
+    {
+      "text": "sitting with a drink, looking relaxed",
+      "load": "calm"
+    },
+    {
+      "text": "standing and choosing a song on the screen",
+      "load": "calm"
+    },
+    {
+      "text": "standing and singing passionately",
+      "load": "calm"
+    },
+    {
+      "text": "clapping hands to the rhythm",
+      "load": "calm"
+    },
+    {
+      "text": "following the rhythm with a small cheer",
+      "load": "calm"
+    },
+    {
+      "text": "pasting a song into the queue",
+      "load": "calm"
+    }
+  ],
+  "families": [
+    {
+      "name": "leisure_participation",
+      "take": 8
+    }
+  ]
+}

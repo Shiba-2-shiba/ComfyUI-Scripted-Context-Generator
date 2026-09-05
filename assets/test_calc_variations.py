@@ -9,16 +9,16 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from assets.calc_variations import calc_base_metrics, calc_garnish_metrics  # noqa: E402
+from tools.check_variation_scope import load_variation_scope
 
 
 class TestCalcVariations(unittest.TestCase):
     def test_base_metrics_still_report_current_action_pool_coverage(self):
         metrics = calc_base_metrics(ROOT)
 
-        self.assertEqual(metrics["unique_subjects"], 120)
-        self.assertEqual(metrics["unique_locations"], 90)
-        self.assertEqual(metrics["total_base_variations"], 103212)
-        self.assertEqual(metrics["row_count"], 5806)
+        expected = load_variation_scope()["expected_metrics"]
+        for key in ("unique_subjects", "unique_locations", "total_base_variations", "row_count"):
+            self.assertEqual(metrics[key], expected[key], key)
         self.assertEqual(metrics["missing_pools_count"], 0)
 
     def test_garnish_metrics_are_semantic_only(self):

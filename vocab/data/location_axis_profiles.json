@@ -116,6 +116,234 @@
         "intimacy": 0.45,
         "time_pressure": 0.15
       }
+    },
+    "bike_station": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "canal_walkway": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "clinic_waiting_room": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "community_garden": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "community_theater_backstage": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "design_studio": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "ferry_terminal": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "fire_station": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "flower_market": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "forest_cabin": {
+      "vector": {
+        "crowd_density": 0.05,
+        "activity_level": 0.15,
+        "openness": 0.25,
+        "orderliness": 0.55,
+        "weather_intensity": 0.0,
+        "light_softness": 0.75,
+        "intimacy": 0.9,
+        "time_pressure": 0.05
+      }
+    },
+    "greenhouse_nursery": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "maker_space": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "observatory_dome": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "postal_service_counter": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "print_shop": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "public_plaza": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "rooftop_cafe": {
+      "vector": {
+        "crowd_density": 0.45,
+        "activity_level": 0.45,
+        "openness": 0.55,
+        "orderliness": 0.55,
+        "weather_intensity": 0.15,
+        "light_softness": 0.6,
+        "intimacy": 0.55,
+        "time_pressure": 0.25
+      }
+    },
+    "tram_platform": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
+    },
+    "vehicle_repair_garage": {
+      "vector": {
+        "crowd_density": 0.5,
+        "activity_level": 0.5,
+        "openness": 0.5,
+        "orderliness": 0.5,
+        "weather_intensity": 0.0,
+        "light_softness": 0.5,
+        "intimacy": 0.5,
+        "time_pressure": 0.5
+      }
     }
   },
   "notes": {

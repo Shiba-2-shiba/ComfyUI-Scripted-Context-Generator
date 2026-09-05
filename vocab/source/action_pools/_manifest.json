@@ -98,6 +98,25 @@
     "shopping_arcade",
     "subway_ticket_gate",
     "train_station_platform",
-    "university_campus_courtyard"
+    "university_campus_courtyard",
+    "bike_station",
+    "canal_walkway",
+    "clinic_waiting_room",
+    "community_garden",
+    "community_theater_backstage",
+    "design_studio",
+    "ferry_terminal",
+    "fire_station",
+    "flower_market",
+    "forest_cabin",
+    "greenhouse_nursery",
+    "maker_space",
+    "observatory_dome",
+    "postal_service_counter",
+    "print_shop",
+    "public_plaza",
+    "rooftop_cafe",
+    "tram_platform",
+    "vehicle_repair_garage"
   ]
 }

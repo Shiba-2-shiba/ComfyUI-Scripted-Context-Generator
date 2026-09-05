@@ -120,100 +120,21 @@ Current execution state:
 L0: BASELINE_READY (completed 2026-09-01)
 L1: PROMOTED (completed 2026-09-01; planner capability only)
 L2: complete for structural selection; iteration 001 rejected, iteration 002 eligible
-L3: iteration 017 automatic quality validation passed; blind-review attempt 007 rejected
+L3: q87 automatic comparison, v6 blind review, and 3x256 confirmation passed
+Full verification: incomplete; candidate repair required before promotion
 ```
 
-L0 evidence is frozen under `experiments/v150-planner-l0/`; the base L1-L3
-technical plan is `planner_refactor_spec.md`, and the promoted L1 delta is
-`planner_l1_contract.md`.
+Current execution order is in [README](./README.md); exact q87 evidence and
+remaining failures are in [the handoff](./HANDOFF_2026-09-04_Q87.md).
+The q87 passes remain bound to q87 and must not authorize changed source bytes.
 
-L1 evidence is frozen under `experiments/v150-planner-l1/`. Its synthetic
-fixture proves planner behavior but is not a promotable variation-data candidate.
-
-L2 analyzer rules are in `candidate_l2_contract.md`. Rejected attempt 001 is
-frozen under `experiments/v150-candidate-l2/`; it cannot be reused as a prompt
-candidate or overwritten by the next iteration.
-
-Iteration 002 handoff is frozen under
-`experiments/v150-candidate-l2-iteration-002/`. It authorizes isolated candidate
-snapshot preparation only; it does not authorize active data or scope changes.
-
-L3 snapshot rules are in `candidate_l3_contract.md`. Snapshot iteration 001 is
-rejected under `experiments/v150-candidate-l3-iteration-001/` because realized
-base variations were `141,984`, below V150. Prompt generation remains blocked.
-
-Runtime-equivalent contribution modeling selected a four-location addition shape
-estimated at `150,184`. Hash-bound review authorized and iteration 004 completed
-isolated authoring of 80 actions, then materialized and compared that shape on the fixed 64+16
-cohort. It met quantity and improved location entropy, but was rejected because
-8 locations and 13 actual location-action pools were unseen and repeated-ngram
-plus context-size guards regressed. Active data remains unchanged; blind review
-and confirmation were not run.
-
-Coverage schedule iteration 005 kept the same 64+16 cohort and established a
-non-circular contract/schedule/snapshot/experiment evidence chain. Its 19-row
-source schedule was fully reachable, but the complete workflow reached only 12
-candidate locations and 9 exact final location-action witnesses because
-`ContextSceneVariator` full mode can replace the source scene. The attempt is
-terminally rejected and cannot change the parent quality verdict. The next
-planner capability must model complete-workflow witness reachability.
-
-Iteration 006 completed that capability. A fixed80-only row/slot matrix and
-deterministic assignment reproduced 19/19 final locations, 15/15 subjects, and
-19/19 exact raw pool-action witnesses in the formal auto workflow. This closes
-the coverage-planning gap but does not change quality authority. Semantic-family
-repetition and context p95/max still regress, so the candidate remains rejected
-and the next loop is quality remediation with the coverage schedule frozen.
-
-Iteration 007 completed that remediation diagnostically. The frozen coverage
-surface retained 19/19 witnesses and zero extra seeds, cleaned prompts were
-byte-stable, semantic-family repetition returned to baseline, and context p95
-and maximum became non-regressing. Because the surface was selected for
-coverage, the fixed quality rejection remains authoritative. A separate
-non-selected quality validation is required before review or confirmation.
-
-Iteration 008 completed that non-selected validation. A current-source 19/19
-coverage refresh is bound separately from a default unscheduled 80-row quality
-surface. Control64 target and guard metrics pass, while the full 64+16 cohort
-remains the generation/replay contract. The result is review-ready but not
-promotable until blind review, fresh 3x256 confirmation, and full verification
-are complete.
-
-Blind-review attempt 002 rejected the iteration 009 comparison despite its
-automatic quality pass. The original five-seed defects remained fixed, but five
-new seeds produced eight candidate-only hard-defect observations involving
-clothing/TPO, time-of-day, and outdoor-room wording.
-
-Iteration 010 completed the post-attempt-002 automatic validation on a fresh
-q25 default80 surface. The fixed 64+16 cohort replayed with zero mismatches,
-control64 location entropy improved from `4.626124` to `4.956344`, all guards
-were non-regressing, and the comparison is review-ready. Promotion remains
-blocked pending comparison-bound blind-review attempt 003, fresh 3x256
-confirmation, and full verification.
-
-Attempts 003 and 004 drove root-cause remediation across clothing TPO,
-time-phase filtering, outdoor wording, candidate location-detail duplication,
-and pool-action realization. Attempt 004 reached zero candidate-only hard
-defects but remained below the qualitative direction thresholds.
-
-Iteration 015 passed fresh q35 automatic validation with every guard
-non-regressing and materially smaller context payloads. Blind-review attempt
-005 nevertheless rejected the candidate with three candidate-only defects and
-remaining qualitative direction gaps. VE-1318 and VE-1319 remain blocked; no
-confirmation or active-data promotion is authorized.
-
-Iteration 016 removed the remaining bedtime/morning and recording-booth hard
-defects. Fresh q37 automatic validation passed, and blind-review attempt 006
-reported zero candidate-only hard defects plus passing target improvement
-support. The verdict remains rejected because candidate-worse rates are still
-above the unchanged `0.1` limit. Confirmation and promotion remain blocked.
-
-Iteration 017 preserved authored pool actions and made location-specific
-profiles override broad tag axes. Fresh q39 automatic validation passed, but
-attempt 007 remained rejected and showed unstable convergence when unrelated
-scenes are compared under a directional worse-rate contract. The next gate is
-an independently approved semantic-paired comparison contract that keeps the
-existing thresholds. VE-1318 and VE-1319 remain blocked.
+L0/L1 evidence is frozen under `experiments/v150-planner-l0/` and
+`experiments/v150-planner-l1/`. L1 promoted planner capability only.
+The technical contracts remain `planner_refactor_spec.md`, `planner_l1_contract.md`,
+`candidate_l2_contract.md`, and `candidate_l3_contract.md`.
+Earlier rejected iterations and their decisions are recorded in
+[progress](./progress.md), [tasks](./tasks.md), and `experiments/`;
+their historical remediation steps are not the current execution sequence.
 
 ### V150 Active Promotion Gate
 
@@ -225,11 +146,9 @@ variations, reruns the complete quality and runtime verification surfaces, and
 records a terminal promotion or rollback receipt. V250 planning cannot use V150
 as its baseline until this receipt is `PROMOTED`.
 
-Blind-review attempt 001 rejected q19 despite its automatic quality pass. Five
-candidate seeds produced eight hard-defect observations, and qualitative
-naturalness/redundancy/image-suitability thresholds failed. The loop returns to
-isolated remediation and must create a fresh comparison and two new blinded
-lanes before VE-1318 or VE-1319 can start.
+For a new candidate, repair and verify executable gates before running fresh
+quality evaluation. Preserve comparison/review/confirmation bindings and all
+eleven final gates; source changes invalidate the previous candidate's evidence.
 
 ### L0: Reproducible Baseline
 

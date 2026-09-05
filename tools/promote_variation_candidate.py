@@ -23,8 +23,8 @@ ALLOWLIST = {
 }
 ARTIFACT_SCHEMAS = {
     "automatic_comparison": ("variation-nonselected-quality-comparison/v2",),
-    "semantic_comparison": ("prompt-quality-comparison/v2", "prompt-quality-comparison/v3", "prompt-quality-comparison/v4"),
-    "review": ("prompt-quality-review/v4", "prompt-quality-review/v5", "prompt-quality-review/v6"),
+    "semantic_comparison": ("prompt-quality-comparison/v2", "prompt-quality-comparison/v3", "prompt-quality-comparison/v4", "prompt-quality-comparison/v5"),
+    "review": ("prompt-quality-review/v4", "prompt-quality-review/v5", "prompt-quality-review/v6", "prompt-quality-review/v7"),
     "confirmation": ("variation-v150-confirmation-bundle/v1",),
     "verification": ("variation-v150-verification-receipt/v1",),
 }
@@ -85,6 +85,20 @@ def default_content_hash(root: Path) -> str:
         return value_hash({p.as_posix(): file_hash(root / p) for p in _relative_files(root)})
 
 
+def _active_content_hash(root: Path, content_hasher: Callable[[Path], str], manifest_text: str | None) -> str:
+    """Use frozen snapshot support bindings without copying its marker into active."""
+    if content_hasher is not default_content_hash or manifest_text is None:
+        return content_hasher(root)
+    if not isinstance(manifest_text, str):
+        raise PromotionError("verification_inputs_invalid", "verification input context must be text")
+    from tools.build_prompt_quality_confirmation import _snapshot_content_hash
+    from tools.workflow_prompt_runner import WorkflowValidationError
+    try:
+        return _snapshot_content_hash(root, verification_manifest_text=manifest_text)
+    except WorkflowValidationError as exc:
+        raise PromotionError("verification_inputs_invalid", "frozen verification inputs are missing or invalid", reason=str(exc)) from exc
+
+
 def _action_source_allowlist(manifest: Mapping[str, Any]) -> set[str]:
     locations = manifest.get("candidate_ids", {}).get("locations", [])
     if not isinstance(locations, list) or len(locations) != 19 or len(set(locations)) != 19:
@@ -102,7 +116,16 @@ def _validate_artifact(name: str, path: Path, experiment_id: str, candidate_sour
         raise PromotionError("artifact_experiment_mismatch", "automatic comparison explicitly binds another experiment", artifact=name)
     terminal = value.get("status", value.get("validation_verdict", value.get("quality_verdict")))
     verdict = value.get("verdict", value.get("quality_verdict"))
-    accepted = terminal in {"pass", "complete", "verified"} or verdict in {"pass", "promote"}
+    if name == "semantic_comparison":
+        passing_values = {
+            "status": {"pass", "complete", "verified"}, "verdict": {"pass", "promote"},
+            "quality_verdict": {"pass"}, "validation_verdict": {"pass"},
+        }
+        declared = [field for field in passing_values if field in value]
+        accepted = all(isinstance(value[field], str) and value[field] in passing_values[field]
+                       for field in declared) if declared else value.get("automatic_comparison_verdict") == "pass"
+    else:
+        accepted = terminal in {"pass", "complete", "verified"} or verdict in {"pass", "promote"}
     if not accepted:
         raise PromotionError("artifact_not_passing", "promotion artifact is not terminal-pass", artifact=name, status=terminal, verdict=verdict)
     source_values = [value.get(key) for key in ("candidate_source_tree_sha256", "candidate_source_tree_hash", "source_tree_hash") if value.get(key) is not None]
@@ -123,7 +146,10 @@ def build_preflight(*, active_root: Path, candidate_root: Path, snapshot_manifes
     changed = manifest.get("changed_files")
     if not isinstance(changed, list) or set(changed) != allowlist or len(changed) != len(allowlist):
         raise PromotionError("snapshot_changed_files_not_allowlisted", "snapshot changed_files must equal the closed promotion allowlist", extra=sorted(set(changed or []) - allowlist), missing=sorted(allowlist - set(changed or [])))
-    active_source, active_content = source_hasher(active_root), content_hasher(active_root)
+    marker = candidate_root / ".verification-inputs.json"
+    manifest_text = marker.read_bytes().decode("utf-8") if content_hasher is default_content_hash and marker.exists() else None
+    active_source = source_hasher(active_root)
+    active_content = _active_content_hash(active_root, content_hasher, manifest_text)
     candidate_source, candidate_content = source_hasher(candidate_root), content_hasher(candidate_root)
     if active_source != manifest.get("baseline_source_tree_sha256") or active_content != manifest.get("baseline_snapshot_content_sha256"):
         raise PromotionError("active_baseline_drift", "active source-tree or snapshot-content hash drifted")
@@ -139,6 +165,7 @@ def build_preflight(*, active_root: Path, candidate_root: Path, snapshot_manifes
         "prompt-quality-comparison/v2": "prompt-quality-review/v4",
         "prompt-quality-comparison/v3": "prompt-quality-review/v5",
         "prompt-quality-comparison/v4": "prompt-quality-review/v6",
+        "prompt-quality-comparison/v5": "prompt-quality-review/v7",
     }[comparison["schema_version"]]
     if review.get("schema_version") != expected_review_schema:
         raise PromotionError("artifact_schema_generation_mismatch", "semantic comparison and review schemas must belong to one generation")
@@ -177,17 +204,24 @@ def build_preflight(*, active_root: Path, candidate_root: Path, snapshot_manifes
     result = {"schema_version": PREFLIGHT_SCHEMA, "experiment_id": experiment_id, "verdict": "promote", "status": "pass", "active_root": str(active_root), "candidate_root": str(candidate_root),
               "snapshot_manifest": {"path": str(snapshot_manifest_path), "sha256": file_hash(snapshot_manifest_path)}, "baseline_source_tree_sha256": active_source, "baseline_snapshot_content_sha256": active_content,
               "candidate_source_tree_sha256": candidate_source, "candidate_snapshot_content_sha256": candidate_content, "allowlist": sorted(allowlist), "candidate_file_hashes": intended, "artifacts": artifacts}
+    if manifest_text is not None:
+        result["verification_input_manifest_text"] = manifest_text
     result["preflight_sha256"] = value_hash(result)
     return result
 
 
-def _validate_preflight(preflight_path: Path, source_hasher: Callable[[Path], str], content_hasher: Callable[[Path], str]) -> tuple[dict[str, Any], Path, Path]:
+def _read_preflight(preflight_path: Path) -> dict[str, Any]:
     preflight = _read_json(preflight_path)
     body = {key: value for key, value in preflight.items() if key != "preflight_sha256"}
     if preflight.get("schema_version") != PREFLIGHT_SCHEMA or value_hash(body) != preflight.get("preflight_sha256") or preflight.get("status") != "pass" or preflight.get("verdict") != "promote":
         raise PromotionError("preflight_invalid", "promotion preflight is not a hash-valid promote verdict")
+    return preflight
+
+
+def _validate_preflight(preflight_path: Path, source_hasher: Callable[[Path], str], content_hasher: Callable[[Path], str]) -> tuple[dict[str, Any], Path, Path]:
+    preflight = _read_preflight(preflight_path)
     active, candidate = Path(preflight["active_root"]).resolve(), Path(preflight["candidate_root"]).resolve()
-    if source_hasher(active) != preflight["baseline_source_tree_sha256"] or content_hasher(active) != preflight["baseline_snapshot_content_sha256"]:
+    if source_hasher(active) != preflight["baseline_source_tree_sha256"] or _active_content_hash(active, content_hasher, preflight.get("verification_input_manifest_text")) != preflight["baseline_snapshot_content_sha256"]:
         raise PromotionError("active_baseline_drift", "active root changed after preflight")
     if source_hasher(candidate) != preflight["candidate_source_tree_sha256"] or content_hasher(candidate) != preflight["candidate_snapshot_content_sha256"]:
         raise PromotionError("candidate_snapshot_drift", "candidate root changed after preflight")
@@ -209,8 +243,10 @@ class ExclusiveLock:
 
 
 def _stage(preflight: Mapping[str, Any], active: Path, candidate: Path, generator: Callable[[Path], None] | None) -> Path:
+    from tools.materialize_variation_candidate_snapshot import _copy_filtered_source
+
     stage = Path(tempfile.mkdtemp(prefix=".v150-stage-", dir=active.parent))
-    shutil.copytree(active, stage, dirs_exist_ok=True, ignore=shutil.ignore_patterns(".promotion-state"))
+    _copy_filtered_source(active, stage)
     for relative in preflight["allowlist"]:
         destination = stage / relative; destination.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(candidate / relative, destination)
     if generator is not None:
@@ -238,7 +274,7 @@ def _rollback(journal: dict[str, Any], active: Path, journal_path: Path, *, fail
         for entry in journal["entries"]:
             actual = file_hash(active / entry["path"]) if (active / entry["path"]).is_file() else None
             if actual != entry["before_sha256"]: raise PromotionError("rollback_path_hash_mismatch", "rollback did not restore an exact path", path=entry["path"])
-        if source_hasher(active) != journal["baseline_source_tree_sha256"] or content_hasher(active) != journal["baseline_snapshot_content_sha256"]:
+        if source_hasher(active) != journal["baseline_source_tree_sha256"] or _active_content_hash(active, content_hasher, journal.get("verification_input_manifest_text")) != journal["baseline_snapshot_content_sha256"]:
             raise PromotionError("rollback_tree_hash_mismatch", "rollback did not restore exact baseline source-tree and snapshot-content hashes")
         journal["state"] = "ROLLED_BACK"; _write_fsync(journal_path, journal)
         return {"schema_version": ROLLBACK_SCHEMA, "experiment_id": journal["experiment_id"], "state": "ROLLED_BACK", "journal_sha256": file_hash(journal_path), "entries_sha256": value_hash(journal["entries"])}
@@ -247,9 +283,26 @@ def _rollback(journal: dict[str, Any], active: Path, journal_path: Path, *, fail
         return {"schema_version": ROLLBACK_SCHEMA, "experiment_id": journal["experiment_id"], "state": "RECOVERY_REQUIRED", "journal_sha256": file_hash(journal_path)}
 
 
-def apply_promotion(*, preflight_path: Path, state_dir: Path, generator: Callable[[Path], None] | None = None, fail_after: int | None = None, fail_rollback: bool = False, source_hasher: Callable[[Path], str] = default_source_hash, content_hasher: Callable[[Path], str] = default_content_hash) -> dict[str, Any]:
+def _check_applied_candidate(active: Path, preflight: Mapping[str, Any], entries: Sequence[Mapping[str, Any]], source_hasher: Callable[[Path], str], content_hasher: Callable[[Path], str]) -> None:
+    for entry in entries:
+        target = active / entry["path"]
+        if not target.is_file() or file_hash(target) != entry["staged_sha256"]:
+            raise PromotionError("post_apply_hash_mismatch", "read-only postcheck detected mutation", path=entry["path"])
+    if source_hasher(active) != preflight["candidate_source_tree_sha256"] or _active_content_hash(active, content_hasher, preflight.get("verification_input_manifest_text")) != preflight["candidate_snapshot_content_sha256"]:
+        raise PromotionError("post_apply_tree_hash_mismatch", "active tree does not equal frozen candidate after apply")
+
+
+def apply_promotion(*, preflight_path: Path, state_dir: Path, generator: Callable[[Path], None] | None = None, postcheck: Callable[[Path], Mapping[str, Any] | None] | None = None, fail_after: int | None = None, fail_rollback: bool = False, source_hasher: Callable[[Path], str] = default_source_hash, content_hasher: Callable[[Path], str] = default_content_hash) -> dict[str, Any]:
+    """Apply frozen files, optionally validate active read-only, then commit.
+
+    The postcheck runs under the transaction lock and rollback protection. It must
+    raise on failure or return a JSON mapping with status="pass". Returned evidence
+    is bound into the journal and receipt; None supports exception-only validators.
+    Write logs outside the hashed active tree. Unrelated source mutations are
+    detected but never silently restored by the allowlisted rollback.
+    """
     state_dir.mkdir(parents=True, exist_ok=True); journal_path, lock_path = state_dir / "journal.json", state_dir / "promotion.lock"
-    if journal_path.exists() and _read_json(journal_path).get("state") in {"APPLYING", "ROLLING_BACK", "RECOVERY_REQUIRED"}:
+    if journal_path.exists() and _read_json(journal_path).get("state") in {"APPLYING", "POSTCHECK", "ROLLING_BACK", "RECOVERY_REQUIRED"}:
         raise PromotionError("incomplete_journal_blocks_apply", "rollback-only recovery is required before apply")
     with ExclusiveLock(lock_path):
         preflight, active, candidate = _validate_preflight(preflight_path, source_hasher, content_hasher)
@@ -262,6 +315,8 @@ def apply_promotion(*, preflight_path: Path, state_dir: Path, generator: Callabl
             if not absent: backup.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(target, backup)
             entries.append({"path": relative, "absent_before": absent, "before_sha256": None if absent else file_hash(target), "staged_sha256": file_hash(stage / relative), "backup_path": str(backup), "after_sha256": None})
         journal = {"schema_version": JOURNAL_SCHEMA, "experiment_id": preflight["experiment_id"], "preflight_path": str(preflight_path), "preflight_sha256": preflight["preflight_sha256"], "baseline_source_tree_sha256": preflight["baseline_source_tree_sha256"], "baseline_snapshot_content_sha256": preflight["baseline_snapshot_content_sha256"], "state": "APPLYING", "entries": entries}
+        if "verification_input_manifest_text" in preflight:
+            journal["verification_input_manifest_text"] = preflight["verification_input_manifest_text"]
         _write_fsync(journal_path, journal)
         try:
             for index, entry in enumerate(entries, 1):
@@ -270,14 +325,23 @@ def apply_promotion(*, preflight_path: Path, state_dir: Path, generator: Callabl
                 entry["after_sha256"] = file_hash(target); _write_fsync(journal_path, journal)
                 if fail_after == index: raise OSError("injected replacement failure")
             journal["state"] = "POSTCHECK"; _write_fsync(journal_path, journal)
-            for entry in entries:
-                if file_hash(active / entry["path"]) != entry["staged_sha256"]: raise PromotionError("post_apply_hash_mismatch", "read-only postcheck detected mutation", path=entry["path"])
-            if source_hasher(active) != preflight["candidate_source_tree_sha256"] or content_hasher(active) != preflight["candidate_snapshot_content_sha256"]:
-                raise PromotionError("post_apply_tree_hash_mismatch", "active tree does not equal frozen candidate after apply")
+            _check_applied_candidate(active, preflight, entries, source_hasher, content_hasher)
+            if postcheck is not None:
+                postcheck_result = postcheck(active)
+                if postcheck_result is not None:
+                    if not isinstance(postcheck_result, Mapping) or postcheck_result.get("status") != "pass":
+                        raise PromotionError("post_apply_validation_failed", "postcheck result must have passing status")
+                    journal["postcheck_result"] = json.loads(canonical_bytes(dict(postcheck_result)))
+                    journal["postcheck_result_sha256"] = value_hash(journal["postcheck_result"])
+                _check_applied_candidate(active, preflight, entries, source_hasher, content_hasher)
             journal["state"] = "PROMOTED"; _write_fsync(journal_path, journal)
             receipt = {"schema_version": PROMOTION_SCHEMA, "experiment_id": preflight["experiment_id"], "state": "PROMOTED", "preflight_sha256": preflight["preflight_sha256"], "journal_sha256": file_hash(journal_path), "candidate_source_tree_sha256": preflight["candidate_source_tree_sha256"], "candidate_snapshot_content_sha256": preflight["candidate_snapshot_content_sha256"], "entries_sha256": value_hash(entries)}
+            if "postcheck_result" in journal:
+                receipt["postcheck_result"] = journal["postcheck_result"]
+                receipt["postcheck_result_sha256"] = journal["postcheck_result_sha256"]
             receipt["promotion_receipt_sha256"] = value_hash(receipt); return receipt
-        except Exception:
+        except Exception as exc:
+            journal["apply_error"] = exc.envelope() if isinstance(exc, PromotionError) else {"exception_type": type(exc).__name__, "message": str(exc)}
             journal["state"] = "ROLLING_BACK"; _write_fsync(journal_path, journal)
             return _rollback(journal, active, journal_path, fail_rollback=fail_rollback, source_hasher=source_hasher, content_hasher=content_hasher)
         finally:
@@ -289,9 +353,13 @@ def recover(*, state_dir: Path, source_hasher: Callable[[Path], str] = default_s
     if not journal_path.is_file(): raise PromotionError("recovery_journal_missing", "no promotion journal exists")
     with ExclusiveLock(lock_path):
         journal = _read_json(journal_path)
-        if journal.get("schema_version") != JOURNAL_SCHEMA or journal.get("state") not in {"APPLYING", "ROLLING_BACK", "RECOVERY_REQUIRED"}:
+        if journal.get("schema_version") != JOURNAL_SCHEMA or journal.get("state") not in {"APPLYING", "POSTCHECK", "ROLLING_BACK", "RECOVERY_REQUIRED"}:
             raise PromotionError("recovery_not_required", "journal is not in a recoverable incomplete state")
-        preflight = _read_json(Path(journal["preflight_path"])); active = Path(preflight["active_root"])
+        preflight = _read_preflight(Path(journal["preflight_path"]))
+        for key in ("preflight_sha256", "baseline_source_tree_sha256", "baseline_snapshot_content_sha256", "verification_input_manifest_text"):
+            if journal.get(key) != preflight.get(key):
+                raise PromotionError("recovery_context_drift", "recovery journal does not match the frozen preflight", field=key)
+        active = Path(preflight["active_root"])
         return _rollback(journal, active, journal_path, source_hasher=source_hasher, content_hasher=content_hasher)
 
 

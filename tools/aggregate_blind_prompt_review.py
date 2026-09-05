@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from tools.prompt_quality_loop import _atomic_write
+from tools.semantic_review_contract import validate_v7_review_contract
 from tools.workflow_prompt_runner import canonical_json_bytes
 
 
@@ -127,18 +128,26 @@ def aggregate_review(
         "prompt-quality-review-contract/v1", "prompt-quality-review-contract/v3",
         "prompt-quality-review-contract/v4", "prompt-quality-review-contract/v5",
         "prompt-quality-review-contract/v6",
+        "prompt-quality-review-contract/v7",
     }:
         raise ValueError(f"unsupported review contract schema: {contract_schema!r}")
     is_v3 = contract_schema == "prompt-quality-review-contract/v3"
     is_v4 = contract_schema == "prompt-quality-review-contract/v4"
     is_v5 = contract_schema == "prompt-quality-review-contract/v5"
     is_v6 = contract_schema == "prompt-quality-review-contract/v6"
-    is_semantic = is_v4 or is_v5 or is_v6
-    expected_key_schema = "prompt-quality-review-assignment-key/v6" if is_v6 else "prompt-quality-review-assignment-key/v5" if is_v5 else "prompt-quality-review-assignment-key/v4" if is_v4 else "prompt-quality-review-assignment-key/v3" if is_v3 else "prompt-quality-review-assignment-key/v1"
+    is_v7 = contract_schema == "prompt-quality-review-contract/v7"
+    is_semantic = is_v4 or is_v5 or is_v6 or is_v7
+    semantic_version = str(contract_schema).rsplit("/v", 1)[-1]
+    uses_non_abstain = is_v5 or is_v6 or is_v7
+    uses_non_abstain_regression = is_v6 or is_v7
+    expected_key_schema = f"prompt-quality-review-assignment-key/v{semantic_version}" if is_semantic else "prompt-quality-review-assignment-key/v3" if is_v3 else "prompt-quality-review-assignment-key/v1"
     if key.get("schema_version") != expected_key_schema:
         raise ValueError("assignment-key schema does not match its frozen review contract")
     allowed_hard_defect_codes = set(review_policy.get("hard_defect_codes", [])) if is_v3 or is_semantic else set()
     dimension_eligibility = key.get("dimension_eligibility", {}) if is_v3 or is_semantic else {}
+    if is_v7:
+        validate_v7_review_contract(review_policy, targets=target_dimensions, guards=guard_dimensions,
+                                   dimensions=dimension_eligibility, pair_ids=[pair["pair_id"] for pair in key.get("selection", {}).get("pairs", [])])
     eligible_seed_sets = {
         dimension: set(eligibility.get("pair_ids" if is_semantic else "seeds", []))
         for dimension, eligibility in dimension_eligibility.items()
@@ -187,7 +196,7 @@ def aggregate_review(
             failures.append({"code": "missing_result_metadata", "lane_id": lane_id, "missing_fields": missing})
         if (
             set(lane) != (V4_LANE_FIELDS if is_semantic else V3_LANE_FIELDS if is_v3 else LANE_FIELDS)
-            or lane.get("schema_version") != ("prompt-quality-blind-review-lane/v6" if is_v6 else "prompt-quality-blind-review-lane/v5" if is_v5 else "prompt-quality-blind-review-lane/v4" if is_v4 else "prompt-quality-blind-review-lane/v3" if is_v3 else "prompt-quality-blind-review-lane/v1")
+            or lane.get("schema_version") != (f"prompt-quality-blind-review-lane/v{semantic_version}" if is_semantic else "prompt-quality-blind-review-lane/v3" if is_v3 else "prompt-quality-blind-review-lane/v1")
             or lane.get("lane_id") != lane_id
             or lane.get("pair_count") != 20
             or lane.get("blinded") is not True
@@ -332,7 +341,8 @@ def aggregate_review(
         non_abstain = directional + counts["equal"]
         valid = directional
         support = better / directional if directional else 0.0
-        worse_rate = worse / (non_abstain if is_v6 else directional) if (non_abstain if is_v6 else directional) else 0.0
+        regression_denominator = non_abstain if uses_non_abstain_regression else directional
+        worse_rate = worse / regression_denominator if regression_denominator else 0.0
         is_target = dimension in target_dimensions
         contract = target_contract if is_target else guard_contract
         eligibility = dimension_eligibility.get(dimension, {})
@@ -343,14 +353,14 @@ def aggregate_review(
                 "candidate_better": 0, "candidate_worse": 0, "equal": 0, "abstain": 0,
                 "improvement_support": 0.0, "lane_directions": {}, "passed": True,
                 "scope": "corpus_confirmation",
-                **({"candidate_regression_rate": 0.0} if is_v6 else {"worse_rate": 0.0}),
-                **({"non_abstain_votes": 0, "directional_votes": 0} if is_v5 or is_v6 else {"valid_votes": 0}),
+                **({"candidate_regression_rate": 0.0} if uses_non_abstain_regression else {"worse_rate": 0.0}),
+                **({"non_abstain_votes": 0, "directional_votes": 0} if uses_non_abstain else {"valid_votes": 0}),
             }
             continue
         max_worse = float(contract.get("max_candidate_worse_rate", 0.10))
         passed = worse_rate <= max_worse
         minimum_valid = int(eligibility.get("minimum_valid_votes", 0)) if is_v3 or is_v4 else 0
-        if (is_v5 or is_v6) and authority == "semantic_pairwise":
+        if uses_non_abstain and authority == "semantic_pairwise":
             minimum_non_abstain = int(eligibility["minimum_non_abstain_votes"])
             minimum_directional = int(eligibility["minimum_directional_votes"])
             passed = passed and non_abstain >= minimum_non_abstain and directional >= minimum_directional
@@ -365,7 +375,7 @@ def aggregate_review(
         if is_target:
             minimum_valid = minimum_valid if is_v3 or is_semantic else int(contract.get("minimum_valid_votes", 36))
             minimum_support = float(contract.get("min_improvement_support", 0.65))
-            passed = passed and (True if is_v5 or is_v6 else valid >= minimum_valid) and support >= minimum_support
+            passed = passed and (True if uses_non_abstain else valid >= minimum_valid) and support >= minimum_support
             if not is_v3 and not is_semantic and valid < minimum_valid:
                 failures.append({"code": "insufficient_valid_votes", "dimension": dimension, "actual": valid, "required": minimum_valid})
             if support < minimum_support:
@@ -381,8 +391,8 @@ def aggregate_review(
             "equal": counts["equal"], "abstain": counts["abstain"],
             "improvement_support": round(support, 6), "lane_directions": lane_directions[dimension],
             "passed": passed, "scope": "target" if is_target else "guard",
-            **({"candidate_regression_rate": round(worse_rate, 6)} if is_v6 else {"worse_rate": round(worse_rate, 6)}),
-            **({"non_abstain_votes": non_abstain, "directional_votes": directional} if is_v5 or is_v6 else {"valid_votes": valid}),
+            **({"candidate_regression_rate": round(worse_rate, 6)} if uses_non_abstain_regression else {"worse_rate": round(worse_rate, 6)}),
+            **({"non_abstain_votes": non_abstain, "directional_votes": directional} if uses_non_abstain else {"valid_votes": valid}),
         }
     candidate_hard_count = sum(hard_defects["candidate_only"].values())
     if candidate_hard_count:
@@ -404,7 +414,7 @@ def aggregate_review(
         "review_contract_hash": computed_review_contract_hash,
         "reviewed_record_hashes": key.get("reviewed_record_hashes", {}),
         "reviewed_run_provenance": key.get("reviewed_run_provenance", {}),
-        "schema_version": "prompt-quality-review/v6" if is_v6 else "prompt-quality-review/v5" if is_v5 else "prompt-quality-review/v4" if is_v4 else "prompt-quality-review/v3" if is_v3 else "prompt-quality-review/v1",
+        "schema_version": f"prompt-quality-review/v{semantic_version}" if is_semantic else "prompt-quality-review/v3" if is_v3 else "prompt-quality-review/v1",
         "status": "pass" if not failures else "fail",
         "verdict": "pass" if not failures else "reject",
         "target_qualitative_dimensions": target_dimensions,

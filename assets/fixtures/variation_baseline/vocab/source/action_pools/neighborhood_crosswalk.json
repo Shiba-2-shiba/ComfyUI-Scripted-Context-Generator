@@ -1,0 +1,47 @@
+{
+  "location": "neighborhood_crosswalk",
+  "actions": [
+    {
+      "text": "waiting at the crosswalk with one foot near the curb",
+      "load": "calm"
+    },
+    {
+      "text": "checking the pedestrian signal before stepping forward",
+      "load": "calm"
+    },
+    {
+      "text": "holding a small bag while crossing the street",
+      "load": "calm"
+    },
+    {
+      "text": "walking beside the painted lines at a steady pace",
+      "load": "active"
+    },
+    {
+      "text": "turning her head to watch passing traffic",
+      "load": "active"
+    },
+    {
+      "text": "standing near the corner as bicycles move by",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting a shoulder strap while waiting for the light",
+      "load": "calm"
+    },
+    {
+      "text": "stepping onto the sidewalk after crossing",
+      "load": "active"
+    }
+  ],
+  "families": [
+    {
+      "name": "transit_flow",
+      "take": 8
+    },
+    {
+      "name": "public_navigation",
+      "take": 4
+    }
+  ]
+}

@@ -1,179 +1,79 @@
-# Variation Expansion Workstream
+# Variation Expansion: 現在の作業入口
 
-このディレクトリは、base variations 拡張作業の入口です。
+更新: 2026-09-06。**P13 / V150 は本体反映・反映後検証まで完了。**
+[最新の引き継ぎ](./HANDOFF_2026-09-06_V150_PROMOTED.md) を先に読む。
+Q87と2026-09-05の中断記録は履歴であり、再applyの指示として扱わない。
 
-現在の active work は **P13: staged 500k loop planning** です。P8-P12 の
-100k stabilization までは完了済みです。現行 planner を核に、L0-L3 の
-capability pass と V150/V250/V350/V500 の段階gateを順に進めます。
+## 現在地
 
-## Active Documents
+- active: **135 subjects / 109 locations / 8,227 rows / 150,184 base variations**。
+- `v150-gaze-release-20260905` の11ゲート、独立2名のv7レビュー、3目的×256件のconfirmationがpass。
+- 27ファイルをrollback保護付きで反映し、終端 `PROMOTED`・postcheck `pass` を確認。
+- 候補・本体それぞれPython 874件、frontend 4件、browser 2件が成功。本体の固定80出力は候補とbytes一致。
+- [昇格証拠](../../assets/results/v150-gaze-release-20260905/promotion-receipt.json)と
+  [全ゲート証拠](../../assets/results/v150-gaze-release-20260905/verification-receipt.json)は検証時点の凍結記録。
+  反映後に更新したdocsのcontentまで凍結候補と同一とは扱わない。
+- V250以降は未着手。stage・commitは実施していない。
 
-- [Progress](./progress.md)
-- [Task Board](./tasks.md)
-- [Canonical Staged 500k Loop Plan](./500k_loop_plan.md)
-- [Planner Refactor Specification](./planner_refactor_spec.md)
-- [Promoted Planner L1 Contract](./planner_l1_contract.md)
-- [Variation Candidate L2 Contract](./candidate_l2_contract.md)
-- [Variation Candidate L3 Snapshot Contract](./candidate_l3_contract.md)
-- [V150 Planner L0 Baseline](./experiments/v150-planner-l0/manifest.json)
-- [V150 Planner L1 Receipt](./experiments/v150-planner-l1/receipt.json)
-- [V150 Candidate L2 Rejection](./experiments/v150-candidate-l2/rejection-receipt.json)
-- [V150 Candidate L2 Iteration 002 Handoff](./experiments/v150-candidate-l2-iteration-002/handoff-receipt.json)
-- [V150 Candidate L3 Snapshot Rejection](./experiments/v150-candidate-l3-iteration-001/rejection-receipt.json)
-- [V150 Shape Iteration 003 Handoff](./experiments/v150-candidate-shape-iteration-003/handoff-receipt.json)
-- [V150 Shape Iteration 004 Prompt Rejection](./experiments/v150-candidate-shape-iteration-004/rejection-receipt.json)
-- [V150 Coverage Schedule Iteration 005 Rejection](./experiments/v150-candidate-shape-iteration-005/rejection-receipt.json)
-- [V150 Full-Workflow Coverage Iteration 006](./experiments/v150-candidate-shape-iteration-006/rejection-receipt.json)
-- [V150 Guard Remediation Iteration 007](./experiments/v150-candidate-shape-iteration-007/guard-remediation-receipt.json)
-- [V150 Non-Selected Quality Validation Iteration 008](./experiments/v150-candidate-shape-iteration-008/quality-validation-receipt.json)
-- [V150 Post-Attempt-002 Quality Validation Iteration 010](./experiments/v150-candidate-shape-iteration-010/quality-validation-receipt.json)
-- [V150 Iteration 015 Quality Validation](./experiments/v150-candidate-shape-iteration-015/quality-validation-receipt.json)
-- [V150 Blind Review Attempt 005 Rejection](./experiments/v150-candidate-shape-iteration-015/blind-review-attempt-005/rejection-receipt.json)
-- [V150 Iteration 016 Quality Validation](./experiments/v150-candidate-shape-iteration-016/quality-validation-receipt.json)
-- [V150 Blind Review Attempt 006 Rejection](./experiments/v150-candidate-shape-iteration-016/blind-review-attempt-006/rejection-receipt.json)
-- [V150 Iteration 017 Quality Validation](./experiments/v150-candidate-shape-iteration-017/quality-validation-receipt.json)
-- [V150 Blind Review Attempt 007 Rejection](./experiments/v150-candidate-shape-iteration-017/blind-review-attempt-007/rejection-receipt.json)
-- [100k Stabilization and Historical 500k Notes](./base_variations_100k_plan.md)
-- [Clothing State Location Gate Refactor Plan](./clothing_state_location_gate_plan.md)
+## GPT-6 Astra での進め方
 
-Historical or completed-plan references:
+目的、対象ファイル、維持する挙動、完了条件を短く固定し、実装方法はコードと失敗事例から
+判断する。対象の回帰テストを先に確認し、一つの原因を修正して必要な検証まで進める。
+数値集計・hash 照合・定型検証は既存 CLI に任せ、Astra は原因分析・修正・意味の評価に使う。
+通常の修正ごとに新しい計画・承認会議・役割別レビューを増やさない。
+独立した調査やレビューが有効なときだけ native subagent に範囲を限定して委任し、
+モデルは実行セッションの設定を継承する。正式な blind review の二 lane は維持する。
 
-- [Completed Refactor Plan](./next_refactor_plan.md)
-- [Completed P8 Expansion Wave Plan](./next_expansion_wave_plan.md)
-- [Completed Wave: 2026-05-08](./completed_wave_2026-05-08.md)
-- [Original Wave Plan](./location_action_refactor_plan.md)
+検証は下表のタイミングで行う。同じ変更・同じ入力の合格済み検証を理由なく繰り返さず、
+新たな変更、失敗、未解決の懸念がある場合に範囲を広げる。
+報告は変更点・検証結果・残る問題を簡潔に記す。
 
-## Current Scope
+この運用は Astra の指示感度と過剰な検証を調整する
+[OpenAI の公式ガイド](https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6-astra)
+を、このリポジトリに適用したもの。料金・速度の改善率は未測定。
 
-第1波、運用面リファクタ、P8 location expansion、P9 target modeling、P10
-compatibility taxonomy expansion、P11 action authoring refactor、P12 100k
-stabilization gate は完了済みです。
+## 実行順序
 
-現在は P13 V150 iteration 017 の自動quality validation完了後で、blind-review attempt 007のrejectを受けたsemantic-paired comparison設計待ちです。L0 baseline と6件の非counted runtime pool分類は
-`experiments/v150-planner-l0/`、L1 pure projectionの昇格証拠は
-`experiments/v150-planner-l1/` にhash固定済みです。L2 iteration 001は
-coverage不足とduplicate pressure超過でreject済みです。iteration 002は
-structural gateを通過しましたが、isolated materializationのrealized値は
-`141,984`でV150未達でした。prompt生成はblockされ、snapshot iteration 001は
-reject済みです。
+| 段階 | 実施する確認 | 次へ進む条件 |
+| --- | --- | --- |
+| 資料・ツールの修正 | 変更対象の回帰テスト、差分検査、該当する静的検査 | 対象挙動が維持される |
+| candidate の修復 | 失敗原因の再現テスト、snapshot 入力・docs・外部実行環境の確認 | 既知の環境不備が解消する |
+| 候補の確定 | candidate 上の action pools、compatibility、data、full flow、widgets、全 Python tests、frontend、browser | 八つの実行 gate が通る |
+| 品質評価 | 固定 64+16 自動比較、semantic pairs、比較に結び付いた v7 blind review、g004/g005/g006 各 256 seeds | 現行品質契約が通る |
+| 昇格判定 | 同一 candidate root/source/content hash の十一 gate の evidence/v2 を集約 | full verification receipt が pass |
 
-Exact contribution modelにより4 location追加で`150,184`となるshapeを実装し、
-isolated 64+16比較まで完了しました。location entropyは改善しましたが、8 location / 13
-location-action pairのcoverage不足、repeated n-gram、context sizeの回帰により
-`REJECTED`です。subject追加はなく、active dataへの昇格もありません。
+candidate を凍結してから得た実行 gate の結果は、品質評価後も root/hash と証拠が一致すれば
+再実行せず集約できる。修正中の試走は正式な合格証拠にしない。
+凍結後に source/content が変わった場合は、新しい snapshot と対応する証拠が必要。
+docs のみの編集でも、変更がどの hash に含まれるかは現行 manifest の規則で判断する。
 
-Iteration 005ではfixed 64+16を維持した19-row scheduleを実装しましたが、
-`ContextSource`到達19/19に対して最終workflowはlocation 12/19、exact
-location-action 9/19でした。次は`ContextSceneVariator`を含むcomplete workflow
-outcomeを事前modelingします。品質正本のrejectとactive dataは変更していません。
+confirmation はコードによる生成・解析であり、LLM の三重レビューではない。
+正式な品質比較・二つの blind lane・三 objective・十一 gate の条件を弱めて
+実行費用を減らさない。
 
-Iteration 006ではfixed 64+16内でfinal location/action witnessを19/19再現し、
-coverage gateを通過しました。ただしcoverageは品質証拠ではなく、semantic-family
-repetitionとcontext size guardが回帰したため品質判定は引き続き`REJECTED`です。
+## 検証基盤と次の候補
 
-Iteration 007ではcoverage scheduleを凍結したままdebug payloadを圧縮し、
-semantic-family/context sizeを含む全定量guardを非回帰へ戻しました。q9からの
-cleaned prompt変更は0件です。この結果はdiagnostic passであり、次は非選択の
-quality validation surfaceが必要です。
+[検証基盤の修復](./VERIFICATION_REPAIR_2026-09-05.md)で、LF の固定、自己完結する
+テスト入力、snapshot の検証用ファイル、候補と外部 runtime のパス分離を実装した。
+新しい baseline は三つの計画・分析・snapshot ツールに同じ `--baseline-manifest` を渡す。
+過去の壊れた hash を現在の入力へ暗黙に読み替えない。
 
-Iteration 008ではcurrent-source coverage certificateを更新後、scheduleなしの
-default80 surfaceでcontrol64 quality metricsを評価し、target改善と全guard
-非回帰を確認しました。`review_ready=true`ですが、blind reviewと3x256
-confirmationが未完了なのでpromotionはまだ行いません。
+V150ではcompatibility driftと視線の競合を修正し、外部frontend・実browserを含む全ゲートを通した。
+以後の変更では新しいactive baselineを明示し、必要な段階だけを実行する。
+V150の凍結receiptを、変更後のsource/contentやV250以降の合格証拠に流用しない。
 
-実際にactive dataを`103,212`から`150,184`へ変更する作業はVE-1319です。
-VE-1319はVE-1317 blind reviewとVE-1318 3x256 confirmation/full verification
-の両方がpassした後だけ開始します。
+## 必要なときだけ読む資料
 
-VE-1317 blind review attempts 001-007はいずれも`REJECTED`です。iteration 017
-q39 automatic validationは全guard非回帰でpassしましたが、attempt 007はunrelated
-scene同士の比較でworse-rateが安定収束しないことを示しました。既存閾値を維持した
-semantic-paired comparison contractの設計・独立承認が次のgateです。VE-1318/1319は
-引き続きblockedです。
+- [今回の整理方針・検証記録](./WORKFLOW_CLEANUP_2026-09-05.md)
+- [Task Board](./tasks.md): 作業 ID と過去の証拠リンク。
+- [Progress](./progress.md): 過去の経緯。古い「次の作業」を再実行しない。
+- [500k Loop Plan](./500k_loop_plan.md): V150 以降の目標と stage 契約。
+- [L3 Snapshot Contract](./candidate_l3_contract.md): snapshot の変更時。
+- [Prompt Quality Baseline](../prompt_quality/README.md): 受入済み品質契約。
+- [Semantic Review Policy v4](../../vocab/data/variation_semantic_review_policy_v4.json):
+  comparison/v5 と review/v7。一貫性を非回帰の保護項目とする
+  [ユーザー承認済み変更](./CONSISTENCY_SCOPE_PROPOSAL_2026-09-05.md)。旧 v6 の棄却は保存する。
 
-並行する品質改善として、衣装 `states` が Location と衝突する問題を
-[`clothing_state_location_gate_plan.md`](./clothing_state_location_gate_plan.md)
-で扱います。これは prompt quality cleanup であり、base variation sizing
-や compatibility rows は変更しません。
-
-1. P8: remaining daily-life location を昇格し、`unique locations` を増やす - Done
-2. P9: 100k target modeling を追加し、subject / location / action depth の必要量を測る - Done
-3. P10: compatibility taxonomy と variation scope を 100k 向けに拡張する - Done
-4. P11: action authoring source を 20+ effective actions に耐える形へ拡張する - Done
-5. P12: 100k stabilization gate で全体検証を固定する - Done
-6. P13: staged 500k loop planning で planner と次の拡張形状を検証する - Active
-7. P14: clothing state location gate で Location と衣装状態語の衝突を抑える - Done
-
-10万達成までの履歴は `base_variations_100k_plan.md`、現在の500k計画は
-[`500k_loop_plan.md`](./500k_loop_plan.md) を参照してください。
-
-## Historical Baseline
-
-Last measured: 2026-05-08
-
-```text
-unique subjects: 58
-unique locations: 76
-base variations: 15,610
-compatibility rows: 1,637
-actions per location: min 4 / median 8 / mean 8.03 / max 12
-location candidates: 93
-dedicated action pool missing candidates: 9
-```
-
-Current measured after later variation restrictions:
-
-```text
-unique subjects: 120
-unique locations: 90
-base variations: 103,212
-compatibility rows: 5,806
-actions per location: min 12 / median 16 / mean 15.6 / max 20
-missing action pools: 0
-```
-
-## P13 Planning Target
-
-500k planning は、次を段階別に測り、`docs/prompt_quality/` の品質契約を
-維持できる候補だけを次のstageへ昇格します。
-
-- subject count
-- location count
-- compatibility density
-- median action depth
-- action-family reuse quality
-
-Target planning command:
-
-```bash
-python tools/plan_variation_target.py --target 500000
-```
-
-## Current Stabilized Target
-
-```text
-target base variations: 100,000
-target shape: reached and remains above target at 103,212 base variations
-final planning horizon: 500,000 base variations
-```
-
-## Source References
-
-- [Current Status](../../CURRENT_STATUS.md)
-- [Expansion Guide](../../EXPANSION_GUIDE.md)
-- [Repository Structure](../../REPO_STRUCTURE.md)
-- [Variation Scope](../../vocab/data/variation_scope.json)
-
-## Completion Rule
-
-P13 planning は、次が満たされたとき最初の V150 実装waveへ進めます。
-
-- `python tools/plan_variation_target.py --target 500000` の scenario output が記録されている
-- compatibility density と location count のどちらが次の limiter か明示されている
-- action depth を増やす場合の repetition / semantic-quality guardrail が明示されている
-- `vocab/data/variation_scope.json`, `assets/compatibility_review.csv`,
-  `vocab/source/action_pools/` のどれを先に変えるかが決まっている
-- P12 baseline checks は引き続き clean である
-- L0-L3 planner capability の対象、テスト、stop condition が固定されている
-- baseline/candidate の prompt-quality control/exploration cohort、blind
-  review、confirmation、promotion/rejection evidence 契約が固定されている
+`.omx/plans/` の初期設計書、完了済み context refactor、過去の rejected attempt は履歴。
+その時点の「未実装」「承認待ち」を現在の作業指示として読み直さない。
+履歴 artifact・hash・schema の解釈は保持する。

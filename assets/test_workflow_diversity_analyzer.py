@@ -1,4 +1,6 @@
 import shutil
+import copy
+import json
 import sys
 import unittest
 from pathlib import Path
@@ -35,7 +37,7 @@ class TestWorkflowDiversityAnalyzer(unittest.TestCase):
             for item in record["execution_trace"]
         }
         self.assertEqual(trace_by_type["ContextSource"]["controls"].get("seed"), "randomize")
-        self.assertEqual(trace_by_type["ContextGarnish"]["controls"], {})
+        self.assertEqual(trace_by_type["ContextGarnish"]["controls"], {"seed": "fixed"})
         self.assertEqual(trace_by_type["ContextGarnish"]["inputs"]["max_items"], 3)
         self.assertEqual(trace_by_type["ContextGarnish"]["inputs"]["emotion_nuance"], "random")
 
@@ -62,7 +64,14 @@ class TestWorkflowDiversityAnalyzer(unittest.TestCase):
         self.assertTrue(summary["top_actions"])
 
     def test_active_workflow_keeps_legacy_style_as_note_not_warning(self):
-        record = build_run_record(self.workflow, 0)
+        workflow = copy.deepcopy(self.workflow)
+        source = next(node for node in workflow["nodes"] if node["type"] == "ContextSource")
+        source["widgets_values"][0] = json.dumps({
+            "subj": "student", "costume": "school_uniform", "loc": "school_classroom",
+            "action": "sitting at a desk", "meta": {"mood": "quiet_focused", "style": "anime"},
+        })
+        source["widgets_values"][3] = "json_only"
+        record = build_run_record(workflow, 0)
 
         self.assertIn(LEGACY_STYLE_NOTE, record["context"].get("notes", []))
         self.assertEqual(record["context"].get("warnings", []), [])

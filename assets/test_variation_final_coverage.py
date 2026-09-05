@@ -2,6 +2,7 @@ import unittest
 import json
 from pathlib import Path
 
+from assets.variation_test_fixtures import fixture_environment, fixture_repository
 from tools.plan_variation_final_coverage import (
     solve_row_slot_assignment,
     validate_final_coverage_contract,
@@ -11,10 +12,10 @@ from tools.workflow_prompt_runner import WorkflowValidationError
 
 
 class TestVariationFinalCoveragePlanner(unittest.TestCase):
-    ROOT = Path(__file__).resolve().parents[1]
+    ROOT = fixture_repository()
     EXPERIMENT = ROOT / "docs/variation_expansion/experiments/v150-candidate-shape-iteration-006"
 
-    def test_tracked_contract_schedule_and_matrix_are_self_consistent(self):
+    def test_fixture_contract_schedule_and_matrix_are_self_consistent(self):
         contract_path = self.EXPERIMENT / "full-workflow-coverage-contract.json"
         schedule_path = self.EXPERIMENT / "full-workflow-schedule.json"
         contract = json.loads(contract_path.read_text(encoding="utf-8"))
@@ -103,6 +104,16 @@ class TestVariationFinalCoveragePlanner(unittest.TestCase):
             )
 
         self.assertEqual(raised.exception.code, "final_coverage_search_inconclusive")
+
+
+def setUpModule():
+    global _fixture_context
+    _fixture_context = fixture_environment(fixture_repository())
+    _fixture_context.__enter__()
+
+
+def tearDownModule():
+    _fixture_context.__exit__(None, None, None)
 
 
 if __name__ == "__main__":

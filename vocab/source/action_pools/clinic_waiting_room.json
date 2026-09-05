@@ -1,0 +1,86 @@
+{
+  "location": "clinic_waiting_room",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "checking an appointment slip"
+    },
+    {
+      "load": "active",
+      "text": "taking a numbered ticket from reception"
+    },
+    {
+      "load": "calm",
+      "text": "reading a health information leaflet"
+    },
+    {
+      "load": "active",
+      "text": "placing a bag beside the waiting chair"
+    },
+    {
+      "load": "calm",
+      "text": "looking toward the reception clock"
+    },
+    {
+      "load": "active",
+      "text": "using the hand sanitizer station"
+    },
+    {
+      "load": "calm",
+      "text": "reviewing instructions on a noticeboard"
+    },
+    {
+      "load": "active",
+      "text": "filling in a short intake form"
+    },
+    {
+      "load": "calm",
+      "text": "holding a closed umbrella near the doorway"
+    },
+    {
+      "load": "active",
+      "text": "checking the room number on a sign"
+    },
+    {
+      "load": "calm",
+      "text": "checking an appointment slip against the reception display"
+    },
+    {
+      "load": "active",
+      "text": "checking the room number while opening the consultation door"
+    },
+    {
+      "load": "calm",
+      "text": "checking a surname on the queue display"
+    },
+    {
+      "load": "active",
+      "text": "returning a clipboard to the reception tray"
+    },
+    {
+      "load": "calm",
+      "text": "checking the consultation door numbers"
+    },
+    {
+      "load": "active",
+      "text": "moving an empty chair back into line"
+    },
+    {
+      "load": "calm",
+      "text": "reading preparation notes on an appointment card"
+    },
+    {
+      "load": "active",
+      "text": "placing a completed intake form in the privacy slot"
+    },
+    {
+      "load": "calm",
+      "text": "watching for the next number above reception"
+    },
+    {
+      "load": "active",
+      "text": "carrying a leaflet back to the information rack"
+    }
+  ],
+  "families": []
+}

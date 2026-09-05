@@ -1,0 +1,86 @@
+{
+  "location": "community_garden",
+  "actions": [
+    {
+      "load": "active",
+      "text": "loosening soil around a planting bed"
+    },
+    {
+      "load": "calm",
+      "text": "checking seedlings beneath a small marker"
+    },
+    {
+      "load": "active",
+      "text": "carrying a watering can between the beds"
+    },
+    {
+      "load": "calm",
+      "text": "sorting hand tools on the shared rack"
+    },
+    {
+      "load": "active",
+      "text": "tying a young stem to a support"
+    },
+    {
+      "load": "calm",
+      "text": "reading the seasonal planting chart"
+    },
+    {
+      "load": "active",
+      "text": "pulling weeds from the path edge"
+    },
+    {
+      "load": "calm",
+      "text": "examining a leaf for damage"
+    },
+    {
+      "load": "active",
+      "text": "filling a tray with compost"
+    },
+    {
+      "load": "calm",
+      "text": "labeling a newly planted row"
+    },
+    {
+      "load": "active",
+      "text": "sweeping soil from the garden walkway"
+    },
+    {
+      "load": "calm",
+      "text": "checking the planting chart beside the tool shed"
+    },
+    {
+      "load": "calm",
+      "text": "checking moisture beneath the mulch layer"
+    },
+    {
+      "load": "active",
+      "text": "turning compost with a garden fork"
+    },
+    {
+      "load": "calm",
+      "text": "matching seed packets to the labeled beds"
+    },
+    {
+      "load": "active",
+      "text": "rolling the hose onto its wall reel"
+    },
+    {
+      "load": "calm",
+      "text": "examining blossoms for visiting pollinators"
+    },
+    {
+      "load": "active",
+      "text": "carrying harvested vegetables toward the tool shed"
+    },
+    {
+      "load": "calm",
+      "text": "reading the rain gauge beside the fence"
+    },
+    {
+      "load": "active",
+      "text": "placing fresh mulch around the raised bed"
+    }
+  ],
+  "families": []
+}

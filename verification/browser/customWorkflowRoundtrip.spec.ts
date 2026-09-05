@@ -2,9 +2,11 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import type { APIRequestContext, Page } from '@playwright/test'
-import { expect, test } from '@playwright/test'
-
+import type { ComfyPage } from '@e2e/fixtures/ComfyPage'
+import {
+  comfyPageFixture as test,
+  comfyExpect as expect
+} from '@e2e/fixtures/ComfyPage'
 
 type WorkflowNode = {
   id: string | number
@@ -16,12 +18,13 @@ type WorkflowNode = {
 
 type WorkflowJson = {
   nodes: WorkflowNode[]
-  links?: unknown
+  links?: Array<[number, ...unknown[]] | { id: number }>
 }
 
-
 const TEST_DIR = path.dirname(fileURLToPath(import.meta.url))
-const REPO_ROOT = path.resolve(TEST_DIR, '..', '..', '..')
+const REPO_ROOT = process.env.VSCG_CUSTOM_NODE_ROOT
+  ? path.resolve(process.env.VSCG_CUSTOM_NODE_ROOT)
+  : path.resolve(TEST_DIR, '..', '..', '..')
 const WORKFLOWS = JSON.parse(
   fs.readFileSync(path.join(REPO_ROOT, 'workflow_samples.json'), 'utf-8')
 ) as Array<{
@@ -32,26 +35,12 @@ const WORKFLOWS = JSON.parse(
   expected_node_types: string[]
 }>
 
-
-const CUSTOM_NODE_TYPES = new Set(
-  WORKFLOWS.flatMap((workflow) => {
-    const raw = JSON.parse(
-      fs.readFileSync(path.join(REPO_ROOT, workflow.path), 'utf-8')
-    ) as WorkflowJson
-    return raw.nodes.map((node) => node.type)
-  })
-)
-
-
 function customWorkflowSnapshot(workflow: WorkflowJson) {
   return workflow.nodes
-    .filter((node) => CUSTOM_NODE_TYPES.has(node.type))
     .map((node) => ({
       id: String(node.id),
       type: node.type,
-      widgets_values: Array.isArray(node.widgets_values)
-        ? node.widgets_values
-        : node.widgets_values ?? null,
+      widgets_values: node.widgets_values ?? null,
       inputs: (node.inputs ?? []).map((input) => ({
         name: input.name,
         link: input.link ?? null
@@ -64,255 +53,129 @@ function customWorkflowSnapshot(workflow: WorkflowJson) {
     .sort((a, b) => a.id.localeCompare(b.id))
 }
 
-
-async function findUser(request: APIRequestContext, baseUrl: string, username: string) {
-  const response = await request.get(`${baseUrl}/api/users`)
-  if (response.status() !== 200) {
-    throw new Error(`Failed to retrieve users: ${await response.text()}`)
-  }
-  const payload = await response.json()
-  return Object.entries(payload?.users ?? {}).find(([, name]) => name === username)
-}
-
-
-async function ensureUser(request: APIRequestContext, baseUrl: string, username: string) {
-  const existing = await findUser(request, baseUrl, username)
-  if (existing?.[0]) {
-    return existing[0]
-  }
-
-  const response = await request.post(`${baseUrl}/api/users`, {
-    data: { username }
-  })
-  if (response.status() !== 200) {
-    throw new Error(`Failed to create user: ${await response.text()}`)
-  }
-  return await response.json()
-}
-
-
-async function setBackendSettings(request: APIRequestContext, baseUrl: string, userId: string) {
-  const response = await request.post(`${baseUrl}/api/devtools/set_settings`, {
-    data: {
-      'Comfy.UseNewMenu': 'Top',
-      'Comfy.Workflow.WorkflowTabsPosition': 'Sidebar',
-      'Comfy.NodeBadge.NodeIdBadgeMode': 'None',
-      'Comfy.NodeBadge.NodeSourceBadgeMode': 'None',
-      'Comfy.EnableTooltips': false,
-      'Comfy.userId': userId,
-      'Comfy.TutorialCompleted': true,
-      'Comfy.VersionCompatibility.DisableWarnings': true,
-      'Comfy.RightSidePanel.ShowErrorsTab': false
-    }
-  })
-  // Older/current backend packages may not expose this test-only settings route.
-  // Runtime settings are applied after the app loads, so 405 does not weaken
-  // the workflow save/reload assertion.
-  if (response.status() === 405) {
-    console.warn(
-      '[workflow-roundtrip] Backend has no devtools settings route; using runtime settings only.'
-    )
-    return
-  }
-  if (response.status() !== 200) {
-    throw new Error(`Failed to setup settings: ${await response.text()}`)
-  }
-}
-
-
-async function waitForAppReady(page: Page) {
-  await page.waitForFunction(
-    () => Boolean(window.app && window.app.extensionManager && window.app.graphToPrompt)
+function workflowLinks(workflow: WorkflowJson) {
+  return [...(workflow.links ?? [])].sort(
+    (a, b) =>
+      (Array.isArray(a) ? a[0] : a.id) - (Array.isArray(b) ? b[0] : b.id)
   )
-  await page.waitForFunction(() => document.fonts.status === 'loaded')
 }
 
-
-async function setRuntimeSettings(page: Page) {
-  await page.evaluate(async () => {
-    await window.app!.extensionManager.setting.set('Comfy.UseNewMenu', 'Top')
-    await window.app!.extensionManager.setting.set(
-      'Comfy.Workflow.WorkflowTabsPosition',
-      'Sidebar'
-    )
-  })
-}
-
-
-async function dismissStartupOverlays(page: Page) {
-  const closeDialog = page.getByRole('button', { name: 'Close dialog' })
-  if (await closeDialog.isVisible()) {
-    await closeDialog.click()
-  }
-}
-
-
-async function openWorkflowsTab(page: Page) {
-  const selected = page.locator('.workflows-tab-button.side-bar-button-selected')
-  if (!(await selected.isVisible())) {
-    await page.locator('.workflows-tab-button').click()
-  }
-  await page.locator('.comfyui-workflows-browse').waitFor({ state: 'visible' })
-}
-
-
-async function openTopbarMenu(page: Page) {
-  const menu = page.locator('.comfy-command-menu')
-  if (await menu.isVisible()) {
-    await page.locator('body').click({ position: { x: 500, y: 300 } })
-    await menu.waitFor({ state: 'hidden', timeout: 1000 })
-  }
-  await page.locator('.comfy-menu-button-wrapper').click()
-  await menu.waitFor({ state: 'visible' })
-}
-
-
-async function triggerTopbarCommand(page: Page, pathParts: string[]) {
-  await openTopbarMenu(page)
-  const topLevel = page.locator(`.p-menubar-item-label:text-is("${pathParts[0]}")`)
-  if (pathParts.length === 1) {
-    await topLevel.click()
-    return
-  }
-  await topLevel.hover()
-  let submenu = page.locator('.p-tieredmenu-submenu:visible').last()
-  await submenu.waitFor({ state: 'visible' })
-  for (let index = 1; index < pathParts.length; index += 1) {
-    const item = submenu.locator(`.p-tieredmenu-item:has-text("${pathParts[index]}")`).first()
-    await item.waitFor({ state: 'visible' })
-    if (index === pathParts.length - 1) {
-      await item.click()
-      return
-    }
-    await item.hover()
-    submenu = page.locator('.p-tieredmenu-submenu:visible').last()
-    await submenu.waitFor({ state: 'visible' })
-  }
-}
-
-
-async function saveWorkflow(page: Page, workflowName: string) {
-  await triggerTopbarCommand(page, ['File', 'Save'])
-  const input = page
-    .getByRole('dialog', { name: 'Save workflow' })
-    .getByRole('textbox', { name: 'Enter the filename:' })
-  await input.fill(workflowName)
-  await page.keyboard.press('Enter')
-  await page.waitForFunction(
-    () => !(window.app! as any).extensionManager.workflow.isBusy
+async function importWorkflow(
+  comfyPage: ComfyPage,
+  workflow: (typeof WORKFLOWS)[number]
+) {
+  const source = JSON.parse(
+    fs.readFileSync(path.join(REPO_ROOT, workflow.path), 'utf-8')
+  ) as WorkflowJson
+  await comfyPage.workflowUploadInput.setInputFiles(
+    path.join(REPO_ROOT, workflow.path)
   )
-  await input.waitFor({ state: 'hidden', timeout: 1000 })
+  await expect(comfyPage.workflowUploadInput).toHaveValue('')
+  await comfyPage.workflow.waitForWorkflowIdle()
+  await expect
+    .poll(() => comfyPage.nodeOps.getGraphNodesCount())
+    .toBe(source.nodes.length)
+  const imported = await comfyPage.workflow.getExportedWorkflow()
+  expect(workflowLinks(imported)).toEqual(workflowLinks(source))
+  for (const expectedNode of source.nodes) {
+    const importedNode = imported.nodes.find(
+      (node) => node.id === expectedNode.id
+    )
+    expect(importedNode?.type).toBe(expectedNode.type)
+    if (
+      expectedNode.type !== 'PreviewAny' &&
+      Array.isArray(expectedNode.widgets_values)
+    ) {
+      const importedValues = importedNode?.widgets_values
+      expect(
+        Array.isArray(importedValues) &&
+          importedValues.slice(0, expectedNode.widgets_values.length)
+      ).toEqual(expectedNode.widgets_values)
+    }
+  }
+  await expect(comfyPage.toast.toastErrors).toHaveCount(0)
+  expect(
+    await comfyPage.page.evaluate(() =>
+      window
+        .app!.graph.nodes.filter((node) => node.has_errors)
+        .map((node) => node.type)
+    )
+  ).toEqual([])
+  const garnishWidgets = await comfyPage.page.evaluate(() =>
+    window
+      .app!.graph.nodes.find((node) => node.type === 'ContextGarnish')
+      ?.widgets?.map((widget) => ({ name: widget.name, value: widget.value }))
+  )
+  expect(garnishWidgets).toEqual(
+    expect.arrayContaining([
+      { name: 'max_items', value: 3 },
+      { name: 'emotion_nuance', value: 'random' }
+    ])
+  )
+  return imported
 }
 
-
-async function executeCommand(page: Page, commandId: string) {
-  await page.evaluate(async (id) => {
-    await window.app!.extensionManager.command.execute(id)
-  }, commandId)
-}
-
-
-async function getGraphNodeCount(page: Page) {
-  return await page.evaluate(() => (window.app as any)?.graph?._nodes?.length ?? 0)
-}
-
-
-async function getExportedWorkflow(page: Page) {
-  return await page.evaluate(async () => {
-    return (await window.app!.graphToPrompt()).workflow
-  }) as WorkflowJson
-}
-
-
-async function getActiveWorkflowName(page: Page) {
-  return await page
-    .locator('.comfyui-workflows-open .p-tree-node-selected .node-label')
-    .innerText()
-}
-
-
-test.describe('Custom workflow roundtrip', () => {
-  test.describe.configure({ mode: 'serial' })
-
-  test.beforeEach(async ({ page, request }, testInfo) => {
-    const baseUrl = testInfo.project.use.baseURL as string
-    const username = `custom-workflow-roundtrip-${testInfo.parallelIndex}`
-
-    await page.route('**/releases**', async (route) => {
-      const url = route.request().url()
-      if (url.includes('api.comfy.org') || url.includes('stagingapi.comfy.org')) {
-        await route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify([])
-        })
-        return
+test.describe(
+  'Custom workflow roundtrip',
+  { tag: ['@canvas', '@widget'] },
+  () => {
+    test.use({
+      initialSettings: {
+        'Comfy.Workflow.WorkflowTabsPosition': 'Sidebar',
+        'Comfy.Workflow.Persist': true
       }
-      await route.continue()
     })
 
-    const userId = await ensureUser(request, baseUrl, username)
-    await setBackendSettings(request, baseUrl, userId)
-
-    await page.goto(baseUrl)
-    await page.evaluate((id) => {
-      localStorage.clear()
-      sessionStorage.clear()
-      localStorage.setItem('Comfy.userId', id)
-    }, userId)
-    await page.goto(baseUrl)
-    await waitForAppReady(page)
-    await setRuntimeSettings(page)
-    await dismissStartupOverlays(page)
-    await openWorkflowsTab(page)
-  })
-
-  test('keeps the context workflow as the only recommended browser baseline', async () => {
-    const recommended = WORKFLOWS.filter((workflow) => workflow.recommended)
-    expect(recommended).toHaveLength(1)
-    expect(recommended[0]).toMatchObject({ id: 'context', surface: 'primary' })
-  })
-
-  for (const workflow of WORKFLOWS) {
-    test(`${workflow.id} workflow survives save and reload`, async ({ page }, testInfo) => {
-      await page
-        .locator('#comfy-file-input')
-        .setInputFiles(path.join(REPO_ROOT, workflow.path))
-
-      await expect
-        .poll(() => getGraphNodeCount(page), { timeout: 10000 })
-        .toBeGreaterThan(0)
-
-      const before = await getExportedWorkflow(page)
-      const beforeSnapshot = customWorkflowSnapshot(before)
-
-      expect(beforeSnapshot.length).toBeGreaterThan(0)
-      expect(beforeSnapshot.map((node) => node.type)).toEqual(
-        expect.arrayContaining(workflow.expected_node_types)
-      )
-
-      const saveName = `roundtrip-${workflow.id}-${Date.now()}-${testInfo.workerIndex}`
-      await saveWorkflow(page, saveName)
-
-      await executeCommand(page, 'Comfy.NewBlankWorkflow')
-      await openWorkflowsTab(page)
-
-      const persistedItem = page.locator('.comfyui-workflows-browse .node-label', {
-        hasText: saveName
+    for (const workflow of WORKFLOWS) {
+      test(`${workflow.id} workflow imports all custom nodes, links and widgets`, async ({
+        comfyPage
+      }) => {
+        const imported = await importWorkflow(comfyPage, workflow)
+        expect(imported.nodes.map((node) => node.type)).toEqual(
+          expect.arrayContaining(workflow.expected_node_types)
+        )
       })
-      await persistedItem.waitFor({ state: 'visible', timeout: 10000 })
-      await persistedItem.click()
 
-      await expect
-        .poll(() => getActiveWorkflowName(page), { timeout: 10000 })
-        .toBe(saveName)
+      test(`${workflow.id} workflow survives save and reload`, async ({
+        comfyPage
+      }, testInfo) => {
+        const before = await importWorkflow(comfyPage, workflow)
+        const saveName = `roundtrip-${workflow.id}-${Date.now()}-${testInfo.workerIndex}`
+        await comfyPage.keyboard.ctrlSend('s')
+        const saveDialog = comfyPage.menu.topbar.getSaveDialog()
+        await saveDialog.fill(saveName)
+        await saveDialog.press('Enter')
+        await expect(saveDialog).toBeHidden()
+        await comfyPage.workflow.waitForWorkflowIdle()
 
-      const after = await getExportedWorkflow(page)
-      const afterSnapshot = customWorkflowSnapshot(after)
-
-      expect(after.nodes.length).toBe(before.nodes.length)
-      expect(after.links).toEqual(before.links)
-      expect(afterSnapshot).toEqual(beforeSnapshot)
-    })
+        await comfyPage.command.executeCommand('Comfy.NewBlankWorkflow')
+        await expect.poll(() => comfyPage.nodeOps.getGraphNodesCount()).toBe(0)
+        await comfyPage.workflow.reloadAndWaitForApp()
+        const workflowsTab = comfyPage.menu.workflowsTab
+        await workflowsTab.open()
+        await workflowsTab.getPersistedItem(saveName).dblclick()
+        await comfyPage.workflow.waitForWorkflowIdle()
+        await expect
+          .poll(async () =>
+            (await workflowsTab.getActiveWorkflowName()).replace(/^\*/, '')
+          )
+          .toBe(saveName)
+        const after = await comfyPage.workflow.getExportedWorkflow()
+        expect(after.nodes).toHaveLength(before.nodes.length)
+        expect(workflowLinks(after)).toEqual(workflowLinks(before))
+        expect(customWorkflowSnapshot(after)).toEqual(
+          customWorkflowSnapshot(before)
+        )
+        await expect(comfyPage.toast.toastErrors).toHaveCount(0)
+        await testInfo.attach('saved-workflow', {
+          body: JSON.stringify(after, null, 2),
+          contentType: 'application/json'
+        })
+        await testInfo.attach('reopened-workflow', {
+          body: await comfyPage.page.screenshot(),
+          contentType: 'image/png'
+        })
+      })
+    }
   }
-})
+)

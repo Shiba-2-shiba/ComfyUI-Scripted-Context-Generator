@@ -1,0 +1,4 @@
+# Receipts hash file bytes; keep text identical on Windows and Unix checkouts.
+* text=auto eol=lf
+# Preserve the historical fixture bytes bound into V150 release evidence.
+assets/fixtures/variation_baseline/vocab/data/background_packs.json -text whitespace=cr-at-eol,-blank-at-eof

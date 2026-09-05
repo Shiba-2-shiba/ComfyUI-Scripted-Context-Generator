@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class VariationSemanticPromoteCheckTests(unittest.TestCase):
-    def _assert_promotion_recursively_binds_review_and_verification(self, version):
+    def _assert_promotion_recursively_binds_review_and_verification(self, version, *, automatic_path_mode="relative", expected_failure=None, mutate_automatic=False):
         with tempfile.TemporaryDirectory(dir=ROOT) as directory:
             root = Path(directory)
             baseline, candidate = root / "baseline.jsonl", root / "candidate.jsonl"
@@ -30,11 +30,15 @@ class VariationSemanticPromoteCheckTests(unittest.TestCase):
             }
             targets = ["consistency", "naturalness", "image_prompt_suitability"] if version == 6 else ["consistency", "naturalness", "protagonist_clarity", "image_prompt_suitability"]
             guards = ["protagonist_clarity", "redundancy", "diversity"] if version == 6 else ["redundancy", "diversity"]
+            if version == 7:
+                policy = json.loads((ROOT / "vocab/data/variation_semantic_review_policy_v4.json").read_text(encoding="utf-8"))["review"]
+                targets = ["naturalness", "image_prompt_suitability"]
+                guards = ["consistency", "protagonist_clarity", "redundancy", "diversity"]
             dimensions = {}
             for dimension in ALL_DIMENSIONS:
                 eligibility = {"authority": "current_source_corpus_confirmation" if dimension == "diversity" else "semantic_pairwise", "pair_ids": [] if dimension == "diversity" else [pair["pair_id"] for pair in pairs]}
                 if version >= 5:
-                    eligibility.update({"minimum_non_abstain_votes": 36 if (dimension in targets or (version == 6 and dimension in guards and dimension != "diversity")) else 0, "minimum_directional_votes": 20 if dimension in targets else 0})
+                    eligibility.update({"minimum_non_abstain_votes": 36 if (dimension in targets or (version >= 6 and dimension in guards and dimension != "diversity")) else 0, "minimum_directional_votes": 20 if dimension in targets else 0})
                 else:
                     eligibility["minimum_valid_votes"] = 36 if dimension in targets else 0
                 dimensions[dimension] = eligibility
@@ -42,12 +46,19 @@ class VariationSemanticPromoteCheckTests(unittest.TestCase):
             selection["selection_hash"] = hashlib.sha256(canonical_json_bytes(selection)).hexdigest()
             automatic = root / "automatic.json"
             automatic.write_bytes(canonical_json_bytes({"status": "pass"}))
+            automatic_reference = automatic.relative_to(ROOT).as_posix()
+            if automatic_path_mode == "absolute":
+                automatic_reference = str(automatic.resolve())
+            elif automatic_path_mode == "traversal":
+                automatic_reference = f"{root.name}/../{root.name}/automatic.json"
+            elif isinstance(automatic_path_mode, Path):
+                automatic_reference = str(automatic_path_mode.resolve())
             source_hash, content_hash = "a" * 64, "b" * 64
             comparison_value = {
-                "schema_version": f"prompt-quality-comparison/v{4 if version == 6 else 3 if version == 5 else 2}", "experiment_id": "semantic-promote",
+                "schema_version": f"prompt-quality-comparison/v{version - 2}", "experiment_id": "semantic-promote",
                 "review_contract_hash": hashlib.sha256(canonical_json_bytes(policy)).hexdigest(),
                 "qualitative_scope_hash": hashlib.sha256(canonical_json_bytes({"guard_qualitative_dimensions": guards, "target_qualitative_dimensions": targets})).hexdigest(),
-                "automatic_comparison_path": automatic.relative_to(ROOT).as_posix(), "automatic_comparison_hash": hashlib.sha256(automatic.read_bytes()).hexdigest(),
+                "automatic_comparison_path": automatic_reference, "automatic_comparison_hash": hashlib.sha256(automatic.read_bytes()).hexdigest(),
                 "automatic_comparison_verdict": "pass", "candidate_source_tree_sha256": source_hash,
                 "candidate_snapshot_content_sha256": content_hash, "uses_output_metrics_for_selection": False,
                 "semantic_pair_contract_sha256": "c" * 64, "pair_generation_receipt_sha256": "d" * 64,
@@ -81,7 +92,13 @@ class VariationSemanticPromoteCheckTests(unittest.TestCase):
                 gates[gate_name] = {"evidence_path": str(evidence.resolve()), "evidence_sha256": hashlib.sha256(evidence.read_bytes()).hexdigest(), "result_path": str(result.resolve()), "result_sha256": hashlib.sha256(result.read_bytes()).hexdigest(), "status": "pass"}
             verification = root / "verification.json"
             verification.write_bytes(canonical_json_bytes({"schema_version": "variation-v150-verification-receipt/v1", "status": "pass", "experiment_id": "semantic-promote", "candidate_root": str(root.resolve()), "candidate_root_identity_sha256": "2" * 64, "candidate_source_tree_sha256": source_hash, "candidate_snapshot_content_sha256": content_hash, "comparison_artifact_sha256": hashlib.sha256(comparison.read_bytes()).hexdigest(), "review_artifact_sha256": hashlib.sha256(review.read_bytes()).hexdigest(), "quality_gates": gates}))
+            if mutate_automatic:
+                automatic.write_bytes(canonical_json_bytes({"status": "fail"}))
             promoted = promote_check(comparison, review=review, verification=verification)
+            if expected_failure is not None:
+                self.assertEqual(promoted["verdict"], "reject")
+                self.assertIn(expected_failure, promoted["failures"])
+                return
             self.assertEqual(promoted["verdict"], "promote", promoted["failures"])
             verification_value = json.loads(verification.read_text(encoding="utf-8"))
             verification_value["candidate_snapshot_content_sha256"] = "9" * 64
@@ -98,6 +115,29 @@ class VariationSemanticPromoteCheckTests(unittest.TestCase):
 
     def test_v6_promotion_recursively_binds_review_and_verification(self):
         self._assert_promotion_recursively_binds_review_and_verification(6)
+
+    def test_v7_promotion_recursively_binds_review_and_verification(self):
+        self._assert_promotion_recursively_binds_review_and_verification(7)
+
+    def test_absolute_automatic_path_inside_repository_preserves_recursive_validation(self):
+        self._assert_promotion_recursively_binds_review_and_verification(7, automatic_path_mode="absolute")
+
+    def test_absolute_automatic_path_outside_repository_is_rejected_even_with_matching_bytes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            automatic = Path(directory) / "automatic.json"
+            automatic.write_bytes(canonical_json_bytes({"status": "pass"}))
+            self.assertFalse(automatic.resolve().is_relative_to(ROOT))
+            self._assert_promotion_recursively_binds_review_and_verification(
+                7, automatic_path_mode=automatic, expected_failure="automatic_comparison_path_invalid")
+
+    def test_automatic_path_traversal_remains_rejected(self):
+        self._assert_promotion_recursively_binds_review_and_verification(
+            7, automatic_path_mode="traversal", expected_failure="automatic_comparison_path_invalid")
+
+    def test_absolute_automatic_path_still_requires_exact_hash(self):
+        self._assert_promotion_recursively_binds_review_and_verification(
+            7, automatic_path_mode="absolute", mutate_automatic=True,
+            expected_failure="automatic_comparison_hash_mismatch")
 
     def test_unknown_comparison_schema_has_no_legacy_fallback(self):
         rejected = promote_check({"schema_version": "prompt-quality-comparison/v999", "automatic_verdict": "pass"})

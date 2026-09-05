@@ -4337,6 +4337,845 @@
       "quiet room air",
       "bright daylight"
     ]
+  },
+  "bike_station": {
+    "label": "bike station",
+    "aliases": [],
+    "core": [
+      "aligned rental bicycle racks",
+      "digital rental kiosk",
+      "painted cycle exit lane",
+      "posted neighborhood route map"
+    ],
+    "crowd": [
+      "quiet rental period with several open docks",
+      "busy-hour wheel tracks without visible figures"
+    ],
+    "environment": [
+      "urban bicycle rental station",
+      "covered neighborhood cycle dock"
+    ],
+    "fx": [
+      "small status LEDs glowing on the docks",
+      "wet wheel tracks crossing the pavement"
+    ],
+    "lighting": [
+      "cool canopy strip lights",
+      "warm kiosk screen glow"
+    ],
+    "props": [
+      "rental bicycles with front baskets",
+      "helmet return cabinet",
+      "card scanner terminal",
+      "portable tire pump"
+    ],
+    "texture": [
+      "brushed steel docking rails",
+      "rain-darkened concrete paving"
+    ],
+    "time": [
+      "early weekday morning",
+      "blue-hour evening return period"
+    ],
+    "weather": [
+      "fine drizzle on the street",
+      "clear cool weather after rain"
+    ]
+  },
+  "canal_walkway": {
+    "label": "canal walkway",
+    "aliases": [],
+    "core": [
+      "weathered waterside railing",
+      "slow canal channel",
+      "arched pedestrian bridge",
+      "marked towpath bends"
+    ],
+    "crowd": [
+      "nearly empty towpath beside the water",
+      "occasional bicycle tracks crossing the paving"
+    ],
+    "environment": [
+      "tree-lined urban canal walkway",
+      "historic waterside towpath"
+    ],
+    "fx": [
+      "rippling building reflections",
+      "fallen leaves drifting at the water edge"
+    ],
+    "lighting": [
+      "soft reflected daylight from the water",
+      "warm path lamps under the bridge"
+    ],
+    "props": [
+      "waterside route marker",
+      "wooden rest bench",
+      "small canal safety notice",
+      "mooring ring set into stone"
+    ],
+    "texture": [
+      "mossy stone embankment",
+      "damp brick paving"
+    ],
+    "time": [
+      "quiet misty morning",
+      "lantern-lit early evening"
+    ],
+    "weather": [
+      "light rain leaving shallow puddles",
+      "clear breezy weather over the canal"
+    ]
+  },
+  "clinic_waiting_room": {
+    "label": "clinic waiting room",
+    "aliases": [],
+    "core": [
+      "reception counter with privacy screen",
+      "rows of wipe-clean waiting chairs",
+      "numbered consultation doors",
+      "wall-mounted queue display"
+    ],
+    "crowd": [
+      "unoccupied spaces near the entrance",
+      "low-volume appointment period"
+    ],
+    "environment": [
+      "neighborhood clinic waiting room",
+      "outpatient reception area"
+    ],
+    "fx": [
+      "quiet queue numbers changing on screen",
+      "subtle reflections on sanitized surfaces"
+    ],
+    "lighting": [
+      "even ceiling panel light",
+      "soft daylight through frosted windows"
+    ],
+    "props": [
+      "appointment slip tray",
+      "hand sanitizer dispenser",
+      "health leaflet rack",
+      "umbrella stand"
+    ],
+    "texture": [
+      "pale acoustic wall panels",
+      "speckled resilient flooring"
+    ],
+    "time": [
+      "weekday morning appointments",
+      "late-afternoon clinic hours"
+    ],
+    "weather": [
+      "rain visible through the entrance glass",
+      "bright dry day beyond the blinds"
+    ]
+  },
+  "community_garden": {
+    "label": "community garden",
+    "aliases": [],
+    "core": [
+      "rows of labeled vegetable beds",
+      "small communal tool shed",
+      "compost bays",
+      "gravel paths between plots"
+    ],
+    "crowd": [
+      "quiet interval between volunteer visits",
+      "empty rest area at the gate"
+    ],
+    "environment": [
+      "shared neighborhood community garden",
+      "fenced urban allotment"
+    ],
+    "fx": [
+      "fine water spray catching the light",
+      "leaves shifting in a mild breeze"
+    ],
+    "lighting": [
+      "dappled sunlight through fruit trees",
+      "soft shed-window glow"
+    ],
+    "props": [
+      "metal watering cans",
+      "hand-tool rack",
+      "seedling labels",
+      "coiled garden hose"
+    ],
+    "texture": [
+      "dark loose potting soil",
+      "weathered timber bed frames"
+    ],
+    "time": [
+      "fresh spring morning",
+      "long summer afternoon"
+    ],
+    "weather": [
+      "sun after an overnight shower",
+      "overcast planting weather"
+    ]
+  },
+  "community_theater_backstage": {
+    "label": "community theater backstage",
+    "aliases": [],
+    "core": [
+      "prop storage shelves",
+      "costume preparation table",
+      "marked stage entrance",
+      "backdrop storage wall"
+    ],
+    "crowd": [
+      "quiet interval between rehearsals",
+      "unoccupied waiting area beside the wings"
+    ],
+    "environment": [
+      "community theater backstage",
+      "local performance venue preparation area"
+    ],
+    "fx": [
+      "dust visible in side-stage light",
+      "curtain edge shifting near the entrance"
+    ],
+    "lighting": [
+      "warm work lamps above the table",
+      "narrow beam from the stage lamps"
+    ],
+    "props": [
+      "labeled prop cases",
+      "costume rack",
+      "rehearsal scripts",
+      "portable repair kit"
+    ],
+    "texture": [
+      "scuffed black stage flooring",
+      "heavy painted canvas folds"
+    ],
+    "time": [
+      "afternoon rehearsal preparation",
+      "evening before curtain call"
+    ],
+    "weather": [
+      "rain audible on the theater roof",
+      "clear evening outside the loading door"
+    ]
+  },
+  "design_studio": {
+    "label": "design studio",
+    "aliases": [],
+    "core": [
+      "large cutting worktable",
+      "material sample wall",
+      "prototype review board",
+      "flat-file drawing cabinets"
+    ],
+    "crowd": [
+      "quiet interval between client visits",
+      "unoccupied seats in the review area"
+    ],
+    "environment": [
+      "professional product design studio",
+      "open-plan creative workspace"
+    ],
+    "fx": [
+      "paper edges lifting in ventilation",
+      "task-light reflections on model surfaces"
+    ],
+    "lighting": [
+      "angled drafting lamps",
+      "broad north-window daylight"
+    ],
+    "props": [
+      "color swatch books",
+      "scale models",
+      "precision rulers",
+      "labeled component trays"
+    ],
+    "texture": [
+      "self-healing cutting mat texture",
+      "layered tracing paper surfaces"
+    ],
+    "time": [
+      "focused weekday morning",
+      "late studio review session"
+    ],
+    "weather": [
+      "soft rain against tall windows",
+      "clear daylight over the city"
+    ]
+  },
+  "ferry_terminal": {
+    "label": "ferry terminal",
+    "aliases": [],
+    "core": [
+      "electronic departure board",
+      "marked boarding lanes",
+      "covered access ramp",
+      "railings overlooking the berth"
+    ],
+    "crowd": [
+      "quiet interval between sailings",
+      "unoccupied seating near the entrance"
+    ],
+    "environment": [
+      "waterside passenger ferry terminal",
+      "covered boarding concourse"
+    ],
+    "fx": [
+      "wind tugging at posted notices",
+      "water reflections moving across the canopy"
+    ],
+    "lighting": [
+      "cool terminal canopy lights",
+      "sunlight flashing from the water"
+    ],
+    "props": [
+      "ticket validator",
+      "folded ferry timetables",
+      "rolling luggage",
+      "orange life-ring cabinet"
+    ],
+    "texture": [
+      "salt-worn concrete floor",
+      "ribbed metal ramp plates"
+    ],
+    "time": [
+      "first morning departure",
+      "golden-hour evening sailing"
+    ],
+    "weather": [
+      "salt mist in a harbor breeze",
+      "clear weather over calm water"
+    ]
+  },
+  "fire_station": {
+    "label": "fire station",
+    "aliases": [],
+    "core": [
+      "wide vehicle bay doors",
+      "equipment readiness board",
+      "wall of response lockers",
+      "marked inspection zone"
+    ],
+    "crowd": [
+      "quiet interval between dispatches",
+      "unoccupied workstations along the wall"
+    ],
+    "environment": [
+      "municipal fire station apparatus bay",
+      "emergency equipment room"
+    ],
+    "fx": [
+      "faint red reflections from vehicle panels",
+      "open bay air moving hanging tags"
+    ],
+    "lighting": [
+      "bright industrial bay lights",
+      "daylight entering through raised doors"
+    ],
+    "props": [
+      "coiled fire hoses",
+      "helmet and turnout gear rack",
+      "handheld radios",
+      "sealed response kits"
+    ],
+    "texture": [
+      "sealed concrete floor",
+      "scuffed rubber threshold strips"
+    ],
+    "time": [
+      "early morning shift",
+      "late evening"
+    ],
+    "weather": [
+      "rain beading beyond the open doors",
+      "clear cold air at the station apron"
+    ]
+  },
+  "flower_market": {
+    "label": "flower market",
+    "aliases": [],
+    "core": [
+      "rows of flower buckets",
+      "striped market awnings",
+      "central wrapping counter",
+      "stacked delivery crates"
+    ],
+    "crowd": [
+      "early market aisle before opening",
+      "recently arranged neighboring displays"
+    ],
+    "environment": [
+      "covered city flower market",
+      "wholesale florist hall"
+    ],
+    "fx": [
+      "fine mist above fresh stems",
+      "loose petals scattered beside buckets"
+    ],
+    "lighting": [
+      "diffused skylight through the roof",
+      "warm bulbs under each awning"
+    ],
+    "props": [
+      "ribbon spools",
+      "handwritten price cards",
+      "wrapping paper rolls",
+      "metal flower shears"
+    ],
+    "texture": [
+      "wet stone market floor",
+      "layered petals and green foliage"
+    ],
+    "time": [
+      "early wholesale morning",
+      "busy late-afternoon market"
+    ],
+    "weather": [
+      "light rain beyond the awnings",
+      "mild clear weather with open stall fronts"
+    ]
+  },
+  "forest_cabin": {
+    "label": "forest cabin",
+    "aliases": [],
+    "core": [
+      "stone fireplace",
+      "cast-iron stove",
+      "heavy wooden table",
+      "covered porch",
+      "stacked firewood alcove"
+    ],
+    "crowd": [
+      "unoccupied guest chairs",
+      "undisturbed bench cushions"
+    ],
+    "environment": [
+      "rustic woodland cabin",
+      "timber retreat in a conifer clearing"
+    ],
+    "fx": [
+      "thin chimney smoke curling outside",
+      "mist threading between pine trunks"
+    ],
+    "lighting": [
+      "warm light from the hearth",
+      "cool daylight through a narrow window"
+    ],
+    "props": [
+      "brass lantern",
+      "trail map",
+      "enamel kettle",
+      "canvas supply bag"
+    ],
+    "texture": [
+      "rough-hewn log walls",
+      "worn wool blanket weave"
+    ],
+    "time": [
+      "cold dawn",
+      "late evening"
+    ],
+    "weather": [
+      "light snowfall on the roof",
+      "mist after woodland rain"
+    ]
+  },
+  "greenhouse_nursery": {
+    "label": "greenhouse nursery",
+    "aliases": [],
+    "core": [
+      "long propagation benches",
+      "adjustable shade cloth",
+      "potting workbench",
+      "tiered seedling trays",
+      "translucent roof panels"
+    ],
+    "crowd": [
+      "quiet interval between customer visits",
+      "unoccupied checkout area"
+    ],
+    "environment": [
+      "commercial greenhouse nursery",
+      "enclosed horticultural propagation house"
+    ],
+    "fx": [
+      "fine irrigation mist",
+      "droplets gathering along the drip line"
+    ],
+    "lighting": [
+      "diffused daylight",
+      "warm grow lights"
+    ],
+    "props": [
+      "watering cans",
+      "hand shears",
+      "seed packets",
+      "stacked terracotta pots"
+    ],
+    "texture": [
+      "ribbed aluminum supports",
+      "dark granular growing medium"
+    ],
+    "time": [
+      "fresh early morning",
+      "warm late-afternoon nursery hours"
+    ],
+    "weather": [
+      "soft rain outside",
+      "bright humid weather after rain"
+    ]
+  },
+  "maker_space": {
+    "label": "maker space",
+    "aliases": [],
+    "core": [
+      "electronics test station",
+      "ventilated soldering station",
+      "prototype assembly table",
+      "wall-mounted tool racks"
+    ],
+    "crowd": [
+      "quiet interval between group sessions",
+      "unoccupied stools near the entrance"
+    ],
+    "environment": [
+      "community maker space",
+      "shared fabrication workshop"
+    ],
+    "fx": [
+      "solder smoke drawn into an extractor",
+      "tiny indicator lights on test boards"
+    ],
+    "lighting": [
+      "adjustable task lamps",
+      "cool overhead workshop panels"
+    ],
+    "props": [
+      "digital caliper",
+      "circuit board",
+      "precision screwdrivers",
+      "safety glasses",
+      "mounted vise",
+      "parts bins"
+    ],
+    "texture": [
+      "perforated steel tool board",
+      "scarred hardwood workbench"
+    ],
+    "time": [
+      "open workshop afternoon",
+      "focused evening build session"
+    ],
+    "weather": [
+      "rain tapping high workshop windows",
+      "clear dry weather outside the loading door"
+    ]
+  },
+  "observatory_dome": {
+    "label": "observatory dome",
+    "aliases": [],
+    "core": [
+      "large equatorial telescope",
+      "curved rotating dome track",
+      "instrument control console",
+      "narrow exterior viewing slit"
+    ],
+    "crowd": [
+      "quiet observation session beneath the dome",
+      "unused side console glowing softly"
+    ],
+    "environment": [
+      "hilltop astronomical observatory",
+      "circular telescope chamber"
+    ],
+    "fx": [
+      "telescope status indicators reflected on the curved housing",
+      "stars visible through the open shutter"
+    ],
+    "lighting": [
+      "low red task lighting",
+      "cold starlight through the dome slit"
+    ],
+    "props": [
+      "red observation lamp",
+      "printed star charts",
+      "observation logbook",
+      "weather monitor"
+    ],
+    "texture": [
+      "matte dark instrument housings",
+      "ribbed metal dome panels"
+    ],
+    "time": [
+      "deep moonless night",
+      "blue-hour instrument setup"
+    ],
+    "weather": [
+      "clear dry observing weather",
+      "thin high clouds approaching the horizon"
+    ]
+  },
+  "postal_service_counter": {
+    "label": "postal service counter",
+    "aliases": [],
+    "core": [
+      "long public service counter",
+      "parcel weighing station",
+      "labeled collection shelves",
+      "queue ticket display"
+    ],
+    "crowd": [
+      "quiet service interval with an open queue lane",
+      "sorted parcels waiting at closed windows"
+    ],
+    "environment": [
+      "public postal service counter",
+      "neighborhood parcel hall"
+    ],
+    "fx": [
+      "label printer feeding a fresh strip",
+      "queue display numbers changing overhead"
+    ],
+    "lighting": [
+      "even ceiling panel illumination",
+      "focused counter task lights"
+    ],
+    "props": [
+      "postal scales",
+      "mailing forms",
+      "stamp trays",
+      "padded envelopes"
+    ],
+    "texture": [
+      "laminated counter surface",
+      "ribbed cardboard parcel texture"
+    ],
+    "time": [
+      "weekday midmorning service",
+      "late-afternoon collection period"
+    ],
+    "weather": [
+      "raincoats gathered near the entrance",
+      "bright dry weather beyond the glass doors"
+    ]
+  },
+  "print_shop": {
+    "label": "print shop",
+    "aliases": [],
+    "core": [
+      "large digital printing machine",
+      "paper cutting station",
+      "drying rack",
+      "shelves of paper stock"
+    ],
+    "crowd": [
+      "quiet production interval between orders",
+      "finished stacks waiting beyond the counter"
+    ],
+    "environment": [
+      "independent commercial print shop",
+      "compact print finishing workshop"
+    ],
+    "fx": [
+      "fresh sheets moving through rollers",
+      "stacked proofs casting crisp shadows"
+    ],
+    "lighting": [
+      "bright color-corrected work lights",
+      "warm daylight through the storefront glass"
+    ],
+    "props": [
+      "ink swatch cards",
+      "paper rolls",
+      "binding tools",
+      "order sleeves"
+    ],
+    "texture": [
+      "smooth coated paper surfaces",
+      "fine toner dust on dark machinery"
+    ],
+    "time": [
+      "morning production run",
+      "late-afternoon order pickup"
+    ],
+    "weather": [
+      "rainy street visible through the storefront",
+      "clear midday outside the shop"
+    ]
+  },
+  "public_plaza": {
+    "label": "public plaza",
+    "aliases": [],
+    "core": [
+      "central stone fountain",
+      "clock tower frontage",
+      "broad monument steps",
+      "raised flower beds"
+    ],
+    "crowd": [
+      "quiet interval between public events",
+      "unoccupied seating at the perimeter"
+    ],
+    "environment": [
+      "open civic plaza",
+      "pedestrian square between municipal buildings"
+    ],
+    "fx": [
+      "fluttering event pennants",
+      "pigeons lifting from the ground"
+    ],
+    "lighting": [
+      "open directional daylight",
+      "warm architectural uplights"
+    ],
+    "props": [
+      "public map kiosk",
+      "event notice board",
+      "bronze inscription plaque",
+      "temporary exhibition panels"
+    ],
+    "texture": [
+      "geometric granite paving",
+      "weathered limestone edging"
+    ],
+    "time": [
+      "bright weekday noon",
+      "calm early evening"
+    ],
+    "weather": [
+      "recent rain leaving shallow puddles",
+      "clear breezy urban weather"
+    ]
+  },
+  "rooftop_cafe": {
+    "label": "rooftop cafe",
+    "aliases": [],
+    "core": [
+      "parapet seating edge",
+      "striped canvas awning",
+      "compact service counter",
+      "spaced bistro tables"
+    ],
+    "crowd": [
+      "quiet interval between lunch customers",
+      "unoccupied seats near the entrance"
+    ],
+    "environment": [
+      "open-air rooftop cafe",
+      "sheltered high-rise terrace cafe"
+    ],
+    "fx": [
+      "awning fabric moving in the breeze",
+      "distant skyline softened by haze"
+    ],
+    "lighting": [
+      "soft daylight beneath the awning",
+      "warm parapet and table lamps"
+    ],
+    "props": [
+      "coffee cups and saucers",
+      "small tray return shelf",
+      "folded menus",
+      "tabletop herb planters"
+    ],
+    "texture": [
+      "slatted wooden decking",
+      "matte ceramic tabletop surfaces"
+    ],
+    "time": [
+      "clear late morning",
+      "city lights at early evening"
+    ],
+    "weather": [
+      "light breeze after rain",
+      "clear warm rooftop weather"
+    ]
+  },
+  "tram_platform": {
+    "label": "tram platform",
+    "aliases": [],
+    "core": [
+      "glass passenger shelter",
+      "electronic arrival display",
+      "painted platform edge",
+      "route information case"
+    ],
+    "crowd": [
+      "light service interval beneath the shelter",
+      "empty boarding markers along the platform"
+    ],
+    "environment": [
+      "street-level tram platform",
+      "covered urban rail stop"
+    ],
+    "fx": [
+      "approaching tram lights reflected on rails",
+      "overhead wires receding down the street"
+    ],
+    "lighting": [
+      "cool shelter lighting",
+      "tram headlamps glowing through mist"
+    ],
+    "props": [
+      "ticket validator",
+      "service notice pole",
+      "metal bench",
+      "printed transit map"
+    ],
+    "texture": [
+      "wet grooved platform tiles",
+      "polished steel rail surfaces"
+    ],
+    "time": [
+      "morning commuting period",
+      "rainy evening service"
+    ],
+    "weather": [
+      "steady light rainfall",
+      "clear cool weather after a shower"
+    ]
+  },
+  "vehicle_repair_garage": {
+    "label": "vehicle repair garage",
+    "aliases": [],
+    "core": [
+      "hydraulic vehicle lift",
+      "wall-mounted tool board",
+      "diagnostic station",
+      "marked service bay"
+    ],
+    "crowd": [
+      "quiet interval between service appointments",
+      "unoccupied workstations along the wall"
+    ],
+    "environment": [
+      "modern vehicle repair garage",
+      "commercial maintenance workshop"
+    ],
+    "fx": [
+      "faint welding haze near a distant bay",
+      "open hood reflecting strip lights"
+    ],
+    "lighting": [
+      "long industrial strip lights",
+      "daylight entering under the roller door"
+    ],
+    "props": [
+      "socket trays",
+      "service clipboard",
+      "replacement part crate",
+      "rolling tool cabinet"
+    ],
+    "texture": [
+      "oil-resistant concrete floor",
+      "brushed metal body panels"
+    ],
+    "time": [
+      "early workshop opening",
+      "late-afternoon maintenance shift"
+    ],
+    "weather": [
+      "rain visible across the forecourt",
+      "clear cool air through the open bay"
+    ]
   }
 }
-

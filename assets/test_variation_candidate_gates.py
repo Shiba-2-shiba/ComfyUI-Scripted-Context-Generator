@@ -23,6 +23,62 @@ class CandidateGateTests(unittest.TestCase):
         self.temp = Path(tempfile.mkdtemp(prefix="candidate-gates-", dir=artifact_root))
         self.addCleanup(lambda: shutil.rmtree(self.temp, ignore_errors=True))
 
+    def test_confirmation_cohort_is_repeatable_and_rechecks_new_history(self) -> None:
+        seed_file = self.temp / "holdout.json"
+        with mock.patch.object(confirmation, "_existing_seeds", return_value={1, 2}) as history:
+            cohort = confirmation._load_or_create_seeds(seed_file)
+            history.assert_called_once_with()
+            self.assertEqual(confirmation._load_or_create_seeds(seed_file), cohort)
+        seeds = cohort["confirmation_seeds"]
+        self.assertEqual(len(set(seeds)), 256)
+        self.assertFalse({1, 2} & set(seeds))
+        with mock.patch.object(confirmation, "_existing_seeds", return_value={seeds[0]}):
+            with self.assertRaisesRegex(ValueError, "overlap"):
+                confirmation._load_or_create_seeds(seed_file)
+
+    def test_confirmation_rejects_duplicate_or_short_cohort(self) -> None:
+        seed_file = self.temp / "holdout.json"
+        for seeds in ([1] * 256, list(range(255))):
+            with self.subTest(count=len(set(seeds))):
+                seed_file.write_bytes(canonical_json_bytes({"confirmation_seeds": seeds}))
+                with mock.patch.object(confirmation, "_existing_seeds", return_value=set()):
+                    with self.assertRaisesRegex(ValueError, "256 unique"):
+                        confirmation._load_or_create_seeds(seed_file)
+
+    def test_confirmation_retains_result_contract_and_post_generation_history(self) -> None:
+        seed_file = self.temp / "holdout.json"
+        cohort = confirmation.build_confirmation_cohort([1, 2])
+        seed_file.write_bytes(canonical_json_bytes(cohort))
+        output = self.temp / "confirmation"
+        output.mkdir()
+        for side in ("baseline", "candidate"):
+            (output / f"{side}-records.jsonl").write_bytes(canonical_json_bytes({"run_seed": 42}))
+        metrics = {"fixture": 1}
+        with mock.patch.object(confirmation, "_existing_seeds", return_value={1, 2}) as history, \
+             mock.patch.object(confirmation.subprocess, "run") as run, \
+             mock.patch.object(confirmation, "load_policy", return_value={}), \
+             mock.patch.object(confirmation, "analyze_records", return_value={"metrics": metrics}), \
+             mock.patch.object(confirmation, "_compare", return_value={"verdict": "pass"}), \
+             mock.patch.object(confirmation, "build_source_manifest", return_value={"source_tree_hash": "a" * 64}), \
+             mock.patch.object(confirmation, "_apply_baseline_ablation", return_value="disable_composition_punctuation_normalization") as ablate:
+            # Keep the later scan: records added while generation runs must be seen.
+            run.side_effect = lambda *args, **kwargs: setattr(history, "return_value", {1, 2, 3})
+            result = confirmation.build_confirmation(objective="g005", output_dir=output, seed_file=seed_file)
+        ablate.assert_not_called()
+        self.assertEqual(result, {
+            "cohort_hash": cohort["cohort_hash"],
+            "comparison": {"verdict": "pass"},
+            "excluded_seed_count": 3,
+            "excluded_seed_set_hash": hashlib.sha256(canonical_json_bytes([1, 2, 3])).hexdigest(),
+            "feature_ablation": "disable_composition_punctuation_normalization",
+            "objective": "g005",
+            "record_count": 256,
+            "schema_version": "prompt-quality-confirmation/v1",
+            "source_tree_hash": "a" * 64,
+        })
+        self.assertEqual(json.loads((output / "confirmation.json").read_text(encoding="utf-8")), result)
+        self.assertEqual([call.args[0][6] for call in run.call_args_list], ["baseline", "candidate"])
+
     def test_candidate_gate_inventory_is_exact_and_candidate_owned(self) -> None:
         candidate = self.temp / "candidate"
         inventory = verification.candidate_gate_inventory(candidate, python="python", pwsh="pwsh")
@@ -35,6 +91,9 @@ class CandidateGateTests(unittest.TestCase):
                 self.assertTrue(any(str(candidate) in value for value in command), gate)
         self.assertEqual(inventory["browser"][-2:], ["-CustomNodeRoot", str(candidate.resolve())])
         self.assertEqual(inventory["frontend"][-2:], ["-CustomNodeRoot", str(candidate.resolve())])
+        for gate in ("frontend", "browser"):
+            command = inventory[gate]
+            self.assertEqual(command[command.index("-ActivePluginRoot") + 1], str(ROOT.resolve()))
 
     def test_environment_is_sanitized_to_candidate_root(self) -> None:
         candidate = self.temp / "candidate"

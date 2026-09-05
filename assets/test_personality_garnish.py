@@ -33,6 +33,74 @@ class TestContextGarnishPersonality(unittest.TestCase):
         ]
         self.test_moods = ["quiet", "energetic_joy", "melancholic_sadness"]
 
+    def test_visual_inspection_keeps_action_attention_authoritative(self):
+        from vocab.garnish.logic import _is_out_of_context
+
+        for action in (
+            "studying fresh tracks across the cabin floor",
+            "reading a notice attached above the doorway",
+            "examining a loose screw on the workbench",
+            "inspecting a crack in the ceiling",
+        ):
+            for tag in ("looking directly ahead", "attention locked forward", "looking slightly away"):
+                with self.subTest(action=action, tag=tag):
+                    self.assertTrue(_is_out_of_context(tag, "", "", action))
+            for tag in ("focused gaze", "steady gaze", "eyes fixed on what she is doing", "calm expression"):
+                with self.subTest(action=action, tag=tag):
+                    self.assertFalse(_is_out_of_context(tag, "", "", action))
+        for action in ("walking along the path", "carrying a closed book", "discussing a reading assignment"):
+            self.assertFalse(_is_out_of_context("looking directly ahead", "", "", action))
+        self.assertTrue(_is_out_of_context("looking directly ahead", "", "", "looking down at her shoes"))
+
+    def test_confident_personality_does_not_override_inspection_gaze(self):
+        args = dict(action_text="studying fresh tracks across the cabin floor",
+                    meta_mood_key="quiet_focused", seed=0, max_items=3, include_camera=False,
+                    context_loc="forest_cabin", context_costume="cozy_cafe", scene_tags="{}", personality="confident")
+        first = self.sample_garnish(**args)
+        self.assertEqual(first, self.sample_garnish(**args))
+        self.assertNotIn("looking directly ahead", first[0])
+        self.assertTrue(first[0])
+
+    def test_elevated_visual_targets_exclude_downward_gaze_in_any_slot(self):
+        from vocab.garnish.logic import _is_out_of_context
+
+        for action in (
+            "checking the skyline beyond the tables",
+            "watching the horizon from the terrace",
+            "inspecting the ceiling for cracks",
+            "looking up at the clouds",
+        ):
+            for tag in ("downcast eyes", "looking down"):
+                with self.subTest(action=action, tag=tag):
+                    self.assertTrue(_is_out_of_context(tag, "", "", action))
+            for tag in ("focused gaze", "steady gaze", "soft eyes", "faint frown", "calm expression"):
+                with self.subTest(action=action, tag=tag):
+                    self.assertFalse(_is_out_of_context(tag, "", "", action))
+
+        for action in (
+            "checking the bill while waiting near the table",
+            "reading a rain gauge beside the garden bed",
+            "reading a book about the skyline",
+            "checking a sky chart on the table",
+            "standing beside the rooftop rail",
+        ):
+            with self.subTest(action=action):
+                self.assertFalse(_is_out_of_context("downcast eyes", "rooftop_cafe", "", action))
+
+    def test_skyline_action_does_not_receive_gloomy_downcast_eyes(self):
+        for mood in ("peaceful_relaxed", "melancholic_sadness"):
+            for seed in range(8):
+                args = dict(action_text="checking the skyline beyond the tables",
+                            meta_mood_key=mood, seed=seed, max_items=3, include_camera=False,
+                            context_loc="rooftop_cafe", context_costume="casual",
+                            scene_tags="{}", personality="gloomy")
+                with self.subTest(mood=mood, seed=seed):
+                    first = self.sample_garnish(**args)
+                    self.assertEqual(first, self.sample_garnish(**args))
+                    self.assertNotIn("downcast eyes", first[0])
+                    self.assertNotIn("looking down", first[0])
+                    self.assertTrue(first[0])
+
     def test_output_type_all_personalities(self):
         """全personalityで出力がstr型かつ非空であることを確認"""
         for personality in self.personalities:

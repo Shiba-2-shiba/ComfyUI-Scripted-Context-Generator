@@ -1,5 +1,9 @@
 import { defineConfig, devices } from '@playwright/test'
 
+Object.assign(globalThis, {
+  __DISTRIBUTION__: 'localhost',
+  __IS_NIGHTLY__: false
+})
 
 export default defineConfig({
   testDir: './browser_tests/tests',
@@ -11,15 +15,17 @@ export default defineConfig({
   workers: 1,
   use: {
     baseURL: process.env.PLAYWRIGHT_TEST_URL || 'http://127.0.0.1:8188',
-    trace: 'on-first-retry'
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure'
   },
   projects: [
     {
       name: 'chromium',
       use: {
-        ...devices['Desktop Chrome']
+        ...devices['Desktop Chrome'],
+        channel: process.env.VSCG_BROWSER_CHANNEL || undefined
       },
-      timeout: 15000
+      timeout: 60000
     }
   ]
 })

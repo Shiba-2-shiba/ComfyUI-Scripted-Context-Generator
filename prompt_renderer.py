@@ -19,6 +19,7 @@ if __package__:
     from .pipeline.action_generator import action_verb as normalize_action_verb
     from .pipeline.prompt_realizer import (
         build_content_plan,
+        coerce_action_frame,
         filter_redundant_garnish,
         normalize_composition_punctuation,
         normalize_subject_to_girl,
@@ -40,6 +41,7 @@ else:
     from pipeline.action_generator import action_verb as normalize_action_verb
     from pipeline.prompt_realizer import (
         build_content_plan,
+        coerce_action_frame,
         filter_redundant_garnish,
         normalize_composition_punctuation,
         normalize_subject_to_girl,
@@ -834,6 +836,14 @@ def build_prompt_text(
         p_intro = intro_entry["text"]
         p_body = body_entry["text"]
         p_end = end_entry["text"]
+        if (
+            normalize_action_verb(action) in {"reading", "studying", "examining", "inspecting"}
+            or coerce_action_frame(action_frame).gaze_target
+            or "gaze" in semantic_families_for_text(_join_nonempty([action, garnish, staging_tags]))
+        ):
+            # Optional narration must not restate attention already owned by a
+            # concrete action or gaze. Preserve the selected template and RNG.
+            p_body = p_body.removesuffix(", her attention fixed on it")
         action_clause, action_surface = _render_action_clause(action, garnish, action_surface, body_entry)
         syntax_family = select_syntax_family(seed)
         content_plan = build_content_plan(

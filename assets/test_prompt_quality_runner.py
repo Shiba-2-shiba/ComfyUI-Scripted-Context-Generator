@@ -507,6 +507,7 @@ class TestCanonicalRunnerArtifacts(unittest.TestCase):
         self.assertIn("run_id", manifest)
         self.assertIn("created_at", manifest)
         self.assertIn("host", manifest)
+        self.assertEqual(manifest["prompt_corpus_sha256"], hashlib.sha256((ROOT / "prompts.jsonl").read_bytes()).hexdigest())
         self.assertEqual(manifest["replay_evidence"], {
             "checked": 80, "mismatch_count": 0, "status": "pass",
         })
@@ -515,6 +516,24 @@ class TestCanonicalRunnerArtifacts(unittest.TestCase):
         for dynamic_key in ("run_id", "created_at", "host", "run_duration_ms", "duration_ms"):
             self.assertNotIn(dynamic_key, first_record)
             self.assertNotIn(dynamic_key, metrics)
+
+    def test_generation_rejects_prompt_corpus_drift_even_when_source_is_unchanged(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            corpus = root / "prompts.jsonl"
+            corpus.write_bytes(b"before\n")
+
+            def change_corpus(*args, **kwargs):
+                corpus.write_bytes(b"after\n")
+                return {"run_seed": args[1]}
+
+            with patch("tools.prompt_quality_loop.ROOT", root), patch(
+                "tools.prompt_quality_loop.build_canonical_record", side_effect=change_corpus,
+            ), patch("tools.prompt_quality_loop.build_source_manifest", return_value={"source_tree_hash": "unchanged"}):
+                with self.assertRaises(WorkflowValidationError) as caught:
+                    generate_run(self.workflow, root / "run", artifact_root=root, profile=self.profile, verify_replay=False)
+            self.assertEqual(caught.exception.code, "prompt_corpus_changed")
+            self.assertFalse((root / "run/run-manifest.json").exists())
 
     def test_duplicate_seed_is_rejected(self):
         with self.assertRaises(WorkflowValidationError) as caught:

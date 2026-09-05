@@ -1,12 +1,29 @@
 # Variation Expansion Progress
 
-Last updated: 2026-09-01
+Last updated: 2026-09-06
 
 ## Status Summary
 
-Overall status: `P12 verified; P13 staged loop planning active`
+Overall status: `P13 V150 promoted and verified; V250/V350/V500 not started`
 
-Current phase: `P13 V150 blind review remediation after attempt 001 rejection`
+Current phase: `V150 complete — PROMOTED with protected postcheck pass`
+
+Active: **135 subjects / 109 locations / 8,227 rows / 150,184 base variations**.
+Fresh experiment `v150-gaze-release-20260905` passed v7 independent review,
+g004/g005/g006 x256 confirmation and all eleven verification gates.
+The 27-file transaction finished `PROMOTED`; active postchecks passed 874 Python
+tests without skips, 4 frontend tests, 2 browser tests and byte-identical replay
+of the candidate's fixed 80 records. No staging or commit was performed.
+See the [completion handoff](./HANDOFF_2026-09-06_V150_PROMOTED.md) for exact evidence.
+
+The first resume review was rejected for skyline action/downcast gaze conflict.
+A regression-first gaze filter fix and frontend test lint cleanup preceded the
+fresh freeze; the rejected votes remain unchanged. Scoped lint and frontend
+typecheck passed. Documentation was updated only after successful promotion;
+the frozen receipts retain their original content bindings.
+
+The phase/attempt reports below retain their original historical context.
+Their "next" / "blocked" / "latest" statements are not current instructions.
 
 Active sidecar cleanup: `P14 clothing state location gate` - verified
 

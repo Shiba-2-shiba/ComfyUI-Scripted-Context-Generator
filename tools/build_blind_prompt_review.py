@@ -15,6 +15,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from tools.prompt_quality_loop import _atomic_write
+from tools.semantic_review_contract import V7_TARGETS, V7_GUARDS, validate_v7_review_contract
 from tools.workflow_prompt_runner import canonical_json_bytes
 
 
@@ -83,13 +84,18 @@ def build_review(
         "prompt-quality-review-contract/v4",
         "prompt-quality-review-contract/v5",
         "prompt-quality-review-contract/v6",
+        "prompt-quality-review-contract/v7",
     }:
         raise ValueError(f"unsupported review contract schema: {contract_schema!r}")
     is_v3 = contract_schema == "prompt-quality-review-contract/v3"
     is_v4 = contract_schema == "prompt-quality-review-contract/v4"
     is_v5 = contract_schema == "prompt-quality-review-contract/v5"
     is_v6 = contract_schema == "prompt-quality-review-contract/v6"
-    is_semantic = is_v4 or is_v5 or is_v6
+    is_v7 = contract_schema == "prompt-quality-review-contract/v7"
+    is_semantic = is_v4 or is_v5 or is_v6 or is_v7
+    semantic_version = str(contract_schema).rsplit("/v", 1)[-1]
+    if is_v7:
+        validate_v7_review_contract(review_policy)
     before = _paired_records(before_records) if is_semantic else _records(before_records)
     after = _paired_records(after_records) if is_semantic else _records(after_records)
     if set(before) != set(after):
@@ -142,7 +148,7 @@ def build_review(
         }
         if not isinstance(comparison_value, dict) or set(comparison_value) != expected_fields:
             raise ValueError("review-contract/v4 requires the exact comparison/v2 contract")
-        expected_comparison_schema = "prompt-quality-comparison/v4" if is_v6 else "prompt-quality-comparison/v3" if is_v5 else "prompt-quality-comparison/v2"
+        expected_comparison_schema = f"prompt-quality-comparison/v{int(semantic_version) - 2}"
         if comparison_value.get("schema_version") != expected_comparison_schema:
             raise ValueError(f"review contract requires a canonical {expected_comparison_schema} artifact")
         if comparison_value.get("experiment_id") != experiment_id:
@@ -211,10 +217,10 @@ def build_review(
             raise ValueError("review requires exactly 16 control and 4 exploration pairs")
         selection = {"affected_control": affected, "unaffected_control": controls, "exploration": exploration}
 
-    targets = list(target_dimensions or [
+    targets = list(target_dimensions or (V7_TARGETS if is_v7 else [
         "consistency", "naturalness", "protagonist_clarity", "image_prompt_suitability",
-    ])
-    guards = list(guard_dimensions or [dimension for dimension in DIMENSIONS if dimension not in targets])
+    ]))
+    guards = list(guard_dimensions or (V7_GUARDS if is_v7 else [dimension for dimension in DIMENSIONS if dimension not in targets]))
     if len(targets) != len(set(targets)) or len(guards) != len(set(guards)) or set(targets) & set(guards):
         raise ValueError("target and guard qualitative dimensions must be unique and disjoint")
     if set(targets) | set(guards) != set(DIMENSIONS):
@@ -244,7 +250,7 @@ def build_review(
         rubric = (
             f"Blindly compare A and B for {', '.join(DIMENSIONS)}. "
             "Vote A_better, B_better, equal, or abstain per dimension. "
-            + ("Equal means both prompts are assessable and neither is better; abstain means the dimension cannot be assessed for this pair. " if is_v5 or is_v6 else "")
+            + ("Equal means both prompts are assessable and neither is better; abstain means the dimension cannot be assessed for this pair. " if is_v5 or is_v6 or is_v7 else "")
             + "Record hard defects by side. "
             "Hard defects must use one closed atomic code and non-empty free-text evidence per observation."
         )
@@ -291,7 +297,7 @@ def build_review(
             raise ValueError("semantic comparison dimension eligibility must cover the exact rubric")
         eligibility_fields = (
             {"authority", "minimum_non_abstain_votes", "minimum_directional_votes", "pair_ids"}
-            if is_v5 or is_v6 else {"authority", "minimum_valid_votes", "pair_ids"}
+            if is_v5 or is_v6 or is_v7 else {"authority", "minimum_valid_votes", "pair_ids"}
         )
         for dimension, eligibility in dimensions.items():
             if not isinstance(eligibility, Mapping) or set(eligibility) != eligibility_fields:
@@ -299,7 +305,9 @@ def build_review(
         consistency = dimensions["consistency"]
         if set(consistency["pair_ids"]) != set(selected):
             raise ValueError("semantic consistency eligibility requires all 20 pairs")
-        if is_v5 or is_v6:
+        if is_v7:
+            validate_v7_review_contract(review_policy, targets=targets, guards=guards, dimensions=dimensions, pair_ids=selected)
+        elif is_v5 or is_v6:
             if consistency["minimum_non_abstain_votes"] != 36 or consistency["minimum_directional_votes"] != 20:
                 raise ValueError("v5 consistency requires 36 non-abstain and 20 directional votes")
         elif consistency["minimum_valid_votes"] != 36:
@@ -316,7 +324,7 @@ def build_review(
             "dimension_eligibility": dimensions,
             "pair_evidence_bindings": {field: comparison_value[field] for field in binding_fields},
             "selection_hash": frozen["selection_hash"],
-            "schema_version": "prompt-quality-review-assignment-key/v6" if is_v6 else "prompt-quality-review-assignment-key/v5" if is_v5 else "prompt-quality-review-assignment-key/v4",
+            "schema_version": f"prompt-quality-review-assignment-key/v{semantic_version}",
         })
     for lane_number in (1, 2):
         lane_id = f"lane-{lane_number}"
@@ -366,7 +374,7 @@ def build_review(
             "guard_qualitative_dimensions": guards,
             "rubric": rubric,
             "rubric_version": "prompt-quality-review-rubric/v2",
-            "schema_version": "prompt-quality-blind-review-lane/v6" if is_v6 else "prompt-quality-blind-review-lane/v5" if is_v5 else "prompt-quality-blind-review-lane/v4" if is_v4 else "prompt-quality-blind-review-lane/v3" if is_v3 else "prompt-quality-blind-review-lane/v1",
+            "schema_version": f"prompt-quality-blind-review-lane/v{semantic_version}" if is_semantic else "prompt-quality-blind-review-lane/v3" if is_v3 else "prompt-quality-blind-review-lane/v1",
             "target_qualitative_dimensions": targets,
         }
         if is_v3:
@@ -382,7 +390,7 @@ def build_review(
             lane.pop("experiment_label")
             lane.pop("guard_qualitative_dimensions")
             lane.pop("target_qualitative_dimensions")
-            lane["result_contract"]["schema_version"] = "prompt-quality-blind-review-result/v6" if is_v6 else "prompt-quality-blind-review-result/v5" if is_v5 else "prompt-quality-blind-review-result/v4"
+            lane["result_contract"]["schema_version"] = f"prompt-quality-blind-review-result/v{semantic_version}"
             lane["result_contract"]["required_fields"].append("review_session_id")
             lane["result_contract"]["hard_defects"] = {
                 "allowed_codes": list(review_policy.get("hard_defect_codes", [])),

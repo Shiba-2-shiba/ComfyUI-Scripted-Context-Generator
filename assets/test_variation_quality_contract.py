@@ -3,11 +3,12 @@ import json
 import unittest
 from pathlib import Path
 
+from assets.variation_test_fixtures import fixture_environment, fixture_repository
 from tools.variation_quality_contract import validate_variation_quality_contract
 from tools.workflow_prompt_runner import WorkflowValidationError
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = fixture_repository()
 CONTRACT_PATH = ROOT / "docs/variation_expansion/experiments/v150-candidate-shape-iteration-008/nonselected-quality-contract.json"
 
 
@@ -16,7 +17,7 @@ class TestVariationQualityContract(unittest.TestCase):
     def setUpClass(cls):
         cls.contract = json.loads(CONTRACT_PATH.read_text(encoding="utf-8"))
 
-    def test_tracked_contract_reproduces_parent_evidence_and_fixed_cohort(self):
+    def test_fixture_contract_reproduces_parent_evidence_and_fixed_cohort(self):
         result = validate_variation_quality_contract(
             self.contract,
             repository_root=ROOT,
@@ -95,6 +96,16 @@ class TestVariationQualityContract(unittest.TestCase):
             raised.exception.code,
             "invalid_variation_quality_contract_path",
         )
+
+
+def setUpModule():
+    global _fixture_context
+    _fixture_context = fixture_environment(ROOT)
+    _fixture_context.__enter__()
+
+
+def tearDownModule():
+    _fixture_context.__exit__(None, None, None)
 
 
 if __name__ == "__main__":

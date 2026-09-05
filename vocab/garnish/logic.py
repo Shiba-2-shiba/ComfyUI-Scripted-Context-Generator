@@ -476,9 +476,30 @@ def _is_out_of_context(
     ):
         return True
 
-    if _contains_any(action_lower, ["looking down"]) and _contains_any(tag_lower, ["looking up", "looking at viewer"]):
+    # Inspection already assigns visual attention to the action target. Optional
+    # personality/emotion tags may describe focus, but must not redirect it.
+    if re.match(r"\s*(?:reading|studying|examining|inspecting)\b", action_lower) and _contains_any(
+        tag_lower, ["looking directly ahead", "looking straight ahead", "glaring straight ahead",
+                    "attention locked forward", "looking slightly away", "looking away", "looking aside",
+                    "sideways glance", "looking at viewer", "looking at the viewer", "looking up", "looking down"]
+    ):
         return True
-    if _contains_any(action_lower, ["looking up"]) and "looking down" in tag_lower:
+
+    # A direct elevated/distant target also owns gaze direction. Match the
+    # action object, not scenery mentioned in a book or a location name; apply
+    # this to expression slots too, where "downcast eyes" can originate.
+    downward_gaze = ["looking down", "downcast eyes"]
+    if re.match(
+        r"\s*(?:checking|watching|studying|examining|inspecting|looking (?:at|toward|towards))"
+        r"\s+(?:(?:the|a|an)\s+)?(?:skyline|horizon|ceiling)\b",
+        action_lower,
+    ) and _contains_any(tag_lower, downward_gaze):
+        return True
+
+    forward_gaze = ["looking directly ahead", "looking straight ahead", "attention locked forward"]
+    if _contains_any(action_lower, ["looking down"]) and _contains_any(tag_lower, ["looking up", "looking at viewer", *forward_gaze]):
+        return True
+    if _contains_any(action_lower, ["looking up"]) and _contains_any(tag_lower, [*downward_gaze, *forward_gaze]):
         return True
     if _contains_any(action_lower, ["looking away", "looking aside"]) and "looking at viewer" in tag_lower:
         return True
