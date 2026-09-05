@@ -6,22 +6,20 @@ LLM に依存せず、ルールベース + seed 再現で自然言語プロン�
 
 ## 現在地の把握
 
-この README は `2026-09-02` のリポジトリ状態に合わせています。
+この README は `2026-09-06` のリポジトリ状態に合わせています。
 
 - 公開ノード、semantic-only 方針、データ構成の基礎資料: [`CURRENT_STATUS.md`](./CURRENT_STATUS.md)
 - 2026-08 の prompt-quality リファクタと最終採用結果: [`.omx/ultragoal/goals.json`](./.omx/ultragoal/goals.json) と [`.omx/ultragoal/ledger.jsonl`](./.omx/ultragoal/ledger.jsonl)
 - 品質ポリシーと再現可能な実験証拠: [`docs/prompt_quality/`](./docs/prompt_quality/)
 
-`CURRENT_STATUS.md` の variation sizing と構造説明は 2026-06-19 に確定した基準を含みます。8 月の変更は主に prompt の自然さ、意味整合性、検証基盤、採用ゲートに対するもので、variation scope 自体の拡張ではありません。
+`CURRENT_STATUS.md` の variation sizing と構造説明は 2026-06-19 に確定した基準を含みます。現在の規模は、この README の「バリエーション規模」と [V150 完了記録](./docs/variation_expansion/HANDOFF_2026-09-06_V150_PROMOTED.md) を参照してください。
 
 subject / location / base variations を増やす作業では、[`EXPANSION_GUIDE.md`](./EXPANSION_GUIDE.md) を先に参照してください。
 日常系 location / action pool の拡張計画と進捗は [`docs/variation_expansion/`](./docs/variation_expansion/README.md) にあります。
-現在は 100k base variations gate を通過済みで、次の大きな計画対象は 500k へ向けた段階拡張です。
-V150 candidate は isolated snapshot で `150,184` variations、19/19 coverage、
-default80/control64 automatic quality validationを通過しましたが、blind
-review attempt 001はrejectされ、現在は5 seedのremediation中です。blind review
-と3x256 confirmationの合格後、VE-1319がactive dataを
-`103,212`から`150,184`へ昇格します。
+V150 は本体反映済みで、現在は `150,184` base variations です。
+固定64+16件の自動比較、独立2名のv7 blind review、3目的×256件のconfirmation、
+11ゲートを通過し、VE-1319は `PROMOTED`・反映後検証 `pass` で完了しています。
+500kへ向けた次の段階はV250で、V250/V350/V500は未着手です。
 
 Semantic EPIG の現在地、文書の正本、変更時の loop-engineering gate は
 [`docs/semantic_epig/README.md`](./docs/semantic_epig/README.md) を参照してください。
@@ -220,30 +218,30 @@ Active domains:
 
 ## バリエーション規模
 
-variation scope は `2026-06-19` に確定した基準です。次の値は、その現行データを `2026-08-31` に `python assets/calc_variations.py --json` で再計測した結果です。
+次の値は、V150反映済みの本体データを `2026-09-06` に `python assets/calc_variations.py --json` で再計測した結果です。
 
-- unique subjects: `120`
-- unique locations: `90`
-- base variations: `103,212`
-- compatibility review rows: `5,806`
-- actions per location: `min 12 / median 16 / mean 15.56 / max 20`
+- unique subjects: `135`
+- unique locations: `109`
+- base variations: `150,184`
+- compatibility review rows: `8,227`
+- actions per location: `min 12 / median 16 / mean 16.33 / max 20`
 - missing action pools: `0`
 - mood keys: `9`
 - unique mood tags: `172`
 - unique micro actions: `280`
-- unique background context tags: `835`
-- semantic units: `1,287`
-- semantic garnish universe: `11,583`
-- theoretical max: `1,195,504,596`
+- unique background context tags: `1,028`
+- semantic units: `1,480`
+- semantic garnish universe: `13,320`
+- theoretical max: `2,000,450,880`
 
 camera / effect 系は semantic-only ランタイムでは active variation に含めません。
 監査用の legacy-disabled 指標として `camera_configs=120`, `effect_tags=22` は残しています。
 
-base variations は 6 月の counted scope と同じ `103,212` です。一方、theoretical max は現行の組み合わせロジックで再計測した値へ更新しています。数値は語彙データや算出ロジックの更新で変わるため、変更後は必ず再計測してください。
+base variations は、現在のsubject / location scopeとcompatibility review CSV、action poolから算出した値です。
+theoretical max はsemantic garnishとの組み合わせ上限であり、実際に異なるプロンプトがその件数生成されることを保証する値ではありません。
+数値は語彙データや算出ロジックの更新で変わるため、変更後は再計測してください。
 
-直近の拡張では、100k target planning、P10 compatibility taxonomy expansion、P11 action authoring refactor を実施し、base variations を `105,612` まで増やしました。
-その後の variation restriction により、現在の counted surface は `103,212` base variations です。
-100k stabilization gate の主要検証も通過済みです。
+V150では27データファイルを本体へ反映し、反映後の件数・全回帰テスト・固定80出力の候補との完全一致を確認しています。
 詳細と実績差分は [`docs/variation_expansion/progress.md`](./docs/variation_expansion/progress.md) を参照してください。
 
 ## インストール
@@ -284,9 +282,9 @@ python tools/build_action_pools.py --check
 python -m unittest discover -s assets -p "test_*.py"
 ```
 
-2026-08-31 の最終採用時は `540/540` tests が通過しています。データ系 check の期待値は `ERROR: []`, `WARNING: []` です。
+2026-09-06 のV150反映時は、候補・本体それぞれ `874/874` tests が通過しています。データ系 check の期待値は `ERROR: []`, `WARNING: []` です。
 
-frontend / browser round-trip は `verification/` と `tools/run_*.ps1` を使います。検証時に固定した環境は ComfyUI `v0.32.0` / ComfyUI_frontend `v1.46.3` です。これは採用時の再現環境であり、一般利用の必須バージョン範囲を意味しません。
+frontend / browser round-trip は `verification/` と `tools/run_*.ps1` を使います。V150はComfyUI_frontend `v1.54.4` でfrontend `4/4`、Chrome browser `2/2` が通過しました。検証環境と証拠は [V150 完了記録](./docs/variation_expansion/HANDOFF_2026-09-06_V150_PROMOTED.md) を参照してください。これは検証時の再現環境であり、一般利用の必須バージョン範囲を意味しません。
 
 ## データ編集ポイント
 
