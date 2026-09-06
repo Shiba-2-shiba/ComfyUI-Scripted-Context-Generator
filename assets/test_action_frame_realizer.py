@@ -171,8 +171,15 @@ class TestActionFrameRealizer(unittest.TestCase):
         self.assertNotIn("{}", first_prompt)
 
     def test_composition_renderer_uses_content_plan_as_realization_authority(self):
-        with patch("prompt_renderer.realize_content_plan", return_value="{subject_clause}, {action_clause}, {scene_clause}.") as realize:
-            prompt = build_prompt_text(
+        from pipeline.prompt_realizer import realize_content_plan
+
+        def realize_with_marker(plan, **kwargs):
+            _text, debug = realize_content_plan(plan, **kwargs)
+            debug["test_metadata_marker"] = "metadata_from_realizer"
+            return "Plan authority marker, {subject_clause}, {action_clause}, {scene_clause}.", debug
+
+        with patch("prompt_renderer.realize_content_plan", side_effect=realize_with_marker) as realize:
+            prompt, debug = build_prompt_text(
                 template="",
                 composition_mode=True,
                 seed=31,
@@ -180,9 +187,13 @@ class TestActionFrameRealizer(unittest.TestCase):
                 costume="navy coat",
                 loc="station platform",
                 action="checking a transit card",
+                return_debug=True,
             )
 
         realize.assert_called_once()
+        self.assertTrue(realize.call_args.kwargs["return_debug"])
+        self.assertIn("Plan authority marker", prompt)
+        self.assertEqual(debug["test_metadata_marker"], "metadata_from_realizer")
         self.assertIn("a solo girl", prompt)
         self.assertIn("checking a transit card", prompt)
         self.assertIn("station platform", prompt)

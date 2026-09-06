@@ -11,6 +11,7 @@ from location_service import load_background_alias_overrides, load_background_pa
 from object_focus_service import OBJECT_TOKENS
 from scene_service import load_scene_compatibility
 from vocab.semantic_space import validate_axis_payload
+from vocab.syntax_families import CATALOG_FILENAME, validate_syntax_family_catalog
 
 
 def _iter_string_paths(value: Any, path: str = "") -> Iterable[tuple[str, str]]:
@@ -512,6 +513,11 @@ def validate_semantic_epig_assets() -> list[str]:
     return warnings
 
 
+def validate_natural_language_realizer_v2(payload: Any | None = None) -> list[str]:
+    data = _read_json_asset(CATALOG_FILENAME) if payload is None else payload
+    return [f"{CATALOG_FILENAME}:{issue}" for issue in validate_syntax_family_catalog(data)]
+
+
 def validate_assets() -> list[str]:
     warnings: list[str] = []
     backgrounds = load_background_packs()
@@ -535,5 +541,6 @@ def validate_assets() -> list[str]:
         )
     )
     warnings.extend(validate_semantic_epig_assets())
+    warnings.extend(validate_natural_language_realizer_v2())
 
     return sorted(set(warnings))

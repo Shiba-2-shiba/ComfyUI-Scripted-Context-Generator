@@ -168,6 +168,22 @@ active / recommended な workflow sample は `ComfyUI-workflow-context.json` だ
 
 ## 3. 補足
 
+現在のリファクタリングの正本は [`docs/diversity_refactor/spec.md`](./docs/diversity_refactor/spec.md)、
+[`tasks.md`](./docs/diversity_refactor/tasks.md)、[`progress.md`](./docs/diversity_refactor/progress.md) です。
+`docs/scg_diversity_refactor_docs/` は受領した元資料、`docs/variation_expansion/` は V150 の完了履歴と延期した V250/V350/V500 計画です。
+V150 固定テストは `assets/test_v150_freeze_contract.py`。
+Audit CLI は `tools/audit_effective_diversity.py`、純粋な集計は `tools/effective_diversity_metrics.py`、
+resolverを使う意味署名抽出は `tools/effective_diversity_signatures.py` に分離しています。
+対応テストは `assets/test_effective_diversity_*.py`。
+`assets/test_prompt_realizer_v2.py` は現行の意味・安全性保護と、明示した未実装構文/debug契約を持ちます。
+候補構文定義は `vocab/data/natural_language_realizer_v2.json`、構造・安全条件の検証は `vocab/syntax_families.py`。
+`asset_validator.validate_assets()` でも検証します。現行のtemplate catalog・構文選択にはまだ接続していません。
+`pipeline/syntax_family_selector.py` は具体的なContentPlanに対する候補判定と拒否理由を返します。
+判定できる形を限定し、未知のsubject/action/sceneはbaselineへ戻します。現行生成への接続は後続タスクです。
+`pipeline/prompt_realizer.py` は明示したframeとv2 familyを使う内部候補経路で6構文を描画します。
+従来のplanだけの呼び出しはv1を維持します。描画方式・構文・候補・fallback・節順序はBuilder decisionに記録します。
+自由形式のlegacy templateには構文を推測せずnull/[]を記録します。候補評価・既定経路への採用・Schedulerは後続タスクです。
+
 今回の分類では、次は主対象から外しています。
 
 - `docs/`: 設計メモ、移行資料。書類整理方針は `docs/documentation_cleanup_plan.md`

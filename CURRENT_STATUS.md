@@ -1,15 +1,30 @@
 # Current Status
 
-Last verified: 2026-08-31
+Last verified: 2026-09-06 (F0 baseline: counts, validators, full flow, 40 focused tests)
 
 このファイルは、毎回全スクリプトを読み直さずに現在地を把握するための短い入口です。
 詳細な構造は `REPO_STRUCTURE.md`、設計背景は `assets/ARCHITECTURE.md` と
 `docs/context_refactor/README.md` を参照してください。
-subject / location / base variations を増やす作業は `EXPANSION_GUIDE.md` を先に参照してください。
-日常系 location / action pool の拡張作業は `docs/variation_expansion/README.md` に計画と進捗があります。
-100k base variations gate は通過済みです。次の拡張計画対象は 500k に向けた subject / location / action-depth の再設計です。
-段階的な500k計画と prompt-quality 維持gateは
-`docs/variation_expansion/500k_loop_plan.md` を正本とします。
+現在の方針は [`docs/diversity_refactor/spec.md`](./docs/diversity_refactor/spec.md)、
+作業と証拠は [`tasks.md`](./docs/diversity_refactor/tasks.md) / [`progress.md`](./docs/diversity_refactor/progress.md) を正本とします。
+V150 の semantic-base を固定し、Effective Diversity Audit → Natural Language Realizer v2 → Deterministic Diversity Scheduler の順に進めます。
+V150 固定と Audit CLI（A1.4）を完了しました。128 seed smoke の通常実行・再実行・参照集合再利用は同一bytesで、関連134テストも成功しています。
+正式なgate基準計測（A1.5）を完了しました。固定8,192件の参照集合に対する2,048件測定と再実行が同一bytesです。
+core署名1,963種類、frame署名2,042種類。詳細・欠損・hashは [`基準計測`](./docs/diversity_refactor/progress.md#6-effective-diversity-baseline) に記録しています。
+目標／非回帰閾値（A1.6）を固定し、Phase A の監査・基準値・受入条件を整えました。
+Realizer v2契約テスト（N2.1）を追加し、比較用sourceを保存しました。
+6種類の候補構文メタデータと厳格な検証（N2.2）を追加しました。128 seedの出力・指標は従来と同一です。
+安全な対応構文だけを残すeligibility engine（N2.3）を実装しました。現行生成には未接続で、128 seedの出力・指標は従来と同一です。
+必要な6構文とBuilder decision/debug（N2.6）が実装済みです。関連188件はすべて成功し、期待される失敗は0件です。
+監査は128件すべての構文をBuilder metadataから読み、現行workflow本文・指標は不変です。
+初回Realizer v2候補（N2.7）は **REJECTED** です。実workflowの2,048件すべてがv1へfallbackし、v2適用0件・構文改善なしでした。
+意味・本文と品質の自動保護条件は維持しましたが、6構文の観測・entropy目標が未達です。N2.8の採用は保留します。
+次は N2.7-R1 で実workflowの句に対する安全判定・接続を修正し、同じ条件で再評価します。現行生成への反映はありません。
+閾値・適用段階・品質条件は [`受入条件`](./docs/diversity_refactor/progress.md#7-locked-target--guard-metrics) を参照してください。
+監査コマンド: `python tools/audit_effective_diversity.py --profile smoke --output assets/results/effective_diversity/smoke.json`。
+V250/V350/V500 は **DEFERRED while effective-diversity refactor is active**。
+数量拡張の履歴は `docs/variation_expansion/README.md`、延期した将来計画は
+`docs/variation_expansion/500k_loop_plan.md`、再開時の手順は `EXPANSION_GUIDE.md` に保持します。
 現在の variation sizing 境界は `vocab/data/variation_scope.json` に固定されています。
 書類整理方針は `docs/documentation_cleanup_plan.md` を参照してください。
 repository cleanup の直近リファクタは `docs/repository_cleanup/` に仕様・進捗・タスクがあります。
@@ -98,21 +113,21 @@ python assets/calc_variations.py --json
 
 Current semantic-only summary:
 
-- unique subjects: `120`
-- unique locations: `90`
-- compatibility review rows: `5,806`
-- base variations: `103,212`
-- actions per location: `min 12 / median 16 / mean 15.6 / max 20`
+- unique subjects: `135`
+- unique locations: `109`
+- compatibility review rows: `8,227`
+- base variations: `150,184`
+- actions per location: `min 12 / median 16 / mean 16.33 / max 20`
 - missing action pools: `0`
-- runtime action pools: `96`
-- split action pool source files: `96` location files + `_manifest.json` + `_shared_families.json`
+- runtime action pools: `115`
+- split action pool source files: `115` location files + `_manifest.json` + `_shared_families.json`
 - mood keys: `9`
 - unique mood tags: `172`
 - unique micro actions: `280`
-- unique background context tags: `835`
-- semantic units: `1,287`
-- semantic garnish universe: `11,583`
-- theoretical max: `1,223,303,796`
+- unique background context tags: `1,028`
+- semantic units: `1,480`
+- semantic garnish universe: `13,320`
+- theoretical max: `2,000,450,880` (not measured effective diversity)
 
 Legacy-disabled vocabulary still present for audit visibility:
 
@@ -125,8 +140,8 @@ Interpretation:
 
 - `base variations` is calculated from `assets/compatibility_review.csv`
   rows and dedicated action counts in `vocab/data/action_pools.json`.
-- Current base sizing is stable at `120 subjects × 90 locations` within
-  `vocab/data/variation_scope.json`, producing `103,212` counted base
+- Current base sizing is frozen at `135 subjects × 109 locations` within
+  `vocab/data/variation_scope.json`, producing `150,184` counted base
   variations.
 - The split files in `vocab/source/action_pools/` are for editing/review only;
   runtime still reads the generated flat `vocab/data/action_pools.json`.
@@ -136,7 +151,19 @@ Interpretation:
 
 ## Verification Snapshot
 
-Last verified commands:
+Current F0 baseline (2026-09-06):
+
+- main HEAD: `1b159bf66fa5202d27908ed63fe7d5fe4cb590f3`.
+- Exact sizing above; missing action pools: `0`.
+- `validate_prompt_data`, `check_variation_scope`, `build_action_pools --check`,
+  `build_compatibility_review --check`: `ERROR: []`, `WARNING: []`.
+- `verify_full_flow`: `OK`; focused variation/context/workflow/snapshot/determinism tests: `40 OK`.
+- Commands, receipt SHA256 and protected-file manifest: [`F0.2 receipt`](./docs/diversity_refactor/progress.md#5-baseline-command-receipt).
+- Previous release frontend/browser/blind-review evidence remains historical; F0 changes no runtime prompt surface.
+
+### Historical verification snapshot (2026-08-31, pre-V150)
+
+The following commands/results describe the earlier 100k baseline, not the current wave:
 
 ```bash
 python -m unittest assets.test_calc_variations assets.test_variation_target_planner assets.test_variation_scope assets.test_build_compatibility_review assets.test_build_action_pools
@@ -193,7 +220,7 @@ Recent cleanup:
 - empty `vocab/*/test.md` placeholders and the tracked generated `assets/results` baseline were removed
 - `pipeline/action_profiles.py` holds expansion-oriented daily-life/location action profile tables
 
-Recent expansion:
+Historical expansion (pre-V150):
 
 - 10 daily-life locations were promoted into base variation sizing
 - 8 remaining daily-life locations were promoted in P8
@@ -203,24 +230,22 @@ Recent expansion:
 - P11 added shared action families and raised action depth to the 12/16/20 tier
 - base variations increased from `11,916` to `105,612`
 - Later variation restrictions reduced the active counted boundary to 120 subjects / 90 locations.
-- `vocab/data/variation_scope.json` now records the active 120 subjects / 90 locations boundary
+- At that stage, `vocab/data/variation_scope.json` recorded the 120 subjects / 90 locations boundary
 - `tools/build_compatibility_review.py --check` now verifies scoped CSV regeneration with `ERROR: []`
 - `tools/build_action_pools.py --check` now verifies split action-pool source
   rebuilds the runtime JSON exactly
 
-Current expansion state:
+Historical P10–P12 results:
 
 - P10 result: `unique subjects 58 -> 120`, `unique locations 76 -> 91`,
   rows `1,637 -> 5,926`, base variations `15,610 -> 52,121`.
 - P11 result: action depth `min 12 / median 16 / mean 15.6 / max 20`,
   base variations `52,121 -> 105,612`.
 - P12 stabilization gate commands have passed at the 100k scale.
-- Current restricted sizing remains above the 100k target at `103,212`.
-- Next planning target: `500,000` base variations without making the 100k
-  implementation noisy or repetitive.
-- Canonical current plan: `docs/variation_expansion/500k_loop_plan.md`.
-- Every promoted expansion stage must retain the accepted prompt-quality
-  target/guard baseline from `docs/prompt_quality/`.
+- P12 restricted sizing was `103,212`; V150 subsequently reached `150,184`.
+- The historical `500,000` roadmap remains in `docs/variation_expansion/500k_loop_plan.md` as deferred work.
+- Current work follows `docs/diversity_refactor/` and preserves the accepted
+  prompt-quality target/guard baseline from `docs/prompt_quality/`.
 
 ## Refactor Risk Map
 
@@ -278,7 +303,7 @@ Optional before/after expansion comparison:
 python tools/report_expansion_delta.py assets/results/variation_before.json assets/results/variation_after.json --enforce
 ```
 
-Before expanding subjects / locations / actions:
+For a future quantity-expansion wave only (currently deferred):
 
 ```bash
 python -m unittest assets.test_data_consistency assets.test_character_resolution assets.test_location_resolution assets.test_action_generator assets.test_calc_variations

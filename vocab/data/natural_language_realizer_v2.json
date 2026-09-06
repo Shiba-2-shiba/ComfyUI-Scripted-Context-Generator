@@ -1,0 +1,84 @@
+{
+  "schema_version": "syntax-family-catalog/v1",
+  "baseline_family": "subject_action_scene",
+  "families": [
+    {
+      "key": "subject_action_scene",
+      "roles": ["*"],
+      "required_slots": [],
+      "allowed_action_surfaces": ["*"],
+      "avoid_action_surfaces": [],
+      "requires": [],
+      "forbids": [],
+      "sentence_count": 1,
+      "clause_order": ["subject", "action", "scene"],
+      "fallback_family": null,
+      "weight": 1.0
+    },
+    {
+      "key": "subject_action__scene_tail",
+      "roles": ["neutral", "focused", "quiet", "transition", "social"],
+      "required_slots": ["subject", "adjunct", "scene"],
+      "allowed_action_surfaces": ["gerund", "clause"],
+      "avoid_action_surfaces": ["fragment", "framed"],
+      "requires": ["standalone_scene_safe"],
+      "forbids": ["independent_action_subject"],
+      "sentence_count": 2,
+      "clause_order": ["subject", "action", "scene"],
+      "fallback_family": "subject_action_scene",
+      "weight": 1.0
+    },
+    {
+      "key": "scene_lead_subject_action",
+      "roles": ["neutral", "focused", "quiet", "transition", "social"],
+      "required_slots": ["subject", "adjunct", "scene"],
+      "allowed_action_surfaces": ["gerund", "clause"],
+      "avoid_action_surfaces": ["fragment", "framed"],
+      "requires": ["scene_lead_safe"],
+      "forbids": ["independent_action_subject"],
+      "sentence_count": 1,
+      "clause_order": ["scene", "subject", "action"],
+      "fallback_family": "subject_action_scene",
+      "weight": 1.0
+    },
+    {
+      "key": "action_lead_subject_scene",
+      "roles": ["neutral", "focused", "quiet", "transition", "social"],
+      "required_slots": ["subject", "adjunct", "scene"],
+      "allowed_action_surfaces": ["gerund"],
+      "avoid_action_surfaces": ["clause", "fragment", "framed"],
+      "requires": ["same_subject_attachment_safe"],
+      "forbids": ["fragment_subject_action", "independent_action_subject"],
+      "sentence_count": 1,
+      "clause_order": ["action", "subject", "scene"],
+      "fallback_family": "subject_action_scene",
+      "weight": 1.0
+    },
+    {
+      "key": "subject_scene_action",
+      "roles": ["neutral", "focused", "quiet", "transition", "social"],
+      "required_slots": ["subject", "predicate", "adjunct", "scene"],
+      "allowed_action_surfaces": ["gerund", "clause"],
+      "avoid_action_surfaces": ["fragment", "framed"],
+      "requires": ["frame_predicate_safe", "scene_adjunct_safe"],
+      "forbids": ["independent_action_subject"],
+      "sentence_count": 1,
+      "clause_order": ["subject", "scene", "action"],
+      "fallback_family": "subject_action_scene",
+      "weight": 1.0
+    },
+    {
+      "key": "subject_action_scene_insert",
+      "roles": ["neutral", "focused", "quiet", "transition", "social"],
+      "required_slots": ["subject", "predicate", "adjunct", "scene"],
+      "allowed_action_surfaces": ["gerund", "clause"],
+      "avoid_action_surfaces": ["fragment", "framed"],
+      "requires": ["frame_predicate_safe", "scene_adjunct_safe", "scene_action_nonduplicative"],
+      "forbids": ["independent_action_subject", "scene_action_overlap"],
+      "sentence_count": 1,
+      "clause_order": ["subject", "action", "scene"],
+      "fallback_family": "subject_action_scene",
+      "weight": 1.0
+    }
+  ]
+}

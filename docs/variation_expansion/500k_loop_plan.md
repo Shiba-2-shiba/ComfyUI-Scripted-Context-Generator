@@ -2,7 +2,13 @@
 
 Last updated: 2026-09-01
 
-This is the canonical active plan for P13. It keeps
+Status (2026-09-06): **V250/V350/V500 DEFERRED while effective-diversity refactor is active**.
+V150 is frozen at 150,184 base variations; current work follows
+[Semantic Diversity / Natural Language Refactor](../diversity_refactor/spec.md).
+This quantity roadmap is preserved for future resumption, not cancelled.
+The baseline and stage instructions below are historical P13 planning context.
+
+This was the canonical quantity-expansion plan for P13. It keeps
 `tools/plan_variation_target.py` as the planning core and extends its capability
 through verified iterations rather than replacing it or bulk-editing data first.
 

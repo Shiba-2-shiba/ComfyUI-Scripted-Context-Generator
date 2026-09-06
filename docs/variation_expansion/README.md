@@ -1,4 +1,8 @@
-# Variation Expansion: 現在の作業入口
+# Variation Expansion: V150 完了履歴と延期した拡張計画
+
+現在の作業入口は [Semantic Diversity / Natural Language Refactor](../diversity_refactor/spec.md) です。
+V150 を semantic-base として固定し、V250/V350/V500 は **DEFERRED while effective-diversity refactor is active**。
+以下の手順・証拠は数量拡張の履歴および再開時の参照として保持します。
 
 更新: 2026-09-06。**P13 / V150 は本体反映・反映後検証まで完了。**
 [最新の引き継ぎ](./HANDOFF_2026-09-06_V150_PROMOTED.md) を先に読む。

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 import re
 from typing import Any, Mapping, Sequence
 
@@ -16,6 +16,16 @@ except ImportError:
     from core.semantic_families import split_semantic_tags
     from core.semantic_policy import sanitize_text
     from vocab.seed_utils import mix_seed
+
+from .action_parser import normalize_action_phrase
+from .syntax_family_selector import eligible_syntax_families
+
+_LEGACY_SYNTAX_FAMILIES = frozenset({"single-sentence-scene-tail", "two-sentence-scene-tail", "template-directed"})
+_V2_IMPLEMENTED_FAMILIES = frozenset({
+    "subject_action_scene", "subject_action__scene_tail", "scene_lead_subject_action",
+    "action_lead_subject_scene", "subject_scene_action", "subject_action_scene_insert",
+})
+_V2_BASELINE = "subject_action_scene"
 
 
 @dataclass(frozen=True)
@@ -189,7 +199,7 @@ def realize_template_parts(parts: Sequence[str], syntax_family: str) -> str:
     return ", ".join(cleaned) + "."
 
 
-def realize_content_plan(plan: ContentPlan) -> str:
+def _realize_content_plan_v1(plan: ContentPlan) -> str:
     slot_for_role = {
         "subject": "subject",
         "action": "adjunct",
@@ -201,6 +211,85 @@ def realize_content_plan(plan: ContentPlan) -> str:
         if role in slot_for_role
     ]
     return realize_template_parts(parts, plan.syntax_family)
+
+
+def _initial_word(text: str, *, capitalize: bool = False) -> str:
+    first, separator, rest = text.partition(" ")
+    return (first.capitalize() if capitalize else first.lower()) + separator + rest
+
+
+def realize_content_plan(
+    plan: ContentPlan, *, action_frame: ActionFrame | Mapping[str, Any] | None = None,
+    action_surface: Mapping[str, Any] | None = None, return_debug: bool = False,
+) -> str | tuple[str, dict[str, Any]]:
+    """Realize explicit candidate families; legacy family calls stay byte-stable.
+
+    V2 requires an explicit frame, concrete clauses and a validated surface
+    (supplied separately or recorded in plan.lexical_choice). Plan-only calls
+    remain v1. Baseline eligibility alone cannot authorize new grammar. The
+    family determines output clause order; incoming v2 plans must retain all roles.
+    """
+    requested = plan.syntax_family
+    if requested in _LEGACY_SYNTAX_FAMILIES or (action_frame is None and action_surface is None):
+        text = _realize_content_plan_v1(plan)
+        if not return_debug:
+            return text
+        composed_families = sorted(_LEGACY_SYNTAX_FAMILIES - {"template-directed"})
+        return text, {"realizer_version": "v1", "syntax_family": requested,
+                      "eligible_syntax_families": composed_families if requested in composed_families else [requested],
+                      "syntax_fallback_reason": "",
+                      "clause_order": list(plan.clause_order)}
+    if len(plan.clause_order) != 3 or set(plan.clause_order) != {"subject", "action", "scene"}:
+        raise ValueError("A v2 plan must retain subject, action and scene exactly once")
+
+    surface = action_surface if action_surface is not None else {
+        "surface": plan.lexical_choice, "rendered_clause": plan.semantic_slots.get("adjunct", ""),
+    }
+    structural, eligibility = eligible_syntax_families(plan, action_frame, surface, return_debug=True)
+    eligible = [key for key in structural if key in _V2_IMPLEMENTED_FAMILIES]
+    selected = requested if requested in eligible else _V2_BASELINE
+    reason = "" if selected == requested else (
+        "family_not_implemented" if requested not in _V2_IMPLEMENTED_FAMILIES else "family_ineligible")
+    order = {
+        "scene_lead_subject_action": ["scene", "subject", "action"],
+        "action_lead_subject_scene": ["action", "subject", "scene"],
+        "subject_scene_action": ["subject", "scene", "action"],
+    }.get(selected, ["subject", "action", "scene"])
+    facts = eligibility["safety_facts"]
+    if facts["frame_predicate_safe"] is not True or facts["scene_action_overlap"] is not False:
+        # Explicit baseline and rejected/unknown families share the same fallback.
+        text = _realize_content_plan_v1(replace(plan, syntax_family="single-sentence-scene-tail",
+                                              clause_order=("subject", "action", "scene")))
+        version, selected, eligible = "v1", _V2_BASELINE, [_V2_BASELINE]
+        order = ["subject", "action", "scene"]
+        reason = "unsafe_for_v2" if facts["frame_predicate_safe"] is not True else "scene_action_overlap"
+    else:
+        subject, action, scene = (normalize_action_phrase(plan.semantic_slots[key]) for key in ("subject", "adjunct", "scene"))
+        predicate = _initial_word(action)
+        if surface.get("surface") == "gerund":
+            predicate = "is " + predicate
+        if selected == "subject_action__scene_tail":
+            text = f"{_initial_word(subject, capitalize=True)} {predicate}. The scene is set {_initial_word(scene)}."
+        elif selected == "scene_lead_subject_action":
+            text = f"{_initial_word(scene, capitalize=True)}, {_initial_word(subject)} {predicate}."
+        elif selected == "action_lead_subject_scene":
+            text = f"{_initial_word(action, capitalize=True)}, {_initial_word(subject)} is {_initial_word(scene)}."
+        elif selected == "subject_scene_action":
+            text = f"{_initial_word(subject, capitalize=True)}, {_initial_word(scene)}, {predicate}."
+        elif selected == "subject_action_scene_insert":
+            text = f"{_initial_word(subject, capitalize=True)} {predicate}, {_initial_word(scene)}."
+        else:
+            text = f"{_initial_word(subject, capitalize=True)} {predicate} {_initial_word(scene)}."
+        # The shared normalizer trims terminal punctuation; this lower-level
+        # realizer, like v1, returns a complete sentence before final prompt cleanup.
+        text = normalize_composition_punctuation(text) + "."
+        version = "v2"
+    if not return_debug:
+        return text
+    return text, {"realizer_version": version, "requested_syntax_family": requested, "syntax_family": selected,
+                  "eligible_syntax_families": eligible, "structurally_eligible_syntax_families": structural,
+                  "syntax_fallback_reason": reason, "clause_order": order,
+                  "rejected_syntax_families": eligibility["rejected_syntax_families"]}
 
 
 def normalize_composition_punctuation(text: str) -> str:

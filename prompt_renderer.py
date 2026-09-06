@@ -857,11 +857,18 @@ def build_prompt_text(
             action_surface=action_surface,
             syntax_family=syntax_family,
         )
-        template = realize_content_plan(content_plan)
+        template, realizer_debug = realize_content_plan(content_plan, return_debug=True)
         selected_template_key = f"{intro_entry['key']}||{body_entry['key']}||{end_entry['key']}"
         logger.debug(f"Composed Template: {template}")
     else:
         logger.info("Using Legacy/Single Template Mode")
+        realizer_debug = {
+            "realizer_version": "v1",
+            "syntax_family": None,
+            "eligible_syntax_families": [],
+            "syntax_fallback_reason": "legacy_template_no_structural_metadata",
+            "clause_order": [],
+        }
         if not template or str(template).strip() == "" or template == DEFAULT_TEMPLATE:
             lines = _load_lines("templates.txt")
             if lines:
@@ -897,6 +904,7 @@ def build_prompt_text(
     logger.info(f"Final Prompt: {result}")
     if return_debug:
         debug_payload = {
+            **realizer_debug,
             "template_key": selected_template_key or str(template),
             "composition_mode": bool(composition_mode),
             "semantic_family_budget": semantic_layers["debug"],

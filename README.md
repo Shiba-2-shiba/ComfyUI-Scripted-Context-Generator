@@ -12,14 +12,29 @@ LLM に依存せず、ルールベース + seed 再現で自然言語プロン�
 - 2026-08 の prompt-quality リファクタと最終採用結果: [`.omx/ultragoal/goals.json`](./.omx/ultragoal/goals.json) と [`.omx/ultragoal/ledger.jsonl`](./.omx/ultragoal/ledger.jsonl)
 - 品質ポリシーと再現可能な実験証拠: [`docs/prompt_quality/`](./docs/prompt_quality/)
 
-`CURRENT_STATUS.md` の variation sizing と構造説明は 2026-06-19 に確定した基準を含みます。現在の規模は、この README の「バリエーション規模」と [V150 完了記録](./docs/variation_expansion/HANDOFF_2026-09-06_V150_PROMOTED.md) を参照してください。
+現在のリファクタリング方針は [`docs/diversity_refactor/spec.md`](./docs/diversity_refactor/spec.md)、作業順序と進捗は [`tasks.md`](./docs/diversity_refactor/tasks.md) / [`progress.md`](./docs/diversity_refactor/progress.md) を正本とします。指定された [`元資料`](./docs/scg_diversity_refactor_docs/) から開始した wave です。
 
-subject / location / base variations を増やす作業では、[`EXPANSION_GUIDE.md`](./EXPANSION_GUIDE.md) を先に参照してください。
-日常系 location / action pool の拡張計画と進捗は [`docs/variation_expansion/`](./docs/variation_expansion/README.md) にあります。
+数量拡張の履歴は [`docs/variation_expansion/`](./docs/variation_expansion/README.md)、将来再開時の手順は [`EXPANSION_GUIDE.md`](./EXPANSION_GUIDE.md) に保持しています。
 V150 は本体反映済みで、現在は `150,184` base variations です。
 固定64+16件の自動比較、独立2名のv7 blind review、3目的×256件のconfirmation、
 11ゲートを通過し、VE-1319は `PROMOTED`・反映後検証 `pass` で完了しています。
-500kへ向けた次の段階はV250で、V250/V350/V500は未着手です。
+V150 を semantic-base として固定し、実効的な意味の多様性の計測、Natural Language Realizer v2、Deterministic Diversity Scheduler の順に進めます。
+V250/V350/V500 は、このリファクタリング中は **DEFERRED（延期）** です。
+V150 固定と回帰保護を完了し、Effective Diversity Audit CLI を実装しました。基準計測に基づく[目標・非回帰閾値](./docs/diversity_refactor/progress.md#7-locked-target--guard-metrics)も固定済みです。Realizer v2は内部候補の実装中、Schedulerは未実装で、どちらも未採用です。
+
+初回v2候補のworkflow評価は **REJECTED** でした。2,048件すべてが既存描画へfallbackし、意味・本文は保持できたものの構文多様性は改善しませんでした。次は実workflowの句への対応を修正して再評価します。現行生成への反映はありません。
+
+同梱workflowの128 seed監査は次のコマンドで実行できます。
+
+```bash
+python tools/audit_effective_diversity.py --profile smoke --output assets/results/effective_diversity/smoke.json
+```
+
+出力先を省略するとcanonical JSONを標準出力へ返します。`--write-reference` で参照集合を保存し、
+`--reference` で同じsource/configの集合を再利用できます。`--seed-start` / `--sample-count` は測定範囲のみ変更します。
+`gate` は2,048件、`release` は8,192件を測定し、両方とも固定8,192件の参照probeを使います。
+smokeの結果は動作確認用です。正式なgate基準計測（A1.5）は完了し、2,048件中core署名1,963種類・frame署名2,042種類でした。
+参照範囲、欠損数、再現コマンドとhashは [`基準計測の記録`](./docs/diversity_refactor/progress.md#6-effective-diversity-baseline) を参照してください。
 
 Semantic EPIG の現在地、文書の正本、変更時の loop-engineering gate は
 [`docs/semantic_epig/README.md`](./docs/semantic_epig/README.md) を参照してください。
@@ -207,6 +222,8 @@ Active domains:
 
 - [`REPO_STRUCTURE.md`](./REPO_STRUCTURE.md)
 - [`CURRENT_STATUS.md`](./CURRENT_STATUS.md)
+- [`docs/diversity_refactor/spec.md`](./docs/diversity_refactor/spec.md)
+- [`docs/diversity_refactor/progress.md`](./docs/diversity_refactor/progress.md)
 - [`EXPANSION_GUIDE.md`](./EXPANSION_GUIDE.md)
 - [`docs/variation_expansion/README.md`](./docs/variation_expansion/README.md)
 - [`docs/variation_expansion/500k_loop_plan.md`](./docs/variation_expansion/500k_loop_plan.md)
