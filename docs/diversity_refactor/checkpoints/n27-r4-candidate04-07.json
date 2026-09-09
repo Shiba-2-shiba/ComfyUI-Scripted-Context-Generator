@@ -1,0 +1,15 @@
+{
+  "archive": "n27-r4-candidate04-07.zip",
+  "sha256": "b2f32478ada1a5f7b2064eee38221a4e16f43fce3c69276070818bb294b4bd4e",
+  "bytes": 7080505,
+  "file_count": 2510,
+  "base_commit": "84b42829ab8ba06597017d27b45b607d97645a5a",
+  "source_tree_hashes": {
+    "n27-candidate-04": "001339a08ef35518a9f2267ab5eda751318ac4ada4013099526b266b6649d4b1",
+    "n27-candidate-05": "4bd18edb40ac756f4871a4a2b317542e9260dacd2ec09c620b45eaf0a3af2b21",
+    "n27-candidate-06": "462423f496516f2377407c10b61c15f35f16412c709170e14d45c542ef823d13",
+    "n27-candidate-07": "b8a99c2fa84cc59e2ade7378d6614527a3bfe672d42e474d0dbaca6078c57472"
+  },
+  "verification": "All file hashes and four restored source manifests match",
+  "scope": "Candidate04 source/R3 baseline observations; candidate05-07 source and R4 development evidence. Not all historical R3 formal artifacts."
+}

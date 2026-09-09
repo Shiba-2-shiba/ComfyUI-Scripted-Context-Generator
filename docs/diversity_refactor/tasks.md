@@ -656,9 +656,12 @@ or new complete action strings. Finite grammar, producer binding and location pr
 
 ## N2.7-R4 Expand productive action and common subordinate-clause coverage
 
-Next actionable task; NOT_STARTED. R3 intake512 accepts only8 primary actions and26 full action tails,
-with6 scene and24 clothing matches. Ignoring end-template matching still leaves just5 complete examples;
-end-wrapper-only expansion cannot resolve this measured bottleneck.
+State: **BLOCKED** (candidate05 development verified 2026-09-09; adoption evidence incomplete).
+Execution followed the supplied `docs/scg_diversity_refactor_docs/# N2.7-R4 Codex Implementation Spec.txt`.
+Source hash: `4bd18edb40ac756f4871a4a2b317542e9260dacd2ec09c620b45eaf0a3af2b21`.
+Intake512 exact replay512, structural primary28 vs legacy8; actual v2 remains5/512,
+observed families4. Unchanged non-action intersection contains only the old5 cases.
+Candidate05 only; active runtime untouched. Details and limitations are in progress.md.
 
 - Plan the next bounded grammar pass from the recorded source clauses, prioritizing recurring action
   constructions (motion/stance, manner and subordinate predicates) over additional complete strings.
@@ -672,9 +675,57 @@ end-wrapper-only expansion cannot resolve this measured bottleneck.
 
 Acceptance:
 
-- [ ] reusable action constructions broaden measured real-clause coverage
-- [ ] adversarial subject/ownership/overlap/binding tests and preservation checks pass
+- [x] reusable action constructions broaden measured real-clause coverage (primary grammar only; actual v2 unchanged)
+- [x] adversarial subject/ownership/overlap/binding tests and development512 preservation checks pass
 - [ ] fresh source-bound candidate gate/fixed80/per-seed receipt and explicit adoption verdict
+
+Formal8192/2048/fixed80 was not run under R4 sections15/23; BLOCKED is an evidence
+limitation, not a measured A1.6 threshold rejection.120 tests/1,807 subtests passed;
+the pre-existing active-only metadata test remains deselected as in candidate04.
+
+### N2.7-R4.1 Follow-up: missing producer grammar and scene attachment evidence
+
+Scoped development PASS; adoption **BLOCKED** (2026-09-09, isolated candidate06).
+Source: `462423f496516f2377407c10b61c15f35f16412c709170e14d45c542ef823d13`.
+Actual v2 applications5 ->7/512; new original seeds190/482 execute standalone scene.
+Old5 outputs and505 fallbacks remain byte-identical; paired512 semantic/upstream
+preservation and22 rollback/determinism probes pass.139 focused tests/1,862 subtests
+and29 context regressions pass. See progress.md and candidate06 `verdict.json`.
+
+The bounded pass addressed candidate05 diagnostic source leaves:
+compound predicate identity, grammatical subject vs owner, and scene attachment.
+Preserve existing runtime-only evidence and public/semantic contracts. Acceptance
+must include additional unchanged real-graph examples and6-family positive fixtures
+before formal gates. No scheduler, active apply, new allowlists, or relaxed thresholds.
+
+- [x] additional unchanged real-workflow examples execute v2
+- [x] runtime-only producer binding, ownership/unknown/old-output regressions verified
+- [ ] all6 real-graph family fixtures and full formal adoption evidence
+
+Next bounded follow-up: scene/whole-action coverage and independent placement proof;
+retain catalog requirements and unknown overlap rather than granting unproved families.
+
+### N2.7-R4.2 Compound predicates and independent placement proof
+
+Scoped development PASS; adoption **BLOCKED** (2026-09-09, isolated candidate07).
+Source: `b8a99c2fa84cc59e2ade7378d6614527a3bfe672d42e474d0dbaca6078c57472`.
+New original88/234 bring actual v2 **7 ->9/512**. Prior7 and503 fallback raw/cleaned
+outputs remain exact; semantic/upstream512 and24 rollback/determinism probes pass.
+160 focused tests/1,890 subtests plus29 context regressions pass; existing1 exclusion
+is independently reproduced on parent06. See progress.md/candidate07 verdict.
+
+The bounded pass diagnosed candidate06 complete-case
+gaps, preserve semantic/frame identity while validating grammatical predicates,
+and prove bounded scene placements from producer fields. Retain prior successful
+outputs and all unknown guards. Paired512 and independent review are required;
+formal evaluation remains gated on adequate coverage and six-family proof.
+
+- [x] new complete real-workflow cases with explicit owner/subject separation
+- [x] compound parser/head binding and finite scene ownership regressions
+- [x] paired512 preservation, old-output retention and independent code review
+- [ ] sufficient real-graph syntax-family coverage and formal adoption evidence
+
+Further work keeps the current unknown guards and public contracts; no N2.8 apply.
 
 ---
 

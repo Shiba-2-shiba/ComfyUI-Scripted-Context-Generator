@@ -12,8 +12,8 @@
 ```text
 Wave: Semantic Diversity / Natural Language Refactor
 State: IN_PROGRESS
-Current task: N2.7-R3 complete (candidate REJECTED); next N2.7-R4
-Next task: candidate-02 evaluation; N2.8 stays blocked until eligible
+Current task: N2.7-R4.2 candidate07 development verified; adoption BLOCKED
+Next task: broaden whole-clause/placement evidence; N2.8 remains blocked
 Baseline: V150
 Active quantity target: NONE
 V250/V350/V500: DEFERRED
@@ -1931,3 +1931,318 @@ Evidence root: `assets/results/diversity_refactor/n27-candidate-04/`.
   `05f8d34938ef99842791f630ec151bf30bf110525596717bf7ad0447f8bcc993`.
 - Plans, source/observation/quality receipts, examples, real-graph smoke, coverage diagnosis, strict guards,
   independent reviews and reproducible evaluation harnesses are hash-bound in verdict.json.
+## N2.7-R4 execution record
+
+### N2.7-R4 — Producer-bound structural evidence / productive subordinate grammar
+
+Start state: IN_PROGRESS (2026-09-09; terminal result below)
+
+Candidate: `assets/results/diversity_refactor/n27-candidate-05/`
+
+Objective: Broaden reusable real-workflow v2 eligibility using existing
+ActionFrame slots and producer-bound rendering provenance, preserving semantic facts.
+
+Constraints: no active apply; no new seed/whole-action allowlist; no public/context
+schema change; no A1.6 threshold change; V150 protected data unchanged;
+unknown grammar remains fallback. N2.8 remains gated on ELIGIBLE.
+
+Baseline: candidate04, actual v2 5/2048, observed structural families 4,
+adoption REJECTED. Its complete source manifest was checked against local files:
+`001339a08ef35518a9f2267ab5eda751318ac4ada4013099526b266b6649d4b1`, exact match.
+
+Plan: trace renderer without byte changes; bind trace to frame/current action;
+parse producer-owned leaves; derive positive safety facts; integrate ephemeral
+evidence; run regression/adversarial tests and intake512 before formal gates.
+Detailed pre-edit plan: candidate05 `repair-plan.md`.
+Candidate scope: action_renderer, v2_direct_provenance, v2_leaf_grammar,
+v2_structural_evidence if needed, v2_candidate_bridge, syntax_family_selector,
+prompt_realizer, and R4 tests/fixtures. Existing candidate04 tests retained.
+
+### N2.7-R4 completion — 2026-09-09
+
+State: **BLOCKED** (adoption evidence unavailable; development implementation verified).
+
+Candidate source hash:
+`4bd18edb40ac756f4871a4a2b317542e9260dacd2ec09c620b45eaf0a3af2b21`.
+Source remains isolated in `assets/results/diversity_refactor/n27-candidate-05/candidate-root/`.
+It is a development snapshot, not a source frozen for formal adoption evaluation.
+
+Changed candidate files:
+- `pipeline/action_renderer.py`: one shared rendering implementation exposes immutable slot/text parts.
+- `pipeline/v2_structural_evidence.py`: exact frame/current-action/two-mode replay binding; conflicting provenance is unknown.
+- `pipeline/v2_leaf_grammar.py`: bounded shared-subject coordination, motion, subordinate and finite predicates;
+  body-part/external subjects and unresolved location ownership stay distinct.
+- `pipeline/v2_direct_provenance.py`, `pipeline/v2_candidate_bridge.py`,
+  `pipeline/syntax_family_selector.py`, `pipeline/prompt_realizer.py`: ephemeral evidence propagation/revalidation.
+  Existing accepted R1-R3 materializations retain their original selection and output bytes.
+- `assets/test_n27_r4_action_trace.py`, `assets/test_n27_r4_structural_evidence.py`,
+  `assets/test_n27_r4_subordinate_grammar.py`, `assets/test_n27_r4_integration.py`;
+  `assets/fixtures/n27_r4_action_trace_cases.json`, `assets/fixtures/n27_r4_productive_cases.json`.
+
+No active runtime apply. No dependency, schema, protected vocabulary, A1.6,
+extractor/normalizer, scheduler, or ContentPlan serialized-field changes.
+Main documentation changes: this progress log, tasks.md, CURRENT_STATUS.md.
+
+Verification:
+- Renderer byte preservation: **PASS**, 512 archived real cases, both modes = 1,024 comparisons.
+- R1-R3/R4/selector/realizer tests: **120 passed**, **1,807 subtests passed**.
+  One existing active-only metadata test was deselected, as in candidate04;
+  baseline execution reproduced its failure before R4 edits. No existing tests removed.
+- Adversarial tests: **PASS** for stale/forged/version-conflicting traces, unknown grammar,
+  finite-modifier comma splices, body-part reflexives, negation and unproved place ownership.
+- `validate_prompt_data`: ERROR/WARNING both empty; asset validation: zero issues;
+  vocabulary lint: 5 tests passed; `verify_full_flow`: PASS; changed Python AST: PASS.
+- Independent final code/evidence reviews: PASS. Typecheck not configured; Ruff not installed.
+
+Intake512 (development diagnostic only):
+
+| Measurement | Result |
+|---|---:|
+| Exact producer replay | 512 / 512 |
+| Primary action grammar | 28 new structural / 8 legacy |
+| Complete action-tail grammar | 20 new structural / 26 legacy |
+| Subject / clothing / scene accepted | 264 / 24 / 6 |
+| Complete new structural intersection | 1 |
+| Non-action component intersection ceiling | 5 |
+| Actual v2 applications | 5 / 512, unchanged |
+| Observed syntax families | 4, unchanged |
+| Structurally supported direct families | 3 |
+
+New/legacy grammar columns describe separate diagnostic checks, not a replacement
+of all legacy acceptance. The bridge retains the existing conservative route.
+Actual seeds9/40/41/51/458 retain exact raw and cleaned output bytes.
+All507 v1 fallbacks retain exact raw/cleaned bytes. Paired512 semantic core/frame,
+upstream context, builder replay, policy and solo-safety mismatches: **0**.
+
+Fallback: `candidate_ineligible_preserve_v1` 507 times. Unknown leaf counts by source:
+primary484, purpose444, social379, gaze369, time316, posture291, obstacle48, object-state13.
+Replay provenance is available; positive grammatical ownership/valency/attachment
+information is still insufficient for most complete actions. The unchanged
+subject/clothing/scene/garnish intersection contains only the previous five cases,
+so widening action grammar alone cannot expand actual applications on this intake.
+Three additional direct-family placements also lack proved scene attachment.
+
+Formal @2048 / reference8192 / fixed80 quality / paired2048 preservation: **NOT_RUN**.
+No formal entropy, dominant-share, max-run or duplicate result is claimed for R4.
+Required real-graph positives for all6 families remain unavailable. The development
+heuristic is not an adoption threshold and its failure is not reported as formal
+A1.6 REJECTED. Sections15/23 of the supplied R4 specification justify stopping
+formal evaluation and recording the missing structural information as BLOCKED.
+
+V150 freeze: **PASS**, all120 protected files unchanged, candidate04 source unchanged,
+active source manifest unchanged. Recomputed candidate/active variation JSON matches
+exactly:135 subjects,109 locations,8,227 rows,150,184 base variations.
+
+Evidence: candidate05 `verdict.json`, `verification.json`, `development-source-manifest.json`,
+`intake512/receipt.json`, `intake512/component-diagnosis.json`,
+`intake512/workflow-diagnosis.json`, `code-review.md`.
+The earlier source-changing diagnostic under `development-intake512/` is marked
+INVALID and has no receipt; it is not used in the verdict.
+All candidate implementation/evidence lives under ignored `assets/results/`; preserve
+the complete candidate05 directory when transferring this experiment.
+
+Next task: **N2.7-R4.1**, a separately scoped producer-evidence design for unresolved
+action leaves and scene attachments, including explicit compound predicate identity
+and modifier ownership. Keep runtime-only evidence and existing contracts; do not add
+whole-action/seed allowlists or loosen A1.6. **N2.8 may not start.**
+
+## N2.7-R4.1 — complete real-workflow producer evidence
+
+Start state: IN_PROGRESS (2026-09-09).
+Candidate: `assets/results/diversity_refactor/n27-candidate-06/`.
+Candidate05 source and all verdict artifact hashes were verified before copying;
+parent source `4bd18edb40ac756f4871a4a2b317542e9260dacd2ec09c620b45eaf0a3af2b21`.
+
+Objective: add actual unchanged real-workflow cases through bounded producer
+grammar/ownership evidence across the whole clause combination. Diagnose concrete
+missing fields first; write RED real cases, implement only needed producer/grammar
+boundaries, preserve old outputs, and measure paired intake512 before formal gates.
+Pre-edit plan: candidate06 `repair-plan.md`. No active apply, dependencies,
+public/context schema changes, protected vocabulary or A1.6 changes.
+
+### N2.7-R4.1 result — 2026-09-09
+
+Scoped development objective: **PASS** — new complete real-workflow cases execute v2.
+Adoption state: **BLOCKED** — six-family and formal adoption evidence remains incomplete.
+
+Candidate06 source:
+`462423f496516f2377407c10b61c15f35f16412c709170e14d45c542ef823d13`.
+Source/evidence remains under ignored `assets/results/diversity_refactor/n27-candidate-06/`;
+retain this directory when transferring the experiment. Candidate05 and active source are unchanged.
+
+Implemented boundary repairs:
+- Clothing proof reconstructs the existing garment choices, palette order and detail fields,
+  then separately validates nominal grammar. Existing selected character palette is passed
+  through ephemeral arguments; no new debug/context fields. Garment-owned details are
+  coordinated inside its noun phrase; nominal style `soft knit silhouette` retains all
+  words and moves to a grammatical garment attachment.
+- Scene proof binds exact environment/core/texture/details/time producer fields, validates
+  bounded noun heads and noun-owned `with` complements, and preserves selected field order.
+  New scene shapes are supported only as a separate scene sentence.
+- Existing R1-R3 reviewed leaf sets were moved unchanged and reused in their producer roles;
+  bounded purpose/viewer grammar completes the original190/482 actions. No new complete-action
+  or seed allowlist was introduced.
+- A shared family-specific realization guard removes the blanket overlap requirement ONLY
+  for freshly bound, fully grammatical `subject_action__scene_tail` plans. Its unchanged
+  catalog does not require non-overlap. `home`/`her place` overlap facts remain **None**;
+  unproved scene insertion, scene-leading and action-leading still fall back. Unknown required
+  grammar is never accepted. Existing accepted paths and plan-only v1 remain unchanged.
+
+Changed candidate files (14):
+- `pipeline/v2_clothing_provenance.py`, `pipeline/v2_scene_provenance.py` (new).
+- `pipeline/v2_leaf_grammar.py`, `pipeline/v2_direct_provenance.py`,
+  `pipeline/syntax_family_selector.py`, `pipeline/v2_candidate_bridge.py`,
+  `pipeline/prompt_realizer.py`, `pipeline/prompt_orchestrator.py`, `prompt_renderer.py`.
+- `assets/test_n27_r41_action.py`, `assets/test_n27_r41_clothing.py`,
+  `assets/test_n27_r41_scene.py`, `assets/test_n27_r41_integration.py`;
+  `assets/fixtures/n27_r41_real_cases.json`.
+Main documentation: progress.md, tasks.md and CURRENT_STATUS.md only.
+
+| Development intake512 | Candidate05 | Candidate06 |
+|---|---:|---:|
+| Actual v2 applications | 5 | **7** |
+| Observed families, including fallback | 4 | 4 |
+| Structural primary action recognition | 28 | 34 |
+| Complete action-tail recognition | 20 | 33 |
+| Clothing recognition | 24 | 124 |
+| Scene recognition | 6 | 11 |
+| Complete structural intersection | 1 | 5 |
+| Non-action component intersection | 5 | 8 |
+
+The table compares the two saved `passed_counts` reports; candidate06's
+`legacy_component_counts` is an internal comparison path, not the candidate05 baseline.
+The new results use existing producer palette fields captured from exact builder input
+context; the original intake text/frame/templates were not substituted.
+
+Actual new seeds: **190,482**, both `subject_action__scene_tail`, with original action text
+preserved. The seed IDs occur only in fixtures/evaluation, never runtime selection.
+Actual v2 counts: scene-lead1, standalone5, subject-scene1. Existing9/40/41/51/458 retain
+exact raw/cleaned outputs. All505 remaining fallbacks retain exact raw/cleaned bytes.
+Paired512 semantic core/frame, upstream context and producer context mismatches: **0**.
+Policy/solo issues and builder replay mismatches: **0**.
+Full-record determinism and composition_mode=false bytes match at22 bounded seeds.
+
+Verification: **139 focused tests, 1,862 subtests passed**; the same one pre-existing
+active-only metadata test is excluded and independently reproduced on candidate05.
+Context/vocabulary/snapshot/determinism regression group: **29 tests passed**.
+Prompt data ERROR/WARNING empty, assets zero issues, full flow PASS, changed Python AST PASS.
+Renderer1024 comparisons unchanged; V150 protected120 files and candidate/active variation
+JSON unchanged (150,184 base variations). Code review PASS. Typecheck unconfigured;
+no new lint tool dependency installed.
+
+Formal reference8192, gate2048, fixed80 quality and paired2048: **NOT_RUN**. The development
+heuristic remains unmet; no formal entropy/quality improvement or A1.6 rejection is claimed.
+Full six-family real-graph fixtures remain missing. No active apply or N2.8 activation.
+
+Evidence: candidate06 `intake512/receipt.json`, `intake512/workflow-diagnosis.json`,
+`intake512/v2-examples.json`, `verification.json`, `verdict.json`, `code-review.md`.
+Next bounded work: expand scene/whole-action producer coverage from the remaining
+intersection gaps, and prove additional placements independently. Compound predicate
+identity and unresolved modifier ownership remain explicit follow-up topics.
+
+## N2.7-R4.2 — compound predicates and placement evidence
+
+Start state: IN_PROGRESS (2026-09-09). Candidate07 derives from candidate06,
+source `462423f496516f2377407c10b61c15f35f16412c709170e14d45c542ef823d13`;
+source manifest and all verdict artifacts verified before copying.
+Plan: candidate07 `repair-plan.md`. Diagnose complete-case gaps; lock RED real
+examples; distinguish semantic and grammatical predicate identity; prove bounded
+scene placement; run paired512 and unchanged adoption conditions. No active apply,
+protected data/schema/threshold changes, dependencies or new allowlists.
+
+### N2.7-R4.2 result — 2026-09-09
+
+Scoped development objective: **PASS** — two additional complete real-workflow
+cases are supported. Adoption: **BLOCKED** — six-family/formal evidence still absent.
+Candidate07 source:
+`b8a99c2fa84cc59e2ade7378d6614527a3bfe672d42e474d0dbaca6078c57472`.
+
+Diagnosis changed the concrete intake focus: seed2 also needs object-owned states,
+body clauses and a non-direct wrapper, so it was not presented as a simple compound
+fix. Original88 and234 were the bounded complete-case targets. Original94/338
+demonstrate compound semantic/head binding only; they are not claimed as new full
+workflow applications. No seed or full-action runtime allowlist was added.
+
+Implemented:
+- Body-owned gaze state88 is materialized as `with eyes fixed ...`. All source
+  action words remain; only the grammatical `with` is added. It is a dependent
+  absolute, not a second independent actor sentence. Same-subject attachment is
+  **False**, so it cannot authorize action-leading grammar.
+- Seated locative and infinitival-purpose predicates consume their complete
+  bounded arguments. Place evidence remains unknown when the phrase is spatial.
+- Verified compound grammatical heads are distinguished from the existing producer
+  parser's semantic main verb. Both complete grammar and original parser replay
+  must agree; rejected/negated heads cannot bypass binding. Serialized frame facts
+  remain unchanged, including the semantic `tidying` versus first-token `standing`.
+- Opera/gallery scene constituents bind to exact producer fields and independently
+  verified noun/participle grammar. `each work` requires its proved sibling works
+  antecedent. Unknown owners, fields and mixed/dangling attachments fail closed.
+- Exact catalog text and placeholder topology prove the existing room/scene wrapper;
+  `staying` becomes finite `stays` without discarding the room-around-her content.
+  For the finite outer room subject, gallery-owned predicates begin immediately
+  after the gallery head: `gallery that is arranged ... and that features ...`.
+  This prevents `featuring` from attaching to room or the nested weekday viewing.
+  New owner/wrapper constructions support standalone scene only, not extra families.
+
+Changed candidate files (10):
+- `pipeline/v2_leaf_grammar.py`, `pipeline/v2_direct_provenance.py`,
+  `pipeline/v2_scene_provenance.py`, `pipeline/prompt_realizer.py`;
+  new `pipeline/v2_template_provenance.py`.
+- `assets/test_n27_r42_action.py`, `assets/test_n27_r42_scene.py`,
+  `assets/test_n27_r42_template.py`, `assets/test_n27_r42_integration.py`;
+  `assets/fixtures/n27_r42_real_cases.json`.
+Main changes remain documentation only; previous candidate06 source is untouched.
+
+| Development intake512 | Candidate06 | Candidate07 |
+|---|---:|---:|
+| Actual v2 applications | 7 | **9** |
+| Observed syntax families, including fallback | 4 | 4 |
+| Structural primary recognition | 34 | 37 |
+| Complete action-tail recognition | 33 | 36 |
+| Scene recognition | 11 | 13 |
+| Complete structural intersection | 5 | 7 |
+| Non-action component intersection | 8 | 10 |
+
+Clothing recognition124 and subject264 remain unchanged. Compare saved candidate
+`passed_counts` reports; internal `legacy_component_counts` is not the parent baseline.
+Template diagnostic also records a proved scene/template intersection separately
+from98 direct placeholder triples; those are different measurements.
+
+Actual new seeds: **88,234**, both `subject_action__scene_tail` through the unchanged
+real workflow. All prior7 raw/cleaned outputs and503 remaining fallback raw/cleaned
+outputs match candidate06 exactly. Paired512 semantic core/frame, upstream context,
+producer context, policy/solo and builder replay mismatches: **0**. Action-word
+preservation permits only the licensed `with` insertion; source ActionFrame/slots
+are unchanged. Grammar inflections `staying -> stays` and `featuring -> features`
+are tested separately from source semantic preservation.
+
+Verification: **160 focused tests, 1,890 subtests passed**; same one inherited
+active-only family-name assertion excluded and independently reproduced on parent06.
+**29 context/vocabulary/snapshot/determinism tests passed**; standalone vocabulary
+lint also passed. Prompt-data ERROR/WARNING empty, assets zero issues, full-flow and
+changed Python AST PASS. Renderer1024 comparisons exact; whole-record determinism
+and composition_mode=false match at24 bounded seeds.
+
+Independent code review initially found the compound-binding bypass and scene-owner
+ambiguity. Both were reproduced, fixed and covered by regressions; final review PASS.
+V150 protected120 files and complete active/candidate variation-count JSON unchanged:
+150,184 base variations. Typecheck unconfigured; no new lint dependency installed.
+
+Formal reference8192/gate2048/fixed80 quality/paired2048: **NOT_RUN**. Development
+coverage is still insufficient and observed families remain4; no A1.6 threshold
+failure or formal quality improvement is claimed. No active apply and no N2.8.
+
+Evidence: `assets/results/diversity_refactor/n27-candidate-07/` contains `verdict.json`,
+`verification.json`, `development-source-manifest.json`, `intake512/receipt.json`,
+`intake512/workflow-diagnosis.json`, `intake512/v2-examples.json`, `code-review.md`
+and the complete candidate-root. This directory is git-ignored and must be retained
+with the experiment. Remaining work: additional complete producer/owner combinations
+and independent proofs for missing syntax-family placements; unknowns stay fallback.
+
+### Committed checkpoint
+
+The isolated candidate04-07 sources and the R4 development evidence are preserved
+in [`checkpoints/n27-r4-candidate04-07.zip`](./checkpoints/n27-r4-candidate04-07.zip).
+The archive does not activate candidate code. All archived file hashes and all
+four restored source manifests were checked. Restore instructions and the exact
+scope are in [`checkpoints/README.md`](./checkpoints/README.md).

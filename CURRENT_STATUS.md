@@ -1,6 +1,7 @@
 # Current Status
 
 Last verified: 2026-09-06 (F0 baseline: counts, validators, full flow, 40 focused tests)
+Candidate development verified: 2026-09-09 (N2.7-R4.2 candidate07; active runtime unchanged)
 
 このファイルは、毎回全スクリプトを読み直さずに現在地を把握するための短い入口です。
 詳細な構造は `REPO_STRUCTURE.md`、設計背景は `assets/ARCHITECTURE.md` と
@@ -19,7 +20,20 @@ Realizer v2契約テスト（N2.1）を追加し、比較用sourceを保存し�
 監査は128件すべての構文をBuilder metadataから読み、現行workflow本文・指標は不変です。
 初回Realizer v2候補（N2.7）は **REJECTED** です。実workflowの2,048件すべてがv1へfallbackし、v2適用0件・構文改善なしでした。
 意味・本文と品質の自動保護条件は維持しましたが、6構文の観測・entropy目標が未達です。N2.8の採用は保留します。
-次は N2.7-R1 で実workflowの句に対する安全判定・接続を修正し、同じ条件で再評価します。現行生成への反映はありません。
+R1〜R3を経て、N2.7-R4（candidate05）でproducerのslot追跡・runtime-only構造証拠・限定的な従属句文法を実装しました。
+採用判定は **BLOCKED**。512件のaction replayは完全一致し、主action文法の認識は旧8件に対し新28件ですが、
+実v2適用は5/512・観測4構文のままです。scene・衣装等との交差と修飾先の証明が不足しています。
+120テスト・1,807 subtestsとvalidator/full-flowが成功し、既存5例・fallback・意味・上流contextを維持しました。
+正式8192参照/2048 gate/fixed80品質比較は未実施です。現行生成へは反映していません。
+続くN2.7-R4.1（candidate06）では衣装・sceneの生成元と修飾先を検証し、実v2適用を**5→7/512**へ増やしました。
+新しい実例190/482はaction原文を維持して別文構文へ変換されます。場所の重複が不明な判定はNoneのままです。
+139重点テスト・1,862 subtests、29関連回帰が成功し、既存5例・505 fallback・意味・上流contextは一致しました。
+観測構文は4種類のため正式評価・main反映は未実施で、採用は引き続き**BLOCKED**です。
+N2.7-R4.2（candidate07）では身体部位の付帯句と、テンプレート由来のroomを保持する独立文を実装し、
+実v2適用を**7→9/512**へ増やしました。新規88/234が動作し、既存7例・503 fallbackと意味・上流contextは一致しています。
+複合動詞のsemantic main verbと文頭動詞を別々に検証し、galleryの修飾先も明示しました。
+160重点テスト・1,890 subtestsと29関連回帰が成功しています。観測4構文のため採用は引き続き**BLOCKED**です。
+次は残る句全体・構文配置の証拠を拡大します。正式評価・main反映・N2.8は保留です。
 閾値・適用段階・品質条件は [`受入条件`](./docs/diversity_refactor/progress.md#7-locked-target--guard-metrics) を参照してください。
 監査コマンド: `python tools/audit_effective_diversity.py --profile smoke --output assets/results/effective_diversity/smoke.json`。
 V250/V350/V500 は **DEFERRED while effective-diversity refactor is active**。
