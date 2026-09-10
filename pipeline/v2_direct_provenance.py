@@ -20,7 +20,8 @@ except ImportError:
     from object_focus_service import extract_action_object_flags
     from location_service import load_background_packs
 
-from .v2_leaf_grammar import background_modifiers, gaze, place_phrase, predicate, simple_clothes, temporal
+from .v2_leaf_grammar import background_modifiers, derive_action_grammar, gaze, place_phrase, predicate, simple_clothes, temporal
+from .v2_structural_evidence import build_structural_evidence
 
 
 _STANDALONE_FAMILY = 'subject_action__scene_tail'
@@ -178,7 +179,27 @@ def _scene(location, mood, location_key, syntax_family=None):
     return ', '.join((anchor, *modifiers, absolute))
 
 
-def materialize_direct(provenance, frame_value, *, syntax_family=None):
+def bound_action_grammar(provenance, frame, structural_evidence):
+    """Recompute ephemeral proof; caller-supplied booleans cannot grant trust."""
+    if structural_evidence is None or not isinstance(provenance, Mapping):
+        return None
+    pairs = provenance.get('replacements')
+    if not isinstance(pairs, (list, tuple)) or any(
+        not isinstance(pair, (list, tuple)) or len(pair) != 2
+        or not all(isinstance(value, str) for value in pair) for pair in pairs
+    ):
+        return None
+    values = dict(pairs)
+    if len(values) != len(pairs):
+        return None
+    replay = build_structural_evidence(frame, values.get('{action}', ''))
+    if replay is None or replay != structural_evidence:
+        return None
+    grammar = derive_action_grammar(replay)
+    return grammar if grammar.frame_predicate_safe is True else None
+
+
+def materialize_direct(provenance, frame_value, *, syntax_family=None, structural_evidence=None):
     """Reconstruct supported concrete clauses from raw, fully checked evidence."""
     if not isinstance(provenance, Mapping):
         return None
@@ -206,19 +227,24 @@ def materialize_direct(provenance, frame_value, *, syntax_family=None):
     frame = frame_value if isinstance(frame_value, ActionFrame) else ActionFrame.from_dict(frame_value)
     action, garnish = values['{action}'], values['{garnish}']
     rendered = action + (', ' + garnish if garnish else '')
+    grammar = bound_action_grammar(provenance, frame_value, structural_evidence)
+    if structural_evidence is not None and grammar is None:
+        return None
+    declared_surface = grammar.surface_kind if grammar is not None else 'gerund'
     if (frame.schema_version != 'action-frame/v1' or frame.legacy_text != action
             or values['{action_clause}'] != rendered or surface.get('rendered_clause') != rendered
-            or surface.get('surface') != 'gerund'):
+            or surface.get('surface') != declared_surface):
         return None
     pieces = action.split(', ')
-    if (pieces[0] not in _PRIMARY and not predicate(pieces[0])
+    if grammar is None and (pieces[0] not in _PRIMARY and not predicate(pieces[0])
             or any(p not in _SHARED | _TEMPORAL and not predicate(p) and not temporal(p) for p in pieces[1:])):
         return None
-    verb = pieces[0].split()[0]
+    first_token = pieces[0].split()[0]
+    verb = grammar.main_verb if grammar is not None else first_token
     obj = frame.primary_object
     if (frame.main_verb != verb or slots.get('predicate') != verb or slots.get('object') != obj
             or any(surface.get(key, value) != value for key, value in
-                   (('verb', verb), ('first_token', verb), ('input_surface', 'gerund')))
+                   (('verb', verb), ('first_token', first_token), ('input_surface', declared_surface)))
             or (obj and obj not in extract_action_object_flags(action)
                 and re.search(r'(?<!\w)' + re.escape(obj) + r'(?!\w)', action) is None)):
         return None
@@ -235,15 +261,17 @@ def materialize_direct(provenance, frame_value, *, syntax_family=None):
             'adjunct': ', '.join([action, *(_GARNISH[g] if g in _GARNISH else g for g in garnishes)]), 'scene': scene}
 
 
-def direct_binding_families(plan, frame, surface, provenance):
+def direct_binding_families(plan, frame, surface, provenance, *, structural_evidence=None):
     """Recheck family-specific slots and derive support from constructor success."""
-    expected = materialize_direct(provenance, frame, syntax_family=plan.syntax_family)
+    expected = materialize_direct(provenance, frame, syntax_family=plan.syntax_family,
+                                  structural_evidence=structural_evidence)
     if not (expected is not None and dict(plan.semantic_slots) == expected
-            and plan.lexical_choice == 'gerund'
+            and plan.lexical_choice == provenance['surface'].get('surface')
             and isinstance(surface, Mapping)
             and dict(surface) == {**provenance['surface'], 'rendered_clause': expected['adjunct']}):
         return frozenset()
     supported = {_STANDALONE_FAMILY}
-    if materialize_direct(provenance, frame, syntax_family='scene_lead_subject_action') is not None:
+    if materialize_direct(provenance, frame, syntax_family='scene_lead_subject_action',
+                          structural_evidence=structural_evidence) is not None:
         supported.update(_RELOCATED_FAMILIES)
     return frozenset(supported)

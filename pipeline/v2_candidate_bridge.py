@@ -5,6 +5,7 @@ import random
 from .prompt_realizer import realize_content_plan
 from .syntax_family_selector import eligible_syntax_families
 from .v2_direct_provenance import materialize_direct
+from .v2_structural_evidence import build_structural_evidence
 try:
     from ..vocab.seed_utils import mix_seed
 except ImportError:
@@ -30,13 +31,22 @@ def render_candidate(plan, legacy_template, legacy_debug, frame, surface, replac
     concrete = replace(plan, semantic_slots=slots)
     actual_surface = {**surface, "rendered_clause": slots["adjunct"]}
     evidence = {'slots': dict(plan.semantic_slots), 'replacements': replacements, 'surface': surface}
+    replay = build_structural_evidence(frame, dict(replacements).get('{action}', ''))
     direct_slots = materialize_direct(evidence, frame)
+    structural_evidence = None
+    if direct_slots is None:
+        structural_evidence = replay
+        if structural_evidence is not None:
+            direct_slots = materialize_direct(evidence, frame, structural_evidence=structural_evidence)
+        if direct_slots is None:
+            structural_evidence = None
     provenance = evidence if direct_slots is not None else None
     if direct_slots is not None:
         concrete = replace(plan, semantic_slots=direct_slots)
         actual_surface = {**surface, 'rendered_clause': direct_slots['adjunct']}
     eligible, eligibility = eligible_syntax_families(concrete, frame, actual_surface, return_debug=True,
-                                                     direct_provenance=provenance)
+                                                     direct_provenance=provenance,
+                                                     structural_evidence=structural_evidence)
     facts = eligibility["safety_facts"]
     selectable = sorted(key for key in eligible if not eligibility['direct_provenance_valid']
                         or key in eligibility['direct_supported_families'])
@@ -44,11 +54,13 @@ def render_candidate(plan, legacy_template, legacy_debug, frame, surface, replac
         selected = random.Random(mix_seed(seed, "realizer_v2_candidate_family")).choice(selectable)
         # Bind the actual constructor output for the selected family; changing
         # a family label alone must not authorize a different scene surface.
-        selected_slots = (materialize_direct(provenance, frame, syntax_family=selected)
+        selected_slots = (materialize_direct(provenance, frame, syntax_family=selected,
+                                            structural_evidence=structural_evidence)
                           if eligibility['direct_provenance_valid'] else concrete.semantic_slots)
         requested = replace(concrete, syntax_family=selected, semantic_slots=selected_slots)
         text, debug = realize_content_plan(requested, action_frame=frame, action_surface=actual_surface,
-                                          return_debug=True, direct_provenance=provenance)
+                                          return_debug=True, direct_provenance=provenance,
+                                          structural_evidence=structural_evidence)
         if debug["realizer_version"] == "v2":
             actual = replace(requested, syntax_family=debug["syntax_family"], clause_order=tuple(debug["clause_order"]))
             return text, actual, {**debug, "candidate_v2_applied": True, "candidate_eligibility": eligibility}

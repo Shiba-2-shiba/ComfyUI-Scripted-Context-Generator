@@ -222,6 +222,7 @@ def realize_content_plan(
     plan: ContentPlan, *, action_frame: ActionFrame | Mapping[str, Any] | None = None,
     action_surface: Mapping[str, Any] | None = None, return_debug: bool = False,
     direct_provenance: Mapping[str, Any] | None = None,
+    structural_evidence=None,
 ) -> str | tuple[str, dict[str, Any]]:
     """Realize explicit candidate families; legacy family calls stay byte-stable.
 
@@ -247,7 +248,8 @@ def realize_content_plan(
         "surface": plan.lexical_choice, "rendered_clause": plan.semantic_slots.get("adjunct", ""),
     }
     structural, eligibility = eligible_syntax_families(plan, action_frame, surface, return_debug=True,
-                                                     direct_provenance=direct_provenance)
+                                                     direct_provenance=direct_provenance,
+                                                     structural_evidence=structural_evidence)
     eligible = [key for key in structural if key in _V2_IMPLEMENTED_FAMILIES]
     if eligibility['direct_provenance_valid']:
         eligible = [key for key in eligible if key in eligibility['direct_supported_families']]

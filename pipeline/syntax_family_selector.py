@@ -28,7 +28,7 @@ except ImportError:
     from vocab.syntax_families import ACTION_SURFACES, BASELINE_FAMILY, CATALOG_FILENAME, SAFETY_FACTS, validate_syntax_family_catalog
 
 from .action_parser import CONTEXTUAL_SPLITTERS, GAZE_STARTERS, SECONDARY_SEGMENT_STARTERS, STANCE_STARTERS, normalize_action_phrase
-from .v2_direct_provenance import direct_binding_families
+from .v2_direct_provenance import bound_action_grammar, direct_binding_families
 
 if TYPE_CHECKING:
     from .prompt_realizer import ContentPlan
@@ -183,6 +183,7 @@ def eligible_syntax_families(
     plan: ContentPlan, action_frame: ActionFrame | Mapping[str, Any] | None,
     action_surface: Mapping[str, Any] | None, *, catalog: dict[str, Any] | None = None,
     return_debug: bool = False, direct_provenance: Mapping[str, Any] | None = None,
+    structural_evidence=None,
 ) -> list[str] | tuple[list[str], dict[str, Any]]:
     """Filter before selection; baseline is a fallback marker, not policy approval."""
     metadata = load_json(CATALOG_FILENAME) if catalog is None else catalog
@@ -190,7 +191,8 @@ def eligible_syntax_families(
     if issues:
         raise ValueError("Invalid syntax-family catalog: " + "; ".join(issues))
     facts, surface, common_reasons = _facts(plan, action_frame, action_surface)
-    direct_supported = direct_binding_families(plan, action_frame, action_surface, direct_provenance)
+    direct_supported = direct_binding_families(plan, action_frame, action_surface, direct_provenance,
+                                              structural_evidence=structural_evidence)
     direct_valid = bool(direct_supported)
     if direct_valid:
         # Movable forms need a successful relative-clause constructor that
@@ -206,7 +208,17 @@ def eligible_syntax_families(
                      # excludes unknown place tails, proving non-overlap.
                      scene_action_overlap=False, scene_action_nonduplicative=True)
         surface, common_reasons = 'gerund', []
-    elif direct_provenance is not None:
+        if structural_evidence is not None:
+            grammar = bound_action_grammar(direct_provenance, action_frame, structural_evidence)
+            # Exact replay proves origin, not grammatical attachment or absence
+            # of a location. Only fully consumed leaf grammar grants those facts.
+            facts.update(frame_predicate_safe=grammar.frame_predicate_safe,
+                         same_subject_attachment_safe=grammar.same_subject_attachment_safe,
+                         independent_action_subject=grammar.independent_action_subject,
+                         scene_action_overlap=False if grammar.no_place_reference is True else None,
+                         scene_action_nonduplicative=True if grammar.no_place_reference is True else None)
+            surface = grammar.surface_kind
+    elif direct_provenance is not None or structural_evidence is not None:
         common_reasons.append('direct_provenance_mismatch')
         facts['frame_predicate_safe'] = False
     eligible = [BASELINE_FAMILY]

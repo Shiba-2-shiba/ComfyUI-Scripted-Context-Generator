@@ -6,3 +6,5 @@ assets/fixtures/variation_baseline/vocab/data/background_packs.json -text whites
 # Preserve checkpoint-bound candidate bytes across checkouts.
 assets/fixtures/n27_r1_direct_cases.json -text whitespace=cr-at-eol
 assets/fixtures/n27_r3_productive_cases.json -text whitespace=cr-at-eol
+assets/fixtures/n27_r4_action_trace_cases.json -text whitespace=cr-at-eol
+assets/fixtures/n27_r4_productive_cases.json -text whitespace=cr-at-eol

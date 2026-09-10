@@ -236,3 +236,207 @@ def simple_clothes(value):
                 if _palette_prefix(prefix, palette, ('colors', 'patterns', 'materials', 'styles')):
                     return ' and '.join(item.with_article() for item in nouns)
     return None
+
+
+@dataclass(frozen=True)
+class LeafGrammarFacts:
+    known: bool = False
+    surface_kind: str = 'unknown'
+    attachment_kind: str = 'unknown'
+    owner_kind: str = 'unknown'
+    same_subject: bool | None = None
+    no_place_reference: bool | None = None
+    main_verb: str = ''
+
+
+@dataclass(frozen=True)
+class ActionGrammarFacts:
+    parts: tuple[LeafGrammarFacts, ...] = ()
+    frame_predicate_safe: bool | None = None
+    same_subject_attachment_safe: bool | None = None
+    independent_action_subject: bool | None = None
+    no_place_reference: bool | None = None
+    main_verb: str = ''
+    surface_kind: str = 'unknown'
+
+
+_SUBJECT_SLOTS = frozenset({'primary_action', 'hand_action', 'posture', 'gaze_target',
+                          'purpose_clause', 'optional_micro_action', 'progress_clause',
+                          'obstacle_clause', 'social_clause', 'time_or_weather'})
+# These inflections extend the existing small valency grammar, not a conjugator.
+_FINITE_GERUNDS = {'checks': 'checking', 'holds': 'holding', 'keeps': 'keeping',
+                   'stands': 'standing', 'waits': 'waiting', 'adjusts': 'adjusting',
+                   'tightens': 'tightening', 'walks': 'walking', 'leans': 'leaning'}
+_SUBORDINATORS = ('while', 'without', 'after', 'before', 'because', 'as')
+
+
+def _leaf_predicate(value):
+    """Consume one predicate using closed valencies and small motion forms."""
+    if predicate(value):
+        return value.partition(' ')[0]
+    if re.fullmatch(r'(?:walking|moving)(?: slowly| carefully)?|leaning(?: closer| in)?|'
+                    r'(?:standing|waiting)(?: quietly| still)?|sleeping|returning|'
+                    r'(?:fully )?getting started', value):
+        return value.split()[1] if value.startswith('fully ') else value.split()[0]
+    if re.fullmatch(r'(?:keeping|holding) herself (?:steady|still|ready)', value):
+        return value.split()[0]
+    # Aspectual complements stay attached to the same explicit protagonist.
+    if re.fullmatch(r'keeping (?:her place|the momentum) going|bringing it to a close|'
+                    r'losing her place|heading to bed|(?:finally )?coming home|'
+                    r'getting ready to leave', value):
+        return value.split()[1] if value.startswith('finally ') else value.split()[0]
+    verb, _, rest = value.partition(' ')
+    if verb in {'checking', 'rechecking'} and re.fullmatch(
+            r'what (?:still )?needs (?:doing|checking|adjusting)', rest):
+        return verb
+    if verb == 'adjusting' and re.fullmatch(r'something (?:out of place|nearby)', rest):
+        return verb
+    if verb == 'keeping' and re.fullmatch(r'her (?:movements|posture) (?:composed|steady|still)', rest):
+        return verb
+    if verb == 'tidying' and re.fullmatch(
+            r'the (?:(?:small|quiet|narrow) )?(?:area|space)(?: around her| in front of her)?', rest):
+        return verb
+    if verb == 'following' and nominal(rest, {'abstract'}, determined=True):
+        return verb
+    if verb == 'realizing' and re.fullmatch(r'something is (?:missing|ready)', rest):
+        return verb
+    return None
+
+
+def _protagonist_clause(value):
+    if value.startswith('she '):
+        finite, _, rest = value[4:].partition(' ')
+        if re.fullmatch(r'(?:works|waits|decides)', value[4:]):
+            return {'works': 'working', 'waits': 'waiting', 'decides': 'deciding'}[finite], 'finite'
+        if finite == 'gets' and re.fullmatch(r'herself (?:ready|steady)', rest):
+            return 'getting', 'finite'
+        gerund = _FINITE_GERUNDS.get(finite)
+        if gerund and _leaf_predicate(gerund + (' ' + rest if rest else '')):
+            return gerund, 'finite'
+        return None
+    finite, _, rest = value.partition(' ')
+    gerund = _FINITE_GERUNDS.get(finite)
+    if gerund and _leaf_predicate(gerund + (' ' + rest if rest else '')):
+        return gerund, 'clause'
+    for prefix in ('not ', 'never '):
+        if value.startswith(prefix):
+            value = value[len(prefix):]
+            break
+    verb = _leaf_predicate(value)
+    return (verb, 'gerund') if verb else None
+
+
+def _external_clause(value):
+    # A small event-subject grammar; no free noun phrase or free finite tail.
+    match = re.fullmatch(r'(.+) (ends|begins|starts|change|keeps stretching out)', value)
+    if not match:
+        return False
+    subject, verb = match.groups()
+    if subject == 'the lights':
+        return verb == 'change'
+    if subject == 'the delay':
+        return verb == 'keeps stretching out'
+    return bool(nominal(subject, {'event'}, determined=True) and verb in {'ends', 'begins', 'starts'})
+
+
+def _body_clause(value):
+    match = re.fullmatch(r'(?:her )?(eyes|hands|fingers|shoulders) (.+)', value)
+    if not match:
+        return False
+    body, rest = match.groups()
+    verb, _, obj = rest.partition(' ')
+    # The grammatical subject is plural body parts: protagonist reflexives are
+    # not valid objects here, even though the protagonist owns those body parts.
+    return bool(body == 'eyes' and verb == 'following'
+                and nominal(obj, {'abstract'}, determined=True)
+                or body in {'hands', 'fingers'} and verb == 'holding'
+                and _object(obj, _TRANSITIVE['holding']))
+
+
+def _shared_leaf(value, depth=0):
+    """At most two subordinate levels inside one producer-owned leaf."""
+    if depth > 2:
+        return None
+    direct = _protagonist_clause(value)
+    if direct:
+        return direct
+    left, sep, right = value.partition(' and ')
+    if sep:
+        first, second = _protagonist_clause(left), _protagonist_clause(right)
+        if first and second and first[1] == second[1] == 'gerund':
+            return first
+        return None
+    for connector in _SUBORDINATORS:
+        prefix = connector + ' '
+        if value.startswith(prefix):
+            # Causal conjunctions require an explicit finite subject.
+            inner = value[len(prefix):]
+            if connector in {'because', 'as'}:
+                return _protagonist_clause(inner) if inner.startswith('she ') else None
+            parsed = _protagonist_clause(inner)
+            if connector == 'without':
+                return parsed if parsed and parsed[1] == 'gerund' else None
+            # One connector introduces one predicate, never another connector.
+            return parsed if parsed and (parsed[1] == 'gerund' or inner.startswith('she ')) else None
+        left, sep, right = value.partition(' ' + connector + ' ')
+        if sep and _protagonist_clause(left) and _shared_leaf(prefix + right, depth + 1):
+            return _protagonist_clause(left)
+    return None
+
+
+def action_part_facts(part, *, primary=False):
+    """Only a known producer role plus fully consumed leaf grammar proves facts."""
+    if (getattr(part, 'slot_key', None) not in _SUBJECT_SLOTS
+            or not isinstance(getattr(part, 'text', None), str)):
+        return LeafGrammarFacts()
+    value = part.text
+    if not value or value != value.strip() or re.search(r'[,;.!?{}\n]', value):
+        return LeafGrammarFacts()
+    if primary and value.startswith(('she ', 'not ', 'never ')):
+        return LeafGrammarFacts()  # Main realization already supplies its subject.
+    if _body_clause(value):
+        if primary or part.slot_key not in {'gaze_target', 'hand_action', 'posture'}:
+            return LeafGrammarFacts()
+        return LeafGrammarFacts(True, 'body_part', 'independent_clause',
+                                'protagonist_body_part', False, True)
+    connector, _, rest = value.partition(' ')
+    if connector in {'while', 'after', 'before', 'because', 'as'} and _external_clause(rest):
+        if primary:
+            return LeafGrammarFacts()
+        attachment = 'subordinate_causal' if connector in {'because', 'as'} else 'subordinate_temporal'
+        return LeafGrammarFacts(True, 'finite', attachment, 'scene_event', False, True)
+    if temporal(value) and not primary:
+        return LeafGrammarFacts(True, 'temporal', 'subordinate_temporal', 'protagonist', True, True)
+    parsed = _shared_leaf(value)
+    if parsed is None:
+        return LeafGrammarFacts()
+    verb, surface = parsed
+    if not primary and surface in {'finite', 'clause'} and connector not in _SUBORDINATORS:
+        return LeafGrammarFacts()  # Shared referent alone cannot license a comma splice.
+    # A leading temporal/causal clause is never an action predicate.
+    if primary and connector in _SUBORDINATORS:
+        return LeafGrammarFacts()
+    attachment = ('main_predicate' if primary else
+                  'subordinate_causal' if connector in {'because', 'as'} else
+                  'subordinate_temporal' if connector in {'while', 'after', 'before'} else
+                  'shared_subject_modifier')
+    # Known destination constructions still carry a spatial reference; they do
+    # not establish scene non-overlap merely because their grammar is understood.
+    no_place = None if re.search(r'\b(?:home|bed|area|space|place|nearby)\b', value) else True
+    return LeafGrammarFacts(True, surface, attachment, 'protagonist', True, no_place, verb)
+
+
+def derive_action_grammar(evidence):
+    """Aggregate positive leaf proofs. Unknown never becomes False or True."""
+    from .v2_structural_evidence import ActionStructuralEvidence
+    if not isinstance(evidence, ActionStructuralEvidence) or not evidence.exact_replay or not evidence.emitted_parts:
+        return ActionGrammarFacts()
+    parts = tuple(action_part_facts(part, primary=index == 0)
+                  for index, part in enumerate(evidence.emitted_parts))
+    primary = parts[0]
+    known = all(part.known for part in parts)
+    shared = all(part.same_subject is True for part in parts) if known else None
+    independent = any(part.same_subject is False for part in parts) if known else None
+    no_place = True if known and all(part.no_place_reference is True for part in parts) else None
+    return ActionGrammarFacts(parts, True if known and primary.attachment_kind == 'main_predicate' else None,
+                              shared, independent, no_place, primary.main_verb, primary.surface_kind)
