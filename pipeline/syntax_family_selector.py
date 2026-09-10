@@ -28,6 +28,7 @@ except ImportError:
     from vocab.syntax_families import ACTION_SURFACES, BASELINE_FAMILY, CATALOG_FILENAME, SAFETY_FACTS, validate_syntax_family_catalog
 
 from .action_parser import CONTEXTUAL_SPLITTERS, GAZE_STARTERS, SECONDARY_SEGMENT_STARTERS, STANCE_STARTERS, normalize_action_phrase
+from .v2_direct_provenance import direct_binding_families
 
 if TYPE_CHECKING:
     from .prompt_realizer import ContentPlan
@@ -181,7 +182,7 @@ def _facts(plan: ContentPlan, frame_value: ActionFrame | Mapping[str, Any] | Non
 def eligible_syntax_families(
     plan: ContentPlan, action_frame: ActionFrame | Mapping[str, Any] | None,
     action_surface: Mapping[str, Any] | None, *, catalog: dict[str, Any] | None = None,
-    return_debug: bool = False,
+    return_debug: bool = False, direct_provenance: Mapping[str, Any] | None = None,
 ) -> list[str] | tuple[list[str], dict[str, Any]]:
     """Filter before selection; baseline is a fallback marker, not policy approval."""
     metadata = load_json(CATALOG_FILENAME) if catalog is None else catalog
@@ -189,6 +190,25 @@ def eligible_syntax_families(
     if issues:
         raise ValueError("Invalid syntax-family catalog: " + "; ".join(issues))
     facts, surface, common_reasons = _facts(plan, action_frame, action_surface)
+    direct_supported = direct_binding_families(plan, action_frame, action_surface, direct_provenance)
+    direct_valid = bool(direct_supported)
+    if direct_valid:
+        # Movable forms need a successful relative-clause constructor that
+        # explicitly assigns each location modifier to its location owner.
+        facts = dict.fromkeys(SAFETY_FACTS)
+        facts.update(frame_predicate_safe=True, standalone_scene_safe=True,
+                     scene_lead_safe=True if 'scene_lead_subject_action' in direct_supported else None,
+                     scene_adjunct_safe=True if 'subject_scene_action' in direct_supported else None,
+                     fragment_subject_action=False, independent_action_subject=False,
+                     # Reviewed legacy leaves contain no named location anchor;
+                     # productive spatial/gaze arguments accept artifact heads
+                     # only, disjoint from place heads. Whole-input consumption
+                     # excludes unknown place tails, proving non-overlap.
+                     scene_action_overlap=False, scene_action_nonduplicative=True)
+        surface, common_reasons = 'gerund', []
+    elif direct_provenance is not None:
+        common_reasons.append('direct_provenance_mismatch')
+        facts['frame_predicate_safe'] = False
     eligible = [BASELINE_FAMILY]
     rejected: dict[str, list[str]] = {}
     for family in sorted(metadata["families"], key=lambda item: item["key"]):
@@ -196,6 +216,8 @@ def eligible_syntax_families(
         if key == BASELINE_FAMILY:
             continue
         reasons = list(common_reasons)
+        if direct_valid and key not in direct_supported:
+            reasons.append('direct_scene_scope_not_proven')
         if not set(plan.discourse_roles) & set(family["roles"]):
             reasons.append("role_mismatch")
         if surface not in family["allowed_action_surfaces"] or surface in family["avoid_action_surfaces"]:
@@ -211,4 +233,5 @@ def eligible_syntax_families(
         return eligible
     return eligible, {"eligible_syntax_families": eligible, "rejected_syntax_families": rejected,
                       "syntax_fallback_reason": "baseline_only" if len(eligible) == 1 else "",
-                      "safety_facts": facts}
+                      "safety_facts": facts, "direct_provenance_valid": direct_valid,
+                      "direct_supported_families": sorted(direct_supported)}

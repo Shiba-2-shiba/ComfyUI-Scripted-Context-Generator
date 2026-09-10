@@ -858,6 +858,16 @@ def build_prompt_text(
             syntax_family=syntax_family,
         )
         template, realizer_debug = realize_content_plan(content_plan, return_debug=True)
+        from pipeline.v2_candidate_bridge import render_candidate
+        replacements = [
+            ("{subject_clause}", subject_clause), ("{action_clause}", action_clause),
+            ("{scene_clause}", scene_clause), ("{scene_anchor_clause}", scene_anchor_clause),
+            ("{subj}", subj), ("{costume}", costume), ("{loc}", loc), ("{action}", action),
+            ("{garnish}", garnish), ("{meta_mood}", meta_mood), ("{meta_style}", ""),
+        ]
+        template, content_plan, realizer_debug = render_candidate(
+            content_plan, template, realizer_debug, action_frame, action_surface, replacements, seed,
+        )
         selected_template_key = f"{intro_entry['key']}||{body_entry['key']}||{end_entry['key']}"
         logger.debug(f"Composed Template: {template}")
     else:

@@ -37,7 +37,9 @@ CONTRACT_PATH = ROOT / "docs/diversity_refactor/spec.md"
 PROFILES = {"smoke": (128, 128), "gate": (2048, 8192), "release": (8192, 8192)}
 AXES = ("subject", "location", "action_family", "primary_object_family", "mood", "clothing_family", "garnish_family", "syntax_family")
 IDENTITY_FIELDS = ("base_workflow_hash", "effective_workflow_hash", "config_hash", "profile_hash", "override_hash")
-ACTIVE_V1_FAMILIES = ["single-sentence-scene-tail", "two-sentence-scene-tail"]
+# Isolated N2.7 candidate config: six implemented structural families.
+# Retained v1 single/two-sentence fallbacks map to the first two shapes with version=v1.
+ACTIVE_V1_FAMILIES = ["action_lead_subject_scene", "scene_lead_subject_action", "subject_action__scene_tail", "subject_action_scene", "subject_action_scene_insert", "subject_scene_action"]
 
 
 class AuditError(ValueError):

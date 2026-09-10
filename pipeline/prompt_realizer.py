@@ -221,6 +221,7 @@ def _initial_word(text: str, *, capitalize: bool = False) -> str:
 def realize_content_plan(
     plan: ContentPlan, *, action_frame: ActionFrame | Mapping[str, Any] | None = None,
     action_surface: Mapping[str, Any] | None = None, return_debug: bool = False,
+    direct_provenance: Mapping[str, Any] | None = None,
 ) -> str | tuple[str, dict[str, Any]]:
     """Realize explicit candidate families; legacy family calls stay byte-stable.
 
@@ -245,8 +246,11 @@ def realize_content_plan(
     surface = action_surface if action_surface is not None else {
         "surface": plan.lexical_choice, "rendered_clause": plan.semantic_slots.get("adjunct", ""),
     }
-    structural, eligibility = eligible_syntax_families(plan, action_frame, surface, return_debug=True)
+    structural, eligibility = eligible_syntax_families(plan, action_frame, surface, return_debug=True,
+                                                     direct_provenance=direct_provenance)
     eligible = [key for key in structural if key in _V2_IMPLEMENTED_FAMILIES]
+    if eligibility['direct_provenance_valid']:
+        eligible = [key for key in eligible if key in eligibility['direct_supported_families']]
     selected = requested if requested in eligible else _V2_BASELINE
     reason = "" if selected == requested else (
         "family_not_implemented" if requested not in _V2_IMPLEMENTED_FAMILIES else "family_ineligible")
@@ -256,13 +260,15 @@ def realize_content_plan(
         "subject_scene_action": ["subject", "scene", "action"],
     }.get(selected, ["subject", "action", "scene"])
     facts = eligibility["safety_facts"]
-    if facts["frame_predicate_safe"] is not True or facts["scene_action_overlap"] is not False:
+    if (facts["frame_predicate_safe"] is not True or facts["scene_action_overlap"] is not False
+            or (eligibility['direct_provenance_valid'] and selected not in eligible)):
         # Explicit baseline and rejected/unknown families share the same fallback.
         text = _realize_content_plan_v1(replace(plan, syntax_family="single-sentence-scene-tail",
                                               clause_order=("subject", "action", "scene")))
         version, selected, eligible = "v1", _V2_BASELINE, [_V2_BASELINE]
         order = ["subject", "action", "scene"]
-        reason = "unsafe_for_v2" if facts["frame_predicate_safe"] is not True else "scene_action_overlap"
+        reason = ('family_ineligible' if eligibility['direct_provenance_valid'] else
+                  "unsafe_for_v2" if facts["frame_predicate_safe"] is not True else "scene_action_overlap")
     else:
         subject, action, scene = (normalize_action_phrase(plan.semantic_slots[key]) for key in ("subject", "adjunct", "scene"))
         predicate = _initial_word(action)
