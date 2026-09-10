@@ -1,5 +1,9 @@
 {
   "archive": "n27-r4-candidate04-07.zip",
+  "archive_commit": "5edea779206cdbcdf4e756012561a137d3ff0c3f",
+  "archive_path": "docs/diversity_refactor/checkpoints/n27-r4-candidate04-07.zip",
+  "development_branch": "refactor/realizer-v2",
+  "development_source_root": ".",
   "sha256": "b2f32478ada1a5f7b2064eee38221a4e16f43fce3c69276070818bb294b4bd4e",
   "bytes": 7080505,
   "file_count": 2510,

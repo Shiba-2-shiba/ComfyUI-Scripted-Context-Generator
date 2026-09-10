@@ -2241,8 +2241,14 @@ and independent proofs for missing syntax-family placements; unknowns stay fallb
 
 ### Committed checkpoint
 
-The isolated candidate04-07 sources and the R4 development evidence are preserved
-in [`checkpoints/n27-r4-candidate04-07.zip`](./checkpoints/n27-r4-candidate04-07.zip).
-The archive does not activate candidate code. All archived file hashes and all
-four restored source manifests were checked. Restore instructions and the exact
-scope are in [`checkpoints/README.md`](./checkpoints/README.md).
+The candidate04-07 sources are recorded as consecutive ordinary source commits
+on `refactor/realizer-v2`; candidate07 is the development baseline. `main` remains
+V150 stable. This storage migration does not constitute adoption or change any
+formal gate result.
+
+The original ZIP and R4 development evidence remain recoverable from commit
+`5edea779206cdbcdf4e756012561a137d3ff0c3f`. The current stable tree retains the
+[checkpoint manifest](./checkpoints/n27-r4-candidate04-07.json). All 2510 archived
+file hashes and all four restored source manifests were checked during migration.
+Branch usage, recovery instructions and the exact evidence scope are in
+[`checkpoints/README.md`](./checkpoints/README.md).
