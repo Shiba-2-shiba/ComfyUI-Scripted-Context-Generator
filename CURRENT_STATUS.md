@@ -1,7 +1,13 @@
 # Current Status
 
 Last verified: 2026-09-06 (F0 baseline: counts, validators, full flow, 40 focused tests)
-Candidate development verified: 2026-09-09 (N2.7-R4.2 candidate07; active runtime unchanged)
+Candidate development verified: 2026-09-09 (N2.7-R4.2 candidate07)
+Source storage verified: 2026-09-10 (candidate04-07 committed as ordinary source; main runtime unchanged)
+
+このブランチ `refactor/realizer-v2` のルートソースは candidate07 です。
+V150 stable は `main` に保持し、正式採用は **BLOCKED** のままです。
+以下の「現行生成」「未反映」は stable `main` に対する過去の検証記録です。
+開発と検証の入口は [development_branch.md](docs/diversity_refactor/development_branch.md) を参照してください。
 
 このファイルは、毎回全スクリプトを読み直さずに現在地を把握するための短い入口です。
 詳細な構造は `REPO_STRUCTURE.md`、設計背景は `assets/ARCHITECTURE.md` と

@@ -1,5 +1,9 @@
 # ComfyUI-Scripted-Context-Generator
 
+> このブランチ `refactor/realizer-v2` は candidate07 の開発用ソースです。
+> V150 stable は `main` に保持しています。正式採用は **BLOCKED** です。
+> 候補間の差分・検証手順は [開発ブランチ案内](docs/diversity_refactor/development_branch.md) を参照してください。
+
 LLM に依存せず、ルールベース + seed 再現で自然言語プロンプトを組み立てる ComfyUI カスタムノード集です。
 
 現在の公開面は `context_json` を中心に扱う context-first 構成で、active surface は `Context*` ノード群と `PromptCleaner` のみです。
