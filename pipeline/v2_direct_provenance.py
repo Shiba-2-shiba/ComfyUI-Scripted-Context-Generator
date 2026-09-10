@@ -24,7 +24,10 @@ from .v2_leaf_grammar import background_modifiers, derive_action_grammar, gaze, 
 from .v2_structural_evidence import build_structural_evidence
 from .v2_leaf_grammar import LEGACY_PRIMARY as _PRIMARY, LEGACY_SHARED as _SHARED, LEGACY_TEMPORAL as _TEMPORAL
 from .v2_clothing_provenance import materialize_clothes
-from .v2_scene_provenance import producer_scene_parts
+from .v2_scene_provenance import producer_scene_parts, producer_owned_scene
+from .v2_leaf_grammar import materialize_action_parts, verified_primary_verbs
+from .action_parser import action_verb
+from .v2_template_provenance import scene_template_kind, materialize_scene_template
 
 
 _STANDALONE_FAMILY = 'subject_action__scene_tail'
@@ -201,7 +204,12 @@ def materialize_direct(provenance, frame_value, *, syntax_family=None, structura
     slots, pairs, surface = (provenance.get(k) for k in ('slots', 'replacements', 'surface'))
     if not isinstance(slots, Mapping) or not isinstance(surface, Mapping) or not isinstance(pairs, (list, tuple)):
         return None
-    if any(slots.get(k) != v for k, v in _TEMPLATES.items()):
+    template_kind = scene_template_kind(slots)
+    if template_kind is None:
+        return None
+    if template_kind == 'owned_finite' and syntax_family not in {
+        None, 'single-sentence-scene-tail', 'two-sentence-scene-tail', _STANDALONE_FAMILY,
+    }:
         return None
     if any(not isinstance(pair, (list, tuple)) or len(pair) != 2
            or not all(isinstance(v, str) for v in pair) for pair in pairs):
@@ -237,6 +245,17 @@ def materialize_direct(provenance, frame_value, *, syntax_family=None, structura
         return None
     first_token = pieces[0].split()[0]
     verb = grammar.main_verb if grammar is not None else first_token
+    if grammar is not None:
+        heads = verified_primary_verbs(structural_evidence)
+        if ' and ' in structural_evidence.emitted_parts[0].text and len(heads) < 2:
+            return None  # A rejected compound cannot bypass semantic replay.
+        if len(heads) > 1:
+            # The producer intentionally projects the second action in a
+            # stance-and-action clause. Preserve that semantic identity, while
+            # verifying both grammatical heads and the actual surface token.
+            if frame.main_verb not in heads or action_verb(action) != frame.main_verb:
+                return None
+            verb = frame.main_verb
     obj = frame.primary_object
     if (frame.main_verb != verb or slots.get('predicate') != verb or slots.get('object') != obj
             or any(surface.get(key, value) != value for key, value in
@@ -250,11 +269,22 @@ def materialize_direct(provenance, frame_value, *, syntax_family=None, structura
     scene = _scene(values['{loc}'], values['{meta_mood}'], frame.legacy_slots.get('location'), syntax_family)
     if scene is None:
         return None
+    if template_kind == 'owned_finite':
+        owned = producer_owned_scene(values['{loc}'], frame.legacy_slots.get('location'))
+        if owned is None:
+            return None
+        scene = owned + ', with ' + values['{meta_mood}']
+    scene = materialize_scene_template(slots, scene)
+    if scene is None:
+        return None
     joined = ' '.join(values[k] for k in _TEMPLATES.values())
     if find_banned_terms(joined) or not is_solo_safe_text(joined):
         return None
+    realized_action = materialize_action_parts(structural_evidence) if grammar is not None else action
+    if realized_action is None:
+        return None
     return {**slots, 'subject': subject + ' in ' + clothes,
-            'adjunct': ', '.join([action, *(_GARNISH[g] if g in _GARNISH else g for g in garnishes)]), 'scene': scene}
+            'adjunct': ', '.join([realized_action, *(_GARNISH[g] if g in _GARNISH else g for g in garnishes)]), 'scene': scene}
 
 
 def direct_binding_families(plan, frame, surface, provenance, *, structural_evidence=None):
@@ -267,6 +297,8 @@ def direct_binding_families(plan, frame, surface, provenance, *, structural_evid
             and dict(surface) == {**provenance['surface'], 'rendered_clause': expected['adjunct']}):
         return frozenset()
     supported = {_STANDALONE_FAMILY}
+    if scene_template_kind(provenance['slots']) == 'owned_finite':
+        return frozenset(supported)
     if structural_evidence is not None:
         grammar = bound_action_grammar(provenance, frame, structural_evidence)
         if grammar is None or grammar.no_place_reference is not True:

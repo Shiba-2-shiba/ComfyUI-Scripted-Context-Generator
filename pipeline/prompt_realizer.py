@@ -19,6 +19,7 @@ except ImportError:
 
 from .action_parser import normalize_action_phrase
 from .syntax_family_selector import candidate_family_safe, eligible_syntax_families
+from .v2_template_provenance import scene_template_kind
 
 _LEGACY_SYNTAX_FAMILIES = frozenset({"single-sentence-scene-tail", "two-sentence-scene-tail", "template-directed"})
 _V2_IMPLEMENTED_FAMILIES = frozenset({
@@ -277,7 +278,12 @@ def realize_content_plan(
         if surface.get("surface") == "gerund":
             predicate = "is " + predicate
         if selected == "subject_action__scene_tail":
-            text = f"{_initial_word(subject, capitalize=True)} {predicate}. The scene is set {_initial_word(scene)}."
+            if (eligibility['direct_provenance_valid']
+                    and scene_template_kind(direct_provenance['slots']) == 'owned_finite'):
+                scene_sentence = _initial_word(scene, capitalize=True)
+            else:
+                scene_sentence = f"The scene is set {_initial_word(scene)}"
+            text = f"{_initial_word(subject, capitalize=True)} {predicate}. {scene_sentence}."
         elif selected == "scene_lead_subject_action":
             text = f"{_initial_word(scene, capitalize=True)}, {_initial_word(subject)} {predicate}."
         elif selected == "action_lead_subject_scene":

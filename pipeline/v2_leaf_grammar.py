@@ -325,6 +325,13 @@ def _leaf_predicate(value):
     """Consume one predicate using closed valencies and small motion forms."""
     if predicate(value):
         return value.partition(' ')[0]
+    # A seat is a spatial argument, not evidence that the scene is distinct.
+    if re.fullmatch(r'sitting in the (?:audience )?seats', value):
+        return 'sitting'
+    # This purpose infinitive owns a concrete reading object; free pronouns,
+    # destinations and trailing adjuncts are deliberately outside its valency.
+    if re.fullmatch(r'leaning (?:in|closer) to read (?:a|the) (?:(?:tiny|small) )?label', value):
+        return 'leaning'
     if re.fullmatch(r'(?:walking|moving)(?: slowly| carefully)?|leaning(?: closer| in)?|'
                     r'(?:standing|waiting)(?: quietly| still)?|sleeping|returning|'
                     r'(?:fully )?getting started', value):
@@ -406,6 +413,11 @@ def _body_clause(value):
                 and _object(obj, _TRANSITIVE['holding']))
 
 
+def _gaze_body_state(value):
+    """An eyes-state complement with an owned body subject, not actor control."""
+    return bool(re.fullmatch(r'(?:her )?eyes fixed on what needs to happen next', value))
+
+
 def _shared_leaf(value, depth=0, *, slot_key=None):
     """At most two subordinate levels inside one producer-owned leaf."""
     if depth > 2:
@@ -453,6 +465,11 @@ def action_part_facts(part, *, primary=False):
         return LeafGrammarFacts()
     if primary and value.startswith(('she ', 'not ', 'never ')):
         return LeafGrammarFacts()  # Main realization already supplies its subject.
+    if _gaze_body_state(value):
+        if primary or part.slot_key != 'gaze_target':
+            return LeafGrammarFacts()
+        return LeafGrammarFacts(True, 'body_state', 'with_absolute',
+                                'protagonist_body_part', False, True)
     if _body_clause(value):
         if primary or part.slot_key not in {'gaze_target', 'hand_action', 'posture'}:
             return LeafGrammarFacts()
@@ -482,7 +499,7 @@ def action_part_facts(part, *, primary=False):
                   'shared_subject_modifier')
     # Known destination constructions still carry a spatial reference; they do
     # not establish scene non-overlap merely because their grammar is understood.
-    no_place = None if re.search(r'\b(?:home|bed|area|space|place|nearby|school|section)\b', value) else True
+    no_place = None if re.search(r'\b(?:home|bed|area|space|place|nearby|school|section|seats)\b', value) else True
     return LeafGrammarFacts(True, surface, attachment, 'protagonist', True, no_place, verb)
 
 
@@ -496,7 +513,51 @@ def derive_action_grammar(evidence):
     primary = parts[0]
     known = all(part.known for part in parts)
     shared = all(part.same_subject is True for part in parts) if known else None
-    independent = any(part.same_subject is False for part in parts) if known else None
+    independent = any(part.same_subject is False and part.attachment_kind != 'with_absolute'
+                      for part in parts) if known else None
     no_place = True if known and all(part.no_place_reference is True for part in parts) else None
     return ActionGrammarFacts(parts, True if known and primary.attachment_kind == 'main_predicate' else None,
                               shared, independent, no_place, primary.main_verb, primary.surface_kind)
+
+
+def materialize_action_parts(evidence):
+    """Preserve every actor leaf and license only proved body states with 'with'."""
+    facts = derive_action_grammar(evidence)
+    if facts.frame_predicate_safe is not True:
+        return None
+    result = []
+    for part, leaf in zip(evidence.emitted_parts, facts.parts):
+        if leaf.attachment_kind == 'with_absolute':
+            # Facts were freshly derived from the exact source text and role.
+            result.append('with ' + part.text)
+        elif leaf.same_subject is True:
+            result.append(part.text)
+        else:
+            return None
+    return ', '.join(result)
+
+
+def verified_primary_verbs(evidence):
+    """Surface heads in a completely known primary predicate, in textual order.
+
+    These grammatical heads do not overwrite the producer's semantic main verb.
+    Callers must separately bind that semantic fact to its original parser replay.
+    """
+    from .v2_structural_evidence import ActionStructuralEvidence
+    if not isinstance(evidence, ActionStructuralEvidence) or not evidence.exact_replay or not evidence.emitted_parts:
+        return ()
+    primary = evidence.emitted_parts[0]
+    facts = action_part_facts(primary, primary=True)
+    if not facts.known or facts.attachment_kind != 'main_predicate':
+        return ()
+    if ' and ' not in primary.text:
+        return (facts.main_verb,) if facts.main_verb else ()
+    heads = []
+    for value in primary.text.split(' and '):
+        if value.startswith(('not ', 'never ', 'she ')):
+            return ()
+        parsed = _protagonist_clause(value, primary.slot_key)
+        if parsed is None or parsed[1] != 'gerund':
+            return ()
+        heads.append(parsed[0])
+    return tuple(heads)

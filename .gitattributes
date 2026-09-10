@@ -7,6 +7,7 @@ assets/fixtures/variation_baseline/vocab/data/background_packs.json -text whites
 assets/fixtures/n27_r1_direct_cases.json -text whitespace=cr-at-eol
 assets/fixtures/n27_r3_productive_cases.json -text whitespace=cr-at-eol
 assets/fixtures/n27_r41_real_cases.json -text whitespace=cr-at-eol
+assets/fixtures/n27_r42_real_cases.json -text whitespace=cr-at-eol
 assets/fixtures/n27_r4_action_trace_cases.json -text whitespace=cr-at-eol
 assets/fixtures/n27_r4_productive_cases.json -text whitespace=cr-at-eol
 pipeline/v2_leaf_grammar.py -text whitespace=cr-at-eol
