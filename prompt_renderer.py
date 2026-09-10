@@ -724,6 +724,7 @@ def build_prompt_text(
     action_frame=None,
     return_debug=False,
     template_entries_fn: Callable[[str], list[dict]] | None = None,
+    producer_context=None,
 ):
     logger.info(f"--- PromptAssembly Build Start (Seed: {seed}) ---")
     logger.debug(f"Generation Mode: {DEFAULT_GENERATION_MODE}")
@@ -867,6 +868,7 @@ def build_prompt_text(
         ]
         template, content_plan, realizer_debug = render_candidate(
             content_plan, template, realizer_debug, action_frame, action_surface, replacements, seed,
+            producer_context=producer_context,
         )
         selected_template_key = f"{intro_entry['key']}||{body_entry['key']}||{end_entry['key']}"
         logger.debug(f"Composed Template: {template}")

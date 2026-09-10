@@ -37,6 +37,7 @@ def build_prompt_text(
     recent_end_keys=None,
     action_frame=None,
     return_debug=False,
+    producer_context=None,
 ):
     return prompt_renderer.build_prompt_text(
         template=template,
@@ -55,6 +56,7 @@ def build_prompt_text(
         recent_body_keys=recent_body_keys,
         recent_end_keys=recent_end_keys,
         action_frame=action_frame,
+        producer_context=producer_context,
         return_debug=return_debug,
         template_entries_fn=_template_entries,
     )
@@ -88,6 +90,7 @@ def build_prompt_from_context(context, template, composition_mode, seed):
         recent_body_keys=recent_template_part_history(ctx, "body"),
         recent_end_keys=recent_template_part_history(ctx, "end"),
         action_frame=state.action.to_dict() if state.action.has_content() else None,
+        producer_context={'character_palette': [part.strip() for part in state.character.palette_text.split(',') if part.strip()]},
         return_debug=True,
     )
     action_slots = state.action.to_slot_dict()

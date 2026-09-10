@@ -179,6 +179,26 @@ def _facts(plan: ContentPlan, frame_value: ActionFrame | Mapping[str, Any] | Non
     return facts, declared, sorted(reasons)
 
 
+def candidate_family_safe(family, eligibility, *, structural_evidence=None):
+    """Apply global frame proof and the placement's relevant overlap constraint.
+
+    A separately owned scene sentence does not move or insert a scene inside
+    the action. Its catalog requirements can be proved while place overlap is
+    unknown. This exception requires fresh direct binding and full action proof;
+    other paths retain their conservative non-overlap guard.
+    """
+    facts = eligibility['safety_facts']
+    if facts['frame_predicate_safe'] is not True:
+        return False
+    if facts['scene_action_overlap'] is False:
+        return True
+    return (structural_evidence is not None and eligibility['direct_provenance_valid']
+            and family == 'subject_action__scene_tail'
+            and family in eligibility['direct_supported_families']
+            and facts['standalone_scene_safe'] is True
+            and facts['independent_action_subject'] is False)
+
+
 def eligible_syntax_families(
     plan: ContentPlan, action_frame: ActionFrame | Mapping[str, Any] | None,
     action_surface: Mapping[str, Any] | None, *, catalog: dict[str, Any] | None = None,

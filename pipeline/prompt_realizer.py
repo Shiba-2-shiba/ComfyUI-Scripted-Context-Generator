@@ -18,7 +18,7 @@ except ImportError:
     from vocab.seed_utils import mix_seed
 
 from .action_parser import normalize_action_phrase
-from .syntax_family_selector import eligible_syntax_families
+from .syntax_family_selector import candidate_family_safe, eligible_syntax_families
 
 _LEGACY_SYNTAX_FAMILIES = frozenset({"single-sentence-scene-tail", "two-sentence-scene-tail", "template-directed"})
 _V2_IMPLEMENTED_FAMILIES = frozenset({
@@ -262,7 +262,7 @@ def realize_content_plan(
         "subject_scene_action": ["subject", "scene", "action"],
     }.get(selected, ["subject", "action", "scene"])
     facts = eligibility["safety_facts"]
-    if (facts["frame_predicate_safe"] is not True or facts["scene_action_overlap"] is not False
+    if (not candidate_family_safe(selected, eligibility, structural_evidence=structural_evidence)
             or (eligibility['direct_provenance_valid'] and selected not in eligible)):
         # Explicit baseline and rejected/unknown families share the same fallback.
         text = _realize_content_plan_v1(replace(plan, syntax_family="single-sentence-scene-tail",

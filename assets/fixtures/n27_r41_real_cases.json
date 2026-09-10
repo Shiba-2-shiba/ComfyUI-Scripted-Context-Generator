@@ -1,0 +1,266 @@
+[
+  {
+    "builder_seed": 16464562293586990063,
+    "checks": {
+      "clothing": false,
+      "direct_components": false,
+      "scene": false,
+      "subject": true
+    },
+    "frame": {
+      "gaze_target": "looking off for a quiet second",
+      "hand_action": "one hand resting lightly where it lands",
+      "legacy_slots": {
+        "anchor": "",
+        "daily_life_tags": [
+          "domestic",
+          "home_life"
+        ],
+        "gaze_target": "looking off for a quiet second",
+        "hand_action": "one hand resting lightly where it lands",
+        "location": "bedroom_boudoir",
+        "obstacle_clause": "",
+        "obstacle_or_trigger": "",
+        "optional_micro_action": "while checking what still needs doing",
+        "posture": "walking slowly",
+        "primary_action": "walking slowly while checking what still needs doing",
+        "progress_clause": "while keeping the momentum going",
+        "progress_state": "midway",
+        "purpose": "rest",
+        "purpose_clause": "letting the pause settle properly",
+        "social_clause": "as if responding directly to the viewer",
+        "social_distance": "viewer",
+        "time_or_weather": "after finally coming home"
+      },
+      "legacy_text": "walking slowly while checking what still needs doing, looking off for a quiet second, letting the pause settle properly, as if responding directly to the viewer, after finally coming home",
+      "main_verb": "walking",
+      "posture": "walking slowly",
+      "primary_object": "",
+      "progress": "midway",
+      "schema_version": "action-frame/v1",
+      "social_relation": "viewer",
+      "stimulus_or_obstacle": ""
+    },
+    "replacements": [
+      [
+        "{subject_clause}",
+        "A solo girl with long straight hair, black hair and sharp black eyes in charcoal grey cashmere soft knit silhouette warm turtleneck sweater dress, with knit belt, fuzzy leg warmers"
+      ],
+      [
+        "{action_clause}",
+        "walking slowly while checking what still needs doing, looking off for a quiet second, letting the pause settle properly, as if responding directly to the viewer, after finally coming home, brows knit in concentration"
+      ],
+      [
+        "{scene_clause}",
+        "in cozy romantic bedroom, smooth silk sheets, during lazy morning, featuring wooden wardrobe with open doors and scattered soft cushions, a quiet room holding around her while the task in front of her sets the pace"
+      ],
+      [
+        "{scene_anchor_clause}",
+        "cozy romantic bedroom, smooth silk sheets, during lazy morning, featuring wooden wardrobe with open doors and scattered soft cushions, a quiet room holding around her while the task in front of her sets the pace"
+      ],
+      [
+        "{subj}",
+        "A solo girl with long straight hair, black hair and sharp black eyes"
+      ],
+      [
+        "{costume}",
+        "charcoal grey cashmere soft knit silhouette warm turtleneck sweater dress, with knit belt, fuzzy leg warmers"
+      ],
+      [
+        "{loc}",
+        "cozy romantic bedroom, smooth silk sheets, during lazy morning, featuring wooden wardrobe with open doors and scattered soft cushions"
+      ],
+      [
+        "{action}",
+        "walking slowly while checking what still needs doing, looking off for a quiet second, letting the pause settle properly, as if responding directly to the viewer, after finally coming home"
+      ],
+      [
+        "{garnish}",
+        "brows knit in concentration"
+      ],
+      [
+        "{meta_mood}",
+        "a quiet room holding around her while the task in front of her sets the pace"
+      ],
+      [
+        "{meta_style}",
+        ""
+      ]
+    ],
+    "run_seed": 190,
+    "slots": {
+      "clause_order": [
+        "subject",
+        "action",
+        "scene"
+      ],
+      "discourse_roles": [
+        "focused",
+        "neutral",
+        "quiet",
+        "transition"
+      ],
+      "lexical_choice": "gerund",
+      "named_seed_streams": {
+        "lexical": 3467556100,
+        "syntax": 4261589344,
+        "template": 4067052544
+      },
+      "semantic_slots": {
+        "adjunct": "{action_clause}",
+        "object": "",
+        "predicate": "walking",
+        "scene": "{scene_clause}",
+        "subject": "{subject_clause}"
+      },
+      "syntax_family": "single-sentence-scene-tail"
+    },
+    "surface": {
+      "first_token": "walking",
+      "input_surface": "gerund",
+      "rendered_clause": "walking slowly while checking what still needs doing, looking off for a quiet second, letting the pause settle properly, as if responding directly to the viewer, after finally coming home, brows knit in concentration",
+      "surface": "gerund",
+      "verb": "walking",
+      "word_count": 30
+    },
+    "producer_context": {
+      "character_palette": [
+        "charcoal grey",
+        "crimson red",
+        "white"
+      ]
+    }
+  },
+  {
+    "builder_seed": 36216724579811815,
+    "checks": {
+      "clothing": false,
+      "direct_components": false,
+      "scene": false,
+      "subject": true
+    },
+    "frame": {
+      "gaze_target": "looking toward the next thing she needs",
+      "hand_action": "one hand keeping her place",
+      "legacy_slots": {
+        "anchor": "",
+        "daily_life_tags": [
+          "domestic",
+          "home_life"
+        ],
+        "gaze_target": "looking toward the next thing she needs",
+        "hand_action": "one hand keeping her place",
+        "location": "bedroom_boudoir",
+        "obstacle_clause": "",
+        "obstacle_or_trigger": "",
+        "optional_micro_action": "while checking what still needs doing",
+        "posture": "walking slowly",
+        "primary_action": "walking slowly while checking what still needs doing",
+        "progress_clause": "without losing her place",
+        "progress_state": "midway",
+        "purpose": "wait",
+        "purpose_clause": "holding onto her place a little longer",
+        "social_clause": "keeping to herself",
+        "social_distance": "alone",
+        "time_or_weather": "before getting ready to leave"
+      },
+      "legacy_text": "walking slowly while checking what still needs doing, looking toward the next thing she needs, holding onto her place a little longer, keeping to herself, before getting ready to leave",
+      "main_verb": "walking",
+      "posture": "walking slowly",
+      "primary_object": "",
+      "progress": "midway",
+      "schema_version": "action-frame/v1",
+      "social_relation": "alone",
+      "stimulus_or_obstacle": ""
+    },
+    "replacements": [
+      [
+        "{subject_clause}",
+        "A solo girl with long flowing hair, black hair and brown eyes in dusty rose cable-knit wool knee-length cozy sweater dress, with ribbed texture, fuzzy leg warmers"
+      ],
+      [
+        "{action_clause}",
+        "walking slowly while checking what still needs doing, looking toward the next thing she needs, holding onto her place a little longer, keeping to herself, before getting ready to leave, brows knit in concentration, hands kept precise and controlled"
+      ],
+      [
+        "{scene_clause}",
+        "in cozy romantic bedroom, featuring vintage vanity mirror with lights and canopied four-poster bed, layered background depth, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{scene_anchor_clause}",
+        "cozy romantic bedroom, featuring vintage vanity mirror with lights and canopied four-poster bed, layered background depth, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{subj}",
+        "A solo girl with long flowing hair, black hair and brown eyes"
+      ],
+      [
+        "{costume}",
+        "dusty rose cable-knit wool knee-length cozy sweater dress, with ribbed texture, fuzzy leg warmers"
+      ],
+      [
+        "{loc}",
+        "cozy romantic bedroom, featuring vintage vanity mirror with lights and canopied four-poster bed, layered background depth"
+      ],
+      [
+        "{action}",
+        "walking slowly while checking what still needs doing, looking toward the next thing she needs, holding onto her place a little longer, keeping to herself, before getting ready to leave"
+      ],
+      [
+        "{garnish}",
+        "brows knit in concentration, hands kept precise and controlled"
+      ],
+      [
+        "{meta_mood}",
+        "the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{meta_style}",
+        ""
+      ]
+    ],
+    "run_seed": 482,
+    "slots": {
+      "clause_order": [
+        "subject",
+        "action",
+        "scene"
+      ],
+      "discourse_roles": [
+        "focused",
+        "neutral",
+        "quiet",
+        "transition"
+      ],
+      "lexical_choice": "gerund",
+      "named_seed_streams": {
+        "lexical": 3656403397,
+        "syntax": 897103519,
+        "template": 619209402
+      },
+      "semantic_slots": {
+        "adjunct": "{action_clause}",
+        "object": "",
+        "predicate": "walking",
+        "scene": "{scene_clause}",
+        "subject": "{subject_clause}"
+      },
+      "syntax_family": "single-sentence-scene-tail"
+    },
+    "surface": {
+      "first_token": "walking",
+      "input_surface": "gerund",
+      "rendered_clause": "walking slowly while checking what still needs doing, looking toward the next thing she needs, holding onto her place a little longer, keeping to herself, before getting ready to leave, brows knit in concentration, hands kept precise and controlled",
+      "surface": "gerund",
+      "verb": "walking",
+      "word_count": 30
+    },
+    "producer_context": {
+      "character_palette": [
+        "gold",
+        "teal",
+        "red"
+      ]
+    }
+  }
+]

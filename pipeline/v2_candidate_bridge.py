@@ -3,7 +3,7 @@ from dataclasses import replace
 import random
 
 from .prompt_realizer import realize_content_plan
-from .syntax_family_selector import eligible_syntax_families
+from .syntax_family_selector import candidate_family_safe, eligible_syntax_families
 from .v2_direct_provenance import materialize_direct
 from .v2_structural_evidence import build_structural_evidence
 try:
@@ -19,7 +19,7 @@ FAMILIES = (
 _FALLBACK = {"single-sentence-scene-tail": "subject_action_scene", "two-sentence-scene-tail": "subject_action__scene_tail"}
 
 
-def render_candidate(plan, legacy_template, legacy_debug, frame, surface, replacements, seed):
+def render_candidate(plan, legacy_template, legacy_debug, frame, surface, replacements, seed, *, producer_context=None):
     def resolve(value):
         for token, replacement in replacements:
             value = value.replace(token, str(replacement) if replacement is not None else "")
@@ -31,6 +31,8 @@ def render_candidate(plan, legacy_template, legacy_debug, frame, surface, replac
     concrete = replace(plan, semantic_slots=slots)
     actual_surface = {**surface, "rendered_clause": slots["adjunct"]}
     evidence = {'slots': dict(plan.semantic_slots), 'replacements': replacements, 'surface': surface}
+    if isinstance(producer_context, dict):
+        evidence['character_palette'] = producer_context.get('character_palette', ())
     replay = build_structural_evidence(frame, dict(replacements).get('{action}', ''))
     direct_slots = materialize_direct(evidence, frame)
     structural_evidence = None
@@ -47,10 +49,10 @@ def render_candidate(plan, legacy_template, legacy_debug, frame, surface, replac
     eligible, eligibility = eligible_syntax_families(concrete, frame, actual_surface, return_debug=True,
                                                      direct_provenance=provenance,
                                                      structural_evidence=structural_evidence)
-    facts = eligibility["safety_facts"]
     selectable = sorted(key for key in eligible if not eligibility['direct_provenance_valid']
                         or key in eligibility['direct_supported_families'])
-    if facts["frame_predicate_safe"] is True and facts["scene_action_overlap"] is False and selectable:
+    selectable = [key for key in selectable if candidate_family_safe(key, eligibility, structural_evidence=structural_evidence)]
+    if selectable:
         selected = random.Random(mix_seed(seed, "realizer_v2_candidate_family")).choice(selectable)
         # Bind the actual constructor output for the selected family; changing
         # a family label alone must not authorize a different scene surface.

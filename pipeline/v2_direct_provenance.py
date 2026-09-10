@@ -22,6 +22,9 @@ except ImportError:
 
 from .v2_leaf_grammar import background_modifiers, derive_action_grammar, gaze, place_phrase, predicate, simple_clothes, temporal
 from .v2_structural_evidence import build_structural_evidence
+from .v2_leaf_grammar import LEGACY_PRIMARY as _PRIMARY, LEGACY_SHARED as _SHARED, LEGACY_TEMPORAL as _TEMPORAL
+from .v2_clothing_provenance import materialize_clothes
+from .v2_scene_provenance import producer_scene_parts
 
 
 _STANDALONE_FAMILY = 'subject_action__scene_tail'
@@ -38,18 +41,6 @@ _STYLES = {
     'long flowing hair': 'long flowing hair', 'loose waves': 'loose waves',
     'short messy bob': 'a short messy bob', 'neatly tied hair': 'neatly tied hair',
 }
-_PRIMARY = frozenset({
-    'checking the arrangement before moving to the next section',
-    'standing quietly while reviewing what she needs next', 'securing the telescope cover',
-})
-_SHARED = frozenset({
-    'hovering in place while she decides', 'checking what is happening nearby',
-    'weighing one choice against another', 'meeting the viewer with a quiet look',
-    'looking off for a quiet second', 'taking one more easy breath',
-    'leaving room for a quiet exchange with the viewer',
-    'taking on an easy unhurried posture', 'letting the pause settle properly',
-})
-_TEMPORAL = frozenset({'after realizing something is missing', 'after school'})
 _GARNISH = {
     'brows knit in concentration': 'with brows knit in concentration',
     'steady gaze': 'with a steady gaze', 'still posture': 'with a still posture',
@@ -99,7 +90,7 @@ def _subject(value):
     return None
 
 
-def _clothes(value):
+def _clothes(value, *, character_palette=()):
     if value == 'casual layered top and practical trousers':
         return 'a ' + value
     if re.fullmatch(r'(?:silver|beige|cream|dusty rose|soft gray) '
@@ -108,7 +99,7 @@ def _clothes(value):
                     r'(?:(?:long-sleeve|knee-length) )?'
                     r'(?:warm turtleneck sweater dress|cozy sweater dress)', value):
         return 'a ' + value
-    return simple_clothes(value)
+    return simple_clothes(value) or materialize_clothes(value, character_palette=character_palette)
 
 
 def _scene_modifier(part):
@@ -136,12 +127,12 @@ def _scene_parts(location, mood, location_key):
         return 'in ' + _article(anchor), modifiers, 'with ' + mood
     pack = load_background_packs().get(location_key, {})
     parsed_anchor = place_phrase(anchor)
-    if anchor not in pack.get('environment', []) or parsed_anchor is None:
-        return None
-    modifiers = background_modifiers(raw_modifiers, pack)
-    if modifiers is None:
-        return None
-    return parsed_anchor, modifiers, 'with ' + mood
+    if anchor in pack.get('environment', []) and parsed_anchor is not None:
+        modifiers = background_modifiers(raw_modifiers, pack)
+        if modifiers is not None:
+            return parsed_anchor, modifiers, 'with ' + mood
+    produced = producer_scene_parts(location, location_key)
+    return (*produced, 'with ' + mood) if produced is not None else None
 
 
 def _relative_scene(parts):
@@ -173,6 +164,10 @@ def _scene(location, mood, location_key, syntax_family=None):
     parts = _scene_parts(location, mood, location_key)
     if parts is None:
         return None
+    if producer_scene_parts(location, location_key) is not None and syntax_family not in {
+        None, 'single-sentence-scene-tail', 'two-sentence-scene-tail', _STANDALONE_FAMILY,
+    }:
+        return None  # New field attachments are proved for a separate scene sentence only.
     if syntax_family in _RELOCATED_FAMILIES:
         return _relative_scene(parts)
     anchor, modifiers, absolute = parts
@@ -216,7 +211,8 @@ def materialize_direct(provenance, frame_value, *, syntax_family=None, structura
                 '{subj}', '{costume}', '{loc}', '{action}', '{garnish}', '{meta_mood}', '{meta_style}'}
     if len(values) != len(pairs) or set(values) != required or any(re.search(r'[{}.!?;]', v) for v in values.values()):
         return None
-    subject, clothes = _subject(values['{subj}']), _clothes(values['{costume}'])
+    subject = _subject(values['{subj}'])
+    clothes = _clothes(values['{costume}'], character_palette=provenance.get('character_palette', ()))
     if subject is None or clothes is None:
         return None
     if values['{subject_clause}'] != values['{subj}'] + ' in ' + values['{costume}']:
@@ -271,6 +267,10 @@ def direct_binding_families(plan, frame, surface, provenance, *, structural_evid
             and dict(surface) == {**provenance['surface'], 'rendered_clause': expected['adjunct']}):
         return frozenset()
     supported = {_STANDALONE_FAMILY}
+    if structural_evidence is not None:
+        grammar = bound_action_grammar(provenance, frame, structural_evidence)
+        if grammar is None or grammar.no_place_reference is not True:
+            return frozenset(supported)
     if materialize_direct(provenance, frame, syntax_family='scene_lead_subject_action',
                           structural_evidence=structural_evidence) is not None:
         supported.update(_RELOCATED_FAMILIES)

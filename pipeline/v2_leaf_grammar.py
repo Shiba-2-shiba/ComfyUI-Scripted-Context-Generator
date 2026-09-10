@@ -12,6 +12,20 @@ except ImportError:
     from vocab import clothing as clothing_vocab
 
 
+# Reviewed compatibility vocabulary shared with the legacy direct route.
+LEGACY_PRIMARY = frozenset({
+    'checking the arrangement before moving to the next section',
+    'standing quietly while reviewing what she needs next', 'securing the telescope cover',
+})
+LEGACY_SHARED = frozenset({
+    'hovering in place while she decides', 'checking what is happening nearby',
+    'weighing one choice against another', 'meeting the viewer with a quiet look',
+    'looking off for a quiet second', 'taking one more easy breath',
+    'leaving room for a quiet exchange with the viewer',
+    'taking on an easy unhurried posture', 'letting the pause settle properly',
+})
+LEGACY_TEMPORAL = frozenset({'after realizing something is missing', 'after school'})
+
 _HEADS = {
     'artifact': {'bolt', 'nut', 'hood', 'machine', 'lift', 'cabinet', 'board', 'clipboard', 'crate'},
     'place': {'garage', 'workshop', 'road', 'street', 'shop', 'bay', 'station'},
@@ -266,8 +280,45 @@ _SUBJECT_SLOTS = frozenset({'primary_action', 'hand_action', 'posture', 'gaze_ta
 # These inflections extend the existing small valency grammar, not a conjugator.
 _FINITE_GERUNDS = {'checks': 'checking', 'holds': 'holding', 'keeps': 'keeping',
                    'stands': 'standing', 'waits': 'waiting', 'adjusts': 'adjusting',
-                   'tightens': 'tightening', 'walks': 'walking', 'leans': 'leaning'}
+                   'tightens': 'tightening', 'walks': 'walking', 'leans': 'leaning',
+                   'responds': 'responding'}
 _SUBORDINATORS = ('while', 'without', 'after', 'before', 'because', 'as')
+
+
+def _reviewed_role_leaf(value, slot_key, primary):
+    """Reuse reviewed grammar only in the producer's existing slot roles."""
+    if primary and slot_key == 'primary_action' and value in LEGACY_PRIMARY:
+        return value.partition(' ')[0], 'gerund'
+    if value in LEGACY_TEMPORAL and slot_key in {'time_or_weather', 'obstacle_clause'} and not primary:
+        # The school expression belongs to the time slot, the other reviewed
+        # temporal expression is already consumed by the subordinate grammar.
+        if slot_key == 'time_or_weather':
+            return '', 'temporal'
+    if value not in LEGACY_SHARED:
+        return None
+    from . import action_generator
+    tables = {
+        'posture': action_generator.POSTURE_BY_PURPOSE,
+        'gaze_target': action_generator.GAZE_BY_PURPOSE,
+        'purpose_clause': action_generator.OPTIONAL_MICRO_ACTIONS,
+        'optional_micro_action': action_generator.OPTIONAL_MICRO_ACTIONS,
+        'social_clause': action_generator.SOCIAL_DISTANCE_CLAUSES,
+    }
+    table = tables.get(slot_key, {})
+    if any(value in options for options in table.values()):
+        return value.partition(' ')[0], 'gerund'
+    return None
+
+
+def _role_predicate(value, slot_key):
+    """Closed owned-object and viewer valencies, scoped to producer roles."""
+    if slot_key in {'purpose_clause', 'optional_micro_action'} and re.fullmatch(
+            r'holding onto her place (?:(?:a little|a bit) )?longer', value):
+        return 'holding'
+    if slot_key == 'social_clause' and re.fullmatch(
+            r'responding (?:(?:directly|quietly) )?to the viewer', value):
+        return 'responding'
+    return None
 
 
 def _leaf_predicate(value):
@@ -303,7 +354,7 @@ def _leaf_predicate(value):
     return None
 
 
-def _protagonist_clause(value):
+def _protagonist_clause(value, slot_key=None):
     if value.startswith('she '):
         finite, _, rest = value[4:].partition(' ')
         if re.fullmatch(r'(?:works|waits|decides)', value[4:]):
@@ -311,18 +362,20 @@ def _protagonist_clause(value):
         if finite == 'gets' and re.fullmatch(r'herself (?:ready|steady)', rest):
             return 'getting', 'finite'
         gerund = _FINITE_GERUNDS.get(finite)
-        if gerund and _leaf_predicate(gerund + (' ' + rest if rest else '')):
+        if gerund and (_leaf_predicate(gerund + (' ' + rest if rest else ''))
+                       or _role_predicate(gerund + (' ' + rest if rest else ''), slot_key)):
             return gerund, 'finite'
         return None
     finite, _, rest = value.partition(' ')
     gerund = _FINITE_GERUNDS.get(finite)
-    if gerund and _leaf_predicate(gerund + (' ' + rest if rest else '')):
+    if gerund and (_leaf_predicate(gerund + (' ' + rest if rest else ''))
+                   or _role_predicate(gerund + (' ' + rest if rest else ''), slot_key)):
         return gerund, 'clause'
     for prefix in ('not ', 'never '):
         if value.startswith(prefix):
             value = value[len(prefix):]
             break
-    verb = _leaf_predicate(value)
+    verb = _leaf_predicate(value) or _role_predicate(value, slot_key)
     return (verb, 'gerund') if verb else None
 
 
@@ -353,16 +406,22 @@ def _body_clause(value):
                 and _object(obj, _TRANSITIVE['holding']))
 
 
-def _shared_leaf(value, depth=0):
+def _shared_leaf(value, depth=0, *, slot_key=None):
     """At most two subordinate levels inside one producer-owned leaf."""
     if depth > 2:
         return None
-    direct = _protagonist_clause(value)
+    if value.startswith('as if '):
+        if slot_key != 'social_clause':
+            return None
+        inner = value[len('as if '):]
+        parsed = _protagonist_clause(inner, slot_key)
+        return parsed if parsed and (parsed[1] == 'gerund' or inner.startswith('she ')) else None
+    direct = _protagonist_clause(value, slot_key)
     if direct:
         return direct
     left, sep, right = value.partition(' and ')
     if sep:
-        first, second = _protagonist_clause(left), _protagonist_clause(right)
+        first, second = _protagonist_clause(left, slot_key), _protagonist_clause(right, slot_key)
         if first and second and first[1] == second[1] == 'gerund':
             return first
         return None
@@ -372,15 +431,15 @@ def _shared_leaf(value, depth=0):
             # Causal conjunctions require an explicit finite subject.
             inner = value[len(prefix):]
             if connector in {'because', 'as'}:
-                return _protagonist_clause(inner) if inner.startswith('she ') else None
-            parsed = _protagonist_clause(inner)
+                return _protagonist_clause(inner, slot_key) if inner.startswith('she ') else None
+            parsed = _protagonist_clause(inner, slot_key)
             if connector == 'without':
                 return parsed if parsed and parsed[1] == 'gerund' else None
             # One connector introduces one predicate, never another connector.
             return parsed if parsed and (parsed[1] == 'gerund' or inner.startswith('she ')) else None
         left, sep, right = value.partition(' ' + connector + ' ')
-        if sep and _protagonist_clause(left) and _shared_leaf(prefix + right, depth + 1):
-            return _protagonist_clause(left)
+        if sep and _protagonist_clause(left, slot_key) and _shared_leaf(prefix + right, depth + 1, slot_key=slot_key):
+            return _protagonist_clause(left, slot_key)
     return None
 
 
@@ -407,7 +466,7 @@ def action_part_facts(part, *, primary=False):
         return LeafGrammarFacts(True, 'finite', attachment, 'scene_event', False, True)
     if temporal(value) and not primary:
         return LeafGrammarFacts(True, 'temporal', 'subordinate_temporal', 'protagonist', True, True)
-    parsed = _shared_leaf(value)
+    parsed = _reviewed_role_leaf(value, part.slot_key, primary) or _shared_leaf(value, slot_key=part.slot_key)
     if parsed is None:
         return LeafGrammarFacts()
     verb, surface = parsed
@@ -417,12 +476,13 @@ def action_part_facts(part, *, primary=False):
     if primary and connector in _SUBORDINATORS:
         return LeafGrammarFacts()
     attachment = ('main_predicate' if primary else
+                  'subordinate_comparative' if value.startswith('as if ') else
                   'subordinate_causal' if connector in {'because', 'as'} else
                   'subordinate_temporal' if connector in {'while', 'after', 'before'} else
                   'shared_subject_modifier')
     # Known destination constructions still carry a spatial reference; they do
     # not establish scene non-overlap merely because their grammar is understood.
-    no_place = None if re.search(r'\b(?:home|bed|area|space|place|nearby)\b', value) else True
+    no_place = None if re.search(r'\b(?:home|bed|area|space|place|nearby|school|section)\b', value) else True
     return LeafGrammarFacts(True, surface, attachment, 'protagonist', True, no_place, verb)
 
 
