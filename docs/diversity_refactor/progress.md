@@ -3001,3 +3001,22 @@ Architecture/development PASS; formal handoff/adoption BLOCKED.64/5 guide unmet,
 formal/frontend/browser NOT_RUN. No main merge/push, N2.8 or D3. Next bounded work
 continues the remaining Action+Scene intersections with this11-case preservation
 baseline. Changes remain uncommitted.
+
+## 2026-09-12 — Recoverable comparison sources
+
+AS01 comparison sources are now pinned as independent snapshot commits for the
+nine-case baseline273c153 and ten-case baseline2a8ffeb, with the eleven-case
+candidate tagged at existingd548cc4. Snapshot commits preserve historical source,
+fixtures, supplemental inputs and A1.6; only documented .gitattributes storage
+metadata differs, with original bytes inventoried. No runtime source changed.
+
+All3 Git archive restores match original source guards. Restored nine/ten sources
+replayed512 inputs each; pair records are byte-identical to the original evidence.
+Existing preservation comparison passes9→11 and10→11. Compact historical receipts,
+full Git/source identities, restore commands and future publication policy are
+tracked under comparison_sources/. Large historical raw logs remain local and
+can be regenerated; this does not claim full historical Python environment recovery.
+
+Published comparison tags must not be force-updated/deleted. Future comparisons
+must first preserve and publish a recoverable baseline. Formal adoption remains
+BLOCKED; these are development baselines, not the formal V150 reference.

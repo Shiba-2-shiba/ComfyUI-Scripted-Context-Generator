@@ -39,6 +39,10 @@ blocked until its separate prerequisites pass. Typecheck is not configured.
 
 Complete, 2026-09-12. [Source-bound result](./coverage_as01_summary.json).
 
+The nine-case intake baseline, ten-case immediate baseline and eleven-case
+candidate are now recoverable through [fixed source tags and restore instructions](./comparison_sources/README.md).
+Their full Git identities, source guards and preserved receipts are in the registry.
+
 - Ordinary v2: **10 to 11/512**, still three ordinary families. All ten earlier
   successes and501 remaining fallbacks retain their exact output/context and
   upstream choices. Original nine-case baseline preservation also passes.

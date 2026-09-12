@@ -1,0 +1,95 @@
+{
+  "historical_environment_limit": "Recorded Python/platform only; dependency versions captured below are a new observation, not a historical lockfile.",
+  "receipts": {
+    "environment-observation.json": {
+      "sha256": "fea3b874a1b90ec961c41e681d9fbebf821867d24c1cd8da3128cea9d45c27fa"
+    },
+    "independent-review.md": {
+      "historical_path": "code-review.md",
+      "sha256": "fac7de2e0ce7c79e3a56243bab7ab959f43cfd811038399621c2e7bc2025d6dd"
+    },
+    "intake-commands.json": {
+      "historical_path": "intake/commands.json",
+      "sha256": "098348e9ffb76ed4876206c8d548d2604368913078e7e5a471299c25ac78518b"
+    },
+    "intake-environment.json": {
+      "historical_path": "intake/environment.json",
+      "sha256": "f09dbcb1353fae5e56d9437f664b8af87bc66ce02a781b5ee52d7afcb2a25531"
+    },
+    "intake-verdict.json": {
+      "historical_path": "intake/verdict.json",
+      "sha256": "a280faa407db9837b0f4c7854d4da5030e39ed605f38140453dbceadf4d1ffce"
+    },
+    "nine-preservation.json": {
+      "historical_path": "intake/preservation.json",
+      "sha256": "445a38fb5cbfc6ebd8947ce9f15447ebcabeb84a167c83a47d821bd21e73393d"
+    },
+    "prose-review.json": {
+      "historical_path": "intake/prose-review.json",
+      "sha256": "5b71cbd8c9cf0f57d613a7c5592120940873e7961b9fc4a4087b66135eb02bcb"
+    },
+    "protected-inputs.json": {
+      "historical_path": "intake/protected-inputs.json",
+      "sha256": "9df3f27feaaca35892731f7fe9b4b0f4dcfdadd417fd70a1131dadb9e0e80e84"
+    },
+    "publication-replay.json": {
+      "sha256": "8bfc51b674fce982fc3c503e20edba5bf7a018f9937d658d00250378366e5a17"
+    },
+    "review-input.json": {
+      "historical_path": "intake/review-input.json",
+      "sha256": "c23338d373facd35a1fc383746b5f6f8d3acd2ae19f978d92a6610701874115a"
+    },
+    "ten-preservation.json": {
+      "historical_path": "ten-case-preservation.json",
+      "sha256": "322e714bcf664cc5ac480352c807fcd287e9b3096a9439e201d1399031efc874"
+    }
+  },
+  "repository": "https://github.com/Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
+  "schema_version": "scg-comparison-sources/v1",
+  "scope": "AS01 development comparisons; not a formal V150 baseline",
+  "sources": [
+    {
+      "archive_sha256": "9322ffc4378ed5ad28c6db5a873aeb206715d15a65a285438a847810562cadc7",
+      "commit": "273c153dfe3651b56a91fdac08fab24ee6132c46",
+      "expected_ordinary_v2_count": 9,
+      "guard_file": "nine-source-guard.json",
+      "guard_file_sha256": "0db1a9946b4890ce2b61bb92e56abbfb3f8a4a9b6601d92843f31a1c5c835d12",
+      "restore_validation": "PASS",
+      "role": "nine",
+      "source_tree_hash": "0c8c421de459f62afa8731d60994d23a4409165b726095e5b24c13d363ebd281",
+      "storage_change": "Only .gitattributes gains a final * -text rule. Original attribute bytes and full original file inventory are preserved alongside this registry.",
+      "tag": "r43-baseline-nine-20260912",
+      "tag_object": "0c856586cf16f82018d4019e741ce68bbe1e05ea",
+      "tree": "7fb3677ef55642d27eb9c84ebda65f84173fd5dc"
+    },
+    {
+      "archive_sha256": "ba783fff053abcbed5a265a3798e9572ed84b8414d38f8edbdc74bfdb0eb2690",
+      "commit": "2a8ffebfc68125ba7cbb1d8245516d48aff7511b",
+      "expected_ordinary_v2_count": 10,
+      "guard_file": "ten-source-guard.json",
+      "guard_file_sha256": "181b8d0f4441e744227a5ece68619a81a12b3f9c6a257b5004f2c46b3984510c",
+      "restore_validation": "PASS",
+      "role": "ten",
+      "source_tree_hash": "1678a635b03d8e6e18e6a797b395511a51cc04c3f245f96c7c5a38e9ca17cf23",
+      "storage_change": "Only .gitattributes gains a final * -text rule. Original attribute bytes and full original file inventory are preserved alongside this registry.",
+      "tag": "r43-baseline-ten-20260912",
+      "tag_object": "e167dc17c9ae79ec937353d82ce5e5a1b4987a04",
+      "tree": "0b03664226a59abe2456bfa6ed81c058cb39ed4d"
+    },
+    {
+      "archive_sha256": "c51be0ecc6cae1979c114a30e8c5f14fcce8dfa9add1e82e9c9872b5776676fe",
+      "commit": "d548cc4d4ca9bc127086cdc281aaa846079c0f41",
+      "expected_ordinary_v2_count": 11,
+      "guard_file": "candidate-source-guard.json",
+      "guard_file_sha256": "adb15037abf46c06a3d198267b5a63c92a7857b55968f6ebb1d7f5694ec10aeb",
+      "restore_validation": "PASS",
+      "role": "candidate",
+      "source_tree_hash": "53a4fe8048cfd71cdcd9f3a7cb414e0b96ec6c0450b96795c465470d6963b56e",
+      "storage_change": "none",
+      "tag": "r43-coverage-as01-20260912",
+      "tag_object": "c97510624e9c505b498de3e273883b098576d96b",
+      "tree": "b22c8941b0d78042917017deff714bb10352c723"
+    }
+  ],
+  "tag_policy": "Do not force-update or delete published comparison tags. Publish corrections under new names; verify full object IDs."
+}

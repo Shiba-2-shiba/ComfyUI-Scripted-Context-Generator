@@ -1,0 +1,3166 @@
+{
+  "a16_lock": "6742b1b735de2e3ef9b53b732e51d54d260434a500ab84f32249334c24cfb7bd",
+  "manifest": {
+    "entries": [
+      {
+        "path": "ComfyUI-workflow-context.json",
+        "sha256": "eb0f850e4e3fe460a7b5ee123f3eaf31fe9f2eea6c17ce77afdad9073463a90b",
+        "size": 9930
+      },
+      {
+        "path": "__init__.py",
+        "sha256": "0800a9771f69e8d59640295c2730b28cf88717a69f96f5dac9525e6cd824ec94",
+        "size": 1519
+      },
+      {
+        "path": "asset_validator.py",
+        "sha256": "48efebe4bece68953e02ab6a6fd77f5b2c32a761da5999b936e7614a4e2911f5",
+        "size": 22189
+      },
+      {
+        "path": "assets/fixtures/benchmark_inputs.jsonl",
+        "sha256": "560c3f55609d825a14173e4d93dc10ab42fa9bd9e301d79ed4d0ad01ec3b4308",
+        "size": 19875
+      },
+      {
+        "path": "assets/fixtures/n27_r1_direct_cases.json",
+        "sha256": "da51cbc03ddfbd272bf30971cb8f4d31cfda34ac9ee15b55c1deabb5e0b68ed4",
+        "size": 14630
+      },
+      {
+        "path": "assets/fixtures/n27_r3_productive_cases.json",
+        "sha256": "a191bbd63d4fec73275b648b63cc8706f2d3aa58d549b295603182a0e32483e3",
+        "size": 9824
+      },
+      {
+        "path": "assets/fixtures/n27_r41_real_cases.json",
+        "sha256": "6d4553a5c29c8c35e9892b3fed86ca499ef33c279177321e5d79367834b07c06",
+        "size": 10034
+      },
+      {
+        "path": "assets/fixtures/n27_r42_real_cases.json",
+        "sha256": "202256e3d483b750776993984463ece8983ec705c184f15e217307f20808a75f",
+        "size": 19958
+      },
+      {
+        "path": "assets/fixtures/n27_r4_action_trace_cases.json",
+        "sha256": "def71398bdd69bbd70c5a591b2c56f677d7ef00e67045cd166955ffaf46e3b50",
+        "size": 747420
+      },
+      {
+        "path": "assets/fixtures/n27_r4_productive_cases.json",
+        "sha256": "020ac8b95351a92619f871b2d3911807eea9e1198e00dd6cc9bcd04efdf6fbda",
+        "size": 52829
+      },
+      {
+        "path": "assets/fixtures/prompt_quality/analyzer_precision_cases.json",
+        "sha256": "cd9ee322397a2865507606c204270a17da397f0f070aa32bc4298220b1490964",
+        "size": 8897
+      },
+      {
+        "path": "assets/fixtures/prompt_quality/manual_experiments.json",
+        "sha256": "4339d0350f9e8f2036da7e45e4d2e00a6b31ef65f27a9dd1f1ed647280be5aeb",
+        "size": 1938
+      },
+      {
+        "path": "assets/fixtures/prompt_quality_confirmation_seeds.json",
+        "sha256": "33554f66ac486aaf81cc8143eca7cd3f041ac3fa5104ca5029992e6b09462b37",
+        "size": 5384
+      },
+      {
+        "path": "assets/fixtures/prompt_quality_control_seeds.json",
+        "sha256": "572d06a690c4bfbf71e175d82f9d595f4e6a6801364f95e9c3dc886101c330d7",
+        "size": 683
+      },
+      {
+        "path": "assets/fixtures/prompt_snapshot_cases.json",
+        "sha256": "2614f4bed04d76a348d04b23c949009e94323eb2a3c998bf56538a002451b5fa",
+        "size": 5132
+      },
+      {
+        "path": "assets/fixtures/r43_family_recombinations.json",
+        "sha256": "b0a43c77a440756495a73fb4af6f10c680627b9a6229fec93f9ac7407703248d",
+        "size": 972
+      },
+      {
+        "path": "assets/fixtures/r43_import_probe.py",
+        "sha256": "8d2848504e18b9c4981bcf578de7f7b7feffeef7b75ba67a6863d51ad28cfff2",
+        "size": 2956
+      },
+      {
+        "path": "assets/fixtures/r43_ordinary_real_cases.json",
+        "sha256": "6cba6e0bca4d0de6ff61d0f854a15303fe112ed29490134be4c2425a3864ce8c",
+        "size": 85190
+      },
+      {
+        "path": "assets/fixtures/r43_real_graph_cases.json",
+        "sha256": "62d7b3a3f1174e9b25ecfeb2ca57aeb8be12b5b4b6f3a78700aeaec486006611",
+        "size": 761210
+      },
+      {
+        "path": "assets/fixtures/semantic_epig_audit_cases.json",
+        "sha256": "e6effe2320c58a5628cfdfb8dc8972f7efc6a7fd380d017b472121a18d7a1166",
+        "size": 2571
+      },
+      {
+        "path": "assets/fixtures/semantic_policy_negative_examples.json",
+        "sha256": "b0c658dd33e95480aab838b6b3621033c371776bbdee2843a6f97bedae8af167",
+        "size": 964
+      },
+      {
+        "path": "assets/fixtures/solo_duplicate_prompt_cases.json",
+        "sha256": "81af80fbc423e9e948e7d7017a81708202a1e9639b60aefa6570b04b21ca13d7",
+        "size": 4779
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/README.md",
+        "sha256": "1124cca893d02cf29e5eb81646ff4124ecb344ba96bf7c17991b1415e4d4d4a7",
+        "size": 812
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/assets/compatibility_review.csv",
+        "sha256": "3f4b50e106773644f42a3bae77811d5b66e59facb65a4cbbd8ef7bc293384d40",
+        "size": 531287
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/prompts.jsonl",
+        "sha256": "abfa88c58ebe33d6b2e60d6aa57099ad6a3a1ddead5507da852c4595ef5e4238",
+        "size": 37124
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/data/action_pools.json",
+        "sha256": "cdd6a0380183f2f8a4273dbdcf669c8769f94663d31561ccbf2300a7252a857e",
+        "size": 173051
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/data/background_packs.json",
+        "sha256": "2ad01e64322b27b9a5c3adc8349b81e6a9c3a80f6e4819a13e8f6512ebe9ed4f",
+        "size": 110074
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/data/location_axis_profiles.json",
+        "sha256": "37ca46399381f7b4fd104ec8121e6864b50209d6c6ab7a528c708216b2061d19",
+        "size": 2926
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/data/scene_compatibility.json",
+        "sha256": "02764fe55c143fc9e91ae525d79ba0e362e664a5046661771badb324d87fda12",
+        "size": 32951
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/data/variation_scope.json",
+        "sha256": "30c2abed6b95c17c55d441e0ddbded3bd9e51e5d40a66df5d7a7edc2762115d6",
+        "size": 8690
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/_manifest.json",
+        "sha256": "183f1f45d10ee8b11801bc35e66875c9af0cda64d815e088af3f9343ef84ef0c",
+        "size": 2451
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/_shared_families.json",
+        "sha256": "581e9926d015ac3f0e8299c8f3ecf1aa9038ca443625bf7eab255e67645ba7ed",
+        "size": 13780
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/abandoned_shrine.json",
+        "sha256": "3e57b0277813b280adde159a5a313f02299a7da30946b9a688cf1dbd8c996bff",
+        "size": 828
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/airship_deck.json",
+        "sha256": "6db36ffc84a1192bb301717f06c0a1d8004ec15e44d86dfe23ad30f060b6a977",
+        "size": 497
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/alien_planet.json",
+        "sha256": "e77793cabe6367ea11c185b0293dbabd875520cb16fe5c7d015089a745dbd78e",
+        "size": 674
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/antique_shop.json",
+        "sha256": "809f6143d49a4e9e24eae7ba9b6e299dcf02fa5bc2255a2bb96ec2e3a275123c",
+        "size": 740
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/apartment_balcony.json",
+        "sha256": "ba5af434a97ee22f2504ff1888f8a5c5646dd14682000ed307d6aba4d60f0165",
+        "size": 907
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/apartment_entryway.json",
+        "sha256": "7f5c7015f7541e3561b45131269ddb2609c51846b658d5797642c5040626baad",
+        "size": 896
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/aquarium.json",
+        "sha256": "91f2ddaf42b3a1f89ee87aa1dca1bd0f85c3e6d78617eb358373eef93075297b",
+        "size": 1208
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/art_gallery.json",
+        "sha256": "59414894258ad4225448db3041a157941e3e206a75f7df9bd4d1bce2d46f6910",
+        "size": 1223
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/bakery_shop.json",
+        "sha256": "cdcfb312837161652f84cc6dca12500305888e223275e8b5bcff8bf51da4206e",
+        "size": 893
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/bamboo_forest.json",
+        "sha256": "af7286d6199df152a9f302e2b70fa197447cf9a40f6d2f59dd0f9e746a51742f",
+        "size": 667
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/bedroom_boudoir.json",
+        "sha256": "a14486f1191967465b9ba681ec095cee23cb73a68695a4c6084b15229d393536",
+        "size": 1141
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/boardroom.json",
+        "sha256": "9e96cae0b48b57d083c104b0b353ae1839f46f7e435ff7082fa3b4c7ab023314",
+        "size": 765
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/botanical_garden.json",
+        "sha256": "6b88406723e7cb1123fcc598c8995a877bf06606d15a13d4c3c344765aa4c81d",
+        "size": 1162
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/burning_battlefield.json",
+        "sha256": "7e76cc7abd2857c2615a5e1e1c5f1c2439e55fe7cd7b454c9cec718462f08583",
+        "size": 638
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/bus_terminal.json",
+        "sha256": "4e638c233909f2d59ad0754d0964a64f62da469079b1a73e646a712f212f8720",
+        "size": 955
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/campus_cafeteria.json",
+        "sha256": "31fa2a7b3608d4405392a7994c9e2c8f5ff79a56405ac1e952a024735f73dfe0",
+        "size": 889
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/campus_hallway.json",
+        "sha256": "b18f2b4707366a3492a05f227936785fd4f78d9a726f618cfbac5468f9f9fca8",
+        "size": 934
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/castle_hall.json",
+        "sha256": "ca997d78b3c80c2b8bca2af8f2318184fb3b829b5c5d5bb13714bfc5b6370a4f",
+        "size": 859
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/cinema_lobby.json",
+        "sha256": "98f9bbb926b64881a50a645ae18f3d2ad4884c69f053e793c5c8407673e63add",
+        "size": 935
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/clean_modern_kitchen.json",
+        "sha256": "1e90921cf5bbcccd49d0079fa86ead094c07c820630838949c49e6db7c9c1722",
+        "size": 1164
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/clockwork_workshop.json",
+        "sha256": "ae89d4c393235c1eaf77de4c0a374e23fbd73f5bf8ee3ba7e2dce6c0cf139a7f",
+        "size": 493
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/community_center.json",
+        "sha256": "0e2517c967adddcdb856c5bf9253581d1bd41ab282b2b72b0d593ebb2f00881d",
+        "size": 984
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/commuter_transport.json",
+        "sha256": "26321499aa2bf6721d59f9b3ae300989ace1f7f4c66f904d1e34e95a3528e2a6",
+        "size": 1187
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/concert_stage.json",
+        "sha256": "b350cad3d9d0a6ee15329887ebc1df29c3ff40a053f4525a0da33687dd9f986b",
+        "size": 822
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/convenience_store.json",
+        "sha256": "b0e3a759e37d6ea4092dfe491b03e0c2b4a58e95610fd825677818e6d4cf88ad",
+        "size": 905
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/coworking_space.json",
+        "sha256": "0d5fa47fbfb580bf30675a40111e6973d508790c7e430a4521b4d44795d8e7ef",
+        "size": 890
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/cozy_bookstore.json",
+        "sha256": "e1b7421ff0422860b53eceb55de7e218b814ce966625c285bc00dea0f049ca0b",
+        "size": 1210
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/cozy_living_room.json",
+        "sha256": "5c5591738ba2e8ff542bfb5a0a353e1762a4dde953c22191816409b00ee49828",
+        "size": 1145
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/cyber_lab.json",
+        "sha256": "f4c626353f52d8847f31b827f53fe1daeddbc671d9adb91533b17a0891b5cf00",
+        "size": 498
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/cyberpunk_street.json",
+        "sha256": "547f07663054fd502d52f1a73160c976a451cd2b4cff8343e37b3dd715c610b5",
+        "size": 844
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/dragon_lair.json",
+        "sha256": "4094d797569dec4bfe7f4f46f368d43fe2f164a1cae27b2b7720108723edd8b3",
+        "size": 635
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/drugstore_aisle.json",
+        "sha256": "28addef124b58dfa05bf8756deb5488e9ef8d2a65b265c146427e65fb12c09d3",
+        "size": 886
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/dungeon_crypt.json",
+        "sha256": "968ce204b37bcf1ac1e3e7a2f809cd78c726cbdf0e57dd5f962b526dbe1e6c7c",
+        "size": 643
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/elegant_dining_room.json",
+        "sha256": "694a4864f35392aaf3c06aa76206f87bd00eaec3322434c70ff8374e8c3df61b",
+        "size": 725
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/enchanted_lake.json",
+        "sha256": "cafc770663dcc7ad01b87ba7788e208cce5785af219ffb4d3c4fb8213e3b3fbb",
+        "size": 900
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/family_restaurant.json",
+        "sha256": "c6d5eec95e52d6349f38423757f94dde8061a855edbecf06ebfb815268995c36",
+        "size": 852
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/fantasy_forest.json",
+        "sha256": "9851d4e26a0e70dde715d54559ba5d3075e63c0d461427d27dd4389c9cc8d6d4",
+        "size": 497
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/fashion_boutique.json",
+        "sha256": "a0a6ee3d66178077b05a9313026df8742f806370e00719ec36ebce3d8338b242",
+        "size": 1067
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/fitness_gym.json",
+        "sha256": "55478463e146757958aefa9e480caf5cdde63df45ba47715793520f86488cbb5",
+        "size": 1093
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/food_court.json",
+        "sha256": "923dd645d61982cf409af12663657be1c7f090a56a014f5f57aad47d561788db",
+        "size": 912
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/game_arcade.json",
+        "sha256": "164f357acbc566befee116aac8a765a4020c9ed56b083118e686c5bdd7a0ff07",
+        "size": 894
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/high_tech_medbay.json",
+        "sha256": "1cbcc1d3722c046826ba90c51bf847461760ea6fe7acc59f9a11012703e3a5c9",
+        "size": 876
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/illuminated_park.json",
+        "sha256": "b735913fc6c6c9f8d8c292a57c4aea6f42b0dc99ce4bc727ef27e0a6ce14599d",
+        "size": 1172
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/japanese_bath.json",
+        "sha256": "e03055b4e19fe55e47ed514ed67ddc4d44e29ff749236b4d8c9fb0ae65bd9000",
+        "size": 627
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/japanese_garden.json",
+        "sha256": "4d91af1385eeb7023fa43c4b2a4c55ab1595818799e073bf92e845893a56fe82",
+        "size": 867
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/karaoke_bar.json",
+        "sha256": "a13643fd96b6a70b8ae137c693164a8cbc45d529b7eceb07061c1c2d0e89b66b",
+        "size": 828
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/laundromat.json",
+        "sha256": "36d55005ba5c6b656e717c0d41b1158cb9ebbf806f479a6ad8dc882545adde3b",
+        "size": 870
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/local_market_street.json",
+        "sha256": "48f330b294018bdf9bd1dfca3dd07590aaa176894a11868101696e69ae6d9181",
+        "size": 1019
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/luxury_bathroom.json",
+        "sha256": "5f71d09a5b896263b58506087fd43203a12e59089dbbba885809ffa03020896f",
+        "size": 714
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/luxury_hotel_lobby.json",
+        "sha256": "64a3679622279e6ac5b3db408e55e0460845a746ebfe6cc7b2be01b267266ea2",
+        "size": 715
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/luxury_hotel_room.json",
+        "sha256": "fd1760d9fb92ba13dc598e66e5b10ca2e9279d5f1976b99c5d966e857b052d1a",
+        "size": 813
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/magic_academy_library.json",
+        "sha256": "ff7f7421b5cd49b849954cb98d98586466ecc5ca561d8acf0b0521254c71a5b5",
+        "size": 857
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/messy_copy_room.json",
+        "sha256": "f68ceba4ad86999cef34f929eff5cd824742e971048e78164e85e94c0cb1983f",
+        "size": 655
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/messy_kitchen.json",
+        "sha256": "1c5493253e872c425bb705187a6f35f47e13324db356579c42f01e01cf0a4065",
+        "size": 1140
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/modern_office.json",
+        "sha256": "d0816e5117d266826c9ea65b401cb10e2fec889676f39d7c2e9c0aca02b0dd5e",
+        "size": 939
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/mountain_resort.json",
+        "sha256": "c21f63fed5c749e5139a71126038754dd439d7f501b10e7e032c84fa55096153",
+        "size": 850
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/museum_hall.json",
+        "sha256": "c1f773f608c41e2cc288580b4758149fcc719b05f688291c25b55ccda82dc876",
+        "size": 1154
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/neighborhood_crosswalk.json",
+        "sha256": "4f622f7744fedb2940ed25502eceaf2090b7c7ddb7aaefb888b4077c18688340",
+        "size": 1007
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/neighborhood_playground.json",
+        "sha256": "4e37104e4374e00e5d2bb8e8f98c32f74d8134caa352157081ffc2b5608ae12e",
+        "size": 985
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/neon_city_street.json",
+        "sha256": "6b96e0e11ad9ae87a239d559c95999cdc8c48a3a54b6f3d8c0c64eef878df39a",
+        "size": 782
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/office_elevator.json",
+        "sha256": "6bf0e106aff466e699e3b103e924e9577b48849e87d6f9c454ed1343c39519e1",
+        "size": 761
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/opera_house.json",
+        "sha256": "87783c0e9ecbea6796405bb0e693dfa810f023f7a694e332ba27fff105e9097b",
+        "size": 539
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/picnic_park.json",
+        "sha256": "768ccf667fe725849842387033c35823090036cdf139aa6ab03f6b5dd58de9d1",
+        "size": 1141
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/poolside_resort.json",
+        "sha256": "26a6bf30f7ced4b9976251934e150e6f137b309d4bfe33842534ff3cd53f5596",
+        "size": 710
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/public_library_lobby.json",
+        "sha256": "66d498fcfb9b349c0218a5081a267a2b5b0a6c5b24bcfb8f18ac9830ff062161",
+        "size": 995
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/rainy_alley.json",
+        "sha256": "4fe176c8bcb6173ee1b760b7256ee07614795c192fbc58c58a1a94ac00fd1ea9",
+        "size": 1182
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/rainy_bus_stop.json",
+        "sha256": "086e2c212e77769d1d3d62a8523d6daa8ee3190c907da53b8f031c681438c23a",
+        "size": 726
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/recording_studio.json",
+        "sha256": "1ee0edb99f3138e2dce98cc54ae1a4865aeca7d1093d70ae92c3734627e35309",
+        "size": 698
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/riverside_walk.json",
+        "sha256": "1913a9b68b2b21ff2b9065c4e4f43b32b9b57b3ad643975baca2c454806e1028",
+        "size": 985
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/rooftop_laundry_area.json",
+        "sha256": "548f7123f11a65f3503109047f50503ccffddcf55e68abf4b93421202217fbac",
+        "size": 926
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/rural_town_street.json",
+        "sha256": "e665cd425709be160b7f4289091dce4500ed8f29b4dff02cd0755bd037f89815",
+        "size": 872
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/school_classroom.json",
+        "sha256": "3f62c8da52e67ee6924cae7e1da21e8b6caf071134106909624be7d5460ec876",
+        "size": 840
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/school_clubroom.json",
+        "sha256": "a88e62dc5e3d094d0ac56eb03afc18af4020973ef274012da0e7912037b0e298",
+        "size": 888
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/school_gym_hall.json",
+        "sha256": "4604e04bd437bf042108ce91bed8f29c3703c586272c76fd7e7acd459df51314",
+        "size": 658
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/school_library.json",
+        "sha256": "363500d99c3ce06699256ce8d49479a1a077c0323f419090cad4358c666cc2e4",
+        "size": 1186
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/school_rooftop.json",
+        "sha256": "a8c3c80fabb69676ddd39dfc6f4620ce502f948a6de5039586edc03906ff7c74",
+        "size": 687
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/shinto_shrine.json",
+        "sha256": "bfb787ac06e14ecebde8a27b44641808a8a6fdc2f2176a54c49ba6ffe33223ef",
+        "size": 674
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/shopping_arcade.json",
+        "sha256": "523038a5049f191e59095bc733d68d42127e2432220b3e66a2f2a227f343f831",
+        "size": 913
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/shopping_mall_atrium.json",
+        "sha256": "390b43ecb7744628f5e24b148144c9a9bc21e3a5451026b0f2a11dcd7ad8797f",
+        "size": 1184
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/spaceship_bridge.json",
+        "sha256": "b8054b272125e230882cf5dad0210959205916f959c246e4f3cd88891b46137e",
+        "size": 507
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/stadium_court.json",
+        "sha256": "2127f5c4f45113d1bf6893070250800eb1b47fd4cd1dcb1dcc0490611fc467b6",
+        "size": 784
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/starship_quarters.json",
+        "sha256": "b60ffd5980875d7793060420941e600c5b56a0f87c1abad83f3fd071f061ed6c",
+        "size": 886
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/steampunk_airship.json",
+        "sha256": "804e65dc9390b133075ddc6da6573e78e31c5ebeabd7f8aef867b5594ad136eb",
+        "size": 735
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/street_cafe.json",
+        "sha256": "2af2830d377f4399f1866a4e5e45c36f9af20263ffe53e79f90140f432bff7f6",
+        "size": 1282
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/suburban_neighborhood.json",
+        "sha256": "9321b849730be140f96f55bf64f9b3262d521f1338058900617be5a12e4484a8",
+        "size": 874
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/subway_ticket_gate.json",
+        "sha256": "65d52451dc3f2aa507da327a00ef5c5d1e13389c9dd089ff5979edb5ff6cb6d5",
+        "size": 934
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/supermarket_aisle.json",
+        "sha256": "6c6198f6c38fed35d5a56579f77b89fdd63ac5a1da0d16ff5e959ab8a75253f2",
+        "size": 898
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/surveillance_room.json",
+        "sha256": "88f47ac1f21b59ea7dd55bdcfa3b528986f54303cb7edbd16b54021a4eabcdc9",
+        "size": 661
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/tea_room.json",
+        "sha256": "d0d8c6c721d059c4754acb94ff3a997bd15278890c5ceb7223968ea13e841472",
+        "size": 832
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/train_station_platform.json",
+        "sha256": "abbcd2414cce2803f2dcf8a65f899ff4210fae71851c9d2e0494206d9a72f0db",
+        "size": 948
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/tropical_beach.json",
+        "sha256": "87f24119c1d2a4380d9da8e611c8304841fff1bceb9c966b87b15fb6f6554a0e",
+        "size": 534
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/underground_bar.json",
+        "sha256": "39ffee8531ffcf660957bca49b517ceadbf5c6ad784f1019e18b9fd6c307b3d3",
+        "size": 991
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/university_campus_courtyard.json",
+        "sha256": "a9d3aefda241cdf556e7dca0edfa9c1e5b061b5af443c7dd17100bfa850442fa",
+        "size": 926
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/wave_barrel.json",
+        "sha256": "6eedf6bd7084dae969fa663671acfe07fc3c1530eb4e7e940c73613658fe5a3f",
+        "size": 1118
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/winter_street.json",
+        "sha256": "4bfd081d2c2a5a3480e3828e55a94367d6ddb6e5a2f9cd22fc91ac67a7a0cdfa",
+        "size": 1163
+      },
+      {
+        "path": "assets/fixtures/variation_baseline/vocab/source/action_pools/yoga_studio.json",
+        "sha256": "6a80cd7fcb88d60f0df625664065412e9b1604c11268b05132ac1897211ff71e",
+        "size": 672
+      },
+      {
+        "path": "assets/fixtures/variation_candidate_analyzer/composed_iteration_v2.json",
+        "sha256": "4bcf61962ebbb48074bf5409eba9afc77d3e3f3239c2e637e4be34f3af2ad7ec",
+        "size": 1085
+      },
+      {
+        "path": "assets/fixtures/variation_candidate_analyzer/location_additions_v1.json",
+        "sha256": "47d0beca4b67b132b9621f9b8b9696efba0d200f73f429d266127ae45a5f03c4",
+        "size": 3435
+      },
+      {
+        "path": "assets/fixtures/variation_candidate_analyzer/valid_catalog_v1.json",
+        "sha256": "7a43ead277e70345252313ef69fc5f3f562d891670eb16469787b7d8b5449379",
+        "size": 26605
+      },
+      {
+        "path": "assets/fixtures/variation_candidate_contribution_model/v150_location_additions.json",
+        "sha256": "eda37d0413af8d02194ab0fe5a00147f921aec0e1fec1c198f128ff516140949",
+        "size": 1539
+      },
+      {
+        "path": "assets/fixtures/variation_target_planner/valid_mixed_v1.json",
+        "sha256": "179eb1601394c3b255a839ff1060431d01d2ef6a4d870d445a2aa69b35092ae7",
+        "size": 2384
+      },
+      {
+        "path": "assets/test_action_diversity_audit.py",
+        "sha256": "f14e2fe6ea3e49b6f9081e60c8ccf518d1b32ae9888a28b8ba1bc93e1ac39000",
+        "size": 1568
+      },
+      {
+        "path": "assets/test_action_frame_realizer.py",
+        "sha256": "0f903e0dba7517674eaade2e93e534cc33e2db95c71642d3ae2eece26c52f504",
+        "size": 10871
+      },
+      {
+        "path": "assets/test_action_generator.py",
+        "sha256": "d1b19b2ac8130b031cee551d556262bb602bb4ecc947edfb441e5e788c16dcbd",
+        "size": 27357
+      },
+      {
+        "path": "assets/test_action_semantics.py",
+        "sha256": "b97a1c76af48717cf89de32bacc141474b57ac545f6fec72999281e7b612f2f9",
+        "size": 4613
+      },
+      {
+        "path": "assets/test_asset_validator.py",
+        "sha256": "77241d43eab35e7a637c71260a65fe508fa40f147494dee5a61108eac94713a2",
+        "size": 15744
+      },
+      {
+        "path": "assets/test_bias_audit_metrics.py",
+        "sha256": "4d8800a01f051a95d25cfa81d3cc73e42d370e18361af2d8c52f6ca59d0cca67",
+        "size": 5946
+      },
+      {
+        "path": "assets/test_bias_controls.py",
+        "sha256": "aa6d94bdf0b16501b137e66fc3f38b9098f68172434010445e2709cfd0b42b8f",
+        "size": 4303
+      },
+      {
+        "path": "assets/test_bootstrap.py",
+        "sha256": "fc62f0256fc10842eed316ff38d358ba99d7d9028b89b9c313ee24e804ac66bb",
+        "size": 2103
+      },
+      {
+        "path": "assets/test_build_action_pools.py",
+        "sha256": "cb2d370d2e41e68e3a16439cdfc1456f1ed15e573ff68e37b9fe6e9b27746e00",
+        "size": 2504
+      },
+      {
+        "path": "assets/test_build_compatibility_review.py",
+        "sha256": "5008c3875e9f03012c44e50c7f25ec8888e90d1940ec44e7f4310826ff73763e",
+        "size": 1617
+      },
+      {
+        "path": "assets/test_calc_variations.py",
+        "sha256": "a725cb3e7036c1564189ea6fdcd034e1525d091ae151431801b14e07e7af8761",
+        "size": 1350
+      },
+      {
+        "path": "assets/test_calm_bias_controls.py",
+        "sha256": "4c4073bc0dcdb018da44af48c2a38325ba55348760f4610130074c529a5fe86e",
+        "size": 3619
+      },
+      {
+        "path": "assets/test_char_profile_nl.py",
+        "sha256": "2ee9e0c93e3a5f91ee54cb1b461345fc9cba5fb758dac4119cc352ce46c2ed44",
+        "size": 1511
+      },
+      {
+        "path": "assets/test_character_profile_pipeline.py",
+        "sha256": "d7e0bc02955293c1c1c40eef34652f3fff6b70206ba4ff066e125b8098df9993",
+        "size": 1505
+      },
+      {
+        "path": "assets/test_character_resolution.py",
+        "sha256": "0a01e8d193d3670bb60db880d07916892d4837b0e305d8fdffcc81d19fac9fff",
+        "size": 4377
+      },
+      {
+        "path": "assets/test_clothing_semantics.py",
+        "sha256": "4af61f3d91db8ddc9ea0182e50c860920a2c04acd36c7cdad416e9dba896fcf7",
+        "size": 9515
+      },
+      {
+        "path": "assets/test_compatibility_boundaries.py",
+        "sha256": "7fe1a3c360416b6500ec17856c94de5c5b82fc7c7f1eb929bb0ce0cebd52ee45",
+        "size": 3697
+      },
+      {
+        "path": "assets/test_composition.py",
+        "sha256": "5fdcce1da08291d6f48b1b7d153aa3c12b7c6a96ee44b37fff1ec456eebc50c8",
+        "size": 1350
+      },
+      {
+        "path": "assets/test_confirmation_ablation_boundary.py",
+        "sha256": "ba41d6d4901fb284b9cd80dc21bda3dad7c6ffda30f1f3ac9f3ea1e34f5cb27e",
+        "size": 930
+      },
+      {
+        "path": "assets/test_consistency.py",
+        "sha256": "b50622ec14e90e9530a54b7dbdb4d4e9b69a42f774e0fe09155c2c0a60c9a97c",
+        "size": 1732
+      },
+      {
+        "path": "assets/test_context_codec.py",
+        "sha256": "be1303077a731d27c1393c719219970383edd078fb30b21c44a8fe138486835b",
+        "size": 2343
+      },
+      {
+        "path": "assets/test_context_content_pipeline.py",
+        "sha256": "cc016a3fe0fa94dd7c25a00756cc88e1287aaaac478e34ae6f3e41ba1428e4fb",
+        "size": 29518
+      },
+      {
+        "path": "assets/test_context_nodes.py",
+        "sha256": "ae0c5b89a2f51b9833f2aef142f190a7634f27b8a8bd2b7edbc912360dda07a5",
+        "size": 3959
+      },
+      {
+        "path": "assets/test_context_ops.py",
+        "sha256": "63a6e17464cba89216da6992f009d7e57c258a545d60cfb0ca2eb34f20e2cb95",
+        "size": 2462
+      },
+      {
+        "path": "assets/test_context_pipeline.py",
+        "sha256": "1a35725d92612f238550754a294839e57b8fd1b071508a801286abf19a4b0fb2",
+        "size": 9475
+      },
+      {
+        "path": "assets/test_context_state_adapter.py",
+        "sha256": "fca418ca434bbc7ad33892df7d236c2af2c6bd17b2dd68b5bb893f647abc3fcf",
+        "size": 3547
+      },
+      {
+        "path": "assets/test_data_consistency.py",
+        "sha256": "6bd7fbf7b2446b4b74f4f8ad4e215c18fc051ec67e07634bda762c09a81cc132",
+        "size": 1106
+      },
+      {
+        "path": "assets/test_deprecated_behavior.py",
+        "sha256": "9e8519171886995b7c61cf0585117e8a8e7b52bca03a763d17cbea65a35ef747",
+        "size": 5276
+      },
+      {
+        "path": "assets/test_determinism.py",
+        "sha256": "856268800668b4246f2e8493cb3d930c8231761e477f15f94a34ce9858169775",
+        "size": 3278
+      },
+      {
+        "path": "assets/test_effective_diversity_audit.py",
+        "sha256": "1d8347751299f347c8e75c29eb6c226bd7aa712fe712849222582e9eace3cdd2",
+        "size": 13214
+      },
+      {
+        "path": "assets/test_effective_diversity_metrics.py",
+        "sha256": "16f58087a68ac25fa3dd7ebe170b12d72d67fd716ae807203b1a8e26adbad810",
+        "size": 13833
+      },
+      {
+        "path": "assets/test_effective_diversity_signatures.py",
+        "sha256": "695917ae3fef0718a4003db0bd56bf6c6c50708204e5b32fbb1a5592c5bc78e5",
+        "size": 17135
+      },
+      {
+        "path": "assets/test_emotion_vad_alignment.py",
+        "sha256": "81eb807ddaf82e88a9bccd991730b85c4590d307679f0788589f3a2824318c7f",
+        "size": 3365
+      },
+      {
+        "path": "assets/test_emotion_vad_profiles.py",
+        "sha256": "52e553f5d18d87fd3b1349eff6c006ff48258090a40b34920ffbe18ea1f92179",
+        "size": 1264
+      },
+      {
+        "path": "assets/test_epig_reference_alignment.py",
+        "sha256": "dc610fcfd279e4a2ff7bb860f019434459b24c4be0389a0f4c6d13de29da5da3",
+        "size": 5080
+      },
+      {
+        "path": "assets/test_epig_reference_overlay.py",
+        "sha256": "10cbcd97f873348df49a1c90cc2a9cf2586dc59949ce9873c28fd2b55e3b75ca",
+        "size": 3753
+      },
+      {
+        "path": "assets/test_expansion_delta.py",
+        "sha256": "6f7f54ab6836f7babe5cf9d340d1617d33b7ba57e51ba7a3975ea611f7231f9b",
+        "size": 2058
+      },
+      {
+        "path": "assets/test_fx_cleanup.py",
+        "sha256": "2e2d1e020507d1342ac78e85a66bc5e8db965eeebfb19252eb8a9d3a990d34d1",
+        "size": 4046
+      },
+      {
+        "path": "assets/test_llm_expanded_prompt_policy.py",
+        "sha256": "f02fdc1d4ebcdd3dbb0f6fffca0399fdb3fda6e343617ae2b0416e702a1c2ae1",
+        "size": 3134
+      },
+      {
+        "path": "assets/test_location_alias_workflow_compat.py",
+        "sha256": "a668c52cb90b8f4bd99119a8d74e0c6611b3d56e8ae4725d5d926892b5769b09",
+        "size": 2723
+      },
+      {
+        "path": "assets/test_location_resolution.py",
+        "sha256": "d26c2cca5dff8e7a78b450473268f4705172a3c39aaab049fe25585eb673bab3",
+        "size": 6133
+      },
+      {
+        "path": "assets/test_location_semantics.py",
+        "sha256": "7b84a3ca15d4c7f5d57f5beabdad9af40e07d8fe7c389fa8b833653fe5519bbc",
+        "size": 26329
+      },
+      {
+        "path": "assets/test_location_spatial_context.py",
+        "sha256": "fbba13a1856047ffc65ecf8f6e45f64f45a9b3f9d3d4b1e1ca69da0f493bbdd6",
+        "size": 1731
+      },
+      {
+        "path": "assets/test_mood_builder.py",
+        "sha256": "e297b82b999bea45ada9ca8a5e228183de3bcba7b59a895a35b07c12e054c67c",
+        "size": 4464
+      },
+      {
+        "path": "assets/test_mood_map_repetition_controls.py",
+        "sha256": "f51fdda5950c54c90ad745fe368f17cdfde7f73b6c8e7b5998451fea6760a64c",
+        "size": 1751
+      },
+      {
+        "path": "assets/test_n27_candidate_bridge.py",
+        "sha256": "745e4073b152470fb73596c2d10eb68daabef5a27301937abe7a4ad09362a835",
+        "size": 4532
+      },
+      {
+        "path": "assets/test_n27_direct_provenance.py",
+        "sha256": "59618bddeea61bc0a92813217901e6cd18ea47bb8fef9c023f408d75510c3731",
+        "size": 9417
+      },
+      {
+        "path": "assets/test_n27_productive_grammar.py",
+        "sha256": "a12d01fc043dfc4f4e84873e546eb961f12944f68d6528124d2e8bb14103a41f",
+        "size": 11977
+      },
+      {
+        "path": "assets/test_n27_r41_action.py",
+        "sha256": "7c56a1369e769dd1de402e464035b9825c343a193a965d4f214831ad5ab76df5",
+        "size": 5905
+      },
+      {
+        "path": "assets/test_n27_r41_clothing.py",
+        "sha256": "6184955532790d3a1d0a40c4249e88aa36cba1e14b793f358695632dd5890ad2",
+        "size": 5899
+      },
+      {
+        "path": "assets/test_n27_r41_integration.py",
+        "sha256": "623194ad0a1a331c58fee7fd8f9fa59e035c73222a8c2574f65e227462ee9d2a",
+        "size": 3451
+      },
+      {
+        "path": "assets/test_n27_r41_scene.py",
+        "sha256": "fb04b25a88f77af5d75bfa5114a11581c20fc7e57781153af2236841830341b8",
+        "size": 2051
+      },
+      {
+        "path": "assets/test_n27_r42_action.py",
+        "sha256": "c7b5ddb61fbe5a2be1064e4dcdfa9356b8a2bbef83884184cecc14c234253330",
+        "size": 7231
+      },
+      {
+        "path": "assets/test_n27_r42_integration.py",
+        "sha256": "3f48beef96d75aa5b04ecc313ad2ab50681432acae4e3bcafc245e4a683c5365",
+        "size": 6321
+      },
+      {
+        "path": "assets/test_n27_r42_scene.py",
+        "sha256": "521f8197978b9ccf453892068e3c0e2bc1abe3d74cd03e960ffccaf4c7fcfae5",
+        "size": 5721
+      },
+      {
+        "path": "assets/test_n27_r42_template.py",
+        "sha256": "3070e1fa95c1bff7e95555b44b7f302f9b9510cd2d4797884c67959515aaac89",
+        "size": 4978
+      },
+      {
+        "path": "assets/test_n27_r4_action_trace.py",
+        "sha256": "301d9611e7988071ebe347ed003184c86625455f6ad40eb99c0ca0e2842fd505",
+        "size": 4533
+      },
+      {
+        "path": "assets/test_n27_r4_integration.py",
+        "sha256": "49953aa1ea3516fba0817e4635221fb47cce60c3f4b1195b5ca0f98b238cda2f",
+        "size": 4711
+      },
+      {
+        "path": "assets/test_n27_r4_structural_evidence.py",
+        "sha256": "03debd80084da740b861502c81c6111c2ca2816157eeb9ec37952a9a2d06b5cd",
+        "size": 2786
+      },
+      {
+        "path": "assets/test_n27_r4_subordinate_grammar.py",
+        "sha256": "cad6e71eedc7b7544bc63d14f4d70cd5e9b526d437a10068723d00dbcd8eb8e7",
+        "size": 8404
+      },
+      {
+        "path": "assets/test_n27_scene_constituents.py",
+        "sha256": "91e71742707b3a06c320699eb4e7ffb09c0d6097631cc361ba7bf7d900fce693",
+        "size": 12593
+      },
+      {
+        "path": "assets/test_node_registry.py",
+        "sha256": "51117f20eed9b1d356ef383819a5cf50a25ecfe2a5d6526b7ba58cfbabda7421",
+        "size": 1559
+      },
+      {
+        "path": "assets/test_object_focus_service.py",
+        "sha256": "70e64823ee389d01564f7e7bbaf79c4477174245a6a297ec94db2e774563b9fc",
+        "size": 5264
+      },
+      {
+        "path": "assets/test_personality_garnish.py",
+        "sha256": "7fef90445d314c77af2171c5f7429c3e07c93b2b19ecbde5e55635aec36a68f7",
+        "size": 16042
+      },
+      {
+        "path": "assets/test_personality_semantics.py",
+        "sha256": "f868eea3e6e445d2a83affdddae862657f6771d7748f74c0c78bdacb3e8495ee",
+        "size": 14890
+      },
+      {
+        "path": "assets/test_policy_alignment.py",
+        "sha256": "c50908248007354674e391036c6ba16fc437bb2e8c94cd0c78d0fea7f9bf2ead",
+        "size": 1294
+      },
+      {
+        "path": "assets/test_policy_drift.py",
+        "sha256": "252f2fffd09ff6449732f88a981102a81844551bf2f720f9ac9312bb61cdb0d1",
+        "size": 2530
+      },
+      {
+        "path": "assets/test_policy_schema.py",
+        "sha256": "89a85a290d7d6d7f9854214539f71e13bbda0e6ad53a53d89c4b2fc310122829",
+        "size": 1311
+      },
+      {
+        "path": "assets/test_prepare_variation_candidate.py",
+        "sha256": "3ad39567a37fccc036b89a8772180ad21e77c3bf73ed355ef1fdc7266ad97803",
+        "size": 5227
+      },
+      {
+        "path": "assets/test_prompt_cleaner.py",
+        "sha256": "eb8794bc8f389efd844464806f657f590d823646ff34c5226258e5974ad18abc",
+        "size": 3892
+      },
+      {
+        "path": "assets/test_prompt_cleaner_context.py",
+        "sha256": "23ab4cbea9796814498136a0cb61b5c7d2302462b1c047d8efec3fc3acb0b5cd",
+        "size": 736
+      },
+      {
+        "path": "assets/test_prompt_cue_arbitration.py",
+        "sha256": "6ade59b541dabb191c9f715d3f58b6678519c308d85b64881bd5fa86cd299fa3",
+        "size": 3868
+      },
+      {
+        "path": "assets/test_prompt_execution_parity.py",
+        "sha256": "349ca55a07657178b2b04a25a1f441f3d66dfba57adfcecaab9d471e01cdd3c8",
+        "size": 9334
+      },
+      {
+        "path": "assets/test_prompt_quality_ablation_pair.py",
+        "sha256": "8ac781a659f6f1c545ce221b35fc9975942bac2532b0661a9b4f5c0cf0810cab",
+        "size": 12803
+      },
+      {
+        "path": "assets/test_prompt_quality_analyzer.py",
+        "sha256": "90f25e63b977a3b5e5a67d8edf7230962b2bd2476bcec9be82b0981636c1c7f2",
+        "size": 14973
+      },
+      {
+        "path": "assets/test_prompt_quality_compare.py",
+        "sha256": "268d1fb5a873c8d96ec4b9aba98bf7b6402827f2c2169ccdb05716b5e89836ff",
+        "size": 51061
+      },
+      {
+        "path": "assets/test_prompt_quality_review_scope.py",
+        "sha256": "6e583a6eab6c9ff425f552caec1487b38ae71b37eada0eff46a1a9e2fcdd9294",
+        "size": 20534
+      },
+      {
+        "path": "assets/test_prompt_quality_runner.py",
+        "sha256": "d3128a5f6544878bc15d0c7b7a63b222852bf1f4f6f097b2b76702cdb5f67769",
+        "size": 25955
+      },
+      {
+        "path": "assets/test_prompt_quality_state.py",
+        "sha256": "8a7e610b2babeb15ab8dbae6a01fd83ab0ec1e510cfe7a246d4e39e402089b62",
+        "size": 2440
+      },
+      {
+        "path": "assets/test_prompt_quality_verification.py",
+        "sha256": "c0038e4496921f93f182834a2ba14981fb769ab852f453b9e3dcbc02dbfe5885",
+        "size": 14101
+      },
+      {
+        "path": "assets/test_prompt_realizer_v2.py",
+        "sha256": "1dfa351e2a20fdb7a5645bab10c117f0f8d05569c905659322dc2c8035323c2b",
+        "size": 31148
+      },
+      {
+        "path": "assets/test_prompt_renderer.py",
+        "sha256": "d1b8c9d705309bc96b1c56dcfac9a5370baca624e1cbfb851f81e66885b310a9",
+        "size": 3696
+      },
+      {
+        "path": "assets/test_prompt_repetition_audit.py",
+        "sha256": "c85f9966e6efa008227bfe943efcf375fd0bdb1fdce0845be3d4f40d03bf0cfa",
+        "size": 2622
+      },
+      {
+        "path": "assets/test_prompt_snapshots.py",
+        "sha256": "13a047093b969b76b20e05b025bc90d157f3105be3cd216b93f75d50b79a4268",
+        "size": 2476
+      },
+      {
+        "path": "assets/test_prompt_template_naturalness.py",
+        "sha256": "fd59a732edc402e541e5464fbbb8ed0bafea5facc15da6d13fbc4ad1b77b3b52",
+        "size": 642
+      },
+      {
+        "path": "assets/test_r43_action_evidence.py",
+        "sha256": "271fc0f71077023f702b68082a270bc71bc53cf5e214049bc9961a6414931890",
+        "size": 8010
+      },
+      {
+        "path": "assets/test_r43_candidate_intake.py",
+        "sha256": "cdbdbc6183b28fcf7145723a35d7d5a7f38be0afeaae98a88eadeda5f386bf13",
+        "size": 7571
+      },
+      {
+        "path": "assets/test_r43_candidate_preservation.py",
+        "sha256": "0b7be7854b7b3ce38260b98b959d83b0e89611b5bba3e789cf7c5e0c952bd654",
+        "size": 6750
+      },
+      {
+        "path": "assets/test_r43_candidate_replay.py",
+        "sha256": "abfe72aae5f2c121e0313935f4767914b8e0cd075a14d64c000ee125b07f80c1",
+        "size": 8344
+      },
+      {
+        "path": "assets/test_r43_candidate_verifier.py",
+        "sha256": "f2271bc569e1e8b78f09ba63253d7dc717884709c5a6d27c3810c2fee0bb4e76",
+        "size": 10560
+      },
+      {
+        "path": "assets/test_r43_clothing_binding.py",
+        "sha256": "6da7d9bf081e86f11f98128d33beae721b8d5a6cb266407e72cca448475d0779",
+        "size": 6969
+      },
+      {
+        "path": "assets/test_r43_clothing_selector_trace.py",
+        "sha256": "2793b9c9140c1e46b145d4b6ac232f2c8f62a6ebbf45c6238a99207406110e07",
+        "size": 7870
+      },
+      {
+        "path": "assets/test_r43_clothing_trace.py",
+        "sha256": "dde84afcef484b41423d06f21bc8b3a114821d52354e9d6e27f54326f5bbdc78",
+        "size": 10591
+      },
+      {
+        "path": "assets/test_r43_common_action_grammar.py",
+        "sha256": "1ecdc196cd2ca1e8d2e5e4561e826b054cbf733aa8a039ad8174278ff6e1de16",
+        "size": 12742
+      },
+      {
+        "path": "assets/test_r43_common_diagnostics.py",
+        "sha256": "fa15a666d273330ae5f7e45a8515776b256c20bae40d3c2c6c0bd03c33689fd2",
+        "size": 6347
+      },
+      {
+        "path": "assets/test_r43_evidence_contract.py",
+        "sha256": "865a2d8356112d21cfe24e6137f6a4cc0cc92c169a3b6ea6ad46e1501b95aa00",
+        "size": 9085
+      },
+      {
+        "path": "assets/test_r43_family_capabilities.py",
+        "sha256": "cabbfe63d9f13335f46c79eb9828bedabead05c4f56aea3abcdc96167d9c6267",
+        "size": 22305
+      },
+      {
+        "path": "assets/test_r43_family_routes.py",
+        "sha256": "0619549728596c564bd749f7922202fd5f783ddbd6d02ae30d6254b746dded6c",
+        "size": 2186
+      },
+      {
+        "path": "assets/test_r43_garnish_reconstruction.py",
+        "sha256": "8646c05e1bbe33869f22e0e2abed2bc75a809cade2cd4d0aa3f046c4041b9dd7",
+        "size": 6318
+      },
+      {
+        "path": "assets/test_r43_import_transport.py",
+        "sha256": "13b76087e6515319d5a77d49c8c8144d8765c535d31b1b392a30bf08e0a5ec1d",
+        "size": 2954
+      },
+      {
+        "path": "assets/test_r43_ordinary_application.py",
+        "sha256": "dcba8918be0ff18ea453ee9fc4a1592e9375775e087ac7a7dd0e9b6ba4c628a8",
+        "size": 3626
+      },
+      {
+        "path": "assets/test_r43_owned_placement.py",
+        "sha256": "ce622cf434bbe7c5cde4edf4bfd3d43ea9eaa02cf9699632bed6b3d556e64b4c",
+        "size": 4779
+      },
+      {
+        "path": "assets/test_r43_reachability_audit.py",
+        "sha256": "fe98aeca9b18032246003b2342f632031cc862b40bc632305476b0b9160858a3",
+        "size": 6283
+      },
+      {
+        "path": "assets/test_r43_reachability_diagnostics.py",
+        "sha256": "c811cf3d5ebd6d49dfb67c6ecce07116e436fceeb6f4dcacc25db9a1de5b65e1",
+        "size": 13850
+      },
+      {
+        "path": "assets/test_r43_real_graph_placement.py",
+        "sha256": "36cb09449db7dba199263b6b2b008889ef24b9eb5110f11d409cc045aab8f73c",
+        "size": 4259
+      },
+      {
+        "path": "assets/test_r43_reviewed_scene_binding.py",
+        "sha256": "583121341e7658e02ea5f6bc346e152221a304195151fa5521dbf3ce6a5fb28b",
+        "size": 5499
+      },
+      {
+        "path": "assets/test_r43_runtime_integration.py",
+        "sha256": "a4c06bf60aa161570226b7a1bc985405267c2873d1464a9205fca8be18e5cb99",
+        "size": 5006
+      },
+      {
+        "path": "assets/test_r43_runtime_transport.py",
+        "sha256": "723be14c2fa93093eaccac3fa56632bbb61a1e833a9fb43ac302bcaea8c09d01",
+        "size": 7915
+      },
+      {
+        "path": "assets/test_r43_scene_binding.py",
+        "sha256": "6ae47c2a219f0222c331ca9c335f0296a6d2ea2ee9822a9ceed5fa6df1e3544c",
+        "size": 7141
+      },
+      {
+        "path": "assets/test_r43_scene_trace.py",
+        "sha256": "74fb1e55175dd9835dbad78830026cfac7c2ea435de7e1f81ed08eb47ead7097",
+        "size": 16365
+      },
+      {
+        "path": "assets/test_r43_standalone_scene_time.py",
+        "sha256": "071536f962de16123ffd7bb4f01c1b4974e77b4de21bb3c7486c355d81960e68",
+        "size": 4465
+      },
+      {
+        "path": "assets/test_r43_support_binding.py",
+        "sha256": "56480673b3b2c1e2a64f1b46ae1a2b78e0ffd57b5474b80531870ce1ce34d877",
+        "size": 6148
+      },
+      {
+        "path": "assets/test_r43_support_transport.py",
+        "sha256": "012ddc447c7d86fe2b256a26f489fd740b65561ba38829cfa1238bbedadf88b0",
+        "size": 3309
+      },
+      {
+        "path": "assets/test_r43_template_binding.py",
+        "sha256": "435befdcc26acb44649215741e388a3a5b76e48d9fdb4bc053f2d0d974afdbd2",
+        "size": 5498
+      },
+      {
+        "path": "assets/test_r43_test_accounting.py",
+        "sha256": "6c5dc7cb5a49ecd7d0b4da90918dec42af34d843141607944d4152aae1df1c97",
+        "size": 4634
+      },
+      {
+        "path": "assets/test_reference_dimension_projection.py",
+        "sha256": "15924cb3d4310f7a7f7eb29797f084f98c17412bb62f19f693120b648e96f112",
+        "size": 5416
+      },
+      {
+        "path": "assets/test_reference_refresh_adoption.py",
+        "sha256": "ad12379123a20dbe7346e6091c29445c0a5b57145358af9d2206aa01eaf03afe",
+        "size": 4936
+      },
+      {
+        "path": "assets/test_registry.py",
+        "sha256": "4ec3318193629b78dadbe66c91cdef8b7402c642522d18b218c3b7014d939d26",
+        "size": 4982
+      },
+      {
+        "path": "assets/test_repetition_guard_audit.py",
+        "sha256": "2e55afff972c51717837695ce1983d9e45616515887948698feb4326a967ed04",
+        "size": 4248
+      },
+      {
+        "path": "assets/test_roulette_distribution.py",
+        "sha256": "9a4dc4532d56533887b988b9d03d97da81c02d129889d04fd71d57e826971d79",
+        "size": 4595
+      },
+      {
+        "path": "assets/test_run_variation_verification.py",
+        "sha256": "c5bfc3daed6a1c2ecc9efcaec38a0434eebfdffa2b62fb8ab2a1038ed975a06b",
+        "size": 8311
+      },
+      {
+        "path": "assets/test_scene_variator.py",
+        "sha256": "8951f63c2a9fa7a6c5b5e9505a7715a534a4d1a79c0d7dfaf64842541bed4b91",
+        "size": 2759
+      },
+      {
+        "path": "assets/test_schema.py",
+        "sha256": "1a34d7a6657ba95ba37d1dfd6edfeefd383b883d01cde099d648c9f3df8817b4",
+        "size": 4201
+      },
+      {
+        "path": "assets/test_semantic_epig.py",
+        "sha256": "cc99fa017db8e9583bb3105a3c3273872169f8db3da524a35a8fa050c22429f1",
+        "size": 2403
+      },
+      {
+        "path": "assets/test_semantic_epig_audit.py",
+        "sha256": "2278eec4b81e3c6178bca816d0eb697edf3cb89b6102e7f778de004498ad0ad3",
+        "size": 7359
+      },
+      {
+        "path": "assets/test_semantic_families.py",
+        "sha256": "21462066aa40f8f1cf818803a6e96deccb24438f650728b9c671d9445a59bc29",
+        "size": 868
+      },
+      {
+        "path": "assets/test_semantic_policy.py",
+        "sha256": "437769045a0f7429f4659f76f289dddbc7c1b79e1b9ff0ca785d52533a2bb925",
+        "size": 1920
+      },
+      {
+        "path": "assets/test_semantic_space.py",
+        "sha256": "564db394d902acc2ae179f08777c963d1b71459f92b4c16b6f63770c2b707e0d",
+        "size": 2375
+      },
+      {
+        "path": "assets/test_snapshot_verification_inputs.py",
+        "sha256": "b68ecdd7aeb65e142c21027c6ddcfb4db4018e22aa1c00cde3933937655e92c2",
+        "size": 3538
+      },
+      {
+        "path": "assets/test_solo_duplicate_suppression.py",
+        "sha256": "9c07de96144707a1a4dc087703079897e8832f6b5845262c726f4cf02af2bf14",
+        "size": 11540
+      },
+      {
+        "path": "assets/test_solo_safety.py",
+        "sha256": "56d386cbd4f10f0de014a1f2eaaea20e2e4865cfcc0e5260e12d5c320483ca79",
+        "size": 2786
+      },
+      {
+        "path": "assets/test_source_pipeline.py",
+        "sha256": "228cc513e3584e80b54190466ebc9a015a2535eaac87e468dff1dcac2c974faa",
+        "size": 1850
+      },
+      {
+        "path": "assets/test_subject_centric_descriptor_audit.py",
+        "sha256": "e9a33812514a405cee970cb3f3669f6ebfa1962bbaa5c503cdfa040df5b6d564",
+        "size": 4495
+      },
+      {
+        "path": "assets/test_syntax_family_catalog.py",
+        "sha256": "ad54582e7e9bd81086af9ed8456b04b21524b8bf4270ec0edbaa954ddaf0166f",
+        "size": 8509
+      },
+      {
+        "path": "assets/test_syntax_family_selector.py",
+        "sha256": "3ffdc8de7928a3ad673856274cb4935821bf6d58a2a5ca335e5fb755daebc70b",
+        "size": 12862
+      },
+      {
+        "path": "assets/test_template_diversity_audit.py",
+        "sha256": "bec50e7dcd1ee9845b558260a3b5e1e676bfd4c264e73f05a5cb22eb4871b19b",
+        "size": 4837
+      },
+      {
+        "path": "assets/test_v150_freeze_contract.py",
+        "sha256": "7059b5cd4c6234230302419a59f12a67602136c3060c2897d6f5c53e412f6986",
+        "size": 1551
+      },
+      {
+        "path": "assets/test_v150_redundancy_authoring.py",
+        "sha256": "a45fc5a7a3a0999b4c352f2e67cd6a2dbe3b48e0bab15ad23b1aef4e4947af76",
+        "size": 3099
+      },
+      {
+        "path": "assets/test_variation_blind_remediation.py",
+        "sha256": "fabefc3a677d5185d1f5b4c9190b4706f4decf5a0b0afa564fb61b73f9582c9d",
+        "size": 8483
+      },
+      {
+        "path": "assets/test_variation_candidate_analyzer.py",
+        "sha256": "84c779250c4a58edcb96dda5060f36bd13efb35991d7b812a66b43a28e3148bf",
+        "size": 19622
+      },
+      {
+        "path": "assets/test_variation_candidate_contribution_model.py",
+        "sha256": "208b46a673cf636d331d403cefcbc4b131d04cbdd99db6a7c658da9f1f8a1c1f",
+        "size": 12899
+      },
+      {
+        "path": "assets/test_variation_candidate_enrichment.py",
+        "sha256": "83beb31c2fe987c45df1c4c12f21bf7e5395cf0f10ba73f55390a260493cbe00",
+        "size": 4285
+      },
+      {
+        "path": "assets/test_variation_candidate_gates.py",
+        "sha256": "3be8dcea25794f83e00ef5dc0ffc6fbc64dc415d936dd478a7bf4fec7d3f48c5",
+        "size": 14358
+      },
+      {
+        "path": "assets/test_variation_candidate_snapshot.py",
+        "sha256": "524795042ea6936b887b975202ef04769c2aba1fae664fcc402b0b211c414c0d",
+        "size": 26975
+      },
+      {
+        "path": "assets/test_variation_final_coverage.py",
+        "sha256": "b01685b240f42626067c0e12b282ee098a08490e0d94367099d90c5d4a14c703",
+        "size": 4278
+      },
+      {
+        "path": "assets/test_variation_pair_remediation.py",
+        "sha256": "b143fd635e51232c4db77fb31332abb2f907cdbcb9046c762cb6b69285f80f2c",
+        "size": 7930
+      },
+      {
+        "path": "assets/test_variation_promotion.py",
+        "sha256": "7cca761133fa2cb6ca9951defe8f6abf8fa756ca4127d3414ad0397ca84cc092",
+        "size": 31167
+      },
+      {
+        "path": "assets/test_variation_prompt_pair.py",
+        "sha256": "311b643bb2789b5211a4cd123afd3d7a110bba5fc407fd0e17a9777aad891bb3",
+        "size": 31375
+      },
+      {
+        "path": "assets/test_variation_prompt_schedule.py",
+        "sha256": "ad8dbc0ecc31fdf6ef226b3fad0f8da255e645dde07ff4fe4e456c81b65873c5",
+        "size": 5378
+      },
+      {
+        "path": "assets/test_variation_quality_contract.py",
+        "sha256": "f4a15e1b6075896a186fc7d06685fa08d87400521b438744dfe02a5cdb61f735",
+        "size": 4245
+      },
+      {
+        "path": "assets/test_variation_quality_contract_v2.py",
+        "sha256": "2dac2b0e5aaa725fbfab5292fa9ea12320fa10d40b697a727f9ab9657ac577e4",
+        "size": 15321
+      },
+      {
+        "path": "assets/test_variation_scope.py",
+        "sha256": "fb84159d61ab452f34c5bea9feee4f20677d94240ed5d30e663a5146afb2d523",
+        "size": 1288
+      },
+      {
+        "path": "assets/test_variation_semantic_comparison.py",
+        "sha256": "c6654858044b28b05e42e7b42b26db7296cf6b4d95b093e4630fc8b4a159fc17",
+        "size": 8602
+      },
+      {
+        "path": "assets/test_variation_semantic_pairs.py",
+        "sha256": "2236a8b6d973d105f25ce517d43ba2cdd0f271a2c9fe4ee0d022c1ec0c98b800",
+        "size": 7512
+      },
+      {
+        "path": "assets/test_variation_semantic_promote_check.py",
+        "sha256": "9625df7ff735e5d54976f45d5d3c8cdc110cc7a4ae62e666035aa908c59340cc",
+        "size": 11737
+      },
+      {
+        "path": "assets/test_variation_semantic_review.py",
+        "sha256": "95f31240975895035ee60b2eccd2a3e3b2e414e4dac640bfeb335181f50a0bc5",
+        "size": 17171
+      },
+      {
+        "path": "assets/test_variation_semantic_review_v7.py",
+        "sha256": "b629252a21f60f238838970cd4bcd5102454f2f0f917e48ef0410cddd005ae0d",
+        "size": 8545
+      },
+      {
+        "path": "assets/test_variation_target_planner.py",
+        "sha256": "1a9b6960d1871f8d400f87eaff3b11617f5664b2c1f065660fd7434448a400f2",
+        "size": 23500
+      },
+      {
+        "path": "assets/test_verification_runtime_scripts.py",
+        "sha256": "b1a330219c6da03ef9348af9783fdc11f72764f4f117e4595d4184bd4d39397c",
+        "size": 16246
+      },
+      {
+        "path": "assets/test_vocab_lint.py",
+        "sha256": "7b259d416caa4e3d2ce1604c3a874ac8238306daf140ad278fe2d49c39d9c1ac",
+        "size": 9073
+      },
+      {
+        "path": "assets/test_workflow_diversity_analyzer.py",
+        "sha256": "177a9ae62b457086b142908fd47f2e7dcaf77db8d0d017c546e5e1d9f6e88f5f",
+        "size": 4731
+      },
+      {
+        "path": "assets/test_workflow_samples.py",
+        "sha256": "85c268e33c8d83830c4a463c6fae119d18534aecb76b1c204bc692fcffd1fe37",
+        "size": 3835
+      },
+      {
+        "path": "background_vocab.py",
+        "sha256": "e47aeb16c14331ac0379d22c7e95ea715163580d66e251b7bab75503ea84d758",
+        "size": 994
+      },
+      {
+        "path": "character_service.py",
+        "sha256": "c5cc78ce08327e9a7fcca9e699aae08759ed443fc1a2c30668b0d23d066a3ac4",
+        "size": 7579
+      },
+      {
+        "path": "clothing_service.py",
+        "sha256": "0f975fb49a163ded6c5f8bf0fd40e26b19a8aced65ed2d6bba4d1de431bf051c",
+        "size": 2258
+      },
+      {
+        "path": "clothing_vocab.py",
+        "sha256": "656cec40c49fb7420c02185eed5978032cc17ebdbb1f244812ce8447cbedd065",
+        "size": 1455
+      },
+      {
+        "path": "core/context_codec.py",
+        "sha256": "43b8a0dfa3740024a6cb4c523d8c4f9afe6dbb878a772c9ee519c253ffb8ab78",
+        "size": 2218
+      },
+      {
+        "path": "core/context_ops.py",
+        "sha256": "c51417795a9c7b46a4791b1b9380146f99390fa101fe9816f54340e3a2c140d4",
+        "size": 3746
+      },
+      {
+        "path": "core/context_state.py",
+        "sha256": "24fd0f9118ed4766f48bb458662bc36e43dd56c13a009d9205db9e6ca903ea91",
+        "size": 4712
+      },
+      {
+        "path": "core/schema.py",
+        "sha256": "1e08dc232e379d86cfbe7529cb8cd8b312c2fd111b07eef49a287cbfac292492",
+        "size": 8882
+      },
+      {
+        "path": "core/semantic_families.py",
+        "sha256": "110b5899b047a1a8dbc0923825f7a29d58ab2baee4b44dad7503064cce63629c",
+        "size": 2376
+      },
+      {
+        "path": "core/semantic_policy.py",
+        "sha256": "8dca135cde0098d5a0114a51aa5b4cff5fa0561905808e3c7e6663e6b4972a77",
+        "size": 5314
+      },
+      {
+        "path": "core/solo_safety.py",
+        "sha256": "bb9f59a8acc04fa7582d13867b8b6f97b1cfa50f52ae2854180436248cf0303a",
+        "size": 6625
+      },
+      {
+        "path": "history_service.py",
+        "sha256": "5c35e512f59d75aebfc7ef0f61c381ea2f5e1f3557b12f33b2959b503e67e354",
+        "size": 4280
+      },
+      {
+        "path": "improved_pose_emotion_vocab.py",
+        "sha256": "353b4bc5e4029da56b20a13e0d22e1bc136ac7a14831e2a5e64ada21d41048e3",
+        "size": 1853
+      },
+      {
+        "path": "location_service.py",
+        "sha256": "79d445d2e9547ec630fc6f4068829b9b710824f65359b336eb088ab3a8c5ea41",
+        "size": 7472
+      },
+      {
+        "path": "nodes_context.py",
+        "sha256": "f962388db8e83efda25a720d93f95d08fb0bfe03a7002a919bcc32cea7c7a220",
+        "size": 12015
+      },
+      {
+        "path": "nodes_prompt_cleaner.py",
+        "sha256": "61669bf348607b1e8fbfe7c030118ca2db150a1893fbb6463a0dfbc2c11f16f1",
+        "size": 10355
+      },
+      {
+        "path": "object_focus_service.py",
+        "sha256": "fcea7323adc25979b5047319a0afbb3ad1f568476355959ddaded1972df366cc",
+        "size": 11182
+      },
+      {
+        "path": "pipeline/__init__.py",
+        "sha256": "cdf53f91e807021a912a805a1bdada7245b315f52d4ad5e0e78302dbedc1e736",
+        "size": 62
+      },
+      {
+        "path": "pipeline/action_generator.py",
+        "sha256": "5e088099cab8cfdff3bf8d47e3641ec2d1659e8edfd6cd5beb219c60926326ba",
+        "size": 29840
+      },
+      {
+        "path": "pipeline/action_parser.py",
+        "sha256": "c7f8145953de94b33588168a6b0995bbc7c003b3882fd0a01f883024c9f55ef3",
+        "size": 13225
+      },
+      {
+        "path": "pipeline/action_profiles.py",
+        "sha256": "abae692168c418b6ea3e29519fdf46b12f6e0ff7dae9f006acaf3c3daaf20218",
+        "size": 10724
+      },
+      {
+        "path": "pipeline/action_relation_binder.py",
+        "sha256": "c9207d34fc94893ccd05b836be0091ccf92f8ca8db2a0fb905355f6acd59b8cc",
+        "size": 1697
+      },
+      {
+        "path": "pipeline/action_renderer.py",
+        "sha256": "b963bf2fd26ac111df5a8ad45bf1f06f48a813152b5cfdc12cce44ae2fbaa822",
+        "size": 5279
+      },
+      {
+        "path": "pipeline/action_semantics.py",
+        "sha256": "4c97ed3f7d0b01270440cf905236f93641f99ad0bc085781a4cf5b1fdcbb53c2",
+        "size": 8995
+      },
+      {
+        "path": "pipeline/character_profile_pipeline.py",
+        "sha256": "13f2079a4093dd1c87de310415bbcfa1c63bc6297769450f708c05f42256361c",
+        "size": 4382
+      },
+      {
+        "path": "pipeline/clothing_builder.py",
+        "sha256": "3bb0f658af3000fd28e7ecec350a1864e1fb25f8bdc14715ad5bd17da6b02ae0",
+        "size": 6246
+      },
+      {
+        "path": "pipeline/clothing_candidate_renderer.py",
+        "sha256": "f3391bd23c0d6fd7ca4d328b77322557e61a00bd38635a1ed8776fe7df3cd9da",
+        "size": 20454
+      },
+      {
+        "path": "pipeline/clothing_candidate_selector.py",
+        "sha256": "bc593bc39785a9826fcd5e4650352b849f575686eaf8fbe66c456eb28882c1a5",
+        "size": 5081
+      },
+      {
+        "path": "pipeline/clothing_semantics.py",
+        "sha256": "38874af118afd527f14a2fd94e17f0cf7917fc2533c5eafb86d9973cf5c4f1b4",
+        "size": 8422
+      },
+      {
+        "path": "pipeline/content_pipeline.py",
+        "sha256": "8c157383fa01653a7043b3858f02f037b030816614d6dae6de2e88f780789f68",
+        "size": 1524
+      },
+      {
+        "path": "pipeline/context_pipeline.py",
+        "sha256": "f591a3f75e47ae5e3ea59cb21a3f573a38a216404c70173b275a89ac958b119e",
+        "size": 21535
+      },
+      {
+        "path": "pipeline/family_capabilities.py",
+        "sha256": "ca7e9e9cde50f691b1ad0a289d4407701791762eec7886cf00196b759009d1a0",
+        "size": 21551
+      },
+      {
+        "path": "pipeline/location_builder.py",
+        "sha256": "13b28d9ab8057ce8f82c6f77e192456fc278162d045efbdf698a5c01c3237f37",
+        "size": 26623
+      },
+      {
+        "path": "pipeline/location_policy.py",
+        "sha256": "ee3bb81ae50c0c5c843eae773bb031091d743210a8f97b211eba23b78314c01c",
+        "size": 6829
+      },
+      {
+        "path": "pipeline/location_segment_selector.py",
+        "sha256": "f62b065d26aeacb6caf0d42b1e9689aa456af2463d9b8b8d5fa71f963777d200",
+        "size": 2837
+      },
+      {
+        "path": "pipeline/location_semantics.py",
+        "sha256": "9698302895ab0361e26e89525591d1ac19ed26b92fe681817d05798617d26650",
+        "size": 7821
+      },
+      {
+        "path": "pipeline/mood_builder.py",
+        "sha256": "bf5d095e1cdf94cae5a8fb8d81ef541a7ae7d1685a4699224ad5d92e17b0d669",
+        "size": 6215
+      },
+      {
+        "path": "pipeline/prompt_orchestrator.py",
+        "sha256": "a1b38f959ba985284761ed616873fc39d9cb42bf4c42be3f5d19331f1534e085",
+        "size": 4823
+      },
+      {
+        "path": "pipeline/prompt_realizer.py",
+        "sha256": "341a899cdf45752ce4cb6ba17bae0ec659ffa88fad9869a1120c1f384d1ab81b",
+        "size": 16691
+      },
+      {
+        "path": "pipeline/realization_evidence.py",
+        "sha256": "791598bac07fd1eee63ed9f745bdb22cbaa84335ed40f17e60e926f3fef86005",
+        "size": 13399
+      },
+      {
+        "path": "pipeline/semantic_epig.py",
+        "sha256": "d666f39eef4aa194a3142a345fbd24b89295eff46a43b7e871d31b9381beb367",
+        "size": 4534
+      },
+      {
+        "path": "pipeline/source_pipeline.py",
+        "sha256": "75ca9ee8e84ed51d5371ca24b043b5af5762dc674c9950d0f3068e036173d734",
+        "size": 4213
+      },
+      {
+        "path": "pipeline/syntax_family_selector.py",
+        "sha256": "a0eabab5e8b15937aa2a015a9c14af7d2367b8720d97a6405de26155ee86cb24",
+        "size": 15768
+      },
+      {
+        "path": "pipeline/v2_candidate_bridge.py",
+        "sha256": "996318383b4b41300d2eec984d4eff33f251d287bf50af79beac7640e3116409",
+        "size": 9076
+      },
+      {
+        "path": "pipeline/v2_clothing_provenance.py",
+        "sha256": "6ac9c43d3b650b29169753d0681909ec9e3c380db84af937a713f9a2d4ad88d2",
+        "size": 15809
+      },
+      {
+        "path": "pipeline/v2_common_action_grammar.py",
+        "sha256": "bffd35ab98cfb331cca31839f2960944b3a558baf40f8f2fb47fa451d65e75fc",
+        "size": 7842
+      },
+      {
+        "path": "pipeline/v2_direct_provenance.py",
+        "sha256": "73bfa56bea333c9fac919b60f7ccf1b005e01954eaa15d4c987302580a76d289",
+        "size": 15991
+      },
+      {
+        "path": "pipeline/v2_leaf_grammar.py",
+        "sha256": "185192b4c7d7cefb919c416976ff9c3ab77a8c443da6115db601648d56b478bc",
+        "size": 26899
+      },
+      {
+        "path": "pipeline/v2_scene_provenance.py",
+        "sha256": "dd7439e15e0c52ebda6db6ae73227b358418f83d02b7afaecc9aec87fef3136b",
+        "size": 20268
+      },
+      {
+        "path": "pipeline/v2_structural_evidence.py",
+        "sha256": "e6be8802a76f19261dad2968b85bfbaa055510477c682787b16f2586a958e38f",
+        "size": 8400
+      },
+      {
+        "path": "pipeline/v2_support_provenance.py",
+        "sha256": "7efcb3cac5460e1eff286bcf35ec42204646c911e2397360766f274e1fea2e27",
+        "size": 12149
+      },
+      {
+        "path": "pipeline/v2_template_provenance.py",
+        "sha256": "3764378ff417565021b25943ccb593688839149a171df0e9fc081802a9a687f7",
+        "size": 9018
+      },
+      {
+        "path": "prompt_renderer.py",
+        "sha256": "a46a8466bf453b20488892ec296a946511e15438e5e448622582a32489027d23",
+        "size": 38245
+      },
+      {
+        "path": "registry.py",
+        "sha256": "84ce5aa3594e35ee0d5fc65b1068a3bbd7d143edfdcc8403286d5183e08568ce",
+        "size": 2562
+      },
+      {
+        "path": "rules/consistency_rules.json",
+        "sha256": "9ae477f1b83b7763a3cee715c3d5b431820a6d359942392bd377da68efe61042",
+        "size": 1540
+      },
+      {
+        "path": "scene_service.py",
+        "sha256": "9a10b06a1d9d2acf5aab0c9f305d1109bd2f95b725c2420bc40a4f292eb049dc",
+        "size": 1313
+      },
+      {
+        "path": "tools/aggregate_blind_prompt_review.py",
+        "sha256": "9a0981e239c9f28e864ec7ff1c174b087d6b4ff26f1e0ff6c9e069d365e92862",
+        "size": 25576
+      },
+      {
+        "path": "tools/analyze_context_workflow_diversity.py",
+        "sha256": "68c5c15f35a18c47eb698af48e92015a2410ca0c315759ab3a3d5794de8763d3",
+        "size": 10847
+      },
+      {
+        "path": "tools/analyze_prompt_quality.py",
+        "sha256": "507ca6d223120075936c566cebd0281d7bb30a964279458107ae999a7750ec78",
+        "size": 38346
+      },
+      {
+        "path": "tools/analyze_variation_candidates.py",
+        "sha256": "d49145c2fd40f814735cb2b9d218622629590b65eb6f26a19b8f93dee693b2f8",
+        "size": 47925
+      },
+      {
+        "path": "tools/archive/ComfyUI-workflow-compat-leaf.json",
+        "sha256": "fdecdfb5eec270ae8b9b736e6bd995dbbdc79c91ffd9a4a11a53243204cbc9be",
+        "size": 4096
+      },
+      {
+        "path": "tools/archive/ComfyUI-workflow-exmaple.json",
+        "sha256": "c7b052352993a3f4a0a2d4acd5bc80bb13a007594bbb04a3d00cb6a79be37530",
+        "size": 13661
+      },
+      {
+        "path": "tools/archive/README.md",
+        "sha256": "a6f39844cb61e6f309b4ee85eee6625610e4d38d5ba3ea415e789737261e90e1",
+        "size": 600
+      },
+      {
+        "path": "tools/archive/assets-ComfyUI-workflow-exmaple.json",
+        "sha256": "bc0657101223d13e665d80025fcaa7d047599b826f335e4f7da15267835544bd",
+        "size": 13723
+      },
+      {
+        "path": "tools/archive/cutover_plan.json",
+        "sha256": "2aa9cb601351fe870ca02e80b82991372df0766a045045d6c947b6678bc1d6bb",
+        "size": 695
+      },
+      {
+        "path": "tools/archive/cutover_plan.py",
+        "sha256": "321641805b97746f6b1df7ea7f5a79c068caeacb24a975e762bb6b314e5548dc",
+        "size": 1315
+      },
+      {
+        "path": "tools/archive/extract_repro_workflow.py",
+        "sha256": "a66b052365a819b7cdec79baec2ba291e6c78e40a0157eec9d0241fdd165bbe7",
+        "size": 2582
+      },
+      {
+        "path": "tools/archive/fix_workflows_widgets.py",
+        "sha256": "a160b923dbe2d74e7f7ed0dee31f9feaf9af09c6f63b6e023d5a9d91609318a6",
+        "size": 6375
+      },
+      {
+        "path": "tools/archive/report_cutover_readiness.py",
+        "sha256": "131f81d8d2b0a38417a92b1c653d5accd7ca93b0b76b3ba0295f1a0c820b9133",
+        "size": 3109
+      },
+      {
+        "path": "tools/archive/scan_workflows_widgets.py",
+        "sha256": "8e72549a332462bfc19c44a1c60ac16d9892a16a0ff9fc7a7f68e01a45f8f62d",
+        "size": 6760
+      },
+      {
+        "path": "tools/archive/simulate_widgets_values_migration.py",
+        "sha256": "d11edb76802da6968b6443e9c563c8e2030e0be0e173b99ed308bc9f23ac996d",
+        "size": 6514
+      },
+      {
+        "path": "tools/archive/workflow_repro_widgets_values.json",
+        "sha256": "439f055e718d07a636207c3a9d40fdde9f3cdb54cafe460ee9eb80d3a1b019b6",
+        "size": 12835
+      },
+      {
+        "path": "tools/audit_action_diversity.py",
+        "sha256": "74389738369c9b661bf268c7abcb11dfb44943b19fe250446aae2e271eea8740",
+        "size": 10986
+      },
+      {
+        "path": "tools/audit_effective_diversity.py",
+        "sha256": "e0ab6c3cc9c63282e397d53aa2c4ccea557eb32d23f394da28809db3975e9925",
+        "size": 18933
+      },
+      {
+        "path": "tools/audit_epig_reference_alignment.py",
+        "sha256": "126a7415c597bccbd2d2ad845d2508313dbf39f9417adf0a67d7cc7be7c067c6",
+        "size": 13930
+      },
+      {
+        "path": "tools/audit_llm_expanded_prompt_policy.py",
+        "sha256": "6d2aefb96568c67bd9c2964fe6570dfda5ee4582dfd6a9c5c946f635407d70f8",
+        "size": 5740
+      },
+      {
+        "path": "tools/audit_prompt_repetition.py",
+        "sha256": "8cbf6e0432f294e571bfa9e4567fc1540351e2c67de4134ed03b88f9ed71f403",
+        "size": 15619
+      },
+      {
+        "path": "tools/audit_realizer_reachability.py",
+        "sha256": "5765a8ca51b71c3e15f882c66ce422cbeaf4740cb58d8c430f7e5fd7f0029147",
+        "size": 21014
+      },
+      {
+        "path": "tools/audit_reference_dimension_projection.py",
+        "sha256": "09b9ae0e3910d66f5a4d28ac5e1d02a978e9add457b3e3886b846b5d34839a08",
+        "size": 14458
+      },
+      {
+        "path": "tools/audit_repetition_guard.py",
+        "sha256": "ee59a329363acdc3cb09a082b9abf6103ed90fb713e0da69f21ec0b1756b136e",
+        "size": 19570
+      },
+      {
+        "path": "tools/audit_semantic_epig_outputs.py",
+        "sha256": "8468740e3396619685c410d54fabaf10aeb6f17193080ab2f27b895776989bd0",
+        "size": 9367
+      },
+      {
+        "path": "tools/audit_solo_duplicate_risk.py",
+        "sha256": "b43085978283d9fdbbfa3689428d2f4566f975d0ff9c005ebbd43c8ad2dce6e6",
+        "size": 4086
+      },
+      {
+        "path": "tools/audit_subject_centric_descriptors.py",
+        "sha256": "288f1b6ea23d576fcba77b59b08f3a3330364a4c3c171c40fd918d37039010e8",
+        "size": 15916
+      },
+      {
+        "path": "tools/audit_template_diversity.py",
+        "sha256": "60112df9d28686880e5c7bea74234a2a8db7773e74d06b1afdba3a304f250f3e",
+        "size": 10095
+      },
+      {
+        "path": "tools/build_action_pools.py",
+        "sha256": "1035e138d7416079bba5a58a942811df7feb1db40336f13964ae4a7cae5d86e2",
+        "size": 12315
+      },
+      {
+        "path": "tools/build_blind_prompt_review.py",
+        "sha256": "b6215c5c12b8b4490fa53cff9c24e56c29189e89311dba28ab1f5f018fd499f7",
+        "size": 24599
+      },
+      {
+        "path": "tools/build_compatibility_review.py",
+        "sha256": "dadee88b1a3825578403d2a9062ec6690e731ca0d8eb035ac62142e32b5bc70b",
+        "size": 14856
+      },
+      {
+        "path": "tools/build_prompt_quality_ablation_pair.py",
+        "sha256": "4171697f9d4f8088b88d468d12b7e79187e9d1b5326485276d21cb2b922bfacc",
+        "size": 13807
+      },
+      {
+        "path": "tools/build_prompt_quality_confirmation.py",
+        "sha256": "bbdbfa920e5d7fb0a53671eb26d0cb78e08d281a5caa79158ac7164b0af96387",
+        "size": 25953
+      },
+      {
+        "path": "tools/build_prompt_quality_verification.py",
+        "sha256": "cf8bbe1b945e6d1b879856a0d9028ecb236f6ce0f3f7249a3788322a1cea6c2f",
+        "size": 28921
+      },
+      {
+        "path": "tools/build_targeted_prompt_review.py",
+        "sha256": "4d86007ea9264b1da9474f58a3a44191bc33f3f108c2c22b7cadca7edb2f7464",
+        "size": 9375
+      },
+      {
+        "path": "tools/capture_asset_validator_baseline.py",
+        "sha256": "b2db987909f4692f7dd0fe4a01f7faa436e71208a349397a984eb15ae127b7a9",
+        "size": 1413
+      },
+      {
+        "path": "tools/capture_workflow_fixture_status.py",
+        "sha256": "331ba0b7eff5b639cadccbf23e26e1a4643c2a39abe8f9de4c0aa064d4324154",
+        "size": 2809
+      },
+      {
+        "path": "tools/check_variation_scope.py",
+        "sha256": "96b5ae7145f0e7f10b7badc6dd2311944a873de3cf6a5d7f7192c46379d612a5",
+        "size": 6061
+      },
+      {
+        "path": "tools/check_widgets_values.py",
+        "sha256": "35800920718e2c04def67b5e404992b1c5bb692e96ab2502e6d96bbe122f1803",
+        "size": 2238
+      },
+      {
+        "path": "tools/compare_prompt_quality.py",
+        "sha256": "6655a5d3eb6361401948ab5d66c096c5f7940bb5c147fa922508402555fc1cae",
+        "size": 75676
+      },
+      {
+        "path": "tools/compare_variation_prompt_pair.py",
+        "sha256": "97602da28cf4729925ce4581b142181f1797d1698abf06cd0dd498c3605f8080",
+        "size": 51174
+      },
+      {
+        "path": "tools/effective_diversity_metrics.py",
+        "sha256": "3898c2edb33ecc9816070a81b7fbc2a62ab1e7b7139d13833f41fa3e76e420fa",
+        "size": 7098
+      },
+      {
+        "path": "tools/effective_diversity_signatures.py",
+        "sha256": "455745534f1f8ccdf5a0042a267f653185723f30d65b1495f979e36bdc642778",
+        "size": 11763
+      },
+      {
+        "path": "tools/extract_epig_reference_overlay.py",
+        "sha256": "664c53ffaa7f96b0972291f2c15a0408c35a36ba4177d7fbb931ec6b96aabf05",
+        "size": 9482
+      },
+      {
+        "path": "tools/materialize_variation_candidate_snapshot.py",
+        "sha256": "451f614b1f2a34cdf45d73b6ee1482aa79c1d19b1757d3860a878fc34a32af7a",
+        "size": 38413
+      },
+      {
+        "path": "tools/measure_baseline.py",
+        "sha256": "5f3cab793e9d1264765e9df834da7a8b810b514397a3e150af25cac4338cd288",
+        "size": 3652
+      },
+      {
+        "path": "tools/migrate_action_pools.py",
+        "sha256": "6d788a346d30ed041c79e7b4cabb93fa3299e7fc8997bfb2c1c5737636f12307",
+        "size": 2464
+      },
+      {
+        "path": "tools/migrate_vocab.py",
+        "sha256": "d4a5834bb8479a33f29b97532c579be4feef8fa9bd1c6167a70148d55f55c7d7",
+        "size": 5785
+      },
+      {
+        "path": "tools/model_variation_candidate_contributions.py",
+        "sha256": "3e83bc285e9c8a64d3e1f77914d8ab039a6a4d2558e049990c4ab448bfa407e2",
+        "size": 17886
+      },
+      {
+        "path": "tools/plan_variation_final_coverage.py",
+        "sha256": "02536821d961834531eea0fee62c17c5573daa947c15d842967eaa0e53c3b5b1",
+        "size": 32740
+      },
+      {
+        "path": "tools/plan_variation_prompt_schedule.py",
+        "sha256": "22b2c55afaeced52d67dfc4b04bc9a9398f53fec315eaab701d3926f31de65a7",
+        "size": 19164
+      },
+      {
+        "path": "tools/plan_variation_semantic_pairs.py",
+        "sha256": "2c4a8ceac491b40c8f20a0080ed13f0e8de649fb8c9f07258f16c4df12a3f5c4",
+        "size": 18760
+      },
+      {
+        "path": "tools/plan_variation_target.py",
+        "sha256": "8d41e6657b8cdf9c395647e9ef6be9827772fc41da12564de14a231b6c731f55",
+        "size": 40102
+      },
+      {
+        "path": "tools/prepare_variation_candidate.py",
+        "sha256": "54f4e51b5243f9be19906304a2c1f3859b2bcbefaac1937484aab435aa95371b",
+        "size": 7088
+      },
+      {
+        "path": "tools/prepare_variation_quality_evaluation.py",
+        "sha256": "461bebe836128a0407d4f089ea7cdd4a7fb4ed676958b9a24c027063a8ffefab",
+        "size": 12912
+      },
+      {
+        "path": "tools/promote_variation_candidate.py",
+        "sha256": "e8ec79fe624886d8dddde001f91b9d78372967f97d0fbb61a4a96472cf374d0f",
+        "size": 30837
+      },
+      {
+        "path": "tools/prompt_quality_loop.py",
+        "sha256": "4248dee8006c160ae57b6fcdaebbcbdbc68f3e5e8fba8e298528082e6637f48d",
+        "size": 44116
+      },
+      {
+        "path": "tools/realizer_candidate_intake.py",
+        "sha256": "ee05352a380a1305f023d70cd3a2f84c7107c0c71699e24dd4486f3faef87117",
+        "size": 20216
+      },
+      {
+        "path": "tools/realizer_candidate_preservation.py",
+        "sha256": "52ee066cfde2cd4342e42d1eb8bbd4ded51a1083bdf23cc288e7f3d12294200e",
+        "size": 13722
+      },
+      {
+        "path": "tools/realizer_candidate_replay.py",
+        "sha256": "4c663abcc0006f4b162ee1015b13344c33dcdf3f6c52b70071f230ed658778e1",
+        "size": 15849
+      },
+      {
+        "path": "tools/realizer_reachability_diagnostics.py",
+        "sha256": "b5674797483eec7eb32750820476eae5472530cebddf56399d4f26fe7c3cc6ef",
+        "size": 18527
+      },
+      {
+        "path": "tools/report_expansion_delta.py",
+        "sha256": "bf6321fb15a3218833bb9ded89ebc55f6f1bf00030e38c94cfb6b4f9c743e72b",
+        "size": 4282
+      },
+      {
+        "path": "tools/review_reference_refresh_adoption.py",
+        "sha256": "221fc60e6ffb2784510d3133e38a5e9b85ba8495ed89a9f8e65be76573ac6452",
+        "size": 10953
+      },
+      {
+        "path": "tools/run_bias_audit.py",
+        "sha256": "b682b16ea92758d8938228b7ad32e7d44f966b31c3d5a86d0fae8df837d29985",
+        "size": 56256
+      },
+      {
+        "path": "tools/run_custom_workflow_roundtrip.ps1",
+        "sha256": "9ed3e9fd310c4fd7c1bd796877e25e0b59eb9ab3cc4a64d8df895c4eac31e4bc",
+        "size": 10888
+      },
+      {
+        "path": "tools/run_frontend_workflow_validation.ps1",
+        "sha256": "9220bfe45628b49e5a1d4c524c2d502d6206cfa8d5d6aa4809f3a0dd9a83deda",
+        "size": 3758
+      },
+      {
+        "path": "tools/run_variation_semantic_pairs.py",
+        "sha256": "268655094550133ba5a11a494420fd8ff4b8cc50f58ab63fbbbb5aa6c8bacd30",
+        "size": 11704
+      },
+      {
+        "path": "tools/run_variation_verification.py",
+        "sha256": "b103d75d0fa23575240af08ee63713c620adb24961f848266cc5afbf48542a88",
+        "size": 16625
+      },
+      {
+        "path": "tools/semantic_review_contract.py",
+        "sha256": "b70184a8464c06799d279606dabf8070442d1e7b966c3d981a87550d037f7ba7",
+        "size": 3233
+      },
+      {
+        "path": "tools/sync_upstream_verification_assets.ps1",
+        "sha256": "a33337c57e1559b88b96d4abc7a16315cdd520776e5483a50f02292c46e7b026",
+        "size": 2307
+      },
+      {
+        "path": "tools/validate_prompt_data.py",
+        "sha256": "14332180b50bed7255ae2fd364da5a5d2b7916a31a99e0e173d2571026ecf795",
+        "size": 11286
+      },
+      {
+        "path": "tools/variation_quality_contract.py",
+        "sha256": "bfab0023f9691a455634be6ea9e4b616571f344aaf553eb0251255420133e910",
+        "size": 16119
+      },
+      {
+        "path": "tools/verify_full_flow.py",
+        "sha256": "f8f38881bf6cc832df9103cbfec93b157d3e27e22aa8679df518fe92b70b6381",
+        "size": 9904
+      },
+      {
+        "path": "tools/verify_prompt_execution_parity.py",
+        "sha256": "8395b16638b9a2bdafb51f354d791d2a18365b93a889dd9045241abc8d5e8980",
+        "size": 24753
+      },
+      {
+        "path": "tools/verify_realizer_v2_candidate.py",
+        "sha256": "0c26388f359a452be889d37957db1e375759c8c297210456565d0d4af84ba67a",
+        "size": 16797
+      },
+      {
+        "path": "tools/workflow_prompt_runner.py",
+        "sha256": "14f6b728ebd93506d2adb85d7b7e16dae3127e4661a1234a50a80dd1e597abcb",
+        "size": 33658
+      },
+      {
+        "path": "verification/browser/customWorkflowRoundtrip.spec.ts",
+        "sha256": "86999fd56cc77784010dc7be5a18bf70fe1879417cb1704c92e3c15e70eda0d7",
+        "size": 5969
+      },
+      {
+        "path": "verification/browser/playwright.custom-node.config.mts",
+        "sha256": "380e73f1dbedc0b35783cfd6c8e8cb5e75fc6c741e7ca4dc4381099ec462644e",
+        "size": 742
+      },
+      {
+        "path": "verification/comfyui_sink/__init__.py",
+        "sha256": "4c0f96b0f0006df5a559d09d44b8d521a32d7992383223310b5ba2a3f88e3e42",
+        "size": 132
+      },
+      {
+        "path": "verification/comfyui_sink/nodes.py",
+        "sha256": "8654a8b105478d84b7ba6999119911d371615d8eccebdf4b9f5e14c2508e81e7",
+        "size": 1359
+      },
+      {
+        "path": "verification/environment.json",
+        "sha256": "78fb9e5505f3f96c5c9cd0f39748284ed1d22204e92bce08919f2d12025944f6",
+        "size": 1227
+      },
+      {
+        "path": "verification/fixtures/prompt_parity_workflow.json",
+        "sha256": "530ecbde87b859259e3e2c53e3d43d150e97cd6281f061529ce19a43ecb920e7",
+        "size": 3167
+      },
+      {
+        "path": "verification/fixtures/prompt_quality_supported_profile.json",
+        "sha256": "86c9c43f87b53c2d92e7de670b21178c6b89a74cf7baf26f33e3b83bc599b39f",
+        "size": 794
+      },
+      {
+        "path": "verification/frontend/customNodeWorkflowCompatibility.test.ts",
+        "sha256": "7987f3a1f77ae070d046e59e98c5a404e99876f4db148766c98a12d7c6f3da0d",
+        "size": 1383
+      },
+      {
+        "path": "verification/frontend/customNodeWorkflowRoundtrip.test.ts",
+        "sha256": "782a3f794f9e7934b29acb066a9dea2cf6271bad1925785cfaf9df8e30c0d48e",
+        "size": 3257
+      },
+      {
+        "path": "verification/frontend/vitest.custom-node.config.mts",
+        "sha256": "21506b6ae4c81990b645f47459eec0dee7328d5deedbdf1cbfc6026ff4eb3a55",
+        "size": 435
+      },
+      {
+        "path": "vocab/__init__.py",
+        "sha256": "7da202e948bd06aea7f6a5d7ffcf65c91a13c81ef6a4e2684f83a551451a7fc1",
+        "size": 17
+      },
+      {
+        "path": "vocab/background/__init__.py",
+        "sha256": "0a1fabae535f65b2acdfc48c9aff3938c8bfdbd7ee4ba5f693638688577714e9",
+        "size": 509
+      },
+      {
+        "path": "vocab/background/concept_packs.py",
+        "sha256": "b8b6067d095ea4dea0cf7a0f0581a16a76ab5c0a2930426ad548aaceba3ef4b2",
+        "size": 155
+      },
+      {
+        "path": "vocab/background/defaults.py",
+        "sha256": "92dc607a50c20e141ffe1ce73b67e850da06a19483b5c03a773ded27a022762c",
+        "size": 164
+      },
+      {
+        "path": "vocab/background/loc_tag_map.py",
+        "sha256": "f63cc490406e277fd5d7d6503d3c29b1eeda2bf6e42f4885ac1fc6c8e5dba08e",
+        "size": 351
+      },
+      {
+        "path": "vocab/clothing/__init__.py",
+        "sha256": "affb8f94951fd34e897707fcebb77f30437f61544fa85063d7ea15fcf9dcb01b",
+        "size": 688
+      },
+      {
+        "path": "vocab/clothing/concept_packs.py",
+        "sha256": "fbed28bfdadb26dbda0db807688f5a0cc737129ba8c51096358a5a5ed7637360",
+        "size": 149
+      },
+      {
+        "path": "vocab/clothing/constants.py",
+        "sha256": "2ec8681c93250a09bd3abdecd1a217b661e8a97c7075997bf19d98ed4beda6d6",
+        "size": 552
+      },
+      {
+        "path": "vocab/clothing/theme_map.py",
+        "sha256": "3e9fbd254fdb528a40676f1be83beb1eafbfcb1313f82bc329a9819e38c41da8",
+        "size": 226
+      },
+      {
+        "path": "vocab/data/action_pools.json",
+        "sha256": "719ced91fffb05e49f05dec4e8e9997863be75bd3b5edb933b9c9d597977dbb9",
+        "size": 216779
+      },
+      {
+        "path": "vocab/data/action_semantic_profiles.json",
+        "sha256": "d83684ec7f0a5ae663e9fa5c9e9080504099a05d4e434762a68a06b0f19f9e2c",
+        "size": 1883
+      },
+      {
+        "path": "vocab/data/action_slot_descriptors.json",
+        "sha256": "5206edbf6309932f4178b8dcfd9486886fb843b70cf8b6ed7c1b8ace4e119e94",
+        "size": 7270
+      },
+      {
+        "path": "vocab/data/background_alias_overrides.json",
+        "sha256": "7c77fa64a36d092f73630a167232761cad1df88703049a0357cfad3a06f4752a",
+        "size": 3131
+      },
+      {
+        "path": "vocab/data/background_defaults.json",
+        "sha256": "351bef591908f19eac6cc41651ea4543f250ad62600a7de42aaa8925112e1993",
+        "size": 378
+      },
+      {
+        "path": "vocab/data/background_loc_tag_map.json",
+        "sha256": "d1040f130747bed99f950603cb93d99caaf4fcd2ffe248e9de3ace7f28922831",
+        "size": 11964
+      },
+      {
+        "path": "vocab/data/background_packs.json",
+        "sha256": "f07fb060b7b97900d5a39f1666a1449e675070d88206bcf3ecdd7e3394dc6ed3",
+        "size": 128300
+      },
+      {
+        "path": "vocab/data/character_profiles.json",
+        "sha256": "d4f176f8ecc8aa72f879aa552c1239835c7f8a225e7e6e4855adf9818b1c5401",
+        "size": 9624
+      },
+      {
+        "path": "vocab/data/clothing_axis_profiles.json",
+        "sha256": "1505adfd441efc3bf571a2e0016e4e9838a7ef04dc9ba1831c2e9aab9925616a",
+        "size": 6483
+      },
+      {
+        "path": "vocab/data/clothing_constants.json",
+        "sha256": "95541d6d022f35831a0179572801e48c66ff9ae5c842825d87da54496f968194",
+        "size": 499
+      },
+      {
+        "path": "vocab/data/clothing_packs.json",
+        "sha256": "d9dde50a664df0e80e15f09dff5e2ace7f371abe9ba9daf275cf60de48775a5e",
+        "size": 55969
+      },
+      {
+        "path": "vocab/data/clothing_theme_map.json",
+        "sha256": "cfe525a7f293ebef4636a5cdad9f2ca0cf8b63a6e0fe7542b3aaf0bd2bb2c93d",
+        "size": 5817
+      },
+      {
+        "path": "vocab/data/emotion_vad_profiles.json",
+        "sha256": "67dcd68b2a9d0c41febf166c8bfddbdb67479e3ece5fabfcad6c1cae3a3d1417",
+        "size": 1434
+      },
+      {
+        "path": "vocab/data/garnish_base_vocab.json",
+        "sha256": "d4dd65476383312ebe389d713a1c1c9576f7a073abf90ecf0dbd2630bb540b33",
+        "size": 8733
+      },
+      {
+        "path": "vocab/data/garnish_exclusive_groups.json",
+        "sha256": "8d496608c0d6eda692878d2e2633e5e95dd53df954eeafda4d4b69ad0b1b3604",
+        "size": 420
+      },
+      {
+        "path": "vocab/data/garnish_micro_actions.json",
+        "sha256": "59f3cb647643d75434933cf87f38e7cd2f0eb3ab9a8948dfbd9c6152ddb1d534",
+        "size": 15604
+      },
+      {
+        "path": "vocab/data/loc_aliases.json",
+        "sha256": "b10373076640b8382a545e334e7cce1e0279c8b446defdc01d3e8d2c94ae071f",
+        "size": 226
+      },
+      {
+        "path": "vocab/data/loc_aliases_canonical.json",
+        "sha256": "26753d660edb3bc30066397c5337d86e6f6a9ef0edc7c93a662191d659dd92b6",
+        "size": 584
+      },
+      {
+        "path": "vocab/data/loc_aliases_fallback.json",
+        "sha256": "a8bfcd38723cbef978af00891195365ba2e28634e10c8d1839e17e72e788b08d",
+        "size": 1276
+      },
+      {
+        "path": "vocab/data/loc_aliases_legacy.json",
+        "sha256": "cd216a3fec393e17556f92d88ec25a19acf4496552ae0537a73749e391ef1834",
+        "size": 344
+      },
+      {
+        "path": "vocab/data/location_axis_profiles.json",
+        "sha256": "3f6d8fbb93006797e3f18568ef0ab989fc4d09a33e7ba58c294adf95d218dd97",
+        "size": 8469
+      },
+      {
+        "path": "vocab/data/natural_language_realizer_v2.json",
+        "sha256": "87ddca68a2fdc275ac415547d9f975d49ae8d65f36172f253fe68d483e162012",
+        "size": 3305
+      },
+      {
+        "path": "vocab/data/object_concentration_policy.json",
+        "sha256": "154af08b0a09e9c549da9cd136b9ce7d3594266c9d5e511fd577813ef4259844",
+        "size": 2781
+      },
+      {
+        "path": "vocab/data/object_relation_profiles.json",
+        "sha256": "9e1c9c32edcf7178a49c2c1396ceaee920d95b508caa811b99356efb57ef9eed",
+        "size": 3502
+      },
+      {
+        "path": "vocab/data/personality_behavior_profiles.json",
+        "sha256": "bdeb54024618f931803ac8d370307a626f115c3dbff6a09d2799ec83fb39b15d",
+        "size": 5649
+      },
+      {
+        "path": "vocab/data/policy_terms.json",
+        "sha256": "2e46319ca1d80bd4a284a877d10e400e8895972ca8d036ce2e8620ba4fb2e1c3",
+        "size": 1367
+      },
+      {
+        "path": "vocab/data/prompt_quality_policy.json",
+        "sha256": "2a58867b85ba6827cea848623f6214b767dea147265e155ea5110ab6ef31fae7",
+        "size": 7426
+      },
+      {
+        "path": "vocab/data/scene_axis.json",
+        "sha256": "1c943e33ea15663e355f7a5aa8459706e7222eb5cff1970b9899d496aff10d08",
+        "size": 4833
+      },
+      {
+        "path": "vocab/data/scene_compatibility.json",
+        "sha256": "ea8ea526c515c8e196bc3132acf515ce2f543cdf98b645e81d32f6e3b2cdaa7f",
+        "size": 37558
+      },
+      {
+        "path": "vocab/data/semantic_epig_config.json",
+        "sha256": "ce4f4046bc8c9a19d203dcab58eda9e94d9d08f782fa156bf53cb882dfa85d25",
+        "size": 503
+      },
+      {
+        "path": "vocab/data/staging_axis_descriptors.json",
+        "sha256": "57272477bd7c058cf28da565ac8c0231f500016da7c53bfd2d18336725f90076",
+        "size": 3450
+      },
+      {
+        "path": "vocab/data/subject_centric_descriptor_overrides.json",
+        "sha256": "c22ce0f2ba07bfcec4da659f6e2e0bfb6870a180848ec054294c6f2ef028cde9",
+        "size": 5599
+      },
+      {
+        "path": "vocab/data/template_catalog.json",
+        "sha256": "d87139a8bce6cca8e75c983fcadae87d1b6246f9fe5fddd932d3f02577de78b4",
+        "size": 5035
+      },
+      {
+        "path": "vocab/data/variation_action_semantic_classifier.json",
+        "sha256": "89d68c733409b370bab14235ec05283bac37cf0e56c0696f09e91a17c05a55d6",
+        "size": 2288
+      },
+      {
+        "path": "vocab/data/variation_scope.json",
+        "sha256": "901403c3824a2ce0b5a4f8c7f16b82a6e1a7ac84c17941f6c5629c83d012012c",
+        "size": 19668
+      },
+      {
+        "path": "vocab/data/variation_semantic_comparators.json",
+        "sha256": "f988a6f3317213f6ad9091e8c2ac5dd496822677c801c07c5c5b984ca17db71c",
+        "size": 8083
+      },
+      {
+        "path": "vocab/data/variation_semantic_review_policy.json",
+        "sha256": "7835685e7dde3334115ef1fe08e8761a53eb87c9691e2f4a973494db46d18cba",
+        "size": 1743
+      },
+      {
+        "path": "vocab/data/variation_semantic_review_policy_v2.json",
+        "sha256": "46167719d14def95f1ef188b9b527070952f56cd08fe47ed7e4c64a31007fae3",
+        "size": 1507
+      },
+      {
+        "path": "vocab/data/variation_semantic_review_policy_v3.json",
+        "sha256": "e4e4ad6fb6e0c783f9070e5caa3ba58c521a2b229db90a5b790178a7560f8876",
+        "size": 1507
+      },
+      {
+        "path": "vocab/data/variation_semantic_review_policy_v4.json",
+        "sha256": "270a3e523a57c1c3e730a0cc5aa13729aefc166de70cacd6ff0989d8f3e15024",
+        "size": 2109
+      },
+      {
+        "path": "vocab/emotion_vad.py",
+        "sha256": "09ff65aeab70e027ec08ff31da9f51bd6790c745a086ea7d55cd96f6e4ed545d",
+        "size": 7173
+      },
+      {
+        "path": "vocab/epig_reference.py",
+        "sha256": "da6928b4bad0adb8be04f0bbf7162e0a0cc9f79fc67e6530c0c1946cff71adea",
+        "size": 6973
+      },
+      {
+        "path": "vocab/garnish/__init__.py",
+        "sha256": "e92063a18f7a5a4920009b6fc3da7d23270cb5c274882cc19063c3c3b786f68c",
+        "size": 1250
+      },
+      {
+        "path": "vocab/garnish/base_vocab.py",
+        "sha256": "d379c891fd59564536ab2ad9067100a522622651a0224a4acedca0c64d5b234a",
+        "size": 738
+      },
+      {
+        "path": "vocab/garnish/logic.py",
+        "sha256": "d0c0b4b296dad47c47a7f6390d6d507a235adef3c34d1502eded4001e0ed6d92",
+        "size": 37164
+      },
+      {
+        "path": "vocab/garnish/micro_actions.py",
+        "sha256": "aa42fa8a4d140aefe11b9d7d8719c6a55fa0ec078bef5cf012b20290975af187",
+        "size": 263
+      },
+      {
+        "path": "vocab/garnish/utils.py",
+        "sha256": "6b8cbcf849bc0c86739511c8f9eca95ee3d55fea7957e70553f8a190ed8b03bc",
+        "size": 910
+      },
+      {
+        "path": "vocab/loader.py",
+        "sha256": "6eabf1ff18acf1b5eb6816ca09ab766f34606ab56e6798b0dc2b96de9d0aee93",
+        "size": 1862
+      },
+      {
+        "path": "vocab/loc_tag_builder.py",
+        "sha256": "8cd003b255e928811a790102db14dfd12773a90a73ae887d79417ae0cb792e46",
+        "size": 2695
+      },
+      {
+        "path": "vocab/personality_semantics.py",
+        "sha256": "8520fff75e359adf62559e8b5450b5774dd44a3ab06e1b1d16c0f04cb62f5f03",
+        "size": 17216
+      },
+      {
+        "path": "vocab/policy.py",
+        "sha256": "ad4e4aec0e9b9e26e09e3ae6d7eb3a95df0a16afc7a18f5fa09f91995669298b",
+        "size": 6564
+      },
+      {
+        "path": "vocab/readme.md",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "size": 1
+      },
+      {
+        "path": "vocab/seed_utils.py",
+        "sha256": "d37b291a2800fa5d9b340eb45f0ebd76ee2765c3eaa3364239cc0ebe81dee854",
+        "size": 1432
+      },
+      {
+        "path": "vocab/semantic_space.py",
+        "sha256": "6d39002c78c8bfc4da8d69a663c3dc0d4e5ccc209b0623e8b2cbad38197e64e5",
+        "size": 5143
+      },
+      {
+        "path": "vocab/source/action_pools/_manifest.json",
+        "sha256": "42ab9141c5f17dcfc514ddd7aa250c3597043a8ef08b15a92007a392dafe0e97",
+        "size": 2889
+      },
+      {
+        "path": "vocab/source/action_pools/_shared_families.json",
+        "sha256": "581e9926d015ac3f0e8299c8f3ecf1aa9038ca443625bf7eab255e67645ba7ed",
+        "size": 13780
+      },
+      {
+        "path": "vocab/source/action_pools/abandoned_shrine.json",
+        "sha256": "3e57b0277813b280adde159a5a313f02299a7da30946b9a688cf1dbd8c996bff",
+        "size": 828
+      },
+      {
+        "path": "vocab/source/action_pools/airship_deck.json",
+        "sha256": "6db36ffc84a1192bb301717f06c0a1d8004ec15e44d86dfe23ad30f060b6a977",
+        "size": 497
+      },
+      {
+        "path": "vocab/source/action_pools/alien_planet.json",
+        "sha256": "e77793cabe6367ea11c185b0293dbabd875520cb16fe5c7d015089a745dbd78e",
+        "size": 674
+      },
+      {
+        "path": "vocab/source/action_pools/antique_shop.json",
+        "sha256": "809f6143d49a4e9e24eae7ba9b6e299dcf02fa5bc2255a2bb96ec2e3a275123c",
+        "size": 740
+      },
+      {
+        "path": "vocab/source/action_pools/apartment_balcony.json",
+        "sha256": "ba5af434a97ee22f2504ff1888f8a5c5646dd14682000ed307d6aba4d60f0165",
+        "size": 907
+      },
+      {
+        "path": "vocab/source/action_pools/apartment_entryway.json",
+        "sha256": "7f5c7015f7541e3561b45131269ddb2609c51846b658d5797642c5040626baad",
+        "size": 896
+      },
+      {
+        "path": "vocab/source/action_pools/aquarium.json",
+        "sha256": "91f2ddaf42b3a1f89ee87aa1dca1bd0f85c3e6d78617eb358373eef93075297b",
+        "size": 1208
+      },
+      {
+        "path": "vocab/source/action_pools/art_gallery.json",
+        "sha256": "59414894258ad4225448db3041a157941e3e206a75f7df9bd4d1bce2d46f6910",
+        "size": 1223
+      },
+      {
+        "path": "vocab/source/action_pools/bakery_shop.json",
+        "sha256": "cdcfb312837161652f84cc6dca12500305888e223275e8b5bcff8bf51da4206e",
+        "size": 893
+      },
+      {
+        "path": "vocab/source/action_pools/bamboo_forest.json",
+        "sha256": "af7286d6199df152a9f302e2b70fa197447cf9a40f6d2f59dd0f9e746a51742f",
+        "size": 667
+      },
+      {
+        "path": "vocab/source/action_pools/bedroom_boudoir.json",
+        "sha256": "a14486f1191967465b9ba681ec095cee23cb73a68695a4c6084b15229d393536",
+        "size": 1141
+      },
+      {
+        "path": "vocab/source/action_pools/bike_station.json",
+        "sha256": "189ffcc7f507f12985e83fd5420d70ce94d657d2ceeb765a421999d9efc2c07b",
+        "size": 1932
+      },
+      {
+        "path": "vocab/source/action_pools/boardroom.json",
+        "sha256": "9e96cae0b48b57d083c104b0b353ae1839f46f7e435ff7082fa3b4c7ab023314",
+        "size": 765
+      },
+      {
+        "path": "vocab/source/action_pools/botanical_garden.json",
+        "sha256": "6b88406723e7cb1123fcc598c8995a877bf06606d15a13d4c3c344765aa4c81d",
+        "size": 1162
+      },
+      {
+        "path": "vocab/source/action_pools/burning_battlefield.json",
+        "sha256": "7e76cc7abd2857c2615a5e1e1c5f1c2439e55fe7cd7b454c9cec718462f08583",
+        "size": 638
+      },
+      {
+        "path": "vocab/source/action_pools/bus_terminal.json",
+        "sha256": "4e638c233909f2d59ad0754d0964a64f62da469079b1a73e646a712f212f8720",
+        "size": 955
+      },
+      {
+        "path": "vocab/source/action_pools/campus_cafeteria.json",
+        "sha256": "31fa2a7b3608d4405392a7994c9e2c8f5ff79a56405ac1e952a024735f73dfe0",
+        "size": 889
+      },
+      {
+        "path": "vocab/source/action_pools/campus_hallway.json",
+        "sha256": "b18f2b4707366a3492a05f227936785fd4f78d9a726f618cfbac5468f9f9fca8",
+        "size": 934
+      },
+      {
+        "path": "vocab/source/action_pools/canal_walkway.json",
+        "sha256": "36fda57953bdcfd9fc478842ce8ecea59ea0f270d705e960ea820e7d31f4ce0e",
+        "size": 1981
+      },
+      {
+        "path": "vocab/source/action_pools/castle_hall.json",
+        "sha256": "ca997d78b3c80c2b8bca2af8f2318184fb3b829b5c5d5bb13714bfc5b6370a4f",
+        "size": 859
+      },
+      {
+        "path": "vocab/source/action_pools/cinema_lobby.json",
+        "sha256": "98f9bbb926b64881a50a645ae18f3d2ad4884c69f053e793c5c8407673e63add",
+        "size": 935
+      },
+      {
+        "path": "vocab/source/action_pools/clean_modern_kitchen.json",
+        "sha256": "1e90921cf5bbcccd49d0079fa86ead094c07c820630838949c49e6db7c9c1722",
+        "size": 1164
+      },
+      {
+        "path": "vocab/source/action_pools/clinic_waiting_room.json",
+        "sha256": "7d734601587b6afbe0af77d36d34161d771b970d72aafb4e924d77dc4ef5d3de",
+        "size": 1953
+      },
+      {
+        "path": "vocab/source/action_pools/clockwork_workshop.json",
+        "sha256": "ae89d4c393235c1eaf77de4c0a374e23fbd73f5bf8ee3ba7e2dce6c0cf139a7f",
+        "size": 493
+      },
+      {
+        "path": "vocab/source/action_pools/community_center.json",
+        "sha256": "0e2517c967adddcdb856c5bf9253581d1bd41ab282b2b72b0d593ebb2f00881d",
+        "size": 984
+      },
+      {
+        "path": "vocab/source/action_pools/community_garden.json",
+        "sha256": "cad841d122b2d133f8d960a586c4be2a7ce48a1771c056b360a18a936f3a14a1",
+        "size": 1877
+      },
+      {
+        "path": "vocab/source/action_pools/community_theater_backstage.json",
+        "sha256": "137575f4bc97ab5eba554b9baa8559df6a0387a7aeff32f615369867ed314dc3",
+        "size": 1994
+      },
+      {
+        "path": "vocab/source/action_pools/commuter_transport.json",
+        "sha256": "26321499aa2bf6721d59f9b3ae300989ace1f7f4c66f904d1e34e95a3528e2a6",
+        "size": 1187
+      },
+      {
+        "path": "vocab/source/action_pools/concert_stage.json",
+        "sha256": "b350cad3d9d0a6ee15329887ebc1df29c3ff40a053f4525a0da33687dd9f986b",
+        "size": 822
+      },
+      {
+        "path": "vocab/source/action_pools/convenience_store.json",
+        "sha256": "b0e3a759e37d6ea4092dfe491b03e0c2b4a58e95610fd825677818e6d4cf88ad",
+        "size": 905
+      },
+      {
+        "path": "vocab/source/action_pools/coworking_space.json",
+        "sha256": "0d5fa47fbfb580bf30675a40111e6973d508790c7e430a4521b4d44795d8e7ef",
+        "size": 890
+      },
+      {
+        "path": "vocab/source/action_pools/cozy_bookstore.json",
+        "sha256": "e1b7421ff0422860b53eceb55de7e218b814ce966625c285bc00dea0f049ca0b",
+        "size": 1210
+      },
+      {
+        "path": "vocab/source/action_pools/cozy_living_room.json",
+        "sha256": "5c5591738ba2e8ff542bfb5a0a353e1762a4dde953c22191816409b00ee49828",
+        "size": 1145
+      },
+      {
+        "path": "vocab/source/action_pools/cyber_lab.json",
+        "sha256": "f4c626353f52d8847f31b827f53fe1daeddbc671d9adb91533b17a0891b5cf00",
+        "size": 498
+      },
+      {
+        "path": "vocab/source/action_pools/cyberpunk_street.json",
+        "sha256": "547f07663054fd502d52f1a73160c976a451cd2b4cff8343e37b3dd715c610b5",
+        "size": 844
+      },
+      {
+        "path": "vocab/source/action_pools/design_studio.json",
+        "sha256": "0ac47dfa046bc31e38a69873b1773258a415b9bc8ab098aaf92dbe1eba66deb0",
+        "size": 1936
+      },
+      {
+        "path": "vocab/source/action_pools/dragon_lair.json",
+        "sha256": "4094d797569dec4bfe7f4f46f368d43fe2f164a1cae27b2b7720108723edd8b3",
+        "size": 635
+      },
+      {
+        "path": "vocab/source/action_pools/drugstore_aisle.json",
+        "sha256": "28addef124b58dfa05bf8756deb5488e9ef8d2a65b265c146427e65fb12c09d3",
+        "size": 886
+      },
+      {
+        "path": "vocab/source/action_pools/dungeon_crypt.json",
+        "sha256": "968ce204b37bcf1ac1e3e7a2f809cd78c726cbdf0e57dd5f962b526dbe1e6c7c",
+        "size": 643
+      },
+      {
+        "path": "vocab/source/action_pools/elegant_dining_room.json",
+        "sha256": "694a4864f35392aaf3c06aa76206f87bd00eaec3322434c70ff8374e8c3df61b",
+        "size": 725
+      },
+      {
+        "path": "vocab/source/action_pools/enchanted_lake.json",
+        "sha256": "cafc770663dcc7ad01b87ba7788e208cce5785af219ffb4d3c4fb8213e3b3fbb",
+        "size": 900
+      },
+      {
+        "path": "vocab/source/action_pools/family_restaurant.json",
+        "sha256": "c6d5eec95e52d6349f38423757f94dde8061a855edbecf06ebfb815268995c36",
+        "size": 852
+      },
+      {
+        "path": "vocab/source/action_pools/fantasy_forest.json",
+        "sha256": "9851d4e26a0e70dde715d54559ba5d3075e63c0d461427d27dd4389c9cc8d6d4",
+        "size": 497
+      },
+      {
+        "path": "vocab/source/action_pools/fashion_boutique.json",
+        "sha256": "a0a6ee3d66178077b05a9313026df8742f806370e00719ec36ebce3d8338b242",
+        "size": 1067
+      },
+      {
+        "path": "vocab/source/action_pools/ferry_terminal.json",
+        "sha256": "08a19d76181e92715656d7cfcf41cebd65836cc52e9de688936c73825d1d7d3c",
+        "size": 1952
+      },
+      {
+        "path": "vocab/source/action_pools/fire_station.json",
+        "sha256": "3eb5fb42a16f98d4d8ca7b0d09a5db59d4f96247e0096dbf82aacecb4cd40500",
+        "size": 1914
+      },
+      {
+        "path": "vocab/source/action_pools/fitness_gym.json",
+        "sha256": "55478463e146757958aefa9e480caf5cdde63df45ba47715793520f86488cbb5",
+        "size": 1093
+      },
+      {
+        "path": "vocab/source/action_pools/flower_market.json",
+        "sha256": "1443087bb12340611cb2c0aec7d1a080a68b87e22462143b1431d46441b867ea",
+        "size": 1937
+      },
+      {
+        "path": "vocab/source/action_pools/food_court.json",
+        "sha256": "923dd645d61982cf409af12663657be1c7f090a56a014f5f57aad47d561788db",
+        "size": 912
+      },
+      {
+        "path": "vocab/source/action_pools/forest_cabin.json",
+        "sha256": "0c9305e422f71f0c8019f2e47d2811d819e9600f04a309fe6dbbd15c4599196f",
+        "size": 1910
+      },
+      {
+        "path": "vocab/source/action_pools/game_arcade.json",
+        "sha256": "164f357acbc566befee116aac8a765a4020c9ed56b083118e686c5bdd7a0ff07",
+        "size": 894
+      },
+      {
+        "path": "vocab/source/action_pools/greenhouse_nursery.json",
+        "sha256": "86e30519568116f513e81d9733710e56a32be0078079e8231503f1c0975b6c96",
+        "size": 1911
+      },
+      {
+        "path": "vocab/source/action_pools/high_tech_medbay.json",
+        "sha256": "1cbcc1d3722c046826ba90c51bf847461760ea6fe7acc59f9a11012703e3a5c9",
+        "size": 876
+      },
+      {
+        "path": "vocab/source/action_pools/illuminated_park.json",
+        "sha256": "b735913fc6c6c9f8d8c292a57c4aea6f42b0dc99ce4bc727ef27e0a6ce14599d",
+        "size": 1172
+      },
+      {
+        "path": "vocab/source/action_pools/japanese_bath.json",
+        "sha256": "e03055b4e19fe55e47ed514ed67ddc4d44e29ff749236b4d8c9fb0ae65bd9000",
+        "size": 627
+      },
+      {
+        "path": "vocab/source/action_pools/japanese_garden.json",
+        "sha256": "4d91af1385eeb7023fa43c4b2a4c55ab1595818799e073bf92e845893a56fe82",
+        "size": 867
+      },
+      {
+        "path": "vocab/source/action_pools/karaoke_bar.json",
+        "sha256": "a13643fd96b6a70b8ae137c693164a8cbc45d529b7eceb07061c1c2d0e89b66b",
+        "size": 828
+      },
+      {
+        "path": "vocab/source/action_pools/laundromat.json",
+        "sha256": "36d55005ba5c6b656e717c0d41b1158cb9ebbf806f479a6ad8dc882545adde3b",
+        "size": 870
+      },
+      {
+        "path": "vocab/source/action_pools/local_market_street.json",
+        "sha256": "48f330b294018bdf9bd1dfca3dd07590aaa176894a11868101696e69ae6d9181",
+        "size": 1019
+      },
+      {
+        "path": "vocab/source/action_pools/luxury_bathroom.json",
+        "sha256": "5f71d09a5b896263b58506087fd43203a12e59089dbbba885809ffa03020896f",
+        "size": 714
+      },
+      {
+        "path": "vocab/source/action_pools/luxury_hotel_lobby.json",
+        "sha256": "64a3679622279e6ac5b3db408e55e0460845a746ebfe6cc7b2be01b267266ea2",
+        "size": 715
+      },
+      {
+        "path": "vocab/source/action_pools/luxury_hotel_room.json",
+        "sha256": "fd1760d9fb92ba13dc598e66e5b10ca2e9279d5f1976b99c5d966e857b052d1a",
+        "size": 813
+      },
+      {
+        "path": "vocab/source/action_pools/magic_academy_library.json",
+        "sha256": "ff7f7421b5cd49b849954cb98d98586466ecc5ca561d8acf0b0521254c71a5b5",
+        "size": 857
+      },
+      {
+        "path": "vocab/source/action_pools/maker_space.json",
+        "sha256": "08a50d203c6cc140b6eddd8e33a187e473de7a18094cbaff6b1d5771d4fc0f05",
+        "size": 1926
+      },
+      {
+        "path": "vocab/source/action_pools/messy_copy_room.json",
+        "sha256": "f68ceba4ad86999cef34f929eff5cd824742e971048e78164e85e94c0cb1983f",
+        "size": 655
+      },
+      {
+        "path": "vocab/source/action_pools/messy_kitchen.json",
+        "sha256": "1c5493253e872c425bb705187a6f35f47e13324db356579c42f01e01cf0a4065",
+        "size": 1140
+      },
+      {
+        "path": "vocab/source/action_pools/modern_office.json",
+        "sha256": "d0816e5117d266826c9ea65b401cb10e2fec889676f39d7c2e9c0aca02b0dd5e",
+        "size": 939
+      },
+      {
+        "path": "vocab/source/action_pools/mountain_resort.json",
+        "sha256": "c21f63fed5c749e5139a71126038754dd439d7f501b10e7e032c84fa55096153",
+        "size": 850
+      },
+      {
+        "path": "vocab/source/action_pools/museum_hall.json",
+        "sha256": "c1f773f608c41e2cc288580b4758149fcc719b05f688291c25b55ccda82dc876",
+        "size": 1154
+      },
+      {
+        "path": "vocab/source/action_pools/neighborhood_crosswalk.json",
+        "sha256": "4f622f7744fedb2940ed25502eceaf2090b7c7ddb7aaefb888b4077c18688340",
+        "size": 1007
+      },
+      {
+        "path": "vocab/source/action_pools/neighborhood_playground.json",
+        "sha256": "4e37104e4374e00e5d2bb8e8f98c32f74d8134caa352157081ffc2b5608ae12e",
+        "size": 985
+      },
+      {
+        "path": "vocab/source/action_pools/neon_city_street.json",
+        "sha256": "6b96e0e11ad9ae87a239d559c95999cdc8c48a3a54b6f3d8c0c64eef878df39a",
+        "size": 782
+      },
+      {
+        "path": "vocab/source/action_pools/observatory_dome.json",
+        "sha256": "347c1507e2439361a1dd04dac64a0339611398f2dae4fc5c93a93dd0f2ef0659",
+        "size": 1954
+      },
+      {
+        "path": "vocab/source/action_pools/office_elevator.json",
+        "sha256": "6bf0e106aff466e699e3b103e924e9577b48849e87d6f9c454ed1343c39519e1",
+        "size": 761
+      },
+      {
+        "path": "vocab/source/action_pools/opera_house.json",
+        "sha256": "87783c0e9ecbea6796405bb0e693dfa810f023f7a694e332ba27fff105e9097b",
+        "size": 539
+      },
+      {
+        "path": "vocab/source/action_pools/picnic_park.json",
+        "sha256": "768ccf667fe725849842387033c35823090036cdf139aa6ab03f6b5dd58de9d1",
+        "size": 1141
+      },
+      {
+        "path": "vocab/source/action_pools/poolside_resort.json",
+        "sha256": "26a6bf30f7ced4b9976251934e150e6f137b309d4bfe33842534ff3cd53f5596",
+        "size": 710
+      },
+      {
+        "path": "vocab/source/action_pools/postal_service_counter.json",
+        "sha256": "e543fa423b785c160840c46257d5a9ae0db4a0b14d907f5edaf407488e21f4a7",
+        "size": 1900
+      },
+      {
+        "path": "vocab/source/action_pools/print_shop.json",
+        "sha256": "09094664135bfcb703fb0c22822b881c9c49f7d2aefa30714a364bc14b040d46",
+        "size": 1949
+      },
+      {
+        "path": "vocab/source/action_pools/public_library_lobby.json",
+        "sha256": "66d498fcfb9b349c0218a5081a267a2b5b0a6c5b24bcfb8f18ac9830ff062161",
+        "size": 995
+      },
+      {
+        "path": "vocab/source/action_pools/public_plaza.json",
+        "sha256": "0be4621e697b52057f7c360a928d5a7e99610af86c6a2b95f37e4f0710dc5e52",
+        "size": 2021
+      },
+      {
+        "path": "vocab/source/action_pools/rainy_alley.json",
+        "sha256": "4fe176c8bcb6173ee1b760b7256ee07614795c192fbc58c58a1a94ac00fd1ea9",
+        "size": 1182
+      },
+      {
+        "path": "vocab/source/action_pools/rainy_bus_stop.json",
+        "sha256": "086e2c212e77769d1d3d62a8523d6daa8ee3190c907da53b8f031c681438c23a",
+        "size": 726
+      },
+      {
+        "path": "vocab/source/action_pools/recording_studio.json",
+        "sha256": "1ee0edb99f3138e2dce98cc54ae1a4865aeca7d1093d70ae92c3734627e35309",
+        "size": 698
+      },
+      {
+        "path": "vocab/source/action_pools/riverside_walk.json",
+        "sha256": "1913a9b68b2b21ff2b9065c4e4f43b32b9b57b3ad643975baca2c454806e1028",
+        "size": 985
+      },
+      {
+        "path": "vocab/source/action_pools/rooftop_cafe.json",
+        "sha256": "25e92f5b1df6d880e183575e0bb95335881d2baf6904553b0030aeabb0e0582d",
+        "size": 1946
+      },
+      {
+        "path": "vocab/source/action_pools/rooftop_laundry_area.json",
+        "sha256": "548f7123f11a65f3503109047f50503ccffddcf55e68abf4b93421202217fbac",
+        "size": 926
+      },
+      {
+        "path": "vocab/source/action_pools/rural_town_street.json",
+        "sha256": "e665cd425709be160b7f4289091dce4500ed8f29b4dff02cd0755bd037f89815",
+        "size": 872
+      },
+      {
+        "path": "vocab/source/action_pools/school_classroom.json",
+        "sha256": "3f62c8da52e67ee6924cae7e1da21e8b6caf071134106909624be7d5460ec876",
+        "size": 840
+      },
+      {
+        "path": "vocab/source/action_pools/school_clubroom.json",
+        "sha256": "a88e62dc5e3d094d0ac56eb03afc18af4020973ef274012da0e7912037b0e298",
+        "size": 888
+      },
+      {
+        "path": "vocab/source/action_pools/school_gym_hall.json",
+        "sha256": "4604e04bd437bf042108ce91bed8f29c3703c586272c76fd7e7acd459df51314",
+        "size": 658
+      },
+      {
+        "path": "vocab/source/action_pools/school_library.json",
+        "sha256": "363500d99c3ce06699256ce8d49479a1a077c0323f419090cad4358c666cc2e4",
+        "size": 1186
+      },
+      {
+        "path": "vocab/source/action_pools/school_rooftop.json",
+        "sha256": "a8c3c80fabb69676ddd39dfc6f4620ce502f948a6de5039586edc03906ff7c74",
+        "size": 687
+      },
+      {
+        "path": "vocab/source/action_pools/shinto_shrine.json",
+        "sha256": "bfb787ac06e14ecebde8a27b44641808a8a6fdc2f2176a54c49ba6ffe33223ef",
+        "size": 674
+      },
+      {
+        "path": "vocab/source/action_pools/shopping_arcade.json",
+        "sha256": "523038a5049f191e59095bc733d68d42127e2432220b3e66a2f2a227f343f831",
+        "size": 913
+      },
+      {
+        "path": "vocab/source/action_pools/shopping_mall_atrium.json",
+        "sha256": "390b43ecb7744628f5e24b148144c9a9bc21e3a5451026b0f2a11dcd7ad8797f",
+        "size": 1184
+      },
+      {
+        "path": "vocab/source/action_pools/spaceship_bridge.json",
+        "sha256": "b8054b272125e230882cf5dad0210959205916f959c246e4f3cd88891b46137e",
+        "size": 507
+      },
+      {
+        "path": "vocab/source/action_pools/stadium_court.json",
+        "sha256": "2127f5c4f45113d1bf6893070250800eb1b47fd4cd1dcb1dcc0490611fc467b6",
+        "size": 784
+      },
+      {
+        "path": "vocab/source/action_pools/starship_quarters.json",
+        "sha256": "b60ffd5980875d7793060420941e600c5b56a0f87c1abad83f3fd071f061ed6c",
+        "size": 886
+      },
+      {
+        "path": "vocab/source/action_pools/steampunk_airship.json",
+        "sha256": "804e65dc9390b133075ddc6da6573e78e31c5ebeabd7f8aef867b5594ad136eb",
+        "size": 735
+      },
+      {
+        "path": "vocab/source/action_pools/street_cafe.json",
+        "sha256": "2af2830d377f4399f1866a4e5e45c36f9af20263ffe53e79f90140f432bff7f6",
+        "size": 1282
+      },
+      {
+        "path": "vocab/source/action_pools/suburban_neighborhood.json",
+        "sha256": "9321b849730be140f96f55bf64f9b3262d521f1338058900617be5a12e4484a8",
+        "size": 874
+      },
+      {
+        "path": "vocab/source/action_pools/subway_ticket_gate.json",
+        "sha256": "65d52451dc3f2aa507da327a00ef5c5d1e13389c9dd089ff5979edb5ff6cb6d5",
+        "size": 934
+      },
+      {
+        "path": "vocab/source/action_pools/supermarket_aisle.json",
+        "sha256": "6c6198f6c38fed35d5a56579f77b89fdd63ac5a1da0d16ff5e959ab8a75253f2",
+        "size": 898
+      },
+      {
+        "path": "vocab/source/action_pools/surveillance_room.json",
+        "sha256": "88f47ac1f21b59ea7dd55bdcfa3b528986f54303cb7edbd16b54021a4eabcdc9",
+        "size": 661
+      },
+      {
+        "path": "vocab/source/action_pools/tea_room.json",
+        "sha256": "d0d8c6c721d059c4754acb94ff3a997bd15278890c5ceb7223968ea13e841472",
+        "size": 832
+      },
+      {
+        "path": "vocab/source/action_pools/train_station_platform.json",
+        "sha256": "abbcd2414cce2803f2dcf8a65f899ff4210fae71851c9d2e0494206d9a72f0db",
+        "size": 948
+      },
+      {
+        "path": "vocab/source/action_pools/tram_platform.json",
+        "sha256": "c7ae8b6633b8fac709a7a6da516a26629ca9bbfa1c7e5e4271a97318e7db198a",
+        "size": 1973
+      },
+      {
+        "path": "vocab/source/action_pools/tropical_beach.json",
+        "sha256": "87f24119c1d2a4380d9da8e611c8304841fff1bceb9c966b87b15fb6f6554a0e",
+        "size": 534
+      },
+      {
+        "path": "vocab/source/action_pools/underground_bar.json",
+        "sha256": "39ffee8531ffcf660957bca49b517ceadbf5c6ad784f1019e18b9fd6c307b3d3",
+        "size": 991
+      },
+      {
+        "path": "vocab/source/action_pools/university_campus_courtyard.json",
+        "sha256": "a9d3aefda241cdf556e7dca0edfa9c1e5b061b5af443c7dd17100bfa850442fa",
+        "size": 926
+      },
+      {
+        "path": "vocab/source/action_pools/vehicle_repair_garage.json",
+        "sha256": "a860f6f81ebef85080a4e1b7c12a4505de437f151e36a7e98127feb88330ed86",
+        "size": 1960
+      },
+      {
+        "path": "vocab/source/action_pools/wave_barrel.json",
+        "sha256": "6eedf6bd7084dae969fa663671acfe07fc3c1530eb4e7e940c73613658fe5a3f",
+        "size": 1118
+      },
+      {
+        "path": "vocab/source/action_pools/winter_street.json",
+        "sha256": "4bfd081d2c2a5a3480e3828e55a94367d6ddb6e5a2f9cd22fc91ac67a7a0cdfa",
+        "size": 1163
+      },
+      {
+        "path": "vocab/source/action_pools/yoga_studio.json",
+        "sha256": "6a80cd7fcb88d60f0df625664065412e9b1604c11268b05132ac1897211ff71e",
+        "size": 672
+      },
+      {
+        "path": "vocab/syntax_families.py",
+        "sha256": "7a06b40cf6b68b8d82990b32377f952476e7cd0dcd149a7b558011d1d689c29f",
+        "size": 7203
+      },
+      {
+        "path": "vocab/templates_body.txt",
+        "sha256": "9ab4dbb3b0238c7d615d94beae168054fef7fb74c68b2e5a7e7114627c88d6ba",
+        "size": 130
+      },
+      {
+        "path": "vocab/templates_end.txt",
+        "sha256": "53b6fcf82976b81ac36b5644c6a29ea4f5a4fcb15c3bde9c713afb145821b234",
+        "size": 372
+      },
+      {
+        "path": "vocab/templates_intro.txt",
+        "sha256": "084fdc0b8ca7fec9c97d1e0a967b99f44be488040db0026879a8c702389980a6",
+        "size": 265
+      },
+      {
+        "path": "workflow_class_map.py",
+        "sha256": "56c9402ec367c6c3d74045b53db5a625919160842358dc1b690cba25ffffef88",
+        "size": 850
+      },
+      {
+        "path": "workflow_samples.py",
+        "sha256": "780aafa38ad0d445fd76e3b97b4d18374832740022d9183cd3c81453513a52b0",
+        "size": 966
+      },
+      {
+        "path": "workflow_widget_validation.py",
+        "sha256": "cfe0b0eb29be8d5cfe8c81d723a770427d5bfb913108fdeebfcbb50a4fa58f77",
+        "size": 6011
+      }
+    ],
+    "rules": {
+      "exclude": [
+        "/.git/**",
+        "/.omx/**",
+        "/assets/results/**",
+        "**/__pycache__/**",
+        "**/*.pyc",
+        "external checkouts"
+      ],
+      "include": [
+        "/*.py",
+        "/core/**",
+        "/pipeline/**",
+        "/vocab/**",
+        "/rules/**",
+        "/tools/**",
+        "/assets/test_*.py",
+        "/assets/fixtures/**",
+        "/verification/**",
+        "/ComfyUI-workflow*.json"
+      ],
+      "version": "prompt-quality-source-manifest/v1"
+    },
+    "source_tree_hash": "1678a635b03d8e6e18e6a797b395511a51cc04c3f245f96c7c5a38e9ca17cf23"
+  },
+  "supplemental": {
+    "assets/calc_variations.py": "b435dda0ebb44852ae3aeed7a17e1f34b7eb5f45f2ff9470bfb137c0edde9560",
+    "assets/compatibility_review.csv": "30292d04bb4e75146b166beecb855ea152649f1e8c04c2daf37cf0c2c14f99e0",
+    "assets/conftest.py": null,
+    "docs/diversity_refactor/r43_development_review.json": "f8e39d31b29c9f439c3d8f44ecd322617c53f5166f37b49568a6bbdaf201a1fb",
+    "docs/diversity_refactor/r43_metric_contract.json": "f13af12efa9f0070acfc56a3ecc29b108e595b6f30834051ace81bdbb974617c",
+    "docs/diversity_refactor/spec.md": "a0dec4bb3f4bbfd5759e596c3baa3bcced827a0298e603fa52f481f1824123ab",
+    "mood_map.json": "d2b34a7fc55cdc3c989ba446ae430cec8cbdb474815161b4babc566735f3bed4",
+    "prompts.jsonl": "0242f5e8953d7ae538c2810bfc559d0e3aab12089f99fb7cac3f122685d0b148",
+    "pyproject.toml": null,
+    "pytest.ini": "e23d2a553b69b667d080b3a4a9653547980bb282297d6f78b1e70bd578cf414c",
+    "setup.cfg": null,
+    "templates.txt": "4956f18812c348c55bd92dc35ac2c90c95bad16410a8a562dd15605396d4df5f",
+    "tox.ini": null
+  }
+}

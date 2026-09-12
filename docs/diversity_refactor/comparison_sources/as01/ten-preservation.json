@@ -1,0 +1,49 @@
+{
+  "baseline_v2_count": 10,
+  "core_frame_mismatches": 0,
+  "current_v2_count": 11,
+  "mismatches": [],
+  "new_cases": [
+    {
+      "after_cleaned": "a solo girl with long flowing hair, black hair and brown eyes in a soft gray fleece warm turtleneck sweater dress with a ribbed texture is turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking a pen, as if responding directly to the viewer, as the session wraps up, with brows knit in concentration, with hands kept precise and controlled. The room around her stays in a professional soundproof recording booth that features geometric sound isolation pads on the wall and that has a quiet focused atmosphere and that has a lived-in atmosphere, with a quiet room holding around her while the task in front of her sets the pace, settled concentration, measured pause",
+      "after_raw": "A solo girl with long flowing hair, black hair and brown eyes in a soft gray fleece warm turtleneck sweater dress with a ribbed texture is turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking a pen, as if responding directly to the viewer, as the session wraps up, with brows knit in concentration, with hands kept precise and controlled. The room around her stays in a professional soundproof recording booth that features geometric sound isolation pads on the wall and that has a quiet focused atmosphere and that has a lived-in atmosphere, with a quiet room holding around her while the task in front of her sets the pace, settled concentration, measured pause",
+      "before_cleaned": "a solo girl with long flowing hair, black hair and brown eyes in soft gray fleece warm turtleneck sweater dress, with ribbed texture, turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up, brows knit in concentration, hands kept precise and controlled. The room around her remains in professional soundproof recording booth, featuring geometric sound isolation pads on wall, quiet focused atmosphere, lived-in atmosphere, a quiet room holding around her while the task in front of her sets the pace, settled concentration, measured pause",
+      "before_raw": "A solo girl with long flowing hair, black hair and brown eyes in soft gray fleece warm turtleneck sweater dress, with ribbed texture, turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up, brows knit in concentration, hands kept precise and controlled. The room around her remains in professional soundproof recording booth, featuring geometric sound isolation pads on wall, quiet focused atmosphere, lived-in atmosphere, a quiet room holding around her while the task in front of her sets the pace, settled concentration, measured pause",
+      "family": "subject_action__scene_tail",
+      "run_seed": 91
+    }
+  ],
+  "new_ordinary_v2_count": 1,
+  "preserved_success_seeds": [
+    2,
+    9,
+    40,
+    41,
+    51,
+    88,
+    190,
+    234,
+    458,
+    482
+  ],
+  "prior_successes_preserved": [
+    2,
+    9,
+    40,
+    41,
+    51,
+    88,
+    190,
+    234,
+    458,
+    482
+  ],
+  "sample_count": 512,
+  "scope": "expansion-preservation/v1",
+  "semantic_scope": "Same selected facts/projections; changed prose requires separate source-atom and ownership review.",
+  "signature_mismatch_count": 0,
+  "status": "PASS",
+  "unchanged_fallback_count": 501,
+  "upstream_context_mismatches": 0,
+  "upstream_mismatch_count": 0
+}

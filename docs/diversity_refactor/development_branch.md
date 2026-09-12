@@ -1,5 +1,9 @@
 # Realizer v2 development branch
 
+Comparison sources must now be published as pinned commits with fixed annotated
+tags before use. [Source preservation and restore instructions](./comparison_sources/README.md)
+cover the AS01 nine/ten-case baselines and eleven-case candidate.
+
 Latest verified development source (2026-09-12): [post-R43 coverage AS01](./coverage_as01_plan.md),
 `53a4fe8048cfd71cdcd9f3a7cb414e0b96ec6c0450b96795c465470d6963b56e`.
 Portable intake architecture/development PASS; ordinary11/512, three families;

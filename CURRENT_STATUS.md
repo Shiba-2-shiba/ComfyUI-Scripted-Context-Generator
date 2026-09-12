@@ -1,5 +1,8 @@
 # Current Status
 
+比較用ソースの保存方針: 今後は固定コミット・注釈付きタグ・ハッシュ照合を必須にします。
+AS01の9件版・10件版・11件版は[復元手順](docs/diversity_refactor/comparison_sources/README.md)に記録しています。
+
 2026-09-12 最新: [R43後のAction＋Scene拡張AS01](docs/diversity_refactor/coverage_as01_plan.md)を完了。
 通常v2は **10→11/512件**、既存10成功例と残る501 fallback・上流入力を保持しました。
 重点534件／2,020 subtests、回帰87件／33 subtests、validator/full-flow、

@@ -1,0 +1,62 @@
+{
+  "candidate_commit": "d548cc4d4ca9bc127086cdc281aaa846079c0f41",
+  "candidate_pairs_sha256": "a3b8a28e873bb4cbcfbd338125eef6165e809f228cd5d7cafa73d1589255b87d",
+  "checks": [
+    {
+      "baseline_source_tree_hash": "0c8c421de459f62afa8731d60994d23a4409165b726095e5b24c13d363ebd281",
+      "expected_baseline_v2": 9,
+      "historical_pairs_byte_identical": true,
+      "historical_pairs_sha256": "59bed79e917235bd0c4bc2e26a893788263627266166c358837a7e32773766da",
+      "new_ordinary_v2_count": 2,
+      "preserved_successes": [
+        9,
+        40,
+        41,
+        51,
+        88,
+        190,
+        234,
+        458,
+        482
+      ],
+      "restored_pairs_sha256": "59bed79e917235bd0c4bc2e26a893788263627266166c358837a7e32773766da",
+      "role": "nine",
+      "sample_count": 512,
+      "status": "PASS",
+      "unchanged_fallback_count": 501
+    },
+    {
+      "baseline_source_tree_hash": "1678a635b03d8e6e18e6a797b395511a51cc04c3f245f96c7c5a38e9ca17cf23",
+      "expected_baseline_v2": 10,
+      "historical_pairs_byte_identical": true,
+      "historical_pairs_sha256": "6d4e886706b14c9a1b4ceff9807cfbeab0e968223de40690355dd2f086024349",
+      "new_ordinary_v2_count": 1,
+      "preserved_successes": [
+        2,
+        9,
+        40,
+        41,
+        51,
+        88,
+        190,
+        234,
+        458,
+        482
+      ],
+      "restored_pairs_sha256": "6d4e886706b14c9a1b4ceff9807cfbeab0e968223de40690355dd2f086024349",
+      "role": "ten",
+      "sample_count": 512,
+      "status": "PASS",
+      "unchanged_fallback_count": 501
+    }
+  ],
+  "formal": "NOT_RUN",
+  "historical_environment_fully_reconstructed": false,
+  "scope": "New replay after restoring comparison snapshot Git commits, using the existing development512 runner",
+  "source_guard_matches_original": [
+    "nine",
+    "ten",
+    "candidate"
+  ],
+  "status": "PASS"
+}
