@@ -1,5 +1,15 @@
 # Semantic Diversity / Natural Language Refactor Tasks
 
+## R44 coverage engineering
+
+Governing design: [R44_DESIGN.md](./R44_DESIGN.md); execution: [R44_IMPLEMENTATION_PLAN.md](./R44_IMPLEMENTATION_PLAN.md). R44 supersedes case-first coverage expansion. Follow [r44_progress.md](./r44_progress.md).
+
+- [x] R44-00: isolated branch and verified 11/512, 3 ordinary / 6 forced family baseline.
+- [ ] R44-01/02: diagnostic signatures, deterministic packet selection and viability gate.
+- [ ] R44-03..05: up to three bounded runtime packets, conditional on viability.
+- [ ] R44-06/07: development classification and recoverable handoff.
+
+
 対象リポジトリ: `Shiba-2-shiba/ComfyUI-Scripted-Context-Generator`
 関連仕様: [`docs/diversity_refactor/spec.md`](./spec.md)
 進捗正本: [`docs/diversity_refactor/progress.md`](./progress.md)

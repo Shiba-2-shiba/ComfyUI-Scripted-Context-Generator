@@ -1,5 +1,8 @@
 # Current Status
 
+2026-09-13: R44を開始。方針は[R44設計](docs/diversity_refactor/R44_DESIGN.md)と[実装計画](docs/diversity_refactor/R44_IMPLEMENTATION_PLAN.md)に移行。`refactor/realizer-v2-r44`で変更前11/512・通常3構文・実入力強制6構文を再検証。重点534件、回帰87件、validator/full-flowはPASS。[R44進捗](docs/diversity_refactor/r44_progress.md)を参照。正式評価はNOT_RUN。
+
+
 比較用ソースの保存方針: 今後は固定コミット・注釈付きタグ・ハッシュ照合を必須にします。
 AS01の9件版・10件版・11件版は[復元手順](docs/diversity_refactor/comparison_sources/README.md)に記録しています。
 

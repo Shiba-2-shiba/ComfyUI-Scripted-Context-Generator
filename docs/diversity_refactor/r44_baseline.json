@@ -1,0 +1,9 @@
+{
+  "git_commit": "b16a4dbca7d91d6d1cdefbfd521fd6a44787765a",
+  "ordinary_family_count": 3,
+  "ordinary_v2_count": 11,
+  "reachability_sha256": "9516984ee50e812268e2800e45c26fb3fa8db03685b1720f147c0ff99e437965",
+  "rows_sha256": "ac72bee19e2268fb288ea163fa2cd39968ee9b9c509be30496e7cf672a6600a2",
+  "schema_version": "r44-baseline/v1",
+  "source_tree_hash": "53a4fe8048cfd71cdcd9f3a7cb414e0b96ec6c0450b96795c465470d6963b56e"
+}
