@@ -18,6 +18,7 @@ from pipeline.v2_structural_evidence import build_structural_evidence
 from pipeline.v2_template_provenance import scene_template_kind
 from vocab.loader import load_json
 from vocab.syntax_families import BASELINE_FAMILY, CATALOG_FILENAME
+from tools.realizer_coverage_signatures import build_coverage_signature, coverage_signature_hash
 
 
 def _domain(supported, binding=None, *, basis="NOT_AVAILABLE", blockers=()):
@@ -229,7 +230,7 @@ def diagnose_snapshot(snapshot, *, force_families=False):
                 "blockers": [blocker],
             } for entry in sorted(load_json(CATALOG_FILENAME)["families"], key=lambda item: item["key"])
         }
-        return {
+        result = {
             "domains": {domain: {**_domain(None), "status": "NOT_AVAILABLE"} for domain in
                         ("subject", "clothing", "action", "scene", "template", "garnish", "mood")},
             "families": families, "route": "fallback", "trace_mode": "none",
@@ -237,6 +238,9 @@ def diagnose_snapshot(snapshot, *, force_families=False):
                           "families": list(families)}],
             "errors": [] if disabled else [{"id": blocker, "detail": "bridge snapshot unavailable"}],
         }
+        signature = build_coverage_signature(snapshot, result)
+        return {**result, "coverage_signature": signature,
+                "coverage_signature_sha256": coverage_signature_hash(signature)}
     common_route = bridge.get("common_route") is True
     domains = _common_components(bridge) if common_route else _components(bridge)
     common_proofs = {proof["family"]: proof for proof in bridge.get("common_proofs", ())}
@@ -331,5 +335,8 @@ def diagnose_snapshot(snapshot, *, force_families=False):
     for item in indexed.values():
         item["domains"].sort()
         item["families"].sort()
-    return {"domains": domains, "families": families, "route": route, "trace_mode": trace_mode,
-            "blockers": [indexed[key] for key in sorted(indexed)], "errors": errors}
+    result = {"domains": domains, "families": families, "route": route, "trace_mode": trace_mode,
+              "blockers": [indexed[key] for key in sorted(indexed)], "errors": errors}
+    signature = build_coverage_signature(snapshot, result)
+    return {**result, "coverage_signature": signature,
+            "coverage_signature_sha256": coverage_signature_hash(signature)}

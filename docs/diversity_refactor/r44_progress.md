@@ -12,8 +12,8 @@
 ## Task ledger
 | Task | State | Commit | Evidence | Notes |
 |---|---|---|---|---|
-| R44-00 | PASS | | | baseline lock |
-| R44-01 | NOT_STARTED | | | coverage signatures |
+| R44-00 | PASS | 83bc23e | baseline-01 | baseline lock |
+| R44-01 | IN_PROGRESS | | | coverage signatures |
 | R44-02 | NOT_STARTED | | | packet selection |
 | R44-03 | NOT_STARTED | | | packet A |
 | R44-04 | NOT_STARTED | | | packet B |
@@ -53,3 +53,11 @@ The root checkout remains on main. R44 is isolated at assets/results/r44-worktre
 
 - Baseline: focused 534 tests / 2,020 subtests; regression 87 / 33; all PASS, zero skips/errors. Regression includes all seven validators/full-flow checks. Ordinary512 = 11 v2, 3 executed families, 501 fallback, no errors. Replay512 = PASS, six common-forced families, zero output/context/proof/RNG mismatches.
 - Ruling: use replay summary families[*].common_forced_v2 for real-input forced proof, not reachability forced_render_v2 — the latter certifies only equality to ordinary output and reports three families. This uses the existing AS01 proof contract; counting constructor presence would overclaim.
+
+## Task review and diagnostic development
+
+- Task 0 independent review: spec and quality PASS. Baseline archive restored into a new directory; complete source/supplemental/A1.6 guard matches the pinned baseline. Remote branch observation confirms b16a4db is published. New R44 tag publication remains pending.
+- Task 1 initial TDD: 18 new tests; with existing diagnostic/transport regressions, 51 tests and 47 subtests passed. Existing common-diagnostics equality assertion now verifies all original fields separately from the additive signature.
+- Task 2 TDD: 23 tests passed; independent selector review approved. Complete seed sets are retained separately from capped examples for union viability.
+- Initial 16-seed repeat: signature sections, rows and records byte-identical. Initial 512 diagnostic audit: exact normal-pairs bytes equal the pre-R44 baseline, ordinary 11/512 and three families preserved. This pre-review revision had 511 signature groups, maximum two seeds per group, no eligible packets; it is not the final selection checkpoint.
+- Task 1 review requested two fixes: bind optional finalization/producer-context fields to current common inputs; preserve bounded catalog origin categories including background defaults versus location pack. Fix round 1 uses new failing tests before corrections. No runtime authorization files changed.

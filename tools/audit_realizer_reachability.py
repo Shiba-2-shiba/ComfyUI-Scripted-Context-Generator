@@ -133,8 +133,23 @@ def summarize(rows):
             actual_v2[family] += 1
         elif normal.get('realizer_version') == 'v1':
             fallback[str(family)] += 1
+    signatures = {}
+    for row in sorted(rows, key=lambda row: row['run_seed']):
+        if 'coverage_signature' not in row:
+            continue
+        sha = row['coverage_signature_sha256']
+        group = signatures.setdefault(sha, {'sha256': sha, 'count': 0,
+            'blocked_domains': sorted(row['coverage_signature']['blocked_domains']),
+            'example_seed_family_rows': []})
+        for family in sorted(row.get('families', {})):
+            group['count'] += 1
+            group['example_seed_family_rows'].append({'run_seed': row['run_seed'], 'family': family})
+    for group in signatures.values():
+        group['example_seed_family_rows'] = sorted(group['example_seed_family_rows'],
+            key=lambda example: (example['run_seed'], example['family']))[:8]
     routes = Counter(row['route'] for row in rows)
     return {'domains': domains, 'families': families,
+            'coverage_signatures': sorted(signatures.values(), key=lambda group: (-group['count'], group['sha256'])),
             'routes': {key: routes[key] for key in ('simple_legacy_compatible', 'legacy_direct', 'common_evidence', 'fallback')},
             'eligible_family_count_distribution': dict(sorted(Counter(str(sum(f.get('runtime_eligible') is True
                 for f in row.get('families', {}).values())) for row in rows).items())),
@@ -275,7 +290,8 @@ def run_audit(args, output):
                    'identity': {'git_commit': git_commit, 'source_tree_hash': before['manifest']['source_tree_hash'],
                                 'source_identity_hash': digest(before),
                                 'audit_implementation_hash': digest({name: file_hash(ROOT / 'tools' / name)
-                                    for name in ('audit_realizer_reachability.py', 'realizer_reachability_diagnostics.py')}),
+                                    for name in ('audit_realizer_reachability.py', 'realizer_reachability_diagnostics.py',
+                                                 'realizer_coverage_signatures.py')}),
                                 'workflow_hash': first_record['base_workflow_hash'],
                                 'effective_workflow_hash': first_record['effective_workflow_hash'],
                                 'runner_config_hash': first_record['config_hash'],

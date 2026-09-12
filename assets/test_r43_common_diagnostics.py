@@ -112,4 +112,13 @@ def test_unused_common_inputs_do_not_change_legacy_diagnostics():
     original = diagnostics.diagnose_snapshot(snapshot, force_families=True)
     snapshot['bridge'].update(common_route=False, common_inputs=common_snapshot()[0], common_proofs=[])
     with patch.object(diagnostics, '_common_evidence', side_effect=AssertionError('legacy priority')):
-        assert diagnostics.diagnose_snapshot(snapshot, force_families=True) == original
+        actual = diagnostics.diagnose_snapshot(snapshot, force_families=True)
+    signature_fields = {'coverage_signature', 'coverage_signature_sha256'}
+    assert {key: value for key, value in actual.items() if key not in signature_fields} == {
+        key: value for key, value in original.items() if key not in signature_fields}
+    signature = actual['coverage_signature']
+    assert signature['proof_basis'] == 'invalid_common_inputs'
+    assert signature['eligible_families'] == []
+    assert signature['family_blockers']
+    assert all('binding.current_input_mismatch' in blockers
+               for blockers in signature['family_blockers'].values())
