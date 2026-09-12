@@ -1,0 +1,75 @@
+{
+  "schema_version": "variation-nonselected-quality-validation-receipt/v2",
+  "experiment_id": "v150-candidate-shape-iteration-017",
+  "terminal_state": "QUALITY_VALIDATED_REVIEW_READY",
+  "recorded_at": "2026-09-03",
+  "authority": {
+    "comparison_authority": "quality_non_selected",
+    "quality_evidence": true,
+    "coverage_is_quality_evidence": false,
+    "coverage_eligibility_verdict": "pass",
+    "quality_verdict": "pass",
+    "validation_verdict": "pass",
+    "review_ready": true,
+    "blind_review_run": false,
+    "confirmation_run": false,
+    "promotion_ready": false
+  },
+  "surface": {
+    "kind": "default_fixed_64_16",
+    "prompt_selection": "default_unselected",
+    "metric_scope": "control64",
+    "metric_record_count": 64,
+    "baseline_rows": 80,
+    "candidate_rows": 80,
+    "uses_output_metrics_for_selection": false
+  },
+  "local_snapshot": {
+    "path": "assets/results/vfc/q39-default-quality",
+    "snapshot_manifest_sha256": "07f1fa13984c7fb915ff32e0cdb9782180238b4ff08784fd97b051323fb496ab",
+    "prompt_schedule_sha256": null,
+    "quality_contract_sha256": "656412dc477d1aac72df536ff6f22729fe76f9ce68f63d2c9e978a9f149dc5a9",
+    "prompt_rows": {"baseline": 80, "candidate": 80},
+    "active_source_unchanged": true
+  },
+  "tracked_artifacts": {
+    "current-source-coverage-refresh.json": "36ae79a817ac47278eeaa88df4828e4d437ef5bf5f82772780d86dd4e41a34fb",
+    "nonselected-quality-contract.json": "3bdc83f4eab2a2a6f9dc5a22e6a4ea3295e5e6a5d66f4b1e301858cc5193f514",
+    "quality-experiment.json": "31ae792aedc29386e916b951415997c17e1883417afca9d6bf9ebb103ec450ad",
+    "quality-comparison.json": "7241f6a5373caa604210b21439389fb7b0f1a9bc8214821e22453d56a150c7c0"
+  },
+  "run_artifacts": {
+    "baseline_run_manifest_sha256": "4b74addc712c4ab8359a02657760eebac51e1fd583c061f3a2fd9433d9d9e341",
+    "candidate_run_manifest_sha256": "d77399dbede3128ef3905d8967a7703fb976c8de4cdb5e99838e8a00930a53b6",
+    "comparison_canonical_sha256": "007bcf10813173768c38030c03a934b09a63e78e9806894a7818f77fd706983c",
+    "experiment_canonical_sha256": "31ae792aedc29386e916b951415997c17e1883417afca9d6bf9ebb103ec450ad",
+    "cohort_hash": "1b7017819fe1ff11c822b27e61d035b0ce0596dd6f06f85c27f6a45766912492",
+    "records_per_side": 80,
+    "control_count": 64,
+    "exploration_count": 16,
+    "replay_mismatch_count": 0
+  },
+  "quality_results": {
+    "failures": [],
+    "location_signature_entropy_before": 4.626124,
+    "location_signature_entropy_after": 4.956344,
+    "repeated_ngram_count_before": 0,
+    "repeated_ngram_count_after": 0,
+    "semantic_family_repetition_count_before": 2,
+    "semantic_family_repetition_count_after": 2,
+    "context_json_bytes_max_before": 26922,
+    "context_json_bytes_max_after": 26370,
+    "context_json_bytes_p95_before": 26205.1,
+    "context_json_bytes_p95_after": 25085.7,
+    "identity_regressions": 0,
+    "hard_consistency_regressions": 0,
+    "policy_regressions": 0,
+    "fallback_regressions": 0
+  },
+  "verification": {
+    "focused_regression_tests": "140 tests OK",
+    "action_pool_generation_check": "pass; ERROR=[]; WARNING=[]",
+    "prompt_data_validation": "pass; ERROR=[]; WARNING=[]; variation_row_count=5806",
+    "variation_scope_check": "pass; active total_base_variations=103212"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "location": "steampunk_airship",
+  "actions": [
+    {
+      "text": "standing at the railing looking at clouds",
+      "load": "calm"
+    },
+    {
+      "text": "checking the pressure gauge on a pipe",
+      "load": "calm"
+    },
+    {
+      "text": "polishing a brass rail",
+      "load": "calm"
+    },
+    {
+      "text": "looking through a telescope",
+      "load": "calm"
+    },
+    {
+      "text": "walking carefully on the wooden deck",
+      "load": "active"
+    },
+    {
+      "text": "holding a map against the wind",
+      "load": "calm"
+    },
+    {
+      "text": "listening to the hum of the engine",
+      "load": "calm"
+    },
+    {
+      "text": "adjusting leather aviator goggles",
+      "load": "calm"
+    }
+  ]
+}

@@ -1,0 +1,836 @@
+{
+  "acceptance_blockers": [],
+  "acceptance_status": "PASS",
+  "added_test_count": 14,
+  "adoption_status": "BLOCKED",
+  "architecture_status": "NOT_RUN",
+  "changed_source_files": [
+    "assets/fixtures/r43_ordinary_real_cases.json",
+    "assets/test_r43_common_action_grammar.py",
+    "assets/test_r43_ordinary_application.py",
+    "assets/test_r43_standalone_scene_time.py",
+    "pipeline/family_capabilities.py",
+    "pipeline/realization_evidence.py",
+    "pipeline/v2_common_action_grammar.py",
+    "pipeline/v2_leaf_grammar.py",
+    "pipeline/v2_scene_provenance.py",
+    "pipeline/v2_structural_evidence.py"
+  ],
+  "development_status": "NOT_RUN",
+  "evidence": [
+    {
+      "path": "baseline512/baseline-command.json",
+      "sha256": "f90ccfa41a95ac2f790f29545b3c42cca6a6d113ec48c3f92764c49aade544cb"
+    },
+    {
+      "path": "baseline512/baseline-identity.json",
+      "sha256": "cd52aea30865bbf8d6b9658945c1cb502358b76bd71783ebcd0859849a9ee923"
+    },
+    {
+      "path": "baseline512/baseline-pairs.jsonl",
+      "sha256": "59bed79e917235bd0c4bc2e26a893788263627266166c358837a7e32773766da"
+    },
+    {
+      "path": "baseline512/baseline-process.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "baseline512.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "code-review.md",
+      "sha256": "8bc3b57220cee1b5fa4b21d95f6c08fa00cb650e5d7267679f929039a446f060"
+    },
+    {
+      "path": "commands.json",
+      "sha256": "6faddbb80735043e79a8cebb2589c274e3af0b780d3294244717746f8756e0ef"
+    },
+    {
+      "path": "expansion.json",
+      "sha256": "2c20d573583dbb4639790a981662cded25cf6136fade6ac58e466a27fa91bfe1"
+    },
+    {
+      "path": "expansion.log",
+      "sha256": "341cbd5c1ca98e96d7a76e614b19c4083fa39c3961fad9ea6d7c2f358dc26e82"
+    },
+    {
+      "path": "family-package/family-evidence.jsonl",
+      "sha256": "755135938eda4b8076e6493f18fe5a941a113383f8c2e1068d8a6733df4dbf3d"
+    },
+    {
+      "path": "family-package/family-summary.json",
+      "sha256": "dec27b16a3744c345710fa86dc9311b4600f3b522bdf364d817488e45c577fed"
+    },
+    {
+      "path": "family-package/recombination-evidence.json",
+      "sha256": "76119c11075884323f40f48607c376acca62cb34b99dec43ad8d3dc2f208e08d"
+    },
+    {
+      "path": "family-package.log",
+      "sha256": "b2dc9bb7349aa1f1861261a8c5af563a911a2fea8637072ace4ec5e60aa89c89"
+    },
+    {
+      "path": "family-root/family-evidence.jsonl",
+      "sha256": "755135938eda4b8076e6493f18fe5a941a113383f8c2e1068d8a6733df4dbf3d"
+    },
+    {
+      "path": "family-root/family-summary.json",
+      "sha256": "dec27b16a3744c345710fa86dc9311b4600f3b522bdf364d817488e45c577fed"
+    },
+    {
+      "path": "family-root/recombination-evidence.json",
+      "sha256": "76119c11075884323f40f48607c376acca62cb34b99dec43ad8d3dc2f208e08d"
+    },
+    {
+      "path": "family-root.log",
+      "sha256": "b2dc9bb7349aa1f1861261a8c5af563a911a2fea8637072ace4ec5e60aa89c89"
+    },
+    {
+      "path": "focused/commands.json",
+      "sha256": "80d93ede915233a76693b2205cd5fcd95a2d9c7f84d56f5cecb734daa24355c0"
+    },
+    {
+      "path": "focused/environment.json",
+      "sha256": "6a5b2c4ed2bc9af8e795a08ddc53d64651ef0ae63ca15d9b3495061d160baa1c"
+    },
+    {
+      "path": "focused/logs/collected-tests.json",
+      "sha256": "4ced9c74c1631c0779688361a623de66f791d1926613e94cebc69059e45faef4"
+    },
+    {
+      "path": "focused/logs/pytest.log",
+      "sha256": "411601247bc641ac0ea8f2ef570edff6e5a8d033cc2d4cb801b37cbb06a7f68b"
+    },
+    {
+      "path": "focused/source-manifest-after.json",
+      "sha256": "b1c20600c3a1c48345466badf02cd1f05449586d010948e7d0cf45889d95815a"
+    },
+    {
+      "path": "focused/source-manifest.json",
+      "sha256": "b1c20600c3a1c48345466badf02cd1f05449586d010948e7d0cf45889d95815a"
+    },
+    {
+      "path": "focused/supplemental-inputs.json",
+      "sha256": "0690acc0703a3361c044829b5ff251ee7adf40dc1ed6bffeb03e5709df599f15"
+    },
+    {
+      "path": "focused/test-collection.json",
+      "sha256": "03cbe7d64d2f2863daeda10f790ec1337bcf11e31ce98a2c1daba42c1cbbf440"
+    },
+    {
+      "path": "focused/verdict.json",
+      "sha256": "6577aada9c2719660c1517beed7d0c9e0d1a6e0bcd9f7df09183bd85983b9ee4"
+    },
+    {
+      "path": "focused.log",
+      "sha256": "36e1215f315fdde57be97cf0c37c4483b780656e323e4ae69c2aeab8730999f3"
+    },
+    {
+      "path": "intake512/environment.json",
+      "sha256": "83dd740187ec64fc9fcb31d8b244e58814754447e299a5378be8eb1ad0aec419"
+    },
+    {
+      "path": "intake512/normal-pairs.jsonl",
+      "sha256": "6d4e886706b14c9a1b4ceff9807cfbeab0e968223de40690355dd2f086024349"
+    },
+    {
+      "path": "intake512/reachability-summary.md",
+      "sha256": "cc70b0d925ece81ea645bf7445c775c252e70407dc593a02f49ee70fbdb20dd2"
+    },
+    {
+      "path": "intake512/reachability.json",
+      "sha256": "9d061d2e87f1f91adda0e444536f0be01518fc3086ae0910111e321e38e5ffb9"
+    },
+    {
+      "path": "intake512/records.jsonl",
+      "sha256": "4481a1a8eb63c37338df20dcf882bc3938e29a6ba8c0ad9165b6734771c757d8"
+    },
+    {
+      "path": "intake512/rows.jsonl",
+      "sha256": "0f709562170fc26dadd6baa41761c9e0fb1593057f14bb1e64829af7616d58f4"
+    },
+    {
+      "path": "intake512/source-manifest-after.json",
+      "sha256": "086210030c4bba07284cef757fc34b9b5355f17ca0c446fab9e9bd44f01fb153"
+    },
+    {
+      "path": "intake512/source-manifest.json",
+      "sha256": "086210030c4bba07284cef757fc34b9b5355f17ca0c446fab9e9bd44f01fb153"
+    },
+    {
+      "path": "intake512.log",
+      "sha256": "fad1dd657b9bbfec532a391488a9e7d6901bdc759fcc97e11c013464365416a9"
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "d34be34405f1876c53ac4ba9f877a1e8766a7ee1bd9e28b9c366181baf89f0e8"
+    },
+    {
+      "path": "preservation.json",
+      "sha256": "dd6c0cc41e26e6a4d0e5153e13322e957c72f0429f4400efb0cc16179510f696"
+    },
+    {
+      "path": "public-contract.log",
+      "sha256": "fa7120cf2530f9c30fac2e0aad2f55a93e0abb20839ff36b2a8fd357a1017619"
+    },
+    {
+      "path": "r43_capture_integration.py",
+      "sha256": "69186107d5b3d4c0d38d166f72f611f1e5aed9e91bb985ad408e7f32eff95a7e"
+    },
+    {
+      "path": "r43_capture_support.py",
+      "sha256": "a06e313be799a79578ad12a3f95952093b13de1ff63c6a746476fa21094c8c94"
+    },
+    {
+      "path": "r43_compare_expansion.py",
+      "sha256": "51b824faa1eabb4e61e0760b502e013c91129c8a738a5492385f5f8e9e519c73"
+    },
+    {
+      "path": "r43_finalize_ordinary.py",
+      "sha256": "6e16a5fe9bbfe60ad80723e8768a57202caf605b9c4f0d8739c116747e1fdd25"
+    },
+    {
+      "path": "r43_run_ordinary_checks.py",
+      "sha256": "81321320303c5158cee2b4472043bf93bbd8f419d7e7fea41402d066035a5055"
+    },
+    {
+      "path": "recombination-inputs.json",
+      "sha256": "0a642ee2ea137728017363dc1d531870a382598d72c6e7a9c7378afd636cbec1"
+    },
+    {
+      "path": "regression/commands.json",
+      "sha256": "52b9886661ffc6d563f2804ea160a2617f544e5ad2711eb6c20b0d5ff1e5c1dc"
+    },
+    {
+      "path": "regression/environment.json",
+      "sha256": "a6b36c298970949409c44ab548f6c308d3c2ef51f2c7ab60ab511e11117f96d7"
+    },
+    {
+      "path": "regression/logs/action_pools.log",
+      "sha256": "a2fe63ac78f3e6748233cf7974a0fd146ab332244601fd9cb645e979b27ab8e1"
+    },
+    {
+      "path": "regression/logs/asset_validation.log",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": "regression/logs/collected-tests.json",
+      "sha256": "be96c38bc509516b2b6d10af2837f79a1e5413790d5f02da42910661f61bd234"
+    },
+    {
+      "path": "regression/logs/compatibility.log",
+      "sha256": "b6cede2000ad9722bcbbd38c90cd88aedaadd7f35e0b805374d1b6548241b4e2"
+    },
+    {
+      "path": "regression/logs/full_flow.log",
+      "sha256": "4e7024bbab9109cc83d937b39b25c4d869bce0b79243b3386352a5b1dc06feda"
+    },
+    {
+      "path": "regression/logs/prompt_data.log",
+      "sha256": "48c9fca6faa41199223917af6b16fa0b8ef55f13f61b41add7204db4a6acda4d"
+    },
+    {
+      "path": "regression/logs/pytest.log",
+      "sha256": "e5b30c3962e01f75371bb60f5b14fe8ee92469ab389b80b26497875cf4c9447f"
+    },
+    {
+      "path": "regression/logs/variation_scope.log",
+      "sha256": "cbd0cc5f38dbb3606d91838a8f446015b7186c3bb13c1bd34a6aca9928427f83"
+    },
+    {
+      "path": "regression/logs/variations.log",
+      "sha256": "791b2fcab90a05e813905a11132be833f981b38b67b3f3fb675b748a8a7da842"
+    },
+    {
+      "path": "regression/source-manifest-after.json",
+      "sha256": "b1c20600c3a1c48345466badf02cd1f05449586d010948e7d0cf45889d95815a"
+    },
+    {
+      "path": "regression/source-manifest.json",
+      "sha256": "b1c20600c3a1c48345466badf02cd1f05449586d010948e7d0cf45889d95815a"
+    },
+    {
+      "path": "regression/supplemental-inputs.json",
+      "sha256": "0690acc0703a3361c044829b5ff251ee7adf40dc1ed6bffeb03e5709df599f15"
+    },
+    {
+      "path": "regression/test-collection.json",
+      "sha256": "5b828c766bd827ccc25e90748f3254b20405d3b6dd5966758a01f876bbf192fa"
+    },
+    {
+      "path": "regression/verdict.json",
+      "sha256": "6116ee742b619a70fec813d1628d14f36be7e9a0661ea925a94819908a5c25d8"
+    },
+    {
+      "path": "regression.log",
+      "sha256": "c0b115d3d63f63244164c5e020d2b33cfba6c75d968964da28527053da769d4e"
+    },
+    {
+      "path": "support-package/support-evidence.jsonl",
+      "sha256": "5e747bc687bc771aa9380c33c5b2817419aac42e738858b11f77b3120c4669f6"
+    },
+    {
+      "path": "support-package/support-summary.json",
+      "sha256": "0c1ca30fff54889719cb566b26ea008e48194d1860b1056945e7ab7c42b67ac1"
+    },
+    {
+      "path": "support-package.log",
+      "sha256": "98de8b0bfeefb849a91b4c38bd84ada920c822e2ff0c4983436ef1170422a570"
+    },
+    {
+      "path": "support-root/support-evidence.jsonl",
+      "sha256": "5e747bc687bc771aa9380c33c5b2817419aac42e738858b11f77b3120c4669f6"
+    },
+    {
+      "path": "support-root/support-summary.json",
+      "sha256": "0c1ca30fff54889719cb566b26ea008e48194d1860b1056945e7ab7c42b67ac1"
+    },
+    {
+      "path": "support-root.log",
+      "sha256": "98de8b0bfeefb849a91b4c38bd84ada920c822e2ff0c4983436ef1170422a570"
+    }
+  ],
+  "evidence_root_relative_to_original_main_checkout": "assets/results/diversity_refactor/r43/ordinary-20260912-01/final-01",
+  "expansion": {
+    "core_frame_mismatches": 0,
+    "new_cases": [
+      {
+        "after_cleaned": "a solo girl with a messy bun, purple hair and green eyes in a purple fair isle cashmere warm turtleneck sweater dress with a knit belt is lying down reading a book, with open pages visible, with eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping, with brows knit in concentration, with a still posture. During a quiet night, the scene around her stays in a gothic victorian boudoir that features a vintage vanity mirror with lights and a wooden wardrobe with open doors, with a quiet room holding around her while the task in front of her sets the pace, settled concentration",
+        "after_raw": "A solo girl with a messy bun, purple hair and green eyes in a purple fair isle cashmere warm turtleneck sweater dress with a knit belt is lying down reading a book, with open pages visible, with eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping, with brows knit in concentration, with a still posture. During a quiet night, the scene around her stays in a gothic victorian boudoir that features a vintage vanity mirror with lights and a wooden wardrobe with open doors, with a quiet room holding around her while the task in front of her sets the pace, settled concentration",
+        "before_cleaned": "a solo girl with messy bun, purple hair and green eyes in purple fair isle cashmere warm turtleneck sweater dress, with knit belt, lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping, brows knit in concentration, still posture, with the scene around her staying in gothic victorian boudoir, during quiet night, featuring vintage vanity mirror with lights and wooden wardrobe with open doors, a quiet room holding around her while the task in front of her sets the pace, settled concentration",
+        "before_raw": "A solo girl with messy bun, purple hair and green eyes in purple fair isle cashmere warm turtleneck sweater dress, with knit belt, lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping, brows knit in concentration, still posture, with the scene around her staying in gothic victorian boudoir, during quiet night, featuring vintage vanity mirror with lights and wooden wardrobe with open doors, a quiet room holding around her while the task in front of her sets the pace, settled concentration",
+        "family": "subject_action__scene_tail",
+        "run_seed": 2
+      }
+    ],
+    "new_ordinary_v2_count": 1,
+    "prior_successes_preserved": [
+      9,
+      40,
+      41,
+      51,
+      88,
+      190,
+      234,
+      458,
+      482
+    ],
+    "sample_count": 512,
+    "scope": "expansion-preservation/v1",
+    "semantic_scope": "Same selected facts/projections; changed prose requires separate source-atom and ownership review.",
+    "status": "PASS",
+    "unchanged_fallback_count": 502,
+    "upstream_context_mismatches": 0
+  },
+  "fallback_structure_counts": {
+    "subject_action__scene_tail": 129,
+    "subject_action_scene": 373
+  },
+  "family_evidence": {
+    "evidence_sha256": "755135938eda4b8076e6493f18fe5a941a113383f8c2e1068d8a6733df4dbf3d",
+    "families": {
+      "action_lead_subject_scene": {
+        "blockers": {
+          "action.grammar_unknown": 499,
+          "action.leaf_grammar_unknown": 499,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "family.action_lead_subject_unknown": 2,
+          "family.missing_slot:adjunct": 5,
+          "family.missing_slot:scene": 5,
+          "family.missing_slot:subject": 5,
+          "family.required_fact_not_true:same_subject_attachment_safe": 2,
+          "family.scene_overlap_unknown": 3,
+          "garnish.grammar_unknown": 126,
+          "garnish.unsupported_constructor": 126,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 499,
+          "scene.placement_constructor_unknown": 3,
+          "scene.source_or_grammar_unknown": 499,
+          "scene.source_unavailable": 499,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.absolute_not_locative_predicate": 2,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 1,
+        "common_runtime_eligible": 1
+      },
+      "scene_lead_subject_action": {
+        "blockers": {
+          "action.grammar_unknown": 499,
+          "action.leaf_grammar_unknown": 499,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "family.missing_slot:adjunct": 4,
+          "family.missing_slot:scene": 4,
+          "family.missing_slot:subject": 4,
+          "family.required_fact_not_true:scene_lead_safe": 4,
+          "family.scene_overlap_unknown": 3,
+          "garnish.grammar_unknown": 126,
+          "garnish.unsupported_constructor": 126,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 499,
+          "scene.placement_constructor_unknown": 4,
+          "scene.source_or_grammar_unknown": 499,
+          "scene.source_unavailable": 499,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 2,
+        "common_runtime_eligible": 2
+      },
+      "subject_action__scene_tail": {
+        "blockers": {
+          "action.grammar_unknown": 499,
+          "action.leaf_grammar_unknown": 499,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "garnish.grammar_unknown": 126,
+          "garnish.unsupported_constructor": 126,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 499,
+          "scene.source_or_grammar_unknown": 499,
+          "scene.source_unavailable": 499,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 6,
+        "common_runtime_eligible": 6
+      },
+      "subject_action_scene": {
+        "blockers": {
+          "action.grammar_unknown": 499,
+          "action.leaf_grammar_unknown": 499,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "family.scene_overlap_unknown": 3,
+          "garnish.grammar_unknown": 126,
+          "garnish.unsupported_constructor": 126,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 499,
+          "scene.placement_constructor_unknown": 4,
+          "scene.source_or_grammar_unknown": 499,
+          "scene.source_unavailable": 499,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 2,
+        "common_runtime_eligible": 2
+      },
+      "subject_action_scene_insert": {
+        "blockers": {
+          "action.grammar_unknown": 499,
+          "action.leaf_grammar_unknown": 499,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "family.forbidden_fact_not_false:scene_action_overlap": 3,
+          "family.missing_slot:adjunct": 4,
+          "family.missing_slot:predicate": 4,
+          "family.missing_slot:scene": 4,
+          "family.missing_slot:subject": 4,
+          "family.required_fact_not_true:scene_action_nonduplicative": 3,
+          "family.required_fact_not_true:scene_adjunct_safe": 4,
+          "family.scene_overlap_unknown": 3,
+          "garnish.grammar_unknown": 126,
+          "garnish.unsupported_constructor": 126,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 499,
+          "scene.placement_constructor_unknown": 4,
+          "scene.source_or_grammar_unknown": 499,
+          "scene.source_unavailable": 499,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 2,
+        "common_runtime_eligible": 2
+      },
+      "subject_scene_action": {
+        "blockers": {
+          "action.grammar_unknown": 499,
+          "action.leaf_grammar_unknown": 499,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "family.missing_slot:adjunct": 4,
+          "family.missing_slot:predicate": 4,
+          "family.missing_slot:scene": 4,
+          "family.missing_slot:subject": 4,
+          "family.required_fact_not_true:scene_adjunct_safe": 4,
+          "family.scene_overlap_unknown": 3,
+          "garnish.grammar_unknown": 126,
+          "garnish.unsupported_constructor": 126,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 499,
+          "scene.placement_constructor_unknown": 4,
+          "scene.source_or_grammar_unknown": 499,
+          "scene.source_unavailable": 499,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 2,
+        "common_runtime_eligible": 2
+      }
+    },
+    "ordinary_output_context_mismatches": 0,
+    "proof_constructor_mismatches": 0,
+    "real_graph_seed_family_rows": 3072,
+    "recombination_forced_family_count": 6,
+    "recombination_sha256": "76119c11075884323f40f48607c376acca62cb34b99dec43ad8d3dc2f208e08d",
+    "runtime_source_identity": "7d10c53286ff6b5254380427046f7862c2e03e55b5a4fd17a1b0dfebb32fa843",
+    "sample_count": 512
+  },
+  "focused_test_count": 423,
+  "forced_real_graph_examples": [
+    {
+      "family": "subject_action__scene_tail",
+      "matches_ordinary": true,
+      "run_seed": 2
+    },
+    {
+      "family": "action_lead_subject_scene",
+      "matches_ordinary": false,
+      "run_seed": 51
+    },
+    {
+      "family": "scene_lead_subject_action",
+      "matches_ordinary": false,
+      "run_seed": 51
+    },
+    {
+      "family": "subject_action__scene_tail",
+      "matches_ordinary": false,
+      "run_seed": 51
+    },
+    {
+      "family": "subject_action_scene",
+      "matches_ordinary": false,
+      "run_seed": 51
+    },
+    {
+      "family": "subject_action_scene_insert",
+      "matches_ordinary": false,
+      "run_seed": 51
+    },
+    {
+      "family": "subject_scene_action",
+      "matches_ordinary": true,
+      "run_seed": 51
+    },
+    {
+      "family": "subject_action__scene_tail",
+      "matches_ordinary": true,
+      "run_seed": 88
+    },
+    {
+      "family": "subject_action__scene_tail",
+      "matches_ordinary": true,
+      "run_seed": 190
+    },
+    {
+      "family": "scene_lead_subject_action",
+      "matches_ordinary": false,
+      "run_seed": 234
+    },
+    {
+      "family": "subject_action__scene_tail",
+      "matches_ordinary": true,
+      "run_seed": 234
+    },
+    {
+      "family": "subject_action_scene",
+      "matches_ordinary": false,
+      "run_seed": 234
+    },
+    {
+      "family": "subject_action_scene_insert",
+      "matches_ordinary": false,
+      "run_seed": 234
+    },
+    {
+      "family": "subject_scene_action",
+      "matches_ordinary": false,
+      "run_seed": 234
+    },
+    {
+      "family": "subject_action__scene_tail",
+      "matches_ordinary": true,
+      "run_seed": 482
+    }
+  ],
+  "forced_real_graph_family_count": 6,
+  "formal": {
+    "fixed80": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "frontend_browser": "NOT_RUN",
+  "full_suite": "NOT_RUN",
+  "implementation_status": "PASS",
+  "known_test_exclusions": [],
+  "known_test_failures": [],
+  "new_ordinary_v2_success_count": 1,
+  "next_task": "R43-09",
+  "observed_structure_count_including_fallback": 4,
+  "ordinary_common_selection_enabled": true,
+  "ordinary_v2_count_512": 10,
+  "ordinary_v2_family_count": 3,
+  "regression_test_count": 87,
+  "semantic_mismatch_count": 0,
+  "semantic_scope": "Selected facts/core/frame and previous successes/remaining fallbacks unchanged. New v2 text verified with source-atom and ownership tests and independent review; no formal global quality certification.",
+  "source_commit": "9a2aa32c1e3a48d1d7ea51eb91aee42843dba021",
+  "source_tree_hash": "1eaca58955044461c335702ea0a398bab8fb9958f0a82fcb01a312d7f979d79a",
+  "start_source_tree_hash": "0c8c421de459f62afa8731d60994d23a4409165b726095e5b24c13d363ebd281",
+  "status": "PASS",
+  "support_evidence": {
+    "blocked_domain_combinations": {
+      "": 6,
+      "action": 1,
+      "action|clothing": 1,
+      "action|clothing|garnish|mood|scene": 8,
+      "action|clothing|garnish|mood|scene|subject": 6,
+      "action|clothing|garnish|mood|scene|subject|template": 17,
+      "action|clothing|garnish|mood|scene|template": 4,
+      "action|clothing|garnish|scene": 14,
+      "action|clothing|garnish|scene|subject": 9,
+      "action|clothing|garnish|scene|subject|template": 19,
+      "action|clothing|garnish|scene|template": 22,
+      "action|clothing|garnish|template": 1,
+      "action|clothing|mood|scene": 20,
+      "action|clothing|mood|scene|subject": 21,
+      "action|clothing|mood|scene|subject|template": 41,
+      "action|clothing|mood|scene|template": 39,
+      "action|clothing|mood|subject": 1,
+      "action|clothing|scene": 36,
+      "action|clothing|scene|subject": 44,
+      "action|clothing|scene|subject|template": 50,
+      "action|clothing|scene|template": 50,
+      "action|garnish|mood": 1,
+      "action|garnish|mood|scene|subject": 2,
+      "action|garnish|mood|scene|subject|template": 2,
+      "action|garnish|mood|scene|template": 1,
+      "action|garnish|mood|subject|template": 1,
+      "action|garnish|scene": 1,
+      "action|garnish|scene|subject": 4,
+      "action|garnish|scene|subject|template": 7,
+      "action|garnish|scene|template": 6,
+      "action|mood|scene": 8,
+      "action|mood|scene|subject": 8,
+      "action|mood|scene|subject|template": 9,
+      "action|mood|scene|template": 9,
+      "action|scene": 4,
+      "action|scene|subject": 8,
+      "action|scene|subject|template": 15,
+      "action|scene|template": 9,
+      "clothing|garnish|scene|subject|template": 1,
+      "clothing|mood|scene|subject": 1,
+      "clothing|mood|scene|template": 1,
+      "clothing|scene": 1,
+      "clothing|scene|subject": 2,
+      "clothing|subject": 1
+    },
+    "blocked_domain_pairs": {
+      "action|clothing": 403,
+      "action|garnish": 125,
+      "action|mood": 198,
+      "action|scene": 493,
+      "action|subject": 264,
+      "action|template": 302,
+      "clothing|garnish": 101,
+      "clothing|mood": 159,
+      "clothing|scene": 406,
+      "clothing|subject": 213,
+      "clothing|template": 245,
+      "garnish|mood": 42,
+      "garnish|scene": 123,
+      "garnish|subject": 68,
+      "garnish|template": 81,
+      "mood|scene": 197,
+      "mood|subject": 109,
+      "mood|template": 124,
+      "scene|subject": 266,
+      "scene|template": 302,
+      "subject|template": 162
+    },
+    "domains": {
+      "action": {
+        "blockers": {
+          "action.leaf_grammar_unknown": 499
+        },
+        "grammar_known": 13,
+        "runtime_bound": 512,
+        "source_trace": 512
+      },
+      "clothing": {
+        "blockers": {
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134
+        },
+        "grammar_known": 102,
+        "runtime_bound": 102,
+        "source_trace": 102
+      },
+      "garnish": {
+        "blockers": {
+          "garnish.unsupported_constructor": 126
+        },
+        "grammar_known": 369,
+        "runtime_bound": 512,
+        "source_trace": 512
+      },
+      "mood": {
+        "blockers": {
+          "mood.unsupported_constructor": 200
+        },
+        "grammar_known": 312,
+        "runtime_bound": 512,
+        "source_trace": 512
+      },
+      "scene": {
+        "blockers": {
+          "scene.source_or_grammar_unknown": 499
+        },
+        "grammar_known": 13,
+        "runtime_bound": 13,
+        "source_trace": 13
+      },
+      "subject": {
+        "blockers": {
+          "subject.source_binding_unknown": 21,
+          "subject.unsupported_constructor": 248
+        },
+        "grammar_known": 243,
+        "runtime_bound": 491,
+        "source_trace": 491
+      },
+      "template": {
+        "blockers": {
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "grammar_known": 208,
+        "runtime_bound": 512,
+        "source_trace": 512
+      }
+    },
+    "evidence_sha256": "5e747bc687bc771aa9380c33c5b2817419aac42e738858b11f77b3120c4669f6",
+    "only_blocked_domain": {
+      "action": 1
+    },
+    "ordinary_output_context_mismatches": 0,
+    "rng_mismatches": 0,
+    "runtime_source_identity": "7d10c53286ff6b5254380427046f7862c2e03e55b5a4fd17a1b0dfebb32fa843",
+    "sample_count": 512,
+    "stale_bindings_rejected": 512,
+    "template_topologies": {
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"and the room around her staying in {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 69,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"everything around her grounded in {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 65,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"everything else widening into {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 42,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"everything else widening into {scene_anchor_clause}\", \"subject\": \"{subject_clause}, right where her attention settles\"}": 1,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"the moment lingering in {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 52,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"the rest of the moment opening into {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 40,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"with the next part of the day waiting in {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 42,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"with the next part of the day waiting in {scene_anchor_clause}\", \"subject\": \"{subject_clause}, right where her attention settles\"}": 2,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"with the scene around her staying in {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 41,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"with the scene around her staying in {scene_anchor_clause}\", \"subject\": \"{subject_clause}, right where her attention settles\"}": 1,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"with the scene around her staying in {scene_anchor_clause}\", \"subject\": \"{subject_clause}, turned toward the next exchange\"}": 1,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"with the world around her settling into {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 35,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"with the world around her settling into {scene_anchor_clause}\", \"subject\": \"{subject_clause}, right where her attention settles\"}": 1,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"{scene_clause}\", \"subject\": \"{subject_clause}\"}": 98,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"{scene_clause}\", \"subject\": \"{subject_clause}, keeping to the edge of the moment\"}": 1,
+      "{\"adjunct\": \"{action_clause}\", \"scene\": \"{scene_clause}\", \"subject\": \"{subject_clause}, right where her attention settles\"}": 1,
+      "{\"adjunct\": \"{action_clause}, carrying the moment forward\", \"scene\": \"everything else widening into {scene_anchor_clause}\", \"subject\": \"{subject_clause}, turned toward the next exchange\"}": 1,
+      "{\"adjunct\": \"{action_clause}, carrying the moment forward\", \"scene\": \"the moment lingering in {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 1,
+      "{\"adjunct\": \"{action_clause}, leaving room for the rest of the scene\", \"scene\": \"the rest of the moment opening into {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 1,
+      "{\"adjunct\": \"{action_clause}, leaving room for the rest of the scene\", \"scene\": \"the rest of the moment opening into {scene_anchor_clause}\", \"subject\": \"{subject_clause}, caught in a brief pause\"}": 1,
+      "{\"adjunct\": \"{action_clause}, the moment gathering around her\", \"scene\": \"and the room around her staying in {scene_anchor_clause}\", \"subject\": \"{subject_clause}, caught in a brief pause\"}": 1,
+      "{\"adjunct\": \"{action_clause}, the moment gathering around her\", \"scene\": \"everything else widening into {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 1,
+      "{\"adjunct\": \"{action_clause}, the moment gathering around her\", \"scene\": \"with the next part of the day waiting in {scene_anchor_clause}\", \"subject\": \"{subject_clause}, gathering herself for what comes next\"}": 1,
+      "{\"adjunct\": \"{action_clause}, the moment gathering around her\", \"scene\": \"{scene_clause}\", \"subject\": \"{subject_clause}, keeping to the edge of the moment\"}": 1,
+      "{\"adjunct\": \"{action_clause}, the moment staying with her\", \"scene\": \"everything around her grounded in {scene_anchor_clause}\", \"subject\": \"{subject_clause}, caught in a brief pause\"}": 1,
+      "{\"adjunct\": \"{action_clause}, the moment staying with her\", \"scene\": \"everything else widening into {scene_anchor_clause}\", \"subject\": \"{subject_clause}, keeping to the edge of the moment\"}": 1,
+      "{\"adjunct\": \"{action}, with {garnish}\", \"scene\": \"and the room around her staying in {scene_anchor_clause}\", \"subject\": \"{subject_clause}, caught in a brief pause\"}": 1,
+      "{\"adjunct\": \"{action}, with {garnish}\", \"scene\": \"everything else widening into {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 1,
+      "{\"adjunct\": \"{action}, with {garnish}\", \"scene\": \"with the scene around her staying in {scene_anchor_clause}\", \"subject\": \"{subject_clause}, gathering herself for what comes next\"}": 1,
+      "{\"adjunct\": \"{action}, with {garnish}\", \"scene\": \"with the scene around her staying in {scene_anchor_clause}\", \"subject\": \"{subject_clause}, turned toward the next exchange\"}": 1,
+      "{\"adjunct\": \"{action}, with {garnish}\", \"scene\": \"{scene_clause}\", \"subject\": \"{subject_clause}, caught in a brief pause\"}": 1,
+      "{\"adjunct\": \"{action}, with {garnish}\", \"scene\": \"{scene_clause}\", \"subject\": \"{subject_clause}, keeping to the edge of the moment\"}": 1,
+      "{\"adjunct\": \"{action}, {garnish}\", \"scene\": \"the rest of the moment opening into {scene_anchor_clause}\", \"subject\": \"{subject_clause}, gathering herself for what comes next\"}": 1,
+      "{\"adjunct\": \"{action}, {garnish}\", \"scene\": \"{scene_clause}\", \"subject\": \"{subject_clause}\"}": 1,
+      "{\"adjunct\": \"{garnish} while {action}\", \"scene\": \"everything around her grounded in {scene_anchor_clause}\", \"subject\": \"{subject_clause}, keeping to the edge of the moment\"}": 1,
+      "{\"adjunct\": \"{garnish} while {action}\", \"scene\": \"with the world around her settling into {scene_anchor_clause}\", \"subject\": \"{subject_clause}\"}": 1
+    }
+  },
+  "task": "N2.7-R4.3/R43-08",
+  "typecheck": "NOT_CONFIGURED",
+  "upstream_context_mismatch_count": 0
+}

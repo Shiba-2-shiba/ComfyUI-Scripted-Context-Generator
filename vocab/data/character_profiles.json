@@ -1,0 +1,396 @@
+{
+  "characters": {
+    "Aiko (Quiet)": {
+      "visual_traits": {
+        "hair_color": "black",
+        "hair_style": "long straight hair",
+        "eye_color": "dark brown"
+      },
+      "personality": "quiet",
+      "default_costume": "school_uniform",
+      "color_palette": [
+        "navy blue",
+        "white",
+        "black"
+      ]
+    },
+    "Aiko (Confident)": {
+      "visual_traits": {
+        "hair_color": "black",
+        "hair_style": "long straight hair",
+        "eye_color": "sharp black"
+      },
+      "personality": "confident",
+      "default_costume": "office_lady",
+      "color_palette": [
+        "charcoal grey",
+        "crimson red",
+        "white"
+      ]
+    },
+    "Aiko (Gothic)": {
+      "visual_traits": {
+        "hair_color": "black",
+        "hair_style": "hime cut",
+        "eye_color": "red"
+      },
+      "personality": "mysterious",
+      "default_costume": "gothic_lolita",
+      "color_palette": [
+        "black",
+        "dark purple",
+        "silver"
+      ]
+    },
+    "Akane (Energetic)": {
+      "visual_traits": {
+        "hair_color": "red",
+        "hair_style": "short messy bob",
+        "eye_color": "amber"
+      },
+      "personality": "energetic",
+      "default_costume": "gym_workout",
+      "color_palette": [
+        "bright orange",
+        "yellow",
+        "white"
+      ]
+    },
+    "Akane (Warrior)": {
+      "visual_traits": {
+        "hair_color": "red",
+        "hair_style": "high ponytail",
+        "eye_color": "green"
+      },
+      "personality": "fierce",
+      "default_costume": "fantasy_battle",
+      "color_palette": [
+        "bronze",
+        "leather brown",
+        "ruby"
+      ]
+    },
+    "Bella (Soft)": {
+      "visual_traits": {
+        "hair_color": "blonde",
+        "hair_style": "loose waves",
+        "eye_color": "blue"
+      },
+      "personality": "gentle",
+      "default_costume": "mori_natural",
+      "color_palette": [
+        "pastel pink",
+        "cream",
+        "white"
+      ]
+    },
+    "Bella (Street)": {
+      "visual_traits": {
+        "hair_color": "blonde",
+        "hair_style": "twin tails",
+        "eye_color": "blue"
+      },
+      "personality": "rebellious",
+      "default_costume": "rock_concert",
+      "color_palette": [
+        "black",
+        "neon yellow",
+        "denim blue"
+      ]
+    },
+    "Chloe (Casual)": {
+      "visual_traits": {
+        "hair_color": "brown",
+        "hair_style": "shoulder length hair",
+        "eye_color": "hazel"
+      },
+      "personality": "friendly",
+      "default_costume": "cozy_cafe",
+      "color_palette": [
+        "beige",
+        "brown",
+        "olive green"
+      ]
+    },
+    "Chloe (Serious)": {
+      "visual_traits": {
+        "hair_color": "brown",
+        "hair_style": "tight bun",
+        "eye_color": "dark brown"
+      },
+      "personality": "serious",
+      "default_costume": "office_lady",
+      "color_palette": [
+        "navy blue",
+        "grey",
+        "white"
+      ]
+    },
+    "Diana (Noble)": {
+      "visual_traits": {
+        "hair_color": "platinum blonde",
+        "hair_style": "elegant updo",
+        "eye_color": "ice blue"
+      },
+      "personality": "elegant",
+      "default_costume": "sleek_evening_gown",
+      "color_palette": [
+        "royal blue",
+        "gold",
+        "silver"
+      ]
+    },
+    "Elara (Mage)": {
+      "visual_traits": {
+        "hair_color": "silver",
+        "hair_style": "braided hair",
+        "eye_color": "glowing green"
+      },
+      "personality": "mysterious",
+      "default_costume": "fantasy_battle",
+      "color_palette": [
+        "emerald green",
+        "gold",
+        "white"
+      ]
+    },
+    "Fiona (Nature)": {
+      "visual_traits": {
+        "hair_color": "ginger",
+        "hair_style": "long curly hair",
+        "eye_color": "green"
+      },
+      "personality": "cheerful",
+      "default_costume": "mori_natural",
+      "color_palette": [
+        "forest green",
+        "brown",
+        "orange"
+      ]
+    },
+    "Grace (Traditional)": {
+      "visual_traits": {
+        "hair_color": "black",
+        "hair_style": "neatly tied hair",
+        "eye_color": "dark brown"
+      },
+      "personality": "polite",
+      "default_costume": "traditional_japanese",
+      "color_palette": [
+        "red",
+        "white",
+        "gold"
+      ]
+    },
+    "Hana (Idol)": {
+      "visual_traits": {
+        "hair_color": "pink",
+        "hair_style": "twin drills",
+        "eye_color": "pink"
+      },
+      "personality": "energetic",
+      "default_costume": "idols_stage",
+      "color_palette": [
+        "pastel pink",
+        "white",
+        "sky blue"
+      ]
+    },
+    "Iris (Cyber)": {
+      "visual_traits": {
+        "hair_color": "blue",
+        "hair_style": "short asymmetrical cut",
+        "eye_color": "neon blue"
+      },
+      "personality": "cool",
+      "default_costume": "cyberpunk_night",
+      "color_palette": [
+        "black",
+        "cyan",
+        "purple"
+      ]
+    },
+    "Jasmine (Dancer)": {
+      "visual_traits": {
+        "hair_color": "black",
+        "hair_style": "long flowing hair",
+        "eye_color": "brown"
+      },
+      "personality": "passionate",
+      "default_costume": "exotic_dancer",
+      "color_palette": [
+        "gold",
+        "teal",
+        "red"
+      ]
+    },
+    "Kaori (Student)": {
+      "visual_traits": {
+        "hair_color": "dark brown",
+        "hair_style": "bob cut",
+        "eye_color": "brown"
+      },
+      "personality": "cheerful",
+      "default_costume": "school_uniform",
+      "color_palette": [
+        "navy",
+        "white",
+        "checkered"
+      ]
+    },
+    "Luna (Goth)": {
+      "visual_traits": {
+        "hair_color": "white",
+        "hair_style": "long wavy hair",
+        "eye_color": "red"
+      },
+      "personality": "gloomy",
+      "default_costume": "gothic_lolita",
+      "color_palette": [
+        "black",
+        "dark red",
+        "white"
+      ]
+    },
+    "Maya (Sporty)": {
+      "visual_traits": {
+        "hair_color": "brown",
+        "hair_style": "short ponytail",
+        "eye_color": "brown"
+      },
+      "personality": "energetic",
+      "default_costume": "gym_workout",
+      "color_palette": [
+        "blue",
+        "grey",
+        "lime green"
+      ]
+    },
+    "Nina (Tech)": {
+      "visual_traits": {
+        "hair_color": "purple",
+        "hair_style": "messy bun",
+        "eye_color": "green"
+      },
+      "personality": "quirky",
+      "default_costume": "steampunk_inventor",
+      "color_palette": [
+        "brown",
+        "brass",
+        "purple"
+      ]
+    },
+    "Olivia (Office)": {
+      "visual_traits": {
+        "hair_color": "blonde",
+        "hair_style": "straight bob",
+        "eye_color": "grey"
+      },
+      "personality": "professional",
+      "default_costume": "office_lady",
+      "color_palette": [
+        "beige",
+        "white",
+        "black"
+      ]
+    },
+    "Penelope (Steam)": {
+      "visual_traits": {
+        "hair_color": "copper",
+        "hair_style": "goggles on forehead, braided",
+        "eye_color": "green"
+      },
+      "personality": "adventurous",
+      "default_costume": "steampunk_inventor",
+      "color_palette": [
+        "leather brown",
+        "copper",
+        "cream"
+      ]
+    },
+    "Rin (Cool)": {
+      "visual_traits": {
+        "hair_color": "black",
+        "hair_style": "short boyish cut",
+        "eye_color": "sharp black"
+      },
+      "personality": "cool",
+      "default_costume": "street_casual",
+      "color_palette": [
+        "black",
+        "grey",
+        "silver"
+      ]
+    },
+    "Sarah (Sunny)": {
+      "visual_traits": {
+        "hair_color": "blonde",
+        "hair_style": "side ponytail",
+        "eye_color": "blue"
+      },
+      "personality": "cheerful",
+      "default_costume": "beach_resort",
+      "color_palette": [
+        "white",
+        "yellow",
+        "orange"
+      ]
+    },
+    "Tara (Wild)": {
+      "visual_traits": {
+        "hair_color": "black",
+        "hair_style": "wild messy hair",
+        "eye_color": "gold"
+      },
+      "personality": "aggressive",
+      "default_costume": "fantasy_battle",
+      "color_palette": [
+        "black",
+        "red",
+        "gold"
+      ]
+    },
+    "Violet (Shy)": {
+      "visual_traits": {
+        "hair_color": "black",
+        "hair_style": "long hair hiding eyes",
+        "eye_color": "purple"
+      },
+      "personality": "shy",
+      "default_costume": "library_girl",
+      "color_palette": [
+        "grey",
+        "lavender",
+        "navy"
+      ]
+    },
+    "Yuki (Cyber)": {
+      "visual_traits": {
+        "hair_color": "white",
+        "hair_style": "short smooth bob",
+        "eye_color": "cyan"
+      },
+      "personality": "robotic",
+      "default_costume": "scifi_space",
+      "color_palette": [
+        "white",
+        "cyan",
+        "black"
+      ]
+    },
+    "Zara (Exotic)": {
+      "visual_traits": {
+        "hair_color": "dark brown",
+        "hair_style": "dreadlocks",
+        "eye_color": "dark brown"
+      },
+      "personality": "confident",
+      "default_costume": "street_casual",
+      "color_palette": [
+        "gold",
+        "purple",
+        "black"
+      ]
+    }
+  }
+}

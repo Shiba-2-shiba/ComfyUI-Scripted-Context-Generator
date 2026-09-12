@@ -1,0 +1,1176 @@
+# N2.7-R4 Codex Implementation Specification
+
+Repository:
+
+`Shiba-2-shiba/ComfyUI-Scripted-Context-Generator`
+
+Task:
+
+`N2.7-R4 Expand productive action and common subordinate-clause coverage`
+
+## 0. Mission
+
+N2.7-R3 / candidate04 では Realizer v2 の実workflow適用が 5/2048 までしか拡大せず、6 required syntax families と normalized syntax entropy gate を満たせなかった。
+
+R4では complete action string / seed allowlist / whole-prompt regex parser を増やすのではなく、
+
+**既存producerが持つ構造情報とActionFrame.legacy_slotsを利用して、安全な文法構造をpositive evidenceとしてRealizerへ渡す。**
+
+最終目的は、V150 semantic factsを一切増減させず、同一semantic frameを複数の自然なsyntax familyで安全にrealizeできる範囲を大幅に広げること。
+
+---
+
+# 1. Non-negotiable constraints
+
+以下は変更禁止。
+
+* V150 protected variation data
+* `context_json` schema/version
+* public `Context*` node I/O
+* `ActionFrame` public/serialized schema
+* semantic-only policy
+* solo-safety policy
+* A1.6 metric definitions / thresholds
+* Effective Diversity extractor / normalizer contract
+* fixed cohort / reference range
+* `composition_mode=false` behavior
+
+禁止する実装:
+
+* 新しいcomplete action string allowlist
+* seed allowlist
+* whole-prompt allowlist
+* 「このtemplate keyだから安全」というだけの判定
+* 一般purpose English parser
+* 大規模verb dictionary
+* LLM / NLP dependency
+* unknown grammarを安全扱いすること
+* candidate結果を見た後のA1.6閾値変更
+* Schedulerの先行実装
+* 新producer debug fieldsをcontextへserializeしてpreservation checkを迂回すること
+
+Unknown must remain unknown.
+
+Unknown → v1 fallback.
+
+---
+
+# 2. Preflight / candidate lineage
+
+作業開始前に以下を確認する。
+
+```text
+docs/diversity_refactor/spec.md
+docs/diversity_refactor/tasks.md
+docs/diversity_refactor/progress.md
+CURRENT_STATUS.md
+```
+
+さらにR3 evidenceを確認する。
+
+Expected:
+
+```text
+assets/results/diversity_refactor/n27-candidate-04/
+```
+
+最低限確認:
+
+```text
+verdict.json
+repair-plan.md
+coverage-diagnosis.json
+candidate-root/
+```
+
+## Critical rule
+
+candidate04 sourceがlocal workspaceから失われている場合、
+
+**mainから推測してR4を開始してはならない。**
+
+その場合:
+
+```text
+N2.7-R4 = BLOCKED
+reason = candidate04 source lineage unavailable
+```
+
+としてprogressへ記録する。
+
+candidate04が存在する場合、新candidateを:
+
+```text
+assets/results/diversity_refactor/n27-candidate-05/
+```
+
+として作る。
+
+candidate04を上書きしない。
+
+Active main sourceへapplyしない。
+
+---
+
+# 3. Architectural decision
+
+R4では `ContentPlan` に新しいserialized semantic modelを追加しない。
+
+代わりに、
+
+```text
+ActionFrame.legacy_slots
+        +
+existing ActionFrame
+        +
+actual action text
+        +
+existing action_surface
+        +
+selected template provenance
+        ↓
+runtime-only structural evidence
+        ↓
+eligible_syntax_families()
+        ↓
+Realizer v2
+```
+
+とする。
+
+重要なのは、
+
+```text
+finished English
+    ↓
+guess grammar
+```
+
+から、
+
+```text
+producer slots
+    ↓
+replay producer structure
+    ↓
+verify exact binding
+    ↓
+derive grammar facts
+```
+
+へ変更することである。
+
+---
+
+# 4. R4.1 — Make action rendering traceable
+
+Primary file:
+
+```text
+pipeline/action_renderer.py
+```
+
+現在の `render_action_slots()` が行っている、
+
+* primary slot selection
+* clause ordering
+* support clause selection
+* time/weather append
+* duplicate suppression
+
+を、文字列だけでなくsource slotを保持した内部表現へ分離する。
+
+推奨内部形:
+
+```python
+@dataclass(frozen=True)
+class RenderedActionPart:
+    slot_key: str
+    text: str
+```
+
+内部helper例:
+
+```python
+def _render_action_parts(
+    slots,
+    activity_first=False,
+) -> tuple[RenderedActionPart, ...]:
+    ...
+```
+
+既存API:
+
+```python
+def render_action_slots(...):
+    return ", ".join(part.text for part in _render_action_parts(...))
+```
+
+追加internal API:
+
+```python
+def trace_action_slots(...):
+    return _render_action_parts(...)
+```
+
+## Critical requirement
+
+`render_action_slots()` outputは変更してはならない。
+
+既存fixtureに対しbefore/after byte equalityを確認する。
+
+R4で新しい文章を生成するための変更ではなく、
+
+**既存rendererが何をしたか観測可能にするだけのrefactor**
+
+とする。
+
+---
+
+# 5. R4.2 — Reconstruct producer provenance from existing ActionFrame
+
+Preferred location:
+
+```text
+pipeline/v2_direct_provenance.py
+```
+
+candidate04で責務が過大ならのみ:
+
+```text
+pipeline/v2_structural_evidence.py
+```
+
+を追加してよい。
+
+新しいpublic schemaは作らない。
+
+## Binding algorithm
+
+`ActionFrame.legacy_slots`からactionをreplayする。
+
+```python
+trace_activity_first = trace_action_slots(
+    frame.legacy_slots,
+    activity_first=True,
+)
+
+trace_normal = trace_action_slots(
+    frame.legacy_slots,
+    activity_first=False,
+)
+```
+
+それぞれについて再構築textを作り、
+
+```text
+frame.legacy_text
+current action text
+replayed text
+```
+
+を比較する。
+
+### Trusted
+
+exact normalized equalityが成立し、一意なtraceが得られた場合。
+
+### Unknown
+
+以下の場合:
+
+* replay mismatch
+* ActionFrame version mismatch
+* legacy_slots missing
+* two replay modes produce conflicting provenance
+* current actionがActionFrameと一致しない
+* producer sourceが特定できない
+
+Unknownの場合は既存conservative pathへ戻す。
+
+安全扱いしてはならない。
+
+---
+
+# 6. R4.3 — Structural evidence model
+
+このevidenceはruntime-only。
+
+`PromptContext` / `ActionFrame.to_dict()` / `ContentPlan.to_dict()`へserializeしない。
+
+推奨最小形:
+
+```python
+@dataclass(frozen=True)
+class ActionStructuralEvidence:
+    exact_replay: bool
+    activity_first: bool | None
+    primary_slot: str
+    emitted_slots: tuple[str, ...]
+    emitted_parts: tuple[RenderedActionPart, ...]
+```
+
+必要に応じて各partへ、
+
+```text
+surface_kind
+attachment_kind
+owner_kind
+```
+
+を付けてもよいが、
+
+semantic内容を複製しない。
+
+例えば:
+
+```text
+owner_kind:
+    protagonist
+    protagonist_body_part
+    scene_event
+    unknown
+
+attachment_kind:
+    main_predicate
+    shared_subject_modifier
+    subordinate_temporal
+    subordinate_causal
+    locative
+    independent_clause
+    unknown
+```
+
+これらはproducer source + bounded grammarの両方が一致した場合のみ確定させる。
+
+---
+
+# 7. R4.4 — Move grammar parsing to bounded leaf clauses
+
+Primary:
+
+```text
+pipeline/v2_leaf_grammar.py
+```
+
+Whole action:
+
+```text
+primary action,
+posture,
+gaze,
+obstacle,
+purpose,
+social,
+time...
+```
+
+を一度にparseする方式を減らす。
+
+代わりに、
+
+```text
+RenderedActionPart(slot_key, text)
+```
+
+単位でgrammarを検証する。
+
+つまり:
+
+```text
+source slot known
++
+small text fragment
++
+expected producer role
+```
+
+の3条件を使う。
+
+## Priority constructions
+
+R4は以下を優先する。
+
+### A. Main action
+
+```text
+primary_action
+```
+
+* gerund
+* supported finite clause
+* known primary object
+* verified verb valency
+
+### B. Motion / stance
+
+主に:
+
+```text
+posture
+optional_micro_action
+purpose_clause
+```
+
+で、
+
+```text
+walking...
+standing...
+leaning...
+keeping...
+holding...
+moving...
+waiting...
+checking...
+```
+
+等のbounded shared-subject constructions。
+
+一般verb conjugatorは作らない。
+
+### C. Shared-subject subordinate modifiers
+
+安全に証明できる:
+
+```text
+while + gerund
+without + gerund
+after + gerund/event
+before + gerund/event
+```
+
+等。
+
+### D. Explicit protagonist clauses
+
+例えばproducer-owned clause内の:
+
+```text
+she
+her
+herself
+```
+
+について、solo protagonistへのbindingが明示的に証明できる場合のみ扱う。
+
+### E. Body-part subject
+
+```text
+eyes ...
+hands ...
+fingers ...
+shoulders ...
+```
+
+は protagonist-owned ではあるが、
+
+**same grammatical subjectとは扱わない。**
+
+`action_lead_subject_scene`等のshared-subject requirementを満たす証拠に使用しない。
+
+### F. Causal / external event
+
+```text
+because ...
+as ...
+after ...
+```
+
+がexternal eventを主語にする場合、
+
+action-lead safetyへ昇格させない。
+
+sentence-tailとして保持できるfamilyだけを候補とする。
+
+---
+
+# 8. R4.5 — Evidence-first eligibility
+
+Primary:
+
+```text
+pipeline/syntax_family_selector.py
+```
+
+新しい優先順位:
+
+```text
+1. producer-bound structural evidence
+2. bounded leaf grammar
+3. existing conservative legacy checks
+4. unknown
+```
+
+禁止:
+
+```text
+existing regex failed
+→ broader regexで無理にaccept
+```
+
+推奨:
+
+```python
+facts = derive_safety_facts(
+    plan,
+    action_frame,
+    action_surface,
+    structural_evidence,
+)
+```
+
+## Important safety facts
+
+特に以下をpositive evidenceから作る。
+
+```text
+frame_predicate_safe
+same_subject_attachment_safe
+independent_action_subject
+scene_action_overlap
+scene_action_nonduplicative
+standalone_scene_safe
+scene_lead_safe
+scene_adjunct_safe
+```
+
+`True` はproofがある場合のみ。
+
+証明不能:
+
+```python
+None
+```
+
+とする。
+
+`False` と `None` を混同しない。
+
+---
+
+# 9. R4.6 — Do not enlarge ContentPlan serialization
+
+R4では原則として、
+
+```text
+pipeline/prompt_realizer.py::ContentPlan
+```
+
+のserialized contractを増やさない。
+
+特に:
+
+```text
+grammar_facts
+surface_facts
+producer_trace
+```
+
+を `ContentPlan.to_dict()` に追加しない。
+
+理由:
+
+Builder debug → PromptContext history → context_json bytes
+
+へ波及するため。
+
+候補経路では:
+
+```python
+realize_content_plan(
+    plan,
+    action_frame=frame,
+    action_surface=surface,
+    structural_evidence=evidence,
+)
+```
+
+のようなephemeral argumentを利用する。
+
+既存plan-only callは完全にv1。
+
+---
+
+# 10. R4.7 — Candidate bridge integration
+
+candidate04に存在する場合:
+
+```text
+pipeline/v2_candidate_bridge.py
+```
+
+を拡張する。
+
+役割:
+
+```text
+existing builder values
+      ↓
+build structural evidence
+      ↓
+verify binding
+      ↓
+eligible families
+      ↓
+candidate syntax selection
+      ↓
+realize
+```
+
+`prompt_renderer.py`本体に大量のR4ロジックを置かない。
+
+`prompt_renderer.py`は:
+
+* selected entries
+* ActionFrame
+* action_surface
+* actual clauses
+
+をcandidate bridgeへ渡すだけにする。
+
+---
+
+# 11. R4.8 — Template handling
+
+今回の主ボトルネックはaction/subordinate grammarなので、
+
+**end wrapperをさらに増やすことをR4の中心にしない。**
+
+既存candidate04 template/scene provenanceを維持する。
+
+新しいtemplate supportが必要な場合も、
+
+```text
+template key membership
+```
+
+だけでは許可しない。
+
+最低限:
+
+```text
+placeholder topology
+fixed prefix/suffix
+owner/reference structure
+```
+
+が検証可能であること。
+
+例:
+
+```text
+{action_clause}, <shared-subject modifier>
+```
+
+と
+
+```text
+<independent NP> while {action}
+```
+
+は別grammar shapeとして扱う。
+
+---
+
+# 12. Tests — positive real workflow cases
+
+新規候補:
+
+```text
+assets/test_n27_r4_action_trace.py
+assets/test_n27_r4_structural_evidence.py
+assets/test_n27_r4_subordinate_grammar.py
+assets/fixtures/n27_r4_productive_cases.json
+```
+
+candidate04の既存testsを削除しない。
+
+最低限positive coverage:
+
+* primary action + posture
+* primary action + gaze
+* primary action + purpose clause
+* primary action + progress clause
+* primary action + obstacle clause
+* primary action + time/weather
+* gerund main action
+* supported finite action
+* while-gerund shared-subject
+* without-gerund shared-subject
+* temporal subordinate clause
+* explicit protagonist pronoun
+* scene-safe composition
+* each required syntax familyに少なくとも1つのreal-graph positive fixture
+
+単純人工fixtureだけでは不可。
+
+実workflow seedから取得したcaseを含める。
+
+---
+
+# 13. Adversarial tests
+
+必須。
+
+### Stale provenance
+
+ActionFrameとcurrent actionを変更して:
+
+```text
+trace != action
+```
+
+ならfallback。
+
+### Independent subject
+
+```text
+the lights ...
+another person ...
+someone ...
+the crowd ...
+```
+
+をshared-subjectとして扱わない。
+
+### Body-part subject
+
+```text
+her eyes ...
+her hands ...
+her fingers ...
+```
+
+をprotagonist grammatical subjectと誤認しない。
+
+### Ownership mismatch
+
+modifierがscene/objectに属する場合、protagonistへattachしない。
+
+### Place overlap
+
+action内部locationとscene locationが同一canonical locationなら、
+
+scene insertなどnonduplicative familyを拒否。
+
+### Object loss
+
+primary/secondary objectをv2化で落とさない。
+
+### Object invention
+
+ActionFrame / source slotにないobjectを追加しない。
+
+### Negation
+
+```text
+not
+without
+never
+```
+
+等をpositive actionへ変換しない。
+
+### Multiple subject / solo
+
+second protagonistを生成しない。
+
+### Unknown grammar
+
+acceptではなくv1 fallback。
+
+---
+
+# 14. Regression requirement
+
+candidate05で必須:
+
+```text
+existing R1/R2/R3 positive outputs
+existing R1/R2/R3 negative outputs
+candidate04 supported seeds
+v1 fallback bytes
+```
+
+を保持する。
+
+特にcandidate04で通っていた:
+
+```text
+9
+40
+41
+51
+458
+```
+
+のbehaviorをlossしない。
+
+ただしseed番号そのものをruntime allowlistに使用してはならない。
+
+---
+
+# 15. Development intake512
+
+正式2048 gateを毎回回さない。
+
+まず同じintake512 diagnosticを再利用する。
+
+Report:
+
+```text
+subject accepted
+clothing accepted
+scene accepted
+primary action accepted
+full action tail accepted
+complete structural intersection
+actual v2 applications
+structurally eligible families
+observed syntax families
+fallback reasons
+```
+
+## Development-only heuristic
+
+これはA1.6変更ではなく、2048 gateを回す価値があるかを見る目安。
+
+推奨:
+
+```text
+actual v2 application >= 64 / 512
+observed required families >= 5
+previous 5 real examples retained
+semantic/policy mismatch = 0
+```
+
+これを満たさなくてもREJECTとはしない。
+
+満たさない場合:
+
+```text
+do not run expensive formal gate yet
+continue bounded coverage diagnosis
+```
+
+とする。
+
+最終判定はA1.6のみで行う。
+
+---
+
+# 16. Formal candidate05 gate
+
+Development結果が十分ならcandidate sourceをfreezeする。
+
+その後、R3と同一条件で:
+
+```text
+8192 source-bound reference
+2048 gate
+paired per-seed observations
+fixed 64 control + 16 exploration quality cohort
+strict V150 preservation guards
+```
+
+を実行する。
+
+既存evaluator/comparatorを再利用する。
+
+新しい有利なcomparatorを作らない。
+
+---
+
+# 17. Locked adoption conditions
+
+A1.6を変更しない。
+
+Realizer v2 gate @2048:
+
+```text
+required syntax families observed: >= 6
+normalized syntax entropy: >= 0.855077
+raw syntax entropy: > 0.814359
+dominant syntax family share: <= 0.748047
+maximum syntax run: <= 16
+```
+
+Prefix guard:
+
+```text
+@128 normalized entropy >= 0.743271
+@512 normalized entropy >= 0.814359
+max syntax run @128/@512 <= 11/11
+```
+
+Semantic/prompt guards:
+
+```text
+core/frame unique non-regression
+exact duplicates = 0
+normalized duplicates = 0
+per-seed semantic preservation = exact
+policy issues = 0
+identity defects = 0
+hard conflicts = 0
+determinism mismatch = 0
+V150 protected counts unchanged
+```
+
+Quality guardsも既存A1.6をそのまま適用する。
+
+---
+
+# 18. Verdict logic
+
+### ELIGIBLE
+
+全locked target + guards PASS。
+
+その場合のみ:
+
+```text
+N2.8 may start
+```
+
+ただしR4ではactive mainへapplyしない。
+
+### REJECTED
+
+測定可能なlocked threshold failure。
+
+例:
+
+```text
+entropy insufficient
+six families not observed
+semantic regression
+quality regression
+```
+
+### BLOCKED
+
+必要な証拠が欠損。
+
+例:
+
+```text
+candidate04 lineage missing
+reference mismatch
+source hash mismatch
+per-seed observations missing
+```
+
+閾値を弱めて進めない。
+
+---
+
+# 19. Expected changed files
+
+Preferred candidate05 delta:
+
+```text
+pipeline/action_renderer.py
+pipeline/v2_direct_provenance.py
+pipeline/v2_leaf_grammar.py
+pipeline/v2_candidate_bridge.py
+pipeline/syntax_family_selector.py
+pipeline/prompt_realizer.py
+prompt_renderer.py
+
+assets/test_n27_r4_action_trace.py
+assets/test_n27_r4_structural_evidence.py
+assets/test_n27_r4_subordinate_grammar.py
+assets/fixtures/n27_r4_productive_cases.json
+```
+
+必要な場合のみ追加:
+
+```text
+pipeline/v2_structural_evidence.py
+```
+
+原則変更しない:
+
+```text
+core/schema.py
+nodes_context.py
+nodes_prompt_cleaner.py
+vocab/data/variation_scope.json
+assets/compatibility_review.csv
+vocab/data/action_pools.json
+vocab/source/action_pools/*
+```
+
+---
+
+# 20. Verification order
+
+以下の順序を守る。
+
+```text
+1. RED real-workflow fixtures
+2. action-render trace implementation
+3. exact renderer regression
+4. structural evidence binding
+5. bounded leaf grammar
+6. adversarial tests
+7. existing R1-R3 regression
+8. validate_prompt_data
+9. asset validation
+10. verify_full_flow
+11. intake512
+12. code review
+13. freeze candidate05 source
+14. source-bound 8192 reference
+15. 2048 gate
+16. fixed80 quality comparison
+17. per-seed preservation
+18. terminal verdict
+19. progress.md update
+```
+
+Formal gate前にsourceを変更した場合、candidateを再freezeして全formal evidenceを作り直す。
+
+---
+
+# 21. progress.md start entry
+
+作業開始時に追記:
+
+```markdown
+### N2.7-R4 — Producer-bound structural evidence / productive subordinate grammar
+
+State: IN_PROGRESS
+
+Candidate:
+`assets/results/diversity_refactor/n27-candidate-05/`
+
+Objective:
+Broaden reusable real-workflow v2 eligibility by deriving grammar safety from
+existing ActionFrame slots and producer-bound rendering provenance rather than
+whole-action string recognition.
+
+Constraints:
+- no active apply
+- no new seed/whole-action allowlist
+- no public/context schema change
+- no A1.6 threshold change
+- V150 protected data unchanged
+- unknown grammar remains fallback
+
+Baseline:
+candidate04, actual v2 5/2048, observed structural families 4, adoption REJECTED.
+
+Planned implementation:
+1. trace existing action renderer without changing output
+2. bind trace to ActionFrame/current action
+3. parse bounded producer-owned leaf clauses
+4. derive positive safety facts
+5. extend real-workflow eligibility
+6. run intake512 before formal gate
+```
+
+---
+
+# 22. Completion entry
+
+完了時:
+
+```markdown
+State: ELIGIBLE | REJECTED | BLOCKED
+
+Candidate source hash:
+...
+
+Changed files:
+...
+
+Renderer byte-preservation:
+PASS / FAIL
+
+R1-R3 regression:
+PASS / FAIL
+
+Adversarial grammar tests:
+PASS / FAIL
+
+Intake512:
+- actual v2:
+- observed families:
+- complete structural intersection:
+- fallback top reasons:
+
+Formal @2048:
+- actual v2:
+- observed families:
+- normalized entropy:
+- raw entropy:
+- dominant share:
+- max run:
+- semantic core/frame:
+- duplicates:
+
+Fixed80 quality:
+...
+
+Per-seed semantic preservation:
+...
+
+V150 freeze:
+...
+
+Verdict:
+...
+
+Next task:
+N2.8 only if ELIGIBLE.
+Otherwise add a new bounded R4 follow-up; do not weaken A1.6.
+```
+
+---
+
+# 23. Definition of success
+
+R4の成功は、
+
+「regexが多くの英文を認識できるようになった」
+
+ことではない。
+
+成功は:
+
+```text
+producer構造
+    ↓
+positive grammatical evidence
+    ↓
+safe syntax eligibility
+    ↓
+multiple realizations
+```
+
+が再利用可能な形で成立し、
+
+実workflow上でv2適用範囲が桁違いに増えながら、
+
+```text
+semantic preservation
+policy
+solo safety
+determinism
+V150 freeze
+```
+
+を完全に維持することである。
+
+R4で十分なcoverageが得られない場合も、
+
+complete stringsやgeneral parserを増やして突破しない。
+
+その場合は、
+
+**Realizerへ渡されるstructured semantic/grammar informationの不足が次のarchitectural bottleneck**
+
+として明示してREJECT/BLOCKし、N2.8へ進まない。

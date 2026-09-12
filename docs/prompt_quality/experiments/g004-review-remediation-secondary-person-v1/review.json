@@ -1,0 +1,19 @@
+{
+  "candidate_only_hard_defects": [],
+  "changed_records": [
+    {
+      "candidate_result": "The secondary-person phrase is absent; no replacement crowd phrase is introduced.",
+      "incumbent_defect": "clusters of teenagers",
+      "seed": 51
+    }
+  ],
+  "experiment_id": "g004-review-remediation-secondary-person-v1",
+  "review_scope": {
+    "changed_seed_count": 1,
+    "dimensions": ["consistency", "protagonist_clarity", "image_prompt_suitability"],
+    "method": "paired changed-record inspection plus analyzer and solo-safety boundary audit"
+  },
+  "schema_version": "prompt-quality-review/v1",
+  "status": "pass",
+  "summary": "The sole changed record removes the review-blocking secondary-person phrase while preserving zero consistency conflicts and all formal guards."
+}

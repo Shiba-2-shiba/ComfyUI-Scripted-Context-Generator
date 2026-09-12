@@ -1,0 +1,32 @@
+{
+  "classification": "RECOMBINATION",
+  "provenance": "Selected current catalog/profile values recombined through existing constructors. This is not an observed ComfyUI graph run or evaluation evidence.",
+  "seed": 17,
+  "subject_profile": "Aiko (Quiet)",
+  "clothing": {
+    "theme": "street_casual",
+    "type": "dresses",
+    "pack": "winter_knit_dress",
+    "garment": "cozy sweater dress",
+    "color": "cream"
+  },
+  "scene": {
+    "pack": "opera_house",
+    "environment": "grand historic opera house interior",
+    "mode": "simple"
+  },
+  "action_slots": {
+    "primary_action": "holding the clipboard",
+    "location": "opera_house"
+  },
+  "main_verb": "holding",
+  "primary_object": "",
+  "garnish_tags": [],
+  "mood_key": "quiet_focused",
+  "mood": "the moment kept deliberate rather than urgent, with everything else held at the edge",
+  "templates": {
+    "intro": "intro_plain_subject",
+    "body": "body_direct_clause",
+    "end": "end_scene_direct"
+  }
+}

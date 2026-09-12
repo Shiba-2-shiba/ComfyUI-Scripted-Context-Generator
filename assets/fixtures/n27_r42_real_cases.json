@@ -1,0 +1,527 @@
+[
+  {
+    "builder_seed": 10541106620680169909,
+    "checks": {
+      "clothing": false,
+      "direct_components": false,
+      "scene": false,
+      "subject": true
+    },
+    "frame": {
+      "gaze_target": "eyes fixed on what needs to happen next",
+      "hand_action": "hands settling and then shifting again",
+      "legacy_slots": {
+        "anchor": "",
+        "daily_life_tags": [
+          "leisure"
+        ],
+        "gaze_target": "eyes fixed on what needs to happen next",
+        "hand_action": "hands settling and then shifting again",
+        "location": "opera_house",
+        "obstacle_clause": "",
+        "obstacle_or_trigger": "",
+        "optional_micro_action": "measuring the pause instead of rushing it",
+        "posture": "sitting in the audience seats",
+        "primary_action": "sitting in the audience seats",
+        "progress_clause": "while keeping the momentum going",
+        "progress_state": "midway",
+        "purpose": "wait",
+        "purpose_clause": "holding onto her place a little longer",
+        "social_clause": "as if responding directly to the viewer",
+        "social_distance": "viewer",
+        "time_or_weather": ""
+      },
+      "legacy_text": "sitting in the audience seats, eyes fixed on what needs to happen next, holding onto her place a little longer, as if responding directly to the viewer",
+      "main_verb": "sitting",
+      "posture": "sitting in the audience seats",
+      "primary_object": "",
+      "progress": "midway",
+      "schema_version": "action-frame/v1",
+      "social_relation": "viewer",
+      "stimulus_or_obstacle": ""
+    },
+    "replacements": [
+      [
+        "{subject_clause}",
+        "A solo girl with high ponytail, red hair and green eyes in soft gray wool knee-length warm turtleneck sweater dress, with ribbed texture"
+      ],
+      [
+        "{action_clause}",
+        "sitting in the audience seats, eyes fixed on what needs to happen next, holding onto her place a little longer, as if responding directly to the viewer, brows knit in concentration, still posture"
+      ],
+      [
+        "{scene_clause}",
+        "in grand historic opera house interior, during evening performance, gold leaf detailing, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{scene_anchor_clause}",
+        "grand historic opera house interior, during evening performance, gold leaf detailing, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{subj}",
+        "A solo girl with high ponytail, red hair and green eyes"
+      ],
+      [
+        "{costume}",
+        "soft gray wool knee-length warm turtleneck sweater dress, with ribbed texture"
+      ],
+      [
+        "{loc}",
+        "grand historic opera house interior, during evening performance, gold leaf detailing"
+      ],
+      [
+        "{action}",
+        "sitting in the audience seats, eyes fixed on what needs to happen next, holding onto her place a little longer, as if responding directly to the viewer"
+      ],
+      [
+        "{garnish}",
+        "brows knit in concentration, still posture"
+      ],
+      [
+        "{meta_mood}",
+        "the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{meta_style}",
+        ""
+      ]
+    ],
+    "run_seed": 88,
+    "slots": {
+      "clause_order": [
+        "subject",
+        "action",
+        "scene"
+      ],
+      "discourse_roles": [
+        "neutral",
+        "quiet"
+      ],
+      "lexical_choice": "gerund",
+      "named_seed_streams": {
+        "lexical": 3926066688,
+        "syntax": 3555435169,
+        "template": 2538085698
+      },
+      "semantic_slots": {
+        "adjunct": "{action_clause}",
+        "object": "",
+        "predicate": "sitting",
+        "scene": "{scene_clause}",
+        "subject": "{subject_clause}"
+      },
+      "syntax_family": "single-sentence-scene-tail"
+    },
+    "surface": {
+      "first_token": "sitting",
+      "input_surface": "gerund",
+      "rendered_clause": "sitting in the audience seats, eyes fixed on what needs to happen next, holding onto her place a little longer, as if responding directly to the viewer, brows knit in concentration, still posture",
+      "surface": "gerund",
+      "verb": "sitting",
+      "word_count": 27
+    },
+    "producer_context": {
+      "character_palette": [
+        "bronze",
+        "leather brown",
+        "ruby"
+      ]
+    }
+  },
+  {
+    "builder_seed": 15836446996896925571,
+    "checks": {
+      "clothing": false,
+      "direct_components": false,
+      "scene": false,
+      "subject": false
+    },
+    "frame": {
+      "gaze_target": "looking toward the next thing she needs",
+      "hand_action": "one hand resting lightly where it lands",
+      "legacy_slots": {
+        "anchor": "",
+        "daily_life_tags": [
+          "domestic",
+          "home_life"
+        ],
+        "gaze_target": "looking toward the next thing she needs",
+        "hand_action": "one hand resting lightly where it lands",
+        "location": "bedroom_boudoir",
+        "obstacle_clause": "",
+        "obstacle_or_trigger": "",
+        "optional_micro_action": "letting the pause settle properly",
+        "posture": "standing and tidying the small area around her",
+        "primary_action": "standing and tidying the small area around her",
+        "progress_clause": "near the point where she can move on",
+        "progress_state": "wrapping_up",
+        "purpose": "rest",
+        "purpose_clause": "letting the pause settle properly",
+        "social_clause": "keeping to herself",
+        "social_distance": "alone",
+        "time_or_weather": "after finally coming home"
+      },
+      "legacy_text": "standing and tidying the small area around her, looking toward the next thing she needs, letting the pause settle properly, keeping to herself, after finally coming home",
+      "main_verb": "tidying",
+      "posture": "standing and tidying the small area around her",
+      "primary_object": "",
+      "progress": "wrapping_up",
+      "schema_version": "action-frame/v1",
+      "social_relation": "alone",
+      "stimulus_or_obstacle": ""
+    },
+    "replacements": [
+      [
+        "{subject_clause}",
+        "A solo girl with short boyish cut, black hair and sharp black eyes in silver logo print fitted designer tee and chic leather mini skirt, with zipper details, shopping bags"
+      ],
+      [
+        "{action_clause}",
+        "standing and tidying the small area around her, looking toward the next thing she needs, letting the pause settle properly, keeping to herself, after finally coming home, brows knit in concentration, still posture"
+      ],
+      [
+        "{scene_clause}",
+        "in gothic victorian boudoir, intricate background details, with cute plush toys on bed, featuring wooden wardrobe with open doors, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{scene_anchor_clause}",
+        "gothic victorian boudoir, intricate background details, with cute plush toys on bed, featuring wooden wardrobe with open doors, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{subj}",
+        "A solo girl with short boyish cut, black hair and sharp black eyes"
+      ],
+      [
+        "{costume}",
+        "silver logo print fitted designer tee and chic leather mini skirt, with zipper details, shopping bags"
+      ],
+      [
+        "{loc}",
+        "gothic victorian boudoir, intricate background details, with cute plush toys on bed, featuring wooden wardrobe with open doors"
+      ],
+      [
+        "{action}",
+        "standing and tidying the small area around her, looking toward the next thing she needs, letting the pause settle properly, keeping to herself, after finally coming home"
+      ],
+      [
+        "{garnish}",
+        "brows knit in concentration, still posture"
+      ],
+      [
+        "{meta_mood}",
+        "the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{meta_style}",
+        ""
+      ]
+    ],
+    "run_seed": 94,
+    "slots": {
+      "clause_order": [
+        "subject",
+        "action",
+        "scene"
+      ],
+      "discourse_roles": [
+        "neutral",
+        "quiet",
+        "transition"
+      ],
+      "lexical_choice": "gerund",
+      "named_seed_streams": {
+        "lexical": 3910884381,
+        "syntax": 4145021973,
+        "template": 2176369949
+      },
+      "semantic_slots": {
+        "adjunct": "{action_clause}",
+        "object": "",
+        "predicate": "tidying",
+        "scene": "with the scene around her staying in {scene_anchor_clause}",
+        "subject": "{subject_clause}"
+      },
+      "syntax_family": "single-sentence-scene-tail"
+    },
+    "surface": {
+      "first_token": "standing",
+      "input_surface": "gerund",
+      "rendered_clause": "standing and tidying the small area around her, looking toward the next thing she needs, letting the pause settle properly, keeping to herself, after finally coming home, brows knit in concentration, still posture",
+      "surface": "gerund",
+      "verb": "tidying",
+      "word_count": 27
+    },
+    "producer_context": {
+      "character_palette": [
+        "black",
+        "grey",
+        "silver"
+      ]
+    }
+  },
+  {
+    "builder_seed": 1238099996539977777,
+    "checks": {
+      "clothing": false,
+      "direct_components": false,
+      "scene": false,
+      "subject": true
+    },
+    "frame": {
+      "gaze_target": "looking toward the next thing she needs",
+      "hand_action": "hand moving between two nearby choices",
+      "legacy_slots": {
+        "anchor": "",
+        "daily_life_tags": [
+          "daily_public",
+          "leisure",
+          "quiet_indoor"
+        ],
+        "gaze_target": "looking toward the next thing she needs",
+        "hand_action": "hand moving between two nearby choices",
+        "location": "art_gallery",
+        "obstacle_clause": "",
+        "obstacle_or_trigger": "",
+        "optional_micro_action": "weighing one choice against another",
+        "posture": "leaning in to read a tiny label",
+        "primary_action": "leaning in to read a tiny label",
+        "progress_clause": "before fully getting started",
+        "progress_state": "preparing",
+        "purpose": "shop",
+        "purpose_clause": "weighing one choice against another",
+        "social_clause": "leaving room for a quiet exchange with the viewer",
+        "social_distance": "viewer",
+        "time_or_weather": ""
+      },
+      "legacy_text": "leaning in to read a tiny label, looking toward the next thing she needs, weighing one choice against another, leaving room for a quiet exchange with the viewer",
+      "main_verb": "leaning",
+      "posture": "leaning in to read a tiny label",
+      "primary_object": "",
+      "progress": "preparing",
+      "schema_version": "action-frame/v1",
+      "social_relation": "viewer",
+      "stimulus_or_obstacle": ""
+    },
+    "replacements": [
+      [
+        "{subject_clause}",
+        "A solo girl with long straight hair, black hair and sharp black eyes in white cashmere long-sleeve cozy sweater dress, with ribbed texture, cozy scarf"
+      ],
+      [
+        "{action_clause}",
+        "leaning in to read a tiny label, looking toward the next thing she needs, weighing one choice against another, leaving room for a quiet exchange with the viewer, brows knit in concentration"
+      ],
+      [
+        "{scene_clause}",
+        "in small contemporary gallery arranged for a weekday viewing, featuring framed canvas works spaced along the wall and small title plaques mounted beside each work, hushed viewing room atmosphere, atmospheric perspective, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{scene_anchor_clause}",
+        "small contemporary gallery arranged for a weekday viewing, featuring framed canvas works spaced along the wall and small title plaques mounted beside each work, hushed viewing room atmosphere, atmospheric perspective, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{subj}",
+        "A solo girl with long straight hair, black hair and sharp black eyes"
+      ],
+      [
+        "{costume}",
+        "white cashmere long-sleeve cozy sweater dress, with ribbed texture, cozy scarf"
+      ],
+      [
+        "{loc}",
+        "small contemporary gallery arranged for a weekday viewing, featuring framed canvas works spaced along the wall and small title plaques mounted beside each work, hushed viewing room atmosphere, atmospheric perspective"
+      ],
+      [
+        "{action}",
+        "leaning in to read a tiny label, looking toward the next thing she needs, weighing one choice against another, leaving room for a quiet exchange with the viewer"
+      ],
+      [
+        "{garnish}",
+        "brows knit in concentration"
+      ],
+      [
+        "{meta_mood}",
+        "the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{meta_style}",
+        ""
+      ]
+    ],
+    "run_seed": 234,
+    "slots": {
+      "clause_order": [
+        "subject",
+        "action",
+        "scene"
+      ],
+      "discourse_roles": [
+        "focused",
+        "neutral",
+        "quiet",
+        "transition"
+      ],
+      "lexical_choice": "gerund",
+      "named_seed_streams": {
+        "lexical": 1838805931,
+        "syntax": 1476159407,
+        "template": 334000089
+      },
+      "semantic_slots": {
+        "adjunct": "{action_clause}",
+        "object": "",
+        "predicate": "leaning",
+        "scene": "and the room around her staying in {scene_anchor_clause}",
+        "subject": "{subject_clause}"
+      },
+      "syntax_family": "single-sentence-scene-tail"
+    },
+    "surface": {
+      "first_token": "leaning",
+      "input_surface": "gerund",
+      "rendered_clause": "leaning in to read a tiny label, looking toward the next thing she needs, weighing one choice against another, leaving room for a quiet exchange with the viewer, brows knit in concentration",
+      "surface": "gerund",
+      "verb": "leaning",
+      "word_count": 28
+    },
+    "producer_context": {
+      "character_palette": [
+        "charcoal grey",
+        "crimson red",
+        "white"
+      ]
+    }
+  },
+  {
+    "builder_seed": 15853197168425466152,
+    "checks": {
+      "clothing": false,
+      "direct_components": false,
+      "scene": false,
+      "subject": false
+    },
+    "frame": {
+      "gaze_target": "looking off for a quiet second",
+      "hand_action": "fingers easing out of their tension",
+      "legacy_slots": {
+        "anchor": "",
+        "daily_life_tags": [
+          "domestic",
+          "home_life"
+        ],
+        "gaze_target": "looking off for a quiet second",
+        "hand_action": "fingers easing out of their tension",
+        "location": "bedroom_boudoir",
+        "obstacle_clause": "",
+        "obstacle_or_trigger": "",
+        "optional_micro_action": "taking one more easy breath",
+        "posture": "standing and tidying the small area around her",
+        "primary_action": "standing and tidying the small area around her",
+        "progress_clause": "while setting up the next step",
+        "progress_state": "preparing",
+        "purpose": "rest",
+        "purpose_clause": "letting the pause settle properly",
+        "social_clause": "as if responding directly to the viewer",
+        "social_distance": "viewer",
+        "time_or_weather": "before getting ready to leave"
+      },
+      "legacy_text": "standing and tidying the small area around her, looking off for a quiet second, letting the pause settle properly, as if responding directly to the viewer, before getting ready to leave",
+      "main_verb": "tidying",
+      "posture": "standing and tidying the small area around her",
+      "primary_object": "",
+      "progress": "preparing",
+      "schema_version": "action-frame/v1",
+      "social_relation": "viewer",
+      "stimulus_or_obstacle": ""
+    },
+    "replacements": [
+      [
+        "{subject_clause}",
+        "A solo girl with wild messy hair, black hair and gold eyes in gold layered satin camisole and distressed skinny jeans, with zipper details"
+      ],
+      [
+        "{action_clause}",
+        "standing and tidying the small area around her, looking off for a quiet second, letting the pause settle properly, as if responding directly to the viewer, before getting ready to leave, brows knit in concentration, still posture"
+      ],
+      [
+        "{scene_clause}",
+        "in gothic victorian boudoir, adorned with glass perfume bottles, during lazy morning, featuring canopied four-poster bed, weathered surfaces, a quiet room holding around her while the task in front of her sets the pace"
+      ],
+      [
+        "{scene_anchor_clause}",
+        "gothic victorian boudoir, adorned with glass perfume bottles, during lazy morning, featuring canopied four-poster bed, weathered surfaces, a quiet room holding around her while the task in front of her sets the pace"
+      ],
+      [
+        "{subj}",
+        "A solo girl with wild messy hair, black hair and gold eyes"
+      ],
+      [
+        "{costume}",
+        "gold layered satin camisole and distressed skinny jeans, with zipper details"
+      ],
+      [
+        "{loc}",
+        "gothic victorian boudoir, adorned with glass perfume bottles, during lazy morning, featuring canopied four-poster bed, weathered surfaces"
+      ],
+      [
+        "{action}",
+        "standing and tidying the small area around her, looking off for a quiet second, letting the pause settle properly, as if responding directly to the viewer, before getting ready to leave"
+      ],
+      [
+        "{garnish}",
+        "brows knit in concentration, still posture"
+      ],
+      [
+        "{meta_mood}",
+        "a quiet room holding around her while the task in front of her sets the pace"
+      ],
+      [
+        "{meta_style}",
+        ""
+      ]
+    ],
+    "run_seed": 338,
+    "slots": {
+      "clause_order": [
+        "subject",
+        "action",
+        "scene"
+      ],
+      "discourse_roles": [
+        "focused",
+        "neutral",
+        "quiet",
+        "transition"
+      ],
+      "lexical_choice": "gerund",
+      "named_seed_streams": {
+        "lexical": 3815613589,
+        "syntax": 3018503152,
+        "template": 2518522413
+      },
+      "semantic_slots": {
+        "adjunct": "{action_clause}",
+        "object": "",
+        "predicate": "tidying",
+        "scene": "and the room around her staying in {scene_anchor_clause}",
+        "subject": "{subject_clause}"
+      },
+      "syntax_family": "single-sentence-scene-tail"
+    },
+    "surface": {
+      "first_token": "standing",
+      "input_surface": "gerund",
+      "rendered_clause": "standing and tidying the small area around her, looking off for a quiet second, letting the pause settle properly, as if responding directly to the viewer, before getting ready to leave, brows knit in concentration, still posture",
+      "surface": "gerund",
+      "verb": "tidying",
+      "word_count": 31
+    },
+    "producer_context": {
+      "character_palette": [
+        "black",
+        "red",
+        "gold"
+      ]
+    }
+  }
+]

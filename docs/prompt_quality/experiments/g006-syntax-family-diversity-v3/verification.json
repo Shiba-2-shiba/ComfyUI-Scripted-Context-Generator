@@ -1,0 +1,37 @@
+{
+  "ai_slop_cleanup": {
+    "fallback_findings": [],
+    "passes_completed": [
+      "fallback resolution gate",
+      "dead-code audit",
+      "duplication audit",
+      "naming and error-handling audit",
+      "test reinforcement"
+    ],
+    "remaining_risks": [
+      "Template entropy remains not observable from canonical records because PromptBuilder does not return updated context; the dedicated template audit remains the authoritative template-distribution surface."
+    ],
+    "ui_design_findings": "N/A"
+  },
+  "artifacts": {
+    "comparison_hash": "ce8123888459dee5ca425645e7578c4b136a20778edf9dd7a16568397721e44f",
+    "source_tree_hash": "a2dba94d598eb9f0adb09ec721e667ec6da6a75d6b9e302f83835c6f4501075f"
+  },
+  "experiment_id": "g006-syntax-family-diversity-v3",
+  "quality_gates": {
+    "action_pool_check": "pass",
+    "compatibility_review_check": "pass",
+    "compileall": "pass",
+    "data_validation": "pass: ERROR 0, WARNING 0",
+    "full_flow": "pass",
+    "full_regression": "pass: 484 tests",
+    "prompt_quality_comparison": "pass: syntax entropy 0.116115 to 0.895601; repeated n-grams 7 to 7 control and 10 to 10 paired; punctuation 0",
+    "snapshot_expected_diff": "pass",
+    "source_runtime_sync": "pass",
+    "targeted_regression": "pass: 43 final focused tests",
+    "template_diversity": "pass: single/two sentence 25/7",
+    "widget_values": "pass"
+  },
+  "schema_version": "prompt-quality-verification/v1",
+  "status": "pass"
+}

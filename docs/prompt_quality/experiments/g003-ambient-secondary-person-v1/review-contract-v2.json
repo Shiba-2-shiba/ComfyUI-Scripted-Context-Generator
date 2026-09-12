@@ -1,0 +1,17 @@
+{
+  "experiment_id": "g003-ambient-secondary-person-v1",
+  "guard_qualitative_dimensions": [
+    "naturalness",
+    "redundancy",
+    "diversity"
+  ],
+  "policy_version": "prompt-quality-policy/v2",
+  "schema_version": "prompt-quality-experiment-review-contract/v2",
+  "source_experiment_manifest_hash": "6ca0df37a4446f6020f0bae695e8191bd894778902559d04239613ff7cc9612a",
+  "steering": "hypothesis-scoped qualitative review",
+  "target_qualitative_dimensions": [
+    "consistency",
+    "protagonist_clarity",
+    "image_prompt_suitability"
+  ]
+}

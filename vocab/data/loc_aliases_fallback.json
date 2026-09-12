@@ -1,0 +1,23 @@
+{
+  "schema_version": "2.0",
+  "layer": "fallback",
+  "_comment": "Semantic fallback aliases only. Use when an input should approximate to an existing canonical scene.",
+  "aliases": {
+    "rainy_bus_stop": "rainy_alley",
+    "luxury_hotel_room": "bedroom_boudoir",
+    "elegant_dining_room": "street_cafe",
+    "luxury_bathroom": "bedroom_boudoir",
+    "bamboo_forest": "fantasy_forest",
+    "suburban_neighborhood": "winter_street",
+    "rural_town_street": "winter_street"
+  },
+  "notes": {
+    "rainy_bus_stop": "Fallback to the closest rainy urban exterior when the exact bus-stop scene is unavailable.",
+    "luxury_hotel_room": "Fallback to an intimate private-room scene when the hotel-room scene is unavailable.",
+    "elegant_dining_room": "Fallback to a dining-adjacent social scene when the exact formal room is unavailable.",
+    "luxury_bathroom": "Fallback to a private luxury interior when the bathroom scene is unavailable.",
+    "bamboo_forest": "Fallback to a nature fantasy forest only as an approximate substitute.",
+    "suburban_neighborhood": "Fallback to a cold outdoor residential street when the exact suburban scene is unavailable.",
+    "rural_town_street": "Fallback to a cold town street when the exact rural street scene is unavailable."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "r43-metric-contract/v1",
+  "audit_schema": "realizer-reachability/v1",
+  "workflow": "ComfyUI-workflow-context.json",
+  "profiles": {"smoke": 16, "intake": 512},
+  "cohort": {"seed_start": 0, "history_mode": "existing-workflow", "classification": "development-not-holdout"},
+  "families": ["action_lead_subject_scene", "scene_lead_subject_action", "subject_action__scene_tail", "subject_action_scene", "subject_action_scene_insert", "subject_scene_action"],
+  "domains": ["action", "clothing", "garnish", "mood", "scene", "subject", "template"],
+  "stages": ["declared", "constructor_present", "runtime_eligible", "forced_render_v2", "selected", "executed_v2"],
+  "runtime_eligible": "Membership in the unchanged bridge selectable set after all existing route and safety filters. An unconditional baseline marker is insufficient.",
+  "forced_constructor_v2": "An eligible constructor actually returns version v2 and the requested family. Ineligible/unrequested cases are NOT_RUN, not measured failures.",
+  "forced_render_v2": "Constructor v2 plus checked semantic parity after existing finalization and PromptCleaner. Unknown semantic parity is null and excluded from certified success counts.",
+  "semantic_parity_limit": "Exact ordinary raw/cleaned equality proves preservation of existing output only. Lexical Counter checks are auxiliary; no general ownership, polarity or grammar inference is permitted.",
+  "unknown": "null or NOT_AVAILABLE; never a successful binding or grammar proof",
+  "audit_only": "Runner-only upstream settings are not passed into runtime diagnostics. Unimplemented audit-only producer replay is NOT_RUN, not zero unavailable cases.",
+  "blocker_unit": "seed-family row; IDs are unique within a row. Counts overlap. only_blocked_by counts only singleton sets; pair/triple counts are intersections, not additive rescue estimates.",
+  "route_unit": "seed; simple_legacy_compatible, legacy_direct, common_evidence, fallback",
+  "forced_does_not_select": true,
+  "canonical_hash": "SHA-256 of sorted-key UTF-8 JSON plus LF; rows/records preserve ascending run_seed order",
+  "a16_lock_id": "A1.6-2026-09-06/v1",
+  "a16_lock_sha256": "6742b1b735de2e3ef9b53b732e51d54d260434a500ab84f32249334c24cfb7bd",
+  "adoption_verdict": "NOT_EVALUATED"
+}

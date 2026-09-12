@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "axes": [
+    "motion_energy",
+    "body_openness",
+    "precision",
+    "object_coupling",
+    "social_intensity",
+    "time_pressure"
+  ],
+  "axis_weights": {
+    "motion_energy": 1.0,
+    "body_openness": 1.0,
+    "precision": 1.0,
+    "object_coupling": 1.0,
+    "social_intensity": 1.0,
+    "time_pressure": 1.0
+  },
+  "profiles": {
+    "study": {
+      "vector": {
+        "motion_energy": 0.2,
+        "body_openness": 0.3,
+        "precision": 0.85,
+        "object_coupling": 0.75,
+        "social_intensity": 0.15,
+        "time_pressure": 0.3
+      }
+    },
+    "work": {
+      "vector": {
+        "motion_energy": 0.35,
+        "body_openness": 0.45,
+        "precision": 0.8,
+        "object_coupling": 0.65,
+        "social_intensity": 0.35,
+        "time_pressure": 0.45
+      }
+    },
+    "commute": {
+      "vector": {
+        "motion_energy": 0.7,
+        "body_openness": 0.45,
+        "precision": 0.35,
+        "object_coupling": 0.45,
+        "social_intensity": 0.6,
+        "time_pressure": 0.85
+      }
+    },
+    "rest": {
+      "vector": {
+        "motion_energy": 0.15,
+        "body_openness": 0.55,
+        "precision": 0.25,
+        "object_coupling": 0.2,
+        "social_intensity": 0.15,
+        "time_pressure": 0.1
+      }
+    },
+    "shop": {
+      "vector": {
+        "motion_energy": 0.45,
+        "body_openness": 0.5,
+        "precision": 0.55,
+        "object_coupling": 0.7,
+        "social_intensity": 0.45,
+        "time_pressure": 0.35
+      }
+    },
+    "wait": {
+      "vector": {
+        "motion_energy": 0.25,
+        "body_openness": 0.35,
+        "precision": 0.35,
+        "object_coupling": 0.3,
+        "social_intensity": 0.35,
+        "time_pressure": 0.55
+      }
+    }
+  },
+  "notes": {
+    "scope": "Initial passive Action EPIG profiles mirrored from existing action purpose families."
+  }
+}

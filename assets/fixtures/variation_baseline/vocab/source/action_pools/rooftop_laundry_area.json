@@ -1,0 +1,43 @@
+{
+  "location": "rooftop_laundry_area",
+  "actions": [
+    {
+      "text": "hanging a towel along the rooftop clothesline",
+      "load": "calm"
+    },
+    {
+      "text": "checking dry laundry in the afternoon air",
+      "load": "calm"
+    },
+    {
+      "text": "standing beside a basket near the washing poles",
+      "load": "calm"
+    },
+    {
+      "text": "folding a shirt before placing it into the basket",
+      "load": "calm"
+    },
+    {
+      "text": "reaching up to clip fabric onto the line",
+      "load": "active"
+    },
+    {
+      "text": "walking between laundry racks with careful steps",
+      "load": "active"
+    },
+    {
+      "text": "holding clothespins while looking over the railing",
+      "load": "calm"
+    },
+    {
+      "text": "gathering laundry as the wind lifts the fabric",
+      "load": "active"
+    }
+  ],
+  "families": [
+    {
+      "name": "home_rhythm",
+      "take": 4
+    }
+  ]
+}

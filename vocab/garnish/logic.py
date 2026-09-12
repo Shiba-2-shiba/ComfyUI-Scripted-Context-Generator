@@ -1,0 +1,934 @@
+"""
+Garnish logic module.
+Builds emotion-led physical expression tags while preserving deterministic seed behavior.
+"""
+
+import random
+import re
+from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
+
+if __package__ and __package__.count(".") >= 2:
+    from ...core.semantic_families import semantic_families_for_text
+    from ...core.semantic_policy import sanitize_sequence
+    from ...core.solo_safety import is_solo_safe_text
+    from ...pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
+    from .. import emotion_vad
+    from .. import personality_semantics
+else:
+    from core.semantic_families import semantic_families_for_text
+    from core.semantic_policy import sanitize_sequence
+    from core.solo_safety import is_solo_safe_text
+    from pipeline.semantic_epig import add_semantic_debug, domain_enabled, semantic_mode
+    from vocab import emotion_vad
+    from vocab import personality_semantics
+
+from .utils import _dedupe
+from .base_vocab import (
+    POSE_STANDING,
+    POSE_SITTING,
+    POSE_LYING,
+    POSE_DYNAMIC,
+    HAND_GESTURES,
+    EYES_BASE,
+    MOUTH_BASE,
+)
+from .micro_actions import MICRO_ACTION_CONCEPTS
+
+
+EMOTION_CATEGORIES = [
+    "joy",
+    "playful",
+    "anger",
+    "sadness",
+    "relax",
+    "focus",
+    "care",
+    "impatience",
+    "moved",
+]
+
+INTENSITIES = ["mild", "medium", "strong"]
+
+LOAD_KEYWORDS = {
+    "intimate": ["hugging", "holding hands", "kissing", "cuddling", "bed", "bedroom", "bath", "soaking"],
+    "tense": ["fighting", "arguing", "hiding", "sneaking", "battle", "danger", "crying", "scared", "frustration", "rage"],
+    "active": ["running", "walking", "carrying", "moving", "crossing", "stepping", "rolling", "dancing", "jumping", "flying", "playing", "cleaning", "cooking", "sweeping", "exercising", "lifting", "pruning", "filling", "placing", "turning"],
+    "calm": ["sitting", "standing", "lying", "reading", "sleeping", "waiting", "looking", "watching", "listening"],
+}
+
+COMPATIBILITY = {
+    "calm": {"joy", "playful", "anger", "sadness", "relax", "focus", "care", "impatience", "moved"},
+    "active": {"joy", "playful", "anger", "focus", "impatience", "moved"},
+    "tense": {"anger", "focus", "impatience", "sadness"},
+    "intimate": {"joy", "playful", "sadness", "relax", "moved", "care"},
+}
+
+LEGACY_MAP = {
+    "quiet": ("focus", "mild"),
+    "quiet_focused": ("focus", "medium"),
+    "energetic_joy": ("joy", "strong"),
+    "whimsical_playful": ("playful", "medium"),
+    "intense_anger": ("anger", "strong"),
+    "melancholic_sadness": ("sadness", "medium"),
+    "peaceful_relaxed": ("relax", "medium"),
+    "mysterious_curious": ("focus", "medium"),
+    "romantic_allure": ("care", "medium"),
+    "creepy_fear": ("impatience", "strong"),
+    "energetic": ("joy", "medium"),
+    "whimsical": ("playful", "mild"),
+    "intense": ("anger", "medium"),
+    "melancholic": ("sadness", "mild"),
+    "peaceful": ("relax", "mild"),
+}
+
+EMOTION_NUANCE_MAP = {
+    "tense": ("impatience", "strong"),
+    "absorbed": ("focus", "strong"),
+    "relieved": ("relax", "mild"),
+    "awkward": ("impatience", "mild"),
+    "content": ("joy", "mild"),
+    "bored": ("sadness", "mild"),
+}
+
+PERSONALITY_GARNISH_BIAS: Dict[str, Dict[str, Any]] = {
+    "shy": {
+        "prefer": ["looking away", "looking down", "fidgeting with her sleeve", "holding her bag close"],
+        "prefer_category": "care",
+    },
+    "confident": {
+        "prefer": ["looking at viewer", "chin lifted slightly", "steady stance"],
+        "prefer_category": "joy",
+    },
+    "energetic": {
+        "prefer": ["bright smile", "leaning forward", "one hand lifted mid-gesture"],
+        "prefer_category": "joy",
+    },
+    "gloomy": {
+        "prefer": ["downcast eyes", "slumped shoulders", "hands tucked close"],
+        "prefer_category": "sadness",
+    },
+    "faithful": {
+        "prefer": ["warm gaze", "gentle smile", "hands held carefully together"],
+        "prefer_category": "care",
+    },
+    "aggressive": {
+        "prefer": ["sharp gaze", "clenched jaw", "fists tightening"],
+        "prefer_category": "anger",
+    },
+    "mysterious": {
+        "prefer": ["sideways glance", "half-hidden expression", "still posture"],
+        "prefer_category": "focus",
+    },
+    "cheerful": {
+        "prefer": ["wide smile", "eyes brightening", "open posture"],
+        "prefer_category": "playful",
+    },
+    "serious": {
+        "prefer": ["focused gaze", "firm mouth", "composed posture"],
+        "prefer_category": "focus",
+    },
+    "gentle": {
+        "prefer": ["soft smile", "gentle eyes", "loose hands"],
+        "prefer_category": "care",
+    },
+    "neutral": {"prefer": [], "prefer_category": None},
+    "": {"prefer": [], "prefer_category": None},
+}
+
+EMOTION_MODEL: Dict[str, Dict[str, List[str]]] = {
+    "joy": {
+        "expression": ["bright smile", "eyes crinkling softly", "cheeks lifting with a smile"],
+        "gaze": ["warm gaze", "eyes brightening", "looking up with expectation"],
+        "mouth": ["smiling to herself", "soft grin", "slightly parted smile"],
+        "posture": ["light posture", "shoulders opening up", "standing a little taller"],
+        "hands": ["fingers tapping lightly", "hands moving with excitement", "one hand lifted mid-gesture"],
+        "behavior": ["bouncing lightly on her heels", "leaning into the moment", "holding herself with easy energy"],
+    },
+    "playful": {
+        "expression": ["mischievous smile", "playful expression", "suppressed laughter"],
+        "gaze": ["sideways glance", "teasing look", "curious eyes"],
+        "mouth": ["crooked smile", "small laugh at the corner of her mouth", "wry grin"],
+        "posture": ["loose playful posture", "tilting her head", "weight shifted to one side"],
+        "hands": ["finger raised as if an idea just hit", "fingers brushing her lips", "one hand swinging lightly"],
+        "behavior": ["shifting in place as if ready to move", "playing with a loose strand of hair", "holding back a laugh"],
+    },
+    "anger": {
+        "expression": ["clenched jaw", "furrowed brow", "hard stare"],
+        "gaze": ["sharp gaze", "glaring straight ahead", "eyes narrowed with tension"],
+        "mouth": ["lips pressed thin", "teeth set", "tight mouth"],
+        "posture": ["tense posture", "shoulders held rigid", "leaning forward aggressively"],
+        "hands": ["fists tightening", "hands rigid at her sides", "knuckles whitening"],
+        "behavior": ["breathing hard through her nose", "holding herself ready to snap", "tension running through her arms"],
+    },
+    "sadness": {
+        "expression": ["downcast eyes", "faint frown", "tired expression"],
+        "gaze": ["distant gaze", "looking down", "eyes glossed with feeling"],
+        "mouth": ["lips trembling slightly", "mouth drawn small", "quietly pressed lips"],
+        "posture": ["slumped shoulders", "folded-in posture", "chin lowered"],
+        "hands": ["hands held close to her chest", "fingers tightening around her sleeve", "one hand brushing at her face"],
+        "behavior": ["holding herself small", "lingering in stillness", "wiping at the corner of one eye"],
+    },
+    "relax": {
+        "expression": ["calm expression", "gentle smile", "soft eyes"],
+        "gaze": ["easy gaze", "half-lidded eyes", "quiet look around her"],
+        "mouth": ["relaxed lips", "faint smile", "contented mouth"],
+        "posture": ["relaxed posture", "loose shoulders", "settled stance"],
+        "hands": ["loose hands", "fingers resting lightly", "hands folded without tension"],
+        "behavior": ["breathing evenly", "moving at an unhurried pace", "leaning back comfortably"],
+    },
+    "focus": {
+        "expression": ["focused expression", "brows knit in concentration", "composed face"],
+        "gaze": ["steady gaze", "eyes fixed on what she is doing", "attention locked forward"],
+        "mouth": ["closed mouth", "lips set in concentration", "subtle pursed lips"],
+        "posture": ["still posture", "upright posture", "body held carefully still"],
+        "hands": ["fingers working with care", "one hand paused mid-task", "hands kept precise and controlled"],
+        "behavior": ["leaning in slightly", "ignoring the rest of the room", "keeping every movement deliberate"],
+    },
+    "care": {
+        "expression": ["gentle expression", "soft smile", "kind eyes"],
+        "gaze": ["warm gaze", "attentive eyes", "looking at someone with care"],
+        "mouth": ["small reassuring smile", "softened mouth", "quiet smile"],
+        "posture": ["open posture", "slight forward lean", "careful stance"],
+        "hands": ["hands held gently", "fingers curled around something with care", "one hand near her chest"],
+        "behavior": ["moving with deliberate gentleness", "keeping close without crowding", "holding still so the moment can settle"],
+    },
+    "impatience": {
+        "expression": ["restless expression", "strained look", "uneasy face"],
+        "gaze": ["quick darting glance", "checking the room again", "eyes flicking toward the exit"],
+        "mouth": ["impatient sigh", "lips pressed together", "jaw set with nerves"],
+        "posture": ["restless posture", "weight shifting from foot to foot", "shoulders held tight"],
+        "hands": ["fingers drumming", "gripping a strap too tightly", "hands fidgeting"],
+        "behavior": ["checking the time again", "pacing in a small space", "holding tension in every small movement"],
+    },
+    "moved": {
+        "expression": ["touched expression", "misty eyes", "softly stunned face"],
+        "gaze": ["lingering gaze", "eyes shining with emotion", "looking up as if taking it in"],
+        "mouth": ["teary smile", "parted lips in surprise", "breath caught in a small smile"],
+        "posture": ["stilled posture", "hand drawn to her chest", "shoulders softening all at once"],
+        "hands": ["fingers pressing lightly to her lips", "hand over her heart", "hands held still with feeling"],
+        "behavior": ["pausing as the feeling sinks in", "breathing out slowly", "holding the moment instead of moving on"],
+    },
+}
+
+INTENSITY_INDEX = {"mild": 0, "medium": 1, "strong": 2}
+PHYSICAL_TAG_HINTS = (
+    "eyes",
+    "gaze",
+    "smile",
+    "mouth",
+    "jaw",
+    "brow",
+    "shoulders",
+    "hands",
+    "fingers",
+    "posture",
+    "stance",
+    "breathing",
+    "leaning",
+    "glance",
+    "lips",
+)
+GAZE_CONFLICTS = {
+    "looking at viewer": {"looking down", "looking away", "looking aside"},
+    "looking down": {"looking at viewer", "looking up"},
+    "looking up": {"looking down"},
+    "sideways glance": {"looking straight ahead"},
+    "steady gaze": {"eyes flicking toward the exit"},
+}
+FACE_FORWARD_FAMILIES = {"gaze", "expression", "smile_mouth"}
+CALM_FACE_CAP_CATEGORIES = {"focus", "relax", "care", "joy", "playful", "moved"}
+ACTIVE_STILLNESS_TAGS = {"still posture", "body held carefully still", "lingering in stillness"}
+TASK_FOCUSED_ACTION_VERBS = {"checking", "comparing", "reading", "inspecting", "matching", "testing", "studying", "watching", "reviewing", "examining"}
+GENERIC_TASK_GARNISH_TAGS = {"holding herself with easy energy"}
+
+
+def _guess_action_load(action_text: str) -> str:
+    if not action_text:
+        return "calm"
+    text = action_text.lower()
+    for keyword in LOAD_KEYWORDS["intimate"]:
+        if re.search(rf"(?<!\w){re.escape(keyword)}(?!\w)", text):
+            return "intimate"
+    for keyword in LOAD_KEYWORDS["tense"]:
+        if re.search(rf"(?<!\w){re.escape(keyword)}(?!\w)", text):
+            return "tense"
+    for keyword in LOAD_KEYWORDS["active"]:
+        if re.search(rf"(?<!\w){re.escape(keyword)}(?!\w)", text):
+            return "active"
+    return "calm"
+
+
+def _is_compatible(category: str, load: str) -> bool:
+    return category in COMPATIBILITY.get(load, COMPATIBILITY["calm"])
+
+
+def _select_category_weighted(load: str, rng: random.Random, prefer_category: Optional[str] = None) -> str:
+    allowed = COMPATIBILITY.get(load, COMPATIBILITY["calm"])
+    weights = {
+        "joy": 16,
+        "playful": 15,
+        "relax": 15,
+        "focus": 17,
+        "care": 11,
+        "moved": 8,
+        "anger": 6 if load != "tense" else 28,
+        "sadness": 4 if load not in {"tense", "active"} else 8,
+        "impatience": 8 if load != "tense" else 24,
+    }
+    if prefer_category in allowed:
+        weights[prefer_category] = weights.get(prefer_category, 10) + 12
+    valid_categories = [cat for cat in EMOTION_CATEGORIES if cat in allowed]
+    valid_weights = [weights.get(cat, 1) for cat in valid_categories]
+    return rng.choices(valid_categories, weights=valid_weights, k=1)[0]
+
+
+def _intensity_from_vad(target_vad: Optional[Tuple[float, float]]) -> Optional[str]:
+    if target_vad is None:
+        return None
+    arousal = target_vad[1]
+    if arousal >= 0.68:
+        return "strong"
+    if arousal <= 0.35:
+        return "mild"
+    return "medium"
+
+
+def _debug_vad_distances(target_vad: Optional[Tuple[float, float]], allowed: Set[str]) -> List[Dict[str, Any]]:
+    if target_vad is None:
+        return []
+    ranked: List[Dict[str, Any]] = []
+    for category in EMOTION_CATEGORIES:
+        if category not in allowed:
+            continue
+        category_vad = emotion_vad.category_vad(category)
+        if category_vad is None:
+            continue
+        ranked.append(
+            {
+                "category": category,
+                "vad": [round(category_vad[0], 3), round(category_vad[1], 3)],
+                "distance": round(emotion_vad.distance(category_vad, target_vad), 4),
+            }
+        )
+    ranked.sort(key=lambda item: (item["distance"], item["category"]))
+    return ranked[:5]
+
+
+def _resolve_target_emotion(
+    meta_mood: str,
+    load: str,
+    rng: random.Random,
+    log: Dict[str, Any],
+    prefer_category: Optional[str] = None,
+    emotion_nuance: str = "",
+) -> Tuple[str, str, Optional[Tuple[float, float]]]:
+    category = None
+    intensity = None
+    target_vad = None
+    target_source = "fallback_weighted"
+    mood_key = (meta_mood or "").strip().lower().replace(" ", "_")
+    nuance_key = (emotion_nuance or "").strip().lower()
+    nuance_target = emotion_vad.nuance_vad(nuance_key)
+
+    if mood_key in LEGACY_MAP:
+        category, intensity = LEGACY_MAP[mood_key]
+        target_source = "legacy_mood"
+    else:
+        alias_category = emotion_vad.alias_category(mood_key)
+        if alias_category:
+            category = alias_category
+            target_source = "vad_alias"
+
+    if category is None and mood_key in EMOTION_CATEGORIES:
+        category = mood_key
+        intensity = "medium"
+        target_source = "category"
+    elif category is None and "_" in mood_key:
+        parts = [part for part in mood_key.split("_") if part]
+        if parts and parts[0] in EMOTION_CATEGORIES:
+            category = parts[0]
+            target_source = "parsed_category"
+            if len(parts) > 1 and parts[1] in INTENSITIES:
+                intensity = parts[1]
+
+    if nuance_key in EMOTION_NUANCE_MAP and category is None:
+        category, intensity = EMOTION_NUANCE_MAP[nuance_key]
+        target_source = "emotion_nuance"
+
+    if category is not None:
+        target_vad = emotion_vad.category_vad(category)
+    target_vad = emotion_vad.blend_vad(target_vad, nuance_target, secondary_weight=0.35)
+    target_vad = emotion_vad.apply_load_bias(target_vad, load)
+
+    if category and not _is_compatible(category, load):
+        log["mood_conflict"] = f"requested={category} load={load}"
+        allowed = COMPATIBILITY.get(load, COMPATIBILITY["calm"])
+        if target_vad is not None:
+            category = emotion_vad.closest_category(target_vad, allowed)
+            target_source = f"{target_source}:compatible_vad"
+        else:
+            category = None
+        intensity = None
+
+    if category is None:
+        allowed = COMPATIBILITY.get(load, COMPATIBILITY["calm"])
+        if target_vad is not None:
+            category = emotion_vad.closest_category(target_vad, allowed)
+            target_source = f"{target_source}:vad_closest"
+        if category is None:
+            category = _select_category_weighted(load, rng, prefer_category=prefer_category)
+            target_vad = emotion_vad.category_vad(category)
+
+    if target_vad is None and category is not None:
+        target_vad = emotion_vad.category_vad(category)
+
+    if intensity is None:
+        vad_intensity = _intensity_from_vad(target_vad)
+        if vad_intensity:
+            intensity = vad_intensity
+        elif nuance_key in EMOTION_NUANCE_MAP and EMOTION_NUANCE_MAP[nuance_key][0] == category:
+            intensity = EMOTION_NUANCE_MAP[nuance_key][1]
+        elif load == "tense":
+            intensity = rng.choices(INTENSITIES, weights=[1, 3, 4], k=1)[0]
+        elif load == "calm":
+            intensity = rng.choices(INTENSITIES, weights=[4, 4, 1], k=1)[0]
+        else:
+            intensity = rng.choices(INTENSITIES, weights=[2, 4, 2], k=1)[0]
+
+    log["emotion_core"] = category
+    log["emotion_intensity"] = intensity
+    log["target_vad"] = [round(target_vad[0], 3), round(target_vad[1], 3)] if target_vad else []
+    log["target_vad_source"] = target_source
+    log["vad_category_distances"] = _debug_vad_distances(target_vad, COMPATIBILITY.get(load, COMPATIBILITY["calm"]))
+    return category, intensity, target_vad
+
+
+def _get_action_anchors(action_text: str) -> List[str]:
+    if not action_text:
+        return []
+    text_lower = action_text.lower()
+    found: List[str] = []
+    for concept, data in MICRO_ACTION_CONCEPTS.items():
+        if not isinstance(data, dict):
+            continue
+        for trigger in data.get("triggers", []):
+            if trigger in text_lower:
+                found.append(concept)
+                break
+    return found
+
+
+def _resolve_micro_actions(concepts: List[str], mood: str, rng: random.Random) -> List[str]:
+    tags: List[str] = []
+    for concept in concepts:
+        concept_data = MICRO_ACTION_CONCEPTS.get(concept)
+        if not isinstance(concept_data, dict):
+            continue
+        variants = concept_data.get("variants", {})
+        candidates = (
+            variants.get(mood, [])
+            or variants.get("default", [])
+            or variants.get("neutral", [])
+            or concept_data.get("tags", [])
+        )
+        if candidates:
+            tags.append(rng.choice(candidates))
+    return tags
+
+
+def _contains_any(text: str, keywords: Sequence[str]) -> bool:
+    return any(keyword in text for keyword in keywords)
+
+
+def _is_out_of_context(
+    tag: str,
+    context_loc: str,
+    context_costume: str,
+    action_text: str = "",
+    existing_tags: Optional[Sequence[str]] = None,
+) -> bool:
+    tag_lower = (tag or "").lower()
+    loc_lower = (context_loc or "").lower()
+    costume_lower = (context_costume or "").lower()
+    action_lower = (action_text or "").lower()
+    existing_lower = [item.lower() for item in existing_tags or []]
+
+    if not tag_lower:
+        return True
+
+    if _contains_any(action_lower, ["sleep", "lying", "lying on", "nap", "bed", "sofa"]) and _contains_any(
+        tag_lower, ["standing", "leaning forward aggressively", "pacing", "bouncing", "on her heels"]
+    ):
+        return True
+
+    if _contains_any(action_lower, ["sitting", "seated", "desk", "chair", "bench", "train seat"]) and _contains_any(
+        tag_lower, ["standing a little taller", "steady stance", "standing tall"]
+    ):
+        return True
+
+    if _contains_any(action_lower, ["running", "sprinting", "jumping", "dancing"]) and _contains_any(
+        tag_lower, ["relaxed posture", "leaning back comfortably", "settled stance"]
+    ):
+        return True
+
+    if _contains_any(action_lower, ["reading", "typing", "writing", "holding", "carrying", "using", "playing", "sweeping", "checking"]) and _contains_any(
+        tag_lower, ["hands on hips", "arms crossed", "hands behind back", "hands held carefully together"]
+    ):
+        return True
+
+    # Inspection already assigns visual attention to the action target. Optional
+    # personality/emotion tags may describe focus, but must not redirect it.
+    if re.match(r"\s*(?:reading|studying|examining|inspecting)\b", action_lower) and _contains_any(
+        tag_lower, ["looking directly ahead", "looking straight ahead", "glaring straight ahead",
+                    "attention locked forward", "looking slightly away", "looking away", "looking aside",
+                    "sideways glance", "looking at viewer", "looking at the viewer", "looking up", "looking down"]
+    ):
+        return True
+
+    # A direct elevated/distant target also owns gaze direction. Match the
+    # action object, not scenery mentioned in a book or a location name; apply
+    # this to expression slots too, where "downcast eyes" can originate.
+    downward_gaze = ["looking down", "downcast eyes"]
+    if re.match(
+        r"\s*(?:checking|watching|studying|examining|inspecting|looking (?:at|toward|towards))"
+        r"\s+(?:(?:the|a|an)\s+)?(?:skyline|horizon|ceiling)\b",
+        action_lower,
+    ) and _contains_any(tag_lower, downward_gaze):
+        return True
+
+    forward_gaze = ["looking directly ahead", "looking straight ahead", "attention locked forward"]
+    if _contains_any(action_lower, ["looking down"]) and _contains_any(tag_lower, ["looking up", "looking at viewer", *forward_gaze]):
+        return True
+    if _contains_any(action_lower, ["looking up"]) and _contains_any(tag_lower, [*downward_gaze, *forward_gaze]):
+        return True
+    if _contains_any(action_lower, ["looking away", "looking aside"]) and "looking at viewer" in tag_lower:
+        return True
+
+    if _contains_any(loc_lower, ["train", "bus", "commuter", "elevator", "crowd"]) and _contains_any(
+        tag_lower, ["arms spread", "wide gesture", "pacing in a small space"]
+    ):
+        return True
+
+    if _contains_any(loc_lower, ["classroom", "library", "office", "study"]) and _contains_any(
+        tag_lower, ["furious scream", "shouting", "ready to snap"]
+    ):
+        return True
+
+    if "kimono" in costume_lower and "hands in pockets" in tag_lower:
+        return True
+
+    for existing in existing_lower:
+        conflicts = GAZE_CONFLICTS.get(existing)
+        if conflicts and tag_lower in conflicts:
+            return True
+        conflicts = GAZE_CONFLICTS.get(tag_lower)
+        if conflicts and existing in conflicts:
+            return True
+
+    return False
+
+
+def _pick_first_valid(
+    candidates: Sequence[str],
+    rng: random.Random,
+    context_loc: str,
+    context_costume: str,
+    action_text: str,
+    existing_tags: Sequence[str],
+) -> Optional[str]:
+    items = [candidate for candidate in candidates if candidate and is_solo_safe_text(candidate)]
+    if not items:
+        return None
+    ordered = list(items)
+    rng.shuffle(ordered)
+    for candidate in ordered:
+        if not _is_out_of_context(candidate, context_loc, context_costume, action_text, existing_tags):
+            return candidate
+    return None
+
+
+def _pick_first_valid_vad_ranked(
+    category: str,
+    slot: str,
+    candidates: Sequence[str],
+    target_vad: Optional[Tuple[float, float]],
+    intensity: str,
+    rng: random.Random,
+    context_loc: str,
+    context_costume: str,
+    action_text: str,
+    existing_tags: Sequence[str],
+    debug_log: Dict[str, Any],
+) -> Optional[str]:
+    items = [candidate for candidate in candidates if candidate and is_solo_safe_text(candidate)]
+    if not items:
+        return None
+    if target_vad is None:
+        return _pick_first_valid(items, rng, context_loc, context_costume, action_text, existing_tags)
+
+    ranked = emotion_vad.rank_descriptors(category, items, target_vad, intensity=intensity)
+    debug_rankings = debug_log.setdefault("vad_descriptor_rankings", {})
+    debug_rankings[slot] = [
+        {
+            "tag": item["tag"],
+            "vad": [round(item["vad"][0], 3), round(item["vad"][1], 3)] if item.get("vad") else [],
+            "distance": round(item["distance"], 4) if item.get("distance") is not None else None,
+            "score": round(item["score"], 4),
+        }
+        for item in ranked[:5]
+    ]
+
+    top_window = [item["tag"] for item in ranked[: min(len(ranked), 3)]]
+    rng.shuffle(top_window)
+    for candidate in top_window:
+        if not _is_out_of_context(candidate, context_loc, context_costume, action_text, existing_tags):
+            return candidate
+
+    for item in ranked[3:]:
+        candidate = item["tag"]
+        if not _is_out_of_context(candidate, context_loc, context_costume, action_text, existing_tags):
+            return candidate
+    return None
+
+
+def _emotion_profile_tags(
+    category: str,
+    intensity: str,
+    rng: random.Random,
+    context_loc: str,
+    context_costume: str,
+    action_text: str,
+    debug_log: Dict[str, Any],
+    target_vad: Optional[Tuple[float, float]] = None,
+) -> List[str]:
+    model = EMOTION_MODEL.get(category, EMOTION_MODEL["focus"])
+    chosen: List[str] = []
+    expression = _pick_first_valid_vad_ranked(
+        category,
+        "expression",
+        model["expression"],
+        target_vad,
+        intensity,
+        rng,
+        context_loc,
+        context_costume,
+        action_text,
+        chosen,
+        debug_log,
+    )
+    if expression:
+        chosen.append(expression)
+
+    gaze = _pick_first_valid_vad_ranked(
+        category,
+        "gaze",
+        model["gaze"],
+        target_vad,
+        intensity,
+        rng,
+        context_loc,
+        context_costume,
+        action_text,
+        chosen,
+        debug_log,
+    )
+    if gaze:
+        chosen.append(gaze)
+
+    behavior_candidates = list(model["posture"]) + list(model["hands"]) + list(model["behavior"])
+    rng.shuffle(behavior_candidates)
+    behavior = _pick_first_valid_vad_ranked(
+        category,
+        "behavior",
+        behavior_candidates,
+        target_vad,
+        intensity,
+        rng,
+        context_loc,
+        context_costume,
+        action_text,
+        chosen,
+        debug_log,
+    )
+    if behavior:
+        chosen.append(behavior)
+
+    if intensity == "strong":
+        extra_candidates = list(model["mouth"]) + list(model["hands"]) + list(model["behavior"])
+        extra = _pick_first_valid_vad_ranked(
+            category,
+            "extra",
+            extra_candidates,
+            target_vad,
+            intensity,
+            rng,
+            context_loc,
+            context_costume,
+            action_text,
+            chosen,
+            debug_log,
+        )
+        if extra:
+            chosen.append(extra)
+    elif intensity == "mild":
+        soft_candidates = list(model["mouth"]) + list(model["posture"])
+        soft = _pick_first_valid_vad_ranked(
+            category,
+            "soft",
+            soft_candidates,
+            target_vad,
+            intensity,
+            rng,
+            context_loc,
+            context_costume,
+            action_text,
+            chosen,
+            debug_log,
+        )
+        if soft and len(chosen) < 3:
+            chosen.append(soft)
+
+    debug_log["emotion_expression"] = expression or ""
+    debug_log["emotion_behavior"] = [tag for tag in chosen if tag != expression]
+    return chosen
+
+
+def _has_physical_expression(tags: Sequence[str]) -> bool:
+    return any(any(hint in tag.lower() for hint in PHYSICAL_TAG_HINTS) for tag in tags)
+
+
+def _fallback_physical_tag(category: str, rng: random.Random) -> str:
+    model = EMOTION_MODEL.get(category, EMOTION_MODEL["focus"])
+    fallback_pool = [
+        tag
+        for tag in model["expression"] + model["gaze"] + model["posture"] + model["hands"]
+        if is_solo_safe_text(tag)
+    ]
+    if not fallback_pool:
+        return "calm expression"
+    return rng.choice(fallback_pool)
+
+
+def _limit_face_forward_tags(tags: Sequence[str], max_face_tags: int = 1) -> Tuple[List[str], List[str]]:
+    kept: List[str] = []
+    dropped: List[str] = []
+    face_tag_count = 0
+    for tag in tags:
+        families = semantic_families_for_text(tag)
+        if families & FACE_FORWARD_FAMILIES:
+            if face_tag_count >= max_face_tags:
+                dropped.append(tag)
+                continue
+            face_tag_count += 1
+        kept.append(tag)
+    return kept, dropped
+
+
+def sample_garnish(
+    seed: int,
+    meta_mood: str,
+    action_text: str = "",
+    max_items: int = 3,
+    include_camera: bool = False,
+    context_loc: str = "",
+    context_costume: str = "",
+    scene_tags: Dict[str, Any] = None,
+    personality: str = "",
+    emotion_nuance: str = "",
+    debug_log: Dict[str, Any] = None,
+) -> List[str]:
+    if debug_log is None:
+        debug_log = {}
+
+    rng = random.Random(seed)
+    scene_tags = scene_tags or {}
+    personality_key = (personality or "").lower().strip()
+    personality_bias = PERSONALITY_GARNISH_BIAS.get(personality_key, PERSONALITY_GARNISH_BIAS[""])
+    personality_behavior_enabled = domain_enabled("personality_behavior")
+    personality_behavior_mode = semantic_mode("personality_behavior")
+    personality_behavior_active = personality_behavior_enabled and personality_behavior_mode == "active"
+    semantic_prefer_category = (
+        personality_semantics.prefer_category_for_personality(personality_key)
+        if personality_behavior_enabled and personality_key
+        else None
+    )
+    if domain_enabled("personality_behavior") and personality_key:
+        add_semantic_debug(
+            debug_log,
+            "personality_behavior",
+            personality_semantics.personality_behavior_debug_payload(
+                personality_key,
+                mode=personality_behavior_mode,
+                mood_key=meta_mood,
+                selected="",
+            ),
+        )
+
+    action_load = _guess_action_load(action_text)
+    debug_log["action_load"] = action_load
+    debug_log["generation_mode"] = "scene_emotion_priority"
+    debug_log["emotion_role_mode"] = "subject_only"
+    debug_log["subject_role"] = "context subject / character profile"
+    debug_log["stimulus_role"] = action_text or ""
+    debug_log["context_role"] = {
+        "location": context_loc or "",
+        "costume": context_costume or "",
+        "scene_tags": scene_tags,
+    }
+
+    category, intensity, target_vad = _resolve_target_emotion(
+        meta_mood=meta_mood,
+        load=action_load,
+        rng=rng,
+        log=debug_log,
+        prefer_category=semantic_prefer_category if semantic_prefer_category is not None else personality_bias.get("prefer_category"),
+        emotion_nuance=emotion_nuance,
+    )
+
+    garnish_pool: List[str] = []
+
+    prefer_tags = personality_bias.get("prefer", [])
+    semantic_selected = False
+    preferred = None
+    personality_pick_debug = {}
+    semantic_rejected_candidates = []
+    if personality_behavior_active and personality_key:
+        semantic_candidate = personality_semantics.pick_personality_descriptor(
+            personality_key,
+            rng,
+            context_loc=context_loc,
+            context_costume=context_costume,
+            action_text=action_text,
+            existing_tags=garnish_pool,
+            mood_key=meta_mood,
+            reject_fn=lambda candidate: "out_of_context"
+            if _is_out_of_context(candidate, context_loc, context_costume, action_text, garnish_pool)
+            else "",
+            debug=personality_pick_debug,
+        )
+        if semantic_candidate:
+            preferred = semantic_candidate
+            semantic_selected = True
+        semantic_rejected_candidates = personality_pick_debug.get("rejected_candidates", [])
+    if not preferred:
+        preferred = _pick_first_valid(prefer_tags, rng, context_loc, context_costume, action_text, garnish_pool)
+    if preferred:
+        garnish_pool.append(preferred)
+        debug_log["personality_preferred"] = preferred
+        semantic_debug = debug_log.get("semantic_epig", {}).get("personality_behavior")
+        if isinstance(semantic_debug, dict):
+            semantic_debug["selected"] = preferred
+            semantic_debug["selected_by_semantic"] = semantic_selected
+            semantic_debug["semantic_candidate"] = preferred if semantic_selected else ""
+            semantic_debug["selection_changed_by_semantic"] = semantic_selected
+            semantic_debug["selected_candidate_rank"] = personality_pick_debug.get("selected_candidate_rank") if semantic_selected else None
+            semantic_debug["selected_candidate_role"] = personality_pick_debug.get("selected_candidate_role", "") if semantic_selected else ""
+            if personality_pick_debug.get("subject_centric_override_selected"):
+                semantic_debug["subject_centric_override_selected"] = personality_pick_debug.get("subject_centric_override_selected")
+            if personality_pick_debug.get("subject_centric_override_rejected") is not None:
+                semantic_debug["subject_centric_override_rejected"] = personality_pick_debug.get("subject_centric_override_rejected")
+            semantic_debug["fallback_used"] = not semantic_selected
+            semantic_debug["rejected_candidates"] = semantic_rejected_candidates
+
+    emotion_tags = _emotion_profile_tags(
+        category=category,
+        intensity=intensity,
+        rng=rng,
+        context_loc=context_loc,
+        context_costume=context_costume,
+        action_text=action_text,
+        debug_log=debug_log,
+        target_vad=target_vad,
+    )
+    garnish_pool.extend(emotion_tags)
+
+    anchors = _get_action_anchors(action_text)
+    debug_log["action_anchors"] = anchors
+    micro_tags = _resolve_micro_actions(anchors, category, rng)
+    for tag in micro_tags:
+        if not _is_out_of_context(tag, context_loc, context_costume, action_text, garnish_pool):
+            garnish_pool.append(tag)
+
+    nuance_key = (emotion_nuance or "").strip().lower()
+    nuance_bias = scene_tags.get("emotion_nuance") or nuance_key
+    if nuance_bias and nuance_bias in EMOTION_NUANCE_MAP:
+        nuance_cat = EMOTION_NUANCE_MAP[nuance_bias][0]
+        nuance_model = EMOTION_MODEL.get(nuance_cat, {})
+        nuance_tag = _pick_first_valid(
+            nuance_model.get("behavior", []),
+            rng,
+            context_loc,
+            context_costume,
+            action_text,
+            garnish_pool,
+        )
+        if nuance_tag:
+            garnish_pool.append(nuance_tag)
+            debug_log["emotion_nuance_tag"] = nuance_tag
+
+    if not action_text:
+        pose_pool = list(POSE_STANDING) + list(POSE_SITTING) + list(POSE_LYING)
+        pose = _pick_first_valid(pose_pool, rng, context_loc, context_costume, action_text, garnish_pool)
+        if pose:
+            garnish_pool.append(pose)
+
+    if include_camera:
+        debug_log["include_camera_ignored"] = True
+
+    if len(garnish_pool) < max_items and rng.random() < 0.20:
+        fallback_detail = _pick_first_valid(
+            list(EYES_BASE) + list(MOUTH_BASE) + list(HAND_GESTURES) + list(POSE_DYNAMIC),
+            rng,
+            context_loc,
+            context_costume,
+            action_text,
+            garnish_pool,
+        )
+        if fallback_detail:
+            garnish_pool.append(fallback_detail)
+
+    final_tags = sanitize_sequence(_dedupe(garnish_pool))
+    filtered_tags: List[str] = []
+    for tag in final_tags:
+        if is_solo_safe_text(tag) and not _is_out_of_context(tag, context_loc, context_costume, action_text, filtered_tags):
+            filtered_tags.append(tag)
+
+    if action_load == "active":
+        active_stillness_dropped = [tag for tag in filtered_tags if tag.casefold() in ACTIVE_STILLNESS_TAGS]
+        if active_stillness_dropped:
+            filtered_tags = [tag for tag in filtered_tags if tag.casefold() not in ACTIVE_STILLNESS_TAGS]
+            debug_log["active_stillness_dropped"] = active_stillness_dropped
+
+    first_action_match = re.match(r"\s*([a-z]+)", str(action_text or "").casefold())
+    task_focused_action = (
+        action_load == "calm"
+        and first_action_match is not None
+        and first_action_match.group(1) in TASK_FOCUSED_ACTION_VERBS
+    )
+    if task_focused_action:
+        generic_task_tags_dropped = [
+            tag for tag in filtered_tags if tag.casefold() in GENERIC_TASK_GARNISH_TAGS
+        ]
+        if generic_task_tags_dropped:
+            filtered_tags = [
+                tag for tag in filtered_tags if tag.casefold() not in GENERIC_TASK_GARNISH_TAGS
+            ]
+            debug_log["generic_task_tags_dropped"] = generic_task_tags_dropped
+
+    if action_load == "calm" and category in CALM_FACE_CAP_CATEGORIES:
+        filtered_tags, dropped_face_forward_tags = _limit_face_forward_tags(filtered_tags, max_face_tags=1)
+        if dropped_face_forward_tags:
+            debug_log["calm_face_forward_budget_dropped"] = dropped_face_forward_tags
+
+    if not _has_physical_expression(filtered_tags):
+        filtered_tags.insert(0, _fallback_physical_tag(category, rng))
+
+    if task_focused_action and len(filtered_tags) > 2:
+        debug_log["task_garnish_budget_dropped"] = filtered_tags[2:]
+        filtered_tags = filtered_tags[:2]
+
+    if len(filtered_tags) > max_items:
+        filtered_tags = filtered_tags[:max_items]
+
+    debug_log["final_tags"] = filtered_tags
+    return filtered_tags

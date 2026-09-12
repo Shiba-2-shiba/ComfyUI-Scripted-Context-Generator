@@ -1,0 +1,4342 @@
+{
+  "school_classroom": {
+    "label": "教室",
+    "environment": [
+      "sun-drenched school classroom in late afternoon",
+      "nostalgic after-school classroom with golden light"
+    ],
+    "core": [
+      "wooden desk with light scratches",
+      "dark green blackboard covered in chalk equations",
+      "teacher's podium made of aged wood",
+      "bulletin board with one neat notice cluster",
+      "cleaning locker in the corner"
+    ],
+    "texture": [
+      "polished wooden floorboards reflecting sunlight",
+      "smooth desk surfaces with graffiti"
+    ],
+    "props": [
+      "textbook and open notebook set near the desk edge",
+      "leather school bags hanging heavily on hooks",
+      "pencil case and mechanical piles"
+    ],
+    "fx": [
+      "sunbeams cutting through the room",
+      "gentle breeze fluttering the white curtains"
+    ],
+    "time": [
+      "golden hour",
+      "bright afternoon",
+      "early morning",
+      "lunch break"
+    ],
+    "crowd": [
+      "quiet classroom atmosphere",
+      "completely empty",
+      "wide open aisle space",
+      "teacher supervising"
+    ],
+    "weather": [
+      "sunny blue sky outside",
+      "heavy rain against the windows",
+      "cloudy grey sky"
+    ],
+    "aliases": [
+      "classroom",
+      "lecture hall"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "school_rooftop": {
+    "label": "学校の屋上",
+    "environment": [
+      "windswept school rooftop terrace",
+      "expansive rooftop with a view of the city"
+    ],
+    "core": [
+      "rusted chain-link fence rattling in wind",
+      "single metallic ventilation unit",
+      "locked steel access door"
+    ],
+    "texture": [
+      "weathered concrete tiles with moss patches",
+      "cold rusted metal fencing"
+    ],
+    "props": [
+      "wooden bench with peeling paint",
+      "small soda can near the bench"
+    ],
+    "fx": [
+      "strong wind blowing through hair and fence",
+      "strong backlight from the sun",
+      "cumulonimbus clouds in background"
+    ],
+    "time": [
+      "clear blue sky",
+      "dramatic sunset"
+    ],
+    "aliases": [
+      "fenced rooftop",
+      "school roof",
+      "school rooftop"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "modern_office": {
+    "label": "モダンオフィス",
+    "environment": [
+      "spacious modern open-plan office",
+      "busy corporate workspace with city view"
+    ],
+    "core": [
+      "sleek glass partitions dividing the room",
+      "white office desk with pinned notes and a task tray",
+      "black ergonomic mesh chairs",
+      "water cooler with bubbling blue water",
+      "metal filing cabinet"
+    ],
+    "texture": [
+      "grey acoustic carpet tiles",
+      "highly reflective glass walls"
+    ],
+    "props": [
+      "organized document folder",
+      "lanyards and ID cards hanging from a rack",
+      "whiteboards covered in brainstorming notes",
+      "stacked lunch containers beside a tote bag"
+    ],
+    "fx": [
+      "busy professional atmosphere",
+      "screen glare and reflections",
+      "cold fluorescent overhead lighting"
+    ],
+    "time": [
+      "busy workday morning",
+      "late night overtime",
+      "quiet lunch hour",
+      "early monday morning"
+    ],
+    "crowd": [
+      "bustling with employees",
+      "nearly empty",
+      "small groups gathering",
+      "cleaning staff working"
+    ],
+    "weather": [
+      "clear city view",
+      "foggy morning window",
+      "rain streaks on glass"
+    ],
+    "aliases": [
+      "corporate office",
+      "office",
+      "open plan office"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "fantasy_forest": {
+    "label": "幻想の森",
+    "environment": [
+      "ancient mystical forest untouched by time",
+      "ethereal enchanted woods glowing softly"
+    ],
+    "core": [
+      "towering ancient trees with twisted roots",
+      "bioluminescent flora illuminating the dark",
+      "thick hanging vines like curtains",
+      "weathered ancient stone marker covered in runes",
+      "crystal clear spring water bubbling up"
+    ],
+    "texture": [
+      "thick mossy bark texture",
+      "soft fern-covered ground",
+      "damp soil"
+    ],
+    "props": [
+      "single mossy ruin fragment from a lost civilization",
+      "swarms of glowing yellow fireflies"
+    ],
+    "fx": [
+      "magical glow drifting in air",
+      "mysterious low-hanging mist",
+      "god rays penetrating the canopy"
+    ],
+    "time": [
+      "mystical twilight",
+      "midnight with full moon"
+    ],
+    "aliases": [
+      "ancient forest",
+      "mystical woods"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "cyberpunk_street": {
+    "label": "サイバーパンク・ストリート",
+    "environment": [
+      "neon-drenched cyberpunk street",
+      "rain-slicked futuristic alleyway"
+    ],
+    "core": [
+      "flickering holographic advertisements",
+      "steam rising from street vents",
+      "tangled bundles of cables overhead",
+      "vending machines selling strange liquids",
+      "service crates stacked beside a repair stall"
+    ],
+    "texture": [
+      "wet reflective asphalt",
+      "rusty metal pipes",
+      "glowing neon glass"
+    ],
+    "props": [
+      "discarded circuit boards",
+      "synthetic food wrappers",
+      "cybernetic parts shop display"
+    ],
+    "fx": [
+      "heavy rain creating puddles",
+      "neon reflections on wet surfaces",
+      "thick smog and steam",
+      "color bleeding from neon reflections"
+    ],
+    "time": [
+      "perpetual night",
+      "acid rain stormy night"
+    ],
+    "aliases": [
+      "neon city",
+      "future slums"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "abandoned_shrine": {
+    "label": "廃神社",
+    "environment": [
+      "dilapidated shinto shrine reclaimed by nature",
+      "eerie abandoned shrine at dusk"
+    ],
+    "core": [
+      "shrine building with rotting wood",
+      "stone statues covered in thick moss",
+      "overgrown stone steps",
+      "broken offering box"
+    ],
+    "texture": [
+      "weathered grey wood",
+      "cracked stone",
+      "encroaching ivy and weeds"
+    ],
+    "props": [
+      "fallen leaves piling up",
+      "rusted bells",
+      "spiderwebs connecting pillars"
+    ],
+    "fx": [
+      "melancholic atmosphere",
+      "desaturated colors",
+      "sound of crow crying visualized",
+      "creepy shadows"
+    ],
+    "time": [
+      "gloomy overcast day",
+      "haunting twilight"
+    ],
+    "aliases": [
+      "haunted shrine",
+      "ruined shrine"
+    ],
+    "lighting": [
+      "magical glow",
+      "bioluminescent",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
+    ]
+  },
+  "rainy_bus_stop": {
+    "label": "雨のバス停",
+    "environment": [
+      "lonely bus stop in heavy rain",
+      "rural bus shelter at night"
+    ],
+    "core": [
+      "faded metal bus stop sign",
+      "small plastic shelter with leaks",
+      "wooden bench worn smooth",
+      "puddle reflecting the street light"
+    ],
+    "texture": [
+      "wet concrete",
+      "condensation on glass",
+      "rusted metal pole"
+    ],
+    "props": [
+      "forgotten umbrella leaning against wall",
+      "wet schedule timetable"
+    ],
+    "fx": [
+      "heavy rain streaks",
+      "lonely melancholic vibe",
+      "glow of approaching headlights in fog"
+    ],
+    "time": [
+      "rainy night",
+      "stormy evening"
+    ],
+    "aliases": [
+      "bus stop",
+      "waiting shelter"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "luxury_hotel_room": {
+    "label": "高級ホテルの一室",
+    "environment": [
+      "penthouse suite with panoramic city view",
+      "opulent 5-star hotel bedroom"
+    ],
+    "core": [
+      "king-sized bed with crisp white linens",
+      "floor-to-ceiling glass windows",
+      "designer lounge chair",
+      "marble bedside table",
+      "modern abstract wall piece"
+    ],
+    "texture": [
+      "plush high-pile carpet",
+      "smooth silk sheets",
+      "polished gold accents"
+    ],
+    "props": [
+      "bucket with champagne bottle",
+      "scattered rose petals",
+      "room service trolley"
+    ],
+    "fx": [
+      "warm room atmosphere",
+      "vivid night city lights outside",
+      "romantic intimate atmosphere"
+    ],
+    "time": [
+      "night time",
+      "sunrise"
+    ],
+    "aliases": [
+      "five star suite",
+      "hotel room"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "steampunk_airship": {
+    "label": "スチームパンク飛行船",
+    "environment": [
+      "deck of a massive steam-powered airship",
+      "flying fortress soaring above clouds"
+    ],
+    "core": [
+      "intricate brass railings and gears",
+      "huge rotating propeller blades",
+      "copper steam pipes hissing",
+      "wooden deck planks polished by wear",
+      "navigational telescope"
+    ],
+    "texture": [
+      "oiled wood",
+      "burnished brass",
+      "oxidized copper"
+    ],
+    "props": [
+      "leather goggles",
+      "rolled navigation maps",
+      "stacked cargo crates"
+    ],
+    "fx": [
+      "wind blowing fiercely",
+      "white steam clouds",
+      "golden hour sunlight illuminating metal",
+      "adventure atmosphere"
+    ],
+    "time": [
+      "sunset above clouds",
+      "clear blue sky high altitude"
+    ],
+    "aliases": [
+      "airship deck",
+      "flying ship"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "clean_modern_kitchen": {
+    "label": "清潔なモダンキッチン",
+    "environment": [
+      "pristine modern kitchen with island",
+      "bright sunlit breakfast nook"
+    ],
+    "core": [
+      "marble island counter",
+      "stainless steel double door fridge",
+      "hanging pendant lights",
+      "vase of fresh flowers",
+      "bowl of fresh fruits"
+    ],
+    "texture": [
+      "polished white marble",
+      "light oak cabinets",
+      "clean ceramic tiles"
+    ],
+    "props": [
+      "espresso machine",
+      "neatly arranged spice jars",
+      "cookbook on stand"
+    ],
+    "fx": [
+      "bright airy atmosphere",
+      "morning sunlight streaming in",
+      "smell of fresh coffee visualized"
+    ],
+    "time": [
+      "refreshing morning",
+      "sunny afternoon"
+    ],
+    "aliases": [
+      "chef's kitchen",
+      "kitchen",
+      "modern kitchen"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "elegant_dining_room": {
+    "label": "エレガントなダイニング",
+    "environment": [
+      "formal dining room prepared for guests",
+      "cozy family dining area"
+    ],
+    "core": [
+      "long wooden dining table",
+      "upholstered dining chairs",
+      "cabinet with fine china",
+      "centerpiece candle holder"
+    ],
+    "texture": [
+      "polished dark wood table",
+      "linen tablecloth",
+      "crystal glasses"
+    ],
+    "props": [
+      "set silverware",
+      "wine glasses",
+      "folded napkins"
+    ],
+    "fx": [
+      "warm inviting glow",
+      "anticipation of meal",
+      "soft shadows"
+    ],
+    "time": [
+      "dinner time",
+      "holiday feast"
+    ],
+    "aliases": [
+      "banquet hall",
+      "dining room",
+      "formal dining room"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "luxury_bathroom": {
+    "label": "高級バスルーム",
+    "environment": [
+      "spa-like luxury bathroom",
+      "modern master bath with view"
+    ],
+    "core": [
+      "freestanding porcelain bathtub",
+      "glass shower enclosure",
+      "double vanity sink",
+      "large wall mirror"
+    ],
+    "texture": [
+      "white marble tiles",
+      "fluffy towel fabric",
+      "chrome faucets"
+    ],
+    "props": [
+      "scented candles",
+      "bath salts jar",
+      "stack of white towels",
+      "orchid plant"
+    ],
+    "fx": [
+      "rising steam",
+      "relaxing spa atmosphere",
+      "soft diffused light"
+    ],
+    "time": [
+      "evening bath",
+      "morning routine"
+    ],
+    "aliases": [
+      "bathroom",
+      "modern bathroom",
+      "spa bathroom"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "japanese_bath": {
+    "label": "日本の風呂",
+    "environment": [
+      "traditional japanese cypress bath (hinoki)",
+      "hot spring style indoor bath"
+    ],
+    "core": [
+      "wooden bathtub (ofuro)",
+      "small wooden stool",
+      "bucket (oke)",
+      "frosted glass window"
+    ],
+    "texture": [
+      "smooth cypress wood",
+      "stone tile floor",
+      "condensated glass"
+    ],
+    "props": [
+      "tenugui towel",
+      "soap bottle",
+      "floating citrus fruits (yuzu)"
+    ],
+    "fx": [
+      "thick steam filling room",
+      "sound of running water visualized",
+      "warm humid air"
+    ],
+    "time": [
+      "relaxing night"
+    ],
+    "aliases": [
+      "onsen",
+      "bath"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "cozy_living_room": {
+    "label": "居心地の良いリビング",
+    "environment": [
+      "comfortable modern living room",
+      "sun-filled family room"
+    ],
+    "core": [
+      "large l-shaped sofa",
+      "coffee table with books",
+      "large flat screen tv",
+      "soft area rug",
+      "bookshelves"
+    ],
+    "texture": [
+      "fabric sofa texture",
+      "knit throw blanket",
+      "hardwood floor"
+    ],
+    "props": [
+      "remote control",
+      "potted house plant",
+      "small framed landscape print"
+    ],
+    "fx": [
+      "relaxed domestic vibe",
+      "afternoon nap atmosphere",
+      "warm sunlight"
+    ],
+    "time": [
+      "lazy sunday afternoon",
+      "movie night"
+    ],
+    "aliases": [
+      "living room",
+      "lounge"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "rural_town_street": {
+    "label": "田舎の町並み",
+    "environment": [
+      "quiet rural town street",
+      "nostalgic countryside village road"
+    ],
+    "core": [
+      "telephone poles with wires",
+      "small local vegetable shop",
+      "vending machine glowing in dusk",
+      "narrow paved road",
+      "distant mountains"
+    ],
+    "texture": [
+      "asphalt with cracks",
+      "rusty tin roofs",
+      "concrete block walls"
+    ],
+    "props": [
+      "bicycle leaning against wall",
+      "plastic crates",
+      "street cat resting near a wall"
+    ],
+    "fx": [
+      "peaceful silence",
+      "golden hour nostalgia",
+      "sound of cicadas visualized"
+    ],
+    "time": [
+      "summer evening",
+      "quiet morning"
+    ],
+    "aliases": [
+      "rural street",
+      "countryside"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "suburban_neighborhood": {
+    "label": "郊外の住宅地",
+    "environment": [
+      "peaceful suburban residential street",
+      "quiet neighborhood with gardens"
+    ],
+    "core": [
+      "rows of detached houses",
+      "manicured green lawns",
+      "paved driveway",
+      "mailbox",
+      "street trees"
+    ],
+    "texture": [
+      "brick siding",
+      "concrete sidewalk",
+      "green hedges"
+    ],
+    "props": [
+      "parked family car",
+      "garden hose",
+      "children's tricycle"
+    ],
+    "fx": [
+      "safe calm atmosphere",
+      "soft morning light",
+      "shadows of trees"
+    ],
+    "time": [
+      "weekend morning",
+      "evening dog walk"
+    ],
+    "aliases": [
+      "quiet street",
+      "residential area"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "mountain_resort": {
+    "label": "山岳リゾート",
+    "environment": [
+      "luxury mountain lodge resort",
+      "scenic alpine retreat terrace"
+    ],
+    "core": [
+      "log cabin architecture",
+      "stone fireplace (outdoor)",
+      "wooden deck with view",
+      "majestic snow-capped mountains in background",
+      "pine trees"
+    ],
+    "texture": [
+      "rough hewn logs",
+      "natural stone",
+      "wooden deck"
+    ],
+    "props": [
+      "rocking chairs",
+      "warm blankets",
+      "hot coffee pot"
+    ],
+    "fx": [
+      "crisp clean mountain air",
+      "breathtaking panoramic view",
+      "peaceful isolation"
+    ],
+    "time": [
+      "fresh morning",
+      "starry night"
+    ],
+    "aliases": [
+      "mountain lodge",
+      "ski resort"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "school_library": {
+    "label": "図書室",
+    "environment": [
+      "quiet library filled with rows of books",
+      "studious library with tall shelves"
+    ],
+    "core": [
+      "endless rows of shelves lined with colorful spines",
+      "large wooden study tables",
+      "rolling ladder for high shelves"
+    ],
+    "texture": [
+      "polished dark wood",
+      "smell of old paper visualized"
+    ],
+    "props": [
+      "return cart waiting by the aisle",
+      "green reading lamps",
+      "labeled study folders"
+    ],
+    "fx": [
+      "hushed silence atmosphere",
+      "soft vignette darkening the corners",
+      "dust dancing in light beams"
+    ],
+    "time": [
+      "quiet afternoon"
+    ],
+    "aliases": [
+      "library shelves",
+      "reading room"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "school_gym_hall": {
+    "label": "体育館/講堂",
+    "environment": [
+      "spacious school assembly hall",
+      "indoor gymnasium echoing with sounds"
+    ],
+    "core": [
+      "raised wooden stage podium with stairs",
+      "basketball hoop with net",
+      "wide floor markings for sports"
+    ],
+    "texture": [
+      "highly polished wooden parquet floor",
+      "heavy velvet stage curtains in burgundy"
+    ],
+    "props": [
+      "rows of metal folding chairs",
+      "volleyball net stretched across",
+      "scattered balls"
+    ],
+    "fx": [
+      "echoing vast space",
+      "distinct smell of floor wax visualized",
+      "bright sunlight from high windows"
+    ],
+    "time": [
+      "daytime practice"
+    ],
+    "aliases": [
+      "assembly hall",
+      "assembly hall podium",
+      "school gym"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "boardroom": {
+    "label": "会議室",
+    "environment": [
+      "formal executive boardroom",
+      "high-stakes meeting room with view"
+    ],
+    "core": [
+      "long polished mahogany conference table",
+      "large framed agenda board near the wall",
+      "whiteboard covered in strategy diagrams",
+      "video conferencing camera system",
+      "credenza with coffee service"
+    ],
+    "texture": [
+      "glossy wood grain",
+      "premium leather executive chairs",
+      "frosted glass partitions",
+      "plush carpet"
+    ],
+    "props": [
+      "legal notepads and pens",
+      "glass water bottles",
+      "laser pointer on table",
+      "pitch deck printouts",
+      "stainless steel pitcher",
+      "name cards laid out for the meeting"
+    ],
+    "fx": [
+      "tense business atmosphere",
+      "clean sharp reflections",
+      "cold air conditioning visualized"
+    ],
+    "time": [
+      "important meeting",
+      "late night crisis meeting",
+      "early morning briefing"
+    ],
+    "aliases": [
+      "conference room",
+      "meeting room"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "office_elevator": {
+    "label": "エレベーター",
+    "environment": [
+      "modern office building elevator",
+      "sleek glass elevator rising up"
+    ],
+    "core": [
+      "shining metallic sliding doors",
+      "illuminated floor button panel",
+      "arrival chime panel above the doors",
+      "security card reader panel",
+      "emergency phone hatch"
+    ],
+    "texture": [
+      "brushed steel walls",
+      "mirrored back wall reflecting infinity",
+      "polished marble floor",
+      "textured metal ceiling"
+    ],
+    "props": [
+      "cctv security camera dome",
+      "polished metal handrail",
+      "poster for company event",
+      "maintenance key hanging"
+    ],
+    "fx": [
+      "slightly claustrophobic feel",
+      "sterile lighting",
+      "reflection of self"
+    ],
+    "time": [
+      "any",
+      "rush hour morning",
+      "empty late night"
+    ],
+    "aliases": [
+      "elevator",
+      "lift"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "surveillance_room": {
+    "label": "監視室",
+    "environment": [
+      "dark security control room",
+      "humming server room with blinking lights"
+    ],
+    "core": [
+      "wall covered in surveillance monitors",
+      "complex control console with buttons",
+      "server racks with blinking LEDs",
+      "ergonomic operator chair",
+      "emergency alert light"
+    ],
+    "texture": [
+      "industrial metal grating floor",
+      "smooth plastic buttons",
+      "acoustic foam walls",
+      "anti-static floor mat"
+    ],
+    "props": [
+      "half-empty coffee cups",
+      "security logbooks",
+      "operator headsets",
+      "clipboard with patrol logs",
+      "walkie-talkie charging station",
+      "takeout food containers"
+    ],
+    "fx": [
+      "blue screen glow illuminating faces",
+      "electronic hum visualized",
+      "high-tech atmosphere"
+    ],
+    "time": [
+      "night shift",
+      "quiet weekend shift",
+      "emergency alert status"
+    ],
+    "aliases": [
+      "monitor room",
+      "security room",
+      "surveillance room"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "messy_copy_room": {
+    "label": "散らかったコピー室",
+    "environment": [
+      "cramped storage room overflowing with items",
+      "busy office copy room"
+    ],
+    "core": [
+      "large humming photocopier machine",
+      "metal shelves packed with office supplies"
+    ],
+    "texture": [
+      "cheap linoleum floor",
+      "rough cardboard boxes"
+    ],
+    "props": [
+      "scattered papers on floor",
+      "empty toner cartridges",
+      "overflow tray of misprinted pages"
+    ],
+    "fx": [
+      "chaotic clutter everywhere",
+      "static electricity in air",
+      "fluorescent flicker"
+    ],
+    "time": [
+      "late night overtime"
+    ],
+    "aliases": [
+      "garage",
+      "gear-filled workshop",
+      "messy copy room"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "rainy_alley": {
+    "label": "雨の路地裏",
+    "environment": [
+      "narrow dark alleyway between buildings",
+      "gloom backstreet behind shops"
+    ],
+    "core": [
+      "old damp brick walls",
+      "rusted iron fire escapes",
+      "large puddles reflecting faint light"
+    ],
+    "texture": [
+      "gritty wet brick",
+      "corroded metal"
+    ],
+    "props": [
+      "overturned trash cans",
+      "soggy cardboard boxes",
+      "stray cat seeking shelter"
+    ],
+    "fx": [
+      "heavy rain falling vertically",
+      "splashing water droplets",
+      "noir atmosphere"
+    ],
+    "time": [
+      "dark night"
+    ],
+    "aliases": [
+      "foggy london street",
+      "graffiti wall",
+      "rainy alley"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "commuter_transport": {
+    "label": "通勤電車/バス",
+    "environment": [
+      "crowded public-transit interior",
+      "swaying public-transit interior at night"
+    ],
+    "core": [
+      "rows of hanging plastic straps",
+      "priority seats with distinct fabric",
+      "large glass windows reflecting interior"
+    ],
+    "texture": [
+      "hard plastic seats",
+      "smooth metal poles"
+    ],
+    "props": [
+      "colorful advertisement posters hanging",
+      "passengers holding smartphones"
+    ],
+    "fx": [
+      "motion blur of city lights outside",
+      "crowded claustrophobic feel",
+      "artificial interior lighting"
+    ],
+    "time": [
+      "rush hour",
+      "late-night transit service",
+      "quiet midday"
+    ],
+    "crowd": [
+      "packed like sardines",
+      "sparse passengers",
+      "standing room only",
+      "mostly empty seats"
+    ],
+    "weather": [
+      "view of sunset city",
+      "rainy window reflection",
+      "dark tunnel window"
+    ],
+    "aliases": [
+      "commuter train",
+      "crowded train",
+      "departing bus"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "luxury_hotel_lobby": {
+    "label": "ホテルロビー",
+    "environment": [
+      "grand luxury hotel lobby with high ceiling",
+      "opulent reception area with marble floors"
+    ],
+    "core": [
+      "massive marble reception desk",
+      "sweeping grand staircase",
+      "giant crystal chandelier overhead"
+    ],
+    "texture": [
+      "polished reflective marble",
+      "thick plush carpet",
+      "gold accents"
+    ],
+    "props": [
+      "gold luggage carts",
+      "extravagant flower arrangements",
+      "red velvet ropes"
+    ],
+    "fx": [
+      "fresh clean atmosphere",
+      "elegant warm lighting",
+      "sense of wealth"
+    ],
+    "time": [
+      "evening check-in"
+    ],
+    "aliases": [
+      "grand entrance",
+      "hotel lobby",
+      "luxury hotel lobby"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "karaoke_bar": {
+    "label": "カラオケバー",
+    "environment": [
+      "dimly lit private karaoke room",
+      "lively party room with disco lights"
+    ],
+    "core": [
+      "large monitor screen displaying lyrics",
+      "comfortable u-shaped leather sofa",
+      "touch-song console built into the low table",
+      "soundproof wall panels with colored trim",
+      "stack of song request booklets and remotes"
+    ],
+    "texture": [
+      "shiny black leather",
+      "padded soundproof walls"
+    ],
+    "props": [
+      "wireless microphones on table",
+      "party tambourines",
+      "pitchers of drinks and glass cups"
+    ],
+    "fx": [
+      "rotating disco ball reflections",
+      "energetic party vibe",
+      "colorful LED mood lighting"
+    ],
+    "time": [
+      "friday night"
+    ],
+    "aliases": [
+      "karaoke bar",
+      "karaoke room",
+      "ktv"
+    ],
+    "lighting": [
+      "neon glow",
+      "streetlight",
+      "moonlight",
+      "dim ambient",
+      "city lights"
+    ]
+  },
+  "messy_kitchen": {
+    "label": "散らかったキッチン",
+    "environment": [
+      "lived-in domestic kitchen",
+      "compact apartment kitchen after a busy morning"
+    ],
+    "core": [
+      "kitchen counter with a few utensils set aside",
+      "sink with a few dishes rinsed clean",
+      "gas stove wiped after cooking"
+    ],
+    "texture": [
+      "plain tiled walls",
+      "dull stainless steel"
+    ],
+    "props": [
+      "pan resting on a side rack",
+      "small ingredient bowl on the counter",
+      "blender set neatly beside the wall"
+    ],
+    "fx": [
+      "steam rising from pot",
+      "chaotic domestic mess",
+      "warm homey lighting"
+    ],
+    "time": [
+      "busy morning"
+    ],
+    "aliases": [
+      "cluttered kitchen",
+      "dirty kitchen",
+      "messy kitchen"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "bedroom_boudoir": {
+    "label": "寝室/ブドワール",
+    "environment": [
+      "cozy romantic bedroom",
+      "gothic victorian boudoir"
+    ],
+    "core": [
+      "canopied four-poster bed",
+      "vintage vanity mirror with lights",
+      "wooden wardrobe with open doors",
+      "strings of fairy lights on wall",
+      "scattered soft cushions"
+    ],
+    "texture": [
+      "smooth silk sheets",
+      "fluffy thick rug"
+    ],
+    "props": [
+      "cute plush toys on bed",
+      "glass perfume bottles",
+      "single decorative pillow"
+    ],
+    "fx": [
+      "soft dreamy focus",
+      "intimate warm atmosphere",
+      "muted colors"
+    ],
+    "time": [
+      "quiet night",
+      "lazy morning"
+    ],
+    "aliases": [
+      "bedroom",
+      "candlelit boudoir"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "fitness_gym": {
+    "label": "フィットネスジム",
+    "environment": [
+      "busy commercial fitness gym",
+      "hardcore weight room"
+    ],
+    "core": [
+      "rack full of heavy dumbbells",
+      "row of running treadmills",
+      "wall-to-wall mirrors"
+    ],
+    "texture": [
+      "black rubber floor mats",
+      "cold chrome metal",
+      "vinyl seat covers"
+    ],
+    "props": [
+      "colorful yoga balls",
+      "plastic water bottles",
+      "sweat towels"
+    ],
+    "fx": [
+      "energetic sweaty atmosphere",
+      "sharp clinical lighting",
+      "reflection in mirrors"
+    ],
+    "time": [
+      "workout time"
+    ],
+    "aliases": [
+      "fitness gym",
+      "treadmill"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "yoga_studio": {
+    "label": "ヨガスタジオ",
+    "environment": [
+      "peaceful sunlit yoga studio",
+      "minimalist zen dojo"
+    ],
+    "core": [
+      "rows of rolled yoga mats by the wall",
+      "full-height mirrors reflecting the room",
+      "low wooden shelf with folded blankets",
+      "potted plants near the window",
+      "small speaker for guided breathing"
+    ],
+    "texture": [
+      "smooth wooden floorboards",
+      "woven meditation cushions",
+      "soft cotton mat texture"
+    ],
+    "props": [
+      "foam blocks stacked neatly",
+      "folded towels by the corner shelf",
+      "water bottles lined beside the mats"
+    ],
+    "fx": [
+      "serene spiritual atmosphere",
+      "soft morning haze",
+      "gentle sunlight"
+    ],
+    "time": [
+      "early morning"
+    ],
+    "aliases": [
+      "dance studio",
+      "peaceful studio",
+      "yoga class"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "stadium_court": {
+    "label": "競技場/コート",
+    "environment": [
+      "professional volleyball court",
+      "outdoor tennis court in summer",
+      "massive stadium arena"
+    ],
+    "core": [
+      "taut sports net",
+      "crisp white boundary lines",
+      "tiered audience seating beyond the court"
+    ],
+    "texture": [
+      "synthetic court surface",
+      "rough sand (if beach)"
+    ],
+    "props": [
+      "sports ball in motion",
+      "large digital scoreboard"
+    ],
+    "fx": [
+      "dynamic sporting action",
+      "motion blur of players",
+      "bright stadium lights"
+    ],
+    "time": [
+      "match day"
+    ],
+    "aliases": [
+      "park track",
+      "running track",
+      "sports field"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "concert_stage": {
+    "label": "ライブステージ",
+    "environment": [
+      "explosive rock concert stage",
+      "huge outdoor festival stage at night"
+    ],
+    "core": [
+      "raised stage platform",
+      "tower of huge speakers",
+      "full drum kit"
+    ],
+    "texture": [
+      "scuffed black stage floor",
+      "cold metal truss structure"
+    ],
+    "props": [
+      "guitar amplifiers",
+      "microphone stands",
+      "fog smoke machines"
+    ],
+    "fx": [
+      "dazzling laser beams cutting darkness",
+      "bright pyrotechnics sparks",
+      "sea of crowd silhouettes"
+    ],
+    "time": [
+      "concert night"
+    ],
+    "aliases": [
+      "explosive stage",
+      "rock_concert"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "recording_studio": {
+    "label": "レコーディングスタジオ",
+    "environment": [
+      "professional soundproof recording booth",
+      "high-tech mixing room"
+    ],
+    "core": [
+      "large mixing console with many sliders",
+      "geometric sound isolation pads on wall"
+    ],
+    "texture": [
+      "grey acoustic foam",
+      "soft carpet"
+    ],
+    "props": [
+      "circular pop filters",
+      "professional studio headphones",
+      "tangled audio cables"
+    ],
+    "fx": [
+      "quiet focused atmosphere",
+      "glowing led level indicators",
+      "warm tube light"
+    ],
+    "time": [
+      "recording session"
+    ],
+    "aliases": [
+      "music studio",
+      "recording studio",
+      "sound studio"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "opera_house": {
+    "label": "オペラハウス",
+    "environment": [
+      "grand historic opera house interior",
+      "opulent theatre balcony with view"
+    ],
+    "core": [
+      "rows of plush red velvet seats",
+      "elaborate gold railing",
+      "massive crystal chandelier"
+    ],
+    "texture": [
+      "soft red velvet",
+      "gold leaf detailing",
+      "polished dark wood"
+    ],
+    "props": [
+      "antique opera glasses",
+      "paper program pamphlet",
+      "heavy velvet stage curtains"
+    ],
+    "fx": [
+      "dramatic spotlight on stage",
+      "hushed anticipation presence",
+      "soft haze in spotlight"
+    ],
+    "time": [
+      "evening performance"
+    ],
+    "aliases": [
+      "concert hall",
+      "opera house balcony",
+      "theater stage"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "burning_battlefield": {
+    "label": "燃える戦場",
+    "environment": [
+      "devastated war-torn battlefield",
+      "apocalyptic wasteland"
+    ],
+    "core": [
+      "deep impact craters",
+      "destroyed stone ruins",
+      "tangled barbed wire",
+      "wrecked armored vehicle",
+      "charred tree stump"
+    ],
+    "texture": [
+      "black scorched earth",
+      "wet mud",
+      "gritty ash-covered ground"
+    ],
+    "props": [
+      "broken swords and weapons",
+      "scattered debris",
+      "burning tattered flags",
+      "lost helmet",
+      "unexploded shell"
+    ],
+    "fx": [
+      "thick black smoke plumes",
+      "glowing embers floating in air",
+      "intense heat haze distortion"
+    ],
+    "time": [
+      "apocalypse",
+      "dawn after the battle"
+    ],
+    "aliases": [
+      "burning battlefield",
+      "mecha pilot"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "dungeon_crypt": {
+    "label": "ダンジョン/地下墓地",
+    "environment": [
+      "ancient stone crypt",
+      "dark underground dungeon"
+    ],
+    "core": [
+      "heavy stone sarcophagus",
+      "massive stone pillars supporting roof"
+    ],
+    "texture": [
+      "uneven cobblestone floor",
+      "slimy moldy stone walls"
+    ],
+    "props": [
+      "rusty iron chains hanging",
+      "piles of skulls and bones",
+      "hanging iron cages"
+    ],
+    "fx": [
+      "creepy low-lying fog",
+      "cold dampness visualized",
+      "eerie shadows"
+    ],
+    "time": [
+      "eternal darkness"
+    ],
+    "aliases": [
+      "crypt",
+      "dungeon"
+    ],
+    "lighting": [
+      "magical glow",
+      "bioluminescent",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
+    ]
+  },
+  "alien_planet": {
+    "label": "異星の地表",
+    "environment": [
+      "surreal alien landscape",
+      "bizarre extraterrestrial terrain"
+    ],
+    "core": [
+      "floating strange rock formations",
+      "multiple large moons in sky"
+    ],
+    "texture": [
+      "vibrant purple alien grass",
+      "glowing crystalline rocks"
+    ],
+    "props": [
+      "bioluminescent alien flora",
+      "debris from crashed spaceship"
+    ],
+    "fx": [
+      "shimmering aurora in sky",
+      "colorful nebula background",
+      "otherworldly atmosphere"
+    ],
+    "time": [
+      "alien sky"
+    ],
+    "aliases": [
+      "alien planet surface",
+      "desert highway"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "dragon_lair": {
+    "label": "ドラゴンの巣",
+    "environment": [
+      "dark volcanic cave",
+      "mountain peak nest"
+    ],
+    "core": [
+      "stone sarcophagus with carvings",
+      "iron chandeliers with unlit candles",
+      "cobweb-covered archways",
+      "pile of ancient bones",
+      "heavy iron barred gate"
+    ],
+    "texture": [
+      "cold damp stone",
+      "rough hewn rock",
+      "moldy brickwork"
+    ],
+    "props": [
+      "rusty iron chains",
+      "broken clay pottery",
+      "flickering torch on wall",
+      "ancient scroll dust"
+    ],
+    "fx": [
+      "hissing sulfuric steam",
+      "heat distortion waves",
+      "ominous red glow"
+    ],
+    "time": [
+      "any"
+    ],
+    "aliases": [
+      "dragon cave",
+      "dragon's jaw",
+      "treasure hoard"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "shinto_shrine": {
+    "label": "神社",
+    "environment": [
+      "peaceful shinto shrine grounds",
+      "stone paved path leading to hall"
+    ],
+    "core": [
+      "sacred main hall (honden)",
+      "purification fountain (temizuya)",
+      "guardian lion-dog statues (komainu)",
+      "vermilion fence",
+      "large sacred tree (shinboku)"
+    ],
+    "texture": [
+      "white gravel ground",
+      "weathered vermilion wood",
+      "mossy stone base"
+    ],
+    "props": [
+      "wooden ema plaques hanging",
+      "white paper streamers (shide)",
+      "mossy stone lanterns",
+      "fortune slip (omikuji) tied to branch"
+    ],
+    "fx": [
+      "falling pink cherry blossoms",
+      "sacred spiritual atmosphere",
+      "soft sunlight"
+    ],
+    "time": [
+      "quiet daytime"
+    ],
+    "aliases": [
+      "sacred place",
+      "shinto shrine",
+      "shrine grounds"
+    ],
+    "lighting": [
+      "magical glow",
+      "bioluminescent",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
+    ]
+  },
+  "bamboo_forest": {
+    "label": "竹林",
+    "environment": [
+      "dense green bamboo grove",
+      "arashiyama style forest path"
+    ],
+    "core": [
+      "dense towering bamboo stalks",
+      "narrow dirt path winding through",
+      "stone lantern covered in moss",
+      "small bamboo fence",
+      "sunlight filtering through leaves"
+    ],
+    "texture": [
+      "smooth green bamboo skin",
+      "soft earth with fallen leaves",
+      "rough stone surface"
+    ],
+    "props": [
+      "fallen bamboo leaves",
+      "small stone jizo statue",
+      "bamboo shoots sprouting"
+    ],
+    "fx": [
+      "wind rustling through leaves",
+      "shafts of sunbeams cutting through",
+      "cool fresh air"
+    ],
+    "time": [
+      "early morning"
+    ],
+    "aliases": [
+      "arashiyama",
+      "bamboo forest",
+      "bamboo grove"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "winter_street": {
+    "label": "雪の街路",
+    "environment": [
+      "quiet snow-covered street",
+      "frozen winter city park"
+    ],
+    "core": [
+      "piles of shoveled snow",
+      "bare tree branches"
+    ],
+    "texture": [
+      "crunchy fresh snow",
+      "icy slippery pavement"
+    ],
+    "props": [
+      "street benches buried in snow",
+      "bright lit vending machine"
+    ],
+    "fx": [
+      "gently falling snowflakes",
+      "visible white breath",
+      "muted sound atmosphere"
+    ],
+    "time": [
+      "winter day",
+      "winter night"
+    ],
+    "aliases": [
+      "frozen lake",
+      "frozen pond",
+      "snow fort",
+      "snowy street"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "tropical_beach": {
+    "label": "南国のビーチ",
+    "environment": [
+      "pristine white sand beach",
+      "exclusive tropical resort beach"
+    ],
+    "core": [
+      "swaying palm trees",
+      "crystal clear turquoise ocean"
+    ],
+    "texture": [
+      "powdery white sand",
+      "transparent water"
+    ],
+    "props": [
+      "striped wooden deck chairs",
+      "colorful tropical drinks with umbrella",
+      "leaning surfboard",
+      "woven beach tote with towels",
+      "seashells scattered near the shoreline"
+    ],
+    "fx": [
+      "simmering heat haze",
+      "splashing white waves",
+      "bright summer vibe"
+    ],
+    "time": [
+      "sunny day",
+      "vibrant sunset"
+    ],
+    "aliases": [
+      "shallow water",
+      "sunset beach",
+      "tropical beach"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "wave_barrel": {
+    "label": "波のトンネル",
+    "environment": [
+      "inside a massive curling ocean wave",
+      "surfer's view inside the tube"
+    ],
+    "core": [
+      "inside the curling wave tube",
+      "wall of rushing blue water",
+      "bright sunlight at the tunnel end",
+      "spray of white foam",
+      "distant shoreline view"
+    ],
+    "texture": [
+      "glassy transparent water",
+      "churning white foam",
+      "liquid motion blur"
+    ],
+    "props": [
+      "surfboard nose cutting water",
+      "droplets suspended in air",
+      "driftwood floating nearby",
+      "sunlit mist forming a faint rainbow",
+      "distant seabirds above the crest"
+    ],
+    "fx": [
+      "intense motion blur",
+      "high speed sensation",
+      "sunlight refracting through water"
+    ],
+    "time": [
+      "daytime"
+    ],
+    "aliases": [
+      "inside a wave",
+      "inside a wave barrel",
+      "surfing tube"
+    ],
+    "lighting": [
+      "neon glow",
+      "streetlight",
+      "moonlight",
+      "dim ambient",
+      "city lights"
+    ]
+  },
+  "poolside_resort": {
+    "label": "リゾートプールサイド",
+    "environment": [
+      "luxury hotel poolside",
+      "sun-drenched resort pool area"
+    ],
+    "core": [
+      "shimmering blue swimming pool",
+      "white lounge chairs",
+      "parasols"
+    ],
+    "texture": [
+      "tiled poolside deck",
+      "rippling water surface"
+    ],
+    "props": [
+      "tropical cocktails",
+      "rolled towels",
+      "inflatable float"
+    ],
+    "fx": [
+      "shimmering water caustics",
+      "bright sunlight",
+      "heat haze"
+    ],
+    "time": [
+      "sunny day",
+      "sunset"
+    ],
+    "aliases": [
+      "hotel pool",
+      "resort pool"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "antique_shop": {
+    "label": "骨董品店",
+    "environment": [
+      "cluttered dusty antique shop",
+      "mysterious curio store filled with history"
+    ],
+    "core": [
+      "wooden shelf with a curated oddity display",
+      "vintage curved glass display cabinets"
+    ],
+    "texture": [
+      "dark dusty wood",
+      "cracked worn leather",
+      "faded floral wallpaper"
+    ],
+    "props": [
+      "old mechanical clocks",
+      "creepy porcelain dolls",
+      "ornate gold-framed mirrors",
+      "leather-bound book stack"
+    ],
+    "fx": [
+      "soft light beams in the air",
+      "dim sepia toned lighting",
+      "quiet timeless atmosphere"
+    ],
+    "time": [
+      "daytime",
+      "evening"
+    ],
+    "aliases": [
+      "antique shop shelf",
+      "curio shop",
+      "vintage store"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "illuminated_park": {
+    "label": "イルミネーションパーク",
+    "environment": [
+      "winter illumination park at night",
+      "romantic tree-lined path with fairy lights"
+    ],
+    "core": [
+      "trees wrapped in thousands of LED lights",
+      "glowing pathway"
+    ],
+    "texture": [
+      "paved stone path",
+      "dry fallen leaves"
+    ],
+    "props": [
+      "park benches for couples",
+      "antique street lamps",
+      "steaming hot cocoa cup"
+    ],
+    "fx": [
+      "beautiful defocused lights",
+      "romantic date atmosphere",
+      "soft warm glow"
+    ],
+    "time": [
+      "holiday night"
+    ],
+    "aliases": [
+      "night park",
+      "winter illumination"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "street_cafe": {
+    "label": "オープンカフェ",
+    "environment": [
+      "stylish european street cafe",
+      "cozy coffee shop terrace"
+    ],
+    "core": [
+      "striped parasol",
+      "small round table with a folded napkin and receipt tray",
+      "handwritten chalkboard menu",
+      "wooden flower box"
+    ],
+    "texture": [
+      "cobblestone street",
+      "painted wooden chair",
+      "sun-warmed tabletop"
+    ],
+    "props": [
+      "buttery croissant on plate",
+      "glass of chilled water",
+      "canvas tote resting by the chair",
+      "folded newspaper beside the menu"
+    ],
+    "fx": [
+      "sunlight filtering through street trees",
+      "relaxing holiday atmosphere",
+      "steam rising from coffee"
+    ],
+    "time": [
+      "sunny afternoon",
+      "fresh morning",
+      "lazy sunday brunch",
+      "evening dusk"
+    ],
+    "crowd": [
+      "empty nearby cafe tables",
+      "quiet corner table",
+      "line of people waiting",
+      "sparse and relaxed"
+    ],
+    "weather": [
+      "warm sunlight",
+      "gentle breeze",
+      "cloudy afternoon"
+    ],
+    "aliases": [
+      "cafe",
+      "sidewalk cafe",
+      "terrace"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "cozy_bookstore": {
+    "label": "古書店",
+    "environment": [
+      "cozy used bookstore",
+      "quiet library corner"
+    ],
+    "core": [
+      "floor-to-ceiling bookshelves",
+      "rolling wooden ladder",
+      "comfortable reading nook armchair",
+      "wooden display cart of staff picks"
+    ],
+    "texture": [
+      "yellowed aged paper",
+      "dark polished wood",
+      "cracked leather binding"
+    ],
+    "props": [
+      "reading glasses",
+      "cat sleeping on top shelf",
+      "handwritten recommendation cards",
+      "canvas book tote hanging from a hook"
+    ],
+    "fx": [
+      "solitary light beam cutting through haze",
+      "quiet stillness",
+      "smell of old books visualized"
+    ],
+    "time": [
+      "quiet daytime",
+      "rainy day",
+      "late evening before closing",
+      "weekend afternoon"
+    ],
+    "crowd": [
+      "few silent readers",
+      "empty aisles",
+      "couple browsing together",
+      "lone customer"
+    ],
+    "weather": [
+      "soft diffused light",
+      "sound of rain outside",
+      "sunbeam through dust"
+    ],
+    "aliases": [
+      "bookshop",
+      "old bookstore"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "shopping_mall_atrium": {
+    "label": "ショッピングモール",
+    "environment": [
+      "grand modern shopping mall atrium",
+      "busy department store ground floor"
+    ],
+    "core": [
+      "glass elevator rising",
+      "moving escalator",
+      "bright storefront displays",
+      "stylish mannequins",
+      "red sale signs"
+    ],
+    "texture": [
+      "polished reflective tile floor",
+      "fingerprinted glass railings"
+    ],
+    "props": [
+      "colorful paper shopping bags",
+      "seasonal hanging banners",
+      "rest benches",
+      "potted indoor trees near the fountain"
+    ],
+    "fx": [
+      "bright artificial overhead light",
+      "bustling crowd motion blur",
+      "clean commercial reflections"
+    ],
+    "time": [
+      "daytime",
+      "weekend sale",
+      "holiday season",
+      "evening stroll"
+    ],
+    "crowd": [
+      "teeming with shoppers",
+      "families walking",
+      "clusters of teenagers",
+      "quiet weekday morning"
+    ],
+    "weather": [
+      "bright skylight sun",
+      "overcast skylight",
+      "night sky through glass roof"
+    ],
+    "aliases": [
+      "department store",
+      "shopping mall",
+      "shopping_mall"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "fashion_boutique": {
+    "label": "ブティック",
+    "environment": [
+      "high-end luxury fashion boutique",
+      "stylish trendy clothing store"
+    ],
+    "core": [
+      "minimalist clothing racks",
+      "large full-length mirror",
+      "glass display counter",
+      "designer bags arranged on shelf",
+      "velvet fitting room curtain"
+    ],
+    "texture": [
+      "plush white carpet",
+      "cool marble counter",
+      "focused spotlight"
+    ],
+    "props": [
+      "wooden hangers",
+      "velvet jewelry tray",
+      "folded gift boxes",
+      "tailor measuring tape on the counter"
+    ],
+    "fx": [
+      "warm flattering spotlighting",
+      "chic expensive atmosphere",
+      "clean minimalist aesthetic"
+    ],
+    "time": [
+      "daytime"
+    ],
+    "aliases": [
+      "boutique",
+      "clothing store",
+      "designer shop"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "picnic_park": {
+    "label": "ピクニック公園",
+    "environment": [
+      "sunny park lawn suitable for picnic",
+      "grassy hill with a view"
+    ],
+    "core": [
+      "spread out picnic blanket",
+      "woven wicker basket",
+      "large shade tree",
+      "homemade sandwiches",
+      "colorful thermos"
+    ],
+    "texture": [
+      "soft green grass",
+      "checkered blanket fabric"
+    ],
+    "props": [
+      "open book",
+      "plastic frisbee",
+      "straw hat"
+    ],
+    "fx": [
+      "dappled sunlight through leaves",
+      "gentle refreshing breeze",
+      "soft dreamlike focus"
+    ],
+    "time": [
+      "sunny spring day",
+      "golden hour"
+    ],
+    "aliases": [
+      "grassy park",
+      "public park"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "botanical_garden": {
+    "label": "植物園",
+    "environment": [
+      "glasshouse botanical garden",
+      "humid indoor jungle"
+    ],
+    "core": [
+      "exotic tropical plants",
+      "steel and glass roof structure",
+      "winding stone path",
+      "small stone fountain",
+      "hanging colorful orchids"
+    ],
+    "texture": [
+      "transparent glass panels",
+      "wet shiny leaves",
+      "mossy stone path"
+    ],
+    "props": [
+      "metal watering can",
+      "handwritten plant labels",
+      "mist spray bottle"
+    ],
+    "fx": [
+      "humid warm atmosphere",
+      "sunbeams filtering through glass",
+      "vibrant lush greenery"
+    ],
+    "time": [
+      "daytime"
+    ],
+    "aliases": [
+      "conservatory",
+      "greenhouse"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "spaceship_bridge": {
+    "label": "宇宙船ブリッジ",
+    "environment": [
+      "advanced starship command bridge",
+      "futuristic sci-fi cockpit"
+    ],
+    "core": [
+      "holographic 3d star map",
+      "captain's command chair",
+      "massive viewscreen showing stars",
+      "touch control consoles",
+      "glowing interface buttons"
+    ],
+    "texture": [
+      "brushed metal surfaces",
+      "glass touch screens",
+      "blue led strips"
+    ],
+    "props": [
+      "digital tablet datapad",
+      "wireless intercom headset",
+      "vacuum coffee cup"
+    ],
+    "fx": [
+      "cool blue ambient glow",
+      "reflection of starlight",
+      "engine glow reflecting in smoke"
+    ],
+    "time": [
+      "deep space time"
+    ],
+    "aliases": [
+      "command center",
+      "spaceship",
+      "starship bridge"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "cyber_lab": {
+    "label": "サイバー研究所",
+    "environment": [
+      "high-tech robotics laboratory",
+      "cluttered robotics workshop"
+    ],
+    "core": [
+      "mechanical robotic arm",
+      "blinking server racks",
+      "cylindrical glass containment pod",
+      "workstation with multiple monitors",
+      "mess of cables"
+    ],
+    "texture": [
+      "clean white plastic surfaces",
+      "polished chrome",
+      "transparent glass"
+    ],
+    "props": [
+      "exposed circuit boards",
+      "electric soldering iron",
+      "glowing blueprint tablet"
+    ],
+    "fx": [
+      "sterile cold atmosphere",
+      "blinking status lights",
+      "holographic data projection"
+    ],
+    "time": [
+      "any"
+    ],
+    "aliases": [
+      "lab",
+      "research facility",
+      "tech lab"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "airship_deck": {
+    "label": "飛行船デッキ",
+    "environment": [
+      "steampunk airship wooden deck",
+      "skyship exterior soaring high"
+    ],
+    "core": [
+      "ornate brass railings",
+      "huge rotating propeller blades",
+      "weathered wooden deck planks",
+      "sea of clouds below",
+      "brass telescope"
+    ],
+    "texture": [
+      "sun-bleached wood",
+      "polished brass",
+      "oxidized green copper"
+    ],
+    "props": [
+      "magnetic compass",
+      "pilot goggles",
+      "coiled ropes"
+    ],
+    "fx": [
+      "strong wind blowing",
+      "wisps of cloud mist",
+      "golden hour sun illuminating metal"
+    ],
+    "time": [
+      "sunset",
+      "bright daytime"
+    ],
+    "aliases": [
+      "airship",
+      "observation deck",
+      "sky deck"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "clockwork_workshop": {
+    "label": "時計仕掛けの工房",
+    "environment": [
+      "cluttered steampunk inventor's workshop",
+      "clockmaker's room with a single exposed gear mechanism"
+    ],
+    "core": [
+      "large brass gear mounted on wall",
+      "heavy worktable with a compact tool tray",
+      "hissing steam pipes",
+      "rolled paper blueprints",
+      "intricate brass machinery"
+    ],
+    "texture": [
+      "oil-stained dark wood",
+      "shiny brass",
+      "worn leather apron"
+    ],
+    "props": [
+      "heavy wrench",
+      "brass magnifying glass",
+      "copper oil can"
+    ],
+    "fx": [
+      "white steam rising",
+      "warm sepia tone",
+      "ticking sound visual"
+    ],
+    "time": [
+      "daytime",
+      "night work"
+    ],
+    "aliases": [
+      "inventor's lab",
+      "steampunk workshop"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "aquarium": {
+    "label": "水族館",
+    "environment": [
+      "dimly lit aquarium tunnel",
+      "large open ocean tank viewing area"
+    ],
+    "core": [
+      "massive curved glass wall",
+      "swirling schools of sardines",
+      "glowing jellyfish tank cylinder",
+      "touch pool with starfish"
+    ],
+    "texture": [
+      "thick acrylic glass",
+      "rippling blue water projection on floor",
+      "dark carpeted floor"
+    ],
+    "props": [
+      "informational digital displays",
+      "silhouettes of other visitors",
+      "bench for watching fish"
+    ],
+    "fx": [
+      "serene underwater blue lighting",
+      "slow movement of marine life",
+      "caustics dancing on walls",
+      "peaceful silence"
+    ],
+    "time": [
+      "daytime visit",
+      "night aquarium event"
+    ],
+    "aliases": [
+      "aquarium",
+      "fish tank",
+      "underwater tunnel"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "university_campus_courtyard": {
+    "label": "大学キャンパス中庭",
+    "environment": [
+      "open university campus courtyard",
+      "sunny college quad with benches"
+    ],
+    "core": [
+      "brick academic building facade",
+      "wide stone path between lawns",
+      "notice board covered in club flyers"
+    ],
+    "texture": [
+      "sun-warmed paving stones",
+      "trimmed green lawn edges"
+    ],
+    "props": [
+      "canvas backpacks resting on benches",
+      "paper coffee cups near a planter",
+      "stack of course handouts tucked under an arm"
+    ],
+    "fx": [
+      "fresh weekday atmosphere",
+      "soft breeze moving through the courtyard trees"
+    ],
+    "time": [
+      "late morning",
+      "bright afternoon"
+    ],
+    "crowd": [
+      "small groups between classes",
+      "scattered students crossing the quad"
+    ],
+    "weather": [
+      "mild spring air",
+      "clear sky overhead"
+    ],
+    "aliases": [
+      "campus courtyard",
+      "college quad",
+      "university campus"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "train_station_platform": {
+    "label": "駅ホーム",
+    "environment": [
+      "busy commuter train platform",
+      "covered station platform with route signs"
+    ],
+    "core": [
+      "painted platform safety line",
+      "digital arrival board overhead",
+      "metal benches facing the tracks"
+    ],
+    "texture": [
+      "textured anti-slip tiles",
+      "brushed steel handrails"
+    ],
+    "props": [
+      "folded umbrellas near commuters",
+      "ticket gate notices on a pillar",
+      "rolling suitcase beside a bench"
+    ],
+    "fx": [
+      "steady rush of arrivals and departures",
+      "light wind stirred by passing trains"
+    ],
+    "time": [
+      "morning commute",
+      "late afternoon"
+    ],
+    "crowd": [
+      "commuters waiting in neat lines",
+      "students gathering near the signboard"
+    ],
+    "weather": [
+      "clear day beyond the platform roof",
+      "bright overcast sky beyond the tracks"
+    ],
+    "aliases": [
+      "station platform",
+      "train platform"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "convenience_store": {
+    "label": "コンビニ店内",
+    "environment": [
+      "bright neighborhood convenience store",
+      "compact convenience shop with tidy aisles"
+    ],
+    "core": [
+      "refrigerated drink wall",
+      "magazine rack near the entrance",
+      "cash register counter with impulse snacks"
+    ],
+    "texture": [
+      "glossy tile floor",
+      "plastic product packaging sheen"
+    ],
+    "props": [
+      "stacked lunch boxes in the chilled case",
+      "wire basket for small items",
+      "freshly delivered cardboard boxes near the back"
+    ],
+    "fx": [
+      "casual stop-on-the-way-home atmosphere",
+      "quiet storefront hum"
+    ],
+    "time": [
+      "early evening errand",
+      "late morning stop"
+    ],
+    "crowd": [
+      "one or two customers browsing",
+      "clerk restocking a shelf"
+    ],
+    "weather": [
+      "clear daylight through the glass door",
+      "soft overcast light outside"
+    ],
+    "aliases": [
+      "convenience store",
+      "corner shop"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "food_court": {
+    "label": "フードコート",
+    "environment": [
+      "open shopping mall food court",
+      "bright food hall with shared seating"
+    ],
+    "core": [
+      "rows of communal tables",
+      "counter signs from multiple casual restaurants",
+      "self-service tray return station"
+    ],
+    "texture": [
+      "easy-clean tabletop surfaces",
+      "patterned mall floor tiles"
+    ],
+    "props": [
+      "plastic trays with drinks",
+      "numbered pager waiting on a table",
+      "shopping bags hanging from a chair"
+    ],
+    "fx": [
+      "lively lunch break atmosphere",
+      "light chatter rising around the tables"
+    ],
+    "time": [
+      "lunchtime rush",
+      "weekend afternoon"
+    ],
+    "crowd": [
+      "families sharing meals",
+      "students looking for seats"
+    ],
+    "weather": [
+      "bright skylight over the atrium",
+      "soft daylight through upper windows"
+    ],
+    "aliases": [
+      "food court",
+      "food hall"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "riverside_walk": {
+    "label": "河川敷遊歩道",
+    "environment": [
+      "riverside pedestrian walkway",
+      "quiet path running beside the embankment"
+    ],
+    "core": [
+      "wide paved path along the river",
+      "low metal railing facing the water",
+      "grass slope leading down to the bank"
+    ],
+    "texture": [
+      "sunlit asphalt path",
+      "short trimmed riverbank grass"
+    ],
+    "props": [
+      "folding bicycle parked nearby",
+      "paper cup resting on the railing",
+      "small tote bag slung over one shoulder"
+    ],
+    "fx": [
+      "open-air afternoon calm",
+      "gentle breeze moving off the water"
+    ],
+    "time": [
+      "late afternoon walk",
+      "clear midday"
+    ],
+    "crowd": [
+      "joggers passing from time to time",
+      "a few walkers along the path"
+    ],
+    "weather": [
+      "clear river sky",
+      "mild cloud cover over the water"
+    ],
+    "aliases": [
+      "riverside path",
+      "river walk"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "laundromat": {
+    "label": "コインランドリー",
+    "environment": [
+      "small self-service laundromat",
+      "coin laundry with rows of washers"
+    ],
+    "core": [
+      "stacked washing machines and dryers",
+      "plastic waiting chairs by the wall",
+      "instruction posters above the change machine"
+    ],
+    "texture": [
+      "cool tiled floor",
+      "metal machine doors with circular glass"
+    ],
+    "props": [
+      "laundry basket full of folded clothes",
+      "detergent bottles lined on a shelf",
+      "small paperback left on a chair"
+    ],
+    "fx": [
+      "low mechanical hum in the room",
+      "routine domestic errand atmosphere"
+    ],
+    "time": [
+      "weekday afternoon",
+      "quiet evening before dinner"
+    ],
+    "crowd": [
+      "one customer folding clothes",
+      "mostly empty laundry room"
+    ],
+    "weather": [
+      "bright light through the storefront glass",
+      "soft daylight outside the windows"
+    ],
+    "aliases": [
+      "laundromat",
+      "coin laundry"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "coworking_space": {
+    "label": "コワーキングスペース",
+    "environment": [
+      "shared coworking office with hot desks",
+      "modern coworking lounge beside large windows"
+    ],
+    "core": [
+      "long communal worktable with outlets",
+      "glass meeting room in the corner",
+      "coffee counter beside the seating area"
+    ],
+    "texture": [
+      "smooth shared desks",
+      "muted carpet and wood flooring mix"
+    ],
+    "props": [
+      "laptop and notebook spread across a desk",
+      "headphones resting beside a mug",
+      "meeting agenda pinned on a notice board"
+    ],
+    "fx": [
+      "focused daytime work atmosphere",
+      "light collaborative energy in the room"
+    ],
+    "time": [
+      "weekday morning",
+      "late afternoon work session"
+    ],
+    "crowd": [
+      "remote workers typing quietly",
+      "small team chatting near the coffee bar"
+    ],
+    "weather": [
+      "clear skyline beyond the windows",
+      "soft daylight filling the workspace"
+    ],
+    "aliases": [
+      "coworking space",
+      "shared office"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "apartment_balcony": {
+    "label": "アパートのベランダ",
+    "environment": [
+      "small apartment balcony overlooking the street",
+      "home balcony with potted plants and laundry rack"
+    ],
+    "core": [
+      "metal balcony railing",
+      "sliding glass door to the living room",
+      "compact drying rack near the wall"
+    ],
+    "texture": [
+      "painted concrete floor",
+      "light metal railing warmed by the sun"
+    ],
+    "props": [
+      "watering can beside the plants",
+      "folded towel on the rack",
+      "small stool with a cup set down on it"
+    ],
+    "fx": [
+      "quiet everyday home atmosphere",
+      "soft breeze moving the hanging fabric"
+    ],
+    "time": [
+      "late morning at home",
+      "sunny afternoon"
+    ],
+    "crowd": [
+      "neighboring balconies visible at a distance",
+      "quiet residential street below"
+    ],
+    "weather": [
+      "clear open sky above the railing",
+      "soft overcast brightness outside"
+    ],
+    "aliases": [
+      "apartment balcony",
+      "balcony"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "bus_terminal": {
+    "label": "バスターミナル",
+    "environment": [
+      "regional bus terminal with numbered bays",
+      "open bus terminal beside a busy station plaza"
+    ],
+    "core": [
+      "covered boarding area with route signs",
+      "rows of molded plastic waiting seats",
+      "digital timetable mounted over the platform"
+    ],
+    "texture": [
+      "painted curb markings",
+      "smooth concrete floor under the canopy"
+    ],
+    "props": [
+      "weekend tote bag resting by a seat",
+      "paper ticket held between two fingers",
+      "bus route map fixed to a metal pillar"
+    ],
+    "fx": [
+      "steady travel-day rhythm",
+      "light movement of arriving passengers"
+    ],
+    "time": [
+      "late morning departure hour",
+      "early afternoon between routes"
+    ],
+    "crowd": [
+      "a few travelers checking the signs",
+      "drivers stepping in and out of parked buses"
+    ],
+    "weather": [
+      "clear daylight across the bus plaza",
+      "soft overcast light under the roof"
+    ],
+    "aliases": [
+      "bus terminal",
+      "station bus plaza"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "subway_ticket_gate": {
+    "label": "地下鉄改札",
+    "environment": [
+      "subway ticket gate concourse",
+      "underground station entrance lined with automatic gates"
+    ],
+    "core": [
+      "row of IC card ticket gates",
+      "station map posted near the wall",
+      "direction boards hanging overhead"
+    ],
+    "texture": [
+      "polished station floor tiles",
+      "stainless gate barriers"
+    ],
+    "props": [
+      "commuter pass case in one hand",
+      "small shoulder bag pulled close",
+      "route display glowing above the corridor"
+    ],
+    "fx": [
+      "everyday commute atmosphere",
+      "soft echo of station announcements"
+    ],
+    "time": [
+      "weekday morning rush easing off",
+      "midday station lull"
+    ],
+    "crowd": [
+      "office workers passing through in short bursts",
+      "students pausing near the route map"
+    ],
+    "weather": [
+      "weather hidden beneath the station ceiling",
+      "filtered daylight near the stairwell"
+    ],
+    "aliases": [
+      "subway ticket gate",
+      "station gate"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "neighborhood_crosswalk": {
+    "label": "住宅街の横断歩道",
+    "environment": [
+      "quiet neighborhood crosswalk near small homes",
+      "residential street intersection with low traffic"
+    ],
+    "core": [
+      "painted zebra crossing over a narrow road",
+      "short traffic light pole at the corner",
+      "small hedges and mailboxes lining the houses"
+    ],
+    "texture": [
+      "sun-warmed asphalt road",
+      "slightly worn white crossing stripes"
+    ],
+    "props": [
+      "canvas tote tucked under one arm",
+      "shopping bag swinging beside one knee",
+      "utility pole shadows falling over the road"
+    ],
+    "fx": [
+      "ordinary residential calm",
+      "light neighborhood afternoon stillness"
+    ],
+    "time": [
+      "late afternoon on the way home",
+      "bright midday in the neighborhood"
+    ],
+    "crowd": [
+      "one cyclist passing in the distance",
+      "quiet street with few pedestrians"
+    ],
+    "weather": [
+      "clear blue sky above the houses",
+      "soft cloud cover over the block"
+    ],
+    "aliases": [
+      "neighborhood crosswalk",
+      "residential crosswalk"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "shopping_arcade": {
+    "label": "商店街アーケード",
+    "environment": [
+      "covered neighborhood shopping arcade",
+      "local shopping street under a glass roof"
+    ],
+    "core": [
+      "small independent storefronts facing the walkway",
+      "hanging banners over the center aisle",
+      "narrow tiled path leading through the arcade"
+    ],
+    "texture": [
+      "patterned shopping street tiles",
+      "metal shutters and signboards"
+    ],
+    "props": [
+      "paper shopping bag with bakery logo",
+      "stacked crates outside a produce stand",
+      "folding bicycle parked near a pillar"
+    ],
+    "fx": [
+      "lively local shopping energy",
+      "gentle crowd chatter under the roof"
+    ],
+    "time": [
+      "busy late morning",
+      "easygoing afternoon shopping hour"
+    ],
+    "crowd": [
+      "neighbors browsing from store to store",
+      "shopkeepers arranging goods near the entrance"
+    ],
+    "weather": [
+      "daylight glowing through the arcade roof",
+      "soft overcast light at the street ends"
+    ],
+    "aliases": [
+      "shopping arcade",
+      "covered shopping street"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "bakery_shop": {
+    "label": "ベーカリー",
+    "environment": [
+      "small neighborhood bakery with fresh bread displays",
+      "bright bakery shop with warm trays behind the counter"
+    ],
+    "core": [
+      "wooden shelves lined with pastries",
+      "glass case showing sandwiches and cakes",
+      "small cashier counter near the entrance"
+    ],
+    "texture": [
+      "warm wood shelving",
+      "paper bakery bags stacked beside the register"
+    ],
+    "props": [
+      "tray and tongs held at waist level",
+      "fresh loaf wrapped in paper",
+      "chalkboard menu propped by the counter"
+    ],
+    "fx": [
+      "freshly baked morning atmosphere",
+      "gentle daily shopping warmth"
+    ],
+    "time": [
+      "morning bread rush",
+      "quiet early afternoon"
+    ],
+    "crowd": [
+      "one customer choosing pastries",
+      "staff arranging loaves on the shelf"
+    ],
+    "weather": [
+      "clear light through the front windows",
+      "soft daylight on the display case"
+    ],
+    "aliases": [
+      "bakery",
+      "bakery shop"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "supermarket_aisle": {
+    "label": "スーパーマーケット通路",
+    "environment": [
+      "local supermarket aisle with everyday groceries",
+      "bright supermarket interior near the refrigerated section"
+    ],
+    "core": [
+      "long grocery aisle with neatly faced products",
+      "price tags clipped under every shelf",
+      "shopping baskets stacked near the aisle entrance"
+    ],
+    "texture": [
+      "smooth supermarket floor",
+      "plastic shelf labels and product packaging"
+    ],
+    "props": [
+      "half-filled shopping basket in one hand",
+      "discount sticker sheet on the endcap",
+      "cart parked beside the shelf"
+    ],
+    "fx": [
+      "ordinary daily errand atmosphere",
+      "light store music drifting through the aisle"
+    ],
+    "time": [
+      "weekday evening shopping hour",
+      "quiet midday grocery stop"
+    ],
+    "crowd": [
+      "customers comparing items on the shelf",
+      "staff restocking cartons further down the aisle"
+    ],
+    "weather": [
+      "daylight visible near the front windows",
+      "overcast brightness outside the entrance"
+    ],
+    "aliases": [
+      "supermarket aisle",
+      "grocery aisle"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "drugstore_aisle": {
+    "label": "ドラッグストア通路",
+    "environment": [
+      "drugstore aisle with cosmetics and daily goods",
+      "clean pharmacy-style store interior"
+    ],
+    "core": [
+      "shelves of skincare and toiletries",
+      "promotional signboards attached to endcaps",
+      "narrow aisle leading toward the cashier"
+    ],
+    "texture": [
+      "glossy white shelf panels",
+      "boxed daily goods with bright labels"
+    ],
+    "props": [
+      "small shopping basket at knee height",
+      "test display mirror beside the shelf",
+      "coupon leaflet half folded in one hand"
+    ],
+    "fx": [
+      "routine after-work errand mood",
+      "clean and practical store atmosphere"
+    ],
+    "time": [
+      "evening stop on the way home",
+      "bright daytime shopping hour"
+    ],
+    "crowd": [
+      "a few shoppers scanning labels",
+      "clerk tidying the display nearby"
+    ],
+    "weather": [
+      "soft daylight near the automatic doors",
+      "clear afternoon brightness outside"
+    ],
+    "aliases": [
+      "drugstore aisle",
+      "drugstore"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "family_restaurant": {
+    "label": "ファミレス",
+    "environment": [
+      "casual family restaurant with booth seating",
+      "bright roadside diner-style family restaurant"
+    ],
+    "core": [
+      "upholstered booth by a wide window",
+      "laminated menu standing on the table",
+      "drink bar counter in the back"
+    ],
+    "texture": [
+      "polished tabletop with menu reflections",
+      "soft booth upholstery in warm tones"
+    ],
+    "props": [
+      "glass of iced tea near the tray",
+      "small receipt tucked under the menu",
+      "order buzzer set by the plate"
+    ],
+    "fx": [
+      "casual meal break atmosphere",
+      "steady lunchtime chatter around the booths"
+    ],
+    "time": [
+      "late lunch hour",
+      "calm early evening meal"
+    ],
+    "crowd": [
+      "friends sharing a booth nearby",
+      "server moving between the tables"
+    ],
+    "weather": [
+      "bright roadside daylight through the windows",
+      "soft cloudy afternoon outside"
+    ],
+    "aliases": [
+      "family restaurant",
+      "casual diner"
+    ],
+    "lighting": [
+      "settled indoor warmth",
+      "quiet room air",
+      "single overhead light fixture",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "cinema_lobby": {
+    "label": "映画館ロビー",
+    "environment": [
+      "modern cinema lobby before the screening",
+      "movie theater entrance hall with poster displays"
+    ],
+    "core": [
+      "ticket kiosk beside the entrance",
+      "large movie poster along the wall",
+      "queue lane leading toward the concession stand"
+    ],
+    "texture": [
+      "dark patterned carpet",
+      "glossy poster frames under soft light"
+    ],
+    "props": [
+      "paper ticket held loosely in one hand",
+      "small popcorn tub resting by the seat",
+      "crossbody bag tucked near the hip"
+    ],
+    "fx": [
+      "anticipation before the movie starts",
+      "weekend outing atmosphere"
+    ],
+    "time": [
+      "early afternoon screening",
+      "evening show before entry"
+    ],
+    "crowd": [
+      "small groups checking showtimes",
+      "staff guiding customers toward the hall"
+    ],
+    "weather": [
+      "daylight visible through the glass doors",
+      "night hidden beyond the theater entrance"
+    ],
+    "aliases": [
+      "cinema lobby",
+      "movie theater lobby"
+    ],
+    "lighting": [
+      "settled indoor warmth",
+      "quiet room air",
+      "single overhead light fixture",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "game_arcade": {
+    "label": "ゲームセンター",
+    "environment": [
+      "bright game arcade with prize machines",
+      "busy amusement arcade lined with rhythm games"
+    ],
+    "core": [
+      "rows of claw machines near the entrance",
+      "rhythm game cabinets further inside",
+      "token counter beside a narrow walkway"
+    ],
+    "texture": [
+      "glossy machine panels",
+      "reflective arcade floor"
+    ],
+    "props": [
+      "coin purse held in one hand",
+      "small plush prize peeking from a bag",
+      "score card clipped near a cabinet"
+    ],
+    "fx": [
+      "playful outing energy",
+      "light electronic sounds from nearby machines"
+    ],
+    "time": [
+      "after school arcade stop",
+      "weekend afternoon"
+    ],
+    "crowd": [
+      "students gathered near the prize corner",
+      "a few players taking turns on the cabinets"
+    ],
+    "weather": [
+      "daylight outside the entrance doors",
+      "evening hidden beyond the mall corridor"
+    ],
+    "aliases": [
+      "game arcade",
+      "arcade"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "campus_hallway": {
+    "label": "大学棟の廊下",
+    "environment": [
+      "quiet campus building hallway",
+      "university corridor lined with classroom doors"
+    ],
+    "core": [
+      "bulletin board full of notices",
+      "classroom doors opening onto a long corridor",
+      "windowed end of the hallway facing the campus"
+    ],
+    "texture": [
+      "clean linoleum floor",
+      "white walls with posted schedules"
+    ],
+    "props": [
+      "file folder tucked under one arm",
+      "student ID card hanging from a lanyard",
+      "rolling backpack leaned by the wall"
+    ],
+    "fx": [
+      "between-classes quiet",
+      "studious campus atmosphere"
+    ],
+    "time": [
+      "mid-morning between lectures",
+      "late afternoon after class"
+    ],
+    "crowd": [
+      "a few students crossing the corridor",
+      "mostly calm hallway between classes"
+    ],
+    "weather": [
+      "soft daylight through the end windows",
+      "clear brightness falling across the floor"
+    ],
+    "aliases": [
+      "campus hallway",
+      "university hallway"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "campus_cafeteria": {
+    "label": "学食",
+    "environment": [
+      "university cafeteria with tray counters",
+      "campus dining hall during a quiet lunch period"
+    ],
+    "core": [
+      "long self-service counter with sample dishes",
+      "rows of simple cafeteria tables",
+      "tray return station near the exit"
+    ],
+    "texture": [
+      "easy-clean dining tables",
+      "cafeteria trays and laminated menu signs"
+    ],
+    "props": [
+      "student tray with tea and lunch set",
+      "lecture notes spread beside the plate",
+      "school bag resting against the chair leg"
+    ],
+    "fx": [
+      "easygoing school lunch atmosphere",
+      "soft cafeteria chatter"
+    ],
+    "time": [
+      "lunch break on campus",
+      "late afternoon light meal"
+    ],
+    "crowd": [
+      "students choosing seats in small groups",
+      "staff wiping a table near the window"
+    ],
+    "weather": [
+      "bright daylight through high cafeteria windows",
+      "soft clouded sky outside the hall"
+    ],
+    "aliases": [
+      "campus cafeteria",
+      "student cafeteria"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "school_clubroom": {
+    "label": "部室",
+    "environment": [
+      "school clubroom with a small shared shelf",
+      "small student club room after activities"
+    ],
+    "core": [
+      "folding tables pushed against the wall",
+      "shelf with a tidy club materials binder",
+      "whiteboard covered with notes and doodles"
+    ],
+    "texture": [
+      "slightly worn classroom floor",
+      "poster-covered walls and taped labels"
+    ],
+    "props": [
+      "sports bag or instrument case by the chair",
+      "club schedule pinned near the whiteboard",
+      "paper cup left on the table corner"
+    ],
+    "fx": [
+      "after-school club atmosphere",
+      "lived-in student space with quiet energy"
+    ],
+    "time": [
+      "late afternoon after class",
+      "early evening before going home"
+    ],
+    "crowd": [
+      "one or two club members tidying up",
+      "quiet room after practice"
+    ],
+    "weather": [
+      "soft daylight through the narrow windows",
+      "late afternoon light on the wall"
+    ],
+    "aliases": [
+      "clubroom",
+      "school clubroom"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "community_center": {
+    "label": "地域センター",
+    "environment": [
+      "small neighborhood community center",
+      "public community hall with notice boards and benches"
+    ],
+    "core": [
+      "multi-purpose hall entrance with flyers",
+      "wooden benches along the wall",
+      "local event posters pinned near the desk"
+    ],
+    "texture": [
+      "clean public building floor",
+      "bulletin boards covered in colorful papers"
+    ],
+    "props": [
+      "canvas bag with pamphlets tucked inside",
+      "sign-up sheet on a folding table",
+      "indoor slippers lined near the corner"
+    ],
+    "fx": [
+      "calm neighborhood gathering atmosphere",
+      "quiet public-space warmth"
+    ],
+    "time": [
+      "weekday afternoon community class",
+      "late morning local event setup"
+    ],
+    "crowd": [
+      "a few residents checking the bulletin board",
+      "staff arranging chairs in the hall"
+    ],
+    "weather": [
+      "bright daylight through the lobby windows",
+      "soft cloudy daylight near the entrance"
+    ],
+    "aliases": [
+      "community center",
+      "community hall"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "public_library_lobby": {
+    "label": "公共図書館ロビー",
+    "environment": [
+      "public library lobby near the entrance desk",
+      "bright library entrance hall with return slots and posters"
+    ],
+    "core": [
+      "information desk beside the entrance gate",
+      "brochure racks near a reading bench",
+      "book return slot built into the wall"
+    ],
+    "texture": [
+      "quiet carpeted lobby floor",
+      "matte wood and glass around the desk"
+    ],
+    "props": [
+      "library card tucked inside a borrowed book",
+      "canvas book tote resting at knee height",
+      "event flyer half folded in one hand"
+    ],
+    "fx": [
+      "quiet public reading atmosphere",
+      "soft everyday calm before finding a seat"
+    ],
+    "time": [
+      "weekend afternoon visit",
+      "calm weekday morning"
+    ],
+    "crowd": [
+      "visitors returning books at the counter",
+      "one child waiting near the poster board"
+    ],
+    "weather": [
+      "soft daylight through the front glass",
+      "bright overcast sky outside the entrance"
+    ],
+    "aliases": [
+      "public library lobby",
+      "library lobby"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "apartment_entryway": {
+    "label": "アパートの玄関",
+    "environment": [
+      "small apartment entryway with shoe cabinet",
+      "compact home foyer just inside the front door"
+    ],
+    "core": [
+      "narrow genkan step by the entrance",
+      "shoe cabinet with keys and small items on top",
+      "interior hallway leading toward the living room"
+    ],
+    "texture": [
+      "cool tile at the doorway",
+      "light wood floor beyond the step"
+    ],
+    "props": [
+      "canvas tote dropped beside the cabinet",
+      "mail set on the shoe shelf",
+      "folded umbrella leaning near the wall"
+    ],
+    "fx": [
+      "coming-home routine atmosphere",
+      "quiet domestic transition moment"
+    ],
+    "time": [
+      "returning home in the afternoon",
+      "morning before heading out"
+    ],
+    "crowd": [
+      "quiet apartment interior",
+      "faint presence from neighboring units beyond the hall"
+    ],
+    "weather": [
+      "daylight spilling in as the door opens",
+      "soft cloudy brightness beyond the doorway"
+    ],
+    "aliases": [
+      "apartment entryway",
+      "home foyer"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "rooftop_laundry_area": {
+    "label": "屋上物干し場",
+    "environment": [
+      "shared apartment rooftop laundry area",
+      "open rooftop drying space above a residential building"
+    ],
+    "core": [
+      "rows of drying poles and clothespins",
+      "low concrete wall around the roof edge",
+      "access door from the stairwell"
+    ],
+    "texture": [
+      "sunlit concrete roof surface",
+      "light fabric moving in the breeze"
+    ],
+    "props": [
+      "laundry basket resting by the doorway",
+      "clothespins clipped between two fingers",
+      "folded sheet draped over one arm"
+    ],
+    "fx": [
+      "ordinary chore-day atmosphere",
+      "soft rooftop breeze across the drying lines"
+    ],
+    "time": [
+      "late morning laundry hour",
+      "sunny early afternoon"
+    ],
+    "crowd": [
+      "empty rooftop except for one resident",
+      "distant balconies visible across the street"
+    ],
+    "weather": [
+      "clear open sky over the rooftop",
+      "soft cloud cover moving above the building"
+    ],
+    "aliases": [
+      "rooftop laundry area",
+      "rooftop clothesline"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "neighborhood_playground": {
+    "label": "近所の公園",
+    "environment": [
+      "small neighborhood playground",
+      "quiet residential park with benches and play equipment"
+    ],
+    "core": [
+      "slide and swing set at the center of the park",
+      "bench under a small tree near the path",
+      "low fence separating the park from the street"
+    ],
+    "texture": [
+      "rubberized play surface and packed dirt",
+      "sunlit painted metal equipment"
+    ],
+    "props": [
+      "small shoulder bag resting on the bench",
+      "paper cup set beside the railing",
+      "light cardigan folded over one arm"
+    ],
+    "fx": [
+      "slow residential afternoon pace",
+      "gentle open-air neighborhood calm"
+    ],
+    "time": [
+      "late afternoon in the park",
+      "bright midday break"
+    ],
+    "crowd": [
+      "a few children playing in the distance",
+      "quiet bench area at the edge of the park"
+    ],
+    "weather": [
+      "clear sky over the neighborhood trees",
+      "soft daylight with light clouds"
+    ],
+    "aliases": [
+      "neighborhood playground",
+      "residential park"
+    ],
+    "lighting": [
+      "golden hour",
+      "bright daylight",
+      "overcast diffuse",
+      "blue hour",
+      "harsh noon sun"
+    ]
+  },
+  "local_market_street": {
+    "label": "市場通り",
+    "environment": [
+      "local market street with small produce stands",
+      "open-air market lane in a neighborhood shopping area"
+    ],
+    "core": [
+      "produce stalls under simple awnings",
+      "hanging price signs over baskets of fruit",
+      "narrow path threading between the storefronts"
+    ],
+    "texture": [
+      "textured pavement with crate marks",
+      "canvas awnings casting patterned shade"
+    ],
+    "props": [
+      "reusable shopping bag held at the elbow",
+      "paper-wrapped vegetables on a small counter",
+      "bicycle basket parked beside a stand"
+    ],
+    "fx": [
+      "lively errand-day neighborhood energy",
+      "soft market chatter drifting through the lane"
+    ],
+    "time": [
+      "morning market hour",
+      "light afternoon shopping"
+    ],
+    "crowd": [
+      "neighbors comparing produce near the stall",
+      "shopkeeper arranging fruit in wooden crates"
+    ],
+    "weather": [
+      "bright daylight between the awnings",
+      "soft cloudy sky above the lane"
+    ],
+    "aliases": [
+      "local market street",
+      "market lane"
+    ],
+    "lighting": [
+      "ceiling fixtures above the aisles",
+      "feature displays near the entrance",
+      "storefront signboards",
+      "steady commercial bustle"
+    ]
+  },
+  "art_gallery": {
+    "label": "アートギャラリー",
+    "environment": [
+      "quiet art gallery hall with white walls",
+      "small contemporary gallery arranged for a weekday viewing"
+    ],
+    "core": [
+      "framed canvas works spaced along the wall",
+      "low bench centered in the viewing room",
+      "small title plaques mounted beside each work"
+    ],
+    "texture": [
+      "smooth painted wall surface",
+      "polished concrete floor with muted reflections"
+    ],
+    "props": [
+      "folded exhibition leaflet held at waist height",
+      "thin brochure rack near the entrance",
+      "museum tote resting beside the bench"
+    ],
+    "fx": [
+      "hushed viewing room atmosphere",
+      "slow footsteps softened by the open space"
+    ],
+    "time": [
+      "quiet weekday afternoon",
+      "early evening before closing"
+    ],
+    "crowd": [
+      "a few visitors moving slowly between works",
+      "gallery staff waiting near the doorway"
+    ],
+    "weather": [
+      "soft daylight filtered through the front glass",
+      "overcast brightness from the street outside"
+    ],
+    "aliases": [
+      "art gallery",
+      "gallery hall"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "castle_hall": {
+    "label": "城の大広間",
+    "environment": [
+      "grand castle hall with high stone arches",
+      "old royal corridor opening into a ceremonial chamber"
+    ],
+    "core": [
+      "long red carpet leading between stone columns",
+      "tall stained glass windows above the hall",
+      "velvet chair placed near a carved wooden dais"
+    ],
+    "texture": [
+      "cold stone floor worn by footsteps",
+      "heavy woven banners hanging from the walls"
+    ],
+    "props": [
+      "rolled parchment set on a side table",
+      "polished armor stand beside the archway",
+      "silver candelabrum resting near the dais"
+    ],
+    "fx": [
+      "formal quiet filling the vaulted room",
+      "faint echo of steps across the stone"
+    ],
+    "time": [
+      "late afternoon in the hall",
+      "evening before a formal audience"
+    ],
+    "crowd": [
+      "distant attendants waiting near the pillars",
+      "empty ceremonial space beyond the carpet"
+    ],
+    "weather": [
+      "cool daylight through stained glass",
+      "clouded sky beyond the narrow windows"
+    ],
+    "aliases": [
+      "castle hall",
+      "royal hall"
+    ],
+    "lighting": [
+      "magical glow",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
+    ]
+  },
+  "enchanted_lake": {
+    "label": "魔法の湖",
+    "environment": [
+      "quiet enchanted lake bordered by old trees",
+      "misty lakeside clearing with a narrow stone bridge"
+    ],
+    "core": [
+      "still water reflecting hanging branches",
+      "mossy stones arranged along the shore",
+      "arched stone bridge crossing a shallow inlet"
+    ],
+    "texture": [
+      "damp moss around the waterline",
+      "smooth wet stones under the trees"
+    ],
+    "props": [
+      "small lantern set beside the path",
+      "folded cloak resting on a lakeside rock",
+      "glass vial catching color from the water"
+    ],
+    "fx": [
+      "thin mist drifting over the lake surface",
+      "faint ripples moving through the reflection"
+    ],
+    "time": [
+      "blue hour by the water",
+      "calm morning beside the lake"
+    ],
+    "crowd": [
+      "empty shoreline hidden by willow branches",
+      "one distant figure crossing the bridge"
+    ],
+    "weather": [
+      "cool clear air above the water",
+      "light rain touching the lake surface"
+    ],
+    "aliases": [
+      "enchanted lake",
+      "mystic lakeside"
+    ],
+    "lighting": [
+      "magical glow",
+      "bioluminescent",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
+    ]
+  },
+  "high_tech_medbay": {
+    "label": "ハイテク医療室",
+    "environment": [
+      "high tech medbay with clean modular walls",
+      "compact medical bay inside a futuristic facility"
+    ],
+    "core": [
+      "scanner bed set beneath a curved diagnostic arch",
+      "transparent medical chart panels beside the bed",
+      "sealed supply cabinet with labeled drawers"
+    ],
+    "texture": [
+      "smooth white composite panels",
+      "brushed metal rails around the equipment"
+    ],
+    "props": [
+      "sterile tray with sealed instruments",
+      "small vial rack clipped to the counter",
+      "folded patient blanket on the scanner bed"
+    ],
+    "fx": [
+      "controlled clinical stillness",
+      "soft machine hum under the room tone"
+    ],
+    "time": [
+      "quiet diagnostic shift",
+      "late night emergency standby"
+    ],
+    "crowd": [
+      "one technician checking the far console",
+      "empty waiting chair near the wall"
+    ],
+    "weather": [
+      "dark corridor beyond the sealed door",
+      "cold station light through the viewport"
+    ],
+    "aliases": [
+      "high tech medbay",
+      "medical bay"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "magic_academy_library": {
+    "label": "魔法学院図書館",
+    "environment": [
+      "magic academy library with towering bookcases",
+      "old study hall with scroll shelves and one reading desk"
+    ],
+    "core": [
+      "spiral staircase climbing between tall shelves",
+      "long oak tables lined with open reference books",
+      "arched windows overlooking the academy courtyard"
+    ],
+    "texture": [
+      "aged leather bindings and polished wood",
+      "dusty stone floor beneath the reading tables"
+    ],
+    "props": [
+      "thick grimoire open beside a bookmark ribbon",
+      "brass reading stand placed near the aisle",
+      "rolled scroll tied with blue cord"
+    ],
+    "fx": [
+      "hushed study air with a faint page rustle",
+      "quiet sense of old knowledge in the room"
+    ],
+    "time": [
+      "late afternoon study hour",
+      "evening before the library closes"
+    ],
+    "crowd": [
+      "students reading at separate desks",
+      "librarian moving between the shelves"
+    ],
+    "weather": [
+      "cloudy courtyard visible beyond the windows",
+      "rain tracing the high glass panes"
+    ],
+    "aliases": [
+      "magic academy library",
+      "academy library"
+    ],
+    "lighting": [
+      "magical glow",
+      "ethereal light",
+      "arcane radiance",
+      "mystic lighting"
+    ]
+  },
+  "museum_hall": {
+    "label": "博物館ホール",
+    "environment": [
+      "museum hall with wide exhibit corridors",
+      "natural history gallery arranged around glass cases"
+    ],
+    "core": [
+      "large skeleton display suspended over the hall",
+      "glass exhibit case aligned along the walkway",
+      "information panel mounted beside one display"
+    ],
+    "texture": [
+      "polished stone floor under the exhibit cases",
+      "matte display walls with subtle signage"
+    ],
+    "props": [
+      "folded museum map held open in one hand",
+      "audio guide device clipped to a strap",
+      "small notebook beside an exhibit label"
+    ],
+    "fx": [
+      "quiet educational atmosphere",
+      "soft murmur from visitors further down the hall"
+    ],
+    "time": [
+      "weekend afternoon visit",
+      "weekday morning opening hour"
+    ],
+    "crowd": [
+      "families reading labels near the cases",
+      "visitors pausing under the central display"
+    ],
+    "weather": [
+      "daylight from the entrance atrium",
+      "grey sky visible through high windows"
+    ],
+    "aliases": [
+      "museum hall",
+      "exhibit hall"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "starship_quarters": {
+    "label": "宇宙船の居住区",
+    "environment": [
+      "compact starship quarters with a narrow bunk",
+      "personal cabin inside a long range spacecraft"
+    ],
+    "core": [
+      "folding bunk built into the metal wall",
+      "small viewport showing a field of stars",
+      "personal locker beside a compact desk"
+    ],
+    "texture": [
+      "brushed metal wall panels",
+      "plain fabric bedding strapped neatly in place"
+    ],
+    "props": [
+      "datapad resting on the built-in desk",
+      "folded uniform arranged inside the locker",
+      "magnetic cup fixed beside the bunk"
+    ],
+    "fx": [
+      "low engine vibration in the quiet cabin",
+      "private off-duty stillness inside the ship"
+    ],
+    "time": [
+      "ship night cycle",
+      "quiet standby between shifts"
+    ],
+    "crowd": [
+      "private room with the corridor sealed outside",
+      "empty upper bunk folded into the wall"
+    ],
+    "weather": [
+      "stars moving beyond the viewport",
+      "dark space outside the cabin window"
+    ],
+    "aliases": [
+      "starship quarters",
+      "spacecraft cabin"
+    ],
+    "lighting": [
+      "quiet room air",
+      "single overhead light fixture",
+      "settled indoor warmth",
+      "task lamps near the desks",
+      "windows facing outside"
+    ]
+  },
+  "underground_bar": {
+    "label": "地下バー",
+    "environment": [
+      "underground bar tucked beneath a side street",
+      "low ceiling basement lounge with a narrow counter"
+    ],
+    "core": [
+      "long wooden counter with worn brass trim",
+      "small jukebox near the back wall",
+      "round tables arranged under low ceiling beams"
+    ],
+    "texture": [
+      "dark varnished wood marked by use",
+      "brick wall softened by years of smoke"
+    ],
+    "props": [
+      "half filled glass set on a coaster",
+      "dartboard mounted beside the corner booth",
+      "folded menu tucked behind the counter"
+    ],
+    "fx": [
+      "muted basement chatter",
+      "dim late night atmosphere under the street"
+    ],
+    "time": [
+      "late evening after work",
+      "quiet hour before last call"
+    ],
+    "crowd": [
+      "regulars speaking quietly at the counter",
+      "bartender polishing a glass near the shelves"
+    ],
+    "weather": [
+      "rainy street entrance above the stairs",
+      "night air beyond the basement door"
+    ],
+    "aliases": [
+      "underground bar",
+      "basement bar"
+    ],
+    "lighting": [
+      "neon glow",
+      "streetlight",
+      "moonlight",
+      "dim ambient",
+      "city lights"
+    ]
+  },
+  "japanese_garden": {
+    "label": "日本庭園",
+    "environment": [
+      "quiet japanese garden with a winding stone path",
+      "carefully kept garden space with a pond and trimmed pines"
+    ],
+    "core": [
+      "stepping stones leading past low shrubs",
+      "small wooden bridge crossing a shallow pond",
+      "raked gravel and moss around the garden edge"
+    ],
+    "texture": [
+      "moss-covered stone and damp garden earth",
+      "smooth wood darkened by recent moisture"
+    ],
+    "props": [
+      "folded umbrella resting beside a bench",
+      "small handbag held close at her side",
+      "paper charm tucked into a sleeve"
+    ],
+    "fx": [
+      "soft movement of leaves in the garden air",
+      "gentle quiet settling over the path"
+    ],
+    "time": [
+      "late afternoon in the garden",
+      "during a calm morning visit"
+    ],
+    "crowd": [
+      "few visitors passing at a respectful distance",
+      "quiet corners away from the main path"
+    ],
+    "weather": [
+      "light rain lingering on the stones",
+      "clear air moving gently through the pines"
+    ],
+    "aliases": [
+      "japanese garden",
+      "zen garden path"
+    ],
+    "lighting": [
+      "overcast diffuse",
+      "blue hour",
+      "bright daylight"
+    ]
+  },
+  "tea_room": {
+    "label": "茶室",
+    "environment": [
+      "traditional tea room prepared for a quiet visit",
+      "simple tatami tea room with a low table and open alcove"
+    ],
+    "core": [
+      "tatami floor with neatly arranged cushions",
+      "low wooden table set near a tea tray",
+      "tokonoma alcove with a hanging scroll and small flower arrangement"
+    ],
+    "texture": [
+      "woven tatami texture and smooth wooden trim",
+      "paper sliding door panels with soft wear at the edges"
+    ],
+    "props": [
+      "tea bowl resting on a folded cloth",
+      "small tray with sweets beside the table",
+      "carefully placed handbag near the doorway"
+    ],
+    "fx": [
+      "still indoor quiet with a measured sense of routine",
+      "faint sound of water and kettle movement from nearby"
+    ],
+    "time": [
+      "during a quiet afternoon visit",
+      "late in the day as the room settles down"
+    ],
+    "crowd": [
+      "just enough room for a calm shared moment",
+      "otherwise empty except for one waiting guest"
+    ],
+    "weather": [
+      "rain tapping softly beyond the eaves",
+      "a mild breeze moving outside the sliding door"
+    ],
+    "aliases": [
+      "tea room",
+      "traditional tea room"
+    ],
+    "lighting": [
+      "overcast diffuse",
+      "quiet room air",
+      "bright daylight"
+    ]
+  }
+}
+

@@ -1,0 +1,86 @@
+{
+  "location": "bike_station",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "checking the rental dock status"
+    },
+    {
+      "load": "active",
+      "text": "unlocking a bicycle from the nearest rack"
+    },
+    {
+      "load": "calm",
+      "text": "securing a helmet beside the route map"
+    },
+    {
+      "load": "active",
+      "text": "returning a bicycle to an open dock"
+    },
+    {
+      "load": "calm",
+      "text": "reading the posted cycling rules"
+    },
+    {
+      "load": "active",
+      "text": "adjusting the seat before departure"
+    },
+    {
+      "load": "calm",
+      "text": "folding a route leaflet near the kiosk"
+    },
+    {
+      "load": "active",
+      "text": "scanning a pass at the rental terminal"
+    },
+    {
+      "load": "calm",
+      "text": "checking a bicycle basket for loose items"
+    },
+    {
+      "load": "active",
+      "text": "wiping rain from a bicycle handlebar"
+    },
+    {
+      "load": "calm",
+      "text": "checking the route map before departure"
+    },
+    {
+      "load": "active",
+      "text": "rolling a bicycle toward the exit lane"
+    },
+    {
+      "load": "calm",
+      "text": "checking the tire pressure guide against the pump gauge"
+    },
+    {
+      "load": "active",
+      "text": "moving a bicycle into the marked return channel"
+    },
+    {
+      "load": "calm",
+      "text": "checking the headlamp mounted above the front wheel"
+    },
+    {
+      "load": "active",
+      "text": "lifting a helmet from the return cabinet"
+    },
+    {
+      "load": "calm",
+      "text": "reading the dock number on the kiosk screen"
+    },
+    {
+      "load": "active",
+      "text": "fastening a basket strap before riding"
+    },
+    {
+      "load": "calm",
+      "text": "checking the brake levers beside the rack"
+    },
+    {
+      "load": "active",
+      "text": "rolling a bicycle past the painted exit arrow"
+    }
+  ],
+  "families": []
+}

@@ -1,0 +1,86 @@
+{
+  "location": "tram_platform",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "reading the next tram time from the arrival display"
+    },
+    {
+      "load": "active",
+      "text": "walking along the marked platform line"
+    },
+    {
+      "load": "calm",
+      "text": "reading a route map beside the shelter"
+    },
+    {
+      "load": "active",
+      "text": "holding a pass near the platform validator"
+    },
+    {
+      "load": "calm",
+      "text": "checking the arrival display beside the wet rails"
+    },
+    {
+      "load": "active",
+      "text": "moving beneath the shelter before departure"
+    },
+    {
+      "load": "calm",
+      "text": "checking a service notice on the pole"
+    },
+    {
+      "load": "active",
+      "text": "following the boarding marker to the front"
+    },
+    {
+      "load": "calm",
+      "text": "folding a printed transit map"
+    },
+    {
+      "load": "active",
+      "text": "looking toward the approaching tram lights"
+    },
+    {
+      "load": "calm",
+      "text": "standing beside the route information case"
+    },
+    {
+      "load": "active",
+      "text": "stepping toward the open tram doorway"
+    },
+    {
+      "load": "calm",
+      "text": "checking the boarding zone number"
+    },
+    {
+      "load": "calm",
+      "text": "standing behind the platform edge marking"
+    },
+    {
+      "load": "active",
+      "text": "checking the service indicator beside the shelter"
+    },
+    {
+      "load": "calm",
+      "text": "placing the pass back in its card holder"
+    },
+    {
+      "load": "calm",
+      "text": "checking the destination on the overhead display"
+    },
+    {
+      "load": "active",
+      "text": "walking to the marked accessible boarding zone"
+    },
+    {
+      "load": "calm",
+      "text": "checking the validator light after tapping a pass"
+    },
+    {
+      "load": "active",
+      "text": "lifting a travel bag away from the platform edge"
+    }
+  ],
+  "families": []
+}

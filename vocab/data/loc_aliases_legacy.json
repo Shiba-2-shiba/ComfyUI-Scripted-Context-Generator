@@ -1,0 +1,11 @@
+{
+  "schema_version": "2.0",
+  "layer": "legacy",
+  "_comment": "Legacy compatibility aliases only. Keep old workflow inputs loading while refactoring alias semantics.",
+  "aliases": {
+    "steampunk_airship": "airship_deck"
+  },
+  "notes": {
+    "steampunk_airship": "Retained only for compatibility with older airship-oriented inputs."
+  }
+}

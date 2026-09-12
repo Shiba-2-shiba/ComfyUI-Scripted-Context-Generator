@@ -1,0 +1,64 @@
+{
+  "gamma": 2.0,
+  "categories": {
+    "joy": {
+      "vad": [0.85, 0.75],
+      "aliases": ["energetic_joy", "energetic"],
+      "prototype": "joy"
+    },
+    "playful": {
+      "vad": [0.8, 0.7],
+      "aliases": ["whimsical_playful", "whimsical"],
+      "prototype": "joy"
+    },
+    "anger": {
+      "vad": [0.25, 0.85],
+      "aliases": ["intense_anger", "intense"],
+      "prototype": "anxiety"
+    },
+    "sadness": {
+      "vad": [0.2, 0.3],
+      "aliases": ["melancholic_sadness", "melancholic"],
+      "prototype": "sadness"
+    },
+    "relax": {
+      "vad": [0.7, 0.2],
+      "aliases": ["peaceful_relaxed", "peaceful"],
+      "prototype": "calm"
+    },
+    "focus": {
+      "vad": [0.55, 0.45],
+      "aliases": ["quiet", "quiet_focused", "mysterious_curious"],
+      "prototype": "calm"
+    },
+    "care": {
+      "vad": [0.72, 0.35],
+      "aliases": ["romantic_allure"],
+      "prototype": "calm"
+    },
+    "impatience": {
+      "vad": [0.3, 0.8],
+      "aliases": ["creepy_fear"],
+      "prototype": "anxiety"
+    },
+    "moved": {
+      "vad": [0.68, 0.55],
+      "aliases": [],
+      "prototype": "joy"
+    }
+  },
+  "nuances": {
+    "tense": [0.3, 0.8],
+    "absorbed": [0.55, 0.65],
+    "relieved": [0.7, 0.25],
+    "awkward": [0.4, 0.65],
+    "content": [0.78, 0.35],
+    "bored": [0.35, 0.25]
+  },
+  "load_arousal_bias": {
+    "calm": -0.08,
+    "active": 0.08,
+    "tense": 0.18,
+    "intimate": -0.02
+  }
+}

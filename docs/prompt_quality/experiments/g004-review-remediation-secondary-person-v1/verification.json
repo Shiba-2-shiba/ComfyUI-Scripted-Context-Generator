@@ -1,0 +1,57 @@
+{
+  "ai_slop_cleanup": {
+    "fallback_findings": [
+      {
+        "classification": "grounded fail-safe",
+        "finding": "Time-option filtering may remove every contradictory candidate.",
+        "resolution": "The optional segment is omitted; the generator does not restore a known-invalid candidate or hide the conflict."
+      },
+      {
+        "classification": "grounded compatibility behavior",
+        "finding": "Existing prefer_bright_time_options retains its original options when no bright candidate exists.",
+        "resolution": "Preserved and regression-tested; the new consistency filter runs first and never falls back to contradictory options."
+      }
+    ],
+    "passes_completed": [
+      "fallback resolution gate",
+      "dead-code audit",
+      "duplication audit",
+      "naming and error-handling audit",
+      "test reinforcement"
+    ],
+    "remaining_risks": [],
+    "scope": [
+      "core/solo_safety.py",
+      "pipeline/location_policy.py",
+      "pipeline/location_builder.py",
+      "rules/consistency_rules.json",
+      "vocab/data/prompt_quality_policy.json",
+      "tools/compare_prompt_quality.py"
+    ],
+    "ui_design_findings": "N/A"
+  },
+  "artifacts": {
+    "comparison_hash": "3110385fc18242327f113e11bf04da6b656ee8f3bbd4e91c92bd4996fc17d268",
+    "seed_179_hash": "af2c72eb00673a4ccd108446121cbd150cfe4f4f070dea4c0b88753218081ec6",
+    "source_tree_hash": "e5c8c9b29326b2d283642d88963944720604c280db751de9430620c277ca98a6"
+  },
+  "experiment_id": "g004-review-remediation-secondary-person-v1",
+  "quality_gates": {
+    "action_pool_check": "pass",
+    "compatibility_review_check": "pass",
+    "compileall": "pass",
+    "data_validation": "pass: ERROR 0, WARNING 0",
+    "full_flow": "pass",
+    "full_regression": "pass: 474 tests",
+    "prompt_quality_comparison": "pass: other_person_solo_conflict_count 1 to 0; consistency hard conflicts remain 0",
+    "targeted_regression": "pass: 47 tests",
+    "widget_values": "pass"
+  },
+  "schema_version": "prompt-quality-verification/v1",
+  "seed_179": {
+    "has_midday": false,
+    "has_night": true,
+    "time_of_day_conflict": false
+  },
+  "status": "pass"
+}

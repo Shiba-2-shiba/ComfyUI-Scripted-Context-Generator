@@ -1,0 +1,146 @@
+{
+    "quiet_focused": {
+        "description": [
+            "a quiet room holding around her while the task in front of her sets the pace",
+            "the scene narrowing to one line of thought as the rest of the room falls gently aside",
+            "a studious pause where the work in front of her matters more than the noise around it",
+            "the air staying calm while her attention stays with what still needs finishing",
+            "the moment kept deliberate rather than urgent, with everything else held at the edge"
+        ],
+        "staging_tags": [
+            "settled concentration",
+            "focused expression",
+            "measured pause",
+            "deliberate pace",
+            "careful hands"
+        ]
+    },
+    "energetic_joy": {
+        "description": [
+            "bright everyday energy with an easy smile and a grin she cannot quite hide",
+            "a lively stretch of the day, her shoulders open and her energy held in one clear pose",
+            "the moment feeling light and fast, with bright eyes and hands already moving before she thinks",
+            "a cheerful scene that makes her lean forward, smile wide, and meet the world head-on",
+            "warm air, quick motion, and the kind of excitement that keeps showing in her face"
+        ],
+        "staging_tags": [
+            "wide smile",
+            "open posture",
+            "alert stance",
+            "eyes brightening",
+            "one hand lifted mid-gesture"
+        ]
+    },
+    "mysterious_curious": {
+        "description": [
+            "an unfamiliar place holding her attention, with her eyes tracking the details nobody else notices",
+            "the scene lingering in uncertainty while she watches from the edge with measured curiosity",
+            "a quiet sense of discovery, her head tilted slightly as she studies what is just out of reach",
+            "the room keeping its secrets while her gaze keeps returning to the part that does not fit",
+            "still air, cautious steps, and a mind pulling her closer even as she stays guarded"
+        ],
+        "staging_tags": [
+            "sideways glance",
+            "tilted head",
+            "half-hidden expression",
+            "still posture",
+            "careful step"
+        ]
+    },
+    "peaceful_relaxed": {
+        "description": [
+            "the day softening into an easy rhythm with nothing asking her to hurry",
+            "a restful stretch of time where the room feels familiar and gently lived in",
+            "quiet comfort settling over the scene as she lets the moment unfold at its own pace",
+            "an unhurried pause that leaves space for small ordinary details to matter again",
+            "the scene easing into calm, with enough room for her to simply stay present"
+        ],
+        "staging_tags": [
+            "gentle smile",
+            "easy presence",
+            "settled warmth",
+            "quiet ease",
+            "soft gaze"
+        ]
+    },
+    "melancholic_sadness": {
+        "description": [
+            "a quieter, heavier stretch of the day, with lowered eyes and thoughts she has not put into words",
+            "the scene carrying a muted loneliness while her shoulders dip and her mouth stays small",
+            "rain-soaked or overcast stillness, with her attention turned inward and her hands held close",
+            "a subdued moment where the room feels wider than usual and she seems to retreat inside herself",
+            "the air holding onto what is unsaid while her gaze drifts away and her posture folds in"
+        ],
+        "staging_tags": [
+            "downcast eyes",
+            "slumped shoulders",
+            "distant gaze",
+            "hands held close",
+            "quiet exhale"
+        ]
+    },
+    "intense_anger": {
+        "description": [
+            "pressure building in the scene, with her jaw tight, her stance braced, and no room left for patience",
+            "the moment sharpening around her while her eyes lock forward and every movement turns hard-edged",
+            "heat in the air and tension through her arms, as if she is one breath away from acting",
+            "a scene charged by frustration, with shoulders set, hands tightening, and attention narrowed to the source",
+            "all the calm stripped out of the room, leaving only a rigid posture and a look that does not soften"
+        ],
+        "staging_tags": [
+            "clenched jaw",
+            "sharp gaze",
+            "tense posture",
+            "fists tightening",
+            "hard breathing"
+        ]
+    },
+    "romantic_allure": {
+        "description": [
+            "close evening air, lingering eye contact, and the kind of pause that makes every small gesture matter",
+            "a soft, intimate moment where her gaze stays a second too long and her expression turns warm",
+            "the scene drawing inward around her, with a slight blush, careful hands, and unspoken expectation",
+            "a tender hush settling between her and the world, carried by a gentle smile and a steady look",
+            "the air feeling warmer around her as she holds herself with quiet confidence and invitation"
+        ],
+        "staging_tags": [
+            "longing gaze",
+            "slightly parted lips",
+            "gentle hand pose",
+            "soft blush",
+            "open posture"
+        ]
+    },
+    "creepy_fear": {
+        "description": [
+            "a strained silence with her breath turning shallow and her attention jumping to every small sound",
+            "the scene feeling wrong in a way she can sense before she can explain, her arms drawn in tight",
+            "an uneasy stretch of stillness, with her eyes wide and her posture ready to flinch",
+            "the room pressing in around her while she listens too carefully and trusts nothing at first glance",
+            "cold unease running through the moment, showing in the way her hands grip and her shoulders stay high"
+        ],
+        "staging_tags": [
+            "wide eyes",
+            "hunched posture",
+            "arms clutched",
+            "shallow breath",
+            "quick darting glance"
+        ]
+    },
+    "whimsical_playful": {
+        "description": [
+            "the scene carrying a small spark of mischief, with a grin forming before she even moves",
+            "lighthearted curiosity pulling her along, shown in the tilt of her head and the bounce in her step",
+            "an everyday moment turning playful, with quick hands, bright eyes, and a laugh close at hand",
+            "the room feeling a little wider and more interesting because she keeps noticing the fun in it",
+            "restless cheerful energy, with teasing glances and movements that never quite stay still"
+        ],
+        "staging_tags": [
+            "playful expression",
+            "finger raised as if an idea just hit",
+            "sideways glance",
+            "bubbly smile",
+            "light posture"
+        ]
+    }
+}

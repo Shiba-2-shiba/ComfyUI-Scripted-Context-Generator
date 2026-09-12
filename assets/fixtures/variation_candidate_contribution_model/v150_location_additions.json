@@ -1,0 +1,37 @@
+{
+  "schema_version": "variation-location-additions/v1",
+  "additions": [
+    {
+      "id": "community_theater_backstage",
+      "compatibility_tags": ["music", "workplace", "leisure"],
+      "action_count": 20,
+      "utility_group": "civic_creative_work",
+      "distinct_from": "opera_house",
+      "rationale": "Adds rehearsal preparation, prop handling, and scheduling behind a community performance space rather than another audience-facing hall."
+    },
+    {
+      "id": "greenhouse_nursery",
+      "compatibility_tags": ["nature", "workplace", "retail_service"],
+      "action_count": 20,
+      "utility_group": "horticulture_service",
+      "distinct_from": "botanical_garden",
+      "rationale": "Adds plant propagation, stock care, and customer-facing nursery work rather than display-garden observation."
+    },
+    {
+      "id": "postal_service_counter",
+      "compatibility_tags": ["retail_service", "workplace", "daily_public"],
+      "action_count": 20,
+      "utility_group": "civic_service",
+      "distinct_from": "convenience_store",
+      "rationale": "Adds parcel labeling, collection, and queue-based public service without duplicating general retail browsing."
+    },
+    {
+      "id": "vehicle_repair_garage",
+      "compatibility_tags": ["craft", "workplace", "urban"],
+      "action_count": 20,
+      "utility_group": "repair_workplace",
+      "distinct_from": "clockwork_workshop",
+      "rationale": "Adds contemporary inspection and repair work distinct from speculative clockwork fabrication."
+    }
+  ]
+}

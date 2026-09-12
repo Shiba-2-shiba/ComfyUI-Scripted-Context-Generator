@@ -1,0 +1,48 @@
+{
+  "schema_version": "variation-prompt-pair-comparison/v1",
+  "snapshot_manifest_sha256": "51842da607f91328d21506742f38ae45e6391460ca0563d89bbadd8ab90e4eea",
+  "experiment_sha256": "7cbd1d30ff002a4f67e51d1b41481c681f3c55ded96a4d9af8de1a9a5c10b55d",
+  "baseline_run_manifest_sha256": "5947b34f3743631a5b2289a4ac6b3dacaab130073ea65e2251970a67b7105118",
+  "candidate_run_manifest_sha256": "1564ebd6e36d78f6b252057b99644ffe83a93a310a1ba9f75da35da8e8a9fde7",
+  "cohort_hash": "1b7017819fe1ff11c822b27e61d035b0ce0596dd6f06f85c27f6a45766912492",
+  "record_count": 80,
+  "changed_seed_count": 66,
+  "changed_seeds": [0,1,2,4,6,8,9,11,12,13,14,15,17,18,19,21,22,23,24,25,26,27,30,31,32,35,36,37,38,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,59,61,62,274927640092229229,1149853648275787818,2584006080659484769,4543059260557251447,5314946416744858579,5873361895440711225,7043409987246859356,9435136036924046218,9507830527730513288,9714408748571744571,11797668770632435338,14333519070031296152,14654944300545876162,16086608232758145338,16224400070696857783,17805388817227132450],
+  "candidate_coverage": {
+    "subjects_seen": ["architect","astronomer","barber","delivery courier","farmer","fisher","florist","journalist","mechanic","nurse","paramedic","photographer","researcher","shopkeeper","teacher"],
+    "locations_seen": ["bike_station","clinic_waiting_room","community_theater_backstage","design_studio","ferry_terminal","flower_market","forest_cabin","greenhouse_nursery","maker_space","observatory_dome","vehicle_repair_garage"],
+    "action_pool_locations_seen": ["bike_station","clinic_waiting_room","community_theater_backstage","ferry_terminal","greenhouse_nursery","observatory_dome"],
+    "unseen_subjects": [],
+    "unseen_locations": ["canal_walkway","community_garden","fire_station","postal_service_counter","print_shop","public_plaza","rooftop_cafe","tram_platform"],
+    "unseen_action_pool_locations": ["canal_walkway","community_garden","design_studio","fire_station","flower_market","forest_cabin","maker_space","postal_service_counter","print_shop","public_plaza","rooftop_cafe","tram_platform","vehicle_repair_garage"]
+  },
+  "metric_comparisons": {
+    "consistency.hard_conflict_count": {"before": 0.0, "after": 0.0, "delta": 0.0},
+    "diversity.exact_unique_ratio": {"before": 1.0, "after": 1.0, "delta": 0.0},
+    "diversity.location_signature_entropy": {"before": 4.831091, "after": 5.242171, "delta": 0.4110800000000001},
+    "identity.duplicate_protagonist_mention_count": {"before": 0.0, "after": 0.0, "delta": 0.0},
+    "identity.male_pronoun_drift_count": {"before": 0.0, "after": 0.0, "delta": 0.0},
+    "identity.missing_female_protagonist_count": {"before": 0.0, "after": 0.0, "delta": 0.0},
+    "identity.other_person_solo_conflict_count": {"before": 0.0, "after": 0.0, "delta": 0.0},
+    "identity.person_demographic_descriptor_count": {"before": 0.0, "after": 0.0, "delta": 0.0},
+    "naturalness.punctuation_anomaly_count": {"before": 0.0, "after": 0.0, "delta": 0.0},
+    "naturalness.repeated_ngram_count": {"before": 12.0, "after": 16.0, "delta": 4.0},
+    "naturalness.semantic_family_repetition_count": {"before": 3.0, "after": 3.0, "delta": 0.0},
+    "policy.policy_issue_count": {"before": 0.0, "after": 0.0, "delta": 0.0},
+    "runtime.context_json_bytes_max": {"before": 29094.0, "after": 30430.0, "delta": 1336.0},
+    "runtime.context_json_bytes_p95": {"before": 28692.15, "after": 29297.5, "delta": 605.3499999999985},
+    "runtime.deterministic_replay_mismatch_count": {"before": 0.0, "after": 0.0, "delta": 0.0},
+    "runtime.fallback_rate": {"before": 0.0, "after": 0.0, "delta": 0.0}
+  },
+  "failures": [
+    "candidate_action_pool_coverage_incomplete",
+    "candidate_location_coverage_incomplete",
+    "guard_regressed:naturalness.repeated_ngram_count",
+    "guard_regressed:runtime.context_json_bytes_max",
+    "guard_regressed:runtime.context_json_bytes_p95"
+  ],
+  "verdict": "reject",
+  "prompt_quality_state": "COMPARED",
+  "promotion_ready": false,
+  "comparison_sha256": "1a0ee07178afad3af7f1fdd68830d902dda27751fffa0bffcdc62a610f69a9e1"
+}

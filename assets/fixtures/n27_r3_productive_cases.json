@@ -1,0 +1,252 @@
+[
+  {
+    "builder_seed": 11850301441060846161,
+    "checks": {
+      "clothing": true,
+      "direct_components": false,
+      "scene": false,
+      "subject": true
+    },
+    "frame": {
+      "gaze_target": "checking what is happening nearby",
+      "hand_action": "tightening a bolt beneath the open hood",
+      "legacy_slots": {
+        "anchor": "",
+        "daily_life_tags": [
+          "urban",
+          "workplace"
+        ],
+        "gaze_target": "checking what is happening nearby",
+        "hand_action": "tightening a bolt beneath the open hood",
+        "location": "vehicle_repair_garage",
+        "obstacle_clause": "",
+        "obstacle_or_trigger": "",
+        "optional_micro_action": "mentally lining up the next task",
+        "posture": "holding herself steady while she works",
+        "primary_action": "tightening a bolt beneath the open hood",
+        "progress_clause": "before fully getting started",
+        "progress_state": "preparing",
+        "purpose": "work",
+        "purpose_clause": "pausing to reassess one detail",
+        "social_clause": "leaving room for a quiet exchange with the viewer",
+        "social_distance": "viewer",
+        "time_or_weather": "before the next inspection"
+      },
+      "legacy_text": "tightening a bolt beneath the open hood, holding herself steady while she works, checking what is happening nearby, pausing to reassess one detail, leaving room for a quiet exchange with the viewer, before the next inspection",
+      "main_verb": "tightening",
+      "posture": "holding herself steady while she works",
+      "primary_object": "",
+      "progress": "preparing",
+      "schema_version": "action-frame/v1",
+      "social_relation": "viewer",
+      "stimulus_or_obstacle": ""
+    },
+    "replacements": [
+      [
+        "{subject_clause}",
+        "A solo girl with long straight hair, black hair and sharp black eyes in casual layered top and practical trousers"
+      ],
+      [
+        "{action_clause}",
+        "tightening a bolt beneath the open hood, holding herself steady while she works, checking what is happening nearby, pausing to reassess one detail, leaving room for a quiet exchange with the viewer, before the next inspection, looking directly ahead, brows knit in concentration, still posture"
+      ],
+      [
+        "{scene_clause}",
+        "in modern vehicle repair garage, during late-afternoon maintenance shift, featuring hydraulic vehicle lift and marked service bay, adorned with rolling tool cabinet, the moment kept deliberate rather than urgent, with everything else held at the edge"
+      ],
+      [
+        "{scene_anchor_clause}",
+        "modern vehicle repair garage, during late-afternoon maintenance shift, featuring hydraulic vehicle lift and marked service bay, adorned with rolling tool cabinet, the moment kept deliberate rather than urgent, with everything else held at the edge"
+      ],
+      [
+        "{subj}",
+        "A solo girl with long straight hair, black hair and sharp black eyes"
+      ],
+      [
+        "{costume}",
+        "casual layered top and practical trousers"
+      ],
+      [
+        "{loc}",
+        "modern vehicle repair garage, during late-afternoon maintenance shift, featuring hydraulic vehicle lift and marked service bay, adorned with rolling tool cabinet"
+      ],
+      [
+        "{action}",
+        "tightening a bolt beneath the open hood, holding herself steady while she works, checking what is happening nearby, pausing to reassess one detail, leaving room for a quiet exchange with the viewer, before the next inspection"
+      ],
+      [
+        "{garnish}",
+        "looking directly ahead, brows knit in concentration, still posture"
+      ],
+      [
+        "{meta_mood}",
+        "the moment kept deliberate rather than urgent, with everything else held at the edge"
+      ],
+      [
+        "{meta_style}",
+        ""
+      ]
+    ],
+    "run_seed": 41,
+    "slots": {
+      "clause_order": [
+        "subject",
+        "action",
+        "scene"
+      ],
+      "discourse_roles": [
+        "focused",
+        "neutral",
+        "quiet",
+        "transition"
+      ],
+      "lexical_choice": "gerund",
+      "named_seed_streams": {
+        "lexical": 3948773767,
+        "syntax": 3818371492,
+        "template": 1412445508
+      },
+      "semantic_slots": {
+        "adjunct": "{action_clause}",
+        "object": "",
+        "predicate": "tightening",
+        "scene": "{scene_clause}",
+        "subject": "{subject_clause}"
+      },
+      "syntax_family": "single-sentence-scene-tail"
+    },
+    "surface": {
+      "first_token": "tightening",
+      "input_surface": "gerund",
+      "rendered_clause": "tightening a bolt beneath the open hood, holding herself steady while she works, checking what is happening nearby, pausing to reassess one detail, leaving room for a quiet exchange with the viewer, before the next inspection, looking directly ahead, brows knit in concentration, still posture",
+      "surface": "gerund",
+      "verb": "tightening",
+      "word_count": 36
+    }
+  },
+  {
+    "builder_seed": 14305908699345276167,
+    "checks": {
+      "clothing": false,
+      "direct_components": false,
+      "scene": false,
+      "subject": true
+    },
+    "frame": {
+      "gaze_target": "looking toward the next thing she needs",
+      "hand_action": "hands settling and then shifting again",
+      "legacy_slots": {
+        "anchor": "by a vending machine",
+        "daily_life_tags": [
+          "suburban",
+          "daily_public"
+        ],
+        "gaze_target": "looking toward the next thing she needs",
+        "hand_action": "hands settling and then shifting again",
+        "location": "rural_town_street",
+        "obstacle_clause": "",
+        "obstacle_or_trigger": "",
+        "optional_micro_action": "checking whether anything has changed yet",
+        "posture": "standing by a vending machine",
+        "primary_action": "standing by a vending machine",
+        "progress_clause": "while keeping the momentum going",
+        "progress_state": "midway",
+        "purpose": "wait",
+        "purpose_clause": "measuring the pause instead of rushing it",
+        "social_clause": "keeping to herself",
+        "social_distance": "alone",
+        "time_or_weather": "before the next errand"
+      },
+      "legacy_text": "standing by a vending machine, looking toward the next thing she needs, measuring the pause instead of rushing it, keeping to herself, before the next errand",
+      "main_verb": "standing",
+      "posture": "standing by a vending machine",
+      "primary_object": "",
+      "progress": "midway",
+      "schema_version": "action-frame/v1",
+      "social_relation": "alone",
+      "stimulus_or_obstacle": ""
+    },
+    "replacements": [
+      [
+        "{subject_clause}",
+        "A solo girl with long straight hair, black hair and sharp black eyes in beige belted fitted knit top and high-waist pencil skirt"
+      ],
+      [
+        "{action_clause}",
+        "standing by a vending machine, looking toward the next thing she needs, measuring the pause instead of rushing it, keeping to herself, before the next errand, brows knit in concentration, still posture"
+      ],
+      [
+        "{scene_clause}",
+        "in nostalgic countryside village road, featuring small local vegetable shop and narrow paved road, the moment kept deliberate rather than urgent, with everything else held at the edge"
+      ],
+      [
+        "{scene_anchor_clause}",
+        "nostalgic countryside village road, featuring small local vegetable shop and narrow paved road, the moment kept deliberate rather than urgent, with everything else held at the edge"
+      ],
+      [
+        "{subj}",
+        "A solo girl with long straight hair, black hair and sharp black eyes"
+      ],
+      [
+        "{costume}",
+        "beige belted fitted knit top and high-waist pencil skirt"
+      ],
+      [
+        "{loc}",
+        "nostalgic countryside village road, featuring small local vegetable shop and narrow paved road"
+      ],
+      [
+        "{action}",
+        "standing by a vending machine, looking toward the next thing she needs, measuring the pause instead of rushing it, keeping to herself, before the next errand"
+      ],
+      [
+        "{garnish}",
+        "brows knit in concentration, still posture"
+      ],
+      [
+        "{meta_mood}",
+        "the moment kept deliberate rather than urgent, with everything else held at the edge"
+      ],
+      [
+        "{meta_style}",
+        ""
+      ]
+    ],
+    "run_seed": 458,
+    "slots": {
+      "clause_order": [
+        "subject",
+        "action",
+        "scene"
+      ],
+      "discourse_roles": [
+        "focused",
+        "neutral",
+        "quiet",
+        "transition"
+      ],
+      "lexical_choice": "gerund",
+      "named_seed_streams": {
+        "lexical": 1092821982,
+        "syntax": 156087991,
+        "template": 2449260986
+      },
+      "semantic_slots": {
+        "adjunct": "{action_clause}",
+        "object": "",
+        "predicate": "standing",
+        "scene": "{scene_clause}",
+        "subject": "{subject_clause}"
+      },
+      "syntax_family": "single-sentence-scene-tail"
+    },
+    "surface": {
+      "first_token": "standing",
+      "input_surface": "gerund",
+      "rendered_clause": "standing by a vending machine, looking toward the next thing she needs, measuring the pause instead of rushing it, keeping to herself, before the next errand, brows knit in concentration, still posture",
+      "surface": "gerund",
+      "verb": "standing",
+      "word_count": 26
+    }
+  }
+]

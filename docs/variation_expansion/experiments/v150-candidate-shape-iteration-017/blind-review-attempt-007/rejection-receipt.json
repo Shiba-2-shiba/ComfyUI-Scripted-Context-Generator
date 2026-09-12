@@ -1,0 +1,47 @@
+{
+  "schema_version": "variation-blind-review-rejection-receipt/v1",
+  "experiment_id": "v150-candidate-shape-iteration-017",
+  "review_attempt": 7,
+  "terminal_state": "REVIEW_REJECTED",
+  "recorded_at": "2026-09-03",
+  "authority": {
+    "automatic_quality_verdict": "pass",
+    "blind_review_verdict": "reject",
+    "confirmation_authorized": false,
+    "promotion_ready": false,
+    "active_data_mutation_authorized": false
+  },
+  "binding": {
+    "quality_comparison_sha256": "7241f6a5373caa604210b21439389fb7b0f1a9bc8214821e22453d56a150c7c0",
+    "review_comparison_adapter_sha256": "0eabdc4c6433cb5d93c2dfffb1ca1bd4f49801729dc0211a0265baa47bc00838",
+    "blind_review_experiment_sha256": "e1405f485218779204a568aaf76a037e375cbcc9d397b15566ec47b82f75fa55",
+    "assignment_key_sha256": "0ed1df77c9b7fd08e70f028f2db55d3a98ea09677fac322e29facdf1673e725e",
+    "lane_1_sha256": "0fe3b98361f05e7fe413a654201b2f03e2a96874fbede996606f769fc6e6c4b0",
+    "lane_2_sha256": "dff973a8589023e4fb3bcc01fc0f88f3c12dc5d4c1ff1bc40a80000c2b66ac80",
+    "lane_1_result_sha256": "91b261895936f986993c083931e3289976ee7aca08e90b32e154408fe7bb6a14",
+    "lane_2_result_sha256": "cec7c06ec6df16d0660c5c378f0666f0f7278dad1a220d2b14e116d19f3969d6",
+    "aggregate_review_sha256": "b5ac335eaddc3062953b2daacf6776069c31fca44d279eff1a15c3863eeaf223",
+    "review_contract_sha256": "2e13191ede3f4810007190c76b54c95ee837d4c8b288bd379120c450d6a097c2",
+    "selection_sha256": "c22b1da521bdbeb5893cade4ccaefa6ce5900e94a666fa49029ab53030ddd07c"
+  },
+  "review_result": {
+    "status": "fail",
+    "pair_count_per_lane": 20,
+    "candidate_hard_defect_observations": 1,
+    "candidate_hard_defects": {"location_action_object_conflict": 1},
+    "dimension_results": {
+      "protagonist_clarity": {"passed": false, "improvement_support": 0.647059, "worse_rate": 0.352941},
+      "consistency": {"passed": false, "improvement_support": 1.0, "worse_rate": 0.0, "valid_votes": 2},
+      "naturalness": {"passed": false, "improvement_support": 0.631579, "worse_rate": 0.368421},
+      "redundancy": {"passed": false, "improvement_support": 0.5625, "worse_rate": 0.4375},
+      "diversity": {"passed": true, "authority": "current_source_corpus_confirmation"},
+      "image_prompt_suitability": {"passed": false, "improvement_support": 0.666667, "worse_rate": 0.333333}
+    }
+  },
+  "next_iteration_requirements": [
+    "Preserve attempt-007 evidence and active variation data unchanged.",
+    "Do not continue seed-by-seed remediation under an unpaired scene comparison.",
+    "Design and independently approve a semantic-paired comparison contract while retaining the existing qualitative thresholds.",
+    "Do not start VE-1318 or VE-1319 until the approved comparison-bound blind review passes."
+  ]
+}

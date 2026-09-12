@@ -1,0 +1,86 @@
+{
+  "location": "observatory_dome",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "checking the telescope control panel"
+    },
+    {
+      "load": "active",
+      "text": "opening the dome shutter mechanism"
+    },
+    {
+      "load": "calm",
+      "text": "aligning a star chart beside the telescope"
+    },
+    {
+      "load": "active",
+      "text": "adjusting the focus control"
+    },
+    {
+      "load": "calm",
+      "text": "recording a reading in an observation log"
+    },
+    {
+      "load": "active",
+      "text": "checking the dome weather display"
+    },
+    {
+      "load": "calm",
+      "text": "watching the first stars emerge"
+    },
+    {
+      "load": "active",
+      "text": "moving a red lamp across the instrument table"
+    },
+    {
+      "load": "calm",
+      "text": "comparing two marked sky positions"
+    },
+    {
+      "load": "active",
+      "text": "securing the telescope cover"
+    },
+    {
+      "load": "calm",
+      "text": "reading a maintenance note near the console"
+    },
+    {
+      "load": "active",
+      "text": "closing the dome after observation"
+    },
+    {
+      "load": "calm",
+      "text": "checking the target coordinates on the control screen"
+    },
+    {
+      "load": "active",
+      "text": "turning the dome slit toward the selected star field"
+    },
+    {
+      "load": "calm",
+      "text": "reviewing humidity readings before a telescope exposure"
+    },
+    {
+      "load": "active",
+      "text": "fastening a camera adapter on the telescope"
+    },
+    {
+      "load": "calm",
+      "text": "comparing the finder scope with the printed chart"
+    },
+    {
+      "load": "active",
+      "text": "moving the instrument ladder beside the eyepiece"
+    },
+    {
+      "load": "calm",
+      "text": "recording the exposure time in the observation log"
+    },
+    {
+      "load": "active",
+      "text": "placing the protective cover from its hook"
+    }
+  ],
+  "families": []
+}

@@ -1,0 +1,18 @@
+{
+  "candidate_only_hard_defects": [],
+  "experiment_id": "g006-syntax-family-diversity-v3",
+  "review_scope": {
+    "dimensions": ["semantic preservation", "syntax diversity", "naturalness", "repetition", "image prompt suitability"],
+    "method": "formal comparison, changed-syntax snapshot review, analyzer precision fixtures, and 32-seed named-family distribution audit"
+  },
+  "results": {
+    "control_repeated_ngram_count": {"before": 7, "after": 7},
+    "control_syntax_entropy": {"before": 0.116115, "after": 0.895601},
+    "punctuation_anomaly_count": 0,
+    "single_sentence_count_32": 25,
+    "two_sentence_count_32": 7
+  },
+  "schema_version": "prompt-quality-review/v1",
+  "status": "pass",
+  "summary": "The named syntax stream materially improves sentence-pattern entropy with no hard defect, semantic loss, or repetition regression."
+}

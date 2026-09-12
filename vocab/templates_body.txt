@@ -1,0 +1,6 @@
+{action_clause}
+{action}, with {garnish}
+{action}, {garnish}
+{garnish} while {action}
+{action}, {garnish}
+{garnish}, and {action}

@@ -1,0 +1,48 @@
+{
+  "ai_slop_cleanup": {
+    "fallback_findings": [
+      {
+        "classification": "grounded compatibility adapter",
+        "finding": "Unchanged legacy action strings require frame persistence.",
+        "resolution": "The existing parse_pool_action_to_slots adapter is reused at the SceneVariator boundary; no parallel action generator or silent default path is added."
+      },
+      {
+        "classification": "grounded compatibility projection",
+        "finding": "ActionFrame retains legacy_text and legacy_slots alongside typed roles.",
+        "resolution": "The duplication is bounded to the versioned compatibility contract, verified against debug slots for all 80 records, and remains inside the 10% p95 context-size guard."
+      }
+    ],
+    "passes_completed": [
+      "fallback resolution gate",
+      "dead-code audit",
+      "duplication audit",
+      "naming and error-handling audit",
+      "test reinforcement"
+    ],
+    "remaining_risks": [
+      "ActionFrame raises context p95 by about 9.8%; this passes the locked gate but leaves limited headroom for future context expansion."
+    ],
+    "ui_design_findings": "N/A"
+  },
+  "artifacts": {
+    "comparison_hash": "68c5e98790baef1b8a7e62078ae0abb010cda5e88aa6989e42eee01a49b50f2d",
+    "source_tree_hash": "1bbf31291d60375a05194de1a35f8c360e37b2bc19f6bb3fc33389ac4e2d816a"
+  },
+  "experiment_id": "g005-natural-action-frame-v4",
+  "quality_gates": {
+    "action_frame_contract": "pass: 80/80 persisted, 0 debug mismatches",
+    "action_pool_check": "pass",
+    "compatibility_review_check": "pass",
+    "compileall": "pass",
+    "data_validation": "pass: ERROR 0, WARNING 0",
+    "full_flow": "pass",
+    "full_regression": "pass: 481 tests",
+    "prompt_quality_comparison": "pass: control64 repeated n-gram 8 to 7; paired80 12 to 10; punctuation anomalies remain 0",
+    "snapshot_expected_diff": "pass: 6 accepted composition-mode cases",
+    "targeted_regression": "pass: 76 tests plus 35 final focused tests",
+    "template_diversity": "pass: intro dominance 0.2917 <= 0.30",
+    "widget_values": "pass: base workflow composition_mode remains false"
+  },
+  "schema_version": "prompt-quality-verification/v1",
+  "status": "pass"
+}

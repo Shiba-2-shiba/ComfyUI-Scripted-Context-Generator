@@ -1,0 +1,34 @@
+{
+  "schema_version": "variation-target-projection-report/v1",
+  "stage_id": "V150",
+  "target": 150000,
+  "baseline_manifest_sha256": "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54",
+  "scenario_manifest_sha256": "207eeac965bfb9d0f5229301bd3f2323e77d55f9cc9f08e1f9d5b91a073db740",
+  "planner_sha256": "dbe67f0919543d9110e43af9e6906b29d06edc57e22c1e670c97ac31dd57ef66",
+  "projection_model_version": "mixed-shape-largest-remainder/v1",
+  "baseline_metrics": {"unique_subjects": 120, "unique_locations": 90, "row_count": 5806, "total_base_variations": 103212},
+  "hypothetical_scenarios": [
+    {
+      "id": "v150-balanced-canonical-004",
+      "subject_count": 135,
+      "location_count": 109,
+      "eligible_pairs": 14715,
+      "projected_rows": 8227,
+      "realized_density_basis_points": 5590,
+      "action_depth_allocation": [{"actions": 20, "row_share_basis_points": 10000, "rows": 8227, "base_variations": 164540}],
+      "projected_base_variations": 164540,
+      "delta_base_variations": 61328,
+      "target_gap": -14540,
+      "target_met": true,
+      "proposed_subject_ids": [
+        "architect", "astronomer", "barber", "delivery courier", "farmer", "fisher", "florist", "journalist", "mechanic", "nurse", "paramedic", "photographer", "researcher", "shopkeeper", "teacher"
+      ],
+      "proposed_location_ids": [
+        "bike_station", "canal_walkway", "clinic_waiting_room", "community_garden", "community_theater_backstage", "design_studio", "ferry_terminal", "fire_station", "flower_market", "forest_cabin", "greenhouse_nursery", "maker_space", "observatory_dome", "postal_service_counter", "print_shop", "public_plaza", "rooftop_cafe", "tram_platform", "vehicle_repair_garage"
+      ],
+      "subject_utility_groups": ["care_and_service", "creative_professional", "education_and_research", "rural_and_craft", "transit_and_public_work"],
+      "location_utility_groups": ["care_and_civic", "civic_creative_work", "civic_service", "craft_and_creative", "horticulture_service", "leisure_and_nature", "public_transit", "repair_workplace", "retail_and_nature"],
+      "notes": "Iteration 004 adds four reviewed locations with 20 direct actions each. Runtime-equivalent contribution estimate is authoritative over uniform-depth projection."
+    }
+  ]
+}

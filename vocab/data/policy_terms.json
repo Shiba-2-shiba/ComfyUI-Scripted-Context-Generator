@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "domains": {
+    "style": [
+      "anime",
+      "watercolor",
+      "painting",
+      "lineart",
+      "line art",
+      "cel shading",
+      "sketch",
+      "illustration style",
+      "illustration",
+      "digital art"
+    ],
+    "quality": [
+      "masterpiece",
+      "best quality",
+      "high quality",
+      "ultra detailed",
+      "highly detailed",
+      "highly detailed textures",
+      "detailed texture",
+      "detailed textures",
+      "8k"
+    ],
+    "camera": [
+      "front view",
+      "profile view",
+      "medium close-up",
+      "close-up",
+      "extreme close-up",
+      "cowboy shot",
+      "bird's eye view",
+      "low angle",
+      "cinematic angle",
+      "depth of field",
+      "cinematic blur",
+      "bokeh",
+      "lens flare",
+      "lens flares"
+    ],
+    "render": [
+      "soft lighting",
+      "natural lighting",
+      "dim lighting",
+      "low key lighting",
+      "cinematic lighting",
+      "bright atmosphere",
+      "warm ambient",
+      "soft indoor light",
+      "fluorescent white",
+      "desk lamp glow",
+      "window light",
+      "bright retail lighting",
+      "spotlight display",
+      "neon signs"
+    ],
+    "body_type": [
+      "slim",
+      "petite",
+      "curvy",
+      "voluptuous",
+      "athletic build",
+      "long legs",
+      "hourglass figure",
+      "busty"
+    ]
+  }
+}

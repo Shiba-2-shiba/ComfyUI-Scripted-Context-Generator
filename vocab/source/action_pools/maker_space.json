@@ -1,0 +1,86 @@
+{
+  "location": "maker_space",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "sorting components beside a prototype bench"
+    },
+    {
+      "load": "active",
+      "text": "tightening a fastener on a small device"
+    },
+    {
+      "load": "calm",
+      "text": "checking a parts list on a clipboard"
+    },
+    {
+      "load": "active",
+      "text": "moving a completed model to a storage shelf"
+    },
+    {
+      "load": "calm",
+      "text": "testing a switch on a circuit board"
+    },
+    {
+      "load": "active",
+      "text": "clearing filings from the work surface"
+    },
+    {
+      "load": "calm",
+      "text": "labeling containers of spare parts"
+    },
+    {
+      "load": "active",
+      "text": "clamping a piece into a mounted vise"
+    },
+    {
+      "load": "calm",
+      "text": "comparing a prototype with its printed plan"
+    },
+    {
+      "load": "active",
+      "text": "charging a tool beside the workbench"
+    },
+    {
+      "load": "calm",
+      "text": "checking the ventilation control"
+    },
+    {
+      "load": "active",
+      "text": "returning measuring tools to their rack"
+    },
+    {
+      "load": "calm",
+      "text": "measuring a component with a caliper"
+    },
+    {
+      "load": "active",
+      "text": "fastening a panel onto the prototype"
+    },
+    {
+      "load": "calm",
+      "text": "checking power at the soldering station"
+    },
+    {
+      "load": "active",
+      "text": "placing safety glasses beside the tool mat"
+    },
+    {
+      "load": "calm",
+      "text": "checking solder joints beneath a magnifying lamp"
+    },
+    {
+      "load": "active",
+      "text": "placing a cable through the prototype housing"
+    },
+    {
+      "load": "calm",
+      "text": "comparing a machined part with its dimension sheet"
+    },
+    {
+      "load": "active",
+      "text": "turning on the bench extractor before soldering"
+    }
+  ],
+  "families": []
+}

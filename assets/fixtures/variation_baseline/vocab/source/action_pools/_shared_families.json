@@ -1,0 +1,515 @@
+{
+  "schema_version": "1.0",
+  "families": {
+    "public_presence": [
+      {
+        "text": "standing and checking what needs attention next",
+        "load": "calm"
+      },
+      {
+        "text": "walking slowly while keeping track of the space around her",
+        "load": "active"
+      },
+      {
+        "text": "pausing to adjust her pace before moving on",
+        "load": "calm"
+      },
+      {
+        "text": "leaning in slightly while reassessing the scene",
+        "load": "calm"
+      },
+      {
+        "text": "waiting quietly while watching for the next opening",
+        "load": "calm"
+      },
+      {
+        "text": "turning her attention from one nearby detail to another",
+        "load": "calm"
+      },
+      {
+        "text": "standing aside while making room for people passing by",
+        "load": "calm"
+      },
+      {
+        "text": "moving with a measured step while staying aware of the surroundings",
+        "load": "active"
+      }
+    ],
+    "public_navigation": [
+      {
+        "text": "checking the route ahead before choosing where to go",
+        "load": "calm"
+      },
+      {
+        "text": "walking across the area while scanning for a clear path",
+        "load": "active"
+      },
+      {
+        "text": "slowing down as the flow around her changes",
+        "load": "calm"
+      },
+      {
+        "text": "standing near the edge of the path and watching timing",
+        "load": "calm"
+      },
+      {
+        "text": "stepping forward after a small delay in the movement around her",
+        "load": "active"
+      },
+      {
+        "text": "looking over the signs of activity before continuing",
+        "load": "calm"
+      },
+      {
+        "text": "adjusting her position to keep from blocking the way",
+        "load": "calm"
+      },
+      {
+        "text": "moving carefully while leaving space for others nearby",
+        "load": "active"
+      }
+    ],
+    "retail_service": [
+      {
+        "text": "browsing slowly while comparing nearby choices",
+        "load": "calm"
+      },
+      {
+        "text": "standing and deciding what to check next",
+        "load": "calm"
+      },
+      {
+        "text": "walking along the display area while looking from side to side",
+        "load": "active"
+      },
+      {
+        "text": "pausing to weigh one option against another",
+        "load": "calm"
+      },
+      {
+        "text": "checking the arrangement before moving to the next section",
+        "load": "calm"
+      },
+      {
+        "text": "turning back after noticing a small detail she missed",
+        "load": "active"
+      },
+      {
+        "text": "waiting her turn while keeping her place in the flow",
+        "load": "calm"
+      },
+      {
+        "text": "leaning closer to review the choice in front of her",
+        "load": "calm"
+      }
+    ],
+    "transit_flow": [
+      {
+        "text": "standing ready while watching for the next departure",
+        "load": "calm"
+      },
+      {
+        "text": "checking the timing before stepping forward",
+        "load": "calm"
+      },
+      {
+        "text": "walking with the crowd while keeping her balance",
+        "load": "active"
+      },
+      {
+        "text": "pausing near the route marker and reassessing direction",
+        "load": "calm"
+      },
+      {
+        "text": "adjusting her stance as the crowd shifts around her",
+        "load": "calm"
+      },
+      {
+        "text": "moving forward after the delay finally clears",
+        "load": "active"
+      },
+      {
+        "text": "looking ahead while preparing for the next transfer",
+        "load": "calm"
+      },
+      {
+        "text": "waiting at the side while keeping track of movement nearby",
+        "load": "calm"
+      }
+    ],
+    "quiet_study": [
+      {
+        "text": "sitting with focused attention on the detail in front of her",
+        "load": "calm"
+      },
+      {
+        "text": "standing quietly while reviewing what she needs next",
+        "load": "calm"
+      },
+      {
+        "text": "leaning in to recheck a small point",
+        "load": "calm"
+      },
+      {
+        "text": "pausing before continuing the task at hand",
+        "load": "calm"
+      },
+      {
+        "text": "walking softly while keeping the quiet rhythm of the place",
+        "load": "active"
+      },
+      {
+        "text": "looking down in concentration while holding her place",
+        "load": "calm"
+      },
+      {
+        "text": "settling back after finishing a careful check",
+        "load": "calm"
+      },
+      {
+        "text": "turning slightly while staying absorbed in the work",
+        "load": "calm"
+      }
+    ],
+    "work_rhythm": [
+      {
+        "text": "standing and lining up the next task in order",
+        "load": "calm"
+      },
+      {
+        "text": "checking one detail before moving on with the work",
+        "load": "calm"
+      },
+      {
+        "text": "leaning forward while keeping the task precise",
+        "load": "calm"
+      },
+      {
+        "text": "walking between work areas with a measured pace",
+        "load": "active"
+      },
+      {
+        "text": "pausing to reassess what still needs finishing",
+        "load": "calm"
+      },
+      {
+        "text": "turning toward the next responsibility before continuing",
+        "load": "calm"
+      },
+      {
+        "text": "standing aside while waiting for the next cue",
+        "load": "calm"
+      },
+      {
+        "text": "reviewing the situation with steady concentration",
+        "load": "calm"
+      }
+    ],
+    "home_rhythm": [
+      {
+        "text": "standing and tidying the small area around her",
+        "load": "calm"
+      },
+      {
+        "text": "walking slowly while checking what still needs doing",
+        "load": "active"
+      },
+      {
+        "text": "pausing to smooth out the next part of the routine",
+        "load": "calm"
+      },
+      {
+        "text": "leaning closer while adjusting something out of place",
+        "load": "calm"
+      },
+      {
+        "text": "settling into a quiet pause before continuing",
+        "load": "calm"
+      },
+      {
+        "text": "turning back after remembering one more small task",
+        "load": "active"
+      },
+      {
+        "text": "checking the room with an easy unhurried look",
+        "load": "calm"
+      },
+      {
+        "text": "moving through the routine without rushing",
+        "load": "active"
+      }
+    ],
+    "leisure_participation": [
+      {
+        "text": "standing with attention on the activity unfolding nearby",
+        "load": "calm"
+      },
+      {
+        "text": "walking closer while deciding how to join in",
+        "load": "active"
+      },
+      {
+        "text": "pausing with a small smile before the next moment",
+        "load": "calm"
+      },
+      {
+        "text": "leaning in as the atmosphere draws her attention",
+        "load": "calm"
+      },
+      {
+        "text": "turning toward the sound of activity around her",
+        "load": "calm"
+      },
+      {
+        "text": "checking the flow of the event before moving again",
+        "load": "calm"
+      },
+      {
+        "text": "moving lightly while keeping up with the lively pace",
+        "load": "active"
+      },
+      {
+        "text": "waiting for the right timing to step in",
+        "load": "calm"
+      }
+    ],
+    "outdoor_observation": [
+      {
+        "text": "standing still while taking in the open air around her",
+        "load": "calm"
+      },
+      {
+        "text": "walking slowly while following the change in the scenery",
+        "load": "active"
+      },
+      {
+        "text": "pausing as the weather shifts the mood of the place",
+        "load": "calm"
+      },
+      {
+        "text": "looking across the distance before choosing her next step",
+        "load": "calm"
+      },
+      {
+        "text": "adjusting her pace to match the quieter surroundings",
+        "load": "calm"
+      },
+      {
+        "text": "leaning slightly forward while noticing a small change nearby",
+        "load": "calm"
+      },
+      {
+        "text": "moving carefully along the edge of the scene",
+        "load": "active"
+      },
+      {
+        "text": "waiting a moment as the atmosphere settles around her",
+        "load": "calm"
+      }
+    ],
+    "performance_focus": [
+      {
+        "text": "standing ready while listening for the next cue",
+        "load": "calm"
+      },
+      {
+        "text": "checking her timing before the activity resumes",
+        "load": "calm"
+      },
+      {
+        "text": "moving through a small practice step with focus",
+        "load": "active"
+      },
+      {
+        "text": "pausing to steady her rhythm before continuing",
+        "load": "calm"
+      },
+      {
+        "text": "turning toward the center of attention with composure",
+        "load": "calm"
+      },
+      {
+        "text": "walking into position while keeping the pace controlled",
+        "load": "active"
+      },
+      {
+        "text": "leaning in as she follows the shape of the moment",
+        "load": "calm"
+      },
+      {
+        "text": "waiting for the signal to begin again",
+        "load": "calm"
+      }
+    ],
+    "fitness_motion": [
+      {
+        "text": "standing and preparing for the next movement",
+        "load": "calm"
+      },
+      {
+        "text": "walking through the space while loosening her posture",
+        "load": "active"
+      },
+      {
+        "text": "pausing to catch her breath before continuing",
+        "load": "calm"
+      },
+      {
+        "text": "checking her stance before shifting into motion",
+        "load": "calm"
+      },
+      {
+        "text": "moving with steady energy while keeping control",
+        "load": "active"
+      },
+      {
+        "text": "leaning forward to reset her balance",
+        "load": "calm"
+      },
+      {
+        "text": "turning back toward the next exercise with focus",
+        "load": "active"
+      },
+      {
+        "text": "slowing down as the effort settles into rhythm",
+        "load": "calm"
+      }
+    ],
+    "resort_relaxation": [
+      {
+        "text": "standing in the easy atmosphere while looking around",
+        "load": "calm"
+      },
+      {
+        "text": "walking unhurriedly while letting the moment open up",
+        "load": "active"
+      },
+      {
+        "text": "pausing to enjoy the quieter part of the scene",
+        "load": "calm"
+      },
+      {
+        "text": "leaning back slightly as the day slows around her",
+        "load": "calm"
+      },
+      {
+        "text": "checking where to settle next before moving on",
+        "load": "calm"
+      },
+      {
+        "text": "turning toward the view with relaxed attention",
+        "load": "calm"
+      },
+      {
+        "text": "moving lightly through the relaxed flow of the place",
+        "load": "active"
+      },
+      {
+        "text": "waiting a moment while the atmosphere stays warm and slow",
+        "load": "calm"
+      }
+    ],
+    "speculative_exploration": [
+      {
+        "text": "standing alert while reading the unfamiliar space around her",
+        "load": "calm"
+      },
+      {
+        "text": "walking forward carefully while checking each change nearby",
+        "load": "active"
+      },
+      {
+        "text": "pausing to understand the strange rhythm of the place",
+        "load": "calm"
+      },
+      {
+        "text": "turning toward an unexpected signal with focused attention",
+        "load": "calm"
+      },
+      {
+        "text": "leaning closer while studying an unusual detail",
+        "load": "calm"
+      },
+      {
+        "text": "moving with caution as the environment shifts around her",
+        "load": "active"
+      },
+      {
+        "text": "checking her position before committing to the next step",
+        "load": "calm"
+      },
+      {
+        "text": "waiting still while listening for the next change",
+        "load": "calm"
+      }
+    ],
+    "cautious_tension": [
+      {
+        "text": "standing tense while watching for movement nearby",
+        "load": "calm"
+      },
+      {
+        "text": "walking carefully while keeping herself ready to react",
+        "load": "active"
+      },
+      {
+        "text": "pausing after a sudden shift in the atmosphere",
+        "load": "calm"
+      },
+      {
+        "text": "looking toward the danger before choosing her next move",
+        "load": "calm"
+      },
+      {
+        "text": "leaning away slightly while holding her ground",
+        "load": "calm"
+      },
+      {
+        "text": "moving from cover to cover with controlled urgency",
+        "load": "active"
+      },
+      {
+        "text": "checking the distance before stepping out",
+        "load": "calm"
+      },
+      {
+        "text": "waiting for an opening while staying guarded",
+        "load": "calm"
+      }
+    ],
+    "refined_interior": [
+      {
+        "text": "standing with careful posture while taking in the room",
+        "load": "calm"
+      },
+      {
+        "text": "walking slowly while keeping her movements composed",
+        "load": "active"
+      },
+      {
+        "text": "pausing beside the quiet activity of the space",
+        "load": "calm"
+      },
+      {
+        "text": "leaning in just enough to review a nearby detail",
+        "load": "calm"
+      },
+      {
+        "text": "turning toward the next exchange with polite attention",
+        "load": "calm"
+      },
+      {
+        "text": "waiting calmly while the formal mood holds",
+        "load": "calm"
+      },
+      {
+        "text": "checking the arrangement before settling into place",
+        "load": "calm"
+      },
+      {
+        "text": "moving with restraint through the ordered scene",
+        "load": "active"
+      }
+    ]
+  }
+}

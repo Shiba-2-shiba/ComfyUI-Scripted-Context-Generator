@@ -1,0 +1,62 @@
+{
+  "schema_version": "variation-blind-review-rejection-receipt/v1",
+  "experiment_id": "v150-candidate-shape-iteration-009",
+  "review_attempt": 2,
+  "terminal_state": "REVIEW_REJECTED",
+  "recorded_at": "2026-09-02",
+  "authority": {
+    "automatic_quality_verdict": "pass",
+    "blind_review_verdict": "reject",
+    "confirmation_authorized": false,
+    "promotion_ready": false,
+    "active_data_mutation_authorized": false
+  },
+  "binding": {
+    "quality_comparison_sha256": "8d4417b1c6444c4c35748c399d86918afd1c703b500cee504a05f5289e7b154a",
+    "review_comparison_adapter_sha256": "e63dd982bd05a14895d3d90ec160c73c7013f90fb9ee54be9fac1a6ba84217f0",
+    "blind_review_experiment_sha256": "33e05ab4cb39963b949c506a6000cfee749eb989926c278c146d8d3031837261",
+    "assignment_key_sha256": "283ba01c3135cb165187cfa4edfd01d7724ba3349795b97a0fb16166ba40d34d",
+    "lane_1_sha256": "2525f8a5e581b50005f06b62687b1757e7418c482614432c6e521fd6220dd67a",
+    "lane_2_sha256": "72b5ae1e59613d9f950552e98196805e596ee5253bf1fc80b52cc9eb077a74e0",
+    "lane_1_result_sha256": "9d87be60a93345b171a1379d3e460ca2d7325ba2fbb856839af186cefb19d09c",
+    "lane_2_result_sha256": "cd157b2de97f394f2bacd08b08923cfd6b514ec2938cd4bee5ab3caf8a0cb0ea",
+    "aggregate_review_sha256": "61774b7b01807cc049839ef3e7517f38051ae1974addf3e2f1378737d7ea330e",
+    "review_contract_sha256": "2e13191ede3f4810007190c76b54c95ee837d4c8b288bd379120c450d6a097c2",
+    "selection_sha256": "363c4bba431fab0ac3efbae0d65efeff8cfffa2aed51f9033d7bd3d74a209bff"
+  },
+  "review_result": {
+    "status": "fail",
+    "pair_count_per_lane": 20,
+    "candidate_hard_defect_observations": 8,
+    "candidate_hard_defect_seeds": [30, 40, 41, 2584006080659484769, 16086608232758145338],
+    "candidate_hard_defects": {
+      "clothing_tpo_weather_conflict": 4,
+      "consistency_rule_conflict": 2,
+      "location_action_object_conflict": 2
+    },
+    "remediated_seed_replay": {
+      "seeds": [1, 2, 9435136036924046218, 1149853648275787818, 16086608232758145338],
+      "reviewed_conflict_phrase_count": 0,
+      "status": "pass"
+    },
+    "dimension_results": {
+      "protagonist_clarity": {"passed": false, "improvement_support": 0.676471, "worse_rate": 0.323529},
+      "consistency": {"passed": false, "improvement_support": 0.375, "worse_rate": 0.625},
+      "naturalness": {"passed": false, "improvement_support": 0.486486, "worse_rate": 0.513514},
+      "redundancy": {"passed": false, "improvement_support": 0.529412, "worse_rate": 0.470588},
+      "diversity": {"passed": true, "authority": "current_source_corpus_confirmation"},
+      "image_prompt_suitability": {"passed": false, "improvement_support": 0.615385, "worse_rate": 0.384615}
+    }
+  },
+  "reviewers": [
+    {"lane_id": "lane-1", "reviewer_id": "blind-attempt-002-lane-1", "reviewer_type": "codex-independent-blind", "model": "gpt-5.6-sol"},
+    {"lane_id": "lane-2", "reviewer_id": "blind-attempt-002-lane-2", "reviewer_type": "codex-independent-blind", "model": "gpt-5.6-sol"}
+  ],
+  "next_iteration_requirements": [
+    "Keep the five-seed remediation and active variation data unchanged.",
+    "Remediate the newly reviewed clothing/TPO, time-of-day, and outdoor-room wording defects.",
+    "Improve naturalness, consistency, redundancy, protagonist clarity, and image-prompt suitability before attempt 003.",
+    "Rerun automatic non-selected quality validation on a fresh source before any new blind review.",
+    "Do not start VE-1318 or VE-1319 until a comparison-bound blind review passes."
+  ]
+}

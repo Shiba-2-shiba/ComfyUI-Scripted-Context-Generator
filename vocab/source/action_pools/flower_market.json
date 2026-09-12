@@ -1,0 +1,86 @@
+{
+  "location": "flower_market",
+  "actions": [
+    {
+      "load": "active",
+      "text": "trimming stems beside a wrapping counter"
+    },
+    {
+      "load": "calm",
+      "text": "checking stem moisture before arranging the flower bucket"
+    },
+    {
+      "load": "active",
+      "text": "arranging a bundle by color"
+    },
+    {
+      "load": "calm",
+      "text": "reading a handwritten price card"
+    },
+    {
+      "load": "active",
+      "text": "carrying wrapped flowers between stalls"
+    },
+    {
+      "load": "calm",
+      "text": "removing wilted leaves from a bouquet"
+    },
+    {
+      "load": "active",
+      "text": "filling a small vase at the counter"
+    },
+    {
+      "load": "calm",
+      "text": "sorting ribbons beside the wrapping paper"
+    },
+    {
+      "load": "active",
+      "text": "spraying water over a display tray"
+    },
+    {
+      "load": "calm",
+      "text": "checking a delivery crate of flowers"
+    },
+    {
+      "load": "active",
+      "text": "tying a label onto a finished bouquet"
+    },
+    {
+      "load": "calm",
+      "text": "placing fresh stems in a shaded bucket"
+    },
+    {
+      "load": "calm",
+      "text": "comparing bloom sizes across two display buckets"
+    },
+    {
+      "load": "active",
+      "text": "carrying fresh flower crates beneath the awning"
+    },
+    {
+      "load": "calm",
+      "text": "checking a bouquet against the written order card"
+    },
+    {
+      "load": "active",
+      "text": "wrapping a finished arrangement in kraft paper"
+    },
+    {
+      "load": "calm",
+      "text": "examining unopened buds under the stall light"
+    },
+    {
+      "load": "active",
+      "text": "carrying an empty bucket to the water tap"
+    },
+    {
+      "load": "calm",
+      "text": "counting stems for a mixed bouquet"
+    },
+    {
+      "load": "active",
+      "text": "moving a shaded flower stand into the aisle"
+    }
+  ],
+  "families": []
+}

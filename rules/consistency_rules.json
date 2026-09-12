@@ -1,0 +1,54 @@
+{
+    "conflicts": [
+        {
+            "input_term": "winter",
+            "template_term": "warm sun",
+            "reason": "Winter conflicts with warm sun"
+        },
+        {
+            "input_term": "snow",
+            "template_term": "hot day",
+            "reason": "Snow conflicts with hot day"
+        },
+        {
+            "input_term": "night",
+            "template_term": "sunny",
+            "reason": "Night conflicts with sunny"
+        },
+        {
+            "input_term": "night",
+            "template_term": "blue sky",
+            "reason": "Night conflicts with blue sky"
+        },
+        {
+            "input_term": "night",
+            "template_term": "midday",
+            "reason": "Night conflicts with midday"
+        },
+        {
+            "input_term": "night",
+            "template_term": "morning",
+            "reason": "Night conflicts with morning"
+        },
+        {
+            "input_term": "evening",
+            "template_term": "morning",
+            "reason": "Evening conflicts with morning"
+        },
+        {
+            "input_term": "evening",
+            "template_term": "midday",
+            "reason": "Evening conflicts with midday"
+        },
+        {
+            "input_term": "indoor",
+            "template_term": "under the sky",
+            "reason": "Indoor conflicts with under the sky"
+        },
+        {
+            "input_term": "rain",
+            "template_term": "dry ground",
+            "reason": "Rain conflicts with dry ground"
+        }
+    ]
+}
