@@ -1,0 +1,636 @@
+import os
+import sys
+import unittest
+from unittest.mock import patch
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
+from core.context_ops import append_history, patch_context
+from core.schema import DebugInfo
+from history_service import (
+    clothing_signature_digest,
+    clothing_signature_from_decision,
+    recent_clothing_signatures,
+)
+from pipeline.mood_builder import apply_mood_expansion
+from pipeline.clothing_builder import apply_clothing_expansion, expand_clothing_prompt
+from pipeline.location_builder import apply_location_expansion
+from pipeline.prompt_orchestrator import (
+    _derive_template_roles,
+    build_prompt_text,
+    build_prompt_from_context,
+)
+
+
+class TestContextContentPipeline(unittest.TestCase):
+    def _clothing_prompts_for(self, theme, loc, mode="random", seeds=range(96)):
+        return [
+            expand_clothing_prompt(
+                theme,
+                seed,
+                mode,
+                0.0,
+                "black, gold",
+                loc=loc,
+            )
+            for seed in seeds
+        ]
+
+    def _assert_state_terms_absent(self, theme, loc, terms, mode="random", seeds=range(96)):
+        for prompt in self._clothing_prompts_for(theme, loc, mode=mode, seeds=seeds):
+            for term in terms:
+                self.assertNotIn(term, prompt)
+
+    def _assert_any_state_term_present(self, theme, loc, terms, mode="random", seeds=range(160)):
+        prompts = self._clothing_prompts_for(theme, loc, mode=mode, seeds=seeds)
+        self.assertTrue(
+            any(any(term in prompt for term in terms) for prompt in prompts),
+            msg=f"missing {terms} for {theme} at {loc}: {prompts[:8]}",
+        )
+
+    def test_apply_mood_expansion_updates_context(self):
+        ctx = patch_context({}, updates={"seed": 10}, meta={"mood": "quiet"})
+        updated, expanded, staging = apply_mood_expansion(ctx, 10, "mood_map.json", "quiet")
+        self.assertIsInstance(expanded, str)
+        self.assertEqual(updated.meta.mood, expanded)
+        self.assertEqual(updated.extras.get("staging_tags", ""), staging)
+
+    def test_apply_clothing_expansion_writes_extras(self):
+        ctx = patch_context(
+            {},
+            updates={"costume": "office_lady", "loc": "modern_office", "action": "reviewing documents", "seed": 11},
+            extras={"raw_costume_key": "office_lady", "character_palette_str": "navy, white"},
+        )
+        updated, clothing_prompt = apply_clothing_expansion(ctx, 11, "random", 0.3)
+        self.assertIsInstance(clothing_prompt, str)
+        self.assertEqual(updated.extras["clothing_prompt"], clothing_prompt)
+        self.assertEqual(updated.history[-1].node, "ContextClothingExpander")
+        self.assertTrue(updated.history[-1].decision.get("signature"))
+        self.assertTrue(updated.history[-1].decision.get("base_variant"))
+        clothing_debug = updated.history[-1].decision["semantic_epig"]["clothing_tpo"]
+        self.assertEqual(clothing_debug["mode"], "active")
+        self.assertTrue(clothing_debug["selected_by_semantic"])
+        self.assertIn("target_vector", clothing_debug)
+        self.assertGreaterEqual(len(clothing_debug["candidate_scores"]), 1)
+        self.assertNotIn("prompt", updated.history[-1].decision)
+
+    def test_apply_clothing_expansion_suppresses_outerwear_for_home_locations(self):
+        ctx = patch_context(
+            {},
+            updates={"costume": "office_lady", "loc": "cozy_living_room", "seed": 11},
+            extras={"raw_costume_key": "office_lady", "raw_loc_tag": "cozy_living_room", "character_palette_str": "navy, white"},
+        )
+        updated, clothing_prompt = apply_clothing_expansion(ctx, 11, "random", 1.0)
+        self.assertIsInstance(clothing_prompt, str)
+        self.assertEqual(updated.history[-1].decision.get("outerwear_pack", ""), "")
+        self.assertNotIn("over it", clothing_prompt)
+
+    def test_expand_clothing_prompt_suppresses_outerwear_for_gym_locations(self):
+        clothing_prompt, decision = expand_clothing_prompt(
+            "gym_workout",
+            21,
+            "random",
+            1.0,
+            "gray, black",
+            loc="fitness_gym",
+            return_debug=True,
+        )
+        self.assertIsInstance(clothing_prompt, str)
+        self.assertEqual(decision.get("outerwear_pack", ""), "")
+        self.assertNotIn("over it", clothing_prompt)
+
+    def test_clothing_tpo_active_selection_is_deterministic(self):
+        prompt_without_assertion, _debug_a = expand_clothing_prompt(
+            "rainy_day",
+            31,
+            "random",
+            1.0,
+            "navy, white",
+            loc="rainy_bus_stop",
+            action_text="commuting",
+            return_debug=True,
+        )
+        prompt_with_debug, debug = expand_clothing_prompt(
+            "rainy_day",
+            31,
+            "random",
+            1.0,
+            "navy, white",
+            loc="rainy_bus_stop",
+            action_text="commuting",
+            return_debug=True,
+        )
+
+        self.assertEqual(prompt_with_debug, prompt_without_assertion)
+        clothing_debug = debug["semantic_epig"]["clothing_tpo"]
+        self.assertEqual(clothing_debug["mode"], "active")
+        self.assertTrue(clothing_debug["selected_by_semantic"])
+        self.assertEqual(clothing_debug["selected_attempt_index"], debug["attempt_index"])
+        self.assertIn("semantic_tpo_score", debug)
+        selected_score = clothing_debug["candidate_scores"][debug["attempt_index"]]
+        self.assertEqual(selected_score["final_penalty"], debug["semantic_tpo_final_penalty"])
+        self.assertGreaterEqual(selected_score["final_penalty"], selected_score["repeat_penalty"])
+
+    def test_expand_clothing_prompt_suppresses_outerwear_for_apartment_balcony(self):
+        clothing_prompt, decision = expand_clothing_prompt(
+            "office_lady",
+            21,
+            "random",
+            1.0,
+            "navy, white",
+            loc="apartment_balcony",
+            return_debug=True,
+        )
+        self.assertEqual(decision.get("outerwear_pack", ""), "")
+        self.assertNotIn("over it", clothing_prompt)
+
+    def test_expand_clothing_prompt_keeps_outerwear_available_for_apartment_entryway(self):
+        clothing_prompt, decision = expand_clothing_prompt(
+            "office_lady",
+            21,
+            "random",
+            1.0,
+            "navy, white",
+            loc="apartment_entryway",
+            return_debug=True,
+        )
+        self.assertTrue(decision.get("outerwear_pack"))
+        self.assertIn("over it", clothing_prompt)
+
+    def test_expand_clothing_prompt_keeps_outerwear_available_for_non_home_indoor_locations(self):
+        clothing_prompt, decision = expand_clothing_prompt(
+            "office_lady",
+            21,
+            "random",
+            1.0,
+            "navy, white",
+            loc="bakery_shop",
+            return_debug=True,
+        )
+        self.assertTrue(decision.get("outerwear_pack"))
+        self.assertIn("over it", clothing_prompt)
+
+    def test_expand_clothing_prompt_suppresses_snow_state_for_indoor_locations(self):
+        for loc in ("modern_office", "food_court", "tea_room", "messy_kitchen"):
+            self._assert_state_terms_absent("winter_date", loc, ("covered in snow",), mode="dresses")
+
+    def test_expand_clothing_prompt_allows_snow_state_for_winter_street(self):
+        self._assert_any_state_term_present("winter_date", "winter_street", ("covered in snow",), mode="dresses")
+
+    def test_expand_clothing_prompt_suppresses_weather_and_context_states_for_indoor_locations(self):
+        cases = [
+            ("rainy_day", "art_gallery", "separates", ("rain-soaked",)),
+            ("beach_resort", "bedroom_boudoir", "separates", ("sun-kissed glow", "wet")),
+            ("gym_workout", "museum_hall", "separates", ("sweaty",)),
+            ("fantasy_battle", "clean_modern_kitchen", "random", ("battle-worn", "blood-stained")),
+            ("steampunk", "cozy_living_room", "separates", ("grease stained",)),
+        ]
+        for theme, loc, mode, terms in cases:
+            with self.subTest(theme=theme, loc=loc):
+                self._assert_state_terms_absent(theme, loc, terms, mode=mode)
+
+    def test_expand_clothing_prompt_allows_context_states_for_compatible_locations(self):
+        cases = [
+            ("rainy_day", "rainy_alley", "separates", ("rain-soaked",)),
+            ("beach_resort", "tropical_beach", "separates", ("sun-kissed glow", "wet")),
+            ("gym_workout", "fitness_gym", "separates", ("sweaty",)),
+            ("fantasy_battle", "burning_battlefield", "random", ("battle-worn", "blood-stained")),
+            ("steampunk", "clockwork_workshop", "separates", ("grease stained",)),
+        ]
+        for theme, loc, mode, terms in cases:
+            with self.subTest(theme=theme, loc=loc):
+                self._assert_any_state_term_present(theme, loc, terms, mode=mode)
+
+    def test_clothing_signature_tracks_variant_details_within_same_pack(self):
+        from history_service import clothing_signature_digest
+        first = clothing_signature_from_decision(
+            {
+                "chosen_type": "separates",
+                "base_pack": "modern_office_attire",
+                "base_variant": "silk_blouse~pencil_skirt~navy",
+                "outerwear_pack": "none",
+                "outerwear_variant": "none",
+            }
+        )
+        second = clothing_signature_from_decision(
+            {
+                "chosen_type": "separates",
+                "base_pack": "modern_office_attire",
+                "base_variant": "knit_top~tailored_trousers~charcoal",
+                "outerwear_pack": "none",
+                "outerwear_variant": "none",
+            }
+        )
+        self.assertNotEqual(first, second)
+        self.assertNotEqual(clothing_signature_digest(first), clothing_signature_digest(second))
+        self.assertEqual(len(clothing_signature_digest(first)), 71)
+
+    def test_legacy_raw_clothing_signature_normalizes_to_current_digest(self):
+        decision = {
+            "chosen_type": "separates",
+            "base_pack": "modern_office_attire",
+            "base_variant": "silk_blouse~pencil_skirt~navy",
+            "outerwear_pack": "none",
+            "outerwear_variant": "none",
+        }
+        raw_signature = clothing_signature_from_decision(decision)
+        legacy = {**decision, "signature": raw_signature}
+        current = {**decision, "signature": clothing_signature_digest(raw_signature)}
+        ctx = patch_context({})
+        ctx = append_history(ctx, DebugInfo(node="ContextClothingExpander", seed=1, decision=legacy))
+        ctx = append_history(ctx, DebugInfo(node="ContextClothingExpander", seed=2, decision=current))
+
+        recent = recent_clothing_signatures(ctx)
+
+        self.assertEqual(recent[0], clothing_signature_digest(raw_signature))
+        self.assertEqual(recent[1], clothing_signature_digest(raw_signature))
+
+    def test_apply_location_expansion_writes_extras(self):
+        ctx = patch_context(
+            {},
+            updates={"loc": "classroom", "action": "reading notes", "seed": 12},
+            meta={"mood": "quiet"},
+            extras={"raw_loc_tag": "classroom"},
+        )
+        updated, location_prompt = apply_location_expansion(ctx, 12, "detailed", "auto")
+        self.assertIsInstance(location_prompt, str)
+        self.assertEqual(updated.extras["location_prompt"], location_prompt)
+        self.assertEqual(updated.history[-1].node, "ContextLocationExpander")
+        location_debug = updated.history[-1].decision["semantic_epig"]["location_scene"]
+        self.assertEqual(location_debug["mode"], "active")
+        self.assertTrue(location_debug["selected_by_semantic"])
+        self.assertIn("target_vector", location_debug)
+        self.assertIn("segment_rankings", location_debug)
+
+    def test_apply_location_expansion_off_avoids_lighting_segments(self):
+        ctx = patch_context({}, updates={"loc": "street_cafe", "seed": 12}, extras={"raw_loc_tag": "street_cafe"})
+        updated, location_prompt = apply_location_expansion(ctx, 12, "detailed", "off")
+        self.assertEqual(updated.extras["location_prompt"], location_prompt)
+        self.assertNotIn("golden hour", location_prompt.lower())
+        self.assertNotIn("bright daylight", location_prompt.lower())
+        self.assertNotIn("warm ambient", location_prompt.lower())
+
+    def test_location_scene_active_selection_is_deterministic(self):
+        from pipeline.location_builder import expand_location_prompt
+
+        prompt_without_assertion, _debug_a = expand_location_prompt(
+            "school_library",
+            42,
+            "detailed",
+            "auto",
+            return_debug=True,
+            action_text="reading a book",
+            mood_text="quiet",
+        )
+        prompt_with_debug, debug = expand_location_prompt(
+            "school_library",
+            42,
+            "detailed",
+            "auto",
+            return_debug=True,
+            action_text="reading a book",
+            mood_text="quiet",
+        )
+
+        self.assertEqual(prompt_with_debug, prompt_without_assertion)
+        self.assertEqual(debug["semantic_epig"]["location_scene"]["mode"], "active")
+        self.assertTrue(debug["semantic_epig"]["location_scene"]["selected_by_semantic"])
+        self.assertIn("core", debug["semantic_epig"]["location_scene"]["segment_rankings"])
+
+    def test_recording_booth_excludes_control_room_console(self):
+        from pipeline.location_builder import expand_location_prompt
+
+        for seed in range(32):
+            prompt, _debug = expand_location_prompt(
+                "recording_studio",
+                seed,
+                "detailed",
+                "auto",
+                return_debug=True,
+                action_text="checking her timing",
+                mood_text="focused",
+            )
+            self.assertNotIn("mixing console", prompt.lower())
+
+    def test_build_prompt_from_context_prefers_expanded_fields(self):
+        ctx = patch_context(
+            {},
+            updates={"subj": "A solo girl", "costume": "office_lady", "loc": "classroom", "action": "reading", "seed": 13},
+            meta={"mood": "quiet", "style": "photo"},
+            extras={
+                "clothing_prompt": "white blouse and navy skirt",
+                "location_prompt": "sunlit classroom",
+                "garnish": "soft smile",
+                "staging_tags": "clean composition",
+            },
+        )
+        updated, prompt = build_prompt_from_context(ctx, "", False, 13)
+        self.assertEqual(updated.seed, 13)
+        self.assertIsInstance(prompt, str)
+        self.assertIn("sunlit classroom", prompt)
+        self.assertNotIn("photo", prompt.lower())
+        self.assertEqual(updated.history[-1].node, "ContextPromptBuilder")
+
+    def test_build_prompt_text_avoids_recent_template_key_when_composing(self):
+        with patch("pipeline.prompt_orchestrator._template_entries") as mocked:
+            mocked.side_effect = [
+                [
+                    {"key": "intro_plain", "text": "{subject_clause}", "roles": ["neutral"]},
+                    {"key": "intro_alt", "text": "{subject_clause}, already in the middle of things", "roles": ["neutral"]},
+                ],
+                [
+                    {"key": "body_direct", "text": "{action_clause}", "roles": ["neutral"]},
+                ],
+                [
+                    {"key": "end_direct", "text": "{scene_clause}", "roles": ["neutral"]},
+                ],
+            ]
+            prompt, debug = build_prompt_text(
+                template="",
+                composition_mode=True,
+                seed=42,
+                subj="girl",
+                costume="dress",
+                loc="park",
+                action="walking",
+                garnish="smiling",
+                meta_mood="quiet",
+                recent_templates=["intro_plain||body_direct||end_direct"],
+                return_debug=True,
+            )
+        self.assertIsInstance(prompt, str)
+        self.assertNotEqual(debug["template_key"], "intro_plain||body_direct||end_direct")
+        self.assertEqual(debug["intro_key"], "intro_alt")
+
+    def test_build_prompt_text_returns_role_aware_debug_in_composition_mode(self):
+        prompt, debug = build_prompt_text(
+            template="",
+            composition_mode=True,
+            seed=44,
+            subj="girl",
+            costume="dress",
+            loc="station platform",
+            action="walking toward the next train",
+            garnish="focused gaze",
+            meta_mood="on the way home",
+            return_debug=True,
+        )
+        self.assertIsInstance(prompt, str)
+        self.assertIn("template_roles", debug)
+        self.assertIn("transition", debug["template_roles"]["body_roles"])
+        self.assertTrue(debug["intro_key"])
+        self.assertTrue(debug["body_key"])
+        self.assertTrue(debug["end_key"])
+
+    def test_derive_template_roles_does_not_let_quiet_garnish_override_transition_action(self):
+        roles = _derive_template_roles(
+            action="walking toward the next train",
+            garnish="quiet look around her",
+            meta_mood="on the way home",
+            loc="station platform",
+        )
+        self.assertEqual(roles["body_roles"][0], "transition")
+        self.assertIn("quiet", roles["body_roles"])
+
+    def test_body_wrapper_templates_append_context_instead_of_prefix_wrapping(self):
+        with patch("pipeline.prompt_orchestrator._template_entries") as mocked:
+            mocked.side_effect = [
+                [
+                    {"key": "intro_plain", "text": "{subject_clause}", "roles": ["neutral"]},
+                ],
+                [
+                    {"key": "body_focus", "text": "{action_clause}, her attention fixed on it", "roles": ["focused"]},
+                ],
+                [
+                    {"key": "end_plain", "text": "{scene_clause}", "roles": ["neutral"]},
+                ],
+            ]
+            prompt, debug = build_prompt_text(
+                template="",
+                composition_mode=True,
+                seed=51,
+                subj="girl",
+                costume="dress",
+                loc="library",
+                action="fingers easing out of their tension",
+                garnish="quiet look around her",
+                meta_mood="late in the day",
+                return_debug=True,
+            )
+        self.assertIn("fingers easing out of their tension, quiet look around her, her attention fixed on it", prompt)
+        self.assertEqual(debug["body_key"], "body_focus")
+
+    def test_fragment_action_surface_avoids_clause_focused_wrapper(self):
+        with patch("pipeline.prompt_orchestrator._template_entries") as mocked:
+            mocked.side_effect = [
+                [
+                    {"key": "intro_plain", "text": "{subject_clause}", "roles": ["focused"]},
+                ],
+                [
+                    {
+                        "key": "body_attention",
+                        "text": "{action_clause}, her attention fixed on it",
+                        "roles": ["focused"],
+                        "preferred_surfaces": ["gerund", "clause"],
+                        "avoid_surfaces": ["fragment"],
+                    },
+                    {
+                        "key": "body_staying",
+                        "text": "{action_clause}, the moment staying with her",
+                        "roles": ["focused"],
+                        "preferred_surfaces": ["fragment"],
+                    },
+                ],
+                [
+                    {"key": "end_plain", "text": "{scene_clause}", "roles": ["focused"]},
+                ],
+            ]
+            prompt, debug = build_prompt_text(
+                template="",
+                composition_mode=True,
+                seed=12,
+                subj="girl",
+                costume="dress",
+                loc="gallery",
+                action="hands settling and then shifting again",
+                garnish="quiet look around her",
+                meta_mood="late in the day",
+                return_debug=True,
+            )
+        self.assertIn("hands settling and then shifting again", prompt)
+        self.assertNotIn("the moment staying with her", prompt)
+        self.assertEqual(debug["body_key"], "body_staying")
+        self.assertEqual(debug["action_surface"]["surface"], "fragment")
+
+    def _attention_wrapper_prompt(self, action, garnish="", staging_tags="", action_frame=None, body=None, seed=51):
+        entries = [
+            [{"key": "intro_plain", "text": "{subject_clause}", "roles": ["neutral"]}],
+            [{"key": "body_focus", "text": body or "{action_clause}, her attention fixed on it", "roles": ["focused"]}],
+            [{"key": "end_plain", "text": "{scene_clause}", "roles": ["neutral"]}],
+        ]
+        with patch("pipeline.prompt_orchestrator._template_entries", side_effect=entries):
+            return build_prompt_text(template="", composition_mode=True, seed=seed, subj="girl", costume="dress",
+                                     loc="garden", action=action, garnish=garnish, meta_mood="a peaceful afternoon",
+                                     staging_tags=staging_tags, action_frame=action_frame, return_debug=True)
+
+    def test_attention_wrapper_does_not_repeat_inspection_or_explicit_gaze(self):
+        for action, garnish, staging, frame in (
+            ("reading the rain gauge beside the fence", "downcast eyes, relaxed posture", "gentle smile", None),
+            ("studying the planting plan", "", "", None),
+            ("examining a leaf", "", "", None),
+            ("inspecting the fence hinge", "", "", None),
+            ("waiting beside the fence", "focused gaze", "", None),
+            ("waiting beside the fence", "", "eyes on the gate", None),
+            ("waiting beside the fence", "", "", {"gaze_target": "watching the gate"}),
+        ):
+            with self.subTest(action=action, garnish=garnish, staging=staging, frame=frame):
+                prompt, _ = self._attention_wrapper_prompt(action, garnish, staging, frame)
+                self.assertNotIn("her attention fixed on it", prompt)
+                self.assertIn(action, prompt)
+                self.assertIn("a peaceful afternoon", prompt)
+        prompt, _ = self._attention_wrapper_prompt("reading the rain gauge beside the fence", "downcast eyes, relaxed posture", "gentle smile")
+        for detail in ("downcast eyes", "relaxed posture", "gentle smile"):
+            self.assertIn(detail, prompt)
+
+    def test_attention_wrapper_retains_optional_focus_for_nonattention_action(self):
+        for action in ("fingers easing out of their tension", "waiting beside the fence", "carrying a basket"):
+            with self.subTest(action=action):
+                prompt, _ = self._attention_wrapper_prompt(action)
+                self.assertIn("her attention fixed on it", prompt)
+        prompt, _ = self._attention_wrapper_prompt("reading the planting plan", body="{action_clause}, while a bell rings nearby")
+        self.assertIn("while a bell rings nearby", prompt)
+
+    def test_attention_tail_pruning_preserves_template_selection_seed_streams_and_syntax(self):
+        for seed in range(8):
+            prompt, debug = self._attention_wrapper_prompt("reading the rain gauge", seed=seed)
+            plain, plain_debug = self._attention_wrapper_prompt("reading the rain gauge", body="{action_clause}", seed=seed)
+            replay, replay_debug = self._attention_wrapper_prompt("reading the rain gauge", seed=seed)
+            self.assertEqual((prompt, debug), (replay, replay_debug))
+            self.assertEqual(prompt, plain)
+            for field in ("intro_key", "body_key", "end_key", "template_key", "template_roles", "action_surface"):
+                self.assertEqual(debug[field], plain_debug[field])
+            for field in ("named_seed_streams", "syntax_family", "clause_order"):
+                self.assertEqual(debug["content_plan"][field], plain_debug["content_plan"][field])
+
+    def test_intro_literal_does_not_repeat_the_action_opening(self):
+        with patch("pipeline.prompt_orchestrator._template_entries") as mocked:
+            mocked.side_effect = [
+                [
+                    {"key": "intro_repeat", "text": "{subject_clause}, moving with the next part of the day", "roles": ["transition"]},
+                    {"key": "intro_pause", "text": "{subject_clause}, caught in a brief pause", "roles": ["transition"]},
+                ],
+                [{"key": "body_direct", "text": "{action_clause}", "roles": ["transition"]}],
+                [{"key": "end_direct", "text": "{scene_clause}", "roles": ["transition"]}],
+            ]
+            prompt, debug = build_prompt_text(
+                template="",
+                composition_mode=True,
+                seed=1962614176392810358,
+                subj="a solo girl",
+                costume="travel clothes",
+                loc="resort beach",
+                action="moving carefully along the edge of the scene",
+                return_debug=True,
+            )
+
+        self.assertEqual(debug["intro_key"], "intro_pause")
+        self.assertNotIn("moving with the next part of the day, moving carefully", prompt)
+
+    def test_long_action_avoids_as_garnish_template(self):
+        with patch("pipeline.prompt_orchestrator._template_entries") as mocked:
+            mocked.side_effect = [
+                [
+                    {"key": "intro_plain", "text": "{subject_clause}", "roles": ["social"]},
+                ],
+                [
+                    {
+                        "key": "body_as_garnish",
+                        "text": "{action} as {garnish}",
+                        "roles": ["social"],
+                        "needs_garnish": True,
+                        "preferred_surfaces": ["gerund", "clause"],
+                        "max_action_words": 4,
+                    },
+                    {
+                        "key": "body_with_garnish",
+                        "text": "{action}, with {garnish}",
+                        "roles": ["social"],
+                        "needs_garnish": True,
+                        "preferred_surfaces": ["gerund", "clause"],
+                    },
+                ],
+                [
+                    {"key": "end_plain", "text": "{scene_clause}", "roles": ["social"]},
+                ],
+            ]
+            prompt, debug = build_prompt_text(
+                template="",
+                composition_mode=True,
+                seed=88,
+                subj="girl",
+                costume="dress",
+                loc="gallery",
+                action="discussing art quietly with a companion near the far wall",
+                garnish="soft smile",
+                meta_mood="late in the day",
+                return_debug=True,
+            )
+        self.assertIn(", with soft smile", prompt)
+        self.assertEqual(debug["body_key"], "body_with_garnish")
+
+    def test_gerund_action_can_render_as_framed_surface_for_room_template(self):
+        with patch("pipeline.prompt_orchestrator._template_entries") as mocked:
+            mocked.side_effect = [
+                [
+                    {"key": "intro_plain", "text": "{subject_clause}", "roles": ["quiet"]},
+                ],
+                [
+                    {
+                        "key": "body_room_for_action",
+                        "text": "{action_clause}, leaving room for the rest of the scene",
+                        "roles": ["quiet"],
+                        "preferred_surfaces": ["gerund", "clause"],
+                    },
+                ],
+                [
+                    {"key": "end_plain", "text": "{scene_clause}", "roles": ["quiet"]},
+                ],
+            ]
+            prompt, debug = build_prompt_text(
+                template="",
+                composition_mode=True,
+                seed=90,
+                subj="girl",
+                costume="dress",
+                loc="station",
+                action="checking a route display before departure",
+                garnish="composed posture",
+                meta_mood="before departure",
+                return_debug=True,
+            )
+        self.assertIn("in the middle of checking a route display before departure, composed posture", prompt)
+        self.assertEqual(debug["body_key"], "body_room_for_action")
+        self.assertEqual(debug["action_surface"]["input_surface"], "gerund")
+        self.assertEqual(debug["action_surface"]["surface"], "framed")
+
+    def test_build_prompt_from_context_uses_template_history(self):
+        ctx = patch_context(
+            {},
+            updates={"subj": "girl", "costume": "office_lady", "loc": "park", "action": "walking", "seed": 13},
+            meta={"mood": "quiet"},
+        )
+        ctx = append_history(
+            ctx,
+            DebugInfo(
+                node="ContextPromptBuilder",
+                seed=12,
+                decision={"template_key": "{subject_clause}, {action_clause}, {scene_clause}."},
+            ),
+        )
+        updated, prompt = build_prompt_from_context(ctx, "", False, 13)
+        self.assertIsInstance(prompt, str)
+        self.assertNotEqual(updated.history[-1].decision["template_key"], "{subject_clause}, {action_clause}, {scene_clause}.")
+
+
+if __name__ == "__main__":
+    unittest.main()

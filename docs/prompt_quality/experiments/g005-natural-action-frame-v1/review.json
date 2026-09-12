@@ -1,0 +1,23 @@
+{
+  "candidate_only_hard_defects": [],
+  "experiment_id": "g005-natural-action-frame-v1",
+  "quality_blockers": [
+    {
+      "actual": 0.375,
+      "code": "intro_dominance_rate",
+      "expected_lte": 0.3,
+      "evidence": "assets.test_template_diversity_audit failed on the frozen unit audit shape."
+    },
+    {
+      "code": "expected_diff_not_accepted",
+      "evidence": "Six composition-mode prompt snapshots changed under the new named template stream; fixture updates are deferred until the distribution gate passes."
+    }
+  ],
+  "review_scope": {
+    "dimensions": ["naturalness", "template diversity", "legacy activation", "context size"],
+    "method": "formal comparison, full regression, template distribution audit, and snapshot expected-diff review"
+  },
+  "schema_version": "prompt-quality-review/v1",
+  "status": "fail",
+  "summary": "Punctuation and frame contracts pass, but template dominance blocks promotion."
+}

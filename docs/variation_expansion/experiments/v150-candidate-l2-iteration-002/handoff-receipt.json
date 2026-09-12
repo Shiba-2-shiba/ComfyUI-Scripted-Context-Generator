@@ -1,0 +1,57 @@
+{
+  "schema_version": "variation-candidate-l2-handoff/v1",
+  "experiment_id": "v150-candidate-l2-iteration-002",
+  "state": "ANALYZED",
+  "recorded_at": "2026-09-01",
+  "repository_head": "40cbe2645b96322be994320b31fba0f630a2de94",
+  "artifact_hashes": {
+    "base_catalog": "507d36b447e9cb1ebda482f474e370c4107162f9a1a4df6d9656e207e1fb31fa",
+    "action_overrides": "f2280068dbfc6348f95c354af44a19b8c014cd5f2f54f82e7f9d83954d48f2ae",
+    "candidate_iteration": "501294caf430a172022b70c677708daa366e3f73a34bf23e747fda4bc0ca6165",
+    "scenario_manifest": "09ce25acd24733f038374c3605b626a8ce5a36b6462a05d2f5037b0e877be362",
+    "projection_report": "22fa33494af6f6d31b63b11bcbde86501f03e3596f1bc8d8599685036a9864ad",
+    "analysis_report": "f5b1e2ad1bb2b1fdd8f850ca4357402cec66dba0cd84f6855c202babba873c9b",
+    "analyzer": "ac660c519d8bceef0fee7a95174fa2df2467a972284c3183a4a72054fa475a51",
+    "analyzer_tests": "5c1f8ab4060fc59b25e6c97a9528434e0d558791a2cbb0457dbd4ef8f7a48c1a"
+  },
+  "content_hashes": {
+    "effective_catalog_sha256": "bd9f7a7c57bc725891a3942091a8c7a0a30982f0b0df94a4c525b28c75fee0e5",
+    "scenario_manifest_canonical_sha256": "09517279d625ee0708f72fbdf265beca61e3d6d7d084b870e55a8f8f25b90c06",
+    "projection_report_canonical_sha256": "7067720f5e876a8fba96e891d5013f070cbb4ea99b515e6756dac06e07a14b81"
+  },
+  "result": {
+    "structural_status": "pass",
+    "eligible_for_prompt_evaluation": true,
+    "promotion_ready": false,
+    "prompt_quality_status": "not_evaluated",
+    "projected_rows": 7796,
+    "estimated_coverage_rows": 7817,
+    "coverage_margin": 21,
+    "projected_base_variations": 155920,
+    "candidate_action_count": 300,
+    "candidate_exact_duplicates": 0,
+    "candidate_duplicate_pressure_basis_points": 0,
+    "direct_existing_duplicate_pressure_basis_points": 50,
+    "policy_findings": 0
+  },
+  "verification": {
+    "focused_tests": "44 tests OK",
+    "prompt_data": "ERROR: [], WARNING: []",
+    "full_flow": "OK",
+    "tracked_report_reproduction": "canonical byte-equivalent",
+    "independent_verifier": "APPROVE",
+    "independent_semantic_code_review": "APPROVE after five mismatched family slices were replaced"
+  },
+  "handoff": {
+    "next_stage": "L3 candidate data and prompt-quality experiment preparation",
+    "allowed": true,
+    "data_mutation_authorized_by_this_receipt": false,
+    "requirements": [
+      "Materialize candidate data in an isolated candidate snapshot, not the active runtime baseline.",
+      "Generate baseline/candidate prompts on the locked 64+16 cohort.",
+      "Run semantic consistency, naturalness, redundancy, diversity, and policy analysis.",
+      "Do not derive prompt-quality pass/fail until a complete authenticated L3 state chain exists.",
+      "Do not promote or update variation_scope.json from this structural receipt alone."
+    ]
+  }
+}

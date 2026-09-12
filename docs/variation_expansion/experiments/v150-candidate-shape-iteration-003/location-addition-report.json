@@ -1,0 +1,64 @@
+{
+  "schema_version": "variation-location-addition-plan/v1",
+  "catalog_sha256": "bd9f7a7c57bc725891a3942091a8c7a0a30982f0b0df94a4c525b28c75fee0e5",
+  "base_report_sha256": "ed2b9a0916ebc5cc3d1bef15fcded63d7788adfe74674c3b069292798ebf4259",
+  "additions_sha256": "5e9662af7e6106d18929abcfcf2d29e4a5d4262c49d298a288e367b24d0ac50d",
+  "starting_base_variations": 141984,
+  "starting_target_gap": 8016,
+  "additions": [
+    {
+      "id": "community_theater_backstage",
+      "compatibility_tags": ["leisure", "music", "workplace"],
+      "action_count": 20,
+      "existing_subject_rows": 95,
+      "proposed_subject_rows": 11,
+      "rows": 106,
+      "base_variations": 2120,
+      "utility_group": "civic_creative_work",
+      "distinct_from": "opera_house",
+      "rationale": "Adds rehearsal preparation, prop handling, and scheduling behind a community performance space rather than another audience-facing hall."
+    },
+    {
+      "id": "greenhouse_nursery",
+      "compatibility_tags": ["nature", "retail_service", "workplace"],
+      "action_count": 20,
+      "existing_subject_rows": 100,
+      "proposed_subject_rows": 13,
+      "rows": 113,
+      "base_variations": 2260,
+      "utility_group": "horticulture_service",
+      "distinct_from": "botanical_garden",
+      "rationale": "Adds plant propagation, stock care, and customer-facing nursery work rather than display-garden observation."
+    },
+    {
+      "id": "postal_service_counter",
+      "compatibility_tags": ["daily_public", "retail_service", "workplace"],
+      "action_count": 20,
+      "existing_subject_rows": 107,
+      "proposed_subject_rows": 11,
+      "rows": 118,
+      "base_variations": 2360,
+      "utility_group": "civic_service",
+      "distinct_from": "convenience_store",
+      "rationale": "Adds parcel labeling, collection, and queue-based public service without duplicating general retail browsing."
+    },
+    {
+      "id": "vehicle_repair_garage",
+      "compatibility_tags": ["craft", "urban", "workplace"],
+      "action_count": 20,
+      "existing_subject_rows": 62,
+      "proposed_subject_rows": 11,
+      "rows": 73,
+      "base_variations": 1460,
+      "utility_group": "repair_workplace",
+      "distinct_from": "clockwork_workshop",
+      "rationale": "Adds contemporary inspection and repair work distinct from speculative clockwork fabrication."
+    }
+  ],
+  "added_rows": 410,
+  "added_base_variations": 8200,
+  "estimated_total_base_variations": 150184,
+  "target": 150000,
+  "target_gap": -184,
+  "target_met": true
+}

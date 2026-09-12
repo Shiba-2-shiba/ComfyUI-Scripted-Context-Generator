@@ -1,0 +1,986 @@
+from __future__ import annotations
+
+import json
+import logging
+import os
+import random
+import re
+from copy import deepcopy
+from typing import Callable
+
+if __package__:
+    from .core.semantic_families import (
+        filter_semantic_family_tags,
+        semantic_families_for_text,
+        split_semantic_tags,
+    )
+    from .core.semantic_policy import filter_candidate_strings, sanitize_text
+    from .core.solo_safety import filter_solo_safe_candidates, has_location_first_template_conflict, is_solo_action_safe_text
+    from .location_service import load_background_packs, resolve_location_key
+    from .pipeline.action_generator import action_verb as normalize_action_verb
+    from .pipeline.prompt_realizer import (
+        build_content_plan,
+        coerce_action_frame,
+        filter_redundant_garnish,
+        normalize_composition_punctuation,
+        normalize_subject_to_girl,
+        strip_person_demographic_descriptors,
+        realize_content_plan,
+        realize_template_parts,
+        select_syntax_family,
+    )
+    from .vocab.seed_utils import mix_seed
+else:
+    from core.semantic_families import (
+        filter_semantic_family_tags,
+        semantic_families_for_text,
+        split_semantic_tags,
+    )
+    from core.semantic_policy import filter_candidate_strings, sanitize_text
+    from core.solo_safety import filter_solo_safe_candidates, has_location_first_template_conflict, is_solo_action_safe_text
+    from location_service import load_background_packs, resolve_location_key
+    from pipeline.action_generator import action_verb as normalize_action_verb
+    from pipeline.prompt_realizer import (
+        build_content_plan,
+        coerce_action_frame,
+        filter_redundant_garnish,
+        normalize_composition_punctuation,
+        normalize_subject_to_girl,
+        strip_person_demographic_descriptors,
+        realize_content_plan,
+        realize_template_parts,
+        select_syntax_family,
+    )
+    from vocab.seed_utils import mix_seed
+
+
+ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
+DATA_DIR = os.path.join(ROOT_DIR, "vocab", "data")
+
+_PROMPT_DEBUG_ENV = "PROMPT_RENDERER_DEBUG_LOG"
+_PROMPT_DEBUG_PATH_ENV = "PROMPT_RENDERER_LOG_PATH"
+_PROMPT_DEBUG_LEVEL_ENV = "PROMPT_RENDERER_LOG_LEVEL"
+
+
+def _env_flag(name):
+    return str(os.getenv(name, "")).strip().lower() in {"1", "true", "yes", "on"}
+
+
+def _configure_logger():
+    logger_instance = logging.getLogger("PromptAssembly")
+    if getattr(logger_instance, "_prompt_renderer_configured", False):
+        return logger_instance
+
+    logger_instance.propagate = False
+    if _env_flag(_PROMPT_DEBUG_ENV):
+        level_name = str(os.getenv(_PROMPT_DEBUG_LEVEL_ENV, "DEBUG")).strip().upper() or "DEBUG"
+        log_level = getattr(logging, level_name, logging.DEBUG)
+        log_path = os.getenv(_PROMPT_DEBUG_PATH_ENV, os.path.join(ROOT_DIR, "simple_template_debug.log"))
+        handler = logging.FileHandler(log_path, encoding="utf-8")
+        formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        handler.setFormatter(formatter)
+        logger_instance.setLevel(log_level)
+        logger_instance.addHandler(handler)
+    else:
+        logger_instance.setLevel(logging.WARNING)
+        logger_instance.addHandler(logging.NullHandler())
+
+    logger_instance._prompt_renderer_configured = True
+    return logger_instance
+
+
+logger = _configure_logger()
+
+DEFAULT_GENERATION_MODE = "scene_emotion_priority"
+DEFAULT_TEMPLATE = "{subject_clause}, {action_clause}, {scene_clause}."
+DEFAULT_END_TEMPLATE = "{scene_clause}"
+
+_template_catalog_cache = None
+
+_ACTION_FOCUSED_HINTS = (
+    "read", "reading", "write", "writing", "study", "studying", "check", "checking",
+    "sort", "sorting", "organizing", "arranging", "inspect", "inspecting", "examining",
+    "working", "review", "reviewing", "comparing", "measuring", "tracking",
+)
+_ACTION_TRANSITION_HINTS = (
+    "walk", "walking", "heading", "commut", "arriv", "leav", "moving", "crossing",
+    "travel", "boarding", "stepping", "on the way", "before ", "after ", "between ",
+)
+_ACTION_SOCIAL_HINTS = (
+    "talk", "talking", "chat", "chatting", "meeting", "meet", "waving", "greet",
+    "greeting", "answer", "answering", "conversation", "friend", "companion",
+    "serving", "offering", "discuss", "discussing",
+)
+_ACTION_QUIET_HINTS = (
+    "quiet", "soft", "gentle", "pause", "lingering", "resting", "still", "calm",
+    "peaceful", "breath", "looking", "watching",
+)
+_FRAGMENT_ACTION_STARTS = {
+    "hands", "fingers", "one", "deep", "peaceful", "quiet", "gentle", "soft",
+}
+_NON_GERUND_BODY_KEYS = {
+    "body_carrying_action",
+    "body_room_for_action",
+}
+_SOLO_SUPPORT_CUE_PATTERN = re.compile(
+    r"\b(?:hands?|fingers?|posture|step|lean(?:ing)?|moving|gesture|shoulders?|stance)\b",
+    re.IGNORECASE,
+)
+_TEMPLATE_ROLE_PRIORITY = ("focused", "transition", "social", "quiet")
+_TEMPLATE_ROLE_HINTS = {
+    "focused": _ACTION_FOCUSED_HINTS,
+    "transition": _ACTION_TRANSITION_HINTS,
+    "social": _ACTION_SOCIAL_HINTS,
+    "quiet": _ACTION_QUIET_HINTS,
+}
+_TEMPLATE_ROLE_SOURCE_WEIGHTS = {
+    "action": 2.2,
+    "meta_mood": 1.5,
+    "garnish": 0.7,
+    "loc": 0.4,
+}
+
+
+def _load_template_catalog():
+    global _template_catalog_cache
+    if _template_catalog_cache is None:
+        path = os.path.join(DATA_DIR, "template_catalog.json")
+        catalog = {}
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                catalog = json.load(f)
+        _template_catalog_cache = catalog if isinstance(catalog, dict) else {}
+    return _template_catalog_cache
+
+
+def _load_lines(filename):
+    path = os.path.join(ROOT_DIR, filename)
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                lines = [line.strip() for line in f if line.strip()]
+                return lines
+        except Exception as e:
+            logger.error(f"Error loading {filename}: {e}")
+            print(f"\033[93m[PromptAssembly] Error loading {filename}: {e}\033[0m")
+    return []
+
+
+def _load_rules():
+    rule_path = os.path.join(ROOT_DIR, "rules", "consistency_rules.json")
+    if os.path.exists(rule_path):
+        try:
+            with open(rule_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                rules = data.get("conflicts", [])
+                logger.debug(f"Loaded {len(rules)} consistency rules.")
+                return rules
+        except Exception as e:
+            logger.error(f"Error loading consistency_rules.json: {e}")
+            print(f"\033[93m[PromptAssembly] Error loading consistency_rules.json: {e}\033[0m")
+    else:
+        logger.warning("consistency_rules.json not found.")
+    return []
+
+
+def _join_nonempty(parts, sep=", "):
+    cleaned = []
+    for part in parts:
+        if part is None:
+            continue
+        text = str(part).strip().strip(",")
+        if text:
+            cleaned.append(text)
+    return sep.join(cleaned)
+
+
+def _strip_clause_punctuation(text):
+    if text is None:
+        return ""
+    return re.sub(r"[\s,.;:]+$", "", str(text).strip())
+
+
+def _compose_visual_sentence(*parts):
+    clauses = []
+    for part in parts:
+        clean = _strip_clause_punctuation(part)
+        if clean:
+            clauses.append(clean)
+    if not clauses:
+        return ""
+    return ", ".join(clauses) + "."
+
+
+def _count_role_hits(text, hints):
+    lowered = str(text or "").lower()
+    return sum(1 for hint in hints if hint in lowered)
+
+
+def _derive_template_roles(action, garnish, meta_mood, loc):
+    role_scores = {role: 0.0 for role in _TEMPLATE_ROLE_PRIORITY}
+    source_texts = {
+        "action": action,
+        "meta_mood": meta_mood,
+        "garnish": garnish,
+        "loc": loc,
+    }
+    for source_name, source_text in source_texts.items():
+        weight = float(_TEMPLATE_ROLE_SOURCE_WEIGHTS.get(source_name, 1.0))
+        for role_name, hints in _TEMPLATE_ROLE_HINTS.items():
+            hits = _count_role_hits(source_text, hints)
+            if hits:
+                role_scores[role_name] += hits * weight
+
+    ordered_roles = [
+        role_name
+        for role_name, score in sorted(
+            role_scores.items(),
+            key=lambda item: (-item[1], _TEMPLATE_ROLE_PRIORITY.index(item[0])),
+        )
+        if score > 0
+    ]
+    if not ordered_roles:
+        ordered_roles = ["neutral"]
+    elif "neutral" not in ordered_roles:
+        ordered_roles.append("neutral")
+
+    return {
+        "intro_roles": list(ordered_roles),
+        "body_roles": list(ordered_roles),
+        "end_roles": list(ordered_roles),
+    }
+
+
+def _derive_action_surface(action):
+    first_clause = str(action or "").split(",", 1)[0].strip().lower()
+    if not first_clause:
+        return {"surface": "clause", "verb": "", "first_token": "", "word_count": 0}
+
+    tokens = re.findall(r"[a-z']+", first_clause)
+    first_token = tokens[0] if tokens else ""
+    verb = normalize_action_verb(first_clause)
+    surface = "clause"
+    if first_token.endswith("ing"):
+        surface = "gerund"
+    if first_token in _FRAGMENT_ACTION_STARTS:
+        surface = "fragment"
+    if verb and verb in _FRAGMENT_ACTION_STARTS:
+        surface = "fragment"
+    full_tokens = re.findall(r"[a-z']+", str(action or "").lower())
+    return {
+        "surface": surface,
+        "verb": verb,
+        "first_token": first_token,
+        "word_count": len(full_tokens),
+    }
+
+
+def _render_action_clause(action, garnish, action_surface, body_entry):
+    action_text = sanitize_text(str(action or "").strip())
+    garnish_text = sanitize_text(str(garnish or "").strip())
+    rendered_clause = sanitize_text(_join_nonempty([action_text, garnish_text]))
+    normalized_surface = dict(action_surface or {})
+    input_surface = str(normalized_surface.get("surface", "")).strip() or "clause"
+    normalized_surface["input_surface"] = input_surface
+    normalized_surface["rendered_clause"] = rendered_clause
+
+    body_key = str((body_entry or {}).get("key", "")).strip()
+    if action_text and input_surface == "gerund" and body_key in _NON_GERUND_BODY_KEYS:
+        framed_action = sanitize_text(f"in the middle of {action_text}")
+        rendered_clause = sanitize_text(_join_nonempty([framed_action, garnish_text]))
+        normalized_surface["surface"] = "framed"
+        normalized_surface["rendered_clause"] = rendered_clause
+
+    return rendered_clause, normalized_surface
+
+
+def _fallback_template_entries(filename, prefix):
+    entries = []
+    for index, line in enumerate(_load_lines(filename)):
+        entries.append(
+            {
+                "key": f"{prefix}_{index}",
+                "text": line,
+                "roles": ["neutral"],
+            }
+        )
+    return entries
+
+
+def _template_entries(section_name):
+    catalog = _load_template_catalog()
+    entries = catalog.get(section_name, []) if isinstance(catalog, dict) else []
+    normalized = []
+    for index, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            continue
+        text = str(entry.get("text", "")).strip()
+        if not text:
+            continue
+        key = str(entry.get("key", f"{section_name}_{index}")).strip() or f"{section_name}_{index}"
+        roles = [str(item).strip() for item in entry.get("roles", []) if str(item).strip()]
+        normalized.append(
+            {
+                "key": key,
+                "text": text,
+                "roles": roles or ["neutral"],
+                "needs_garnish": bool(entry.get("needs_garnish", False)),
+                "needs_mood": bool(entry.get("needs_mood", False)),
+                "needs_loc": bool(entry.get("needs_loc", False)),
+                "preferred_surfaces": [str(item).strip() for item in entry.get("preferred_surfaces", []) if str(item).strip()],
+                "avoid_surfaces": [str(item).strip() for item in entry.get("avoid_surfaces", []) if str(item).strip()],
+                "min_action_words": int(entry.get("min_action_words", 0) or 0),
+                "max_action_words": int(entry.get("max_action_words", 0) or 0),
+            }
+        )
+    if normalized:
+        return normalized
+    fallback_map = {
+        "intro": _fallback_template_entries("vocab/templates_intro.txt", "intro"),
+        "body": _fallback_template_entries("vocab/templates_body.txt", "body"),
+        "end": _fallback_template_entries("vocab/templates_end.txt", "end"),
+    }
+    return fallback_map.get(section_name, [])
+
+
+def _filter_solo_template_entries(entries):
+    kept = []
+    dropped = []
+    for entry in entries:
+        text = str((entry or {}).get("text", "")).strip()
+        if has_location_first_template_conflict(text):
+            dropped.append(entry)
+        else:
+            kept.append(entry)
+    return kept or list(entries), dropped
+
+
+def _is_solo_prompt_context(subj: str, staging_tags: str = "") -> bool:
+    source = f"{subj or ''} {staging_tags or ''}".lower()
+    return "solo" in source or "1girl" in source
+
+
+def _compact_solo_support_tags(garnish: str, staging_tags: str):
+    kept_garnish = []
+    kept_staging = []
+    dropped = []
+    support_used = False
+
+    def accept_tag(tag: str) -> bool:
+        nonlocal support_used
+        if not is_solo_action_safe_text(tag):
+            return False
+        if _SOLO_SUPPORT_CUE_PATTERN.search(tag):
+            if support_used:
+                return False
+            support_used = True
+        return True
+
+    for tag in split_semantic_tags(garnish):
+        if accept_tag(tag):
+            kept_garnish.append(tag)
+        else:
+            dropped.append(tag)
+    for tag in split_semantic_tags(staging_tags):
+        if accept_tag(tag):
+            kept_staging.append(tag)
+        else:
+            dropped.append(tag)
+
+    return sanitize_text(", ".join(kept_garnish)), sanitize_text(", ".join(kept_staging)), dropped
+
+
+def _select_template_entry(
+    entries,
+    default_text,
+    default_key,
+    preferred_roles,
+    recent_part_keys,
+    recent_templates,
+    rng,
+    is_consistent,
+    has_garnish,
+    has_loc,
+    has_mood,
+    action_surface=None,
+):
+    if not entries:
+        return {"key": default_key, "text": default_text, "roles": ["neutral"]}
+
+    recent_part_keys = {str(item) for item in (recent_part_keys or []) if item}
+    recent_templates = {str(item) for item in (recent_templates or []) if item}
+    recent_component_keys = {
+        component
+        for template_key in recent_templates
+        for component in template_key.split("||")
+        if component
+    }
+    preferred_roles = [str(item) for item in (preferred_roles or []) if item]
+
+    candidates = []
+    for entry in entries:
+        if entry.get("needs_garnish") and not has_garnish:
+            continue
+        if entry.get("needs_loc") and not has_loc:
+            continue
+        if entry.get("needs_mood") and not has_mood:
+            continue
+        if not is_consistent(entry["text"]):
+            continue
+        action_word_count = int((action_surface or {}).get("word_count", 0) or 0)
+        min_action_words = int(entry.get("min_action_words", 0) or 0)
+        max_action_words = int(entry.get("max_action_words", 0) or 0)
+        if min_action_words and action_word_count < min_action_words:
+            continue
+        if max_action_words and action_word_count > max_action_words:
+            continue
+        if action_word_count > 20:
+            key = str(entry.get("key", ""))
+            if key.startswith("intro_") and key != "intro_plain_subject":
+                continue
+            if key.startswith("body_") and key != "body_direct_clause":
+                continue
+
+        score = 1.0
+        roles = entry.get("roles", [])
+        for index, role in enumerate(preferred_roles):
+            if role in roles:
+                score += max(0.4, 2.0 - (index * 0.3))
+        surface_name = str((action_surface or {}).get("surface", "")).strip()
+        first_action_token = str((action_surface or {}).get("first_token", "")).strip()
+        literal_template_text = re.sub(r"\{[^}]+\}", "", entry["text"]).lower()
+        if first_action_token and len(first_action_token) > 3 and re.search(
+            rf"\b{re.escape(first_action_token)}\b", literal_template_text
+        ):
+            continue
+        if surface_name:
+            if surface_name in entry.get("preferred_surfaces", []):
+                score += 1.1
+            if surface_name in entry.get("avoid_surfaces", []):
+                score *= 0.25
+        if entry["key"] in recent_part_keys and len(entries) > 1:
+            score *= 0.15
+        if entry["key"] in recent_component_keys and len(entries) > 1:
+            score *= 0.25
+        candidates.append((entry, max(score, 0.01)))
+
+    if not candidates:
+        return {"key": default_key, "text": default_text, "roles": ["neutral"]}
+
+    non_recent_candidates = [
+        item for item in candidates
+        if item[0]["key"] not in recent_part_keys
+        and item[0]["key"] not in recent_component_keys
+    ]
+    if non_recent_candidates:
+        candidates = non_recent_candidates
+
+    candidate_entries = [item[0] for item in candidates]
+    weights = [item[1] for item in candidates]
+    return rng.choices(candidate_entries, weights=weights, k=1)[0]
+
+
+def _normalize_prompt(text):
+    if text is None:
+        return ""
+    return sanitize_text(str(text))
+
+
+def _apply_semantic_family_budget(action, garnish, meta_mood, staging_tags):
+    action_text = sanitize_text(str(action or "").strip())
+    garnish_tags = split_semantic_tags(garnish)
+    meta_mood_text = sanitize_text(str(meta_mood or "").strip())
+    staging_tag_items = split_semantic_tags(staging_tags)
+
+    base_families = semantic_families_for_text(action_text) | semantic_families_for_text(meta_mood_text)
+    filtered_garnish_tags, dropped_garnish_tags, garnish_families = filter_semantic_family_tags(
+        garnish_tags,
+        blocked_families=base_families,
+        per_family_limit=1,
+    )
+    filtered_staging_tags, dropped_staging_tags, staging_families = filter_semantic_family_tags(
+        staging_tag_items,
+        blocked_families=base_families | garnish_families,
+        per_family_limit=1,
+    )
+
+    return {
+        "action": action_text,
+        "garnish": sanitize_text(", ".join(filtered_garnish_tags)),
+        "meta_mood": meta_mood_text,
+        "staging_tags": sanitize_text(", ".join(filtered_staging_tags)),
+        "debug": {
+            "base_families": sorted(base_families),
+            "garnish_input_tags": garnish_tags,
+            "garnish_kept_tags": filtered_garnish_tags,
+            "garnish_dropped_tags": dropped_garnish_tags,
+            "garnish_kept_families": sorted(garnish_families),
+            "staging_input_tags": staging_tag_items,
+            "staging_kept_tags": filtered_staging_tags,
+            "staging_dropped_tags": dropped_staging_tags,
+            "staging_kept_families": sorted(staging_families),
+            "final_families": sorted(base_families | garnish_families | staging_families),
+        },
+    }
+
+
+def _make_consistency_checker(rules, context_values):
+    def is_consistent(template_part):
+        for rule in rules:
+            input_term = rule.get("input_term", "").lower()
+            template_term = rule.get("template_term", "").lower()
+            if not input_term or not template_term:
+                continue
+            triggered = False
+            for val in context_values:
+                if val and input_term in str(val).lower():
+                    triggered = True
+                    break
+            if triggered and template_term in str(template_part).lower():
+                logger.debug(
+                    f"Conflict detected: input '{input_term}' conflicts with template '{template_term}' in part '{template_part}'"
+                )
+                return False
+        return True
+
+    return is_consistent
+
+
+def _expand_location_key_for_builder(loc, rng, context_values, is_consistent, solo_prompt_context=False):
+    if not loc or not isinstance(loc, str):
+        return loc
+    try:
+        bg_packs = load_background_packs()
+        resolved_loc = resolve_location_key(loc) or loc
+        if resolved_loc not in bg_packs:
+            return loc
+        logger.info(f"Expanding location: {resolved_loc}")
+        pack = bg_packs[resolved_loc]
+        parts = []
+
+        def pick_consistent(candidates):
+            safe_candidates = filter_candidate_strings(candidates)
+            if solo_prompt_context:
+                safe_candidates = filter_solo_safe_candidates(safe_candidates)
+            if not safe_candidates:
+                return None
+            for _ in range(10):
+                candidate = rng.choice(safe_candidates)
+                if is_consistent(str(candidate)):
+                    return candidate
+            logger.debug("Failed to find consistent candidate after 10 attempts.")
+            return None
+
+        envs = pack.get("environment", [])
+        if envs:
+            e = pick_consistent(envs)
+            parts.append(e if e else pack.get("label", resolved_loc))
+        else:
+            parts.append(pack.get("label", resolved_loc))
+
+        times = pack.get("time", [])
+        if times:
+            t = pick_consistent(times)
+            if t:
+                parts.append(f"during {t}")
+        weathers = pack.get("weather", [])
+        if weathers:
+            w = pick_consistent(weathers)
+            if w:
+                parts.append(w)
+        crowds = pack.get("crowd", [])
+        if crowds:
+            c = pick_consistent(crowds)
+            if c:
+                parts.append(c)
+        new_loc = ", ".join(parts)
+        logger.debug(f"Expanded loc '{resolved_loc}' to '{new_loc}'")
+        return sanitize_text(new_loc)
+    except Exception as e:
+        logger.error(f"Error expanding location: {e}")
+        print(f"[PromptAssembly] Error expanding location: {e}")
+        return loc
+
+
+def _arbitrate_prompt_cues(
+    *,
+    action,
+    garnish,
+    meta_mood,
+    staging_tags,
+    action_frame,
+    composition_mode,
+):
+    exact_dropped = []
+    if composition_mode:
+        garnish, exact_dropped = filter_redundant_garnish(action, garnish, action_frame)
+
+    layers = _apply_semantic_family_budget(action, garnish, meta_mood, staging_tags)
+    layers["debug"]["exact_redundancy_dropped"] = exact_dropped
+    return layers
+
+
+LOW_VALUE_COMPOSITION_FILLERS = {
+    "already in the middle of things",
+    "caught in a brief pause",
+    "gathering herself for what comes next",
+    "holding herself with easy energy",
+    "keeping to the edge of the moment",
+    "measured pause",
+    "moving with the next part of the day",
+    "right where her attention settles",
+    "the moment gathering around her",
+    "the moment kept deliberate rather than urgent",
+    "the moment staying with her",
+    "turned toward the next exchange",
+    "leaving room for the rest of the scene",
+    "with everything else held at the edge",
+}
+COMPOSITION_FILLER_PREFIX_REWRITES = {
+    "the moment lingering in ": "in ",
+    "with the next part of the day waiting in ": "in ",
+}
+ACTIVE_ACTION_VERBS = {
+    "carrying",
+    "cleaning",
+    "cooking",
+    "filling",
+    "lifting",
+    "moving",
+    "placing",
+    "pruning",
+    "rolling",
+    "running",
+    "stepping",
+    "sweeping",
+    "turning",
+    "walking",
+}
+ACTIVE_STASIS_FILLERS = {
+    "caught in a brief pause",
+    "the moment kept deliberate rather than urgent",
+}
+ACTIVE_STASIS_PREFIX_REWRITES = {
+    "the moment lingering in ": "in ",
+}
+
+
+def _prune_redundant_prompt_fillers(text):
+    parts = [part.strip() for part in str(text or "").split(",")]
+    kept = []
+    for part in parts:
+        for prefix, replacement in COMPOSITION_FILLER_PREFIX_REWRITES.items():
+            if part.casefold().startswith(prefix):
+                part = replacement + part[len(prefix):]
+                break
+        if part.casefold() in LOW_VALUE_COMPOSITION_FILLERS:
+            continue
+        if part:
+            kept.append(part)
+    return ", ".join(kept)
+
+
+def _prune_action_incompatible_fillers(text, action):
+    if normalize_action_verb(action) not in ACTIVE_ACTION_VERBS:
+        return str(text or "")
+    kept = []
+    for raw_part in str(text or "").split(","):
+        part = raw_part.strip()
+        for prefix, replacement in ACTIVE_STASIS_PREFIX_REWRITES.items():
+            if part.casefold().startswith(prefix):
+                part = replacement + part[len(prefix):]
+                break
+        if part.casefold() in ACTIVE_STASIS_FILLERS:
+            continue
+        if part:
+            kept.append(part)
+    return ", ".join(kept)
+
+
+def _append_staging_tags(result, staging_tags):
+    if "{staging_tags}" in result:
+        return result.replace("{staging_tags}", staging_tags)
+    base_result = str(result).rstrip()
+    terminal = "." if base_result.endswith(".") else ""
+    base_result = base_result.rstrip(".")
+    return f"{base_result}, {sanitize_text(staging_tags)}{terminal}"
+
+
+def _finalize_prompt(template, *, replacements, staging_tags, action, composition_mode):
+    """Apply the shared final Builder substitutions and normalization in order."""
+    result = template
+    for token, replacement in replacements:
+        result = result.replace(token, str(replacement) if replacement is not None else "")
+    if staging_tags and isinstance(staging_tags, str) and staging_tags.strip():
+        result = _append_staging_tags(result, staging_tags)
+    else:
+        result = result.replace("{staging_tags}", "")
+    result = _prune_redundant_prompt_fillers(result)
+    result = _prune_action_incompatible_fillers(result, action)
+    result = _normalize_prompt(result)
+    result = normalize_subject_to_girl(result)
+    result = strip_person_demographic_descriptors(result)
+    if composition_mode:
+        result = normalize_composition_punctuation(result)
+    return result
+
+
+def build_prompt_text(
+    template,
+    composition_mode,
+    seed,
+    subj="",
+    costume="",
+    loc="",
+    action="",
+    garnish="",
+    meta_mood="",
+    meta_style="",
+    staging_tags="",
+    recent_templates=None,
+    recent_intro_keys=None,
+    recent_body_keys=None,
+    recent_end_keys=None,
+    action_frame=None,
+    return_debug=False,
+    template_entries_fn: Callable[[str], list[dict]] | None = None,
+    producer_context=None,
+    *,
+    audit_sink=None,
+):
+    logger.info(f"--- PromptAssembly Build Start (Seed: {seed}) ---")
+    logger.debug(f"Generation Mode: {DEFAULT_GENERATION_MODE}")
+    logger.debug(
+        f"Inputs - Subj: {subj}, Costume: {costume}, Loc: {loc}, Action: {action}, "
+        f"Garnish: {garnish}, Mood: {meta_mood}, DeprecatedStyle: {meta_style}, Staging: {staging_tags}"
+    )
+    logger.debug(f"Composition Mode: {composition_mode}")
+
+    template_entries_fn = template_entries_fn or _template_entries
+    subj = strip_person_demographic_descriptors(normalize_subject_to_girl(subj))
+    rng = random.Random(seed)
+    semantic_layers = _arbitrate_prompt_cues(
+        action=action,
+        garnish=garnish,
+        meta_mood=meta_mood,
+        staging_tags=staging_tags,
+        action_frame=action_frame,
+        composition_mode=composition_mode,
+    )
+    action = semantic_layers["action"]
+    garnish = semantic_layers["garnish"]
+    meta_mood = semantic_layers["meta_mood"]
+    staging_tags = semantic_layers["staging_tags"]
+    solo_prompt_context = _is_solo_prompt_context(subj, staging_tags)
+    solo_support_dropped_tags = []
+    if solo_prompt_context:
+        garnish, staging_tags, solo_support_dropped_tags = _compact_solo_support_tags(garnish, staging_tags)
+    realizer_dropped_garnish = semantic_layers["debug"]["exact_redundancy_dropped"]
+    subject_clause = sanitize_text(_join_nonempty([subj, f"in {costume}" if costume else ""], " "))
+    action_clause = sanitize_text(_join_nonempty([action, garnish]))
+    scene_clause = sanitize_text(_join_nonempty([f"in {loc}" if loc else "", meta_mood]))
+    rules = _load_rules()
+    context_vals = [subj, costume, loc, action, garnish, meta_mood, staging_tags]
+    is_consistent = _make_consistency_checker(rules, context_vals)
+    recent_templates = {str(item) for item in (recent_templates or []) if item}
+    selected_template_key = ""
+    bridge_snapshot = None
+    common_evidence_inputs = None
+    common_evidence = None
+    common_evidence_error = None
+
+    def collect_bridge(snapshot):
+        nonlocal bridge_snapshot
+        bridge_snapshot = snapshot
+
+    loc = _expand_location_key_for_builder(loc, rng, context_vals, is_consistent, solo_prompt_context=solo_prompt_context)
+    context_vals = [subj, costume, loc, action, garnish, meta_mood, staging_tags]
+    is_consistent = _make_consistency_checker(rules, context_vals)
+    scene_clause = sanitize_text(_join_nonempty([f"in {loc}" if loc else "", meta_mood]))
+    scene_anchor_clause = scene_clause[3:] if scene_clause.lower().startswith("in ") else scene_clause
+
+    if composition_mode:
+        logger.info("Using Composition Mode")
+        template_seed = mix_seed(seed, "prompt_template")
+        intro_rng = random.Random(mix_seed(seed, "natural_intro_v2"))
+        body_rng = random.Random(mix_seed(seed, "prompt_syntax"))
+        end_rng = random.Random(mix_seed(template_seed, "end"))
+        template_roles = _derive_template_roles(action, garnish, meta_mood, loc)
+        action_surface = _derive_action_surface(action)
+        solo_template_filter_applied = solo_prompt_context
+        solo_template_filtered_keys = {}
+        intro_entries = template_entries_fn("intro")
+        body_entries = template_entries_fn("body")
+        end_entries = template_entries_fn("end")
+        if solo_template_filter_applied:
+            intro_entries, dropped_intro_entries = _filter_solo_template_entries(intro_entries)
+            body_entries, dropped_body_entries = _filter_solo_template_entries(body_entries)
+            end_entries, dropped_end_entries = _filter_solo_template_entries(end_entries)
+            solo_template_filtered_keys = {
+                "intro": [str(entry.get("key", "")) for entry in dropped_intro_entries],
+                "body": [str(entry.get("key", "")) for entry in dropped_body_entries],
+                "end": [str(entry.get("key", "")) for entry in dropped_end_entries],
+            }
+        intro_entry = _select_template_entry(
+            intro_entries,
+            "{subject_clause}",
+            "intro_default",
+            template_roles["intro_roles"],
+            recent_intro_keys,
+            recent_templates,
+            intro_rng,
+            is_consistent,
+            has_garnish=bool(str(garnish).strip()),
+            has_loc=bool(str(loc).strip()),
+            has_mood=bool(str(meta_mood).strip()),
+            action_surface=action_surface,
+        )
+        body_entry = _select_template_entry(
+            body_entries,
+            "{action_clause}",
+            "body_default",
+            template_roles["body_roles"],
+            recent_body_keys,
+            recent_templates,
+            body_rng,
+            is_consistent,
+            has_garnish=bool(str(garnish).strip()),
+            has_loc=bool(str(loc).strip()),
+            has_mood=bool(str(meta_mood).strip()),
+            action_surface=action_surface,
+        )
+        end_entry = _select_template_entry(
+            end_entries,
+            DEFAULT_END_TEMPLATE,
+            "end_default",
+            template_roles["end_roles"],
+            recent_end_keys,
+            recent_templates,
+            end_rng,
+            is_consistent,
+            has_garnish=bool(str(garnish).strip()),
+            has_loc=bool(str(loc).strip()),
+            has_mood=bool(str(meta_mood).strip()),
+            action_surface=action_surface,
+        )
+
+        p_intro = intro_entry["text"]
+        p_body = body_entry["text"]
+        p_end = end_entry["text"]
+        if (
+            normalize_action_verb(action) in {"reading", "studying", "examining", "inspecting"}
+            or coerce_action_frame(action_frame).gaze_target
+            or "gaze" in semantic_families_for_text(_join_nonempty([action, garnish, staging_tags]))
+        ):
+            # Optional narration must not restate attention already owned by a
+            # concrete action or gaze. Preserve the selected template and RNG.
+            p_body = p_body.removesuffix(", her attention fixed on it")
+        action_clause, action_surface = _render_action_clause(action, garnish, action_surface, body_entry)
+        syntax_family = select_syntax_family(seed)
+        content_plan = build_content_plan(
+            seed=seed,
+            subject_clause=p_intro,
+            action_clause=p_body,
+            scene_clause=p_end,
+            action_frame=action_frame,
+            template_roles=template_roles,
+            template_keys=(intro_entry["key"], body_entry["key"], end_entry["key"]),
+            action_surface=action_surface,
+            syntax_family=syntax_family,
+        )
+        template, realizer_debug = realize_content_plan(content_plan, return_debug=True)
+        if __package__:
+            from .pipeline.v2_candidate_bridge import render_candidate
+        else:
+            from pipeline.v2_candidate_bridge import render_candidate
+        replacements = [
+            ("{subject_clause}", subject_clause), ("{action_clause}", action_clause),
+            ("{scene_clause}", scene_clause), ("{scene_anchor_clause}", scene_anchor_clause),
+            ("{subj}", subj), ("{costume}", costume), ("{loc}", loc), ("{action}", action),
+            ("{garnish}", garnish), ("{meta_mood}", meta_mood), ("{meta_style}", ""),
+        ]
+        if audit_sink is not None or isinstance((producer_context or {}).get('context'), dict):
+            if __package__:
+                from .pipeline.realization_evidence import build_realization_evidence, evidence_to_dict
+            else:
+                from pipeline.realization_evidence import build_realization_evidence, evidence_to_dict
+            common_evidence_inputs = {
+                'context': (producer_context or {}).get('context'),
+                'subject': subj, 'clothing': costume, 'scene': loc, 'action': action,
+                'garnish': garnish, 'mood': meta_mood, 'staging_tags': staging_tags,
+                'action_frame': action_frame, 'seed': seed,
+                'composition_mode': bool(composition_mode),
+                'character_palette': (producer_context or {}).get('character_palette'),
+                'selected_templates': {'intro': intro_entry, 'body': body_entry, 'end': end_entry},
+                'template_slots': {'subject': p_intro, 'adjunct': p_body, 'scene': p_end},
+            }
+            if audit_sink is not None:
+                try:
+                    common_evidence = evidence_to_dict(build_realization_evidence(common_evidence_inputs))
+                except (TypeError, ValueError):
+                    common_evidence_error = 'invalid_inputs'
+        template, content_plan, realizer_debug = render_candidate(
+            content_plan, template, realizer_debug, action_frame, action_surface, replacements, seed,
+            producer_context=producer_context,
+            common_inputs=common_evidence_inputs,
+            audit_sink=collect_bridge if audit_sink is not None else None,
+        )
+        selected_template_key = f"{intro_entry['key']}||{body_entry['key']}||{end_entry['key']}"
+        logger.debug(f"Composed Template: {template}")
+    else:
+        logger.info("Using Legacy/Single Template Mode")
+        realizer_debug = {
+            "realizer_version": "v1",
+            "syntax_family": None,
+            "eligible_syntax_families": [],
+            "syntax_fallback_reason": "legacy_template_no_structural_metadata",
+            "clause_order": [],
+        }
+        if not template or str(template).strip() == "" or template == DEFAULT_TEMPLATE:
+            lines = _load_lines("templates.txt")
+            if lines:
+                non_recent = [line for line in lines if line not in recent_templates]
+                template = rng.choice(non_recent or lines)
+        selected_template_key = str(template)
+
+    replacements = [
+        ("{subject_clause}", subject_clause), ("{action_clause}", action_clause),
+        ("{scene_clause}", scene_clause), ("{scene_anchor_clause}", scene_anchor_clause),
+        ("{subj}", subj), ("{costume}", costume), ("{loc}", loc), ("{action}", action),
+        ("{garnish}", garnish), ("{meta_mood}", meta_mood), ("{meta_style}", ""),
+    ]
+    finalization = dict(replacements=replacements, staging_tags=staging_tags,
+                        action=action, composition_mode=bool(composition_mode))
+    result = _finalize_prompt(template, **finalization)
+    if audit_sink is not None:
+        audit_sink(json.loads(json.dumps(deepcopy({
+            'bridge': bridge_snapshot, 'finalization': finalization, 'raw_prompt': result,
+            'common_evidence_inputs': common_evidence_inputs, 'common_evidence': common_evidence,
+            'common_evidence_error': common_evidence_error,
+        }))))
+    logger.info(f"Final Prompt: {result}")
+    if return_debug:
+        debug_payload = {
+            **realizer_debug,
+            "template_key": selected_template_key or str(template),
+            "composition_mode": bool(composition_mode),
+            "semantic_family_budget": semantic_layers["debug"],
+            "solo_support_dropped_tags": solo_support_dropped_tags,
+        }
+        if composition_mode:
+            debug_payload.update(
+                {
+                    "intro_key": intro_entry["key"],
+                    "body_key": body_entry["key"],
+                    "end_key": end_entry["key"],
+                    "template_roles": template_roles,
+                    "action_surface": action_surface,
+                    "content_plan": content_plan.to_dict(),
+                    "action_frame": dict(action_frame) if isinstance(action_frame, dict) else {},
+                    "realizer_dropped_garnish": realizer_dropped_garnish,
+                    "solo_template_filter_applied": solo_template_filter_applied,
+                    "solo_template_filtered_keys": solo_template_filtered_keys,
+                }
+            )
+        return result, debug_payload
+    return result

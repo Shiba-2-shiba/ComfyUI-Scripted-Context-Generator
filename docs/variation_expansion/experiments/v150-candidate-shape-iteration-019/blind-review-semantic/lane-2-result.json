@@ -1,0 +1,261 @@
+{
+  "schema_version": "prompt-quality-blind-review-result/v4",
+  "lane_id": "lane-2",
+  "reviewer_id": "fresh-q69-reviewer-2",
+  "reviewer_type": "independent",
+  "reviewer_model_version": "gpt-5.6-sol",
+  "blinded": true,
+  "rubric_version": "prompt-quality-review-rubric/v2",
+  "rubric_hash": "dbafc9c19de7ed46e493d38e8c1c0e2fddf0e247c09097141433f1b99143301b",
+  "review_prompt_hash": "dbafc9c19de7ed46e493d38e8c1c0e2fddf0e247c09097141433f1b99143301b",
+  "input_hash": "dfc1ad0f2c0781884592a5b6ca892c98a1acd6df488239945dc784b2d592d095",
+  "votes": [
+    {
+      "pair_id": "vsp-5eca5896da0a9567",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "equal",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-da8e652ee9d01a78",
+      "dimensions": {
+        "protagonist_clarity": "equal",
+        "consistency": "equal",
+        "naturalness": "equal",
+        "redundancy": "equal",
+        "diversity": "equal",
+        "image_prompt_suitability": "equal"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-7124af0f3dd2cd99",
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "A_better",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {
+        "A": [],
+        "B": [{"code": "consistency_rule_conflict", "evidence": "The prompt simultaneously states \"busy professional atmosphere\" and \"nearly empty\"."}]
+      }
+    },
+    {
+      "pair_id": "vsp-599feb860255e126",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "A_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-3ac0c34bd7a6e83d",
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "A_better",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-eac956e05f709c27",
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "A_better",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-a463042da690f7e5",
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "A_better",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {
+        "A": [],
+        "B": [{"code": "location_action_object_conflict", "evidence": "The protagonist is \"walking through the space\" while the location is explicitly \"inside a massive curling ocean wave\"."}]
+      }
+    },
+    {
+      "pair_id": "vsp-f2d09a18f5494fee",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "A_better",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-d9890d4bdfb970c8",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-90cee8fdadf4c97a",
+      "dimensions": {
+        "protagonist_clarity": "equal",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-a08e5896b3be54f7",
+      "dimensions": {
+        "protagonist_clarity": "A_better",
+        "consistency": "A_better",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-7b5b6de820c3908e",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "B_better",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-26ab93bb7679ceb8",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "equal",
+        "naturalness": "equal",
+        "redundancy": "equal",
+        "diversity": "equal",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-9ace57ec60310399",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "A_better",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-d51c4c8d80740ec1",
+      "dimensions": {
+        "protagonist_clarity": "equal",
+        "consistency": "equal",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "B_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-fb716404aa83d4cc",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "equal",
+        "redundancy": "A_better",
+        "diversity": "A_better",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-9e3d3e85d7ace96a",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "equal",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "A_better",
+        "image_prompt_suitability": "equal"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-9308c31589538d41",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "equal",
+        "naturalness": "equal",
+        "redundancy": "equal",
+        "diversity": "equal",
+        "image_prompt_suitability": "A_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-2231706456e45e76",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "equal",
+        "naturalness": "A_better",
+        "redundancy": "equal",
+        "diversity": "equal",
+        "image_prompt_suitability": "equal"
+      },
+      "hard_defects": {"A": [], "B": []}
+    },
+    {
+      "pair_id": "vsp-8514fb30b19add5a",
+      "dimensions": {
+        "protagonist_clarity": "B_better",
+        "consistency": "B_better",
+        "naturalness": "B_better",
+        "redundancy": "equal",
+        "diversity": "equal",
+        "image_prompt_suitability": "B_better"
+      },
+      "hard_defects": {"A": [], "B": []}
+    }
+  ],
+  "review_session_id": "81ebfef9-4b13-4ed2-b70f-d32f4d4b16ec"
+}

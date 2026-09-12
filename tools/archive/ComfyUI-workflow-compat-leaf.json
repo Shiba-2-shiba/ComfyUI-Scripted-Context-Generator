@@ -1,0 +1,217 @@
+{
+  "id": "e786c58c-f0db-4828-9916-c1e0b555f784",
+  "revision": 0,
+  "last_node_id": 7,
+  "last_link_id": 0,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "ThemeClothingExpander",
+      "pos": [
+        -900,
+        -3780
+      ],
+      "size": [
+        311,
+        150
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "theme_key",
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "character_palette",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "clothing_prompt",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ThemeClothingExpander",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "office_lady",
+        0,
+        "random",
+        0.3,
+        ""
+      ]
+    },
+    {
+      "id": 4,
+      "type": "ThemeLocationExpander",
+      "pos": [
+        -900,
+        -3420
+      ],
+      "size": [
+        311,
+        130
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "loc_tag",
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "location_prompt",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ThemeLocationExpander",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.6.2",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "classroom",
+        0,
+        "detailed",
+        "auto"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CharacterProfileNode",
+      "pos": [
+        -2000,
+        -3700
+      ],
+      "size": [
+        281.92734375,
+        210
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "subj_prompt",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "hair_color",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "eye_color",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "personality",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "color_palette_str",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CharacterProfileNode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "random",
+        "Aiko (Quiet)",
+        0,
+        "randomize"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "DictionaryExpand",
+      "pos": [
+        -900,
+        -3060
+      ],
+      "size": [
+        273,
+        130
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "key",
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "expanded_text",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DictionaryExpand",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        "",
+        "mood_map.json",
+        "",
+        0
+      ]
+    }
+  ],
+  "links": [],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "workflowRendererVersion": "LG",
+    "ue_links": [],
+    "ds": {
+      "scale": 1.0,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "frontendVersion": "1.39.14"
+  },
+  "version": 0.4
+}

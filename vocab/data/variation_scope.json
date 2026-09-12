@@ -1,0 +1,855 @@
+{
+  "_comment": "Base variation sizing scope. This file defines which subjects and locations are intentionally counted by assets/compatibility_review.csv.",
+  "schema_version": "1.0",
+  "expected_metrics": {
+    "unique_subjects": 135,
+    "unique_locations": 109,
+    "row_count": 8227,
+    "total_base_variations": 150184
+  },
+  "variation_subjects": [
+    "CEO",
+    "after school walker",
+    "after work shopper",
+    "afternoon reader",
+    "airship captain",
+    "apartment neighbor",
+    "apartment resident",
+    "arcade girl",
+    "arcade regular",
+    "bakery clerk",
+    "balcony gardener",
+    "blonde elf archer",
+    "bookworm girl",
+    "boutique customer",
+    "business girl",
+    "cafe barista",
+    "cafe customer",
+    "cafeteria student",
+    "campus club member",
+    "campus girl",
+    "campus student",
+    "chef girl",
+    "cinema visitor",
+    "city girl",
+    "clockwork artisan",
+    "club member",
+    "community organizer",
+    "commuter",
+    "convenience clerk",
+    "coworking freelancer",
+    "cyberpunk girl",
+    "cyberpunk hacker",
+    "cyberpunk mercenary",
+    "dancer girl",
+    "detective",
+    "doll-like girl",
+    "family diner",
+    "fantasy warrior",
+    "fashionista",
+    "girl knight",
+    "fitness model",
+    "flower girl",
+    "food court visitor",
+    "gallery sketcher",
+    "geisha",
+    "gothic doll",
+    "gothic girl",
+    "guitarist",
+    "gym girl",
+    "home girl",
+    "idol performer",
+    "injured knight",
+    "inventor girl",
+    "kendo girl",
+    "late shopper",
+    "laundry day girl",
+    "library girl",
+    "library visitor",
+    "local market vendor",
+    "local volunteer",
+    "lunch break girl",
+    "mall browser",
+    "market shopper",
+    "mori girl",
+    "morning customer",
+    "morning girl",
+    "mountain resort guest",
+    "moviegoer",
+    "museum docent",
+    "nature wanderer",
+    "neighborhood student",
+    "neighborhood walker",
+    "noble girl",
+    "office girl",
+    "office worker",
+    "opera singer",
+    "park girl",
+    "pharmacy customer",
+    "playground caretaker",
+    "project assistant",
+    "public librarian",
+    "quiet reader",
+    "rainy day girl",
+    "recording artist",
+    "resident",
+    "riverside walker",
+    "rock singer",
+    "rock star",
+    "rooftop neighbor",
+    "runner",
+    "secret agent",
+    "shopping arcade visitor",
+    "shopping girl",
+    "shrine maiden",
+    "silver-haired girl",
+    "sleepy girl",
+    "solarpunk girl",
+    "sorceress",
+    "space engineer",
+    "space pilot",
+    "spy agent",
+    "stargazer",
+    "station traveler",
+    "steampunk inventor",
+    "street dancer",
+    "street girl",
+    "student",
+    "subway passenger",
+    "supermarket shopper",
+    "surfer girl",
+    "train commuter",
+    "university student",
+    "urban shopper",
+    "vacation girl",
+    "vacationer",
+    "weekend traveler",
+    "window shopper",
+    "winter date girl",
+    "winter traveler",
+    "yoga instructor",
+    "architect",
+    "astronomer",
+    "barber",
+    "delivery courier",
+    "farmer",
+    "fisher",
+    "florist",
+    "journalist",
+    "mechanic",
+    "nurse",
+    "paramedic",
+    "photographer",
+    "researcher",
+    "shopkeeper",
+    "teacher"
+  ],
+  "variation_locations": [
+    "abandoned_shrine",
+    "airship_deck",
+    "alien_planet",
+    "antique_shop",
+    "apartment_balcony",
+    "apartment_entryway",
+    "aquarium",
+    "art_gallery",
+    "bakery_shop",
+    "bamboo_forest",
+    "bedroom_boudoir",
+    "boardroom",
+    "botanical_garden",
+    "burning_battlefield",
+    "bus_terminal",
+    "campus_cafeteria",
+    "campus_hallway",
+    "castle_hall",
+    "cinema_lobby",
+    "clean_modern_kitchen",
+    "clockwork_workshop",
+    "community_center",
+    "commuter_transport",
+    "concert_stage",
+    "convenience_store",
+    "coworking_space",
+    "cozy_bookstore",
+    "cozy_living_room",
+    "cyber_lab",
+    "cyberpunk_street",
+    "dragon_lair",
+    "drugstore_aisle",
+    "dungeon_crypt",
+    "enchanted_lake",
+    "family_restaurant",
+    "fantasy_forest",
+    "fashion_boutique",
+    "fitness_gym",
+    "food_court",
+    "game_arcade",
+    "high_tech_medbay",
+    "illuminated_park",
+    "japanese_bath",
+    "japanese_garden",
+    "karaoke_bar",
+    "laundromat",
+    "local_market_street",
+    "luxury_hotel_lobby",
+    "luxury_hotel_room",
+    "magic_academy_library",
+    "messy_copy_room",
+    "modern_office",
+    "mountain_resort",
+    "museum_hall",
+    "neighborhood_crosswalk",
+    "neighborhood_playground",
+    "office_elevator",
+    "opera_house",
+    "picnic_park",
+    "poolside_resort",
+    "public_library_lobby",
+    "rainy_alley",
+    "recording_studio",
+    "riverside_walk",
+    "rooftop_laundry_area",
+    "rural_town_street",
+    "school_classroom",
+    "school_clubroom",
+    "school_gym_hall",
+    "school_library",
+    "school_rooftop",
+    "shinto_shrine",
+    "shopping_arcade",
+    "shopping_mall_atrium",
+    "spaceship_bridge",
+    "stadium_court",
+    "starship_quarters",
+    "street_cafe",
+    "suburban_neighborhood",
+    "subway_ticket_gate",
+    "supermarket_aisle",
+    "surveillance_room",
+    "tea_room",
+    "train_station_platform",
+    "tropical_beach",
+    "underground_bar",
+    "university_campus_courtyard",
+    "wave_barrel",
+    "winter_street",
+    "yoga_studio",
+    "bike_station",
+    "canal_walkway",
+    "clinic_waiting_room",
+    "community_garden",
+    "community_theater_backstage",
+    "design_studio",
+    "ferry_terminal",
+    "fire_station",
+    "flower_market",
+    "forest_cabin",
+    "greenhouse_nursery",
+    "maker_space",
+    "observatory_dome",
+    "postal_service_counter",
+    "print_shop",
+    "public_plaza",
+    "rooftop_cafe",
+    "tram_platform",
+    "vehicle_repair_garage"
+  ],
+  "completed_wave_locations": [
+    "convenience_store",
+    "bakery_shop",
+    "supermarket_aisle",
+    "drugstore_aisle",
+    "family_restaurant",
+    "cinema_lobby",
+    "game_arcade",
+    "bus_terminal",
+    "campus_hallway",
+    "campus_cafeteria",
+    "food_court",
+    "coworking_space",
+    "community_center",
+    "apartment_balcony",
+    "apartment_entryway",
+    "public_library_lobby",
+    "riverside_walk",
+    "laundromat",
+    "abandoned_shrine",
+    "bamboo_forest",
+    "cyberpunk_street",
+    "local_market_street",
+    "luxury_hotel_room",
+    "mountain_resort",
+    "neighborhood_crosswalk",
+    "neighborhood_playground",
+    "rooftop_laundry_area",
+    "rural_town_street",
+    "school_clubroom",
+    "shopping_arcade",
+    "suburban_neighborhood",
+    "subway_ticket_gate",
+    "train_station_platform",
+    "university_campus_courtyard"
+  ],
+  "next_candidate_locations": [],
+  "compatibility_review_generation": {
+    "canonical_location_overrides": {
+      "elegant_dining_room": "street_cafe",
+      "luxury_bathroom": "bedroom_boudoir",
+      "rainy_bus_stop": "rainy_alley",
+      "steampunk_airship": "airship_deck"
+    },
+    "excluded_pairs": [
+      {
+        "subj": "CEO",
+        "canonical_loc": "luxury_hotel_lobby"
+      },
+      {
+        "subj": "afternoon reader",
+        "canonical_loc": "antique_shop"
+      },
+      {
+        "subj": "business girl",
+        "canonical_loc": "fashion_boutique"
+      },
+      {
+        "subj": "business girl",
+        "canonical_loc": "karaoke_bar"
+      },
+      {
+        "subj": "business girl",
+        "canonical_loc": "luxury_hotel_lobby"
+      },
+      {
+        "subj": "business girl",
+        "canonical_loc": "neon_city_street"
+      },
+      {
+        "subj": "business girl",
+        "canonical_loc": "underground_bar"
+      },
+      {
+        "subj": "cafe barista",
+        "canonical_loc": "poolside_resort"
+      },
+      {
+        "subj": "detective",
+        "canonical_loc": "luxury_hotel_lobby"
+      },
+      {
+        "subj": "office worker",
+        "canonical_loc": "fashion_boutique"
+      },
+      {
+        "subj": "office worker",
+        "canonical_loc": "karaoke_bar"
+      },
+      {
+        "subj": "office worker",
+        "canonical_loc": "luxury_hotel_lobby"
+      },
+      {
+        "subj": "office worker",
+        "canonical_loc": "neon_city_street"
+      },
+      {
+        "subj": "office worker",
+        "canonical_loc": "underground_bar"
+      },
+      {
+        "subj": "secret agent",
+        "canonical_loc": "luxury_hotel_lobby"
+      },
+      {
+        "subj": "student",
+        "canonical_loc": "fashion_boutique"
+      },
+      {
+        "subj": "student",
+        "canonical_loc": "karaoke_bar"
+      },
+      {
+        "subj": "student",
+        "canonical_loc": "neon_city_street"
+      },
+      {
+        "subj": "student",
+        "canonical_loc": "underground_bar"
+      },
+      {
+        "subj": "vacation girl",
+        "canonical_loc": "fashion_boutique"
+      },
+      {
+        "subj": "vacation girl",
+        "canonical_loc": "karaoke_bar"
+      },
+      {
+        "subj": "vacation girl",
+        "canonical_loc": "neon_city_street"
+      },
+      {
+        "subj": "vacation girl",
+        "canonical_loc": "underground_bar"
+      },
+      {
+        "subj": "vacationer",
+        "canonical_loc": "fashion_boutique"
+      },
+      {
+        "subj": "vacationer",
+        "canonical_loc": "karaoke_bar"
+      },
+      {
+        "subj": "vacationer",
+        "canonical_loc": "neon_city_street"
+      },
+      {
+        "subj": "vacationer",
+        "canonical_loc": "underground_bar"
+      }
+    ],
+    "existing_prompt_rows": [
+      {
+        "subj": "silver-haired girl",
+        "loc": "school_classroom",
+        "costume": "school_uniform"
+      },
+      {
+        "subj": "cyberpunk girl",
+        "loc": "neon_city_street",
+        "costume": "cyberpunk_night"
+      },
+      {
+        "subj": "blonde elf archer",
+        "loc": "fantasy_forest",
+        "costume": "fantasy_battle"
+      },
+      {
+        "subj": "business girl",
+        "loc": "modern_office",
+        "costume": "office_lady"
+      },
+      {
+        "subj": "gothic girl",
+        "loc": "dungeon_crypt",
+        "costume": "gothic_lolita"
+      },
+      {
+        "subj": "fitness model",
+        "loc": "fitness_gym",
+        "costume": "gym_workout"
+      },
+      {
+        "subj": "shrine maiden",
+        "loc": "shinto_shrine",
+        "costume": "traditional_japanese"
+      },
+      {
+        "subj": "rock singer",
+        "loc": "concert_stage",
+        "costume": "rock_concert"
+      },
+      {
+        "subj": "spy agent",
+        "loc": "luxury_hotel_lobby",
+        "costume": "secret_agent"
+      },
+      {
+        "subj": "vacationer",
+        "loc": "tropical_beach",
+        "costume": "beach_resort"
+      },
+      {
+        "subj": "winter traveler",
+        "loc": "winter_street",
+        "costume": "winter_date"
+      },
+      {
+        "subj": "student",
+        "loc": "school_rooftop",
+        "costume": "school_uniform"
+      },
+      {
+        "subj": "street dancer",
+        "loc": "neon_city_street",
+        "costume": "cyberpunk_night"
+      },
+      {
+        "subj": "sorceress",
+        "loc": "fantasy_forest",
+        "costume": "fantasy_battle"
+      },
+      {
+        "subj": "CEO",
+        "loc": "boardroom",
+        "costume": "office_lady"
+      },
+      {
+        "subj": "doll-like girl",
+        "loc": "bedroom_boudoir",
+        "costume": "gothic_lolita"
+      },
+      {
+        "subj": "runner",
+        "loc": "stadium_court",
+        "costume": "gym_workout"
+      },
+      {
+        "subj": "geisha",
+        "loc": "winter_street",
+        "costume": "traditional_japanese"
+      },
+      {
+        "subj": "guitarist",
+        "loc": "recording_studio",
+        "costume": "rock_concert"
+      },
+      {
+        "subj": "detective",
+        "loc": "rainy_alley",
+        "costume": "secret_agent"
+      },
+      {
+        "subj": "girl knight",
+        "loc": "burning_battlefield",
+        "costume": "fantasy_battle"
+      },
+      {
+        "subj": "library girl",
+        "loc": "school_library",
+        "costume": "school_uniform"
+      },
+      {
+        "subj": "yoga instructor",
+        "loc": "yoga_studio",
+        "costume": "gym_workout"
+      },
+      {
+        "subj": "cyberpunk mercenary",
+        "loc": "rainy_alley",
+        "costume": "cyberpunk_night"
+      },
+      {
+        "subj": "rainy day girl",
+        "loc": "rainy_alley",
+        "costume": "rainy_day"
+      },
+      {
+        "subj": "bookworm girl",
+        "loc": "antique_shop",
+        "costume": "school_uniform"
+      },
+      {
+        "subj": "office worker",
+        "loc": "office_elevator",
+        "costume": "office_lady"
+      },
+      {
+        "subj": "cyberpunk hacker",
+        "loc": "surveillance_room",
+        "costume": "cyberpunk_night"
+      },
+      {
+        "subj": "vacation girl",
+        "loc": "poolside_resort",
+        "costume": "beach_resort"
+      },
+      {
+        "subj": "shrine maiden",
+        "loc": "japanese_garden",
+        "costume": "traditional_japanese"
+      },
+      {
+        "subj": "rock star",
+        "loc": "karaoke_bar",
+        "costume": "rock_concert"
+      },
+      {
+        "subj": "fantasy warrior",
+        "loc": "dragon_lair",
+        "costume": "fantasy_battle"
+      },
+      {
+        "subj": "gym girl",
+        "loc": "stadium_court",
+        "costume": "gym_workout"
+      },
+      {
+        "subj": "winter date girl",
+        "loc": "illuminated_park",
+        "costume": "winter_date"
+      },
+      {
+        "subj": "gothic doll",
+        "loc": "messy_copy_room",
+        "costume": "gothic_lolita"
+      },
+      {
+        "subj": "secret agent",
+        "loc": "commuter_transport",
+        "costume": "secret_agent"
+      },
+      {
+        "subj": "solarpunk girl",
+        "loc": "alien_planet",
+        "costume": "beach_resort"
+      },
+      {
+        "subj": "opera singer",
+        "loc": "opera_house",
+        "costume": "gothic_lolita"
+      },
+      {
+        "subj": "kendo girl",
+        "loc": "school_gym_hall",
+        "costume": "traditional_japanese"
+      },
+      {
+        "subj": "injured knight",
+        "loc": "dungeon_crypt",
+        "costume": "fantasy_battle"
+      },
+      {
+        "subj": "surfer girl",
+        "loc": "wave_barrel",
+        "costume": "beach_resort"
+      },
+      {
+        "subj": "recording artist",
+        "loc": "recording_studio",
+        "costume": "rock_concert"
+      },
+      {
+        "subj": "sleepy girl",
+        "loc": "bedroom_boudoir",
+        "costume": "winter_date"
+      },
+      {
+        "subj": "cafe customer",
+        "loc": "street_cafe",
+        "costume": "cozy_cafe"
+      },
+      {
+        "subj": "urban shopper",
+        "loc": "shopping_mall",
+        "costume": "urban_shopping"
+      },
+      {
+        "subj": "mori girl",
+        "loc": "picnic_park",
+        "costume": "mori_natural"
+      },
+      {
+        "subj": "space pilot",
+        "loc": "spaceship",
+        "costume": "scifi_space"
+      },
+      {
+        "subj": "inventor girl",
+        "loc": "workshop",
+        "costume": "steampunk"
+      },
+      {
+        "subj": "cafe barista",
+        "loc": "street_cafe",
+        "costume": "cozy_cafe"
+      },
+      {
+        "subj": "afternoon reader",
+        "loc": "cozy_bookstore",
+        "costume": "cozy_cafe"
+      },
+      {
+        "subj": "fashionista",
+        "loc": "fashion_boutique",
+        "costume": "urban_shopping"
+      },
+      {
+        "subj": "window shopper",
+        "loc": "shopping_mall_atrium",
+        "costume": "urban_shopping"
+      },
+      {
+        "subj": "flower girl",
+        "loc": "botanical_garden",
+        "costume": "mori_natural"
+      },
+      {
+        "subj": "nature wanderer",
+        "loc": "fantasy_forest",
+        "costume": "mori_natural"
+      },
+      {
+        "subj": "space engineer",
+        "loc": "cyber_lab",
+        "costume": "scifi_space"
+      },
+      {
+        "subj": "stargazer",
+        "loc": "airship_deck",
+        "costume": "scifi_space"
+      },
+      {
+        "subj": "clockwork artisan",
+        "loc": "clockwork_workshop",
+        "costume": "steampunk"
+      },
+      {
+        "subj": "airship captain",
+        "loc": "airship_deck",
+        "costume": "steampunk"
+      },
+      {
+        "subj": "afternoon reader",
+        "loc": "antique_shop",
+        "costume": "cozy_cafe"
+      },
+      {
+        "subj": "vacation girl",
+        "loc": "luxury_hotel_lobby",
+        "costume": "beach_resort"
+      },
+      {
+        "subj": "student",
+        "loc": "school_gym_hall",
+        "costume": "school_uniform"
+      },
+      {
+        "subj": "window shopper",
+        "loc": "aquarium",
+        "costume": "urban_shopping"
+      },
+      {
+        "subj": "office worker",
+        "loc": "street_cafe",
+        "costume": "office_lady"
+      },
+      {
+        "subj": "fashionista",
+        "loc": "karaoke_bar",
+        "costume": "urban_shopping"
+      },
+      {
+        "subj": "cafe barista",
+        "loc": "poolside_resort",
+        "costume": "cozy_cafe"
+      },
+      {
+        "subj": "chef girl",
+        "loc": "clean_modern_kitchen",
+        "costume": "rainy_day"
+      },
+      {
+        "subj": "vacationer",
+        "loc": "luxury_hotel_lobby",
+        "costume": "beach_resort"
+      },
+      {
+        "subj": "business girl",
+        "loc": "office_elevator",
+        "costume": "office_lady"
+      },
+      {
+        "subj": "student",
+        "loc": "campus_hallway",
+        "costume": "school_uniform"
+      },
+      {
+        "subj": "office worker",
+        "loc": "commuter_transport",
+        "costume": "office_lady"
+      },
+      {
+        "subj": "urban shopper",
+        "loc": "convenience_store",
+        "costume": "urban_shopping"
+      },
+      {
+        "subj": "cafe customer",
+        "loc": "family_restaurant",
+        "costume": "cozy_cafe"
+      },
+      {
+        "subj": "student",
+        "loc": "picnic_park",
+        "costume": "school_uniform"
+      },
+      {
+        "subj": "sleepy girl",
+        "loc": "cozy_living_room",
+        "costume": "winter_date"
+      },
+      {
+        "subj": "office worker",
+        "loc": "modern_office",
+        "costume": "office_lady"
+      },
+      {
+        "subj": "office worker",
+        "loc": "bus_terminal",
+        "costume": "office_lady"
+      },
+      {
+        "subj": "student",
+        "loc": "commuter_transport",
+        "costume": "school_uniform"
+      },
+      {
+        "subj": "urban shopper",
+        "loc": "shopping_mall_atrium",
+        "costume": "urban_shopping"
+      },
+      {
+        "subj": "cafe customer",
+        "loc": "bakery_shop",
+        "costume": "cozy_cafe"
+      },
+      {
+        "subj": "office worker",
+        "loc": "supermarket_aisle",
+        "costume": "office_lady"
+      },
+      {
+        "subj": "urban shopper",
+        "loc": "drugstore_aisle",
+        "costume": "urban_shopping"
+      },
+      {
+        "subj": "office worker",
+        "loc": "family_restaurant",
+        "costume": "office_lady"
+      },
+      {
+        "subj": "urban shopper",
+        "loc": "cinema_lobby",
+        "costume": "urban_shopping"
+      },
+      {
+        "subj": "street dancer",
+        "loc": "game_arcade",
+        "costume": "cyberpunk_night"
+      },
+      {
+        "subj": "student",
+        "loc": "campus_cafeteria",
+        "costume": "school_uniform"
+      },
+      {
+        "subj": "student",
+        "loc": "school_classroom",
+        "costume": "school_uniform"
+      },
+      {
+        "subj": "afternoon reader",
+        "loc": "school_library",
+        "costume": "cozy_cafe"
+      },
+      {
+        "subj": "urban shopper",
+        "loc": "supermarket_aisle",
+        "costume": "urban_shopping"
+      }
+    ]
+  }
+}

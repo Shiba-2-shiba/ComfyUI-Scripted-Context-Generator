@@ -1,0 +1,73 @@
+{
+  "schema_version": "variation-planner-l0-baseline/v1",
+  "captured_at": "2026-09-01",
+  "command": "python tools/plan_variation_target.py --target 500000",
+  "target": 500000,
+  "current_metrics": {
+    "unique_subjects": 120,
+    "unique_locations": 90,
+    "row_count": 5806,
+    "total_base_variations": 103212,
+    "missing_pools_count": 0,
+    "action_count_summary": {
+      "min": 12,
+      "max": 20,
+      "median": 16,
+      "mean": 15.56
+    }
+  },
+  "candidate_pool": {
+    "known_subjects": 120,
+    "current_subjects": 120,
+    "subject_candidates": 0,
+    "action_backed_compatible_locations": 90,
+    "current_locations": 90,
+    "location_candidates": 0
+  },
+  "scenarios": [
+    {
+      "name": "current_scope",
+      "unique_subjects": 120,
+      "unique_locations": 90,
+      "row_count": 5806,
+      "total_base_variations": 103212,
+      "delta_base_variations": 0
+    },
+    {
+      "name": "all_known_subjects_current_locations",
+      "unique_subjects": 120,
+      "unique_locations": 90,
+      "row_count": 5806,
+      "total_base_variations": 103212,
+      "delta_base_variations": 0
+    },
+    {
+      "name": "current_subjects_all_action_backed_compatible_locations",
+      "unique_subjects": 120,
+      "unique_locations": 90,
+      "row_count": 5806,
+      "total_base_variations": 103212,
+      "delta_base_variations": 0
+    },
+    {
+      "name": "all_known_subjects_all_action_backed_compatible_locations",
+      "unique_subjects": 120,
+      "unique_locations": 90,
+      "row_count": 5806,
+      "total_base_variations": 103212,
+      "delta_base_variations": 0
+    }
+  ],
+  "minimum_action_scenarios": [
+    {"minimum_actions": 12, "total_base_variations": 103212, "target_gap": 396788, "target_met": false},
+    {"minimum_actions": 16, "total_base_variations": 105260, "target_gap": 394740, "target_met": false},
+    {"minimum_actions": 20, "total_base_variations": 116120, "target_gap": 383880, "target_met": false},
+    {"minimum_actions": 24, "total_base_variations": 139344, "target_gap": 360656, "target_met": false},
+    {"minimum_actions": 32, "total_base_variations": 185792, "target_gap": 314208, "target_met": false},
+    {"minimum_actions": 35, "total_base_variations": 203210, "target_gap": 296790, "target_met": false}
+  ],
+  "first_minimum_action_target_met": null,
+  "top_subject_candidates": [],
+  "top_location_candidates": [],
+  "conclusion": "The current planner reproduces the 100k surface but cannot model a path to 500k from the exhausted repo-local candidate sets."
+}

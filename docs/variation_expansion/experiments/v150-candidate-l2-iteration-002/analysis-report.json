@@ -1,0 +1,94 @@
+{
+  "schema_version": "variation-quality-candidate-analysis/v1",
+  "catalog_sha256": "bd9f7a7c57bc725891a3942091a8c7a0a30982f0b0df94a4c525b28c75fee0e5",
+  "scenario_binding": {
+    "scenario_id": "v150-balanced-canonical-002",
+    "scenario_manifest_sha256": "09517279d625ee0708f72fbdf265beca61e3d6d7d084b870e55a8f8f25b90c06",
+    "projection_report_sha256": "7067720f5e876a8fba96e891d5013f070cbb4ea99b515e6756dac06e07a14b81",
+    "baseline_manifest_sha256": "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54"
+  },
+  "structural_status": "pass",
+  "eligible_for_prompt_evaluation": true,
+  "promotion_ready": false,
+  "prompt_quality": {"status": "not_evaluated", "receipt_sha256": null},
+  "identity_analysis": {
+    "subject_count": 15,
+    "location_count": 15,
+    "subject_ids": [
+      "architect", "astronomer", "barber", "delivery courier", "farmer",
+      "fisher", "florist", "journalist", "mechanic", "nurse", "paramedic",
+      "photographer", "researcher", "shopkeeper", "teacher"
+    ],
+    "location_ids": [
+      "bike_station", "canal_walkway", "clinic_waiting_room", "community_garden",
+      "design_studio", "ferry_terminal", "fire_station", "flower_market",
+      "forest_cabin", "maker_space", "observatory_dome", "print_shop",
+      "public_plaza", "rooftop_cafe", "tram_platform"
+    ]
+  },
+  "utility_analysis": {
+    "subject_signature_count": 15,
+    "location_signature_count": 15,
+    "human_semantic_review_required": true
+  },
+  "compatibility_coverage": {
+    "proposed_subject_existing_location_pairs": 589,
+    "existing_subject_proposed_location_pairs": 1296,
+    "proposed_cross_pairs": 126,
+    "estimated_total_rows": 7817,
+    "projected_rows": 7796,
+    "coverage_margin": 21,
+    "subject_pair_counts": {
+      "architect": 30, "astronomer": 46, "barber": 41,
+      "delivery courier": 40, "farmer": 36, "fisher": 41, "florist": 42,
+      "journalist": 46, "mechanic": 28, "nurse": 42, "paramedic": 33,
+      "photographer": 52, "researcher": 36, "shopkeeper": 41, "teacher": 35
+    },
+    "location_pair_counts": {
+      "bike_station": 107, "canal_walkway": 114, "clinic_waiting_room": 107,
+      "community_garden": 66, "design_studio": 37, "ferry_terminal": 107,
+      "fire_station": 107, "flower_market": 96, "forest_cabin": 36,
+      "maker_space": 26, "observatory_dome": 103, "print_shop": 84,
+      "public_plaza": 107, "rooftop_cafe": 92, "tram_platform": 107
+    }
+  },
+  "action_family_analysis": {
+    "candidate_family_refs": {
+      "fitness_motion": 1, "home_rhythm": 2,
+      "leisure_participation": 2, "outdoor_observation": 2,
+      "performance_focus": 1, "public_navigation": 2, "public_presence": 2,
+      "quiet_study": 2, "refined_interior": 2, "resort_relaxation": 2,
+      "retail_service": 2, "speculative_exploration": 1, "transit_flow": 2,
+      "work_rhythm": 2
+    },
+    "resulting_existing_plus_candidate_reuse": {
+      "cautious_tension": 5, "fitness_motion": 6, "home_rhythm": 11,
+      "leisure_participation": 11, "outdoor_observation": 17,
+      "performance_focus": 4, "public_navigation": 13, "public_presence": 8,
+      "quiet_study": 15, "refined_interior": 12, "resort_relaxation": 7,
+      "retail_service": 16, "speculative_exploration": 7, "transit_flow": 8,
+      "work_rhythm": 9
+    },
+    "candidate_location_action_depths": {
+      "bike_station": 20, "canal_walkway": 20, "clinic_waiting_room": 20,
+      "community_garden": 20, "design_studio": 20, "ferry_terminal": 20,
+      "fire_station": 20, "flower_market": 20, "forest_cabin": 20,
+      "maker_space": 20, "observatory_dome": 20, "print_shop": 20,
+      "public_plaza": 20, "rooftop_cafe": 20, "tram_platform": 20
+    },
+    "candidate_action_depth_histogram": {"20": 15},
+    "shared_family_action_occurrences": 100,
+    "shared_family_existing_reuse_occurrences": 100
+  },
+  "duplicate_pressure": {
+    "candidate_total_actions": 300,
+    "candidate_duplicate_occurrences": 0,
+    "candidate_duplicate_pressure_basis_points": 0,
+    "direct_action_count": 200,
+    "direct_existing_duplicate_occurrences": 1,
+    "direct_duplicate_pressure_basis_points": 50,
+    "intentional_shared_family_existing_reuse_occurrences": 100
+  },
+  "policy_findings": [],
+  "errors": []
+}

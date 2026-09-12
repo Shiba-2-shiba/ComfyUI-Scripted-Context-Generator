@@ -1,0 +1,43 @@
+{
+  "location": "school_clubroom",
+  "actions": [
+    {
+      "text": "sorting club materials on a shared table",
+      "load": "calm"
+    },
+    {
+      "text": "standing beside a whiteboard with notes prepared",
+      "load": "calm"
+    },
+    {
+      "text": "sitting near stacked boxes after practice",
+      "load": "calm"
+    },
+    {
+      "text": "checking a schedule pinned to the wall",
+      "load": "calm"
+    },
+    {
+      "text": "holding a folder while listening to club members",
+      "load": "calm"
+    },
+    {
+      "text": "arranging chairs before a small meeting",
+      "load": "calm"
+    },
+    {
+      "text": "walking past shelves filled with supplies",
+      "load": "active"
+    },
+    {
+      "text": "writing a short note on the clubroom board",
+      "load": "calm"
+    }
+  ],
+  "families": [
+    {
+      "name": "quiet_study",
+      "take": 4
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{scene_clause}
+in {loc}, {meta_mood}
+against {loc}, {meta_mood}
+with {meta_mood} settling through {loc}
+the background opening into {loc}, {meta_mood}
+the rest of the frame held by {loc}, {meta_mood}
+everything around her staying in {loc}, {meta_mood}
+{meta_mood}, all of it set in {loc}
+the scene widening into {loc}, {meta_mood}
+the moment resting in {loc}, {meta_mood}

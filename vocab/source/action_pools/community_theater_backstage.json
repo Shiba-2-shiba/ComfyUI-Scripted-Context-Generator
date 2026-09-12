@@ -1,0 +1,86 @@
+{
+  "location": "community_theater_backstage",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "checking the rehearsal schedule on a wall board"
+    },
+    {
+      "load": "active",
+      "text": "sorting stage props by marked storage shelf"
+    },
+    {
+      "load": "calm",
+      "text": "checking a costume label beside the preparation table"
+    },
+    {
+      "load": "active",
+      "text": "carrying a prop box toward the stage entrance"
+    },
+    {
+      "load": "calm",
+      "text": "checking a marked scene cue beside the stage entrance"
+    },
+    {
+      "load": "active",
+      "text": "labeling a prop with its storage position"
+    },
+    {
+      "load": "calm",
+      "text": "checking the condition of a stage accessory"
+    },
+    {
+      "load": "active",
+      "text": "arranging rehearsal materials across a table"
+    },
+    {
+      "load": "calm",
+      "text": "marking a change on the performance schedule"
+    },
+    {
+      "load": "active",
+      "text": "hanging a costume on the backstage rack"
+    },
+    {
+      "load": "calm",
+      "text": "placing scripts into a labeled folder"
+    },
+    {
+      "load": "active",
+      "text": "carrying a folded backdrop toward the marked storage wall"
+    },
+    {
+      "load": "calm",
+      "text": "checking a small stage lantern"
+    },
+    {
+      "load": "active",
+      "text": "stacking empty prop containers"
+    },
+    {
+      "load": "calm",
+      "text": "reading a backstage access notice"
+    },
+    {
+      "load": "active",
+      "text": "preparing a repair kit for stage materials"
+    },
+    {
+      "load": "calm",
+      "text": "checking the order of marked entrances"
+    },
+    {
+      "load": "active",
+      "text": "returning a hand prop to its labeled case"
+    },
+    {
+      "load": "calm",
+      "text": "reviewing notes beside the rehearsal desk"
+    },
+    {
+      "load": "active",
+      "text": "clearing the preparation table for the next task"
+    }
+  ],
+  "families": []
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": "variation-quality-guard-remediation-receipt/v1",
+  "experiment_id": "v150-candidate-shape-iteration-007",
+  "terminal_state": "VERIFIED_DIAGNOSTIC",
+  "recorded_at": "2026-09-01",
+  "authority": {
+    "coverage_is_quality_evidence": false,
+    "coverage_verdict": "pass",
+    "diagnostic_pair_verdict": "pass",
+    "fixed_quality_verdict": "reject",
+    "verdict": "reject",
+    "promotion_ready": false,
+    "blind_review_run": false,
+    "confirmation_run": false
+  },
+  "local_snapshot": {
+    "path": "assets/results/vfc/q13",
+    "snapshot_manifest_sha256": "ef20cc7ac9d99f004b7d08fd63405cb50c576c408b7d5177d896ec793b697252",
+    "prompt_schedule_sha256": "0c5ce848e03ef4eefc3cb083c6d5649223d317399d371ef68535172571ba8453",
+    "witness_matrix_sha256": "4eb36f10c164e285e18f418cbda5b0df7f8244a9695b478d80b2521019a7e423",
+    "witness_certificate_status": "pass",
+    "verified_locations": 19,
+    "verified_subjects": 15,
+    "fixed_seed_count": 80,
+    "extra_seed_count": 0,
+    "active_source_unchanged": true
+  },
+  "tracked_artifacts": {
+    "prompt-quality-experiment.json": "2def09f12cc2575e7a4bd03d2edad9f6263dbf14f61025be56569a1e6bc7f3a7",
+    "guard-comparison.json": "f170b771978693fdf324370c3166fec96bb4a47cc81750be485a01bffdbde659"
+  },
+  "run_artifacts": {
+    "baseline_run_manifest_sha256": "9fdb50bbee21fcee6cd5c4843119fdb8bdbe16cb0bf188cfc6e00198959c997c",
+    "candidate_run_manifest_sha256": "01f81bf44395dd4cafd7446a986cc744c1f76588b91ef9b3be7c5aa03253e838",
+    "comparison_canonical_sha256": "e620a0bb9dee56bdc71717f356d37a60d90b491a2c4036b1fd2cba79ed5e61a4",
+    "cohort_hash": "1b7017819fe1ff11c822b27e61d035b0ce0596dd6f06f85c27f6a45766912492",
+    "records_per_side": 80,
+    "replay_mismatch_count": 0
+  },
+  "prompt_stability": {
+    "prompt_map_hash_schema": "sha256(UTF-8 json.dumps(seed_to_cleaned_prompt, sort_keys=True, ensure_ascii=True, default separators))",
+    "baseline_changed_prompts_vs_q9": 0,
+    "candidate_changed_prompts_vs_q9": 0,
+    "baseline_prompt_map_sha256": "f554302bfb9046beb12fdb27b1afab742050a460c2389cdf80ee3e7ac0bfebee",
+    "candidate_prompt_map_sha256": "8a862e35de8090fc65a57cd2e3a6c6d03167e7f15e7141167190507708b66cc2"
+  },
+  "guard_results": {
+    "failures": [],
+    "location_signature_entropy_before": 4.831091,
+    "location_signature_entropy_after": 5.29136,
+    "repeated_ngram_count_before": 12,
+    "repeated_ngram_count_after": 10,
+    "semantic_family_repetition_count_before": 3,
+    "semantic_family_repetition_count_after": 3,
+    "context_json_bytes_max_before": 27636,
+    "context_json_bytes_max_after": 27624,
+    "context_json_bytes_p95_before": 27077.15,
+    "context_json_bytes_p95_after": 26679.5,
+    "identity_regressions": 0,
+    "hard_consistency_regressions": 0,
+    "policy_regressions": 0,
+    "fallback_regressions": 0
+  },
+  "implementation_hashes": {
+    "core/semantic_families.py": "1ccf2633c5a9bcd0eb91eee468b7e7b4330c0feae8cd312afe0ee101cef59dd3",
+    "pipeline/context_pipeline.py": "629535efd40339147770d635ab2023a668b6978133b6c806fde02c2c17939e43",
+    "pipeline/clothing_semantics.py": "0b20b7334cbb07714a060a98c46c404da732fc9fa16c0b6a69c97d325b751997",
+    "pipeline/clothing_builder.py": "a7115b9a7e696d3cfa42365a283005e3db8942eb0978a57f1d38d6b434821218",
+    "history_service.py": "ba46735f1727c6c88712413949044bdd745a59284d4848438d900364efb2fdb1",
+    "pipeline/clothing_candidate_renderer.py": "a791b72ddf67b2e50f4321a2d70f61dd6f71334fe7d761de14f2d6e755357511",
+    "assets/test_semantic_families.py": "21462066aa40f8f1cf818803a6e96deccb24438f650728b9c671d9445a59bc29",
+    "assets/test_context_pipeline.py": "0ba411cfe5d3ca5b2046bb92eb1236f8a8c301c379a6b575cfe39ba626f025a6",
+    "assets/test_clothing_semantics.py": "6787095185580dadd9d06b803c11bf032d0bbe214cfd9a81945a127f6f75b745",
+    "assets/test_context_content_pipeline.py": "21b50346876f75576d9e70df237ed6a719ffa697ed54eb4162487c2ef0da24ca"
+  },
+  "verification": {
+    "targeted_tests": "94 tests OK",
+    "combined_l1_l3_and_remediation_tests": "170 tests OK",
+    "tracked_comparison_reproduction": "pass; fresh comparator canonical output equals tracked comparison",
+    "independent_code_review": "APPROVE migration-signature compatibility and q13 guard remediation; no remaining findings",
+    "independent_verifier": "APPROVE q13 19/19 coverage, zero guard failures, prompt-stable VERIFIED_DIAGNOSTIC evidence"
+  },
+  "next_iteration_requirements": [
+    "Treat q13 as diagnostic guard evidence only; it does not replace the fixed rejected quality verdict.",
+    "Freeze the remediation implementation and run a separately declared non-selected quality validation surface.",
+    "Preserve the 19/19 coverage schedule as eligibility evidence, but do not use selected coverage prompts for promotion claims.",
+    "Require fresh review and confirmation evidence before any V150 promotion."
+  ]
+}

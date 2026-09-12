@@ -1,0 +1,86 @@
+{
+  "location": "ferry_terminal",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "checking the departure board beside the ramp"
+    },
+    {
+      "load": "active",
+      "text": "walking toward the marked boarding lane"
+    },
+    {
+      "load": "calm",
+      "text": "holding a ticket near the gate"
+    },
+    {
+      "load": "active",
+      "text": "watching the ferry approach the pier"
+    },
+    {
+      "load": "calm",
+      "text": "reading a waterside safety notice"
+    },
+    {
+      "load": "active",
+      "text": "rolling luggage across the terminal floor"
+    },
+    {
+      "load": "calm",
+      "text": "checking the weather display before boarding"
+    },
+    {
+      "load": "active",
+      "text": "moving beneath the covered boarding sign"
+    },
+    {
+      "load": "calm",
+      "text": "folding a ferry timetable"
+    },
+    {
+      "load": "calm",
+      "text": "looking across the water from the railing"
+    },
+    {
+      "load": "active",
+      "text": "presenting a pass at the boarding point"
+    },
+    {
+      "load": "active",
+      "text": "stepping onto the access ramp"
+    },
+    {
+      "load": "calm",
+      "text": "checking the berth number on the departure screen"
+    },
+    {
+      "load": "active",
+      "text": "rolling a suitcase into the assigned boarding lane"
+    },
+    {
+      "load": "calm",
+      "text": "reading the tide warning beside the gangway"
+    },
+    {
+      "load": "active",
+      "text": "fastening a luggage tag before boarding"
+    },
+    {
+      "load": "calm",
+      "text": "watching the ferry settle against the pier"
+    },
+    {
+      "load": "active",
+      "text": "lifting a travel bag onto the ramp threshold"
+    },
+    {
+      "load": "calm",
+      "text": "checking the route color on a boarding pass"
+    },
+    {
+      "load": "active",
+      "text": "watching ferry lights ripple across the water beneath the pier canopy"
+    }
+  ],
+  "families": []
+}

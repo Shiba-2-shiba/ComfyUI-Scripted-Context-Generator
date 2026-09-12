@@ -1,0 +1,13 @@
+[
+  {
+    "id": "context",
+    "path": "ComfyUI-workflow-context.json",
+    "surface": "primary",
+    "recommended": true,
+    "expected_node_types": [
+      "ContextSource",
+      "ContextPromptBuilder",
+      "ContextInspector"
+    ]
+  }
+]

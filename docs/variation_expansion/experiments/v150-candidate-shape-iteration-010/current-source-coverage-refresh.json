@@ -1,0 +1,21 @@
+{
+  "schema_version": "variation-current-source-coverage-refresh/v1",
+  "refresh_id": "v150-candidate-shape-iteration-010-current-source",
+  "parent_guard_remediation_receipt_path": "docs/variation_expansion/experiments/v150-candidate-shape-iteration-007/guard-remediation-receipt.json",
+  "parent_guard_remediation_receipt_sha256": "0a8ed9b3ae6fa6c2d6a1f4f7f8bbed50e2005c9bf6f6476eaa7fda7c64734d4a",
+  "snapshot_manifest_path": "assets/results/vfc/q24-current-source-refresh/snapshot-manifest.json",
+  "snapshot_manifest_sha256": "c6c7047efdb9006504c82f0cfe41dc7fb070d0e239e5dd0a9c0a4bcd9ee2e8a1",
+  "candidate_source_tree_sha256": "f7902e0b69f1e3a200fc324007db1c5cd45661c9e95b0262e06d8fcbf35434c9",
+  "prompt_schedule_sha256": "0c5ce848e03ef4eefc3cb083c6d5649223d317399d371ef68535172571ba8453",
+  "witness_matrix_sha256": "4eb36f10c164e285e18f418cbda5b0df7f8244a9695b478d80b2521019a7e423",
+  "certificate_verification_sha256": "d8180f9a148797e7435e4d75d9c13ef6cde48eae531d9672d793f863d962599c",
+  "verified_locations": 19,
+  "verified_subjects": 15,
+  "verified_witnesses": 19,
+  "fixed_seed_count": 80,
+  "extra_seed_count": 0,
+  "coverage_is_quality_evidence": false,
+  "promotion_ready": false,
+  "status": "pass",
+  "refresh_sha256": "3581f477a80d542bbf80e80ba7c8786ebe8d1b43cb544fdccacdf0418d0757e8"
+}

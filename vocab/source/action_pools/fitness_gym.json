@@ -1,0 +1,59 @@
+{
+  "location": "fitness_gym",
+  "actions": [
+    {
+      "text": "stretching on the floor",
+      "load": "calm"
+    },
+    {
+      "text": "standing and holding dumbbells",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on a bench, resting between sets",
+      "load": "calm"
+    },
+    {
+      "text": "checking her stance near the wall",
+      "load": "calm"
+    },
+    {
+      "text": "walking on the treadmill",
+      "load": "active"
+    },
+    {
+      "text": "sitting on an exercise ball",
+      "load": "calm"
+    },
+    {
+      "text": "wiping down equipment",
+      "load": "calm"
+    },
+    {
+      "text": "drinking a protein shake",
+      "load": "calm"
+    },
+    {
+      "text": "lifting weights with effort",
+      "load": "active"
+    },
+    {
+      "text": "doing crunches on a mat",
+      "load": "calm"
+    },
+    {
+      "text": "running on the elliptical machine",
+      "load": "active"
+    },
+    {
+      "text": "checking her training form",
+      "load": "calm"
+    }
+  ],
+  "families": [
+    {
+      "name": "fitness_motion",
+      "take": 4
+    }
+  ]
+}

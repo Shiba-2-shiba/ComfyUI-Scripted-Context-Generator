@@ -1,0 +1,23 @@
+{
+  "PALETTE_DEFAULT_PROBABILITIES": {
+    "colors": 0.9,
+    "materials": 0.85,
+    "patterns": 0.45,
+    "styles": 0.7,
+    "embellishments": 0.55
+  },
+  "OPTIONAL_DETAIL_PROBABILITY": 0.45,
+  "STATE_DETAIL_PROBABILITY": 0.3,
+  "OUTERWEAR_SELECTION_PROBABILITY": 0.25,
+  "EMBELLISHMENT_DETAIL_PROBABILITY": 0.55,
+  "STATE_TAGS": [
+    "wet",
+    "rain-soaked",
+    "damp",
+    "wind-blown",
+    "sun-bleached",
+    "glowing",
+    "shimmering",
+    "slightly disheveled"
+  ]
+}

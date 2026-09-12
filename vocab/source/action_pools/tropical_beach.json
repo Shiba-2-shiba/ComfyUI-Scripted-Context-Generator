@@ -1,0 +1,31 @@
+{
+  "location": "tropical_beach",
+  "actions": [
+    {
+      "text": "walking along the shoreline",
+      "load": "active"
+    },
+    {
+      "text": "standing and looking at the ocean",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on the sand, relaxing",
+      "load": "calm"
+    },
+    {
+      "text": "standing with feet in the water",
+      "load": "calm"
+    }
+  ],
+  "families": [
+    {
+      "name": "resort_relaxation",
+      "take": 8
+    },
+    {
+      "name": "outdoor_observation",
+      "take": 8
+    }
+  ]
+}

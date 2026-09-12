@@ -1,0 +1,52 @@
+{
+  "schema_version": "variation-blind-review-rejection-receipt/v1",
+  "experiment_id": "v150-candidate-shape-iteration-010",
+  "review_attempt": 3,
+  "terminal_state": "REVIEW_REJECTED",
+  "recorded_at": "2026-09-03",
+  "authority": {
+    "automatic_quality_verdict": "pass",
+    "blind_review_verdict": "reject",
+    "confirmation_authorized": false,
+    "promotion_ready": false,
+    "active_data_mutation_authorized": false
+  },
+  "binding": {
+    "quality_comparison_sha256": "85a43cf4b2c701677ade558b96af3680d1076a7ea744f18fe1541a06f34f7944",
+    "review_comparison_adapter_sha256": "283f9879b685590b1a13152c2e14ab891f6e9e483caf854c31271abd7373ea10",
+    "blind_review_experiment_sha256": "411299d4c3777d8e64c935559293d8349064e5cad6d2d8e2216f506fd2e4adb6",
+    "assignment_key_sha256": "cb9298534e62098907b04c3fa309ef17a6772d0bbb2dfe41204dc5e17d6705b4",
+    "lane_1_sha256": "a93aa8f5bd278a463871b61c5090f86a146c6a131893672562ca85217f106152",
+    "lane_2_sha256": "a4def35403d7936eaf93d917f4eb0357740677bbd022dc5b9d246778d8ce59ed",
+    "lane_1_result_sha256": "3adbe07bf3c94ba1c1f420025b55ca49499e6d14d61caf828cfcfc13a06e331e",
+    "lane_2_result_sha256": "b84a524d41d3e4bb20be5220607c0865a80af9420cc7408f5280f57d912c0e5c",
+    "aggregate_review_sha256": "c8bc70369eefd1be923d5382138bc1e73a48208760b850c18ee5ac8faff187da",
+    "review_contract_sha256": "2e13191ede3f4810007190c76b54c95ee837d4c8b288bd379120c450d6a097c2",
+    "selection_sha256": "a9cdab3f4723d736d53871a1dce4051e83f27e38ee8a466b6a2395420889b3b5"
+  },
+  "review_result": {
+    "status": "fail",
+    "pair_count_per_lane": 20,
+    "candidate_hard_defect_observations": 8,
+    "candidate_hard_defect_seeds": [40, 41, 61, 2584006080659484769, 16086608232758145338],
+    "candidate_hard_defects": {
+      "clothing_tpo_weather_conflict": 5,
+      "consistency_rule_conflict": 2,
+      "location_action_object_conflict": 1
+    },
+    "dimension_results": {
+      "protagonist_clarity": {"passed": false, "improvement_support": 0.692308, "worse_rate": 0.307692},
+      "consistency": {"passed": false, "improvement_support": 0.2, "worse_rate": 0.8},
+      "naturalness": {"passed": false, "improvement_support": 0.444444, "worse_rate": 0.555556},
+      "redundancy": {"passed": false, "improvement_support": 0.5, "worse_rate": 0.5},
+      "diversity": {"passed": true, "authority": "current_source_corpus_confirmation"},
+      "image_prompt_suitability": {"passed": false, "improvement_support": 0.617647, "worse_rate": 0.382353}
+    }
+  },
+  "next_iteration_requirements": [
+    "Preserve attempt-003 evidence and active variation data unchanged.",
+    "Repair contextual clothing theme selection, time-phase filtering, outdoor courtyard anchors, and candidate location-detail duplication.",
+    "Rerun scheduled coverage and automatic non-selected quality validation on a fresh source before blind-review attempt 004.",
+    "Do not start VE-1318 or VE-1319 until a comparison-bound blind review passes."
+  ]
+}

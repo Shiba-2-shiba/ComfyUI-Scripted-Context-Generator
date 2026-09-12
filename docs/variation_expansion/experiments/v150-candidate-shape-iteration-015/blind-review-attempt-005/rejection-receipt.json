@@ -1,0 +1,52 @@
+{
+  "schema_version": "variation-blind-review-rejection-receipt/v1",
+  "experiment_id": "v150-candidate-shape-iteration-015",
+  "review_attempt": 5,
+  "terminal_state": "REVIEW_REJECTED",
+  "recorded_at": "2026-09-03",
+  "authority": {
+    "automatic_quality_verdict": "pass",
+    "blind_review_verdict": "reject",
+    "confirmation_authorized": false,
+    "promotion_ready": false,
+    "active_data_mutation_authorized": false
+  },
+  "binding": {
+    "quality_comparison_sha256": "b5840ab725b2c3179aec3336e8fe0fefbbc0d30c9fa87d806dfbc7d536eb1187",
+    "review_comparison_adapter_sha256": "0ccf17a6d90bb455f20cb858bc7b566689e4898da842642e9c95a5891fbf1f17",
+    "blind_review_experiment_sha256": "592ff4a9d0452fb650ac814b1fe77ac9b8f65262f65205b4692d4460c3d9d6db",
+    "assignment_key_sha256": "faf3aeb29201a8ca7cd3bba848fd3218573741a6391c7ce74b9814a22f5a5eef",
+    "lane_1_sha256": "30b7567df629b3ec8da0b964fd224adb6bff6edc791280d021d7773090198984",
+    "lane_2_sha256": "a743ef73f4ce6588ca1288b3005df404cadc68d654d0b92cc80058dbf9d67654",
+    "lane_1_result_sha256": "d0c94d5b698eef78fc83c976e7561177a008d6db04f37ac110ad78e9fd60fcea",
+    "lane_2_result_sha256": "110dfdb441a50058407ae34fcd193dcd8867832bbd4a877f23edf3e8337cdfa9",
+    "aggregate_review_sha256": "e16e0ef3965db61e510b81c7e3e0143d04d24b4e27ece88bd6e145bf5ff55a5e",
+    "review_contract_sha256": "2e13191ede3f4810007190c76b54c95ee837d4c8b288bd379120c450d6a097c2",
+    "selection_sha256": "ed837c006b9870fa38b0cb04faa5d74d37caee390f690d3b45186157a838d0fa"
+  },
+  "review_result": {
+    "status": "fail",
+    "pair_count_per_lane": 20,
+    "candidate_hard_defect_observations": 3,
+    "candidate_hard_defect_seeds": [2, 30, 274927640092229229],
+    "candidate_hard_defects": {
+      "consistency_rule_conflict": 2,
+      "location_action_object_conflict": 1
+    },
+    "dimension_results": {
+      "protagonist_clarity": {"passed": false, "improvement_support": 0.605263, "worse_rate": 0.394737},
+      "consistency": {"passed": false, "improvement_support": 0.571429, "worse_rate": 0.428571},
+      "naturalness": {"passed": false, "improvement_support": 0.513514, "worse_rate": 0.486486},
+      "redundancy": {"passed": false, "improvement_support": 0.586207, "worse_rate": 0.413793},
+      "diversity": {"passed": true, "authority": "current_source_corpus_confirmation"},
+      "image_prompt_suitability": {"passed": false, "improvement_support": 0.631579, "worse_rate": 0.368421}
+    }
+  },
+  "next_iteration_requirements": [
+    "Preserve attempt-005 evidence and active variation data unchanged.",
+    "Repair before-sleeping versus morning conflicts and recording-booth equipment placement.",
+    "Continue systemic naturalness, redundancy, protagonist-clarity, and image-suitability remediation without weakening thresholds.",
+    "Rerun fresh coverage and automatic validation before another blind review.",
+    "Do not start VE-1318 or VE-1319 until a comparison-bound blind review passes."
+  ]
+}

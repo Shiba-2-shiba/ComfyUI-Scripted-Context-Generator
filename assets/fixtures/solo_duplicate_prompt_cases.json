@@ -1,0 +1,32 @@
+[
+  {
+    "name": "street_cafe_friend_talk",
+    "image": "260618-052301_00001_.png",
+    "risk_families": ["other_person", "social_talk", "multi_action_density"],
+    "prompt": "1girl, solo, big breasts, slim waist, masterpiece, best quality, a solo girl with short messy bob, red hair and amber eyes in white mesh knit quick-dry training tee and lightweight training shorts, with reflective piping, ankle socks, already part of stylish european street cafe, cobblestone street, during fresh morning, with glass of chilled water and canvas tote resting by the chair, waving to a friend approaching the cafe close to where she needs to be, holding herself ready to continue, checking what is happening nearby, keeping pace with the space around her, as if responding directly to the viewer, as the last part falls into place, while the afternoon slows down, hands moving as she talks, suppressed laughter, teasing look, bright everyday bustle with quick steps, easy laughter, and a grin she cannot quite hide., open posture"
+  },
+  {
+    "name": "bedroom_mirror_talk",
+    "image": "260618-052432_00001_.png",
+    "risk_families": ["mirror_clone", "social_talk", "multi_action_density"],
+    "prompt": "1girl, solo, big breasts, slim waist, masterpiece, best quality, a solo girl with short messy bob, red hair and amber eyes in beige solid soft silhouette fitted turtleneck and pleated midi skirt, adjusting clothes, standing by the mirror, looking toward the next thing she needs, moving on only after one more check, lost in her own rhythm, before fully getting started, before sleeping, hands moving as she talks, brows knit in concentration, the rest of the scene opening into gothic victorian boudoir, adorned with cute plush toys on bed, during lazy morning, matte background, featuring strings of fairy lights on wall and canopied four-poster bed, a lively stretch of the day, her shoulders open and her movements full of fresh energy"
+  },
+  {
+    "name": "bedroom_mirror_three_clone",
+    "image": "260618-052518_00001_.png",
+    "risk_families": ["mirror_clone", "multi_action_density"],
+    "prompt": "1girl, solo, big breasts, slim waist, masterpiece, best quality, a solo girl with short boyish cut, black hair and sharp black eyes in taupe pinstripe merino wool cropped hem draped soft blouse and tailored cropped trousers, with minimal hardware, bright everyday bustle with quick steps, easy laughter, and a grin she cannot quite hide, brushing hair in front of a mirror, holding herself steady while she works, eyes fixed on what needs to happen next, pausing to reassess one detail, leaving room for a quiet exchange with the viewer, before fully getting started, after finally coming home, fingers tapping lightly, leaning into the moment, against cozy romantic bedroom, intricate background details, during lazy morning"
+  },
+  {
+    "name": "kitchen_location_first",
+    "image": "260618-052649_00001_.png",
+    "risk_families": ["location_first_template", "multi_action_density"],
+    "prompt": "1girl, solo, big breasts, slim waist, masterpiece, best quality, At the edge of pristine modern kitchen with island, featuring bowl of fresh fruits and marble island counter, during refreshing morning, a solo girl with elegant updo, platinum blonde hair and ice blue eyes in royal blue graphic print denim high-waist oversized graphic tee and frayed denim shorts, with zippers, wiping down the marble counter near the part of the scene she is using, settling into a quieter pace, looking off for a quiet second, letting the pause settle properly, meeting the viewer with a quiet look, as she gets herself ready, late in the evening, touched expression, moving at an unhurried pace, a lively stretch of the day, her shoulders open and her movements full of fresh energy., quick step"
+  },
+  {
+    "name": "ticket_gate_scene_anchor_stack",
+    "image": "260618-052735_00001_.png",
+    "risk_families": ["multi_action_density"],
+    "prompt": "1girl, solo, big breasts, slim waist, masterpiece, best quality, a solo girl with braided hair, silver hair and glowing green eyes in gold nylon streamlined bodysuit, with mesh inserts, moving forward near the route display, angling herself toward what she is considering, looking from one option to another, after the delay finally clears, as if responding directly to the viewer, as the last part falls into place, tapping foot impatiently, during the evening rush, teasing look, holding herself with easy energy, the rest of the scene opening into underground station entrance lined with automatic gates, with commuter pass case in one hand, during weekday morning rush easing off, featuring row of IC card ticket gates, bright everyday bustle with quick steps, easy laughter, and a grin she cannot quite hide"
+  }
+]

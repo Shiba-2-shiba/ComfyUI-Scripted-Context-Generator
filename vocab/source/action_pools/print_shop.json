@@ -1,0 +1,86 @@
+{
+  "location": "print_shop",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "checking paper samples beside the counter"
+    },
+    {
+      "load": "active",
+      "text": "feeding a sheet into the printing machine"
+    },
+    {
+      "load": "calm",
+      "text": "comparing ink swatches on a sample card"
+    },
+    {
+      "load": "active",
+      "text": "stacking finished pages on a drying rack"
+    },
+    {
+      "load": "calm",
+      "text": "reviewing a layout proof"
+    },
+    {
+      "load": "active",
+      "text": "cutting a printed sheet along its guide"
+    },
+    {
+      "load": "calm",
+      "text": "sorting envelopes by size"
+    },
+    {
+      "load": "active",
+      "text": "binding a small set of documents"
+    },
+    {
+      "load": "calm",
+      "text": "checking an order note beside the register"
+    },
+    {
+      "load": "active",
+      "text": "placing a completed order in a paper sleeve"
+    },
+    {
+      "load": "calm",
+      "text": "wiping toner dust from the work counter"
+    },
+    {
+      "load": "active",
+      "text": "organizing paper rolls near the finishing station"
+    },
+    {
+      "load": "calm",
+      "text": "checking crop marks on a fresh proof sheet"
+    },
+    {
+      "load": "active",
+      "text": "feeding a new paper stack into the feed tray"
+    },
+    {
+      "load": "calm",
+      "text": "comparing the printed color against a reference swatch"
+    },
+    {
+      "load": "active",
+      "text": "turning the guillotine guide to the required width"
+    },
+    {
+      "load": "calm",
+      "text": "reviewing page order before binding"
+    },
+    {
+      "load": "active",
+      "text": "carrying trimmed sheets to the finishing table"
+    },
+    {
+      "load": "calm",
+      "text": "checking the toner level on the machine display"
+    },
+    {
+      "load": "active",
+      "text": "placing a completed booklet into its order sleeve"
+    }
+  ],
+  "families": []
+}

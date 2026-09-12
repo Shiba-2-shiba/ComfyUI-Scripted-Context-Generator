@@ -1,0 +1,358 @@
+[
+  {
+    "builder_seed": 8919487355398519527,
+    "frame": {
+      "gaze_target": "checking what is happening nearby",
+      "hand_action": "checking the arrangement",
+      "legacy_slots": {
+        "anchor": "",
+        "daily_life_tags": [
+          "retail_service",
+          "quiet_indoor"
+        ],
+        "gaze_target": "checking what is happening nearby",
+        "hand_action": "checking the arrangement",
+        "location": "antique_shop",
+        "obstacle_clause": "",
+        "obstacle_or_trigger": "",
+        "optional_micro_action": "before moving to the next section",
+        "posture": "hovering in place while she decides",
+        "primary_action": "checking the arrangement before moving to the next section",
+        "progress_clause": "while setting up the next step",
+        "progress_state": "preparing",
+        "purpose": "shop",
+        "purpose_clause": "weighing one choice against another",
+        "social_clause": "meeting the viewer with a quiet look",
+        "social_distance": "viewer",
+        "time_or_weather": ""
+      },
+      "legacy_text": "checking the arrangement before moving to the next section, hovering in place while she decides, checking what is happening nearby, weighing one choice against another, meeting the viewer with a quiet look",
+      "main_verb": "checking",
+      "posture": "hovering in place while she decides",
+      "primary_object": "",
+      "progress": "preparing",
+      "schema_version": "action-frame/v1",
+      "social_relation": "viewer",
+      "stimulus_or_obstacle": ""
+    },
+    "replacements": [
+      [
+        "{subject_clause}",
+        "A solo girl with elegant updo, platinum blonde hair and ice blue eyes in silver fair isle long-sleeve warm turtleneck sweater dress"
+      ],
+      [
+        "{action_clause}",
+        "checking the arrangement before moving to the next section, hovering in place while she decides, checking what is happening nearby, weighing one choice against another, meeting the viewer with a quiet look, brows knit in concentration, steady gaze, hands kept precise and controlled"
+      ],
+      [
+        "{scene_clause}",
+        "in mysterious curio store filled with history, with old mechanical clocks and ornate gold-framed mirrors, featuring vintage curved glass display cabinets, during evening, quiet timeless atmosphere, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{scene_anchor_clause}",
+        "mysterious curio store filled with history, with old mechanical clocks and ornate gold-framed mirrors, featuring vintage curved glass display cabinets, during evening, quiet timeless atmosphere, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{subj}",
+        "A solo girl with elegant updo, platinum blonde hair and ice blue eyes"
+      ],
+      [
+        "{costume}",
+        "silver fair isle long-sleeve warm turtleneck sweater dress"
+      ],
+      [
+        "{loc}",
+        "mysterious curio store filled with history, with old mechanical clocks and ornate gold-framed mirrors, featuring vintage curved glass display cabinets, during evening, quiet timeless atmosphere"
+      ],
+      [
+        "{action}",
+        "checking the arrangement before moving to the next section, hovering in place while she decides, checking what is happening nearby, weighing one choice against another, meeting the viewer with a quiet look"
+      ],
+      [
+        "{garnish}",
+        "brows knit in concentration, steady gaze, hands kept precise and controlled"
+      ],
+      [
+        "{meta_mood}",
+        "the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{meta_style}",
+        ""
+      ]
+    ],
+    "run_seed": 9,
+    "slots": {
+      "clause_order": [
+        "subject",
+        "action",
+        "scene"
+      ],
+      "discourse_roles": [
+        "focused",
+        "neutral",
+        "quiet",
+        "social",
+        "transition"
+      ],
+      "lexical_choice": "gerund",
+      "named_seed_streams": {
+        "lexical": 4237693959,
+        "syntax": 47356414,
+        "template": 2659002690
+      },
+      "semantic_slots": {
+        "adjunct": "{action_clause}",
+        "object": "",
+        "predicate": "checking",
+        "scene": "{scene_clause}",
+        "subject": "{subject_clause}"
+      },
+      "syntax_family": "single-sentence-scene-tail"
+    },
+    "surface": {
+      "first_token": "checking",
+      "input_surface": "gerund",
+      "rendered_clause": "checking the arrangement before moving to the next section, hovering in place while she decides, checking what is happening nearby, weighing one choice against another, meeting the viewer with a quiet look, brows knit in concentration, steady gaze, hands kept precise and controlled",
+      "surface": "gerund",
+      "verb": "checking",
+      "word_count": 32
+    }
+  },
+  {
+    "builder_seed": 4047327264138610291,
+    "frame": {
+      "gaze_target": "looking off for a quiet second",
+      "hand_action": "fingers easing out of their tension",
+      "legacy_slots": {
+        "anchor": "along the open walkway",
+        "daily_life_tags": [
+          "school"
+        ],
+        "gaze_target": "looking off for a quiet second",
+        "hand_action": "fingers easing out of their tension",
+        "location": "university_campus_courtyard",
+        "obstacle_clause": "after realizing something is missing",
+        "obstacle_or_trigger": "forgot",
+        "optional_micro_action": "while reviewing what she needs next",
+        "posture": "standing quietly",
+        "primary_action": "standing quietly while reviewing what she needs next",
+        "progress_clause": "while keeping the momentum going",
+        "progress_state": "midway",
+        "purpose": "rest",
+        "purpose_clause": "taking one more easy breath",
+        "social_clause": "leaving room for a quiet exchange with the viewer",
+        "social_distance": "viewer",
+        "time_or_weather": "after school"
+      },
+      "legacy_text": "standing quietly while reviewing what she needs next, looking off for a quiet second, after realizing something is missing, taking one more easy breath, leaving room for a quiet exchange with the viewer, after school",
+      "main_verb": "standing",
+      "posture": "standing quietly",
+      "primary_object": "",
+      "progress": "midway",
+      "schema_version": "action-frame/v1",
+      "social_relation": "viewer",
+      "stimulus_or_obstacle": "forgot"
+    },
+    "replacements": [
+      [
+        "{subject_clause}",
+        "A solo girl with dark brown hair and dark brown eyes in casual layered top and practical trousers"
+      ],
+      [
+        "{action_clause}",
+        "standing quietly while reviewing what she needs next, looking off for a quiet second, after realizing something is missing, taking one more easy breath, leaving room for a quiet exchange with the viewer, after school, brows knit in concentration, still posture"
+      ],
+      [
+        "{scene_clause}",
+        "in sunny college quad with benches, adorned with canvas backpacks resting on benches, featuring wide stone path between lawns, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{scene_anchor_clause}",
+        "sunny college quad with benches, adorned with canvas backpacks resting on benches, featuring wide stone path between lawns, the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{subj}",
+        "A solo girl with dark brown hair and dark brown eyes"
+      ],
+      [
+        "{costume}",
+        "casual layered top and practical trousers"
+      ],
+      [
+        "{loc}",
+        "sunny college quad with benches, adorned with canvas backpacks resting on benches, featuring wide stone path between lawns"
+      ],
+      [
+        "{action}",
+        "standing quietly while reviewing what she needs next, looking off for a quiet second, after realizing something is missing, taking one more easy breath, leaving room for a quiet exchange with the viewer, after school"
+      ],
+      [
+        "{garnish}",
+        "brows knit in concentration, still posture"
+      ],
+      [
+        "{meta_mood}",
+        "the scene narrowing to one line of thought as the rest of the room falls gently aside"
+      ],
+      [
+        "{meta_style}",
+        ""
+      ]
+    ],
+    "run_seed": 40,
+    "slots": {
+      "clause_order": [
+        "subject",
+        "action",
+        "scene"
+      ],
+      "discourse_roles": [
+        "focused",
+        "neutral",
+        "quiet",
+        "transition"
+      ],
+      "lexical_choice": "gerund",
+      "named_seed_streams": {
+        "lexical": 3377803426,
+        "syntax": 259921623,
+        "template": 2872640535
+      },
+      "semantic_slots": {
+        "adjunct": "{action_clause}",
+        "object": "",
+        "predicate": "standing",
+        "scene": "{scene_clause}",
+        "subject": "{subject_clause}"
+      },
+      "syntax_family": "single-sentence-scene-tail"
+    },
+    "surface": {
+      "first_token": "standing",
+      "input_surface": "gerund",
+      "rendered_clause": "standing quietly while reviewing what she needs next, looking off for a quiet second, after realizing something is missing, taking one more easy breath, leaving room for a quiet exchange with the viewer, after school, brows knit in concentration, still posture",
+      "surface": "gerund",
+      "verb": "standing",
+      "word_count": 35
+    }
+  },
+  {
+    "builder_seed": 18244598981650950103,
+    "frame": {
+      "gaze_target": "looking off for a quiet second",
+      "hand_action": "securing the telescope cover",
+      "legacy_slots": {
+        "anchor": "",
+        "daily_life_tags": [
+          "leisure",
+          "quiet_indoor"
+        ],
+        "gaze_target": "looking off for a quiet second",
+        "hand_action": "securing the telescope cover",
+        "location": "observatory_dome",
+        "obstacle_clause": "",
+        "obstacle_or_trigger": "",
+        "optional_micro_action": "letting the pause settle properly",
+        "posture": "taking on an easy unhurried posture",
+        "primary_action": "securing the telescope cover",
+        "progress_clause": "while setting up the next step",
+        "progress_state": "preparing",
+        "purpose": "rest",
+        "purpose_clause": "letting the pause settle properly",
+        "social_clause": "leaving room for a quiet exchange with the viewer",
+        "social_distance": "viewer",
+        "time_or_weather": ""
+      },
+      "legacy_text": "securing the telescope cover, taking on an easy unhurried posture, looking off for a quiet second, letting the pause settle properly, leaving room for a quiet exchange with the viewer",
+      "main_verb": "securing",
+      "posture": "taking on an easy unhurried posture",
+      "primary_object": "",
+      "progress": "preparing",
+      "schema_version": "action-frame/v1",
+      "social_relation": "viewer",
+      "stimulus_or_obstacle": ""
+    },
+    "replacements": [
+      [
+        "{subject_clause}",
+        "A solo girl with short asymmetrical cut, blue hair and neon blue eyes in beige fair isle long-sleeve warm turtleneck sweater dress"
+      ],
+      [
+        "{action_clause}",
+        "securing the telescope cover, taking on an easy unhurried posture, looking off for a quiet second, letting the pause settle properly, leaving room for a quiet exchange with the viewer, brows knit in concentration"
+      ],
+      [
+        "{scene_clause}",
+        "in circular telescope chamber, polished finish, during deep moonless night, layered background depth, featuring large equatorial telescope and curved rotating dome track, with weather monitor, a quiet room holding around her while the task in front of her sets the pace"
+      ],
+      [
+        "{scene_anchor_clause}",
+        "circular telescope chamber, polished finish, during deep moonless night, layered background depth, featuring large equatorial telescope and curved rotating dome track, with weather monitor, a quiet room holding around her while the task in front of her sets the pace"
+      ],
+      [
+        "{subj}",
+        "A solo girl with short asymmetrical cut, blue hair and neon blue eyes"
+      ],
+      [
+        "{costume}",
+        "beige fair isle long-sleeve warm turtleneck sweater dress"
+      ],
+      [
+        "{loc}",
+        "circular telescope chamber, polished finish, during deep moonless night, layered background depth, featuring large equatorial telescope and curved rotating dome track, with weather monitor"
+      ],
+      [
+        "{action}",
+        "securing the telescope cover, taking on an easy unhurried posture, looking off for a quiet second, letting the pause settle properly, leaving room for a quiet exchange with the viewer"
+      ],
+      [
+        "{garnish}",
+        "brows knit in concentration"
+      ],
+      [
+        "{meta_mood}",
+        "a quiet room holding around her while the task in front of her sets the pace"
+      ],
+      [
+        "{meta_style}",
+        ""
+      ]
+    ],
+    "run_seed": 51,
+    "slots": {
+      "clause_order": [
+        "subject",
+        "action",
+        "scene"
+      ],
+      "discourse_roles": [
+        "neutral",
+        "quiet",
+        "transition"
+      ],
+      "lexical_choice": "gerund",
+      "named_seed_streams": {
+        "lexical": 1389466182,
+        "syntax": 3531848178,
+        "template": 490704638
+      },
+      "semantic_slots": {
+        "adjunct": "{action_clause}",
+        "object": "",
+        "predicate": "securing",
+        "scene": "{scene_clause}",
+        "subject": "{subject_clause}"
+      },
+      "syntax_family": "single-sentence-scene-tail"
+    },
+    "surface": {
+      "first_token": "securing",
+      "input_surface": "gerund",
+      "rendered_clause": "securing the telescope cover, taking on an easy unhurried posture, looking off for a quiet second, letting the pause settle properly, leaving room for a quiet exchange with the viewer, brows knit in concentration",
+      "surface": "gerund",
+      "verb": "securing",
+      "word_count": 30
+    }
+  }
+]

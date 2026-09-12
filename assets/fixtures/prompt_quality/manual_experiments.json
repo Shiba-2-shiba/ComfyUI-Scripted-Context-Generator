@@ -1,0 +1,35 @@
+{
+  "schema_version": "prompt-quality-manual-experiments/v1",
+  "experiments": [
+    {
+      "experiment_id": "manual-behavior-boundary-promote",
+      "hypothesis": "Removing two deterministic duplicate-subject defects meets the behavior gate.",
+      "target_metric": "identity.defect_count",
+      "guard_metrics": ["identity.single_female_rate"],
+      "owned_files": ["prompt_renderer.py"],
+      "source_snapshot": "fixture-incumbent-v1",
+      "source_tree_hash": "3dd775ff59994b7645d409e9fbb9bd04da41fdb8acc718877e7b2f9ae27d4b45",
+      "candidate_patch": "remove duplicate subject clause",
+      "candidate_patch_hash": "a0762ee2f28e4f818a1c0391a1ccff51ddb011c051fd8623f15cca4699982495",
+      "before": {"identity": {"defect_count": 10, "single_female_rate": 1.0}},
+      "after": {"identity": {"defect_count": 8, "single_female_rate": 1.0}},
+      "expected_automatic_verdict": "pass",
+      "expected_promotion_verdict": "promote"
+    },
+    {
+      "experiment_id": "manual-diversity-hard-gate-reject",
+      "hypothesis": "Increasing template entropy must not override an identity regression.",
+      "target_metric": "diversity.template_entropy",
+      "guard_metrics": ["identity.single_female_rate"],
+      "owned_files": ["vocab/data/template_catalog.json"],
+      "source_snapshot": "fixture-incumbent-v2",
+      "source_tree_hash": "da07bd6dec6dd97c4b54e6d281cbf97a2db0f1a2c229bb8b1a2321562f8a5c71",
+      "candidate_patch": "add template family with hard regression",
+      "candidate_patch_hash": "adee744e2f7c03c45a8ba0699c3d1487439d86917e3c5a35aba589da2d56bf36",
+      "before": {"diversity": {"template_entropy": 100}, "identity": {"hard_defect_count": 0, "single_female_rate": 1.0}},
+      "after": {"diversity": {"template_entropy": 110}, "identity": {"hard_defect_count": 1, "single_female_rate": 0.9875}},
+      "expected_automatic_verdict": "reject",
+      "expected_promotion_verdict": "reject"
+    }
+  ]
+}

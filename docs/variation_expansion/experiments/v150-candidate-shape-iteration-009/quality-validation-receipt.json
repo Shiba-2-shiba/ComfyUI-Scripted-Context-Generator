@@ -1,0 +1,94 @@
+{
+  "schema_version": "variation-nonselected-quality-validation-receipt/v2",
+  "experiment_id": "v150-candidate-shape-iteration-009",
+  "terminal_state": "QUALITY_VALIDATED_REVIEW_READY",
+  "recorded_at": "2026-09-02",
+  "authority": {
+    "comparison_authority": "quality_non_selected",
+    "quality_evidence": true,
+    "coverage_is_quality_evidence": false,
+    "coverage_eligibility_verdict": "pass",
+    "quality_verdict": "pass",
+    "validation_verdict": "pass",
+    "review_ready": true,
+    "blind_review_run": false,
+    "confirmation_run": false,
+    "promotion_ready": false
+  },
+  "surface": {
+    "kind": "default_fixed_64_16",
+    "prompt_selection": "default_unselected",
+    "metric_scope": "control64",
+    "metric_record_count": 64,
+    "baseline_rows": 80,
+    "candidate_rows": 80,
+    "uses_output_metrics_for_selection": false
+  },
+  "local_snapshot": {
+    "path": "assets/results/vfc/q23-default-quality",
+    "snapshot_manifest_sha256": "82ddf2162b5748be2d4c86a445af83b041abb5636907027051032a4619dab77a",
+    "prompt_schedule_sha256": null,
+    "quality_contract_sha256": "00ca832a6941295d87ffea87b041d32625ac09ddbf49b84f46d30ae32af31bb6",
+    "prompt_rows": {"baseline": 80, "candidate": 80},
+    "active_source_unchanged": true
+  },
+  "tracked_artifacts": {
+    "current-source-coverage-refresh.json": "f918b1b38b17f97d7141f15e0cd30476b664f51e6bfedae5368d7f4d1f3b535a",
+    "nonselected-quality-contract.json": "85c21dac133b43735fe00d1f6e959e23658675fa9e29dd9d760913badfde150b",
+    "quality-experiment.json": "380e412b3b7969df7a7d7def51f7380a413191484eb4ce73bf1567ef48249057",
+    "quality-comparison.json": "8d4417b1c6444c4c35748c399d86918afd1c703b500cee504a05f5289e7b154a"
+  },
+  "run_artifacts": {
+    "baseline_run_manifest_sha256": "d79309a11a9910c55574be9fb00c6b9be31a6fce7a6fe101893274338aacd773",
+    "candidate_run_manifest_sha256": "c569a1d4af64e58b4690d3df1b7300cd07e5918d3e683d9e86ccb51bc87f4ed7",
+    "comparison_canonical_sha256": "fb94ebd752169de309a73a4ee850cc999918b471e4a1c99bffb415544c786987",
+    "experiment_canonical_sha256": "380e412b3b7969df7a7d7def51f7380a413191484eb4ce73bf1567ef48249057",
+    "cohort_hash": "1b7017819fe1ff11c822b27e61d035b0ce0596dd6f06f85c27f6a45766912492",
+    "records_per_side": 80,
+    "control_count": 64,
+    "exploration_count": 16,
+    "replay_mismatch_count": 0
+  },
+  "coverage_eligibility": {
+    "status": "pass",
+    "candidate_subjects": 15,
+    "candidate_locations": 19,
+    "candidate_action_pool_locations": 19,
+    "fixed_seed_count": 80,
+    "extra_seed_count": 0,
+    "prompt_schedule_sha256": "0c5ce848e03ef4eefc3cb083c6d5649223d317399d371ef68535172571ba8453",
+    "witness_matrix_sha256": "4eb36f10c164e285e18f418cbda5b0df7f8244a9695b478d80b2521019a7e423"
+  },
+  "quality_results": {
+    "failures": [],
+    "location_signature_entropy_before": 4.626124,
+    "location_signature_entropy_after": 4.956344,
+    "repeated_ngram_count_before": 0,
+    "repeated_ngram_count_after": 0,
+    "semantic_family_repetition_count_before": 2,
+    "semantic_family_repetition_count_after": 2,
+    "context_json_bytes_max_before": 27468,
+    "context_json_bytes_max_after": 27392,
+    "context_json_bytes_p95_before": 26873.35,
+    "context_json_bytes_p95_after": 26144.65,
+    "identity_regressions": 0,
+    "hard_consistency_regressions": 0,
+    "policy_regressions": 0,
+    "fallback_regressions": 0
+  },
+  "five_seed_replay": {
+    "seeds": [1, 2, 9435136036924046218, 1149853648275787818, 16086608232758145338],
+    "reviewed_conflict_phrase_count": 0,
+    "status": "pass"
+  },
+  "verification": {
+    "focused_remediation_and_planner_tests": "87 tests OK",
+    "action_pool_generation_check": "pass",
+    "prompt_data_validation": "pass; variation_row_count=5806",
+    "full_assets_suite": "685 passed; 3 unrelated pre-existing snapshot/attestation failures"
+  },
+  "next_iteration_requirements": [
+    "Run a comparison-bound blind review without changing the validated source.",
+    "Keep promotion_ready=false until review, confirmation, and verification receipts are complete."
+  ]
+}

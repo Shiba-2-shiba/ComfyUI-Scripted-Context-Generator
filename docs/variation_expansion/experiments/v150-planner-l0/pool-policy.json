@@ -1,0 +1,53 @@
+{
+  "schema_version": "variation-location-pool-policy/v1",
+  "captured_at": "2026-09-01",
+  "counted_scope_source": "vocab/data/variation_scope.json",
+  "runtime_pool_source": "vocab/data/action_pools.json",
+  "counted_location_count": 90,
+  "runtime_location_count": 96,
+  "next_candidate_locations": [],
+  "non_counted_runtime_pools": [
+    {
+      "location": "neon_city_street",
+      "classification": "runtime_alias_compatible",
+      "canonical_location": "cyberpunk_street",
+      "reason": "Canonical alias overlap; counting both would duplicate one prompt utility surface."
+    },
+    {
+      "location": "messy_kitchen",
+      "classification": "quality_excluded",
+      "canonical_location": null,
+      "reason": "Runtime support is retained, but location-resolution tests intentionally exclude it from the daily/universal/domestic/home_life counted candidate surface."
+    },
+    {
+      "location": "rainy_bus_stop",
+      "classification": "runtime_alias_compatible",
+      "canonical_location": "rainy_alley",
+      "reason": "Fallback alias and variation-scope canonical override prevent duplicate counting."
+    },
+    {
+      "location": "elegant_dining_room",
+      "classification": "runtime_alias_compatible",
+      "canonical_location": "street_cafe",
+      "reason": "Fallback alias and variation-scope canonical override prevent duplicate counting."
+    },
+    {
+      "location": "steampunk_airship",
+      "classification": "legacy_only",
+      "canonical_location": "airship_deck",
+      "reason": "Legacy alias exists only for older airship-oriented workflow inputs."
+    },
+    {
+      "location": "luxury_bathroom",
+      "classification": "runtime_alias_compatible",
+      "canonical_location": "bedroom_boudoir",
+      "reason": "Fallback alias and variation-scope canonical override prevent duplicate counting."
+    }
+  ],
+  "policy": {
+    "count_aliases_independently": false,
+    "promote_legacy_only_locations": false,
+    "promote_quality_excluded_locations_without_new_review": false,
+    "candidate_source": "variation_scope.next_candidate_locations"
+  }
+}

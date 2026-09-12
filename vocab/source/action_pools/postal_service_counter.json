@@ -1,0 +1,86 @@
+{
+  "location": "postal_service_counter",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "checking a parcel label at the service counter"
+    },
+    {
+      "load": "active",
+      "text": "placing a sealed package on the weighing scale"
+    },
+    {
+      "load": "calm",
+      "text": "reading the posted delivery options"
+    },
+    {
+      "load": "active",
+      "text": "filling out a mailing form"
+    },
+    {
+      "load": "calm",
+      "text": "sorting envelopes by service type"
+    },
+    {
+      "load": "active",
+      "text": "checking the address on a parcel"
+    },
+    {
+      "load": "calm",
+      "text": "placing stamps beside the transaction tray"
+    },
+    {
+      "load": "active",
+      "text": "carrying a package toward the collection shelf"
+    },
+    {
+      "load": "calm",
+      "text": "reviewing a customs declaration"
+    },
+    {
+      "load": "active",
+      "text": "sealing a padded mailer"
+    },
+    {
+      "load": "calm",
+      "text": "checking a numbered collection slip"
+    },
+    {
+      "load": "active",
+      "text": "organizing packing materials beneath the counter"
+    },
+    {
+      "load": "calm",
+      "text": "reading a notice about parcel dimensions"
+    },
+    {
+      "load": "active",
+      "text": "placing a completed form in the document tray"
+    },
+    {
+      "load": "calm",
+      "text": "checking the service window schedule"
+    },
+    {
+      "load": "active",
+      "text": "weighing a small box for postage"
+    },
+    {
+      "load": "calm",
+      "text": "sorting labels beside the printing terminal"
+    },
+    {
+      "load": "active",
+      "text": "moving an accepted parcel into a storage bin"
+    },
+    {
+      "load": "calm",
+      "text": "checking a receipt before folding it"
+    },
+    {
+      "load": "active",
+      "text": "restocking envelopes on the counter shelf"
+    }
+  ],
+  "families": []
+}

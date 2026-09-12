@@ -1,0 +1,286 @@
+{
+  "adoption_status": "BLOCKED",
+  "architecture_status": "NOT_RUN",
+  "candidate_rng_parity": {
+    "candidate_rng_poststates_compared": 384,
+    "mismatches": 0,
+    "runtime_source_identity": "bcc0feba90d7aa9f8943763cb746db4cb00c0287587a966ac85404fc088cb58f",
+    "status": "PASS"
+  },
+  "changed_source_files": [
+    "assets/test_r43_clothing_binding.py",
+    "assets/test_r43_clothing_selector_trace.py",
+    "assets/test_r43_clothing_trace.py",
+    "pipeline/clothing_candidate_renderer.py",
+    "pipeline/clothing_candidate_selector.py",
+    "pipeline/realization_evidence.py",
+    "pipeline/v2_clothing_provenance.py"
+  ],
+  "clothing_evidence": {
+    "attempt_counts": {
+      "0": 465,
+      "1": 29,
+      "2": 8,
+      "3": 8,
+      "4": 2
+    },
+    "audit_only_renderer_replays": 512,
+    "blockers": {
+      "binding.history_stale": 16,
+      "binding.source_ambiguity": 7,
+      "clothing.multigarment_owner_unknown": 182,
+      "clothing.nominal_grammar_unknown": 71,
+      "clothing.outerwear_attachment_unknown": 134
+    },
+    "evidence_sha256": "a6f88a6731239c05ecf1b209ba76062088a5f3fa70e7d50650b391d91d4f5bb7",
+    "history_mismatches": 0,
+    "normal_output_mismatches": 0,
+    "rng_mismatches": 0,
+    "runtime_bound_constructor_count": 102,
+    "runtime_exact_replay_count": 0,
+    "runtime_source_identity": "bcc0feba90d7aa9f8943763cb746db4cb00c0287587a966ac85404fc088cb58f",
+    "sample_count": 512,
+    "selected_attempt_trace_replay_matches": 512,
+    "stale_bindings_rejected": 512
+  },
+  "common_family_authorization_enabled": false,
+  "development_status": "NOT_RUN",
+  "evidence": [
+    {
+      "path": "candidate-rng-parity.json",
+      "sha256": "ac6c9a715cc381a9aaab5624a32930d859b543258e1bfc694664e582c7b7a13c"
+    },
+    {
+      "path": "focused/commands.json",
+      "sha256": "07fa002609d7d293ae02f7518a6dd2fb5f55616bf5a734c550498298fc1ed32b"
+    },
+    {
+      "path": "focused/environment.json",
+      "sha256": "a22486e5fcbfbec28798b0d7ef4a80feef09c5d7446f398b734bf5fba471944d"
+    },
+    {
+      "path": "focused/logs/collected-tests.json",
+      "sha256": "87e02a0f0c5468d6c3836f246c3e70dda363b7045800011c53de8251e65dd316"
+    },
+    {
+      "path": "focused/logs/pytest.log",
+      "sha256": "a44becb69dd1b2307a87f4e9045d8ba6bccf395c063c12ea80af66c7114a423f"
+    },
+    {
+      "path": "focused/source-manifest-after.json",
+      "sha256": "ff7724b89be5e3ad809ce3460d7ea2acad363e7d49e417d5ba7a91ea3e05d890"
+    },
+    {
+      "path": "focused/source-manifest.json",
+      "sha256": "ff7724b89be5e3ad809ce3460d7ea2acad363e7d49e417d5ba7a91ea3e05d890"
+    },
+    {
+      "path": "focused/supplemental-inputs.json",
+      "sha256": "0690acc0703a3361c044829b5ff251ee7adf40dc1ed6bffeb03e5709df599f15"
+    },
+    {
+      "path": "focused/test-collection.json",
+      "sha256": "1dca2d6594d7335d6e0bbdd967f0d5bbcc49e29b6320f4d9941b3d2a83911683"
+    },
+    {
+      "path": "focused/verdict.json",
+      "sha256": "cf6bf26381a25f464c281139046698a9e0c46a080b459cd439637ab2bf8649f2"
+    },
+    {
+      "path": "intake512/baseline-command.json",
+      "sha256": "03c6a3099ee6bf0fa460477090b7d4c092cf4413df9954ea82fca51b0d719a49"
+    },
+    {
+      "path": "intake512/baseline-identity.json",
+      "sha256": "c2ef3d0ef21a50a2418e21e96f2c3e20550ca263a339d8d6b5948ea492e709d9"
+    },
+    {
+      "path": "intake512/baseline-pairs.jsonl",
+      "sha256": "59bed79e917235bd0c4bc2e26a893788263627266166c358837a7e32773766da"
+    },
+    {
+      "path": "intake512/baseline-process.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "intake512/environment.json",
+      "sha256": "c783011f1107f7c3980ff990fca099ca8b6e301e360eed16e1e9b8e070ecefb4"
+    },
+    {
+      "path": "intake512/normal-pairs.jsonl",
+      "sha256": "59bed79e917235bd0c4bc2e26a893788263627266166c358837a7e32773766da"
+    },
+    {
+      "path": "intake512/reachability-summary.md",
+      "sha256": "9aa9c2ff0e65470dcc49f5869072b361764cc20fa738720df6e3a762b6e4d392"
+    },
+    {
+      "path": "intake512/reachability.json",
+      "sha256": "c1adfea358eb6d5216e9ad3485f8ec44fb7bdfbc2552e19b339c022cf432e28f"
+    },
+    {
+      "path": "intake512/records.jsonl",
+      "sha256": "c384f01d708a546ac4a1b08ef1b9fd46bd1e8bb97d886032a56f616148a13bef"
+    },
+    {
+      "path": "intake512/rows.jsonl",
+      "sha256": "b964d1f0ab36fe86cf5b4b255959f947d6cede577ff28ad8cb32d39b43bd343b"
+    },
+    {
+      "path": "intake512/source-manifest-after.json",
+      "sha256": "e2ec3b15c0836f83bc8ad485ffaf6262dd5c5340a5a161ee13699b78d5e88908"
+    },
+    {
+      "path": "intake512/source-manifest.json",
+      "sha256": "e2ec3b15c0836f83bc8ad485ffaf6262dd5c5340a5a161ee13699b78d5e88908"
+    },
+    {
+      "path": "preservation.json",
+      "sha256": "5fd22775fd44e985ca488f85c68e98806f1c5b0fb4928159c1e99aa8ca1a7ee6"
+    },
+    {
+      "path": "public-contract.json",
+      "sha256": "07bfe42b6ff01da527599d6d210a8d9da06fac857275c5d1042826c9a3bad711"
+    },
+    {
+      "path": "r43_capture_clothing_evidence.py",
+      "sha256": "5c004cdf1ea4cc19159abb299a56d901c7f436da43d2b41874cd40e307203d1c"
+    },
+    {
+      "path": "r43_check_clothing_rng.py",
+      "sha256": "471b2138f3c72dc5ccebe4a2b9cda15c1907d44b1d2da87f8cbc6fc801548758"
+    },
+    {
+      "path": "r43_finalize_clothing.py",
+      "sha256": "d42486e61136892933a9ce4fe91020e1bdfa49d1db9780f56af6258960ceae2b"
+    },
+    {
+      "path": "regression/commands.json",
+      "sha256": "4c6b5db961d65f48ffc63a729a8f0602d3261f689e4b51275f8cb5d21d4549ab"
+    },
+    {
+      "path": "regression/environment.json",
+      "sha256": "80afc556119b3e9e49c805bc0fe3deee2589dfb28d2a76392b3f7310a107aeff"
+    },
+    {
+      "path": "regression/logs/action_pools.log",
+      "sha256": "a2fe63ac78f3e6748233cf7974a0fd146ab332244601fd9cb645e979b27ab8e1"
+    },
+    {
+      "path": "regression/logs/asset_validation.log",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": "regression/logs/collected-tests.json",
+      "sha256": "be96c38bc509516b2b6d10af2837f79a1e5413790d5f02da42910661f61bd234"
+    },
+    {
+      "path": "regression/logs/compatibility.log",
+      "sha256": "b6cede2000ad9722bcbbd38c90cd88aedaadd7f35e0b805374d1b6548241b4e2"
+    },
+    {
+      "path": "regression/logs/full_flow.log",
+      "sha256": "4e7024bbab9109cc83d937b39b25c4d869bce0b79243b3386352a5b1dc06feda"
+    },
+    {
+      "path": "regression/logs/prompt_data.log",
+      "sha256": "48c9fca6faa41199223917af6b16fa0b8ef55f13f61b41add7204db4a6acda4d"
+    },
+    {
+      "path": "regression/logs/pytest.log",
+      "sha256": "0fce21e38d4b75d88a3087acddde611fd3a056348370080d41a7568cec32d137"
+    },
+    {
+      "path": "regression/logs/variation_scope.log",
+      "sha256": "cbd0cc5f38dbb3606d91838a8f446015b7186c3bb13c1bd34a6aca9928427f83"
+    },
+    {
+      "path": "regression/logs/variations.log",
+      "sha256": "791b2fcab90a05e813905a11132be833f981b38b67b3f3fb675b748a8a7da842"
+    },
+    {
+      "path": "regression/source-manifest-after.json",
+      "sha256": "ff7724b89be5e3ad809ce3460d7ea2acad363e7d49e417d5ba7a91ea3e05d890"
+    },
+    {
+      "path": "regression/source-manifest.json",
+      "sha256": "ff7724b89be5e3ad809ce3460d7ea2acad363e7d49e417d5ba7a91ea3e05d890"
+    },
+    {
+      "path": "regression/supplemental-inputs.json",
+      "sha256": "0690acc0703a3361c044829b5ff251ee7adf40dc1ed6bffeb03e5709df599f15"
+    },
+    {
+      "path": "regression/test-collection.json",
+      "sha256": "5b828c766bd827ccc25e90748f3254b20405d3b6dd5966758a01f876bbf192fa"
+    },
+    {
+      "path": "regression/verdict.json",
+      "sha256": "74d5bc878af685e25419ef8da3bcee4f29537e504eff07e7b2e33be33554ac73"
+    },
+    {
+      "path": "traced-package/clothing-evidence.jsonl",
+      "sha256": "a6f88a6731239c05ecf1b209ba76062088a5f3fa70e7d50650b391d91d4f5bb7"
+    },
+    {
+      "path": "traced-package/clothing-summary.json",
+      "sha256": "48f6315f8e737ced613cd05f4fcbb3f05200a34080d4800a6f4cf8dcb033c655"
+    },
+    {
+      "path": "traced-root/clothing-evidence.jsonl",
+      "sha256": "a6f88a6731239c05ecf1b209ba76062088a5f3fa70e7d50650b391d91d4f5bb7"
+    },
+    {
+      "path": "traced-root/clothing-summary.json",
+      "sha256": "48f6315f8e737ced613cd05f4fcbb3f05200a34080d4800a6f4cf8dcb033c655"
+    }
+  ],
+  "evidence_root_relative_to_original_main_checkout": "assets\\results\\diversity_refactor\\r43\\clothing-final-01",
+  "fallback_structure_count": 2,
+  "focused": {
+    "skips": 0,
+    "subtests": 1963,
+    "tests": 259
+  },
+  "forced_real_graph_family_count": 3,
+  "formal": {
+    "fixed80": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "frontend_browser": "NOT_RUN",
+  "full_suite": "NOT_RUN",
+  "known_test_exclusions": [],
+  "known_test_failures": [],
+  "next_task": "R43-05",
+  "observed_structure_count_including_fallback": 4,
+  "ordinary_v2_count_512": 9,
+  "ordinary_v2_family_count": 3,
+  "pre_edit_golden_cases": {
+    "candidates": 576,
+    "items": 624
+  },
+  "proof_constructor_mismatch_count": 0,
+  "regression": {
+    "skips": 0,
+    "subtests": 33,
+    "tests": 87
+  },
+  "semantic_mismatch_count": 0,
+  "semantic_scope": "Ordinary paired records unchanged; runtime Clothing proof does not enable family expansion.",
+  "source_commit": "9a2aa32c1e3a48d1d7ea51eb91aee42843dba021",
+  "source_tree_hash": "69870cf195583d3cc50ae765c2761754f9a5eedeb2f42cbd16181000b5bc1876",
+  "start_source_tree_hash": "9e11acec3b8d16f280bbec453d8f0d3506baaa3a892fe565a9ee0beecbdcd6c7",
+  "status": "PASS",
+  "task": "N2.7-R4.3/R43-04",
+  "typecheck": "NOT_CONFIGURED",
+  "unimplemented_domains": [
+    "garnish",
+    "mood",
+    "scene",
+    "subject",
+    "template"
+  ],
+  "upstream_context_mismatch_count": 0
+}

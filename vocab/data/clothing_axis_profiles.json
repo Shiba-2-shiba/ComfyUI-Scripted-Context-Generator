@@ -1,0 +1,285 @@
+{
+  "schema_version": "1.0",
+  "axes": [
+    "formality",
+    "warmth",
+    "movement_freedom",
+    "softness",
+    "weather_fit",
+    "activity_fit",
+    "visual_prominence"
+  ],
+  "axis_weights": {
+    "formality": 1.0,
+    "warmth": 1.0,
+    "movement_freedom": 1.0,
+    "softness": 1.0,
+    "weather_fit": 1.0,
+    "activity_fit": 1.0,
+    "visual_prominence": 1.0
+  },
+  "theme_profiles": {
+    "office_lady": {
+      "vector": {
+        "formality": 0.8,
+        "warmth": 0.45,
+        "movement_freedom": 0.45,
+        "softness": 0.4,
+        "weather_fit": 0.45,
+        "activity_fit": 0.65,
+        "visual_prominence": 0.35
+      }
+    },
+    "school_uniform": {
+      "vector": {
+        "formality": 0.65,
+        "warmth": 0.45,
+        "movement_freedom": 0.45,
+        "softness": 0.45,
+        "weather_fit": 0.4,
+        "activity_fit": 0.55,
+        "visual_prominence": 0.55
+      }
+    },
+    "casual": {
+      "vector": {
+        "formality": 0.25,
+        "warmth": 0.5,
+        "movement_freedom": 0.75,
+        "softness": 0.6,
+        "weather_fit": 0.5,
+        "activity_fit": 0.75,
+        "visual_prominence": 0.4
+      }
+    },
+    "rainy_day": {
+      "vector": {
+        "formality": 0.35,
+        "warmth": 0.65,
+        "movement_freedom": 0.6,
+        "softness": 0.55,
+        "weather_fit": 0.9,
+        "activity_fit": 0.65,
+        "visual_prominence": 0.3
+      }
+    },
+    "gym_workout": {
+      "vector": {
+        "formality": 0.1,
+        "warmth": 0.35,
+        "movement_freedom": 0.95,
+        "softness": 0.45,
+        "weather_fit": 0.45,
+        "activity_fit": 0.95,
+        "visual_prominence": 0.45
+      }
+    },
+    "winter_date": {
+      "vector": {
+        "formality": 0.45,
+        "warmth": 0.9,
+        "movement_freedom": 0.45,
+        "softness": 0.75,
+        "weather_fit": 0.8,
+        "activity_fit": 0.5,
+        "visual_prominence": 0.55
+      }
+    }
+  },
+  "pack_profiles": {
+    "modern_office_attire": {
+      "vector": {
+        "formality": 0.8,
+        "warmth": 0.45,
+        "movement_freedom": 0.5,
+        "softness": 0.4,
+        "weather_fit": 0.45,
+        "activity_fit": 0.7,
+        "visual_prominence": 0.35
+      }
+    },
+    "commuter_office_layers": {
+      "vector": {
+        "formality": 0.7,
+        "warmth": 0.55,
+        "movement_freedom": 0.65,
+        "softness": 0.45,
+        "weather_fit": 0.65,
+        "activity_fit": 0.75,
+        "visual_prominence": 0.3
+      }
+    },
+    "rainy_day_layers": {
+      "vector": {
+        "formality": 0.3,
+        "warmth": 0.65,
+        "movement_freedom": 0.65,
+        "softness": 0.55,
+        "weather_fit": 0.95,
+        "activity_fit": 0.65,
+        "visual_prominence": 0.25
+      }
+    },
+    "rainproof_trench": {
+      "vector": {
+        "formality": 0.55,
+        "warmth": 0.65,
+        "movement_freedom": 0.6,
+        "softness": 0.45,
+        "weather_fit": 0.95,
+        "activity_fit": 0.65,
+        "visual_prominence": 0.3
+      }
+    },
+    "cozy_wool_coat": {
+      "vector": {
+        "formality": 0.45,
+        "warmth": 0.9,
+        "movement_freedom": 0.45,
+        "softness": 0.75,
+        "weather_fit": 0.75,
+        "activity_fit": 0.45,
+        "visual_prominence": 0.4
+      }
+    },
+    "training_activewear": {
+      "vector": {
+        "formality": 0.1,
+        "warmth": 0.35,
+        "movement_freedom": 0.95,
+        "softness": 0.45,
+        "weather_fit": 0.45,
+        "activity_fit": 0.95,
+        "visual_prominence": 0.4
+      }
+    }
+  },
+  "location_targets": {
+    "modern_office": {
+      "vector": {
+        "formality": 0.75,
+        "warmth": 0.45,
+        "movement_freedom": 0.55,
+        "softness": 0.4,
+        "weather_fit": 0.45,
+        "activity_fit": 0.65,
+        "visual_prominence": 0.3
+      }
+    },
+    "school_library": {
+      "vector": {
+        "formality": 0.55,
+        "warmth": 0.45,
+        "movement_freedom": 0.5,
+        "softness": 0.5,
+        "weather_fit": 0.4,
+        "activity_fit": 0.55,
+        "visual_prominence": 0.35
+      }
+    },
+    "rainy_bus_stop": {
+      "vector": {
+        "formality": 0.35,
+        "warmth": 0.65,
+        "movement_freedom": 0.7,
+        "softness": 0.45,
+        "weather_fit": 0.95,
+        "activity_fit": 0.75,
+        "visual_prominence": 0.25
+      }
+    },
+    "winter_street": {
+      "vector": {
+        "formality": 0.35,
+        "warmth": 0.95,
+        "movement_freedom": 0.55,
+        "softness": 0.7,
+        "weather_fit": 0.9,
+        "activity_fit": 0.55,
+        "visual_prominence": 0.35
+      }
+    },
+    "fitness_gym": {
+      "vector": {
+        "formality": 0.05,
+        "warmth": 0.3,
+        "movement_freedom": 0.95,
+        "softness": 0.45,
+        "weather_fit": 0.45,
+        "activity_fit": 0.95,
+        "visual_prominence": 0.4
+      }
+    },
+    "cozy_living_room": {
+      "vector": {
+        "formality": 0.15,
+        "warmth": 0.65,
+        "movement_freedom": 0.65,
+        "softness": 0.8,
+        "weather_fit": 0.45,
+        "activity_fit": 0.35,
+        "visual_prominence": 0.25
+      }
+    }
+  },
+  "action_targets": {
+    "commute": {
+      "vector": {
+        "formality": 0.35,
+        "warmth": 0.6,
+        "movement_freedom": 0.75,
+        "softness": 0.45,
+        "weather_fit": 0.7,
+        "activity_fit": 0.75,
+        "visual_prominence": 0.3
+      }
+    },
+    "study": {
+      "vector": {
+        "formality": 0.5,
+        "warmth": 0.45,
+        "movement_freedom": 0.5,
+        "softness": 0.55,
+        "weather_fit": 0.4,
+        "activity_fit": 0.55,
+        "visual_prominence": 0.35
+      }
+    },
+    "work": {
+      "vector": {
+        "formality": 0.75,
+        "warmth": 0.45,
+        "movement_freedom": 0.55,
+        "softness": 0.4,
+        "weather_fit": 0.45,
+        "activity_fit": 0.7,
+        "visual_prominence": 0.3
+      }
+    },
+    "rest": {
+      "vector": {
+        "formality": 0.15,
+        "warmth": 0.65,
+        "movement_freedom": 0.65,
+        "softness": 0.8,
+        "weather_fit": 0.45,
+        "activity_fit": 0.35,
+        "visual_prominence": 0.25
+      }
+    },
+    "shop": {
+      "vector": {
+        "formality": 0.3,
+        "warmth": 0.5,
+        "movement_freedom": 0.7,
+        "softness": 0.55,
+        "weather_fit": 0.5,
+        "activity_fit": 0.65,
+        "visual_prominence": 0.45
+      }
+    }
+  },
+  "notes": {
+    "scope": "Initial passive Clothing TPO profiles for candidate scoring debug."
+  }
+}

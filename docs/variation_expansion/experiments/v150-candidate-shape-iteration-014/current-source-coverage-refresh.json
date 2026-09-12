@@ -1,0 +1,21 @@
+{
+  "schema_version": "variation-current-source-coverage-refresh/v1",
+  "refresh_id": "v150-candidate-shape-iteration-014-current-source",
+  "parent_guard_remediation_receipt_path": "docs/variation_expansion/experiments/v150-candidate-shape-iteration-007/guard-remediation-receipt.json",
+  "parent_guard_remediation_receipt_sha256": "0a8ed9b3ae6fa6c2d6a1f4f7f8bbed50e2005c9bf6f6476eaa7fda7c64734d4a",
+  "snapshot_manifest_path": "assets/results/vfc/q32-current-source-refresh/snapshot-manifest.json",
+  "snapshot_manifest_sha256": "b2bd1d9621bc638bdd7c0aadb50df2b90177dbef48f1c00574d30bd246692e88",
+  "candidate_source_tree_sha256": "8509e9a83f85c666e232a0419693388a08ed1f3ca94561a0f84ff341b6261595",
+  "prompt_schedule_sha256": "0c5ce848e03ef4eefc3cb083c6d5649223d317399d371ef68535172571ba8453",
+  "witness_matrix_sha256": "4eb36f10c164e285e18f418cbda5b0df7f8244a9695b478d80b2521019a7e423",
+  "certificate_verification_sha256": "64720947115f466d83add9657635c62f5913be13764ecdbce1c981fbb2334dc7",
+  "verified_locations": 19,
+  "verified_subjects": 15,
+  "verified_witnesses": 19,
+  "fixed_seed_count": 80,
+  "extra_seed_count": 0,
+  "coverage_is_quality_evidence": false,
+  "promotion_ready": false,
+  "status": "pass",
+  "refresh_sha256": "0fb914f480552cc40f4a7d9e995e340afdc70506e194566cf30e172e2bf28d2f"
+}

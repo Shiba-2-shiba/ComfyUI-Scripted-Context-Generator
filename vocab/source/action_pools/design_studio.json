@@ -1,0 +1,86 @@
+{
+  "location": "design_studio",
+  "actions": [
+    {
+      "load": "active",
+      "text": "arranging material samples across a worktable"
+    },
+    {
+      "load": "calm",
+      "text": "comparing two color swatches"
+    },
+    {
+      "load": "active",
+      "text": "pinning a draft layout beside the review board"
+    },
+    {
+      "load": "calm",
+      "text": "checking measurements on a paper plan"
+    },
+    {
+      "load": "active",
+      "text": "sorting tools beside the prototype"
+    },
+    {
+      "load": "calm",
+      "text": "marking revisions on a printed layout"
+    },
+    {
+      "load": "active",
+      "text": "turning a sample beneath the studio light"
+    },
+    {
+      "load": "calm",
+      "text": "placing labels beside organized components"
+    },
+    {
+      "load": "active",
+      "text": "clearing scraps from the cutting surface"
+    },
+    {
+      "load": "calm",
+      "text": "reviewing a sequence of concept cards"
+    },
+    {
+      "load": "active",
+      "text": "assembling a small physical mockup"
+    },
+    {
+      "load": "calm",
+      "text": "filing completed drawings in a flat folder"
+    },
+    {
+      "load": "calm",
+      "text": "checking a scale model from another angle"
+    },
+    {
+      "load": "active",
+      "text": "matching material codes to the sample board"
+    },
+    {
+      "load": "calm",
+      "text": "organizing tracing sheets by revision"
+    },
+    {
+      "load": "active",
+      "text": "measuring spacing on a prototype panel"
+    },
+    {
+      "load": "calm",
+      "text": "reviewing join lines on the scale model"
+    },
+    {
+      "load": "active",
+      "text": "cutting a fresh template from tracing paper"
+    },
+    {
+      "load": "calm",
+      "text": "comparing prototype dimensions with the flat drawing"
+    },
+    {
+      "load": "active",
+      "text": "pinning a revised concept card on the review wall"
+    }
+  ],
+  "families": []
+}

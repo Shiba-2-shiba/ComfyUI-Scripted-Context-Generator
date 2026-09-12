@@ -1,0 +1,10 @@
+{subject_clause}, {action_clause}, {scene_clause}.
+In {loc}, {subject_clause}, {action_clause}, {meta_mood}.
+Against {loc}, {subject_clause}, {action_clause}, {meta_mood}.
+At the edge of {loc}, {subject_clause}, {action_clause}, {meta_mood}.
+{subject_clause}, {action_clause}, the rest of the scene opening into {loc}, {meta_mood}.
+{subject_clause}, {action_clause}, with {meta_mood} settling through {loc}.
+{subject_clause}, already part of {loc}, {action_clause}, {meta_mood}.
+{meta_mood}, {subject_clause}, {action_clause}, in {loc}.
+{subject_clause}, {meta_mood}, {action_clause}, against {loc}.
+Inside {loc}, {subject_clause}, {action_clause}, with {meta_mood}.

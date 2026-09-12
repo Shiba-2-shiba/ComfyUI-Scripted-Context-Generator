@@ -1,0 +1,5 @@
+{
+    "schema_version": "2.0",
+    "_comment": "Deprecated compatibility placeholder. Alias data has been migrated into loc_aliases_canonical.json, loc_aliases_legacy.json, and loc_aliases_fallback.json.",
+    "aliases": {}
+}

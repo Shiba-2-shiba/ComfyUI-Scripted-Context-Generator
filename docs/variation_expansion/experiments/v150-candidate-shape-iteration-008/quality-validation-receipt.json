@@ -1,0 +1,111 @@
+{
+  "schema_version": "variation-nonselected-quality-validation-receipt/v2",
+  "experiment_id": "v150-candidate-shape-iteration-008",
+  "terminal_state": "QUALITY_VALIDATED_REVIEW_READY",
+  "recorded_at": "2026-09-02",
+  "authority": {
+    "comparison_authority": "quality_non_selected",
+    "quality_evidence": true,
+    "coverage_is_quality_evidence": false,
+    "coverage_eligibility_verdict": "pass",
+    "quality_verdict": "pass",
+    "validation_verdict": "pass",
+    "review_ready": true,
+    "blind_review_run": false,
+    "confirmation_run": false,
+    "promotion_ready": false
+  },
+  "surface": {
+    "kind": "default_fixed_64_16",
+    "prompt_selection": "default_unselected",
+    "metric_scope": "control64",
+    "metric_record_count": 64,
+    "baseline_rows": 80,
+    "candidate_rows": 80,
+    "uses_output_metrics_for_selection": false
+  },
+  "local_snapshot": {
+    "path": "assets/results/vfc/q19-default-quality",
+    "snapshot_manifest_sha256": "6c4fb992a8bc5176146e67c9ee76e893a1432cd8aa5eec79b99ff25d4e13248d",
+    "prompt_schedule_sha256": null,
+    "quality_contract_sha256": "ab17ee82017c52e63e7fe923e4ab00e86b05c75949adaebbaf7193f25c8e62aa",
+    "prompt_rows": {"baseline": 80, "candidate": 80},
+    "active_source_unchanged": true
+  },
+  "tracked_artifacts": {
+    "current-source-coverage-refresh.json": "19e79fc7c4b349ba6513045c5cfcbfd4acf6fe158d1fb1a54162cfcf4d7221e8",
+    "nonselected-quality-contract.json": "2d03f485e6692f0971504af05b0e912f2e8cfcdc14874a60ff5f401115b6f4ab",
+    "quality-experiment.json": "247b47a87cfe183ae9b8cb9d1972663f4486331f0a3394a631dd195777883435",
+    "quality-comparison.json": "c9fb0d67848bb08eb9af8bbadaa4ae8421b1b40fb71cb1e2d062e55da7180453"
+  },
+  "run_artifacts": {
+    "baseline_run_manifest_sha256": "6c5a52291693e04e5337c53ca6c0da273aefc57b36258954843a702ac8267cd2",
+    "candidate_run_manifest_sha256": "11500f864f8ee3c0ff69f714a45986e1b532dc0c331c9853d3823385c540e0a3",
+    "comparison_canonical_sha256": "007d3cd9802ba95dffc448e7334414e5ea12fc5e3babc0a4316b48dc824c1d40",
+    "experiment_canonical_sha256": "247b47a87cfe183ae9b8cb9d1972663f4486331f0a3394a631dd195777883435",
+    "cohort_hash": "1b7017819fe1ff11c822b27e61d035b0ce0596dd6f06f85c27f6a45766912492",
+    "records_per_side": 80,
+    "control_count": 64,
+    "exploration_count": 16,
+    "replay_mismatch_count": 0
+  },
+  "coverage_eligibility": {
+    "status": "pass",
+    "candidate_subjects": 15,
+    "candidate_locations": 19,
+    "candidate_action_pool_locations": 19,
+    "fixed_seed_count": 80,
+    "extra_seed_count": 0,
+    "prompt_schedule_sha256": "0c5ce848e03ef4eefc3cb083c6d5649223d317399d371ef68535172571ba8453",
+    "witness_matrix_sha256": "4eb36f10c164e285e18f418cbda5b0df7f8244a9695b478d80b2521019a7e423"
+  },
+  "default_surface_coverage_observations": {
+    "candidate_subjects_unseen": 0,
+    "candidate_locations_unseen": 8,
+    "candidate_action_pool_locations_unseen": 8,
+    "quality_failure": false
+  },
+  "quality_results": {
+    "failures": [],
+    "location_signature_entropy_before": 4.626124,
+    "location_signature_entropy_after": 4.956344,
+    "repeated_ngram_count_before": 0,
+    "repeated_ngram_count_after": 0,
+    "semantic_family_repetition_count_before": 2,
+    "semantic_family_repetition_count_after": 2,
+    "context_json_bytes_max_before": 27812,
+    "context_json_bytes_max_after": 27736,
+    "context_json_bytes_p95_before": 27225.2,
+    "context_json_bytes_p95_after": 26318.55,
+    "identity_regressions": 0,
+    "hard_consistency_regressions": 0,
+    "policy_regressions": 0,
+    "fallback_regressions": 0
+  },
+  "implementation_hashes": {
+    "tools/variation_quality_contract.py": "493d95981195eee1bdcd49784ccc0ebf28bfacb62ad2fd6d25fb3a4a02c25e79",
+    "tools/materialize_variation_candidate_snapshot.py": "d12ba42f476354850e6cc72105e8703c325c71d61ad97f5312fc3d009f2107cd",
+    "tools/compare_variation_prompt_pair.py": "304b3e4d0117c29ac26f6b2d64e421d205952a67ce69a164587b87c3c2d8142a",
+    "tools/analyze_prompt_quality.py": "507ca6d223120075936c566cebd0281d7bb30a964279458107ae999a7750ec78",
+    "pipeline/location_semantics.py": "3a275db5458ed85ea73a1f9668887076db725d114f9989c367e85b8aa1b2d6c4",
+    "assets/test_variation_quality_contract.py": "714769d52200e9239b33676819ca6b200e9625fdd63a2d3f4723f539d70557f2",
+    "assets/test_variation_candidate_snapshot.py": "14d2653376d4a422ac752b4d332a3080e8fb50c445e35763bb57024b9a919ebf",
+    "assets/test_variation_prompt_pair.py": "311b643bb2789b5211a4cd123afd3d7a110bba5fc407fd0e17a9777aad891bb3",
+    "assets/test_prompt_quality_analyzer.py": "90f25e63b977a3b5e5a67d8edf7230962b2bd2476bcec9be82b0981636c1c7f2",
+    "assets/test_location_semantics.py": "6204ca46d0d8e621348f56205811ff1a36b8f5a05c8d105d89a87603f3177115",
+    "assets/fixtures/prompt_quality/analyzer_precision_cases.json": "cd9ee322397a2865507606c204270a17da397f0f070aa32bc4298220b1490964"
+  },
+  "verification": {
+    "pre_snapshot_lineage_tests": "90 tests OK",
+    "combined_l1_l3_quality_tests": "218 tests OK",
+    "tracked_comparison_reproduction": "pass; fresh comparator canonical output equals tracked comparison",
+    "independent_code_review": "APPROVE current-source lineage, control64 authority, analyzer precision, debug compaction, and default80 separation",
+    "independent_verifier": "APPROVE q19 fixed64+16 non-selected quality pass and review-ready evidence"
+  },
+  "next_iteration_requirements": [
+    "Freeze q19 source, contract, experiment, runs, and comparison before review.",
+    "Run a comparison-bound blind review without changing the validated source.",
+    "Run fresh 3x256 confirmation lanes and full verification before any V150 promotion.",
+    "Keep promotion_ready=false until review, confirmation, and verification receipts are complete."
+  ]
+}

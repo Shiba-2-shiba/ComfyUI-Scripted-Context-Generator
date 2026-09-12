@@ -1,0 +1,89 @@
+{
+  "schema_version": "variation-quality-location-additions/v1",
+  "locations": [
+    {
+      "id": "community_theater_backstage",
+      "utility_group": "civic_creative_work",
+      "compatibility_tags": ["music", "workplace", "leisure"],
+      "universal": false,
+      "environment_terms": ["community theater backstage", "prop tables and rehearsal notices"],
+      "utility_claim": {
+        "category": "backstage_preparation",
+        "prompt_visible_terms": ["community theater backstage"],
+        "distinct_from": ["opera_house"],
+        "rationale": "Adds rehearsal preparation and prop handling behind a civic performance space."
+      },
+      "action_plan": {
+        "direct_actions": [],
+        "family_refs": [
+          {"name": "performance_focus", "offset": 0, "take": 8},
+          {"name": "work_rhythm", "offset": 0, "take": 8},
+          {"name": "leisure_participation", "offset": 0, "take": 4}
+        ]
+      }
+    },
+    {
+      "id": "greenhouse_nursery",
+      "utility_group": "horticulture_service",
+      "compatibility_tags": ["nature", "workplace", "retail_service"],
+      "universal": false,
+      "environment_terms": ["greenhouse nursery", "seedling benches and stock labels"],
+      "utility_claim": {
+        "category": "plant_propagation_service",
+        "prompt_visible_terms": ["greenhouse nursery"],
+        "distinct_from": ["botanical_garden"],
+        "rationale": "Adds plant propagation and customer-facing nursery work."
+      },
+      "action_plan": {
+        "direct_actions": [],
+        "family_refs": [
+          {"name": "outdoor_observation", "offset": 0, "take": 8},
+          {"name": "home_rhythm", "offset": 0, "take": 8},
+          {"name": "retail_service", "offset": 0, "take": 4}
+        ]
+      }
+    },
+    {
+      "id": "postal_service_counter",
+      "utility_group": "civic_service",
+      "compatibility_tags": ["retail_service", "workplace", "daily_public"],
+      "universal": false,
+      "environment_terms": ["postal service counter", "parcel scales and collection notices"],
+      "utility_claim": {
+        "category": "parcel_service",
+        "prompt_visible_terms": ["postal service counter"],
+        "distinct_from": ["convenience_store"],
+        "rationale": "Adds parcel labeling, collection, and queue-based public service."
+      },
+      "action_plan": {
+        "direct_actions": [],
+        "family_refs": [
+          {"name": "retail_service", "offset": 0, "take": 8},
+          {"name": "work_rhythm", "offset": 0, "take": 8},
+          {"name": "public_presence", "offset": 0, "take": 4}
+        ]
+      }
+    },
+    {
+      "id": "vehicle_repair_garage",
+      "utility_group": "repair_workplace",
+      "compatibility_tags": ["craft", "workplace", "urban"],
+      "universal": false,
+      "environment_terms": ["vehicle repair garage", "inspection lift and organized tool cabinets"],
+      "utility_claim": {
+        "category": "vehicle_repair",
+        "prompt_visible_terms": ["vehicle repair garage"],
+        "distinct_from": ["clockwork_workshop"],
+        "rationale": "Adds contemporary vehicle inspection and repair work."
+      },
+      "action_plan": {
+        "direct_actions": [],
+        "family_refs": [
+          {"name": "work_rhythm", "offset": 0, "take": 8},
+          {"name": "cautious_tension", "offset": 0, "take": 8},
+          {"name": "public_presence", "offset": 0, "take": 4}
+        ]
+      }
+    }
+  ]
+}

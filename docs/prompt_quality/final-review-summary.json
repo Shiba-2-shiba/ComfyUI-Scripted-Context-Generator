@@ -1,0 +1,28 @@
+{
+  "assignment_key_hash": "f5c96811f9cd06d8ab13ae76a8ad9569fcc13d4504e73f650013edb911f0a7a8",
+  "candidate_hard_defect_count": 0,
+  "cohort_hash": "a54d37fd054cdeaa80436b8bdabf2bde97a3bf6f11c6758ea7d68fb2de6ac6cc",
+  "image_prompt_suitability": {
+    "candidate_better": 40,
+    "candidate_worse": 0,
+    "valid_votes": 40
+  },
+  "lane_result_hashes": {
+    "lane-1": "60a521dc18270571ac6db7a496495c87ff1a19f16e8980f1758e94fa39924a73",
+    "lane-2": "33669203535f7f1283f9f736378af075f747b8f92c617377f51ba8c455521092"
+  },
+  "naturalness": {
+    "candidate_better": 40,
+    "candidate_worse": 0,
+    "valid_votes": 40
+  },
+  "review_artifact_hash": "76b9adcfb5bac74fe05915af2915b2ff0fa5d1e6b5b2b522211d710f1a98baad",
+  "review_attempt": "final-blind-review-attempt-009",
+  "reviewed_record_hashes": {
+    "after": "780dc0b3e2b502cafe48d95fb5e2aa6ba80e25d0b153fbf27ac5067182b179b3",
+    "before": "541aaf6e2c3a43050a0782e358abcaf0212ef7a1bf91e7489133ccdaf2a2eda5"
+  },
+  "schema_version": "prompt-quality-final-review-summary/v1",
+  "source_tree_hash": "f4acf9d15fd1046ca8b63eb212d30c9f5a779e5a7e08acd053bd88db2742f99f",
+  "status": "pass"
+}

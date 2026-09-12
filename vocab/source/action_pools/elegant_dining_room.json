@@ -1,0 +1,37 @@
+{
+  "location": "elegant_dining_room",
+  "actions": [
+    {
+      "text": "sitting at the head of the table",
+      "load": "calm"
+    },
+    {
+      "text": "arranging silverware on the tablecloth",
+      "load": "calm"
+    },
+    {
+      "text": "standing and proposing a toast",
+      "load": "calm"
+    },
+    {
+      "text": "sipping wine from a crystal glass",
+      "load": "calm"
+    },
+    {
+      "text": "lighting the centerpiece candles",
+      "load": "calm"
+    },
+    {
+      "text": "folding a napkin into a shape",
+      "load": "calm"
+    },
+    {
+      "text": "waiting for the main course",
+      "load": "calm"
+    },
+    {
+      "text": "admiring the chandelier above",
+      "load": "calm"
+    }
+  ]
+}

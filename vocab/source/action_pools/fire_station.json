@@ -1,0 +1,86 @@
+{
+  "location": "fire_station",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "checking the equipment readiness board"
+    },
+    {
+      "load": "active",
+      "text": "securing a strap on a response bag"
+    },
+    {
+      "load": "calm",
+      "text": "inspecting a coiled hose beside the bay"
+    },
+    {
+      "load": "active",
+      "text": "wiping dust from a helmet visor"
+    },
+    {
+      "load": "calm",
+      "text": "reviewing the vehicle departure checklist"
+    },
+    {
+      "load": "active",
+      "text": "testing a handheld radio"
+    },
+    {
+      "load": "calm",
+      "text": "reviewing an equipment checklist beside the locker"
+    },
+    {
+      "load": "active",
+      "text": "lifting a supply case from the storage shelf"
+    },
+    {
+      "load": "calm",
+      "text": "checking the station clock against a readiness checklist"
+    },
+    {
+      "load": "active",
+      "text": "closing a bay cabinet after inspection"
+    },
+    {
+      "load": "calm",
+      "text": "studying a posted route diagram"
+    },
+    {
+      "load": "active",
+      "text": "walking toward the vehicle bay"
+    },
+    {
+      "load": "calm",
+      "text": "counting sealed response kits"
+    },
+    {
+      "load": "active",
+      "text": "checking flashlight batteries in the locker"
+    },
+    {
+      "load": "calm",
+      "text": "matching equipment tags to the checklist"
+    },
+    {
+      "load": "active",
+      "text": "fastening a label to a supply case"
+    },
+    {
+      "load": "calm",
+      "text": "reviewing pressure readings on a hose gauge"
+    },
+    {
+      "load": "active",
+      "text": "rolling a checked hose onto its bay rack"
+    },
+    {
+      "load": "calm",
+      "text": "checking radio call signs on the readiness sheet"
+    },
+    {
+      "load": "active",
+      "text": "placing a response bag into the vehicle compartment"
+    }
+  ],
+  "families": []
+}

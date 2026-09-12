@@ -1,0 +1,86 @@
+{
+  "location": "vehicle_repair_garage",
+  "actions": [
+    {
+      "load": "calm",
+      "text": "checking the maintenance list beside the work bay"
+    },
+    {
+      "load": "active",
+      "text": "placing a tool on the repair bench"
+    },
+    {
+      "load": "calm",
+      "text": "checking a vehicle service note against the panel label"
+    },
+    {
+      "load": "active",
+      "text": "lifting a replacement part from its crate"
+    },
+    {
+      "load": "calm",
+      "text": "checking a service note against the repair bay checklist"
+    },
+    {
+      "load": "active",
+      "text": "tightening a bolt beneath the open hood"
+    },
+    {
+      "load": "calm",
+      "text": "sorting sockets by size on the tool board"
+    },
+    {
+      "load": "active",
+      "text": "checking fluid levels with a dipstick"
+    },
+    {
+      "load": "calm",
+      "text": "marking a damaged component on the inspection form"
+    },
+    {
+      "load": "active",
+      "text": "carrying a removed part to the workbench"
+    },
+    {
+      "load": "calm",
+      "text": "checking a diagnostic display"
+    },
+    {
+      "load": "active",
+      "text": "wiping grease from a hand tool"
+    },
+    {
+      "load": "calm",
+      "text": "comparing a replacement part with the service note"
+    },
+    {
+      "load": "active",
+      "text": "securing a vehicle wheel before inspection"
+    },
+    {
+      "load": "calm",
+      "text": "organizing fasteners in a parts tray"
+    },
+    {
+      "load": "active",
+      "text": "removing a protective cover from the work area"
+    },
+    {
+      "load": "calm",
+      "text": "checking the repair bay safety notice"
+    },
+    {
+      "load": "active",
+      "text": "recording a completed maintenance step"
+    },
+    {
+      "load": "calm",
+      "text": "examining a belt for visible wear"
+    },
+    {
+      "load": "active",
+      "text": "returning tools to the labeled cabinet"
+    }
+  ],
+  "families": []
+}

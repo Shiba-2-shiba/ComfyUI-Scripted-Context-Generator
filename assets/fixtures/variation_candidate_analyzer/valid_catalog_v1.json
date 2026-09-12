@@ -1,0 +1,1100 @@
+{
+  "schema_version": "variation-quality-candidate-catalog/v1",
+  "catalog_id": "v150-quality-candidates-001",
+  "stage_id": "V150",
+  "scenario_binding": {
+    "scenario_manifest_sha256": "bc1b2be3f85876044de68b3c08538a5c14cc4d30323f31126d1bcddc44fb66f2",
+    "projection_report_sha256": "2df437d629947434298d1ce24f1976e58575dd0fd3cc7de15baf2ac075eb9cbe",
+    "scenario_id": "balanced-growth-001",
+    "baseline_manifest_sha256": "7bb90af6b124b724c484034fddbe1dad05006fc897947ce359d6f5a769acae54"
+  },
+  "subjects": [
+    {
+      "id": "v150_subject_001",
+      "utility_group": "daily-adult-v1",
+      "tags": [
+        "daily_public",
+        "urban"
+      ],
+      "default_costume": "casual",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_001"
+        ],
+        "distinct_from": [
+          "student"
+        ],
+        "rationale": "Adds an adult routine centered on planned morning errands."
+      }
+    },
+    {
+      "id": "v150_subject_002",
+      "utility_group": "daily-adult-v1",
+      "tags": [
+        "daily_public",
+        "transit"
+      ],
+      "default_costume": "casual",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_002"
+        ],
+        "distinct_from": [
+          "commuter"
+        ],
+        "rationale": "Adds a reading-led transit routine with visible intent."
+      }
+    },
+    {
+      "id": "v150_subject_003",
+      "utility_group": "daily-adult-v1",
+      "tags": [
+        "workplace",
+        "office"
+      ],
+      "default_costume": "office_lady",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_003"
+        ],
+        "distinct_from": [
+          "office worker"
+        ],
+        "rationale": "Adds an archive-focused workplace role."
+      }
+    },
+    {
+      "id": "v150_subject_004",
+      "utility_group": "daily-adult-v1",
+      "tags": [
+        "retail_service",
+        "urban"
+      ],
+      "default_costume": "casual",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_004"
+        ],
+        "distinct_from": [
+          "boutique customer"
+        ],
+        "rationale": "Adds a flower-shopping routine with visible selection behavior."
+      }
+    },
+    {
+      "id": "v150_subject_005",
+      "utility_group": "daily-adult-v1",
+      "tags": [
+        "home_life",
+        "domestic"
+      ],
+      "default_costume": "casual",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_005"
+        ],
+        "distinct_from": [
+          "apartment resident"
+        ],
+        "rationale": "Adds a domestic planning role centered on meal preparation."
+      }
+    },
+    {
+      "id": "v150_subject_006",
+      "utility_group": "daily-youth-v1",
+      "tags": [
+        "school",
+        "quiet_indoor"
+      ],
+      "default_costume": "school_uniform",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_006"
+        ],
+        "distinct_from": [
+          "student"
+        ],
+        "rationale": "Adds a school archive duty with clear props and behavior."
+      }
+    },
+    {
+      "id": "v150_subject_007",
+      "utility_group": "daily-youth-v1",
+      "tags": [
+        "school",
+        "sport"
+      ],
+      "default_costume": "school_uniform",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_007"
+        ],
+        "distinct_from": [
+          "club member"
+        ],
+        "rationale": "Adds an equipment-care routine after class."
+      }
+    },
+    {
+      "id": "v150_subject_008",
+      "utility_group": "daily-youth-v1",
+      "tags": [
+        "school",
+        "daily_public"
+      ],
+      "default_costume": "school_uniform",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_008"
+        ],
+        "distinct_from": [
+          "campus student"
+        ],
+        "rationale": "Adds a visible campus publishing task."
+      }
+    },
+    {
+      "id": "v150_subject_009",
+      "utility_group": "daily-adult-v1",
+      "tags": [
+        "craft",
+        "quiet_indoor"
+      ],
+      "default_costume": "casual",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_009"
+        ],
+        "distinct_from": [
+          "clockwork artisan"
+        ],
+        "rationale": "Adds a quiet repair craft grounded in ceramic tools."
+      }
+    },
+    {
+      "id": "v150_subject_010",
+      "utility_group": "daily-adult-v1",
+      "tags": [
+        "leisure",
+        "urban"
+      ],
+      "default_costume": "casual",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_010"
+        ],
+        "distinct_from": [
+          "cinema visitor"
+        ],
+        "rationale": "Adds a puzzle-led leisure activity."
+      }
+    },
+    {
+      "id": "v150_subject_011",
+      "utility_group": "daily-adult-v1",
+      "tags": [
+        "nature",
+        "daily_public"
+      ],
+      "default_costume": "casual",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_011"
+        ],
+        "distinct_from": [
+          "balcony gardener"
+        ],
+        "rationale": "Adds an outdoor observation and recording routine."
+      }
+    },
+    {
+      "id": "v150_subject_012",
+      "utility_group": "daily-adult-v1",
+      "tags": [
+        "retail_service",
+        "workplace"
+      ],
+      "default_costume": "casual",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_012"
+        ],
+        "distinct_from": [
+          "convenience clerk"
+        ],
+        "rationale": "Adds inventory checking in an open market setting."
+      }
+    },
+    {
+      "id": "v150_subject_013",
+      "utility_group": "daily-youth-v1",
+      "tags": [
+        "school",
+        "music"
+      ],
+      "default_costume": "school_uniform",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_013"
+        ],
+        "distinct_from": [
+          "guitarist"
+        ],
+        "rationale": "Adds a music-practice scheduling duty."
+      }
+    },
+    {
+      "id": "v150_subject_014",
+      "utility_group": "daily-adult-v1",
+      "tags": [
+        "transit",
+        "daily_public"
+      ],
+      "default_costume": "casual",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_014"
+        ],
+        "distinct_from": [
+          "after work shopper"
+        ],
+        "rationale": "Adds visible route mapping during local travel."
+      }
+    },
+    {
+      "id": "v150_subject_015",
+      "utility_group": "daily-adult-v1",
+      "tags": [
+        "quiet_indoor",
+        "leisure"
+      ],
+      "default_costume": "casual",
+      "utility_claim": {
+        "category": "subject_identity",
+        "prompt_visible_terms": [
+          "v150_subject_015"
+        ],
+        "distinct_from": [
+          "afternoon reader"
+        ],
+        "rationale": "Adds note taking tied to local-history material."
+      }
+    }
+  ],
+  "locations": [
+    {
+      "id": "v150_location_001",
+      "utility_group": "daily-transit-v1",
+      "compatibility_tags": [
+        "transit",
+        "urban"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "covered bicycle parking",
+        "route board"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "covered bicycle parking"
+        ],
+        "distinct_from": [
+          "train_station_platform"
+        ],
+        "rationale": "Adds bicycle-specific arrival and route-check behavior."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "checking a bicycle route on the posted map",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_002",
+      "utility_group": "daily-transit-v1",
+      "compatibility_tags": [
+        "transit",
+        "suburban"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "small ferry shelter",
+        "timetable case"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "small ferry shelter"
+        ],
+        "distinct_from": [
+          "bus_terminal"
+        ],
+        "rationale": "Adds a small waterside transit wait."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "reading the ferry times behind the glass case",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_003",
+      "utility_group": "daily-transit-v1",
+      "compatibility_tags": [
+        "transit",
+        "daily_public"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "neighborhood tram stop",
+        "ticket validator"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "neighborhood tram stop"
+        ],
+        "distinct_from": [
+          "subway_ticket_gate"
+        ],
+        "rationale": "Adds street-level tram boarding behavior."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "holding a pass near the tram validator",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_004",
+      "utility_group": "daily-transit-v1",
+      "compatibility_tags": [
+        "transit",
+        "urban"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "station bicycle ramp",
+        "direction arrows"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "station bicycle ramp"
+        ],
+        "distinct_from": [
+          "commuter_transport"
+        ],
+        "rationale": "Adds a pedestrian-bicycle transition surface."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "walking a bicycle along the marked ramp",
+            "load": "active"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_005",
+      "utility_group": "daily-transit-v1",
+      "compatibility_tags": [
+        "transit",
+        "suburban"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "community shuttle bay",
+        "folded timetable"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "community shuttle bay"
+        ],
+        "distinct_from": [
+          "bus_terminal"
+        ],
+        "rationale": "Adds a small local shuttle context."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "unfolding the shuttle timetable beside the bay",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_006",
+      "utility_group": "daily-work-v1",
+      "compatibility_tags": [
+        "workplace",
+        "quiet_indoor"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "records archive room",
+        "labeled document boxes"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "records archive room"
+        ],
+        "distinct_from": [
+          "modern_office"
+        ],
+        "rationale": "Adds archive handling rather than general desk work."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "matching a document box to the shelf label",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_007",
+      "utility_group": "daily-work-v1",
+      "compatibility_tags": [
+        "workplace",
+        "craft"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "ceramic repair bench",
+        "sorting trays"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "ceramic repair bench"
+        ],
+        "distinct_from": [
+          "art_gallery"
+        ],
+        "rationale": "Adds hands-on repair work and specialized tools."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "sorting ceramic fragments into padded trays",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_008",
+      "utility_group": "daily-work-v1",
+      "compatibility_tags": [
+        "workplace",
+        "retail_service"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "flower market stockroom",
+        "bucket labels"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "flower market stockroom"
+        ],
+        "distinct_from": [
+          "local_market_street"
+        ],
+        "rationale": "Adds behind-the-counter flower inventory work."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "checking bucket labels against an inventory sheet",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_009",
+      "utility_group": "daily-work-v1",
+      "compatibility_tags": [
+        "workplace",
+        "school"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "campus print room",
+        "paper sorting rack"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "campus print room"
+        ],
+        "distinct_from": [
+          "messy_copy_room"
+        ],
+        "rationale": "Adds an orderly school publishing workspace."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "placing fresh notices into the sorting rack",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_010",
+      "utility_group": "daily-work-v1",
+      "compatibility_tags": [
+        "workplace",
+        "music"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "practice booking desk",
+        "room key board"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "practice booking desk"
+        ],
+        "distinct_from": [
+          "recording_studio"
+        ],
+        "rationale": "Adds scheduling and room-key handling rather than performance."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "matching a practice booking to the room key",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_011",
+      "utility_group": "daily-work-v1",
+      "compatibility_tags": [
+        "domestic",
+        "home_life"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "apartment pantry nook",
+        "weekly meal board"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "apartment pantry nook"
+        ],
+        "distinct_from": [
+          "clean_modern_kitchen"
+        ],
+        "rationale": "Adds compact pantry planning outside active cooking."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "marking pantry supplies on the weekly meal board",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_012",
+      "utility_group": "daily-work-v1",
+      "compatibility_tags": [
+        "domestic",
+        "home_life"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "shared laundry folding room",
+        "numbered baskets"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "shared laundry folding room"
+        ],
+        "distinct_from": [
+          "cozy_living_room"
+        ],
+        "rationale": "Adds a shared household maintenance task."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "folding clean towels beside a numbered basket",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_013",
+      "utility_group": "daily-work-v1",
+      "compatibility_tags": [
+        "domestic",
+        "home_life"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "entryway repair shelf",
+        "small tool case"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "entryway repair shelf"
+        ],
+        "distinct_from": [
+          "apartment_entryway"
+        ],
+        "rationale": "Adds a bounded home-repair utility surface."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "tightening a loose hook with a small screwdriver",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_014",
+      "utility_group": "daily-work-v1",
+      "compatibility_tags": [
+        "domestic",
+        "quiet_indoor"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "household records corner",
+        "labeled folders"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "household records corner"
+        ],
+        "distinct_from": [
+          "modern_office"
+        ],
+        "rationale": "Adds domestic record sorting distinct from paid office work."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "sorting household receipts into labeled folders",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "v150_location_015",
+      "utility_group": "daily-work-v1",
+      "compatibility_tags": [
+        "domestic",
+        "home_life"
+      ],
+      "universal": true,
+      "environment_terms": [
+        "balcony potting corner",
+        "seed packet box"
+      ],
+      "utility_claim": {
+        "category": "location_environment",
+        "prompt_visible_terms": [
+          "balcony potting corner"
+        ],
+        "distinct_from": [
+          "apartment_balcony"
+        ],
+        "rationale": "Adds compact seed organization and potting preparation."
+      },
+      "action_plan": {
+        "direct_actions": [
+          {
+            "text": "arranging seed packets beside empty planting pots",
+            "load": "calm"
+          }
+        ],
+        "family_refs": [
+          {
+            "name": "public_presence",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "performance_focus",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "fitness_motion",
+            "offset": 0,
+            "take": 3
+          },
+          {
+            "name": "cautious_tension",
+            "offset": 0,
+            "take": 2
+          }
+        ]
+      }
+    }
+  ],
+  "quality_limits": {
+    "max_exact_duplicate_pressure_basis_points": 10000,
+    "max_shared_family_location_reuse": 100
+  },
+  "prompt_quality_receipt": null
+}

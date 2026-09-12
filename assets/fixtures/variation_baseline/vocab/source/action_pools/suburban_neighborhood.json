@@ -1,0 +1,47 @@
+{
+  "location": "suburban_neighborhood",
+  "actions": [
+    {
+      "text": "walking a dog down the sidewalk",
+      "load": "active"
+    },
+    {
+      "text": "standing by the mailbox checking mail",
+      "load": "calm"
+    },
+    {
+      "text": "watering the front lawn",
+      "load": "calm"
+    },
+    {
+      "text": "sitting on the front porch steps",
+      "load": "calm"
+    },
+    {
+      "text": "washing a car in the driveway",
+      "load": "calm"
+    },
+    {
+      "text": "waving to a car passing by",
+      "load": "calm"
+    },
+    {
+      "text": "looking at the sunset over the houses",
+      "load": "calm"
+    },
+    {
+      "text": "jogging slowly down the street",
+      "load": "calm"
+    }
+  ],
+  "families": [
+    {
+      "name": "public_navigation",
+      "take": 8
+    },
+    {
+      "name": "outdoor_observation",
+      "take": 4
+    }
+  ]
+}
