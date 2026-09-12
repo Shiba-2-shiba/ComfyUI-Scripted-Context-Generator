@@ -37,6 +37,8 @@ The final ordinary512 profile contains **511 full structural signatures**, with 
 
 The archive's audit report has no checkout Git commit. Its full report equals the worktree report after removing only `identity.git_commit`; source/configuration identity and every diagnostic/outcome field match. Replay summary bytes themselves match exactly. Forced-family evidence uses the existing AS01 replay `common_forced_v2`, because audit `forced_render_v2` certifies only exact ordinary-output equivalence and observes three families.
 
+Diff hygiene covers authored changes. The supplied design and implementation plan are preserved verbatim, including six Markdown hard-break lines and the plan's final blank line; these two files are excluded from the scoped whitespace check.
+
 ## Changes and boundaries
 
 `tools/realizer_coverage_signatures.py` projects freshly reconstructed producer evidence into text-free structure. `tools/realizer_reachability_diagnostics.py` attaches the signature; `tools/audit_realizer_reachability.py` counts ordinary seed-family diagnostic rows. `tools/select_r44_coverage_packets.py` ranks distinct-seed groups with hard exclusions and bounded ROI. Existing evidence/proof and canonical JSON helpers are reused. Runtime authorization never imports these new tools.

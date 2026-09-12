@@ -92,3 +92,5 @@ python tools/realizer_candidate_replay.py --source-root assets/results/diversity
 See [handoff](./r44_handoff.md) for the next R45 grouping-design boundary. No selected packet manifests or packet runtime tests were manufactured.
 
 - Final independent whole-branch review: APPROVE, no Important findings. Both R44 source tags were published; remote annotated-tag and peeled commit IDs exactly match the registry. Handoff/registry committed on the R44 development branch.
+
+- Final whole-branch whitespace check flags only the verbatim supplied R44 design (six Markdown hard-break lines) and plan (final blank line). Preserve supplied text; scoped authored-file diff check excludes only those two inputs and passes. Static-check receipt records the exception.
