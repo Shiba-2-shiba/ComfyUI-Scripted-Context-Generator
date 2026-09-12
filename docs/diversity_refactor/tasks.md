@@ -5,9 +5,10 @@
 Governing design: [R44_DESIGN.md](./R44_DESIGN.md); execution: [R44_IMPLEMENTATION_PLAN.md](./R44_IMPLEMENTATION_PLAN.md). R44 supersedes case-first coverage expansion. Follow [r44_progress.md](./r44_progress.md).
 
 - [x] R44-00: isolated branch and verified 11/512, 3 ordinary / 6 forced family baseline.
-- [ ] R44-01/02: diagnostic signatures, deterministic packet selection and viability gate.
-- [ ] R44-03..05: up to three bounded runtime packets, conditional on viability.
-- [ ] R44-06/07: development classification and recoverable handoff.
+- [x] R44-01/02: diagnostic signatures and selector verified; viability BLOCKED (511 signatures, max2seeds, no packet).
+- [x] R44-03..05: SKIPPED_VIABILITY_GATE; zero runtime packets attempted.
+- [x] R44-06: runtime coverage gate skipped by Task2; focused/regression/validators and restore512 verified for handoff.
+- [x] R44-07: final review approved; checkpoint restored/replayed; remote source tag IDs verified. [Handoff](./r44_handoff.md).
 
 
 対象リポジトリ: `Shiba-2-shiba/ComfyUI-Scripted-Context-Generator`

@@ -3020,3 +3020,7 @@ can be regenerated; this does not claim full historical Python environment recov
 Published comparison tags must not be force-updated/deleted. Future comparisons
 must first preserve and publish a recoverable baseline. Formal adoption remains
 BLOCKED; these are development baselines, not the formal V150 reference.
+
+## R44 Coverage Engineering
+
+2026-09-13: Profile-first R44 diagnostics and deterministic packet selection are implemented on refactor/realizer-v2-r44. Measured ordinary11/512 and3families remain unchanged, with all6common-forced families and exact512pair preservation. The cohort has511full structural signatures (maximum2seeds), so no packet meets the minimum4seeds. Task2 viability is BLOCKED and runtime packets are skipped. Focused534/2020subtests, regression87/33, R44tests45/53, validators/full-flow and independent restored512replay PASS. Formal gates NOT_RUN, N2.8BLOCKED, D3DEFERRED. See [R44 progress](./r44_progress.md), [handoff](./r44_handoff.md) and [source registry](./comparison_sources/r44/registry.json).

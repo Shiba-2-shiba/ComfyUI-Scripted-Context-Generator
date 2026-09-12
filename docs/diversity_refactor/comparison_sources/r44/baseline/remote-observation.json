@@ -1,0 +1,8 @@
+{
+  "development_branch_commit": "b16a4dbca7d91d6d1cdefbfd521fd6a44787765a",
+  "existing_as01_tag_object": "c97510624e9c505b498de3e273883b098576d96b",
+  "method": "git -c http.sslBackend=schannel ls-remote origin refs/heads/refactor/realizer-v2 refs/tags/r43-coverage-as01-20260912",
+  "observed_date_jst": "2026-09-13",
+  "r44_baseline_tag_publication": "PENDING",
+  "repository": "https://github.com/Shiba-2-shiba/ComfyUI-Scripted-Context-Generator"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "r44-remote-source-observation/v1",
+  "status": "SOURCE_TAGS_VERIFIED",
+  "observed_date_jst": "2026-09-13",
+  "repository": "https://github.com/Shiba-2-shiba/ComfyUI-Scripted-Context-Generator",
+  "refs": {
+    "refs/tags/realizer-v2-r44-baseline-11": "eb0600409b463a578e47f55cf6d696fdf2654397",
+    "refs/tags/realizer-v2-r44-baseline-11^{}": "b16a4dbca7d91d6d1cdefbfd521fd6a44787765a",
+    "refs/tags/realizer-v2-r44-blocked-20260913": "0f4d49af59d8e679a9471e4c982acb5534e35f79",
+    "refs/tags/realizer-v2-r44-blocked-20260913^{}": "98a8ef33ab9a851240cf678864b0ed65879228e4"
+  },
+  "method": "git -c http.sslBackend=schannel ls-remote origin with exact R44 tag and peeled-commit refs"
+}
