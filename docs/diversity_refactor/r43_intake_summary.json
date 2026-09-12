@@ -1,0 +1,149 @@
+{
+  "a16_lock_sha256": "6742b1b735de2e3ef9b53b732e51d54d260434a500ab84f32249334c24cfb7bd",
+  "adoption_status": "BLOCKED",
+  "architecture_status": "NOT_RUN",
+  "date_jst": "2026-09-11",
+  "development_status": "NOT_RUN",
+  "evidence": [
+    {
+      "path": "a16-lock.json",
+      "sha256": "4b086045d98e98bf0f19d6731f0c481442c09836db245357a7263a7daa375164"
+    },
+    {
+      "path": "baseline-identity.json",
+      "sha256": "d627488c330d9f2693bc3198dea38151a3ed74989bebc7a9f145703ce597fa11"
+    },
+    {
+      "path": "candidate07-manifest.json",
+      "sha256": "f686a5264fa9f54369799f0ad251a45b52e05463f2c63f0848c70f50c7ac80a6"
+    },
+    {
+      "path": "commands.json",
+      "sha256": "e4dc4bceb03ced3ce31b3f45815a920cff3eb4ef4da2ba3ff0e7bf81f393e622"
+    },
+    {
+      "path": "environment.json",
+      "sha256": "6f4cfef9dcce898303d4b46cd632b60a245aff6e25c0eb28740f3e709aeb7018"
+    },
+    {
+      "path": "existing-user-files.json",
+      "sha256": "0598397f080c02da203ce5a89dcaf875093af4fa29804293c7b6458d185d8312"
+    },
+    {
+      "path": "historical-evidence.json",
+      "sha256": "1085f2e839ff35637bf6678aa879c098a49448807c7da456f78e3529d04077ee"
+    },
+    {
+      "path": "main-source-manifest.json",
+      "sha256": "e7e4768e9226fc6260766411837cfc5201864e14d009877a9b89101f3ecc18fe"
+    },
+    {
+      "path": "plan-identity.json",
+      "sha256": "9a47c905b74c2d25e3bc48249fc7e1260d6bbc09fef020a79525b97193ef6a97"
+    },
+    {
+      "path": "preservation.json",
+      "sha256": "88111c197fbafed13226922a51d5e405819fc05755178d08bb3746856bcd88ec"
+    },
+    {
+      "path": "protected-data.json",
+      "sha256": "1f398143d124486db33a1afb22b012684276d070d44586c82f41090c9f6e6b54"
+    },
+    {
+      "path": "public-runtime-contract.json",
+      "sha256": "07bfe42b6ff01da527599d6d210a8d9da06fac857275c5d1042826c9a3bad711"
+    },
+    {
+      "path": "public-signatures.json",
+      "sha256": "34c03dd2937e22f567f499af1aafdad455a994ec02f6defd4dbaacf73948c435"
+    },
+    {
+      "path": "r43_capture_intake.py",
+      "sha256": "573441618a8527b2139ba4d116b65c8a46395f98b51e39c14a085faaaf7ad84f"
+    },
+    {
+      "path": "r43_capture_public.py",
+      "sha256": "b859102b961c1e7e2daebd67434923eb3782a35383f082903869039d60a1b841"
+    },
+    {
+      "path": "r43_finalize_intake.py",
+      "sha256": "78608b98a0639c0cd25f08c5ce5f8899ba3fb8053e7a6e53b20df47e6b99c1e6"
+    },
+    {
+      "path": "source-identity.json",
+      "sha256": "6768f47dc369fa4f21feb58b40bbef2ae3b74480282acd3bb915db5a0533bbdd"
+    },
+    {
+      "path": "source-manifest.json",
+      "sha256": "f686a5264fa9f54369799f0ad251a45b52e05463f2c63f0848c70f50c7ac80a6"
+    },
+    {
+      "path": "stable-main-manifest.json",
+      "sha256": "e7e4768e9226fc6260766411837cfc5201864e14d009877a9b89101f3ecc18fe"
+    },
+    {
+      "path": "start-baseline-manifest.json",
+      "sha256": "f686a5264fa9f54369799f0ad251a45b52e05463f2c63f0848c70f50c7ac80a6"
+    },
+    {
+      "path": "test-collection.json",
+      "sha256": "b7533236a6a0fcd5358443f273fb748db33a78798c90fdad256c07919898759a"
+    },
+    {
+      "path": "logs/diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "evidence_root_relative_to_original_main_checkout": "assets/results/diversity_refactor/r43/intake-20260911-01",
+  "fallback_structure_count": null,
+  "forced_real_graph_family_count": null,
+  "formal": {
+    "fixed80": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "frontend_browser": "NOT_RUN",
+  "full_suite": "NOT_RUN",
+  "historical_candidate07": {
+    "new_measurement": false,
+    "ordinary_v2_count_512": 9,
+    "ordinary_v2_family_count": 3,
+    "structure_count_including_fallback": 4
+  },
+  "intake_status": "PASS",
+  "known_test_exclusions": [],
+  "known_test_failures": [
+    "assets/test_prompt_realizer_v2.py::TestRealizerBuilderDebug::test_actual_v1_family_metadata_and_seed_replay"
+  ],
+  "next_task": "R43-01",
+  "ordinary_v2_count_512": null,
+  "ordinary_v2_family_count": null,
+  "original_v150_baseline": "PRESENT_LOCAL_HASH_VERIFIED_NOT_REMEASURED",
+  "proof_constructor_mismatch_count": null,
+  "scope": "Documentation and external evidence only; first task of the supplied plan.",
+  "semantic_mismatch_count": null,
+  "source_commit": "9a2aa32c1e3a48d1d7ea51eb91aee42843dba021",
+  "source_tree_hash": "b8a99c2fa84cc59e2ade7378d6614527a3bfe672d42e474d0dbaca6078c57472",
+  "task": "N2.7-R4.3/R43-00",
+  "tests": {
+    "exclusions": [],
+    "focused_collected": 152,
+    "focused_failed": 1,
+    "focused_passed": 151,
+    "historical_checkpoint_exact_collection_delta": "NOT_AVAILABLE",
+    "regressions_passed": 29,
+    "skips": 0,
+    "subtests_passed": 1888,
+    "test_ids_sha256": "0d2a27483fd1bad6f0aa0870f03d8308e67561e07133e8638b9f253cbfd28473"
+  },
+  "typecheck": "NOT_CONFIGURED",
+  "upstream_context_mismatch_count": null,
+  "v150": {
+    "base_variations": 150184,
+    "compatibility_rows": 8227,
+    "locations": 109,
+    "protected_files_unchanged": 120,
+    "subjects": 135
+  }
+}

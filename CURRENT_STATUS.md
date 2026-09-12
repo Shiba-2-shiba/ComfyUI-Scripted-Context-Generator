@@ -1,13 +1,38 @@
 # Current Status
 
+2026-09-12 最新: [R43後のAction＋Scene拡張AS01](docs/diversity_refactor/coverage_as01_plan.md)を完了。
+通常v2は **10→11/512件**、既存10成功例と残る501 fallback・上流入力を保持しました。
+重点534件／2,020 subtests、回帰87件／33 subtests、validator/full-flow、
+512件のroot/package再現性がPASS。全6構文の実入力proofも維持しています。
+architecture／developmentはPASS、通常3構文・64/512と5構文の目安未達により
+正式評価への引き継ぎ・採用はBLOCKEDです。既存テンプレート由来の冗長さは残っています。
+変更ファイルと証拠は[AS01検証記録](docs/diversity_refactor/coverage_as01_summary.json)を参照。
+以下のR43完了時の10/512・492テストは、この拡張前の検証履歴です。
+
 Last verified: 2026-09-06 (F0 baseline: counts, validators, full flow, 40 focused tests)
 Candidate development verified: 2026-09-09 (N2.7-R4.2 candidate07)
 Source storage verified: 2026-09-10 (candidate04-07 committed as ordinary source; main runtime unchanged)
 
-このブランチ `refactor/realizer-v2` のルートソースは candidate07 です。
+このブランチ `refactor/realizer-v2` はR43-00〜10の開発・条件付き引き継ぎを完了しました。architecture／developmentは **PASS**、正式評価への実行引き継ぎ・採用は **BLOCKED** です。
 V150 stable は `main` に保持し、正式採用は **BLOCKED** のままです。
 以下の「現行生成」「未反映」は stable `main` に対する過去の検証記録です。
 開発と検証の入口は [development_branch.md](docs/diversity_refactor/development_branch.md) を参照してください。
+
+2026-09-12: [R4.3実装計画](docs/diversity_refactor/r43_implementation_plan.md) の
+R43-08で共通Action文法と所有関係の証明を追加し、通常v2適用が9→10/512件へ増えました。
+既存9成功例と残る502 fallbackは本文・context・debugを保持し、上流入力とcore/frameも一致しています。
+新規1件はbook/pagesとeyesの所有関係、原文要素、Scene文に付く時刻を検証しています。
+全6構文の実入力proof／強制描画は維持しています（計15 seed-family行）。
+R43-09のportableなintake CLIで、重点492件・1,990 subtests、回帰87件・33 subtests、
+validator/full-flow・paired512・root/package再現性をまとめて検証しました。
+独立したクリーンなsourceコピーでも全intakeが通り、判定JSONは同一bytesです。
+skip・除外・xfail・collection／setup／teardownエラーは別集計し、すべて0件です。
+通常選択での実行構文は3種類のため、適用範囲には改善余地があります。
+64/512・通常5構文という開発上の目安は未達で、正式評価は自動実行していません。
+R43-10でoriginal V150の封印済み1120ファイルと過去のgate/reference/paired2048/fixed80証拠を照合し、
+完全なA1.6条件とsource/configの比較可能性を整理しました。stable mainとは別の正式baselineです。
+candidateの正式評価・品質比較はNOT_RUN、正式評価用freezeも未作成です。N2.8/D3は未着手。
+次は残るfallbackのAction+Scene交差に基づく適用範囲改善です。[引き継ぎ](docs/diversity_refactor/r43_handoff.md)を参照してください。
 
 このファイルは、毎回全スクリプトを読み直さずに現在地を把握するための短い入口です。
 詳細な構造は `REPO_STRUCTURE.md`、設計背景は `assets/ARCHITECTURE.md` と

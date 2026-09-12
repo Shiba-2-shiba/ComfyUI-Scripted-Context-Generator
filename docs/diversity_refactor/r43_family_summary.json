@@ -1,0 +1,502 @@
+{
+  "added_test_count": 49,
+  "adoption_status": "BLOCKED",
+  "architecture_status": "NOT_RUN",
+  "changed_source_files": [
+    "assets/fixtures/r43_family_recombinations.json",
+    "assets/test_r43_family_capabilities.py",
+    "assets/test_r43_family_routes.py",
+    "pipeline/family_capabilities.py",
+    "pipeline/prompt_realizer.py",
+    "pipeline/realization_evidence.py",
+    "pipeline/syntax_family_selector.py"
+  ],
+  "development_status": "NOT_RUN",
+  "evidence": [
+    {
+      "path": "code-review.md",
+      "sha256": "5502734996148d77295ff595f3553b2f54f5f5da75b90bbc93424220f55b042b"
+    },
+    {
+      "path": "commands.json",
+      "sha256": "a8fa3e7bcc7a7c053f049bc4411ca116766fbd28c44df93de704a243ba3a7408"
+    },
+    {
+      "path": "family-package/family-evidence.jsonl",
+      "sha256": "0694b422635d4756ca8983f75a17eb50a18b6cf772ff6ebb3c88ddb1fa5f2e3e"
+    },
+    {
+      "path": "family-package/family-summary.json",
+      "sha256": "f6feed03f0bf6653e480d4bbe96e2450fe6f42373a015e04d24b80559d61d39e"
+    },
+    {
+      "path": "family-package/recombination-evidence.json",
+      "sha256": "231426e635f75af388315cd496b7c9b32329ad0b3440c1e174dac3d1a8fe3156"
+    },
+    {
+      "path": "family-package.log",
+      "sha256": "daebeded4cc5a0445e15f4edd07a96f45602a69f744b6a061dcb9181ea970abf"
+    },
+    {
+      "path": "family-root/family-evidence.jsonl",
+      "sha256": "0694b422635d4756ca8983f75a17eb50a18b6cf772ff6ebb3c88ddb1fa5f2e3e"
+    },
+    {
+      "path": "family-root/family-summary.json",
+      "sha256": "f6feed03f0bf6653e480d4bbe96e2450fe6f42373a015e04d24b80559d61d39e"
+    },
+    {
+      "path": "family-root/recombination-evidence.json",
+      "sha256": "231426e635f75af388315cd496b7c9b32329ad0b3440c1e174dac3d1a8fe3156"
+    },
+    {
+      "path": "family-root.log",
+      "sha256": "daebeded4cc5a0445e15f4edd07a96f45602a69f744b6a061dcb9181ea970abf"
+    },
+    {
+      "path": "focused/commands.json",
+      "sha256": "379bbfe0a7c8cf1050cda9f75caf7a04ee9ace33ca3b33077af2a6e2bad70e06"
+    },
+    {
+      "path": "focused/environment.json",
+      "sha256": "39b5c922efcb576b0e6f6fdec119cd905b2b9c138a6cf2174caf3ca727573382"
+    },
+    {
+      "path": "focused/logs/collected-tests.json",
+      "sha256": "1691c9f6d989d00109fb3be1376b2be4b66c78873efd4a6d8bc17f20cf03cc9b"
+    },
+    {
+      "path": "focused/logs/pytest.log",
+      "sha256": "c230afabcdefdbd95f72f0d410c7b9247627c02e09c0283cc9e5a6715fee77aa"
+    },
+    {
+      "path": "focused/source-manifest-after.json",
+      "sha256": "45058356dc8993fd98b8bf87b4dd07f74d2ba614dec2f06b900a76f7b5cc4ac4"
+    },
+    {
+      "path": "focused/source-manifest.json",
+      "sha256": "45058356dc8993fd98b8bf87b4dd07f74d2ba614dec2f06b900a76f7b5cc4ac4"
+    },
+    {
+      "path": "focused/supplemental-inputs.json",
+      "sha256": "0690acc0703a3361c044829b5ff251ee7adf40dc1ed6bffeb03e5709df599f15"
+    },
+    {
+      "path": "focused/test-collection.json",
+      "sha256": "7216e570b7a874e1be886a13a09eb6f36eb5e78e49edd7f0a90e68f0d11fb521"
+    },
+    {
+      "path": "focused/verdict.json",
+      "sha256": "08e08c3f53a0d75f5f6bbf95a86ab2fa6783a24b0666b5254cc14c79642a8b84"
+    },
+    {
+      "path": "focused.log",
+      "sha256": "1ad250da7339e0fd36cf5ad3aa571a08a8bff93673563057b424a1426ebcca0e"
+    },
+    {
+      "path": "intake512/baseline-command.json",
+      "sha256": "49c149ea109b59ce7b27c70fe5d3c4f89575662363c8f09455292e193fbb79c3"
+    },
+    {
+      "path": "intake512/baseline-identity.json",
+      "sha256": "ba92b1d98fabf951ba3ed70765c13d922bc762233d393e89534d4c76f9aeb1af"
+    },
+    {
+      "path": "intake512/baseline-pairs.jsonl",
+      "sha256": "59bed79e917235bd0c4bc2e26a893788263627266166c358837a7e32773766da"
+    },
+    {
+      "path": "intake512/baseline-process.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "intake512/environment.json",
+      "sha256": "b148b2986fd765e9325929119395e7d7d2bc431c83c678b4c5386170a3bcf977"
+    },
+    {
+      "path": "intake512/normal-pairs.jsonl",
+      "sha256": "59bed79e917235bd0c4bc2e26a893788263627266166c358837a7e32773766da"
+    },
+    {
+      "path": "intake512/reachability-summary.md",
+      "sha256": "9aa9c2ff0e65470dcc49f5869072b361764cc20fa738720df6e3a762b6e4d392"
+    },
+    {
+      "path": "intake512/reachability.json",
+      "sha256": "311520b8cb29c42cd02005d5b0ed52c67175af9ae78bc26c1ee7c9266bc764cf"
+    },
+    {
+      "path": "intake512/records.jsonl",
+      "sha256": "c384f01d708a546ac4a1b08ef1b9fd46bd1e8bb97d886032a56f616148a13bef"
+    },
+    {
+      "path": "intake512/rows.jsonl",
+      "sha256": "ba200e5d1f869ddd1c22efc3bbc1b6028a9a49d319980aa528c9851a54125bcc"
+    },
+    {
+      "path": "intake512/source-manifest-after.json",
+      "sha256": "465135c239c06c505cf7bea711cc708381a7e584f29f6e942cd42dfe64411166"
+    },
+    {
+      "path": "intake512/source-manifest.json",
+      "sha256": "465135c239c06c505cf7bea711cc708381a7e584f29f6e942cd42dfe64411166"
+    },
+    {
+      "path": "intake512.log",
+      "sha256": "fad1dd657b9bbfec532a391488a9e7d6901bdc759fcc97e11c013464365416a9"
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "aea140e484d77cd2de441c9636efdc2c79530e9b3efc57b75156d9f55e56430a"
+    },
+    {
+      "path": "preservation.json",
+      "sha256": "a7c2a296e621f5b4ce60816e2281df11a4df3efc5f1ce3824eaabdbee0a4f32c"
+    },
+    {
+      "path": "public-contract.log",
+      "sha256": "0e08956e170de80018428f0379d76d586400b2d84a2acf9fce6c595bbcb32da6"
+    },
+    {
+      "path": "r43_capture_family.py",
+      "sha256": "2c156f174a6f7a403d176f4608f81c3c0f431ea98ad652a4ffd1b791440acbcb"
+    },
+    {
+      "path": "r43_capture_support.py",
+      "sha256": "a06e313be799a79578ad12a3f95952093b13de1ff63c6a746476fa21094c8c94"
+    },
+    {
+      "path": "r43_finalize_family.py",
+      "sha256": "c8ca3edf9a7b4218bb52aa97605599ac72d49c58bfa5af0d20efacd99a595822"
+    },
+    {
+      "path": "r43_run_family_checks.py",
+      "sha256": "67cee31fe6ecad6a3c2fa6e967ceaa1a35212eea3b2fe8d371473dfe3ca83fe9"
+    },
+    {
+      "path": "recombination-inputs.json",
+      "sha256": "0a642ee2ea137728017363dc1d531870a382598d72c6e7a9c7378afd636cbec1"
+    },
+    {
+      "path": "regression/commands.json",
+      "sha256": "882d448704ea6adb788827104b00bdbc8bb8c35b1fb72ad7a1bfb2abbc97e79d"
+    },
+    {
+      "path": "regression/environment.json",
+      "sha256": "55417d1856928918a08e547860f1016e18893f09e0f772a0f2276a16e80c0baf"
+    },
+    {
+      "path": "regression/logs/action_pools.log",
+      "sha256": "a2fe63ac78f3e6748233cf7974a0fd146ab332244601fd9cb645e979b27ab8e1"
+    },
+    {
+      "path": "regression/logs/asset_validation.log",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": "regression/logs/collected-tests.json",
+      "sha256": "be96c38bc509516b2b6d10af2837f79a1e5413790d5f02da42910661f61bd234"
+    },
+    {
+      "path": "regression/logs/compatibility.log",
+      "sha256": "b6cede2000ad9722bcbbd38c90cd88aedaadd7f35e0b805374d1b6548241b4e2"
+    },
+    {
+      "path": "regression/logs/full_flow.log",
+      "sha256": "4e7024bbab9109cc83d937b39b25c4d869bce0b79243b3386352a5b1dc06feda"
+    },
+    {
+      "path": "regression/logs/prompt_data.log",
+      "sha256": "48c9fca6faa41199223917af6b16fa0b8ef55f13f61b41add7204db4a6acda4d"
+    },
+    {
+      "path": "regression/logs/pytest.log",
+      "sha256": "9a080366645222c0821b255185d64794164f4556047c2838c3137f9cba6481a7"
+    },
+    {
+      "path": "regression/logs/variation_scope.log",
+      "sha256": "cbd0cc5f38dbb3606d91838a8f446015b7186c3bb13c1bd34a6aca9928427f83"
+    },
+    {
+      "path": "regression/logs/variations.log",
+      "sha256": "791b2fcab90a05e813905a11132be833f981b38b67b3f3fb675b748a8a7da842"
+    },
+    {
+      "path": "regression/source-manifest-after.json",
+      "sha256": "45058356dc8993fd98b8bf87b4dd07f74d2ba614dec2f06b900a76f7b5cc4ac4"
+    },
+    {
+      "path": "regression/source-manifest.json",
+      "sha256": "45058356dc8993fd98b8bf87b4dd07f74d2ba614dec2f06b900a76f7b5cc4ac4"
+    },
+    {
+      "path": "regression/supplemental-inputs.json",
+      "sha256": "0690acc0703a3361c044829b5ff251ee7adf40dc1ed6bffeb03e5709df599f15"
+    },
+    {
+      "path": "regression/test-collection.json",
+      "sha256": "5b828c766bd827ccc25e90748f3254b20405d3b6dd5966758a01f876bbf192fa"
+    },
+    {
+      "path": "regression/verdict.json",
+      "sha256": "4c1b379a4e155914e1e916368b84804211cd656b1a960d308eafb552c0375f79"
+    },
+    {
+      "path": "regression.log",
+      "sha256": "2f9d5c08ce9dce19df49cda14f345d9918bb39c572ea565b9472693c7c9c3b92"
+    },
+    {
+      "path": "support-package/support-evidence.jsonl",
+      "sha256": "d92ded931c9b4f9c79c6875976bfcf6f59fee4e23bd8f599916ac7f14b393949"
+    },
+    {
+      "path": "support-package/support-summary.json",
+      "sha256": "1cb6aefdb0ba2e46ad99749dfa9260ad8880d8ab8cffcde76c6be44c4fa07585"
+    },
+    {
+      "path": "support-package.log",
+      "sha256": "637347d77c76bc05dbc33e26d56476cf81e825b9db47d1f96fe3e06ac9ea21f2"
+    },
+    {
+      "path": "support-root/support-evidence.jsonl",
+      "sha256": "d92ded931c9b4f9c79c6875976bfcf6f59fee4e23bd8f599916ac7f14b393949"
+    },
+    {
+      "path": "support-root/support-summary.json",
+      "sha256": "1cb6aefdb0ba2e46ad99749dfa9260ad8880d8ab8cffcde76c6be44c4fa07585"
+    },
+    {
+      "path": "support-root.log",
+      "sha256": "637347d77c76bc05dbc33e26d56476cf81e825b9db47d1f96fe3e06ac9ea21f2"
+    }
+  ],
+  "evidence_root_relative_to_original_main_checkout": "assets/results/diversity_refactor/r43/family-20260912-01/final-01",
+  "fallback_structure_counts": {
+    "subject_action__scene_tail": 129,
+    "subject_action_scene": 374
+  },
+  "family_evidence": {
+    "evidence_sha256": "0694b422635d4756ca8983f75a17eb50a18b6cf772ff6ebb3c88ddb1fa5f2e3e",
+    "families": {
+      "action_lead_subject_scene": {
+        "blockers": {
+          "action.grammar_unknown": 500,
+          "action.leaf_grammar_unknown": 500,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "garnish.grammar_unknown": 447,
+          "garnish.source_binding_unknown": 390,
+          "garnish.source_unavailable": 390,
+          "garnish.unsupported_constructor": 57,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 502,
+          "scene.source_or_grammar_unknown": 502,
+          "scene.source_unavailable": 502,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 0,
+        "common_runtime_eligible": 0
+      },
+      "scene_lead_subject_action": {
+        "blockers": {
+          "action.grammar_unknown": 500,
+          "action.leaf_grammar_unknown": 500,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "garnish.grammar_unknown": 447,
+          "garnish.source_binding_unknown": 390,
+          "garnish.source_unavailable": 390,
+          "garnish.unsupported_constructor": 57,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 502,
+          "scene.source_or_grammar_unknown": 502,
+          "scene.source_unavailable": 502,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 0,
+        "common_runtime_eligible": 0
+      },
+      "subject_action__scene_tail": {
+        "blockers": {
+          "action.grammar_unknown": 500,
+          "action.leaf_grammar_unknown": 500,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "garnish.grammar_unknown": 447,
+          "garnish.source_binding_unknown": 390,
+          "garnish.source_unavailable": 390,
+          "garnish.unsupported_constructor": 57,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 502,
+          "scene.source_or_grammar_unknown": 502,
+          "scene.source_unavailable": 502,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 0,
+        "common_runtime_eligible": 0
+      },
+      "subject_action_scene": {
+        "blockers": {
+          "action.grammar_unknown": 500,
+          "action.leaf_grammar_unknown": 500,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "garnish.grammar_unknown": 447,
+          "garnish.source_binding_unknown": 390,
+          "garnish.source_unavailable": 390,
+          "garnish.unsupported_constructor": 57,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 502,
+          "scene.source_or_grammar_unknown": 502,
+          "scene.source_unavailable": 502,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 0,
+        "common_runtime_eligible": 0
+      },
+      "subject_action_scene_insert": {
+        "blockers": {
+          "action.grammar_unknown": 500,
+          "action.leaf_grammar_unknown": 500,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "garnish.grammar_unknown": 447,
+          "garnish.source_binding_unknown": 390,
+          "garnish.source_unavailable": 390,
+          "garnish.unsupported_constructor": 57,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 502,
+          "scene.source_or_grammar_unknown": 502,
+          "scene.source_unavailable": 502,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 0,
+        "common_runtime_eligible": 0
+      },
+      "subject_scene_action": {
+        "blockers": {
+          "action.grammar_unknown": 500,
+          "action.leaf_grammar_unknown": 500,
+          "binding.history_stale": 16,
+          "binding.source_ambiguity": 7,
+          "clothing.atoms_missing": 410,
+          "clothing.multigarment_owner_unknown": 182,
+          "clothing.nominal_grammar_unknown": 71,
+          "clothing.outerwear_attachment_unknown": 134,
+          "clothing.source_unavailable": 410,
+          "garnish.grammar_unknown": 447,
+          "garnish.source_binding_unknown": 390,
+          "garnish.source_unavailable": 390,
+          "garnish.unsupported_constructor": 57,
+          "mood.grammar_unknown": 200,
+          "mood.unsupported_constructor": 200,
+          "scene.grammar_unknown": 502,
+          "scene.source_or_grammar_unknown": 502,
+          "scene.source_unavailable": 502,
+          "subject.grammar_unknown": 269,
+          "subject.source_binding_unknown": 21,
+          "subject.source_unavailable": 21,
+          "subject.unsupported_constructor": 248,
+          "template.grammar_unknown": 304,
+          "template.pruning_condition_unknown": 1,
+          "template.topology_unknown": 304
+        },
+        "common_forced_v2": 0,
+        "common_runtime_eligible": 0
+      }
+    },
+    "ordinary_output_context_mismatches": 0,
+    "proof_constructor_mismatches": 0,
+    "real_graph_seed_family_rows": 3072,
+    "recombination_forced_family_count": 6,
+    "recombination_sha256": "231426e635f75af388315cd496b7c9b32329ad0b3440c1e174dac3d1a8fe3156",
+    "runtime_source_identity": "1a80f5857305eee548c77b52a27d59e637f822d27105224ffb1de75ce85733ed",
+    "sample_count": 512
+  },
+  "focused_test_count": 348,
+  "formal": {
+    "fixed80": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "frontend_browser": "NOT_RUN",
+  "full_suite": "NOT_RUN",
+  "known_test_exclusions": [],
+  "known_test_failures": [],
+  "next_task": "R43-08",
+  "observed_structure_count_including_fallback": 4,
+  "ordinary_common_selection_enabled": false,
+  "ordinary_v2_count_512": 9,
+  "ordinary_v2_family_count": 3,
+  "regression_test_count": 87,
+  "semantic_mismatch_count": 0,
+  "semantic_scope": "Ordinary paired512 records unchanged. Recombination six-family rendering is not real-graph coverage.",
+  "source_commit": "9a2aa32c1e3a48d1d7ea51eb91aee42843dba021",
+  "source_tree_hash": "2bf39ee99bcc5fa9010891c2ddf8451cc9194cb8647887d099870e9e021d4faf",
+  "start_source_tree_hash": "72988cdef49384d5d61ead709280497af59e2ab400a3f85dc1cad0ecf358deaf",
+  "status": "PASS",
+  "task": "N2.7-R4.3/R43-07",
+  "typecheck": "NOT_CONFIGURED",
+  "upstream_context_mismatch_count": 0
+}

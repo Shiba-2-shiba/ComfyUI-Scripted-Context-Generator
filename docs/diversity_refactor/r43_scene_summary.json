@@ -1,0 +1,280 @@
+{
+  "adoption_status": "BLOCKED",
+  "architecture_status": "NOT_RUN",
+  "changed_source_files": [
+    "assets/test_r43_scene_binding.py",
+    "assets/test_r43_scene_trace.py",
+    "pipeline/location_builder.py",
+    "pipeline/realization_evidence.py",
+    "pipeline/v2_scene_provenance.py"
+  ],
+  "common_family_authorization_enabled": false,
+  "development_status": "NOT_RUN",
+  "evidence": [
+    {
+      "path": "focused/commands.json",
+      "sha256": "bb773465167360b2379fe21fa3c880b206e3bed70f3a5252edc3bc0f14482d7c"
+    },
+    {
+      "path": "focused/environment.json",
+      "sha256": "ce0b46fb058572b55daae13b449ca85a0dcc61ce6e7174e3e479d69e443e601c"
+    },
+    {
+      "path": "focused/logs/collected-tests.json",
+      "sha256": "d9a4ed18fb43dbe54faa844a521a0ded2fda4c0cfb799ae3729138fa5a1e0f09"
+    },
+    {
+      "path": "focused/logs/pytest.log",
+      "sha256": "5de846e3d0e0c5a8b737c15f6fb8ff598064f3650d3ab898891cca659ca5762e"
+    },
+    {
+      "path": "focused/source-manifest-after.json",
+      "sha256": "ba185fff33c91de1034720459016cf060211b7178e7027b6b3350583bb56eb56"
+    },
+    {
+      "path": "focused/source-manifest.json",
+      "sha256": "ba185fff33c91de1034720459016cf060211b7178e7027b6b3350583bb56eb56"
+    },
+    {
+      "path": "focused/supplemental-inputs.json",
+      "sha256": "0690acc0703a3361c044829b5ff251ee7adf40dc1ed6bffeb03e5709df599f15"
+    },
+    {
+      "path": "focused/test-collection.json",
+      "sha256": "a0b10f39f992ebc0bffa9b041b57643bcca2f994ef86d0f91f20b9eaef9890dc"
+    },
+    {
+      "path": "focused/verdict.json",
+      "sha256": "e46aaecb6c97da34d40a91e540eb5044a55e43605627c70228d89fafbf188cb5"
+    },
+    {
+      "path": "intake512/baseline-command.json",
+      "sha256": "220ce2f2f8706982cdfdebed22f6a9b967d8c71ad95e8f79dbe13df3e74f6349"
+    },
+    {
+      "path": "intake512/baseline-identity.json",
+      "sha256": "8a451cf1679d3e88e7b25aaf1be7f76e3f9c4672b9ba81fb27deb29ad45ced71"
+    },
+    {
+      "path": "intake512/baseline-pairs.jsonl",
+      "sha256": "59bed79e917235bd0c4bc2e26a893788263627266166c358837a7e32773766da"
+    },
+    {
+      "path": "intake512/baseline-process.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "intake512/environment.json",
+      "sha256": "6572f16a015ee55870a1b551688bc6c809223181d223b9ed59d2dff1ce145382"
+    },
+    {
+      "path": "intake512/normal-pairs.jsonl",
+      "sha256": "59bed79e917235bd0c4bc2e26a893788263627266166c358837a7e32773766da"
+    },
+    {
+      "path": "intake512/reachability-summary.md",
+      "sha256": "9aa9c2ff0e65470dcc49f5869072b361764cc20fa738720df6e3a762b6e4d392"
+    },
+    {
+      "path": "intake512/reachability.json",
+      "sha256": "c56bbeb76697a79b3ede18f4cea54944b9f5108e6040ebe4f1f46fd5ce2f2d3a"
+    },
+    {
+      "path": "intake512/records.jsonl",
+      "sha256": "c384f01d708a546ac4a1b08ef1b9fd46bd1e8bb97d886032a56f616148a13bef"
+    },
+    {
+      "path": "intake512/rows.jsonl",
+      "sha256": "701580e3ae16b6995cdd7ef4635d9db3d416d148cad36113ab928bb8ea91f576"
+    },
+    {
+      "path": "intake512/source-manifest-after.json",
+      "sha256": "6af26ea6355fd247338b11c325e90fb2086874a943a4c477e275d5d86af20113"
+    },
+    {
+      "path": "intake512/source-manifest.json",
+      "sha256": "6af26ea6355fd247338b11c325e90fb2086874a943a4c477e275d5d86af20113"
+    },
+    {
+      "path": "preservation.json",
+      "sha256": "e1836638541e5f211a3e9f0d09d230052a30565c310a655084b80f8a692a89f9"
+    },
+    {
+      "path": "public-contract.json",
+      "sha256": "07bfe42b6ff01da527599d6d210a8d9da06fac857275c5d1042826c9a3bad711"
+    },
+    {
+      "path": "r43_capture_scene_evidence.py",
+      "sha256": "47c38582850a6f7b827eaed106359437e1028fa82986b919466e7e7bed002caa"
+    },
+    {
+      "path": "r43_finalize_scene.py",
+      "sha256": "418c267f45378f3f84eeae7b04746e16126f67cf09a1f44590e5fa537324f4a1"
+    },
+    {
+      "path": "regression/commands.json",
+      "sha256": "d9f7faca35545b31159ed9132cf641aa8c125439117f0ac9bcb768312c733ed2"
+    },
+    {
+      "path": "regression/environment.json",
+      "sha256": "9fe4ed5874fcb860b125b9accf0d3a695f88884dae7c6043be6510f6b99df90d"
+    },
+    {
+      "path": "regression/logs/action_pools.log",
+      "sha256": "a2fe63ac78f3e6748233cf7974a0fd146ab332244601fd9cb645e979b27ab8e1"
+    },
+    {
+      "path": "regression/logs/asset_validation.log",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": "regression/logs/collected-tests.json",
+      "sha256": "be96c38bc509516b2b6d10af2837f79a1e5413790d5f02da42910661f61bd234"
+    },
+    {
+      "path": "regression/logs/compatibility.log",
+      "sha256": "b6cede2000ad9722bcbbd38c90cd88aedaadd7f35e0b805374d1b6548241b4e2"
+    },
+    {
+      "path": "regression/logs/full_flow.log",
+      "sha256": "4e7024bbab9109cc83d937b39b25c4d869bce0b79243b3386352a5b1dc06feda"
+    },
+    {
+      "path": "regression/logs/prompt_data.log",
+      "sha256": "48c9fca6faa41199223917af6b16fa0b8ef55f13f61b41add7204db4a6acda4d"
+    },
+    {
+      "path": "regression/logs/pytest.log",
+      "sha256": "49f32dee04bcc91bdc90414048f73f19c127616a5b78042a2b352734038ca280"
+    },
+    {
+      "path": "regression/logs/variation_scope.log",
+      "sha256": "cbd0cc5f38dbb3606d91838a8f446015b7186c3bb13c1bd34a6aca9928427f83"
+    },
+    {
+      "path": "regression/logs/variations.log",
+      "sha256": "791b2fcab90a05e813905a11132be833f981b38b67b3f3fb675b748a8a7da842"
+    },
+    {
+      "path": "regression/source-manifest-after.json",
+      "sha256": "ba185fff33c91de1034720459016cf060211b7178e7027b6b3350583bb56eb56"
+    },
+    {
+      "path": "regression/source-manifest.json",
+      "sha256": "ba185fff33c91de1034720459016cf060211b7178e7027b6b3350583bb56eb56"
+    },
+    {
+      "path": "regression/supplemental-inputs.json",
+      "sha256": "0690acc0703a3361c044829b5ff251ee7adf40dc1ed6bffeb03e5709df599f15"
+    },
+    {
+      "path": "regression/test-collection.json",
+      "sha256": "5b828c766bd827ccc25e90748f3254b20405d3b6dd5966758a01f876bbf192fa"
+    },
+    {
+      "path": "regression/verdict.json",
+      "sha256": "565d5661e859b611e915f8c737a9082b11ae5b23d30bfd4172dd157f360ce2f9"
+    },
+    {
+      "path": "traced-package/scene-evidence.jsonl",
+      "sha256": "92a35c91246f63408071be898fdc470852d4b2650d0c4f2c4419f9eff2423f06"
+    },
+    {
+      "path": "traced-package/scene-summary.json",
+      "sha256": "b7008c8d09a3da8b1cff88bcd4ea97187e21e26d46fea72a9ace1ffea5bcf1c7"
+    },
+    {
+      "path": "traced-root/scene-evidence.jsonl",
+      "sha256": "92a35c91246f63408071be898fdc470852d4b2650d0c4f2c4419f9eff2423f06"
+    },
+    {
+      "path": "traced-root/scene-summary.json",
+      "sha256": "b7008c8d09a3da8b1cff88bcd4ea97187e21e26d46fea72a9ace1ffea5bcf1c7"
+    }
+  ],
+  "evidence_root_relative_to_original_main_checkout": "assets\\results\\diversity_refactor\\r43\\scene-final-03",
+  "fallback_structure_count": 2,
+  "focused": {
+    "skips": 0,
+    "subtests": 1963,
+    "tests": 278
+  },
+  "forced_real_graph_family_count": 3,
+  "formal": {
+    "fixed80": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "frontend_browser": "NOT_RUN",
+  "full_suite": "NOT_RUN",
+  "known_test_exclusions": [],
+  "known_test_failures": [],
+  "next_task": "R43-06",
+  "observed_structure_count_including_fallback": 4,
+  "ordinary_v2_count_512": 9,
+  "ordinary_v2_family_count": 3,
+  "pre_edit_golden_cases": {
+    "output_debug_rng": 2736
+  },
+  "proof_constructor_mismatch_count": 0,
+  "regression": {
+    "skips": 0,
+    "subtests": 33,
+    "tests": 87
+  },
+  "scene_evidence": {
+    "audit_only_renderer_replays": 512,
+    "blockers": {
+      "scene.source_or_grammar_unknown": 502
+    },
+    "bound_reference_atoms": 1,
+    "dedupe_omissions": 0,
+    "evidence_sha256": "92a35c91246f63408071be898fdc470852d4b2650d0c4f2c4419f9eff2423f06",
+    "history_mismatches": 0,
+    "local_rng_poststates_compared": 512,
+    "normal_output_mismatches": 0,
+    "omission_reasons": {
+      "scene.repeat_risk_budget": 9
+    },
+    "renderer_trace_replay_matches": 512,
+    "rng_mismatches": 0,
+    "runtime_bound_constructor_count": 10,
+    "runtime_exact_replay_count": 0,
+    "runtime_source_identity": "8c8151d9ada97fb23c520e7a1f01fb36e4907c8348290b8b477eee50fe783d4e",
+    "sample_count": 512,
+    "source_default_parts": 232,
+    "source_field_counts": {
+      "core": 729,
+      "crowd": 65,
+      "details": 169,
+      "environment": 506,
+      "fx": 91,
+      "loc_tag": 6,
+      "props": 368,
+      "texture": 267,
+      "time": 235,
+      "weather": 37
+    },
+    "stale_bindings_rejected": 512
+  },
+  "semantic_mismatch_count": 0,
+  "semantic_scope": "Ordinary paired records unchanged; runtime Scene proof does not enable family expansion.",
+  "source_commit": "9a2aa32c1e3a48d1d7ea51eb91aee42843dba021",
+  "source_tree_hash": "0781fb1204b07bba7dc97af26711f6a989d7334f0118651099b5b4f81fa3143c",
+  "start_source_tree_hash": "69870cf195583d3cc50ae765c2761754f9a5eedeb2f42cbd16181000b5bc1876",
+  "status": "PASS",
+  "superseded_runs": [
+    "scene-final-01",
+    "scene-final-02"
+  ],
+  "task": "N2.7-R4.3/R43-05",
+  "typecheck": "NOT_CONFIGURED",
+  "unimplemented_domains": [
+    "garnish",
+    "mood",
+    "subject",
+    "template"
+  ],
+  "upstream_context_mismatch_count": 0
+}

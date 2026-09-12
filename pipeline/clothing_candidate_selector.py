@@ -1,6 +1,9 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any, Callable
+
+if TYPE_CHECKING:
+    from .realization_evidence import ProducerTrace
 
 try:
     from .clothing_candidate_renderer import render_clothing_candidate
@@ -49,10 +52,14 @@ def select_clothing_candidate(
     clothing_tpo_enabled: bool,
     clothing_tpo_active: bool,
     clothing_target_vector: dict[str, float],
+    *,
+    trace_sink: Callable[[ProducerTrace], None] | None = None,
 ) -> tuple[str, dict[str, Any], list[dict[str, Any]], int]:
     candidate_scores: list[dict[str, Any]] = []
     baseline_selected_attempt_index = 0
     baseline_best_score = None
+    candidate_traces: list[ProducerTrace] = []
+    trace_kwargs = {"trace_sink": candidate_traces.append} if trace_sink is not None else {}
 
     prompt, decision = render_clothing_candidate(
         theme_key,
@@ -66,7 +73,9 @@ def select_clothing_candidate(
         recent_outerwear=recent_outerwear,
         recent_signatures=recent_signatures,
         attempt_index=0,
+        **trace_kwargs,
     )
+    selected_trace = candidate_traces[-1] if trace_sink is not None else None
     if clothing_tpo_enabled:
         final_penalty, score_entry = annotate_clothing_candidate(
             decision,
@@ -91,6 +100,7 @@ def select_clothing_candidate(
             recent_outerwear=recent_outerwear,
             recent_signatures=recent_signatures,
             attempt_index=attempt_index,
+            **trace_kwargs,
         )
         if clothing_tpo_enabled:
             _final_penalty, score_entry = annotate_clothing_candidate(
@@ -107,7 +117,11 @@ def select_clothing_candidate(
         candidate_score = int(candidate_decision.get("semantic_tpo_final_penalty", candidate_decision.get("repeat_guard_penalty", 0)) or 0)
         if candidate_score < best_score:
             prompt, decision = candidate_prompt, candidate_decision
+            if trace_sink is not None:
+                selected_trace = candidate_traces[-1]
             best_score = candidate_score
             if best_score == 0:
                 break
+    if trace_sink is not None:
+        trace_sink(selected_trace)
     return prompt, decision, candidate_scores, baseline_selected_attempt_index

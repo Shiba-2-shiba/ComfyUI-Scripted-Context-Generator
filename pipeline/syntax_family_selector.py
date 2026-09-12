@@ -204,8 +204,21 @@ def eligible_syntax_families(
     action_surface: Mapping[str, Any] | None, *, catalog: dict[str, Any] | None = None,
     return_debug: bool = False, direct_provenance: Mapping[str, Any] | None = None,
     structural_evidence=None,
+    realization_evidence=None, builder_inputs=None, producer_context=None,
 ) -> list[str] | tuple[list[str], dict[str, Any]]:
     """Filter before selection; baseline is a fallback marker, not policy approval."""
+    if realization_evidence is not None or builder_inputs is not None:
+        if any(value is not None for value in (action_frame, action_surface, direct_provenance, structural_evidence)):
+            raise ValueError("Cannot mix common and legacy realization evidence")
+        from .family_capabilities import prove_all_families, family_proof_to_dict
+        proofs = prove_all_families(plan, realization_evidence, builder_inputs=builder_inputs,
+                                   producer_context=producer_context, catalog=catalog)
+        eligible = [proof.family for proof in proofs if proof.eligible]
+        if not return_debug:
+            return eligible
+        return eligible, {'eligible_syntax_families': eligible,
+                          'family_proofs': [family_proof_to_dict(proof) for proof in proofs],
+                          'syntax_fallback_reason': '' if eligible else 'common_family_unproved'}
     metadata = load_json(CATALOG_FILENAME) if catalog is None else catalog
     issues = validate_syntax_family_catalog(metadata)
     if issues:

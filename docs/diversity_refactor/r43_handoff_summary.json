@@ -1,0 +1,130 @@
+{
+  "adoption_status": "BLOCKED",
+  "allowed_data_additions": [
+    "vocab/data/natural_language_realizer_v2.json"
+  ],
+  "architecture_status": "PASS",
+  "blockers": [
+    "development_guide_not_met",
+    "candidate_formal_reference_gate_quality_release_NOT_RUN",
+    "original_v150_release_profile_baseline_not_established"
+  ],
+  "candidate_formal_freeze": "NOT_CREATED",
+  "comparison_status": "METADATA_COMPATIBLE_FORMAL_NOT_RUN",
+  "development_baseline_source_tree_hash": "0c8c421de459f62afa8731d60994d23a4409165b726095e5b24c13d363ebd281",
+  "development_guide": {
+    "met": false,
+    "minimum_ordinary_families": 5,
+    "minimum_v2_count_512": 64
+  },
+  "development_status": "PASS",
+  "evidence": [
+    {
+      "path": "candidate-audit-identity.json",
+      "sha256": "1009e0fbbf431b5bdf556c6d7509cb460b2ce8ecd37f7359f4c2240cb97e78e0"
+    },
+    {
+      "path": "candidate-audit-identity.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "commands.json",
+      "sha256": "5d873006700c4724f4cff3413e0c4da436ef04924b1d46ebd9209eae6d08aabe"
+    },
+    {
+      "path": "comparison-readiness.json",
+      "sha256": "95aa423ebb3f776ae78da58ce12ad6e228e4cf14ced0162df0c95a8dd5471643"
+    },
+    {
+      "path": "complete-a16-lock.md",
+      "sha256": "6742b1b735de2e3ef9b53b732e51d54d260434a500ab84f32249334c24cfb7bd"
+    },
+    {
+      "path": "contract-integrity.json",
+      "sha256": "fdcdaec580ef074d06d47d2947761a195efafb3ac1676189dbcb40f7754ae2a3"
+    },
+    {
+      "path": "handoff.json",
+      "sha256": "b785bbe004125a1a6a306a5f3e45712bf3796f86fb191ed0c9e085f26981ca03"
+    },
+    {
+      "path": "historical-report-integrity.json",
+      "sha256": "2e9d6b6f6dca834e31353e70268a4d692326bb85846c28298aec7ec90a6a54b6"
+    },
+    {
+      "path": "next-coverage-evidence.json",
+      "sha256": "73515f37c12a37da30d0ac402f8ce563b9919b205d2cc0d553a7016bb4b441ef"
+    },
+    {
+      "path": "original-audit-identity.json",
+      "sha256": "d865140615533042e3006e4a4736c645d605462c63276cd07927f355a9074324"
+    },
+    {
+      "path": "original-audit-identity.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "original-source-integrity.json",
+      "sha256": "f864d8d955362f984350ce6316ded2408af8dccfb3bb05a02ec1563d3ed91e66"
+    },
+    {
+      "path": "public-and-data-comparison.json",
+      "sha256": "a494179cde8cbc3d294104298dcfe82a7f4499eb92dd37768ca7d2fc8a3d155b"
+    },
+    {
+      "path": "source-after.json",
+      "sha256": "cc99d88f4548f274259a212d0395c46f25a0849e8f9960a6bd9ec0744a0fc8e4"
+    },
+    {
+      "path": "source-before.json",
+      "sha256": "cc99d88f4548f274259a212d0395c46f25a0849e8f9960a6bd9ec0744a0fc8e4"
+    },
+    {
+      "path": "handoff-review.md",
+      "sha256": "73509012255c2f5198e70e1a58bf01648a97fcc41aa35118865fe757ca74cacf"
+    }
+  ],
+  "evidence_root_relative_to_original_main_checkout": "assets/results/diversity_refactor/r43/handoff-20260912-01",
+  "forced_real_graph_family_count": 6,
+  "formal": {
+    "fixed80": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "handoff_status": "BLOCKED",
+  "independent_handoff_review": "APPROVED",
+  "next_work": "bounded ordinary-coverage improvement before automatic heavy formal evaluation",
+  "ordinary_v2_count_512": 10,
+  "ordinary_v2_family_count": 3,
+  "original_v150": {
+    "audit_source_hash": "448e4240b6f8321e1ba9332f9f624b7bf9419d255f715f438fd87b13dd556214",
+    "prompt_quality_source_tree_hash": "27fea03cfcc4d54c1fbed033f5a9ece9a812f2ad090b663f06745d8794412c53",
+    "sealed_content_hash": "34f92cc23d738f564568b04a48e1019d6ee54529e1487bdfc22d8bf9a6b456af",
+    "sealed_file_count": 1120,
+    "source_path_relative_to_original_main": "assets/results/diversity_refactor/v150-before-n2/baseline-root"
+  },
+  "prior_preflight_source_clarification": "R43-09 preflight supplied stable main, not sealed pre-N2 formal V150; this handoff verifies the sealed original separately.",
+  "public_original_candidate_equal": true,
+  "remaining_formal_evidence": {
+    "candidate_fixed64_plus16": "NOT_RUN",
+    "candidate_gate2048": "NOT_RUN",
+    "candidate_paired2048": "NOT_RUN",
+    "candidate_reference8192": "NOT_RUN",
+    "candidate_release8192": "NOT_RUN",
+    "current_candidate_full_suite_frontend_browser": "NOT_RUN",
+    "fresh_3x256_confirmation": "NOT_RUN",
+    "fresh_independent_blind_review": "NOT_RUN",
+    "source_bound_v150_release_profile_baseline": "NOT_ESTABLISHED"
+  },
+  "scope": "conditional handoff prepared; no formal measurement or evaluation freeze",
+  "source_changed": false,
+  "source_commit": "9a2aa32c1e3a48d1d7ea51eb91aee42843dba021",
+  "source_tree_hash": "1678a635b03d8e6e18e6a797b395511a51cc04c3f245f96c7c5a38e9ca17cf23",
+  "stable_main": {
+    "role": "stable preservation source; not the sealed original formal baseline",
+    "source_tree_hash": "01f94274e237597b032f708dd246066b66ee8660bb58d1dbdf7ac159c12b45ba"
+  },
+  "status": "PASS",
+  "task": "N2.7-R4.3/R43-10"
+}

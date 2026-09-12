@@ -510,10 +510,25 @@ def derive_action_grammar(evidence):
         return ActionGrammarFacts()
     parts = tuple(action_part_facts(part, primary=index == 0)
                   for index, part in enumerate(evidence.emitted_parts))
+    return aggregate_action_parts(parts)
+
+
+def _dependent_temporal_event(part):
+    return (part.known and part.attachment_kind == 'dependent_temporal_event'
+            and part.surface_kind == 'finite' and part.owner_kind == 'scene_event'
+            and part.same_subject is False and part.no_place_reference is True
+            and not part.main_verb)
+
+
+def aggregate_action_parts(parts, *, allow_dependent_events=False):
+    """Aggregate already derived leaf facts for either bounded grammar route."""
+    if not parts:
+        return ActionGrammarFacts()
     primary = parts[0]
     known = all(part.known for part in parts)
     shared = all(part.same_subject is True for part in parts) if known else None
     independent = any(part.same_subject is False and part.attachment_kind != 'with_absolute'
+                      and not (allow_dependent_events and _dependent_temporal_event(part))
                       for part in parts) if known else None
     no_place = True if known and all(part.no_place_reference is True for part in parts) else None
     return ActionGrammarFacts(parts, True if known and primary.attachment_kind == 'main_predicate' else None,
@@ -523,13 +538,27 @@ def derive_action_grammar(evidence):
 def materialize_action_parts(evidence):
     """Preserve every actor leaf and license only proved body states with 'with'."""
     facts = derive_action_grammar(evidence)
-    if facts.frame_predicate_safe is not True:
+    return materialize_proved_action_parts(evidence, facts)
+
+
+def materialize_proved_action_parts(evidence, facts, *, allow_common_parts=False):
+    """Shared rendering for fresh leaf proofs; callers own source binding."""
+    if (facts.frame_predicate_safe is not True
+            or len(evidence.emitted_parts) != len(facts.parts)):
         return None
     result = []
     for part, leaf in zip(evidence.emitted_parts, facts.parts):
         if leaf.attachment_kind == 'with_absolute':
             # Facts were freshly derived from the exact source text and role.
             result.append('with ' + part.text)
+        elif allow_common_parts and _dependent_temporal_event(leaf):
+            result.append(part.text)
+        elif leaf.surface_kind == 'count_noun_gerund':
+            if (not allow_common_parts or part.text != 'clicking pen'
+                    or leaf.main_verb != 'clicking' or leaf.owner_kind != 'protagonist'
+                    or leaf.same_subject is not True):
+                return None
+            result.append('clicking a pen')
         elif leaf.same_subject is True:
             result.append(part.text)
         else:

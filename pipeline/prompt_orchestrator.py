@@ -38,6 +38,8 @@ def build_prompt_text(
     action_frame=None,
     return_debug=False,
     producer_context=None,
+    *,
+    audit_sink=None,
 ):
     return prompt_renderer.build_prompt_text(
         template=template,
@@ -59,10 +61,11 @@ def build_prompt_text(
         producer_context=producer_context,
         return_debug=return_debug,
         template_entries_fn=_template_entries,
+        audit_sink=audit_sink,
     )
 
 
-def build_prompt_from_context(context, template, composition_mode, seed):
+def build_prompt_from_context(context, template, composition_mode, seed, *, audit_sink=None):
     ctx = ensure_context(context, default_seed=int(seed))
     state = generation_state_from_context(ctx)
     if not state.action.has_content() and ctx.action:
@@ -90,8 +93,12 @@ def build_prompt_from_context(context, template, composition_mode, seed):
         recent_body_keys=recent_template_part_history(ctx, "body"),
         recent_end_keys=recent_template_part_history(ctx, "end"),
         action_frame=state.action.to_dict() if state.action.has_content() else None,
-        producer_context={'character_palette': [part.strip() for part in state.character.palette_text.split(',') if part.strip()]},
+        producer_context={
+            'character_palette': [part.strip() for part in state.character.palette_text.split(',') if part.strip()],
+            **({'context': ctx.to_dict()} if composition_mode or audit_sink is not None else {}),
+        },
         return_debug=True,
+        audit_sink=audit_sink,
     )
     action_slots = state.action.to_slot_dict()
     for entry in reversed(ctx.history):

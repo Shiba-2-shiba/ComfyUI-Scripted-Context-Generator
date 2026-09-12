@@ -5,6 +5,7 @@ import logging
 import os
 import random
 import re
+from copy import deepcopy
 from typing import Callable
 
 if __package__:
@@ -705,6 +706,25 @@ def _append_staging_tags(result, staging_tags):
     return f"{base_result}, {sanitize_text(staging_tags)}{terminal}"
 
 
+def _finalize_prompt(template, *, replacements, staging_tags, action, composition_mode):
+    """Apply the shared final Builder substitutions and normalization in order."""
+    result = template
+    for token, replacement in replacements:
+        result = result.replace(token, str(replacement) if replacement is not None else "")
+    if staging_tags and isinstance(staging_tags, str) and staging_tags.strip():
+        result = _append_staging_tags(result, staging_tags)
+    else:
+        result = result.replace("{staging_tags}", "")
+    result = _prune_redundant_prompt_fillers(result)
+    result = _prune_action_incompatible_fillers(result, action)
+    result = _normalize_prompt(result)
+    result = normalize_subject_to_girl(result)
+    result = strip_person_demographic_descriptors(result)
+    if composition_mode:
+        result = normalize_composition_punctuation(result)
+    return result
+
+
 def build_prompt_text(
     template,
     composition_mode,
@@ -725,6 +745,8 @@ def build_prompt_text(
     return_debug=False,
     template_entries_fn: Callable[[str], list[dict]] | None = None,
     producer_context=None,
+    *,
+    audit_sink=None,
 ):
     logger.info(f"--- PromptAssembly Build Start (Seed: {seed}) ---")
     logger.debug(f"Generation Mode: {DEFAULT_GENERATION_MODE}")
@@ -762,6 +784,14 @@ def build_prompt_text(
     is_consistent = _make_consistency_checker(rules, context_vals)
     recent_templates = {str(item) for item in (recent_templates or []) if item}
     selected_template_key = ""
+    bridge_snapshot = None
+    common_evidence_inputs = None
+    common_evidence = None
+    common_evidence_error = None
+
+    def collect_bridge(snapshot):
+        nonlocal bridge_snapshot
+        bridge_snapshot = snapshot
 
     loc = _expand_location_key_for_builder(loc, rng, context_vals, is_consistent, solo_prompt_context=solo_prompt_context)
     context_vals = [subj, costume, loc, action, garnish, meta_mood, staging_tags]
@@ -859,16 +889,41 @@ def build_prompt_text(
             syntax_family=syntax_family,
         )
         template, realizer_debug = realize_content_plan(content_plan, return_debug=True)
-        from pipeline.v2_candidate_bridge import render_candidate
+        if __package__:
+            from .pipeline.v2_candidate_bridge import render_candidate
+        else:
+            from pipeline.v2_candidate_bridge import render_candidate
         replacements = [
             ("{subject_clause}", subject_clause), ("{action_clause}", action_clause),
             ("{scene_clause}", scene_clause), ("{scene_anchor_clause}", scene_anchor_clause),
             ("{subj}", subj), ("{costume}", costume), ("{loc}", loc), ("{action}", action),
             ("{garnish}", garnish), ("{meta_mood}", meta_mood), ("{meta_style}", ""),
         ]
+        if audit_sink is not None or isinstance((producer_context or {}).get('context'), dict):
+            if __package__:
+                from .pipeline.realization_evidence import build_realization_evidence, evidence_to_dict
+            else:
+                from pipeline.realization_evidence import build_realization_evidence, evidence_to_dict
+            common_evidence_inputs = {
+                'context': (producer_context or {}).get('context'),
+                'subject': subj, 'clothing': costume, 'scene': loc, 'action': action,
+                'garnish': garnish, 'mood': meta_mood, 'staging_tags': staging_tags,
+                'action_frame': action_frame, 'seed': seed,
+                'composition_mode': bool(composition_mode),
+                'character_palette': (producer_context or {}).get('character_palette'),
+                'selected_templates': {'intro': intro_entry, 'body': body_entry, 'end': end_entry},
+                'template_slots': {'subject': p_intro, 'adjunct': p_body, 'scene': p_end},
+            }
+            if audit_sink is not None:
+                try:
+                    common_evidence = evidence_to_dict(build_realization_evidence(common_evidence_inputs))
+                except (TypeError, ValueError):
+                    common_evidence_error = 'invalid_inputs'
         template, content_plan, realizer_debug = render_candidate(
             content_plan, template, realizer_debug, action_frame, action_surface, replacements, seed,
             producer_context=producer_context,
+            common_inputs=common_evidence_inputs,
+            audit_sink=collect_bridge if audit_sink is not None else None,
         )
         selected_template_key = f"{intro_entry['key']}||{body_entry['key']}||{end_entry['key']}"
         logger.debug(f"Composed Template: {template}")
@@ -888,31 +943,21 @@ def build_prompt_text(
                 template = rng.choice(non_recent or lines)
         selected_template_key = str(template)
 
-    result = template
-    result = result.replace("{subject_clause}", subject_clause)
-    result = result.replace("{action_clause}", action_clause)
-    result = result.replace("{scene_clause}", scene_clause)
-    result = result.replace("{scene_anchor_clause}", scene_anchor_clause)
-    result = result.replace("{subj}", str(subj) if subj is not None else "")
-    result = result.replace("{costume}", str(costume) if costume is not None else "")
-    result = result.replace("{loc}", str(loc) if loc is not None else "")
-    result = result.replace("{action}", str(action) if action is not None else "")
-    result = result.replace("{garnish}", str(garnish) if garnish is not None else "")
-    result = result.replace("{meta_mood}", str(meta_mood) if meta_mood is not None else "")
-    result = result.replace("{meta_style}", "")
-
-    if staging_tags and isinstance(staging_tags, str) and staging_tags.strip():
-        result = _append_staging_tags(result, staging_tags)
-    else:
-        result = result.replace("{staging_tags}", "")
-
-    result = _prune_redundant_prompt_fillers(result)
-    result = _prune_action_incompatible_fillers(result, action)
-    result = _normalize_prompt(result)
-    result = normalize_subject_to_girl(result)
-    result = strip_person_demographic_descriptors(result)
-    if composition_mode:
-        result = normalize_composition_punctuation(result)
+    replacements = [
+        ("{subject_clause}", subject_clause), ("{action_clause}", action_clause),
+        ("{scene_clause}", scene_clause), ("{scene_anchor_clause}", scene_anchor_clause),
+        ("{subj}", subj), ("{costume}", costume), ("{loc}", loc), ("{action}", action),
+        ("{garnish}", garnish), ("{meta_mood}", meta_mood), ("{meta_style}", ""),
+    ]
+    finalization = dict(replacements=replacements, staging_tags=staging_tags,
+                        action=action, composition_mode=bool(composition_mode))
+    result = _finalize_prompt(template, **finalization)
+    if audit_sink is not None:
+        audit_sink(json.loads(json.dumps(deepcopy({
+            'bridge': bridge_snapshot, 'finalization': finalization, 'raw_prompt': result,
+            'common_evidence_inputs': common_evidence_inputs, 'common_evidence': common_evidence,
+            'common_evidence_error': common_evidence_error,
+        }))))
     logger.info(f"Final Prompt: {result}")
     if return_debug:
         debug_payload = {

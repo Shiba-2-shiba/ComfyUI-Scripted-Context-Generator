@@ -11,3 +11,11 @@ assets/fixtures/n27_r42_real_cases.json -text whitespace=cr-at-eol
 assets/fixtures/n27_r4_action_trace_cases.json -text whitespace=cr-at-eol
 assets/fixtures/n27_r4_productive_cases.json -text whitespace=cr-at-eol
 pipeline/v2_leaf_grammar.py -text whitespace=cr-at-eol
+
+# Preserve R43 fixture and receipt bytes bound by development verification.
+assets/fixtures/r43_coverage_as01_pair.json -text whitespace=cr-at-eol
+assets/fixtures/r43_ordinary_real_cases.json -text whitespace=cr-at-eol
+assets/fixtures/r43_real_graph_cases.json -text whitespace=cr-at-eol
+docs/diversity_refactor/*_summary.json -text whitespace=cr-at-eol
+docs/diversity_refactor/r43_development_review.json -text whitespace=cr-at-eol
+docs/diversity_refactor/progress.md -text whitespace=cr-at-eol

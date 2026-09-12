@@ -219,11 +219,45 @@ def _initial_word(text: str, *, capitalize: bool = False) -> str:
     return (first.capitalize() if capitalize else first.lower()) + separator + rest
 
 
+def _render_family_surface(
+    plan: ContentPlan, *, action_surface: Mapping[str, Any], scene_is_finite: bool = False,
+    subject_parenthetical: bool = False,
+) -> str:
+    """Format already authorized family clauses without making policy decisions."""
+    subject, action, scene = (normalize_action_phrase(plan.semantic_slots[key]) for key in ("subject", "adjunct", "scene"))
+    predicate = _initial_word(action)
+    if action_surface.get("surface") == "gerund":
+        predicate = "is " + predicate
+    if plan.syntax_family == "subject_action__scene_tail":
+        if scene_is_finite:
+            scene_sentence = _initial_word(scene, capitalize=True)
+        else:
+            scene_sentence = f"The scene is set {_initial_word(scene)}"
+        text = f"{_initial_word(subject, capitalize=True)} {predicate}. {scene_sentence}."
+    elif plan.syntax_family == "scene_lead_subject_action":
+        text = f"{_initial_word(scene, capitalize=True)}, {_initial_word(subject)} {predicate}."
+    elif plan.syntax_family == "action_lead_subject_scene":
+        if subject_parenthetical:
+            subject += ','
+        text = f"{_initial_word(action, capitalize=True)}, {_initial_word(subject)} is {_initial_word(scene)}."
+    elif plan.syntax_family == "subject_scene_action":
+        text = f"{_initial_word(subject, capitalize=True)}, {_initial_word(scene)}, {predicate}."
+    elif plan.syntax_family == "subject_action_scene_insert":
+        text = f"{_initial_word(subject, capitalize=True)} {predicate}, {_initial_word(scene)}."
+    else:
+        text = f"{_initial_word(subject, capitalize=True)} {predicate} {_initial_word(scene)}."
+    # The shared normalizer trims terminal punctuation; this lower-level
+    # realizer, like v1, returns a complete sentence before final prompt cleanup.
+    return normalize_composition_punctuation(text) + "."
+
+
 def realize_content_plan(
     plan: ContentPlan, *, action_frame: ActionFrame | Mapping[str, Any] | None = None,
     action_surface: Mapping[str, Any] | None = None, return_debug: bool = False,
     direct_provenance: Mapping[str, Any] | None = None,
     structural_evidence=None,
+    realization_evidence=None, builder_inputs=None, family_proof=None,
+    producer_context=None, catalog=None,
 ) -> str | tuple[str, dict[str, Any]]:
     """Realize explicit candidate families; legacy family calls stay byte-stable.
 
@@ -232,6 +266,16 @@ def realize_content_plan(
     remain v1. Baseline eligibility alone cannot authorize new grammar. The
     family determines output clause order; incoming v2 plans must retain all roles.
     """
+    if any(value is not None for value in (realization_evidence, builder_inputs, family_proof)):
+        if any(value is not None for value in (action_frame, action_surface, direct_provenance, structural_evidence)):
+            raise ValueError("Cannot mix common and legacy realization evidence")
+        from .family_capabilities import realize_common_plan
+
+        return realize_common_plan(
+            plan, realization_evidence, builder_inputs=builder_inputs,
+            producer_context=producer_context, catalog=catalog,
+            proof=family_proof, return_debug=return_debug,
+        )
     requested = plan.syntax_family
     if requested in _LEGACY_SYNTAX_FAMILIES or (action_frame is None and action_surface is None):
         text = _realize_content_plan_v1(plan)
@@ -273,30 +317,15 @@ def realize_content_plan(
         reason = ('family_ineligible' if eligibility['direct_provenance_valid'] else
                   "unsafe_for_v2" if facts["frame_predicate_safe"] is not True else "scene_action_overlap")
     else:
-        subject, action, scene = (normalize_action_phrase(plan.semantic_slots[key]) for key in ("subject", "adjunct", "scene"))
-        predicate = _initial_word(action)
-        if surface.get("surface") == "gerund":
-            predicate = "is " + predicate
-        if selected == "subject_action__scene_tail":
-            if (eligibility['direct_provenance_valid']
-                    and scene_template_kind(direct_provenance['slots']) == 'owned_finite'):
-                scene_sentence = _initial_word(scene, capitalize=True)
-            else:
-                scene_sentence = f"The scene is set {_initial_word(scene)}"
-            text = f"{_initial_word(subject, capitalize=True)} {predicate}. {scene_sentence}."
-        elif selected == "scene_lead_subject_action":
-            text = f"{_initial_word(scene, capitalize=True)}, {_initial_word(subject)} {predicate}."
-        elif selected == "action_lead_subject_scene":
-            text = f"{_initial_word(action, capitalize=True)}, {_initial_word(subject)} is {_initial_word(scene)}."
-        elif selected == "subject_scene_action":
-            text = f"{_initial_word(subject, capitalize=True)}, {_initial_word(scene)}, {predicate}."
-        elif selected == "subject_action_scene_insert":
-            text = f"{_initial_word(subject, capitalize=True)} {predicate}, {_initial_word(scene)}."
-        else:
-            text = f"{_initial_word(subject, capitalize=True)} {predicate} {_initial_word(scene)}."
-        # The shared normalizer trims terminal punctuation; this lower-level
-        # realizer, like v1, returns a complete sentence before final prompt cleanup.
-        text = normalize_composition_punctuation(text) + "."
+        scene_is_finite = (
+            selected == "subject_action__scene_tail"
+            and eligibility['direct_provenance_valid']
+            and scene_template_kind(direct_provenance['slots']) == 'owned_finite'
+        )
+        text = _render_family_surface(
+            replace(plan, syntax_family=selected), action_surface=surface,
+            scene_is_finite=scene_is_finite,
+        )
         version = "v2"
     if not return_debug:
         return text

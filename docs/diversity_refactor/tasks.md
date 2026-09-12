@@ -4,6 +4,76 @@
 関連仕様: [`docs/diversity_refactor/spec.md`](./spec.md)
 進捗正本: [`docs/diversity_refactor/progress.md`](./progress.md)
 
+## N2.7-R4.3 implementation sequence
+
+Execution contract: [R4.3 implementation plan](./r43_implementation_plan.md).
+Keep one active task and satisfy its acceptance before starting the next.
+This sequence is distinct from the final documentation task named R4.3 below.
+
+- [x] R43-00 Intake/source preservation — PASS, 2026-09-11;
+  [report](./r43_intake.md), [receipt inventory](./r43_intake_summary.json).
+  No runtime changes. Fresh focused result:151 passed,1 known alias failure,
+  1,888 subtests;29 related regressions passed. Adoption remains BLOCKED.
+- [x] R43-01 Import and metadata contracts — PASS, 2026-09-11;
+  [result](./r43_import_plan.md), [receipts](./r43_import_summary.json).
+  No exclusions:175 focused tests/1,888 subtests;87 regression tests/33 subtests.
+  Paired512 and package replay match baseline; public I/O/mapping/V150 unchanged.
+- [x] R43-02 Reachability audit and candidate07 parity — PASS, 2026-09-11;
+  [result](./r43_audit_plan.md), [receipts](./r43_audit_summary.json).
+  Fixed512 x6 measured; ordinary9 v2 cases/3 families,17 forced constructors,
+  9 exact output matches/8 changed outputs with unknown semantics. Paired/repeat
+  parity passes;202 focused tests/1,922 subtests and87 regressions/33 subtests pass.
+- [x] R43-03 Common runtime evidence and input binding — PASS, 2026-09-11;
+  [result](./r43_evidence_plan.md), [receipts](./r43_evidence_summary.json).
+  Immutable tri-state types, exact Action/legacy adapters and reconstruction-based
+  binding validation.236 focused tests/1,931 subtests;87 regressions/33 subtests.
+  All512 ordinary records unchanged; typed evidence matches across processes,
+  import modes, execution order/hashseeds and a separate snapshot. No new permission.
+- [x] R43-04 Clothing trace/reconstruction — PASS, 2026-09-11;
+  [result](./r43_clothing_plan.md), [receipts](./r43_clothing_summary.json).
+  Shared renderer trace and selected-attempt capture;102/512 runtime-available
+  history-bound proofs,512 audit-only exact replays, no new family permission.
+  259 focused tests/1,963 subtests;87 regressions/33 subtests; paired512 unchanged.
+- [x] R43-05 Scene trace/reconstruction — PASS, 2026-09-11;
+  [result](./r43_scene_plan.md), [receipts](./r43_scene_summary.json).
+  Source/default/raw hashes and shuffle/dedupe trace;10/512 runtime-bound proofs,
+  512 audit-only exact replays, known gallery/reference ownership.278 focused
+  tests/1,963 subtests;87 regressions/33 subtests; paired512 unchanged.
+- [x] R43-06 Template/Subject/Garnish/Mood adapters — PASS, 2026-09-12;
+  [result](./r43_support_plan.md), [receipts](./r43_support_summary.json).
+  All seven common components diagnosed from current Builder inputs; source and
+  grammar remain separate.299 focused tests/1,963 subtests;87 regressions/33 subtests;
+  paired512 unchanged, fresh root/package evidence identical. No new permission.
+- [x] R43-07 Family-specific proof and constructors — PASS, 2026-09-12;
+  [result](./r43_family_plan.md), [receipts](./r43_family_summary.json).
+  One common authority, six bound constructors and opt-in adapters;348 focused
+  tests/1,963 subtests,87 regressions/33 subtests pass. Ordinary512 unchanged.
+  Recombination6-family PASS; common real-graph eligible0/512, recorded separately.
+- [x] R43-08 Integration and real-graph six-family evidence — PASS, 2026-09-12;
+  [ordinary expansion](./r43_ordinary_plan.md), [receipts](./r43_ordinary_summary.json).
+  Ordinary v2 9→10/512; old9 successes/502 remaining fallbacks and selected facts
+  preserved. All6 real-graph families forced (15 rows);423 focused/87 regression
+  tests pass. Ordinary execution remains3 families; formal adoption BLOCKED.
+- [x] R43-09 Development verification and separate architecture/development verdicts — PASS, 2026-09-12;
+  [portable CLI/result](./r43_verification_plan.md), [receipts](./r43_verification_summary.json).
+  Architecture/development PASS;492 focused/87 regression tests; clean-source full
+  intake is canonical-byte-identical. Ordinary10/512,3 families,all6 real forced.
+  Guide unmet and formal evidence pending; adoption-preflight/adoption BLOCKED.
+- [x] R43-10 Conditional formal evaluation handoff — prepared, 2026-09-12;
+  [handoff and complete obligations](./r43_handoff.md), [integrity receipts](./r43_handoff_summary.json).
+  Original sealed1120 files and historical formal/paired/fixed80 evidence verified;
+  source/config/measurement comparability recorded. Actual formal handoff/adoption
+  BLOCKED (guide unmet; candidate formal NOT_RUN). No evaluation freeze/main/N2.8.
+
+- [x] Post-R43 coverage AS01 — [bounded Action+Scene extension](./coverage_as01_plan.md),
+  [receipts](./coverage_as01_summary.json). Ordinary10→11/512; previous10 successes
+  and501 fallbacks preserved.534 focused/87 regression tests; portable intake PASS.
+  All6 real forced families retained; formal evaluation/adoption remain BLOCKED.
+
+Next bounded follow-up: further Action+Scene coverage from remaining intersections,
+preserving this eleven-case checkpoint. Keep locked thresholds and semantic
+selection; no automatic heavy formal evaluation.
+
 ---
 
 ## 0. Common Instructions for Codex

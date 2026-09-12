@@ -21,7 +21,7 @@ from core.schema import ActionFrame, PromptContext  # noqa: E402
 from core.semantic_policy import find_banned_terms  # noqa: E402
 from core.solo_safety import is_solo_safe_text  # noqa: E402
 from pipeline.prompt_orchestrator import build_prompt_from_context, build_prompt_text  # noqa: E402
-from pipeline.prompt_realizer import build_content_plan, realize_content_plan  # noqa: E402
+from pipeline.prompt_realizer import build_content_plan, realize_content_plan, select_syntax_family  # noqa: E402
 from tools.effective_diversity_signatures import build_semantic_signatures  # noqa: E402
 from tools.workflow_prompt_runner import canonical_json_bytes  # noqa: E402
 
@@ -403,8 +403,35 @@ class TestRealizerV2RemainingSyntax(FactAssertions):
 
 class TestRealizerBuilderDebug(unittest.TestCase):
     def test_actual_v1_family_metadata_and_seed_replay(self):
+        expected_text = {
+            "single-sentence-scene-tail": "A solo girl, checking a transit card, in the station platform.",
+            "two-sentence-scene-tail": "A solo girl, checking a transit card. The scene is set in the station platform.",
+        }
+        observed = set()
+        for seed in range(16):
+            family = select_syntax_family(seed)
+            plan = build_content_plan(
+                seed=seed, subject_clause="A solo girl", action_clause="checking a transit card",
+                scene_clause="in the station platform", action_frame=None, syntax_family=family,
+            )
+            before = copy.deepcopy(plan.to_dict())
+            text, debug = realize_content_plan(plan, return_debug=True)
+            self.assertEqual((text, debug), realize_content_plan(plan, return_debug=True))
+            self.assertEqual(text, expected_text[family])
+            self.assertEqual(debug, {
+                "realizer_version": "v1", "syntax_family": family,
+                "eligible_syntax_families": ["single-sentence-scene-tail", "two-sentence-scene-tail"],
+                "syntax_fallback_reason": "", "clause_order": ["subject", "action", "scene"],
+            })
+            self.assertEqual(plan.to_dict(), before)
+            observed.add(family)
+        self.assertEqual(observed, set(expected_text))
+
+    def test_builder_fallback_maps_v1_metadata_and_preserves_seed_replay(self):
         context = patch_context({}, updates={"subj": "a solo girl", "loc": "station platform", "action": "checking a transit card"})
         before = copy.deepcopy(context.to_dict())
+        mapped = {"single-sentence-scene-tail": "subject_action_scene",
+                  "two-sentence-scene-tail": "subject_action__scene_tail"}
         observed = set()
         for seed in range(16):
             updated, prompt = build_prompt_from_context(context, "", True, seed)
@@ -413,14 +440,17 @@ class TestRealizerBuilderDebug(unittest.TestCase):
             self.assertEqual(prompt, repeated_prompt)
             self.assertEqual(canonical_json_bytes(updated.to_dict()), canonical_json_bytes(repeated.to_dict()))
             self.assertEqual(decision["realizer_version"], "v1")
-            self.assertEqual(decision["eligible_syntax_families"], ["single-sentence-scene-tail", "two-sentence-scene-tail"])
+            self.assertEqual(decision["eligible_syntax_families"], list(mapped.values()))
+            self.assertIs(decision["candidate_v2_applied"], False)
+            self.assertEqual(decision["fallback_origin_syntax_family"], select_syntax_family(seed))
+            self.assertEqual(decision["syntax_family"], mapped[decision["fallback_origin_syntax_family"]])
             self.assertEqual(decision["syntax_family"], decision["content_plan"]["syntax_family"])
-            self.assertEqual(decision["syntax_fallback_reason"], "")
+            self.assertEqual(decision["syntax_fallback_reason"], "candidate_ineligible_preserve_v1")
             self.assertEqual(decision["clause_order"], ["subject", "action", "scene"])
             for key in ("template_key", "intro_key", "body_key", "end_key"):
                 self.assertTrue(decision[key])
             observed.add(decision["syntax_family"])
-        self.assertEqual(observed, {"single-sentence-scene-tail", "two-sentence-scene-tail"})
+        self.assertEqual(observed, set(mapped.values()))
         self.assertEqual(context.to_dict(), before)
 
     def test_legacy_template_reports_unknown_structure_without_parsing_its_sentences(self):

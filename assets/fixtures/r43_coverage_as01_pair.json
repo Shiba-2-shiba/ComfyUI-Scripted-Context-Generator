@@ -1,0 +1,1267 @@
+{
+  "builder_context": {
+    "action": "turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up",
+    "context_version": "2.0",
+    "costume": "street_casual",
+    "extras": {
+      "action_frame": {
+        "gaze_target": "looking toward the next thing she needs",
+        "hand_action": "turning toward the center of attention with composure",
+        "legacy_slots": {
+          "anchor": "",
+          "daily_life_tags": [
+            "leisure"
+          ],
+          "gaze_target": "looking toward the next thing she needs",
+          "hand_action": "turning toward the center of attention with composure",
+          "location": "recording_studio",
+          "obstacle_clause": "",
+          "obstacle_or_trigger": "",
+          "optional_micro_action": "mentally lining up the next task",
+          "posture": "leaning in with quiet purpose",
+          "primary_action": "turning toward the center of attention with composure",
+          "progress_clause": "before fully getting started",
+          "progress_state": "preparing",
+          "purpose": "work",
+          "purpose_clause": "clicking pen",
+          "social_clause": "as if responding directly to the viewer",
+          "social_distance": "viewer",
+          "time_or_weather": "as the session wraps up"
+        },
+        "legacy_text": "turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up",
+        "main_verb": "turning",
+        "posture": "leaning in with quiet purpose",
+        "primary_object": "",
+        "progress": "preparing",
+        "schema_version": "action-frame/v1",
+        "social_relation": "viewer",
+        "stimulus_or_obstacle": ""
+      },
+      "character_id": "jasmine_dancer",
+      "character_name": "Jasmine (Dancer)",
+      "character_palette_str": "gold, teal, red",
+      "clothing_prompt": "soft gray fleece warm turtleneck sweater dress, with ribbed texture",
+      "color_palette": [
+        "gold",
+        "teal",
+        "red"
+      ],
+      "eye_color": "brown",
+      "garnish": "brows knit in concentration, steady gaze, hands kept precise and controlled",
+      "hair_color": "black",
+      "location_prompt": "professional soundproof recording booth, featuring geometric sound isolation pads on wall, quiet focused atmosphere, lived-in atmosphere",
+      "personality": "passionate",
+      "raw_costume_key": "street_casual",
+      "raw_loc_tag": "recording_studio",
+      "raw_mood_key": "quiet_focused",
+      "source_subj_key": "florist",
+      "staging_tags": "settled concentration, measured pause"
+    },
+    "history": [
+      {
+        "decision": {
+          "action": "placing fresh stems in a shaded bucket",
+          "action_frame": {
+            "gaze_target": "looking toward the next thing she needs",
+            "hand_action": "turning toward the center of attention with composure",
+            "legacy_slots": {
+              "anchor": "",
+              "daily_life_tags": [
+                "leisure"
+              ],
+              "gaze_target": "looking toward the next thing she needs",
+              "hand_action": "turning toward the center of attention with composure",
+              "location": "recording_studio",
+              "obstacle_clause": "",
+              "obstacle_or_trigger": "",
+              "optional_micro_action": "mentally lining up the next task",
+              "posture": "leaning in with quiet purpose",
+              "primary_action": "turning toward the center of attention with composure",
+              "progress_clause": "before fully getting started",
+              "progress_state": "preparing",
+              "purpose": "work",
+              "purpose_clause": "clicking pen",
+              "social_clause": "as if responding directly to the viewer",
+              "social_distance": "viewer",
+              "time_or_weather": "as the session wraps up"
+            },
+            "legacy_text": "turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up",
+            "main_verb": "turning",
+            "posture": "leaning in with quiet purpose",
+            "primary_object": "",
+            "progress": "preparing",
+            "schema_version": "action-frame/v1",
+            "social_relation": "viewer",
+            "stimulus_or_obstacle": ""
+          },
+          "action_frame_source": "generated_slots",
+          "action_load": "calm",
+          "action_pool_dominant_objects": [],
+          "action_pool_object_hits": {
+            "microphone": 2
+          },
+          "action_pool_size": 16,
+          "action_refresh_reason": "location_changed",
+          "action_updated": true,
+          "base_action": "turning toward the center of attention with composure",
+          "candidate_source_counts": {
+            "daily_life": 42,
+            "existing": 1,
+            "tag": 51,
+            "universal": 3
+          },
+          "candidate_weight_profile": {
+            "daily_life": 45.9,
+            "existing": 11.0,
+            "tag": 36.75,
+            "universal": 51.0
+          },
+          "candidates_count": 97,
+          "candidates_preview": [
+            "flower_market (existing)",
+            "convenience_store (tag:retail_service)",
+            "bakery_shop (tag:retail_service)",
+            "supermarket_aisle (tag:retail_service)",
+            "drugstore_aisle (tag:retail_service)",
+            "family_restaurant (tag:retail_service)",
+            "food_court (tag:retail_service)",
+            "shopping_mall_atrium (tag:retail_service)",
+            "fashion_boutique (tag:retail_service)",
+            "shopping_arcade (tag:retail_service)",
+            "local_market_street (tag:retail_service)",
+            "street_cafe (tag:retail_service)",
+            "cozy_bookstore (tag:retail_service)",
+            "antique_shop (tag:retail_service)",
+            "greenhouse_nursery (tag:retail_service)",
+            "postal_service_counter (tag:retail_service)",
+            "print_shop (tag:retail_service)",
+            "commuter_transport (tag:daily_public)",
+            "picnic_park (tag:daily_public)",
+            "school_library (tag:daily_public)",
+            "winter_street (tag:daily_public)",
+            "illuminated_park (tag:daily_public)",
+            "rainy_bus_stop (tag:daily_public)",
+            "suburban_neighborhood (tag:daily_public)"
+          ],
+          "candidates_preview_total_count": 97,
+          "candidates_preview_truncated_count": 73,
+          "compat_subject_key": "florist",
+          "compatible_unique_count": 55,
+          "generator_mode": "pool",
+          "mode": "full",
+          "new_action": "turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up",
+          "normalized_action": "turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up",
+          "object_focus": {
+            "classifications": {},
+            "detected_objects": [],
+            "slot_map": {}
+          },
+          "pool_slots": {
+            "hand_action": "turning toward the center of attention with composure",
+            "location": "recording_studio",
+            "primary_action": "turning toward the center of attention with composure",
+            "purpose": "work"
+          },
+          "selected_loc": "recording_studio",
+          "selected_source": "daily_life",
+          "semantic_epig": {
+            "action": {
+              "baseline_candidate": "",
+              "changed_slots": [],
+              "mode": "active",
+              "selected_by_semantic": true,
+              "selected_candidate_rank": null,
+              "selection_changed_by_semantic": false,
+              "semantic_candidate": "",
+              "semantic_scoring_enabled": true,
+              "semantic_top_candidate": "",
+              "slot_changes": {
+                "gaze_target": {
+                  "baseline": "looking toward the next thing she needs",
+                  "changed": false,
+                  "selected_candidate_rank": 4,
+                  "semantic": "looking toward the next thing she needs",
+                  "semantic_top_candidate": "eyes fixed on what needs to happen next"
+                },
+                "hand_action": {
+                  "baseline": "turning toward the center of attention with composure",
+                  "changed": false,
+                  "selected_candidate_rank": null,
+                  "semantic": "turning toward the center of attention with composure",
+                  "semantic_top_candidate": "hands staying precise and controlled"
+                },
+                "optional_micro_action": {
+                  "baseline": "mentally lining up the next task",
+                  "changed": false,
+                  "selected_candidate_rank": 1,
+                  "semantic": "mentally lining up the next task",
+                  "semantic_top_candidate": "mentally lining up the next task"
+                },
+                "posture": {
+                  "baseline": "leaning in with quiet purpose",
+                  "changed": false,
+                  "selected_candidate_rank": 3,
+                  "semantic": "leaning in with quiet purpose",
+                  "semantic_top_candidate": "keeping an upright working posture"
+                },
+                "progress_clause": {
+                  "baseline": "before fully getting started",
+                  "changed": false,
+                  "selected_candidate_rank": 2,
+                  "semantic": "before fully getting started",
+                  "semantic_top_candidate": "as she gets herself ready"
+                },
+                "purpose_clause": {
+                  "baseline": "clicking pen",
+                  "changed": false,
+                  "selected_candidate_rank": 1,
+                  "semantic": "clicking pen",
+                  "semantic_top_candidate": "clicking pen"
+                },
+                "social_clause": {
+                  "baseline": "as if responding directly to the viewer",
+                  "changed": false,
+                  "selected_candidate_rank": 1,
+                  "semantic": "as if responding directly to the viewer",
+                  "semantic_top_candidate": "as if responding directly to the viewer"
+                },
+                "time_or_weather": {
+                  "baseline": "as the session wraps up",
+                  "changed": false,
+                  "selected_candidate_rank": 1,
+                  "semantic": "as the session wraps up",
+                  "semantic_top_candidate": "as the session wraps up"
+                }
+              },
+              "slot_rankings": {
+                "gaze_target": [
+                  {
+                    "distance": 0.0554,
+                    "role": "gaze_target",
+                    "score": 0.8952,
+                    "source": "action_slot_descriptors:gaze_target[1]",
+                    "text": "eyes fixed on what needs to happen next"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "gaze_target",
+                    "score": 0.7207,
+                    "source": "runtime:gaze_target[2]",
+                    "text": "checking what is happening nearby"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "gaze_target",
+                    "score": 0.7207,
+                    "source": "runtime:gaze_target[1]",
+                    "text": "looking between the task and the space around it"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "gaze_target",
+                    "score": 0.7207,
+                    "source": "runtime:gaze_target[3]",
+                    "text": "looking toward the next thing she needs"
+                  }
+                ],
+                "hand_action": [
+                  {
+                    "distance": 0.1353,
+                    "role": "hand_action",
+                    "score": 0.7629,
+                    "source": "action_slot_descriptors:hand_action[1]",
+                    "text": "hands staying precise and controlled"
+                  },
+                  {
+                    "distance": 0.1604,
+                    "role": "hand_action",
+                    "score": 0.7255,
+                    "source": "action_slot_descriptors:hand_action[5]",
+                    "text": "fingers poised over the keyboard"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "hand_action",
+                    "score": 0.7207,
+                    "source": "runtime:hand_action[1]",
+                    "text": "fingers gathering what she needs next"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "hand_action",
+                    "score": 0.7207,
+                    "source": "runtime:hand_action[0]",
+                    "text": "one hand already reaching for the next task"
+                  }
+                ],
+                "optional_micro_action": [
+                  {
+                    "distance": 0.1638,
+                    "role": "optional_micro_action",
+                    "score": 0.7207,
+                    "source": "runtime:optional_micro_action[0]",
+                    "text": "mentally lining up the next task"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "optional_micro_action",
+                    "score": 0.7207,
+                    "source": "runtime:optional_micro_action[2]",
+                    "text": "moving on only after one more check"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "optional_micro_action",
+                    "score": 0.7207,
+                    "source": "runtime:optional_micro_action[1]",
+                    "text": "pausing to reassess one detail"
+                  }
+                ],
+                "posture": [
+                  {
+                    "distance": 0.0436,
+                    "role": "posture",
+                    "score": 0.9165,
+                    "source": "action_slot_descriptors:posture[1]",
+                    "text": "keeping an upright working posture"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "posture",
+                    "score": 0.7207,
+                    "source": "runtime:posture[2]",
+                    "text": "holding herself steady while she works"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "posture",
+                    "score": 0.7207,
+                    "source": "runtime:posture[1]",
+                    "text": "leaning in with quiet purpose"
+                  }
+                ],
+                "progress_clause": [
+                  {
+                    "distance": 0.1638,
+                    "role": "progress_clause",
+                    "score": 0.7207,
+                    "source": "runtime:progress_clause[1]",
+                    "text": "as she gets herself ready"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "progress_clause",
+                    "score": 0.7207,
+                    "source": "runtime:progress_clause[0]",
+                    "text": "before fully getting started"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "progress_clause",
+                    "score": 0.7207,
+                    "source": "runtime:progress_clause[2]",
+                    "text": "while setting up the next step"
+                  }
+                ],
+                "purpose_clause": [
+                  {
+                    "distance": 0.1638,
+                    "role": "purpose_clause",
+                    "score": 0.7207,
+                    "source": "runtime:purpose_clause[3]",
+                    "text": "clicking pen"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "purpose_clause",
+                    "score": 0.7207,
+                    "source": "runtime:purpose_clause[0]",
+                    "text": "mentally lining up the next task"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "purpose_clause",
+                    "score": 0.7207,
+                    "source": "runtime:purpose_clause[2]",
+                    "text": "moving on only after one more check"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "purpose_clause",
+                    "score": 0.7207,
+                    "source": "runtime:purpose_clause[1]",
+                    "text": "pausing to reassess one detail"
+                  }
+                ],
+                "social_clause": [
+                  {
+                    "distance": 0.1638,
+                    "role": "social_clause",
+                    "score": 0.7207,
+                    "source": "runtime:social_clause[1]",
+                    "text": "as if responding directly to the viewer"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "social_clause",
+                    "score": 0.7207,
+                    "source": "runtime:social_clause[2]",
+                    "text": "leaving room for a quiet exchange with the viewer"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "social_clause",
+                    "score": 0.7207,
+                    "source": "runtime:social_clause[0]",
+                    "text": "meeting the viewer with a quiet look"
+                  }
+                ],
+                "time_or_weather": [
+                  {
+                    "distance": 0.1638,
+                    "role": "time_or_weather",
+                    "score": 0.7207,
+                    "source": "runtime:time_or_weather[2]",
+                    "text": "as the session wraps up"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "time_or_weather",
+                    "score": 0.7207,
+                    "source": "runtime:time_or_weather[0]",
+                    "text": "before recording"
+                  },
+                  {
+                    "distance": 0.1638,
+                    "role": "time_or_weather",
+                    "score": 0.7207,
+                    "source": "runtime:time_or_weather[1]",
+                    "text": "during the current take"
+                  }
+                ]
+              },
+              "target_vector": {
+                "body_openness": 0.45,
+                "motion_energy": 0.35,
+                "object_coupling": 0.65,
+                "precision": 0.8,
+                "social_intensity": 0.35,
+                "time_pressure": 0.53
+              }
+            },
+            "object_relation": {
+              "applied_slots": {},
+              "detected_objects": [],
+              "mode": "active",
+              "relation_key": "",
+              "required_roles": {},
+              "skipped_slots": {}
+            }
+          },
+          "slot_sources": {
+            "gaze_target": "generated",
+            "hand_action": "pool",
+            "location": "pool",
+            "optional_micro_action": "generated",
+            "posture": "generated",
+            "primary_action": "pool",
+            "progress_clause": "generated",
+            "progress_state": "generated",
+            "purpose": "pool",
+            "purpose_clause": "generated",
+            "social_clause": "generated",
+            "social_distance": "generated",
+            "time_or_weather": "generated"
+          },
+          "slots": {
+            "anchor": "",
+            "daily_life_tags": [
+              "leisure"
+            ],
+            "gaze_target": "looking toward the next thing she needs",
+            "hand_action": "turning toward the center of attention with composure",
+            "location": "recording_studio",
+            "obstacle_clause": "",
+            "obstacle_or_trigger": "",
+            "optional_micro_action": "mentally lining up the next task",
+            "posture": "leaning in with quiet purpose",
+            "primary_action": "turning toward the center of attention with composure",
+            "progress_clause": "before fully getting started",
+            "progress_state": "preparing",
+            "purpose": "work",
+            "purpose_clause": "clicking pen",
+            "social_clause": "as if responding directly to the viewer",
+            "social_distance": "viewer",
+            "time_or_weather": "as the session wraps up"
+          },
+          "solo_safety_filtered_pool_count": 0
+        },
+        "node": "ContextSceneVariator",
+        "seed": 8002479797121057023,
+        "warnings": []
+      },
+      {
+        "decision": {
+          "attempt_index": 0,
+          "base_pack": "winter_knit_dress",
+          "base_variant": "warm_turtleneck_sweater_dress~soft_gray~fleece~ribbed_texture",
+          "chosen_type": "dresses",
+          "objects": [],
+          "outerwear_pack": "",
+          "outerwear_variant": "",
+          "repeat_guard_penalty": 0,
+          "semantic_epig": {
+            "clothing_tpo": {
+              "baseline_candidate": 0,
+              "baseline_selected_attempt_index": 0,
+              "candidate_score_count": 5,
+              "candidate_scores": [
+                {
+                  "attempt_index": 0,
+                  "distance": 0.0,
+                  "final_penalty": 0,
+                  "repeat_penalty": 0,
+                  "score": 1.0,
+                  "semantic_penalty": 0
+                },
+                {
+                  "attempt_index": 1,
+                  "score": 1.0
+                },
+                {
+                  "attempt_index": 2,
+                  "score": 1.0
+                },
+                {
+                  "attempt_index": 3,
+                  "score": 1.0
+                },
+                {
+                  "attempt_index": 4,
+                  "score": 1.0
+                }
+              ],
+              "mode": "active",
+              "selected_attempt_index": 0,
+              "selected_by_semantic": true,
+              "selected_candidate_rank": 0,
+              "selection_changed_by_semantic": false,
+              "semantic_candidate": 0,
+              "semantic_scoring_enabled": true,
+              "semantic_selected_attempt_index": 0,
+              "semantic_top_candidate": 0,
+              "target_vector": {
+                "activity_fit": 0.5,
+                "formality": 0.5,
+                "movement_freedom": 0.5,
+                "softness": 0.5,
+                "visual_prominence": 0.5,
+                "warmth": 0.5,
+                "weather_fit": 0.5
+              }
+            }
+          },
+          "semantic_tpo_distance": 0.0,
+          "semantic_tpo_final_penalty": 0,
+          "semantic_tpo_penalty": 0,
+          "semantic_tpo_score": 1.0,
+          "signature": "sha256:b8fd6f432257bff3e156ebedddc8322c3037c8903c21904f6a358cc07fc0aafe",
+          "theme": "street_casual"
+        },
+        "node": "ContextClothingExpander",
+        "seed": 12063750532744062283,
+        "warnings": []
+      },
+      {
+        "decision": {
+          "objects": [],
+          "pack_key": "recording_studio",
+          "selected_props": [],
+          "semantic_epig": {
+            "location_scene": {
+              "baseline_candidate": "",
+              "changed_sections": [
+                "details"
+              ],
+              "mode": "active",
+              "section_changes": {
+                "core": {
+                  "baseline": [
+                    "geometric sound isolation pads on wall"
+                  ],
+                  "changed": false,
+                  "selected_candidate_rank": 1,
+                  "semantic": [
+                    "geometric sound isolation pads on wall"
+                  ],
+                  "semantic_top_candidate": "geometric sound isolation pads on wall"
+                },
+                "details": {
+                  "baseline": "intricate background details",
+                  "changed": true,
+                  "selected_candidate_rank": 4,
+                  "semantic": "lived-in atmosphere",
+                  "semantic_top_candidate": "atmospheric perspective"
+                },
+                "environment": {
+                  "baseline": "professional soundproof recording booth",
+                  "changed": false,
+                  "selected_candidate_rank": 2,
+                  "semantic": "professional soundproof recording booth",
+                  "semantic_top_candidate": "high-tech mixing room"
+                },
+                "fx": {
+                  "baseline": "quiet focused atmosphere",
+                  "changed": false,
+                  "selected_candidate_rank": 1,
+                  "semantic": "quiet focused atmosphere",
+                  "semantic_top_candidate": "quiet focused atmosphere"
+                }
+              },
+              "segment_ranking_counts": {
+                "core": 1,
+                "details": 4,
+                "environment": 2,
+                "fx": 1,
+                "props": 3,
+                "texture": 2,
+                "time": 1
+              },
+              "segment_ranking_truncated_counts": {
+                "core": 0,
+                "details": 1,
+                "environment": 0,
+                "fx": 0,
+                "props": 0,
+                "texture": 0,
+                "time": 0
+              },
+              "segment_rankings": {
+                "core": [
+                  {
+                    "distance": 0.025,
+                    "role": "core",
+                    "score": 0.9512,
+                    "source": "runtime:core[0]",
+                    "text": "geometric sound isolation pads on wall"
+                  }
+                ],
+                "details": [
+                  {
+                    "distance": 0.025,
+                    "role": "details",
+                    "score": 0.9512,
+                    "source": "runtime:details[3]",
+                    "text": "atmospheric perspective"
+                  },
+                  {
+                    "distance": 0.025,
+                    "role": "details",
+                    "score": 0.9512,
+                    "source": "runtime:details[1]",
+                    "text": "intricate background details"
+                  },
+                  {
+                    "distance": 0.025,
+                    "role": "details",
+                    "score": 0.9512,
+                    "source": "runtime:details[2]",
+                    "text": "layered background depth"
+                  }
+                ],
+                "environment": [
+                  {
+                    "distance": 0.025,
+                    "role": "environment",
+                    "score": 0.9512,
+                    "source": "runtime:environment[1]",
+                    "text": "high-tech mixing room"
+                  },
+                  {
+                    "distance": 0.025,
+                    "role": "environment",
+                    "score": 0.9512,
+                    "source": "runtime:environment[0]",
+                    "text": "professional soundproof recording booth"
+                  }
+                ],
+                "fx": [
+                  {
+                    "distance": 0.025,
+                    "role": "fx",
+                    "score": 0.9512,
+                    "source": "runtime:fx[0]",
+                    "text": "quiet focused atmosphere"
+                  }
+                ],
+                "props": [
+                  {
+                    "distance": 0.025,
+                    "role": "props",
+                    "score": 0.9512,
+                    "source": "runtime:props[0]",
+                    "text": "circular pop filters"
+                  },
+                  {
+                    "distance": 0.025,
+                    "role": "props",
+                    "score": 0.9512,
+                    "source": "runtime:props[1]",
+                    "text": "professional studio headphones"
+                  },
+                  {
+                    "distance": 0.025,
+                    "role": "props",
+                    "score": 0.9512,
+                    "source": "runtime:props[2]",
+                    "text": "tangled audio cables"
+                  }
+                ],
+                "texture": [
+                  {
+                    "distance": 0.025,
+                    "role": "texture",
+                    "score": 0.9512,
+                    "source": "runtime:texture[0]",
+                    "text": "grey acoustic foam"
+                  },
+                  {
+                    "distance": 0.025,
+                    "role": "texture",
+                    "score": 0.9512,
+                    "source": "runtime:texture[1]",
+                    "text": "soft carpet"
+                  }
+                ],
+                "time": [
+                  {
+                    "distance": 0.025,
+                    "role": "time",
+                    "score": 0.9512,
+                    "source": "runtime:time[0]",
+                    "text": "recording session"
+                  }
+                ]
+              },
+              "selected_by_semantic": true,
+              "selected_candidate_rank": null,
+              "selection_changed_by_semantic": true,
+              "semantic_candidate": "",
+              "semantic_scoring_enabled": true,
+              "semantic_top_candidate": "",
+              "target_vector": {
+                "activity_level": 0.45,
+                "crowd_density": 0.5,
+                "intimacy": 0.5,
+                "light_softness": 0.55,
+                "openness": 0.5,
+                "orderliness": 0.5,
+                "time_pressure": 0.5,
+                "weather_intensity": 0.5
+              }
+            }
+          },
+          "template_key": "detailed"
+        },
+        "node": "ContextLocationExpander",
+        "seed": 2616087599012920237,
+        "warnings": []
+      },
+      {
+        "decision": {
+          "action_anchors": [],
+          "action_load": "active",
+          "context_role": {
+            "costume": "street_casual",
+            "location": "recording_studio",
+            "scene_tags": {
+              "emotion_nuance": "absorbed",
+              "place_type": "public",
+              "progress": "preparing",
+              "purpose": "work",
+              "social_distance": "viewer"
+            }
+          },
+          "emotion_behavior": [
+            "steady gaze",
+            "hands kept precise and controlled"
+          ],
+          "emotion_core": "focus",
+          "emotion_expression": "brows knit in concentration",
+          "emotion_intensity": "medium",
+          "emotion_nuance_tag": "keeping every movement deliberate",
+          "emotion_role_mode": "subject_only",
+          "final_tags": [
+            "brows knit in concentration",
+            "steady gaze",
+            "hands kept precise and controlled"
+          ],
+          "generation_mode": "scene_emotion_priority",
+          "semantic_epig": {
+            "personality_behavior": {
+              "baseline_candidate": "",
+              "fallback_used": false,
+              "mode": "active",
+              "personality": "passionate",
+              "prefer_category": null,
+              "rejected_candidates": [],
+              "selected": "",
+              "selected_by_semantic": false,
+              "selected_candidate_rank": null,
+              "selection_changed_by_semantic": false,
+              "semantic_candidate": "",
+              "semantic_scoring_enabled": true,
+              "semantic_top_candidate": "",
+              "slot_rankings": {
+                "gaze": [],
+                "hands": [],
+                "posture": []
+              },
+              "subject_centric_overrides": {
+                "adoption_state": "active_candidate_selection",
+                "available_count": 0,
+                "by_slot": {},
+                "candidates": [],
+                "max_candidates_per_slot": 1,
+                "mode": "active",
+                "mode_counts": {},
+                "source": "subject_centric_descriptor_overrides.json"
+              },
+              "target_vector": {}
+            }
+          },
+          "stimulus_role": "turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up",
+          "subject_role": "context subject / character profile",
+          "target_vad": [
+            0.55,
+            0.53
+          ],
+          "target_vad_source": "legacy_mood",
+          "vad_category_distances": [
+            {
+              "category": "focus",
+              "distance": 0.08,
+              "vad": [
+                0.55,
+                0.45
+              ]
+            },
+            {
+              "category": "moved",
+              "distance": 0.1315,
+              "vad": [
+                0.68,
+                0.55
+              ]
+            },
+            {
+              "category": "playful",
+              "distance": 0.3023,
+              "vad": [
+                0.8,
+                0.7
+              ]
+            },
+            {
+              "category": "impatience",
+              "distance": 0.368,
+              "vad": [
+                0.3,
+                0.8
+              ]
+            },
+            {
+              "category": "joy",
+              "distance": 0.372,
+              "vad": [
+                0.85,
+                0.75
+              ]
+            }
+          ],
+          "vad_descriptor_rankings": {
+            "behavior": [
+              {
+                "distance": 0.08,
+                "score": 0.8521,
+                "tag": "fingers working with care",
+                "vad": [
+                  0.55,
+                  0.45
+                ]
+              },
+              {
+                "distance": 0.08,
+                "score": 0.8521,
+                "tag": "hands kept precise and controlled",
+                "vad": [
+                  0.55,
+                  0.45
+                ]
+              },
+              {
+                "distance": 0.08,
+                "score": 0.8521,
+                "tag": "ignoring the rest of the room",
+                "vad": [
+                  0.55,
+                  0.45
+                ]
+              },
+              {
+                "distance": 0.08,
+                "score": 0.8521,
+                "tag": "keeping every movement deliberate",
+                "vad": [
+                  0.55,
+                  0.45
+                ]
+              },
+              {
+                "distance": 0.08,
+                "score": 0.8521,
+                "tag": "leaning in slightly",
+                "vad": [
+                  0.55,
+                  0.45
+                ]
+              }
+            ],
+            "expression": [
+              {
+                "distance": 0.08,
+                "score": 0.8521,
+                "tag": "brows knit in concentration",
+                "vad": [
+                  0.55,
+                  0.45
+                ]
+              },
+              {
+                "distance": 0.08,
+                "score": 0.8521,
+                "tag": "composed face",
+                "vad": [
+                  0.55,
+                  0.45
+                ]
+              },
+              {
+                "distance": 0.08,
+                "score": 0.8521,
+                "tag": "focused expression",
+                "vad": [
+                  0.55,
+                  0.45
+                ]
+              }
+            ],
+            "gaze": [
+              {
+                "distance": 0.08,
+                "score": 0.8521,
+                "tag": "attention locked forward",
+                "vad": [
+                  0.55,
+                  0.45
+                ]
+              },
+              {
+                "distance": 0.08,
+                "score": 0.8521,
+                "tag": "eyes fixed on what she is doing",
+                "vad": [
+                  0.55,
+                  0.45
+                ]
+              },
+              {
+                "distance": 0.08,
+                "score": 0.8521,
+                "tag": "steady gaze",
+                "vad": [
+                  0.55,
+                  0.45
+                ]
+              }
+            ]
+          }
+        },
+        "node": "ContextGarnish",
+        "seed": 0,
+        "warnings": []
+      },
+      {
+        "decision": {
+          "action_frame": {
+            "gaze_target": "looking toward the next thing she needs",
+            "hand_action": "turning toward the center of attention with composure",
+            "legacy_slots": {
+              "anchor": "",
+              "daily_life_tags": [
+                "leisure"
+              ],
+              "gaze_target": "looking toward the next thing she needs",
+              "hand_action": "turning toward the center of attention with composure",
+              "location": "recording_studio",
+              "obstacle_clause": "",
+              "obstacle_or_trigger": "",
+              "optional_micro_action": "mentally lining up the next task",
+              "posture": "leaning in with quiet purpose",
+              "primary_action": "turning toward the center of attention with composure",
+              "progress_clause": "before fully getting started",
+              "progress_state": "preparing",
+              "purpose": "work",
+              "purpose_clause": "clicking pen",
+              "social_clause": "as if responding directly to the viewer",
+              "social_distance": "viewer",
+              "time_or_weather": "as the session wraps up"
+            },
+            "legacy_text": "turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up",
+            "main_verb": "turning",
+            "posture": "leaning in with quiet purpose",
+            "primary_object": "",
+            "progress": "preparing",
+            "schema_version": "action-frame/v1",
+            "social_relation": "viewer",
+            "stimulus_or_obstacle": ""
+          },
+          "action_frame_matches_debug_slots": true,
+          "action_slots": {
+            "anchor": "",
+            "daily_life_tags": [
+              "leisure"
+            ],
+            "gaze_target": "looking toward the next thing she needs",
+            "hand_action": "turning toward the center of attention with composure",
+            "location": "recording_studio",
+            "obstacle_clause": "",
+            "obstacle_or_trigger": "",
+            "optional_micro_action": "mentally lining up the next task",
+            "posture": "leaning in with quiet purpose",
+            "primary_action": "turning toward the center of attention with composure",
+            "progress_clause": "before fully getting started",
+            "progress_state": "preparing",
+            "purpose": "work",
+            "purpose_clause": "clicking pen",
+            "social_clause": "as if responding directly to the viewer",
+            "social_distance": "viewer",
+            "time_or_weather": "as the session wraps up"
+          },
+          "action_surface": {
+            "first_token": "turning",
+            "input_surface": "gerund",
+            "rendered_clause": "turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up, brows knit in concentration, hands kept precise and controlled",
+            "surface": "gerund",
+            "verb": "turning",
+            "word_count": 34
+          },
+          "body_key": "body_direct_clause",
+          "candidate_eligibility": {
+            "direct_provenance_valid": false,
+            "direct_supported_families": [],
+            "eligible_syntax_families": [
+              "subject_action_scene"
+            ],
+            "rejected_syntax_families": {
+              "action_lead_subject_scene": [
+                "forbidden_fact_not_false:independent_action_subject",
+                "required_fact_not_true:same_subject_attachment_safe",
+                "unsupported_or_mismatched_surface",
+                "unsupported_scene_anchor",
+                "unsupported_subject"
+              ],
+              "scene_lead_subject_action": [
+                "forbidden_fact_not_false:independent_action_subject",
+                "required_fact_not_true:scene_lead_safe",
+                "unsupported_or_mismatched_surface",
+                "unsupported_scene_anchor",
+                "unsupported_subject"
+              ],
+              "subject_action__scene_tail": [
+                "forbidden_fact_not_false:independent_action_subject",
+                "required_fact_not_true:standalone_scene_safe",
+                "unsupported_or_mismatched_surface",
+                "unsupported_scene_anchor",
+                "unsupported_subject"
+              ],
+              "subject_action_scene_insert": [
+                "forbidden_fact_not_false:independent_action_subject",
+                "forbidden_fact_not_false:scene_action_overlap",
+                "required_fact_not_true:frame_predicate_safe",
+                "required_fact_not_true:scene_action_nonduplicative",
+                "required_fact_not_true:scene_adjunct_safe",
+                "unsupported_or_mismatched_surface",
+                "unsupported_scene_anchor",
+                "unsupported_subject"
+              ],
+              "subject_scene_action": [
+                "forbidden_fact_not_false:independent_action_subject",
+                "required_fact_not_true:frame_predicate_safe",
+                "required_fact_not_true:scene_adjunct_safe",
+                "unsupported_or_mismatched_surface",
+                "unsupported_scene_anchor",
+                "unsupported_subject"
+              ]
+            },
+            "safety_facts": {
+              "fragment_subject_action": false,
+              "frame_predicate_safe": false,
+              "independent_action_subject": null,
+              "same_subject_attachment_safe": false,
+              "scene_action_nonduplicative": null,
+              "scene_action_overlap": null,
+              "scene_adjunct_safe": false,
+              "scene_lead_safe": false,
+              "standalone_scene_safe": false
+            },
+            "syntax_fallback_reason": "baseline_only"
+          },
+          "candidate_v2_applied": false,
+          "clause_order": [
+            "subject",
+            "action",
+            "scene"
+          ],
+          "composition_mode": true,
+          "content_plan": {
+            "clause_order": [
+              "subject",
+              "action",
+              "scene"
+            ],
+            "discourse_roles": [
+              "neutral",
+              "quiet"
+            ],
+            "lexical_choice": "gerund",
+            "named_seed_streams": {
+              "lexical": 3968673103,
+              "syntax": 3671410415,
+              "template": 1226691047
+            },
+            "semantic_slots": {
+              "adjunct": "{action_clause}",
+              "object": "",
+              "predicate": "turning",
+              "scene": "and the room around her staying in {scene_anchor_clause}",
+              "subject": "{subject_clause}"
+            },
+            "syntax_family": "subject_action__scene_tail"
+          },
+          "eligible_syntax_families": [
+            "subject_action_scene",
+            "subject_action__scene_tail"
+          ],
+          "end_key": "end_scene_room",
+          "fallback_origin_syntax_family": "two-sentence-scene-tail",
+          "intro_key": "intro_plain_subject",
+          "prompt": "A solo girl with long flowing hair, black hair and brown eyes in soft gray fleece warm turtleneck sweater dress, with ribbed texture, turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up, brows knit in concentration, hands kept precise and controlled. The room around her remains in professional soundproof recording booth, featuring geometric sound isolation pads on wall, quiet focused atmosphere, lived-in atmosphere, a quiet room holding around her while the task in front of her sets the pace, settled concentration, measured pause",
+          "realizer_dropped_garnish": [],
+          "realizer_version": "v1",
+          "semantic_family_budget": {
+            "base_families": [
+              "gaze",
+              "posture"
+            ],
+            "exact_redundancy_dropped": [],
+            "final_families": [
+              "gaze",
+              "hands",
+              "posture"
+            ],
+            "garnish_dropped_tags": [
+              "steady gaze"
+            ],
+            "garnish_input_tags": [
+              "brows knit in concentration",
+              "steady gaze",
+              "hands kept precise and controlled"
+            ],
+            "garnish_kept_families": [
+              "hands"
+            ],
+            "garnish_kept_tags": [
+              "brows knit in concentration",
+              "hands kept precise and controlled"
+            ],
+            "staging_dropped_tags": [],
+            "staging_input_tags": [
+              "settled concentration",
+              "measured pause"
+            ],
+            "staging_kept_families": [],
+            "staging_kept_tags": [
+              "settled concentration",
+              "measured pause"
+            ]
+          },
+          "solo_support_dropped_tags": [],
+          "solo_template_filter_applied": true,
+          "solo_template_filtered_keys": {
+            "body": [],
+            "end": [],
+            "intro": []
+          },
+          "syntax_fallback_reason": "candidate_ineligible_preserve_v1",
+          "syntax_family": "subject_action__scene_tail",
+          "template_key": "intro_plain_subject||body_direct_clause||end_scene_room",
+          "template_roles": {
+            "body_roles": [
+              "quiet",
+              "neutral"
+            ],
+            "end_roles": [
+              "quiet",
+              "neutral"
+            ],
+            "intro_roles": [
+              "quiet",
+              "neutral"
+            ]
+          }
+        },
+        "node": "ContextPromptBuilder",
+        "seed": 10307578762516684591,
+        "warnings": []
+      }
+    ],
+    "loc": "recording_studio",
+    "meta": {
+      "mood": "a quiet room holding around her while the task in front of her sets the pace",
+      "style": "",
+      "tags": {
+        "emotion_nuance": "absorbed",
+        "place_type": "public",
+        "progress": "preparing",
+        "purpose": "work",
+        "social_distance": "viewer"
+      }
+    },
+    "notes": [],
+    "seed": 10307578762516684591,
+    "subj": "A solo girl with long flowing hair, black hair and brown eyes",
+    "warnings": []
+  },
+  "classification": "REAL_GRAPH",
+  "record": {
+    "execution_trace": [
+      {
+        "controls": {
+          "seed": "randomize"
+        },
+        "function": "build_prompt_context",
+        "inputs": {
+          "composition_mode": true,
+          "context_json": "{\"context_version\": \"2.0\", \"seed\": 0, \"subj\": \"A solo girl with long flowing hair, black hair and brown eyes\", \"costume\": \"street_casual\", \"loc\": \"recording_studio\", \"action\": \"turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up\", \"meta\": {\"mood\": \"a quiet room holding around her while the task in front of her sets the pace\", \"style\": \"\", \"tags\": {\"emotion_nuance\": \"absorbed\", \"place_type\": \"public\", \"progress\": \"preparing\", \"purpose\": \"work\", \"social_distance\": \"viewer\"}}, \"extras\": {\"character_name\": \"Jasmine (Dancer)\", \"hair_color\": \"black\", \"eye_color\": \"brown\", \"personality\": \"passionate\", \"color_palette\": [\"gold\", \"teal\", \"red\"], \"character_palette_str\": \"gold, teal, red\", \"clothing_prompt\": \"soft gray fleece warm turtleneck sweater dress, with ribbed texture\", \"location_prompt\": \"professional soundproof recording booth, featuring geometric sound isolation pads on wall, quiet focused atmosphere, lived-in atmosphere\", \"garnish\": \"brows knit in concentration, steady gaze, hands kept precise and controlled\", \"staging_tags\": \"settled concentration, measured pause\", \"source_subj_key\": \"florist\", \"raw_costume_key\": \"street_casual\", \"raw_loc_tag\": \"recording_studio\", \"character_id\": \"jasmine_dancer\", \"action_frame\": {\"schema_version\": \"action-frame/v1\", \"legacy_text\": \"turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up\", \"main_verb\": \"turning\", \"primary_object\": \"\", \"posture\": \"leaning in with quiet purpose\", \"hand_action\": \"turning toward the center of attention with composure\", \"gaze_target\": \"looking toward the next thing she needs\", \"progress\": \"preparing\", \"stimulus_or_obstacle\": \"\", \"social_relation\": \"viewer\", \"legacy_slots\": {\"location\": \"recording_studio\", \"purpose\": \"work\", \"progress_state\": \"preparing\", \"social_distance\": \"viewer\", \"obstacle_or_trigger\": \"\", \"daily_life_tags\": [\"leisure\"], \"primary_action\": \"turning toward the center of attention with composure\", \"anchor\": \"\", \"posture\": \"leaning in with quiet purpose\", \"hand_action\": \"turning toward the center of attention with composure\", \"gaze_target\": \"looking toward the next thing she needs\", \"purpose_clause\": \"clicking pen\", \"progress_clause\": \"before fully getting started\", \"social_clause\": \"as if responding directly to the viewer\", \"obstacle_clause\": \"\", \"optional_micro_action\": \"mentally lining up the next task\", \"time_or_weather\": \"as the session wraps up\"}}, \"raw_mood_key\": \"quiet_focused\"}, \"history\": [{\"node\": \"ContextSceneVariator\", \"seed\": 8002479797121057023, \"decision\": {\"mode\": \"full\", \"candidates_count\": 97, \"selected_source\": \"daily_life\", \"selected_loc\": \"recording_studio\", \"action\": \"placing fresh stems in a shaded bucket\", \"compat_subject_key\": \"florist\", \"compatible_unique_count\": 55, \"candidates_preview\": [\"flower_market (existing)\", \"convenience_store (tag:retail_service)\", \"bakery_shop (tag:retail_service)\", \"supermarket_aisle (tag:retail_service)\", \"drugstore_aisle (tag:retail_service)\", \"family_restaurant (tag:retail_service)\", \"food_court (tag:retail_service)\", \"shopping_mall_atrium (tag:retail_service)\", \"fashion_boutique (tag:retail_service)\", \"shopping_arcade (tag:retail_service)\", \"local_market_street (tag:retail_service)\", \"street_cafe (tag:retail_service)\", \"cozy_bookstore (tag:retail_service)\", \"antique_shop (tag:retail_service)\", \"greenhouse_nursery (tag:retail_service)\", \"postal_service_counter (tag:retail_service)\", \"print_shop (tag:retail_service)\", \"commuter_transport (tag:daily_public)\", \"picnic_park (tag:daily_public)\", \"school_library (tag:daily_public)\", \"winter_street (tag:daily_public)\", \"illuminated_park (tag:daily_public)\", \"rainy_bus_stop (tag:daily_public)\", \"suburban_neighborhood (tag:daily_public)\"], \"candidates_preview_total_count\": 97, \"candidates_preview_truncated_count\": 73, \"candidate_source_counts\": {\"existing\": 1, \"tag\": 51, \"universal\": 3, \"daily_life\": 42}, \"candidate_weight_profile\": {\"existing\": 11.0, \"tag\": 36.75, \"universal\": 51.0, \"daily_life\": 45.9}, \"generator_mode\": \"pool\", \"action_pool_size\": 16, \"action_pool_dominant_objects\": [], \"action_pool_object_hits\": {\"microphone\": 2}, \"solo_safety_filtered_pool_count\": 0, \"base_action\": \"turning toward the center of attention with composure\", \"normalized_action\": \"turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up\", \"action_load\": \"calm\", \"pool_slots\": {\"primary_action\": \"turning toward the center of attention with composure\", \"location\": \"recording_studio\", \"hand_action\": \"turning toward the center of attention with composure\", \"purpose\": \"work\"}, \"slot_sources\": {\"location\": \"pool\", \"purpose\": \"pool\", \"progress_state\": \"generated\", \"social_distance\": \"generated\", \"primary_action\": \"pool\", \"posture\": \"generated\", \"hand_action\": \"pool\", \"gaze_target\": \"generated\", \"purpose_clause\": \"generated\", \"progress_clause\": \"generated\", \"social_clause\": \"generated\", \"optional_micro_action\": \"generated\", \"time_or_weather\": \"generated\"}, \"object_focus\": {\"detected_objects\": [], \"slot_map\": {}, \"classifications\": {}}, \"slots\": {\"location\": \"recording_studio\", \"purpose\": \"work\", \"progress_state\": \"preparing\", \"social_distance\": \"viewer\", \"obstacle_or_trigger\": \"\", \"daily_life_tags\": [\"leisure\"], \"primary_action\": \"turning toward the center of attention with composure\", \"anchor\": \"\", \"posture\": \"leaning in with quiet purpose\", \"hand_action\": \"turning toward the center of attention with composure\", \"gaze_target\": \"looking toward the next thing she needs\", \"purpose_clause\": \"clicking pen\", \"progress_clause\": \"before fully getting started\", \"social_clause\": \"as if responding directly to the viewer\", \"obstacle_clause\": \"\", \"optional_micro_action\": \"mentally lining up the next task\", \"time_or_weather\": \"as the session wraps up\"}, \"semantic_epig\": {\"action\": {\"mode\": \"active\", \"target_vector\": {\"motion_energy\": 0.35, \"body_openness\": 0.45, \"precision\": 0.8, \"object_coupling\": 0.65, \"social_intensity\": 0.35, \"time_pressure\": 0.53}, \"slot_rankings\": {\"posture\": [{\"text\": \"keeping an upright working posture\", \"score\": 0.9165, \"distance\": 0.0436, \"source\": \"action_slot_descriptors:posture[1]\", \"role\": \"posture\"}, {\"text\": \"holding herself steady while she works\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:posture[2]\", \"role\": \"posture\"}, {\"text\": \"leaning in with quiet purpose\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:posture[1]\", \"role\": \"posture\"}], \"hand_action\": [{\"text\": \"hands staying precise and controlled\", \"score\": 0.7629, \"distance\": 0.1353, \"source\": \"action_slot_descriptors:hand_action[1]\", \"role\": \"hand_action\"}, {\"text\": \"fingers poised over the keyboard\", \"score\": 0.7255, \"distance\": 0.1604, \"source\": \"action_slot_descriptors:hand_action[5]\", \"role\": \"hand_action\"}, {\"text\": \"fingers gathering what she needs next\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:hand_action[1]\", \"role\": \"hand_action\"}, {\"text\": \"one hand already reaching for the next task\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:hand_action[0]\", \"role\": \"hand_action\"}], \"gaze_target\": [{\"text\": \"eyes fixed on what needs to happen next\", \"score\": 0.8952, \"distance\": 0.0554, \"source\": \"action_slot_descriptors:gaze_target[1]\", \"role\": \"gaze_target\"}, {\"text\": \"checking what is happening nearby\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:gaze_target[2]\", \"role\": \"gaze_target\"}, {\"text\": \"looking between the task and the space around it\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:gaze_target[1]\", \"role\": \"gaze_target\"}, {\"text\": \"looking toward the next thing she needs\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:gaze_target[3]\", \"role\": \"gaze_target\"}], \"purpose_clause\": [{\"text\": \"clicking pen\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:purpose_clause[3]\", \"role\": \"purpose_clause\"}, {\"text\": \"mentally lining up the next task\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:purpose_clause[0]\", \"role\": \"purpose_clause\"}, {\"text\": \"moving on only after one more check\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:purpose_clause[2]\", \"role\": \"purpose_clause\"}, {\"text\": \"pausing to reassess one detail\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:purpose_clause[1]\", \"role\": \"purpose_clause\"}], \"progress_clause\": [{\"text\": \"as she gets herself ready\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:progress_clause[1]\", \"role\": \"progress_clause\"}, {\"text\": \"before fully getting started\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:progress_clause[0]\", \"role\": \"progress_clause\"}, {\"text\": \"while setting up the next step\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:progress_clause[2]\", \"role\": \"progress_clause\"}], \"social_clause\": [{\"text\": \"as if responding directly to the viewer\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:social_clause[1]\", \"role\": \"social_clause\"}, {\"text\": \"leaving room for a quiet exchange with the viewer\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:social_clause[2]\", \"role\": \"social_clause\"}, {\"text\": \"meeting the viewer with a quiet look\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:social_clause[0]\", \"role\": \"social_clause\"}], \"optional_micro_action\": [{\"text\": \"mentally lining up the next task\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:optional_micro_action[0]\", \"role\": \"optional_micro_action\"}, {\"text\": \"moving on only after one more check\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:optional_micro_action[2]\", \"role\": \"optional_micro_action\"}, {\"text\": \"pausing to reassess one detail\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:optional_micro_action[1]\", \"role\": \"optional_micro_action\"}], \"time_or_weather\": [{\"text\": \"as the session wraps up\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:time_or_weather[2]\", \"role\": \"time_or_weather\"}, {\"text\": \"before recording\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:time_or_weather[0]\", \"role\": \"time_or_weather\"}, {\"text\": \"during the current take\", \"score\": 0.7207, \"distance\": 0.1638, \"source\": \"runtime:time_or_weather[1]\", \"role\": \"time_or_weather\"}]}, \"slot_changes\": {\"posture\": {\"baseline\": \"leaning in with quiet purpose\", \"semantic\": \"leaning in with quiet purpose\", \"changed\": false, \"semantic_top_candidate\": \"keeping an upright working posture\", \"selected_candidate_rank\": 3}, \"hand_action\": {\"baseline\": \"turning toward the center of attention with composure\", \"semantic\": \"turning toward the center of attention with composure\", \"changed\": false, \"semantic_top_candidate\": \"hands staying precise and controlled\", \"selected_candidate_rank\": null}, \"gaze_target\": {\"baseline\": \"looking toward the next thing she needs\", \"semantic\": \"looking toward the next thing she needs\", \"changed\": false, \"semantic_top_candidate\": \"eyes fixed on what needs to happen next\", \"selected_candidate_rank\": 4}, \"purpose_clause\": {\"baseline\": \"clicking pen\", \"semantic\": \"clicking pen\", \"changed\": false, \"semantic_top_candidate\": \"clicking pen\", \"selected_candidate_rank\": 1}, \"progress_clause\": {\"baseline\": \"before fully getting started\", \"semantic\": \"before fully getting started\", \"changed\": false, \"semantic_top_candidate\": \"as she gets herself ready\", \"selected_candidate_rank\": 2}, \"social_clause\": {\"baseline\": \"as if responding directly to the viewer\", \"semantic\": \"as if responding directly to the viewer\", \"changed\": false, \"semantic_top_candidate\": \"as if responding directly to the viewer\", \"selected_candidate_rank\": 1}, \"optional_micro_action\": {\"baseline\": \"mentally lining up the next task\", \"semantic\": \"mentally lining up the next task\", \"changed\": false, \"semantic_top_candidate\": \"mentally lining up the next task\", \"selected_candidate_rank\": 1}, \"time_or_weather\": {\"baseline\": \"as the session wraps up\", \"semantic\": \"as the session wraps up\", \"changed\": false, \"semantic_top_candidate\": \"as the session wraps up\", \"selected_candidate_rank\": 1}}, \"changed_slots\": [], \"selected_by_semantic\": true, \"semantic_scoring_enabled\": true, \"selection_changed_by_semantic\": false, \"baseline_candidate\": \"\", \"semantic_candidate\": \"\", \"semantic_top_candidate\": \"\", \"selected_candidate_rank\": null}, \"object_relation\": {\"detected_objects\": [], \"relation_key\": \"\", \"required_roles\": {}, \"mode\": \"active\", \"applied_slots\": {}, \"skipped_slots\": {}}}, \"action_updated\": true, \"action_refresh_reason\": \"location_changed\", \"new_action\": \"turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up\", \"action_frame\": {\"schema_version\": \"action-frame/v1\", \"legacy_text\": \"turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up\", \"main_verb\": \"turning\", \"primary_object\": \"\", \"posture\": \"leaning in with quiet purpose\", \"hand_action\": \"turning toward the center of attention with composure\", \"gaze_target\": \"looking toward the next thing she needs\", \"progress\": \"preparing\", \"stimulus_or_obstacle\": \"\", \"social_relation\": \"viewer\", \"legacy_slots\": {\"location\": \"recording_studio\", \"purpose\": \"work\", \"progress_state\": \"preparing\", \"social_distance\": \"viewer\", \"obstacle_or_trigger\": \"\", \"daily_life_tags\": [\"leisure\"], \"primary_action\": \"turning toward the center of attention with composure\", \"anchor\": \"\", \"posture\": \"leaning in with quiet purpose\", \"hand_action\": \"turning toward the center of attention with composure\", \"gaze_target\": \"looking toward the next thing she needs\", \"purpose_clause\": \"clicking pen\", \"progress_clause\": \"before fully getting started\", \"social_clause\": \"as if responding directly to the viewer\", \"obstacle_clause\": \"\", \"optional_micro_action\": \"mentally lining up the next task\", \"time_or_weather\": \"as the session wraps up\"}}, \"action_frame_source\": \"generated_slots\"}, \"warnings\": []}, {\"node\": \"ContextClothingExpander\", \"seed\": 12063750532744062283, \"decision\": {\"theme\": \"street_casual\", \"chosen_type\": \"dresses\", \"base_pack\": \"winter_knit_dress\", \"base_variant\": \"warm_turtleneck_sweater_dress~soft_gray~fleece~ribbed_texture\", \"outerwear_pack\": \"\", \"outerwear_variant\": \"\", \"signature\": \"sha256:b8fd6f432257bff3e156ebedddc8322c3037c8903c21904f6a358cc07fc0aafe\", \"objects\": [], \"repeat_guard_penalty\": 0, \"attempt_index\": 0, \"semantic_tpo_score\": 1.0, \"semantic_tpo_penalty\": 0, \"semantic_tpo_distance\": 0.0, \"semantic_tpo_final_penalty\": 0, \"semantic_epig\": {\"clothing_tpo\": {\"mode\": \"active\", \"target_vector\": {\"formality\": 0.5, \"warmth\": 0.5, \"movement_freedom\": 0.5, \"softness\": 0.5, \"weather_fit\": 0.5, \"activity_fit\": 0.5, \"visual_prominence\": 0.5}, \"candidate_score_count\": 5, \"candidate_scores\": [{\"attempt_index\": 0, \"score\": 1.0, \"distance\": 0.0, \"semantic_penalty\": 0, \"repeat_penalty\": 0, \"final_penalty\": 0}, {\"attempt_index\": 1, \"score\": 1.0}, {\"attempt_index\": 2, \"score\": 1.0}, {\"attempt_index\": 3, \"score\": 1.0}, {\"attempt_index\": 4, \"score\": 1.0}], \"selected_attempt_index\": 0, \"baseline_selected_attempt_index\": 0, \"semantic_selected_attempt_index\": 0, \"selected_by_semantic\": true, \"semantic_scoring_enabled\": true, \"selection_changed_by_semantic\": false, \"baseline_candidate\": 0, \"semantic_candidate\": 0, \"semantic_top_candidate\": 0, \"selected_candidate_rank\": 0}}}, \"warnings\": []}, {\"node\": \"ContextLocationExpander\", \"seed\": 2616087599012920237, \"decision\": {\"pack_key\": \"recording_studio\", \"objects\": [], \"selected_props\": [], \"template_key\": \"detailed\", \"semantic_epig\": {\"location_scene\": {\"mode\": \"active\", \"target_vector\": {\"crowd_density\": 0.5, \"activity_level\": 0.45, \"openness\": 0.5, \"orderliness\": 0.5, \"weather_intensity\": 0.5, \"light_softness\": 0.55, \"intimacy\": 0.5, \"time_pressure\": 0.5}, \"segment_rankings\": {\"environment\": [{\"text\": \"high-tech mixing room\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:environment[1]\", \"role\": \"environment\"}, {\"text\": \"professional soundproof recording booth\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:environment[0]\", \"role\": \"environment\"}], \"core\": [{\"text\": \"geometric sound isolation pads on wall\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:core[0]\", \"role\": \"core\"}], \"props\": [{\"text\": \"circular pop filters\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:props[0]\", \"role\": \"props\"}, {\"text\": \"professional studio headphones\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:props[1]\", \"role\": \"props\"}, {\"text\": \"tangled audio cables\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:props[2]\", \"role\": \"props\"}], \"texture\": [{\"text\": \"grey acoustic foam\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:texture[0]\", \"role\": \"texture\"}, {\"text\": \"soft carpet\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:texture[1]\", \"role\": \"texture\"}], \"details\": [{\"text\": \"atmospheric perspective\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:details[3]\", \"role\": \"details\"}, {\"text\": \"intricate background details\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:details[1]\", \"role\": \"details\"}, {\"text\": \"layered background depth\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:details[2]\", \"role\": \"details\"}], \"time\": [{\"text\": \"recording session\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:time[0]\", \"role\": \"time\"}], \"fx\": [{\"text\": \"quiet focused atmosphere\", \"score\": 0.9512, \"distance\": 0.025, \"source\": \"runtime:fx[0]\", \"role\": \"fx\"}]}, \"segment_ranking_counts\": {\"environment\": 2, \"core\": 1, \"props\": 3, \"texture\": 2, \"details\": 4, \"time\": 1, \"fx\": 1}, \"segment_ranking_truncated_counts\": {\"environment\": 0, \"core\": 0, \"props\": 0, \"texture\": 0, \"details\": 1, \"time\": 0, \"fx\": 0}, \"section_changes\": {\"environment\": {\"baseline\": \"professional soundproof recording booth\", \"semantic\": \"professional soundproof recording booth\", \"changed\": false, \"semantic_top_candidate\": \"high-tech mixing room\", \"selected_candidate_rank\": 2}, \"core\": {\"baseline\": [\"geometric sound isolation pads on wall\"], \"semantic\": [\"geometric sound isolation pads on wall\"], \"changed\": false, \"semantic_top_candidate\": \"geometric sound isolation pads on wall\", \"selected_candidate_rank\": 1}, \"details\": {\"baseline\": \"intricate background details\", \"semantic\": \"lived-in atmosphere\", \"changed\": true, \"semantic_top_candidate\": \"atmospheric perspective\", \"selected_candidate_rank\": 4}, \"fx\": {\"baseline\": \"quiet focused atmosphere\", \"semantic\": \"quiet focused atmosphere\", \"changed\": false, \"semantic_top_candidate\": \"quiet focused atmosphere\", \"selected_candidate_rank\": 1}}, \"changed_sections\": [\"details\"], \"selected_by_semantic\": true, \"semantic_scoring_enabled\": true, \"selection_changed_by_semantic\": true, \"baseline_candidate\": \"\", \"semantic_candidate\": \"\", \"semantic_top_candidate\": \"\", \"selected_candidate_rank\": null}}}, \"warnings\": []}, {\"node\": \"ContextGarnish\", \"seed\": 0, \"decision\": {\"semantic_epig\": {\"personality_behavior\": {\"mode\": \"active\", \"personality\": \"passionate\", \"target_vector\": {}, \"prefer_category\": null, \"slot_rankings\": {\"gaze\": [], \"posture\": [], \"hands\": []}, \"selected\": \"\", \"selected_by_semantic\": false, \"semantic_scoring_enabled\": true, \"selection_changed_by_semantic\": false, \"baseline_candidate\": \"\", \"semantic_candidate\": \"\", \"semantic_top_candidate\": \"\", \"selected_candidate_rank\": null, \"fallback_used\": false, \"rejected_candidates\": [], \"subject_centric_overrides\": {\"source\": \"subject_centric_descriptor_overrides.json\", \"adoption_state\": \"active_candidate_selection\", \"mode\": \"active\", \"max_candidates_per_slot\": 1, \"available_count\": 0, \"by_slot\": {}, \"mode_counts\": {}, \"candidates\": []}}}, \"action_load\": \"active\", \"generation_mode\": \"scene_emotion_priority\", \"emotion_role_mode\": \"subject_only\", \"subject_role\": \"context subject / character profile\", \"stimulus_role\": \"turning toward the center of attention with composure, leaning in with quiet purpose, looking toward the next thing she needs, clicking pen, as if responding directly to the viewer, as the session wraps up\", \"context_role\": {\"location\": \"recording_studio\", \"costume\": \"street_casual\", \"scene_tags\": {\"emotion_nuance\": \"absorbed\", \"place_type\": \"public\", \"progress\": \"preparing\", \"purpose\": \"work\", \"social_distance\": \"viewer\"}}, \"emotion_core\": \"focus\", \"emotion_intensity\": \"medium\", \"target_vad\": [0.55, 0.53], \"target_vad_source\": \"legacy_mood\", \"vad_category_distances\": [{\"category\": \"focus\", \"vad\": [0.55, 0.45], \"distance\": 0.08}, {\"category\": \"moved\", \"vad\": [0.68, 0.55], \"distance\": 0.1315}, {\"category\": \"playful\", \"vad\": [0.8, 0.7], \"distance\": 0.3023}, {\"category\": \"impatience\", \"vad\": [0.3, 0.8], \"distance\": 0.368}, {\"category\": \"joy\", \"vad\": [0.85, 0.75], \"distance\": 0.372}], \"vad_descriptor_rankings\": {\"expression\": [{\"tag\": \"brows knit in concentration\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"composed face\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"focused expression\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}], \"gaze\": [{\"tag\": \"attention locked forward\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"eyes fixed on what she is doing\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"steady gaze\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}], \"behavior\": [{\"tag\": \"fingers working with care\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"hands kept precise and controlled\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"ignoring the rest of the room\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"keeping every movement deliberate\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"leaning in slightly\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}]}, \"emotion_expression\": \"brows knit in concentration\", \"emotion_behavior\": [\"steady gaze\", \"hands kept precise and controlled\"], \"action_anchors\": [], \"emotion_nuance_tag\": \"keeping every movement deliberate\", \"final_tags\": [\"brows knit in concentration\", \"steady gaze\", \"hands kept precise and controlled\"]}, \"warnings\": []}], \"notes\": [], \"warnings\": []}",
+          "seed": 10307578762516684591,
+          "template": ""
+        },
+        "node_id": 8,
+        "node_type": "ContextPromptBuilder"
+      }
+    ],
+    "run_seed": 91
+  },
+  "source_tree_hash": "1678a635b03d8e6e18e6a797b395511a51cc04c3f245f96c7c5a38e9ca17cf23"
+}

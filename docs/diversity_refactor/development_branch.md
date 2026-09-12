@@ -1,7 +1,16 @@
 # Realizer v2 development branch
 
-`main` contains V150 stable. `refactor/realizer-v2` contains candidate07 at ordinary
-repository paths, including its tests and fixtures. Future development should
+Latest verified development source (2026-09-12): [post-R43 coverage AS01](./coverage_as01_plan.md),
+`53a4fe8048cfd71cdcd9f3a7cb414e0b96ec6c0450b96795c465470d6963b56e`.
+Portable intake architecture/development PASS; ordinary11/512, three families;
+all six forced real-input families.534 focused/87 regression tests pass. Prior10
+successes and501 remaining fallbacks are unchanged. Adoption remains BLOCKED.
+Older checkpoint counts below are historical; [current receipts](./coverage_as01_summary.json).
+
+`main` contains V150 stable. `refactor/realizer-v2` contains candidate07 plus the
+R43-01 import repair, R43-02 diagnostics, R43-03 evidence, R43-04/05 Clothing/Scene
+reconstruction, R43-06 support adapters, R43-07 family proof and a limited R43-08
+runtime integration at ordinary repository paths. Future development should
 commit changes here directly. Candidate source no longer requires ZIP extraction.
 Adoption remains **BLOCKED**; do not merge this branch into stable until the
 unchanged formal 8192/2048/fixed80 gates and required family evidence pass.
@@ -39,23 +48,108 @@ validate this development branch unchanged.
 
 ## Development verification
 
-Run from the branch root with the existing Python test environment. No new
-dependencies or source behavior changes were introduced by this migration.
+Run from the branch root with the existing Python test environment. Each command
+requires a new output directory; replace the example directory for subsequent runs.
+No dependency is installed by the verifier. Focused, regression and intake are
+development checks. Adoption-preflight checks prerequisites without running formal
+gates; see [the current verification interface](./r43_verification_plan.md).
 
 ```powershell
-$candidateTests = Get-ChildItem assets/test_n27*.py | Select-Object -ExpandProperty FullName
-python -m pytest -q $candidateTests assets/test_syntax_family_selector.py assets/test_prompt_realizer_v2.py -k 'not test_actual_v1_family_metadata_and_seed_replay'
-python -m unittest assets.test_context_codec assets.test_context_state_adapter assets.test_context_nodes assets.test_context_ops assets.test_vocab_lint
-python tools/validate_prompt_data.py
-python -c "from asset_validator import validate_assets; issues = validate_assets(); print(issues); assert not issues"
-python tools/verify_full_flow.py
+python tools/verify_realizer_v2_candidate.py --stage focused --output-dir assets/results/diversity_refactor/r43/local-focused-01
+python tools/verify_realizer_v2_candidate.py --stage regression --output-dir assets/results/diversity_refactor/r43/local-regression-01
 git diff --check main
 ```
 
-Migration verification: 151 focused tests and 1888 subtests passed; 29 related
+Historical migration verification: 151 focused tests and 1888 subtests passed; 29 related
 regressions passed; data/asset validation and full flow passed. The single excluded
 test, `test_actual_v1_family_metadata_and_seed_replay`, is the previously recorded
-candidate failure concerning v1 family aliases. It still needs resolution during
-development; these results do not claim an unrestricted full-suite pass.
+candidate failure concerning v1 family aliases. R43-01 resolves that exclusion by
+separating the plan-only v1 contract from Builder fallback metadata. Current
+verification includes both contracts without exclusions. The import repair also
+supports package-mode Builder execution without a flat repository-root import.
+Results and source-bound paired512 evidence are in
+[r43_import_plan.md](./r43_import_plan.md) and [progress.md](./progress.md).
+Focused/regression results do not claim an unrestricted full-suite pass.
 No typecheck configuration is present. Formal adoption gates were not rerun for
 this storage-only migration, and no CI workflow was added.
+
+## Development reachability (R43-02)
+
+Use a new output directory on each invocation:
+
+```powershell
+python tools/audit_realizer_reachability.py --profile smoke --output-dir assets/results/diversity_refactor/r43/smoke-01
+python tools/audit_realizer_reachability.py --profile intake --force-families all --output-dir assets/results/diversity_refactor/r43/intake-01
+```
+
+Smoke defaults to16, intake to512; these are not Effective Diversity profiles.
+Optional `--baseline-root <saved-source-root>` compares ordinary output/debug in
+a separate interpreter; a source without the sink has reachability NOT_AVAILABLE.
+Unknown forcing/semantic proof is never reported as certified success. Existing
+output directories and source changes fail closed. Full evidence and remaining
+proof gaps: [r43_audit_plan.md](./r43_audit_plan.md). Adoption remains BLOCKED.
+
+R43-03 adds immutable common evidence and an Action adapter, without connecting new
+family authorization. Binding validation reconstructs current evidence; receipt
+JSON/checksums are not trusted proof. Runtime fingerprints describe an imported
+source snapshot, while audit runs guard full source before/after. Details and
+512-case preservation: [r43_evidence_plan.md](./r43_evidence_plan.md).
+
+R43-04 shares item assembly and selected-attempt traces, and binds Clothing from
+received history without guessing historical renderer settings. Complete-input
+audit replay stays separate from102 runtime-available bound constructors; ordinary
+v2 coverage is unchanged. Verification and remaining ownership gaps:
+[r43_clothing_plan.md](./r43_clothing_plan.md).
+
+R43-05 retains Scene source/default origins and original selected hashes through
+shuffle, text dedupe and repeat-risk suppression. Ten runtime-bound constructors
+preserve known owners/references; missing historical renderer inputs are not
+guessed. Existing output and family permission remain unchanged. Details:
+[r43_scene_plan.md](./r43_scene_plan.md).
+
+R43-06 adapts selected Template/Subject/Garnish/Mood through existing source and
+grammar rules. Common evidence is captured within the Builder audit sink, separately
+from locked legacy reachability counts.299 focused tests and87 regressions pass;
+paired512 output/context/debug is unchanged and common receipts reproduce across
+fresh root/package processes. Unknown grammar/source stays blocked. Details:
+[r43_support_plan.md](./r43_support_plan.md). Next: R43-07 family proof/constructors.
+
+R43-07 provides one common family proof/constructor engine and explicit selector/
+realizer adapters. The six-layout formatter is shared while ordinary selection
+remains unchanged.348 focused tests and87 regressions pass; paired512 and fresh
+root/package receipts match. Recombination6-family success is separate from
+common real-graph eligible0/512. See [r43_family_plan.md](./r43_family_plan.md).
+Next R43-08 owns integration and real-graph proof; adoption remains BLOCKED.
+
+R43-08's limited runtime integration and Garnish post-policy reconstruction are
+verified:374 focused tests and87 regressions pass; ordinary512 is unchanged.
+Common standalone proof reaches4 prior success inputs, but five families remain
+unreached and new ordinary applications remain0. **R43-08 acceptance is BLOCKED**;
+do not proceed to R43-09 or infer adoption from these tests. Details:
+[r43_integration_plan.md](./r43_integration_plan.md).
+
+The subsequent [owned-placement pass](./r43_placement_plan.md) reaches all six
+families on unchanged real-graph inputs (14 forced seed-family rows), with exact
+source binding and scoped semantic review.409 focused tests/87 regressions and
+paired512 pass. Ordinary v2 remains9/512; new ordinary application is the remaining
+R43-08 blocker. Do not start R43-09 or claim formal adoption from forced reachability.
+
+Latest checkpoint: [ordinary Action proof](./r43_ordinary_plan.md) resolves that
+blocker and completes R43-08 acceptance. Ordinary v2 is10/512 with the original9
+successes and502 remaining fallbacks preserved. All6 families reach real-graph
+forced execution;423 focused tests/87 regressions and expansion-preservation pass.
+Next: R43-09 verification consolidation. Architecture/development judgments remain
+NOT_RUN until that task; formal adoption remains BLOCKED.
+
+Latest: R43-09 is complete. The portable intake CLI verifies architecture and
+development PASS, with explicit test outcome/exclusion accounting and current
+prose review binding. Full intake from a clean source copy has identical canonical
+verdict bytes.492 focused tests/87 regressions pass. Adoption-preflight remains
+BLOCKED for the guide and formal evidence; see [r43_verification_plan.md](./r43_verification_plan.md).
+
+R43-10 conditional handoff is prepared: original sealed pre-N2 V150 source and
+historical reports/paired/fixed80 evidence are hash-verified, with complete A1.6
+obligations and explicit baseline roles. Stable main is not that original formal
+baseline. Candidate formal gates remain NOT_RUN and evaluation/adoption BLOCKED;
+the64/5 guide is not met. [Handoff](./r43_handoff.md) records the next bounded
+Action+Scene coverage work. No formal evaluation freeze, merge/push or N2.8/D3.

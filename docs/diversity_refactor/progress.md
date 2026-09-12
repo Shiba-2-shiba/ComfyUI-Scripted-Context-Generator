@@ -12,8 +12,8 @@
 ```text
 Wave: Semantic Diversity / Natural Language Refactor
 State: IN_PROGRESS
-Current task: N2.7-R4.2 candidate07 development verified; adoption BLOCKED
-Next task: broaden whole-clause/placement evidence; N2.8 remains blocked
+Current task: N2.7-R4.3 / R43-10 conditional handoff prepared; architecture/development PASS
+Next task: bounded Action+Scene coverage improvement; formal handoff/adoption BLOCKED
 Baseline: V150
 Active quantity target: NONE
 V250/V350/V500: DEFERRED
@@ -2252,3 +2252,752 @@ The original ZIP and R4 development evidence remain recoverable from commit
 file hashes and all four restored source manifests were checked during migration.
 Branch usage, recovery instructions and the exact evidence scope are in
 [`checkpoints/README.md`](./checkpoints/README.md).
+
+## N2.7-R4.3 / R43-00 — Intake
+
+State: IN_PROGRESS (2026-09-11 JST).
+Branch: refactor/realizer-v2.
+Design baseline / actual start HEAD: 9a2aa32c1e3a48d1d7ea51eb91aee42843dba021.
+Stable main: 10d7d8dd6a6dd006f7269bf09aedc5e3624f5c51.
+Existing development worktree: clean before this task; main checkout has existing untracked OMX state/notepad and the user-supplied plan. Preserve all.
+Scope and pre-edit plan: [r43_intake.md](./r43_intake.md). Documentation and external evidence only.
+Historical reference: candidate07 9/512 actual v2 applications, four structures including fallback; not a new measurement.
+Transport: only received Builder inputs/context/history authorize runtime proof; execution-trace replay is audit-only.
+Next: R43-01 only after R43-00 acceptance. Adoption: BLOCKED; no main merge, N2.8 or D3.
+
+### R43-00 result — 2026-09-11 JST
+
+State: PASS (intake acceptance; no runtime implementation).
+Source HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`.
+Source-tree SHA-256: `b8a99c2fa84cc59e2ade7378d6614527a3bfe672d42e474d0dbaca6078c57472`.
+
+Changed files: this progress log, tasks.md, CURRENT_STATUS.md, r43_intake.md,
+r43_intake_summary.json, and the byte-identical copy r43_implementation_plan.md.
+The existing development worktree is used; stable main runtime/docs and the user's
+untracked plan/OMX files remain intact. No commit, merge or push was made.
+
+Intake report and transport table: [r43_intake.md](./r43_intake.md).
+Receipt hashes: [r43_intake_summary.json](./r43_intake_summary.json).
+Ignored evidence under the original main checkout:
+`assets/results/diversity_refactor/r43/intake-20260911-01/`.
+Fresh read-only Git snapshots preserve candidate07, actual start and stable main.
+All 1,120 original sealed V150 files, its ZIP/manifest, A1.5 report/replay/reference,
+eight historical paired2048/fixed80 files, candidate07 verdict artifacts and the
+fixed intake512 match their recorded hashes. Historical measurements were not rerun.
+
+Fresh checks: 152 focused test IDs collected; **151 passed / 1 failed / 1,888
+subtests passed**, no exclusion (pytest exit 1). The failure reproduces the known
+v1 alias expectation in `test_actual_v1_family_metadata_and_seed_replay`; R43-01
+owns its contract repair. Related regressions: 29 passed (exit 0). V150 sizing,
+data validation, scope, generated action pools/compatibility, asset validation,
+vocabulary lint and full flow pass (exit 0). Typecheck is unconfigured; full suite,
+frontend/browser and formal evaluation were not run. Historical 160/1,890 checkpoint
+counts are a different, incompletely inventoried test group, not this collection.
+
+Preservation: development/main source manifests, all120 protected files, public
+signature sources and A1.6 section7 remain unchanged. Counts:135 subjects,109
+locations,8,227 rows,150,184 base variations. All inventoried user files unchanged.
+Raw/cleaned paired512, upstream context, source-atom semantics and fresh-process
+determinism: NOT_RUN here; no runtime code was changed. Existing historical
+candidate07 9/512 success and four fallback-inclusive structure names remain
+historical reference only. New eligible/forced/ordinary/fallback counts: NOT_RUN.
+
+All five R43-00 acceptance conditions are satisfied. Remaining issues: inherited
+alias-test failure, root/package bridge import, incomplete runtime replay inputs,
+and unmeasured R43 coverage/quality. Original formal V150 evidence is locally
+available, but availability alone does not satisfy candidate adoption gates.
+
+Next task: **R43-01**. Architecture/development: NOT_RUN. Adoption: **BLOCKED**.
+N2.8 and D3 remain unstarted. No main merge/push.
+
+### R43-01 — Import and metadata contracts (start)
+
+State: IN_PROGRESS (2026-09-11 JST).
+Start HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`.
+Pre-code cleanup plan: [r43_import_plan.md](./r43_import_plan.md).
+R43-00 acceptance and source preservation are complete. Reproduce package import
+failure and split legacy-v1/Builder-fallback contracts before repairing the import.
+Add the minimal branch-native verifier and run unexcluded checks. Existing R43-00
+documentation and user files remain intact. Adoption: BLOCKED; no main merge/N2.8.
+
+### R43-01 result — 2026-09-11 JST
+
+State: PASS (R43-01 acceptance).
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; changes are uncommitted.
+Final source-tree: `e44157bdbf706465d3f9f8531aad7f5d3e4281c108429fada51535ce51de1be1`.
+Baseline source-tree: `b8a99c2fa84cc59e2ade7378d6614527a3bfe672d42e474d0dbaca6078c57472`.
+Changed files and rationale: [r43_import_plan.md](./r43_import_plan.md).
+Artifact inventory/SHA-256: [r43_import_summary.json](./r43_import_summary.json).
+
+Fixed the lazy candidate bridge import to follow package/root resolution.
+The two new import tests failed with ModuleNotFoundError before the fix, then
+passed. Split strict plan-only v1 metadata/text from strict Builder mapped
+fallback metadata/origin/replay; no family mapping or eligibility changes.
+Added a thin focused/regression verifier with machine-readable test IDs, canonical
+verdicts, separated logs/environment, failure exits, no overwrite/dependency
+installation, and source/supplemental-input mutation detection.
+
+Final checks (all exit0): focused **175 tests / 1,888 subtests**, regression
+**87 tests / 33 subtests**, calc_variations, prompt-data, variation-scope,
+action-pool/compatibility checks, asset validation and full flow. No exclusions
+or skips. Current focused IDs retain all152 intake IDs and add23 cases: one
+Builder contract, two import/transport tests and20 verifier cases. Regression is
+a broader pinned set than the historical29; both exact collections are retained.
+
+Fresh original-workflow paired512: whole canonical record, raw/cleaned prompt,
+upstream context and serialized Builder context/debug mismatches **0**. Exact
+received Builder inputs also replay in package mode for all512 with mismatches0;
+no flat runtime module imports are present. Ordinary actual v2: **9/512**, across
+scene-lead1/standalone7/subject-scene-action1; four structure names including
+fallback, two fallback structure names. No coverage increase is claimed.
+
+Public node signatures/default serialization, protected120 V150 files, original
+main source/user files, read-only comparison snapshots and A1.6 section7 unchanged.
+Python3.10 AST check and diff check pass; execution environment is Python3.12.10.
+Independent code review PASS after fixing an omitted supplemental hash for
+assets/calc_variations.py and adding its mutation regression. Earlier source
+`30b7de5c...` checks under `import-20260911-01` are superseded, not final-source
+evidence. Final receipts are under original main's ignored
+`assets/results/diversity_refactor/r43/import-20260911-02/`; its immutable fresh
+baseline512 is explicitly reused from the first run. All final-source checks
+were rerun after the reviewer correction.
+
+Remaining limits: typecheck unconfigured; full suite, frontend/browser and formal
+reference8192/gate2048/fixed80/release8192 NOT_RUN. All-R4.3 architecture/development
+acceptance remains NOT_RUN, adoption **BLOCKED**. No producer/common-evidence
+coverage work or R43-02 instrumentation was started. No commit/merge/push or N2.8/D3.
+Next task: **R43-02** — Reachability Audit before any new grammar permission.
+
+### R43-02 — Reachability Audit (start)
+
+State: IN_PROGRESS (2026-09-11 JST).
+Start HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; uncommitted R43-01 source
+`e44157bdbf706465d3f9f8531aad7f5d3e4281c108429fada51535ce51de1be1`.
+Cleanup/verification plan: [r43_audit_plan.md](./r43_audit_plan.md).
+Scope: diagnostic sink, existing-constructor diagnostics, development audit CLI,
+metric contract and tests. Existing context transport and ordinary outputs stay
+unchanged; unknown evidence is not made safe. Preserve R43-00/01/user changes.
+Adoption BLOCKED; no formal claim, main merge/push or N2.8/D3.
+
+### R43-02 result — 2026-09-11 JST
+
+State: PASS (R43-02 acceptance only).
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; work remains uncommitted.
+Start source: `e44157bdbf706465d3f9f8531aad7f5d3e4281c108429fada51535ce51de1be1`.
+Final source: `0cfe1bf8a508e83d7c93e853b526826e8326cebf11260d49b5ab3883d6432808`.
+Plan/result/changed files: [r43_audit_plan.md](./r43_audit_plan.md).
+Machine-readable receipt hashes: [r43_audit_summary.json](./r43_audit_summary.json).
+
+Implemented detached internal sink, shared final postprocessing, existing-component
+diagnostics, fixed development contract and canonical-runner audit CLI. Six stages,
+source/grammar separation, route/seed/family counts, only-blocker/full-set/pair/triple
+counts and deterministic examples are recorded. No new grammar/family permission,
+public node input, serialized evidence or runner-only proof input was added.
+
+All commands exit0 on final source: focused202 tests/1,922 subtests; regression87
+tests/33 subtests; existing validators/variation sizing/asset validation/full flow;
+two forced intake512 audits paired against sealed candidate07; no-force16 and
+fresh-source16 smoke. No skips/exclusions,27 new tests, no removed IDs. Independent
+review PASS after correcting unmeasured Markdown labels and baseline/route/error
+classification; ordinary constructor failure is an error even without forcing.
+
+Fresh512: ordinary v2 **9**, actual executed families3, fallback-inclusive structures4.
+Runtime eligibility: standalone9, scene-leading4, subject-scene-action4; other3
+families0. Forced constructors17/17 succeed;9 have exact ordinary raw/cleaned output,
+8 changed outputs retain semantic parity NOT_AVAILABLE. No quality gain is inferred.
+Proof/constructor mismatch0; paired whole-record/raw/cleaned/upstream/Builder-debug
+mismatch0. All prior9 successful seeds retained; new/regressed successes0.
+Routes: legacy_direct9/fallback503/common_evidence0/simple_legacy_compatible0.
+Only-blocker rows: legacy route ceiling11 (seed-family rows, not11 rescued seeds).
+
+Repeated reports/rows/records/normal pairs are byte-identical. Rows hash:
+`24707d73c2e9d7f235080694eb7df0a427f35c8d5f0d8dd2b799208dc841b307`;
+records hash: `c384f01d708a546ac4a1b08ef1b9fd46bd1e8bb97d886032a56f616148a13bef`.
+Public signatures/default serialization, V150 protected120 files, A1.6 lock,
+original main/user files and saved baseline sources remain intact. AST (Python3.10
+grammar) and diff checks pass; execution used Python3.12.10.
+
+Final ignored artifacts beneath original main:
+`assets/results/diversity_refactor/r43/audit-final-02/`.
+Read-only R43-AUDIT-BASE: `assets/results/diversity_refactor/r43/audit-base-20260911-02/`.
+Superseded audit-final-01/source3c18... remains stored, not final-source evidence.
+Unknown binding/forced ownership is explicit. Audit-only producer replay, formal
+8192/2048/fixed80/release, full suite and frontend/browser are NOT_RUN; typecheck
+unconfigured. Overall R4.3 architecture/development NOT_RUN, adoption **BLOCKED**.
+Next: **R43-03**, common runtime evidence and binding. No main merge/push or N2.8/D3.
+
+### R43-03 — Common runtime evidence and binding (start)
+
+State: IN_PROGRESS (2026-09-11 JST).
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; accepted uncommitted source
+`0cfe1bf8a508e83d7c93e853b526826e8326cebf11260d49b5ab3883d6432808`.
+Pre-code cleanup plan: [r43_evidence_plan.md](./r43_evidence_plan.md).
+Own only common immutable types/binding, Action legacy adapters, tests and docs.
+Validate current evidence by reconstruction; retain unknowns and subject/owner
+distinctions. Existing selection, raw/cleaned/debug and public JSON stay unchanged.
+All R43-00/01/02 user edits/evidence preserved. Adoption BLOCKED; no N2.8/D3.
+
+### R43-03 result — 2026-09-11 JST
+
+State: PASS (R43-03 acceptance only).
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; changes remain uncommitted.
+Start source: `0cfe1bf8a508e83d7c93e853b526826e8326cebf11260d49b5ab3883d6432808`.
+Final source: `9e11acec3b8d16f280bbec453d8f0d3506baaa3a892fe565a9ee0beecbdcd6c7`.
+Changes/decisions: [r43_evidence_plan.md](./r43_evidence_plan.md).
+Source-bound artifacts: [r43_evidence_summary.json](./r43_evidence_summary.json).
+
+Added immutable tri-state common evidence, explicit external serialization,
+all-input hashing and reconstruction-based validation. Matching checksums cannot
+authorize forged fields. Missing references remain None; grammatical subject and
+owner differ for body/event clauses. Additive Action adapter retains unchanged
+legacy renderer/grammar behavior, exact selected bytes and semantic main verbs.
+Only emitted parts are proved; omissions/antecedents remain unknown. Other domain
+adapters and FamilyProof/family authorization remain deferred to their owning tasks.
+
+Final checks all exit0: focused236 tests/1,931 subtests; regression87 tests/33
+subtests; validators, sizing, assets/full flow; source-bound intake512 paired with
+R43-AUDIT-BASE; three typed512 runs in root/package, ascending/reverse, hashseeds
+0/123/7, with one separate read-only snapshot.34 focused IDs added, none removed,
+no skips/exclusions. Independent review ran34 tests/9 subtests and approved.
+Changed Python AST (Python3.10 grammar) and diff checks pass; runtime Python3.12.10.
+
+All512 ordinary raw/cleaned/upstream/debug/whole records and existing reachability
+metrics/blockers match R43-02. v2 remains9/512 across3 families, four structures
+including fallback; forced changed-output semantics remain unknown as before.
+New typed binding validation512/512, stale changed-action rejection512/512, exact
+Action replay512/512. Recognized legacy grammar atoms994, unknown atoms1,824.
+These trace/atom counts are not new runtime eligibility or quality gains.
+
+Typed evidence hash, identical across all three runs:
+`41d5837308d75a399640df1d677e3646b6f21cda7069fba6c9ef56f122115966`.
+Runtime evidence source identity:
+`7a3a721c800df92e3b4e0ed74c8ce2dc205a9662818335198be89232b87ab6a8`;
+this cached bounded identity differs from the audit's full source_tree_hash and
+assumes a fixed imported process snapshot. No per-prompt repo walk or trace cache.
+
+Public signatures/default serialization, V150 protected120 files, A1.6 lock,
+metric contract, prior saved sources and original main/user files are unchanged.
+Final ignored receipts: `assets/results/diversity_refactor/r43/evidence-final-01/`;
+read-only source: `assets/results/diversity_refactor/r43/evidence-base-20260911/`.
+Full suite/frontend/browser/formal gates NOT_RUN; typecheck unconfigured. Overall
+R4.3 architecture/development NOT_RUN; adoption **BLOCKED**. No new family permission,
+commit/merge/push or N2.8/D3. Next: **R43-04**, Clothing trace/reconstruction.
+
+### R43-04 — Clothing trace/reconstruction (start)
+
+State: IN_PROGRESS (2026-09-11 JST).
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; accepted uncommitted source
+`9e11acec3b8d16f280bbec453d8f0d3506baaa3a892fe565a9ee0beecbdcd6c7`.
+Pre-code plan: [r43_clothing_plan.md](./r43_clothing_plan.md).
+Share existing renderer assembly for trace acquisition; preserve selected-attempt
+decision/RNG behavior. Bind runtime Clothing only through existing history and
+current text with separate grammar proof; no inferred exact replay settings.
+Earlier source snapshots/user work preserved. Adoption BLOCKED; no N2.8/D3.
+
+### R43-04 result — 2026-09-11 JST
+
+State: PASS (R43-04 acceptance only).
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; changes remain uncommitted.
+Start source: `9e11acec3b8d16f280bbec453d8f0d3506baaa3a892fe565a9ee0beecbdcd6c7`.
+Final source: `69870cf195583d3cc50ae765c2761754f9a5eedeb2f42cbd16181000b5bc1876`.
+Changes/decisions: [r43_clothing_plan.md](./r43_clothing_plan.md).
+Artifact hashes: [r43_clothing_summary.json](./r43_clothing_summary.json).
+
+Shared item selection/assembly now produces legacy output and optional immutable
+trace without different draws. Candidate/selector sinks expose only selected
+attempt trace while preserving tuples/decisions/scoring/early break. Material/state
+suppression and palette origin are explicit; no public/context metadata was added.
+Latest-history Clothing adapter uses selected pack + exact current text + existing
+variants/signature + shared nominal rules; it never scans another pack or guesses
+outfit_mode/outerwear_chance. Common factory integrates this bound component only.
+
+All final checks exit0: focused259 tests/1,963 subtests; regression87 tests/33
+subtests; validators/sizing/assets/full flow; paired512 audit; two512 trace/binding
+runs across root/ascending/hashseed0 and a separate package/reverse/hashseed123
+snapshot.23 tests added, none removed, no skips/exclusions. Pre-edit golden624
+item/576 candidate outputs match;384 candidate-local RNG post-states match.
+Review approved after correcting override catalog references and fingerprint
+dependencies. Changed Python AST (3.10 grammar) and diff checks pass.
+
+Fresh512 exact selected-attempt trace/direct replay matches512, including47
+nonzero selected attempts (1:29,2:8,3:8,4:2). History/plain/traced tuple/RNG mismatches0.
+Runtime-available bound constructors102, runtime exact historical replay0;
+audit-only complete-input renderer replay512. Unknowns: multiple garment owner182,
+outerwear attachment134, nominal grammar71, source ambiguity7, incomplete/stale
+selection history16. All102 bound traces' emitted fields/raw hashes/text agree
+with actual producer traces. Stale-history binding mutations rejected512/512.
+
+These counts do not alter family authorization or the R43-02 metric contract.
+Ordinary v2 stays9/512 across3 families,4 fallback-inclusive structures. All512
+raw/cleaned/upstream/context/debug/whole records and existing reachability metrics
+match R43-03 byte-for-byte. Clothing trace/evidence hash, identical in both runs:
+`a6f88a6731239c05ecf1b209ba76062088a5f3fa70e7d50650b391d91d4f5bb7`.
+Bounded runtime evidence identity:
+`bcc0feba90d7aa9f8943763cb746db4cb00c0287587a966ac85404fc088cb58f`.
+
+Public signatures/default serialization, V150 protected120 files, A1.6 lock,
+metric contract, prior snapshots and original main/user files remain intact.
+Final ignored evidence: `assets/results/diversity_refactor/r43/clothing-final-01/`;
+read-only source: `assets/results/diversity_refactor/r43/clothing-base-20260911/`.
+Full suite/frontend/browser/formal gates NOT_RUN; typecheck unconfigured. Overall
+R4.3 architecture/development NOT_RUN, adoption **BLOCKED**. No commit/merge/push,
+new family permission or N2.8/D3. Next: **R43-05**, Scene trace/reconstruction.
+
+### R43-05 — Scene trace/reconstruction (start)
+
+State: IN_PROGRESS (2026-09-11 JST).
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; accepted uncommitted source
+`69870cf195583d3cc50ae765c2761754f9a5eedeb2f42cbd16181000b5bc1876`.
+Pre-code plan: [r43_scene_plan.md](./r43_scene_plan.md).
+Preserve draws/shuffle/text-dedupe while exposing internal field/default trace.
+Bind Scene using received context/history and unchanged nominal ownership rules;
+unknown weather/crowd and missing historical replay inputs stay unknown.
+Earlier source/user work preserved. Adoption BLOCKED; no N2.8/D3.
+
+### R43-05 result — 2026-09-11 JST
+
+State: PASS (R43-05 acceptance only).
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; changes remain uncommitted.
+Start source: `69870cf195583d3cc50ae765c2761754f9a5eedeb2f42cbd16181000b5bc1876`.
+Final source: `0781fb1204b07bba7dc97af26711f6a989d7334f0118651099b5b4f81fa3143c`.
+Changes/decisions: [r43_scene_plan.md](./r43_scene_plan.md).
+Artifact hashes: [r43_scene_summary.json](./r43_scene_summary.json).
+
+Implemented internal Scene source records and optional trace; original text-based
+shuffle/dedupe, filters, draws and debug remain unchanged. Pack/default origins
+and pre-normalized raw selected hashes survive equal-text collisions. Sampled
+cores removed by repeat-risk and duplicated segments retain omission rule IDs.
+Shared join/sanitize and existing nominal parser feed the common Scene adapter.
+Latest history and current/raw/frame locations must agree. Missing optional
+semantic history is not fabricated; unknown weather/crowd retains original text.
+Gallery/works/plaques subjects and scene ownership are separate; each-work requires
+one earlier works antecedent. Ambiguous normalized/prefixed origins fail closed.
+
+All final checks exit0: focused278 tests/1,963 subtests; regression87 tests/33
+subtests; validators/sizing/assets/full flow; paired512 audit; two512 Scene trace
+runs across root/ascending/hashseed0 and separate package/reverse/hashseed123.
+19 tests added, none removed; no skips/exclusions. Pre-edit2,736 output/debug/RNG
+rows unchanged (all114 packs,6 seeds,2 modes,2 lighting modes). Current512 local RNG
+post-state and full trace replay match512/512. Independent review approved final
+origin/reference/omission corrections; Python3.10 AST and diff checks pass.
+
+Runtime-bound Scene constructors10/512, runtime exact historical replay0,
+audit-only complete-input replay512. Remaining502 source/grammar cases retain
+UNKNOWN/raw text. Trace counts include232 defaults parts and9 repeat-risk-suppressed
+core draws. No post-shuffle duplicates occur in this cohort; controlled tests
+exercise duplicates across fields. All10 bound emitted source sequences match
+actual producer trace; one each-work reference atom is bound. Stale history
+mutations rejected512/512. No audit-only trace is used for runtime authorization.
+
+Ordinary raw/cleaned/upstream/context/debug/whole records and existing reachability
+metrics match R43-04 byte-for-byte. v2 remains9/512 across3 families,4 structures
+including fallback. Scene evidence hash identical across both source/import/order runs:
+`92a35c91246f63408071be898fdc470852d4b2650d0c4f2c4419f9eff2423f06`.
+Bounded runtime source identity:
+`8c8151d9ada97fb23c520e7a1f01fb36e4907c8348290b8b477eee50fe783d4e`.
+
+Public signatures/default serialization, V150 protected120 files, A1.6 lock,
+metric contract, prior snapshots and original main/user files remain intact.
+Final evidence: `assets/results/diversity_refactor/r43/scene-final-03/`;
+read-only source: `assets/results/diversity_refactor/r43/scene-base-20260911-03/`.
+scene-final-01/02 are superseded after conservative reference-order/omission fixes.
+Full suite/frontend/browser/formal gates NOT_RUN; typecheck unconfigured. Overall
+R4.3 architecture/development NOT_RUN, adoption **BLOCKED**. No new family permission,
+commit/merge/push or N2.8/D3. Next: **R43-06**, Template/Subject/Garnish/Mood adapters.
+
+### R43-06 start — 2026-09-12 JST
+
+State: IN_PROGRESS. Existing uncommitted R43-00..05 changes preserved.
+Start source: `0781fb1204b07bba7dc97af26711f6a989d7334f0118651099b5b4f81fa3143c`.
+Plan and bounded write scope: [r43_support_plan.md](./r43_support_plan.md).
+Hash-verified snapshot and pre-edit verification beneath original main:
+`assets/results/diversity_refactor/r43/support-20260912-01/`.
+Adapt current selected template and received support inputs into common evidence;
+retain UNKNOWN and original text for unsupported sources/grammar. No new family
+permission, vocabulary or semantic selection. Adoption BLOCKED; no N2.8/D3.
+
+### R43-06 result — 2026-09-12 JST
+
+State: PASS (R43-06 acceptance only).
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; changes remain uncommitted.
+Start source: `0781fb1204b07bba7dc97af26711f6a989d7334f0118651099b5b4f81fa3143c`.
+Final source: `72988cdef49384d5d61ead709280497af59e2ab400a3f85dc1cad0ecf358deaf`.
+Changes, scope and limitations: [r43_support_plan.md](./r43_support_plan.md).
+Commands, artifact inventory and SHA-256: [r43_support_summary.json](./r43_support_summary.json).
+
+Added common Template/Subject/Garnish/Mood adapters using existing constructors and
+bounded grammar. Exact selected template metadata/topology is bound within the
+same Builder call; source membership alone grants no grammar. Received profile,
+latest garnish selection and mood key/text are checked without guessing missing
+upstream settings. Unsupported/current mismatches retain UNKNOWN/raw text.
+Attachment categories, grammatical subject, ownership and references remain
+separate. No evidence is serialized into public context/history/debug; normal
+execution and rollback do not build diagnostic evidence.
+
+Fresh512 source-bound counts: subject491, garnish122, mood512, template512.
+Their all-atom grammar-known counts are243/65/312/208 respectively. They are
+diagnostic components, not family eligibility. Full seven-domain blockers/topology
+and pair intersections are stored separately from unchanged legacy counters.
+
+Verification exit0:299 focused tests/1,963 subtests,87 regression tests/33 subtests,
+all validators/sizing/assets/full flow, paired512, two common-evidence512 replays,
+public contracts.21 tests added, none removed; no skips/exclusions. All raw/cleaned/
+upstream/context/debug/whole records and legacy reachability counters match R43-05.
+Ordinary v2 remains9/512 across3 families,4 structures including fallback.
+Fresh root/ascending/hashseed0 and separate snapshot/package/reverse/hashseed123
+evidence bytes match;512 stale bindings rejected and RNG/context unchanged.
+Protected120 V150 files, A1.6 lock, metric contract, main and user files are intact.
+Python3.10 AST and diff checks PASS.
+
+Independent review identified attachment/owner conflation; added failing tests,
+fixed the fields and received approval. final-01 is retained and superseded.
+Final evidence relative to original main:
+`assets/results/diversity_refactor/r43/support-20260912-01/final-02/`.
+Overall architecture/development NOT_RUN; full suite/frontend/browser/formal gates
+NOT_RUN; typecheck unconfigured; adoption **BLOCKED**. No new grammar/family
+permission, commit/merge/push or N2.8/D3. Next: **R43-07** family proof/constructors.
+
+### R43-07 start — 2026-09-12 JST
+
+State: IN_PROGRESS. All prior uncommitted work preserved.
+Start source: `72988cdef49384d5d61ead709280497af59e2ab400a3f85dc1cad0ecf358deaf`.
+Plan: [r43_family_plan.md](./r43_family_plan.md).
+Baseline and evidence relative to original main:
+`assets/results/diversity_refactor/r43/family-20260912-01/`.
+Create one common proof/constructor engine with explicit current-input revalidation
+and six independent contracts. Existing selection and compatibility remain unchanged.
+Recombination fixture success and real-graph reachability are separate measurements.
+Adoption BLOCKED; no main merge/push or N2.8/D3.
+
+### R43-07 result — 2026-09-12 JST
+
+State: PASS (R43-07 acceptance only).
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; changes remain uncommitted.
+Start source: `72988cdef49384d5d61ead709280497af59e2ab400a3f85dc1cad0ecf358deaf`.
+Final source: `2bf39ee99bcc5fa9010891c2ddf8451cc9194cb8647887d099870e9e021d4faf`.
+Changes and contracts: [r43_family_plan.md](./r43_family_plan.md).
+Command/artifact/hash inventory: [r43_family_summary.json](./r43_family_summary.json).
+
+Added a single common family authority, immutable FamilyProof and six constructors
+using existing source/grammar materializers. Current inputs, complete ContentPlan,
+source catalog and concrete constructor output are revalidated; full producer
+ActionFrame projection is checked independently of grammar. New selector/realizer
+paths explicitly opt in and reject mixed legacy proofs. Successful layout formatting
+is shared without changing old safety gates, fallback or ordinary selection.
+
+All6 families have positive/negative RECOMBINATION fixtures with actual rendered
+order, source words, ownership/reference checks. Real-graph512 x6 diagnostics are
+separate: common eligible0/512 and common forced-v2 0 for each family. Existing
+ordinary v2 remains9/512 across3 families;4 structures including fallback.
+No six-family real-graph coverage or quality improvement is claimed.
+
+All checks exit0:348 focused tests/1,963 subtests;87 regressions/33 subtests;49 test
+IDs added, none removed, no skips/exclusions; validators/sizing/assets/full flow.
+Paired512 raw/cleaned/upstream/context/debug/whole records and legacy reachability
+counters are unchanged. Fresh root/ascending/hashseed0 and separate snapshot/
+package/reverse/hashseed123 common/family/recombination receipts match exactly.
+Proof/constructor mismatches0;512 stale evidence changes rejected; RNG unchanged.
+Public signatures/default serialization,120 protected V150 files, A1.6/metric
+contract, stable main and prior user files preserved. Python3.10 AST/diff checks PASS.
+
+Independent review reproduced an insufficient semantic-object check, corrected it
+to full producer frame reconstruction, and approved the final scope. Mixed legacy
+authorization arguments are explicitly rejected. No new grammar vocabulary or dependency.
+Final evidence relative to original main:
+`assets/results/diversity_refactor/r43/family-20260912-01/final-01/`.
+
+Remaining: common evidence still fails to establish all necessary domain facts on
+real inputs (notably Scene/Action/Garnish). R43-08 owns bounded reconstruction fixes,
+integration and genuine six-family real-graph evidence. Overall architecture/
+development NOT_RUN; full suite/frontend/browser/formal gates NOT_RUN; typecheck
+unconfigured; adoption **BLOCKED**. No commit/merge/push or N2.8/D3.
+
+### R43-08 start — 2026-09-12 JST
+
+State: IN_PROGRESS. Existing R43-00..07 changes preserved.
+Start source: `2bf39ee99bcc5fa9010891c2ddf8451cc9194cb8647887d099870e9e021d4faf`.
+Plan: [r43_integration_plan.md](./r43_integration_plan.md).
+Inspect real common-component blockers, reconstruct from received context using
+existing policy, then connect common proof only after compatibility fallback.
+Keep old successes/fallbacks, semantic selection, V150/A1.6/public I/O unchanged.
+Evidence root: `assets/results/diversity_refactor/r43/integration-20260912-01/`.
+Adoption BLOCKED; no main merge/push or N2.8/D3.
+
+### R43-08 limited integration result — 2026-09-12 JST
+
+State: BLOCKED (R43-08 acceptance); limited implementation checks PASS.
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; changes uncommitted.
+Start source: `2bf39ee99bcc5fa9010891c2ddf8451cc9194cb8647887d099870e9e021d4faf`.
+Final source: `e4742266368e68aaee3e3aa82fe03850c8186f4267f0c7cb9f77d80bf84663ec`.
+Implementation/blockers: [r43_integration_plan.md](./r43_integration_plan.md).
+Commands/artifact hashes: [r43_integration_summary.json](./r43_integration_summary.json).
+
+Integrated common proof only after actual compatibility fallback; retained the
+existing sorted seed selector and all old success outputs. Proof/transform data
+stays outside public context/debug. Reused existing garnish policies to bind raw
+history to current post-policy output; retained raw/emitted/omitted source parts.
+Garnish source-bound122→512; emitted grammar-known65→386. No grammar/vocabulary
+expansion or seed allowlist. Invalid optional JSON data returns old fallback;
+proof/constructor mismatch errors remain visible.
+
+Actual common family evidence: standalone-scene4/512, each other family0/512.
+Four forced outputs match prior raw/cleaned exactly (88/190/234/482). All are
+existing successes; ordinary v2 stays9/512 across3 families and4 total structures.
+New ordinary success0. Therefore R43-08 acceptance remains BLOCKED and R43-09
+has not started. Missing place/temporal/owned-wrapper/body-attachment proofs are
+recorded without turning UNKNOWN into permission or substituting artificial cases.
+Plan section18 A/C/D prevents a broad grammar expansion to rescue individual rows.
+
+Verification exit0:374 focused tests/1,963 subtests;87 regressions/33 subtests;
+validators/sizing/assets/full flow; paired512; common/family/recombination replay
+in fresh root and separate package/reverse/hashseed processes.27 test IDs added,
+1 renamed/updated for the new runtime-fallback contract; no skips/exclusions.
+Normal raw/cleaned/upstream/context/debug/whole records, legacy metrics, public
+contracts,120 V150 files, A1.6, stable main and user files preserved.512 stale
+bindings rejected, RNG unchanged, proof/constructor mismatch0. Python3.10 AST
+and diff checks PASS. Independent review approved the limited integration.
+
+Final evidence relative to original main:
+`assets/results/diversity_refactor/r43/integration-20260912-01/final-02/`.
+final-01 retained/superseded by noncanonical-context regression correction.
+Architecture/development NOT_RUN; full suite/frontend/browser/formal gates
+NOT_RUN; typecheck unconfigured; adoption BLOCKED. No commit/merge/push or N2.8/D3.
+
+### R43-08 placement continuation — 2026-09-12 JST
+
+State: IN_PROGRESS. Existing limited integration and user work preserved.
+Start source: e4742266368e68aaee3e3aa82fe03850c8186f4267f0c7cb9f77d80bf84663ec.
+Plan: [r43_placement_plan.md](./r43_placement_plan.md).
+Bound reviewed Scene constituents, separate fronted Action from owned Garnish,
+and prove owned template placement without changing legacy selection or vocabulary.
+Adoption BLOCKED; no R43-09/main/N2.8/D3 advancement.
+
+### R43-08 owned-placement result — 2026-09-12 JST
+
+State: placement pass PASS; R43-08 acceptance BLOCKED (no new ordinary success).
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; changes remain uncommitted.
+Start source: `e4742266368e68aaee3e3aa82fe03850c8186f4267f0c7cb9f77d80bf84663ec`.
+Final source: `0c8c421de459f62afa8731d60994d23a4409165b726095e5b24c13d363ebd281`.
+Changes and semantic limits: [r43_placement_plan.md](./r43_placement_plan.md).
+Artifact/hash inventory: [r43_placement_summary.json](./r43_placement_summary.json).
+
+Reused existing reviewed Scene grammar with exact pack/field/default/history
+binding. The legacy relative constructor stays restricted to that bound route;
+modern temporal/adorned restrictions remain unchanged. Scene bound10→13/512.
+Action-leading fronts only actor Action; owned Garnish moves to the subject
+parenthetical with original body subject and updated atom mapping. Owned room
+templates gain with-absolute placement, never an invalid is-locative predicate.
+
+Unchanged real-graph common eligible/forced counts per512:
+subject_action_scene2, standalone5, scene_lead2, action_lead1,
+subject_scene_action2, scene_insert2. All6 families now reach real inputs;
+14 successful seed-family rows across5 inputs. Actual51 reaches all6 and234
+reaches5. Runtime contains no seed gates. Ordinary compatibility output stays
+9/512 v2,3 executed families,4 structures including fallback; new ordinary0.
+This remaining R43-08 condition keeps acceptance BLOCKED and R43-09 unstarted.
+
+Verification exit0:409 focused tests/1,963 subtests;87 regressions/33 subtests;
+validators/sizing/assets/full flow, paired512, common/family/recombination receipts
+in fresh root and separate package/reverse/hashseed processes.36 tests added,
+1 renamed/updated; existing diagnostics now validate5 owned-wrapper alternatives
+and reject action-leading. No skips/exclusions. Normal raw/cleaned/upstream/
+context/debug/whole records and legacy metrics unchanged. Public contracts,
+120 V150 files, A1.6/metric lock, stable main and user files intact.512 stale
+inputs rejected, RNG unchanged, proof/constructor mismatches0, Python3.10 AST
+and whitespace checks PASS.
+
+Independent review ran35 new tests and inspected six actual51 final surfaces.
+Source-atom/raw/cleaned retention and owner/reference tests pass; this is scoped
+evidence, not formal global quality certification. Final evidence:
+`assets/results/diversity_refactor/r43/placement-20260912-01/final-02/`
+relative to original main. final-01 retained with its obsolete diagnostics
+assertion failure; corrected final-02 is authoritative.
+
+Architecture/development and full-suite/frontend/browser/formal gates NOT_RUN;
+typecheck unconfigured; adoption BLOCKED. Next: bounded producer grammar/binding
+work for a new ordinary application. No commit/merge/push or N2.8/D3.
+
+### R43-08 ordinary-application continuation — 2026-09-12 JST
+
+State: IN_PROGRESS. Placement checkpoint and existing user work preserved.
+Start source: 0c8c421de459f62afa8731d60994d23a4409165b726095e5b24c13d363ebd281.
+Plan: [r43_ordinary_plan.md](./r43_ordinary_plan.md).
+Common-only productive Action clauses; preserve legacy grammar, source facts,
+owners, old9 successes and remaining fallbacks. Adoption BLOCKED.
+
+### R43-08 ordinary-application result — 2026-09-12 JST
+
+State: PASS (R43-08 acceptance). Formal adoption remains BLOCKED.
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; changes uncommitted.
+Start source: `0c8c421de459f62afa8731d60994d23a4409165b726095e5b24c13d363ebd281`.
+Final source: `1eaca58955044461c335702ea0a398bab8fb9958f0a82fcb01a312d7f979d79a`.
+Plan/result: [r43_ordinary_plan.md](./r43_ordinary_plan.md).
+Command/hash inventory: [r43_ordinary_summary.json](./r43_ordinary_summary.json).
+
+Added common-only complete-clause stance/activity, rechecking, owned eyes-relative
+and relation-bound book-page visibility proofs. Existing grammar/aggregation/
+materialization is reused; legacy grammar remains unchanged. Pages retain artifact
+ownership, eyes retain protagonist body ownership, and neither authorizes actor
+fronting. The standalone Scene binds time to its full finite sentence rather than
+to furniture or the Action. No source vocabulary/dependency/seed allowlist changes.
+
+Ordinary v2 increases9→10/512 (new real input2, standalone family). All9 prior
+successes and502 remaining fallbacks are byte-identical. New prose preserves
+source atoms/polarity/owners; selected upstream context and core/frame match512/512.
+The exact-parity audit definition is unchanged; separate expansion-preservation
+uses fresh isolated baseline execution and existing semantic projection functions.
+All6 real-graph families still forced: baseline2, standalone6, scene_lead2,
+action_lead1, subject_scene2, insert2 (15 rows). Ordinary families remain3;
+4 structures including fallback. This shortfall remains recorded for improvement.
+
+Verification exit0:423 focused tests/1,990 subtests;87 regressions/33 subtests;
+validators/sizing/assets/full flow; baseline/current512 expansion preservation;
+common/family/recombination replay in fresh root/ascending/hashseed0 and separate
+snapshot/package/reverse/hashseed123.14 tests added, none removed/skipped/excluded.
+No source/owner/projection, proof/constructor or RNG mismatch;512 stale bindings
+rejected. Public contracts,120 V150 files, A1.6/metric contract, main and prior
+user files preserved. Python3.10 AST and whitespace checks PASS.
+
+Independent code and before/after semantic review found no blocker. Final evidence:
+`assets/results/diversity_refactor/r43/ordinary-20260912-01/final-01/`
+relative to original main. R43-08 conditions satisfied. Next R43-09 consolidates
+verification and architecture/development judgments (currently NOT_RUN).
+Full suite/frontend/browser/formal gates NOT_RUN; typecheck unconfigured;
+adoption BLOCKED. No commit/merge/push or N2.8/D3 activation.
+
+### R43-09 start — 2026-09-12 JST
+
+State: IN_PROGRESS. Accepted R43-08 source/user edits preserved.
+Start source: 1eaca58955044461c335702ea0a398bab8fb9958f0a82fcb01a312d7f979d79a.
+Plan: [r43_verification_plan.md](./r43_verification_plan.md).
+Portable thin verification, source-bound receipts and distinct verdicts.
+Runtime/A1.6/public contracts unchanged. Formal adoption BLOCKED.
+
+### R43-09 result — 2026-09-12 JST
+
+State: PASS (R43-09 acceptance).
+Architecture: PASS. Development: PASS. Adoption: BLOCKED.
+HEAD: `9a2aa32c1e3a48d1d7ea51eb91aee42843dba021`; changes uncommitted.
+Start source: `1eaca58955044461c335702ea0a398bab8fb9958f0a82fcb01a312d7f979d79a`.
+Final source: `1678a635b03d8e6e18e6a797b395511a51cc04c3f245f96c7c5a38e9ca17cf23`.
+Interface/result: [r43_verification_plan.md](./r43_verification_plan.md).
+Parent/child canonical evidence hashes: [r43_verification_summary.json](./r43_verification_summary.json).
+
+Extended the thin verifier with portable intake and adoption-preflight. Repository
+helpers reuse the existing workflow runner, audit, baseline replay, semantic
+projection and proof engine. No ignored-driver imports or developer paths.
+Test accounting includes runtime and collection skips, deselections, xfail/xpass,
+setup/teardown/collection errors and separate test/subtest outcomes. Canonical
+verdicts exclude time/host paths; command/environment/log details remain separate.
+
+Corrected-source intake and a complete repeat from a clean source copy both PASS;
+their canonical verdict bytes and all referenced canonical hashes are identical.
+492 focused tests/1,990 subtests and87 regressions/33 subtests pass, with all
+exception counters0.69 test IDs added, none removed. Validators/sizing/assets/
+full flow, isolated baseline/current512 preservation and root/package/reversed
+hashseed replay all exit0. Actual hashseed use is checked, not merely requested.
+
+Development results remain10/512 ordinary v2 (baseline9/new1),3 ordinary families,
+all6 real-graph forced families. Old9 successes/502 remaining fallbacks and upstream/
+core/frame facts preserved. Scoped prose review binds runtime source, input and
+actual new ordinary/raw/cleaned outputs. Runtime/grammar/data/selection code is
+unchanged in this task. Public/V150/A1.6, main and user-file preservation PASS.
+
+Independent review reproduced and fixed ordinary-prose review mismatch, collection
+skip omission, and preflight supplemental staleness. Failing tests preceded fixes;
+final re-review found no further clear false-PASS. accounting-probe/intake-01 remain
+historical unsuccessful probes; intake-02/fresh-intake are authoritative.
+
+Adoption-preflight from the clean copy identifies original V150 source and matching
+protected inputs, checks current intake/supplemental/lock integrity, then returns
+BLOCKED/exit2 for the unmet64/5 guide and pending R43-10 formal baseline/quality
+receipt validation. No heavy formal evaluation ran. Full suite/frontend/browser/
+formal gates NOT_RUN; typecheck unconfigured. Source review is not blinded formal QA.
+
+Evidence relative to original main:
+`assets/results/diversity_refactor/r43/verification-20260912-01/`.
+Next: R43-10 conditional handoff. No main merge/push or N2.8/D3 activation.
+
+### R43-10 start — 2026-09-12 JST
+
+State: IN_PROGRESS. Conditional handoff only; no runtime/tool/data changes.
+Candidate source: 1678a635b03d8e6e18e6a797b395511a51cc04c3f245f96c7c5a38e9ca17cf23.
+Plan: [r43_handoff.md](./r43_handoff.md). Verify original V150 evidence and
+complete A1.6 obligations. No heavy formal run while the64/5 guide is unmet.
+Adoption BLOCKED; main/N2.8/D3 untouched.
+
+### R43-10 conditional handoff result — 2026-09-12 JST
+
+State: PASS (handoff preparation only). Formal handoff/adoption: BLOCKED.
+Source unchanged: `1678a635b03d8e6e18e6a797b395511a51cc04c3f245f96c7c5a38e9ca17cf23`.
+HEAD9a2aa32c1e3a48d1d7ea51eb91aee42843dba021; prior uncommitted work preserved.
+Packet: [r43_handoff.md](./r43_handoff.md).
+Integrity and comparison receipts: [r43_handoff_summary.json](./r43_handoff_summary.json).
+
+Reverified all1120 sealed original pre-N2 V150 source files, archive/manifest
+hashes and ZIP CRC. Its own isolated metadata capture reproduces audit source
+448e4240b6f8321e1ba9332f9f624b7bf9419d255f715f438fd87b13dd556214 and
+prompt-quality source27fea03cfcc4d54c1fbed033f5a9ece9a812f2ad090b663f06745d8794412c53.
+Historical gate/repeat/reference and paired2048/fixed64+16 files match their
+receipts and source/config/cohort identities. This is integrity validation, not
+a new candidate formal measurement or historical-vote reuse.
+
+Original/candidate public4 source files and120 protected V150 files match.
+Only vocab/data addition is existing N2 syntax metadata. Workflow/runner/
+normalization/signature/contract identities match; audit AST differs only by
+allowed active-family declaration. Metrics/signature extraction files are
+byte-identical. Candidate audit/config projections are explicitly not a report.
+Existing validator rejects cross-source V150 reference reuse as expected.
+
+Full A1.6 lock copied unchanged and all numeric/missingness/coverage/semantic/
+quality/review/confirmation/release/runtime obligations inventoried; scheduler
+conditions retained as DEFERRED. Scoped independent handoff review approved the
+packet and verified referenced hashes. Existing R43-09 preflight supplied stable
+main01f942..., not the sealed original27fea...; the handoff documents this
+distinction without rewriting the old receipt.
+
+Architecture/development PASS and492 focused/87 regression evidence remain current
+because runtime/tool/data source and intake guards did not change. Tests were not
+rerun for this documentation-only task. Ordinary10/512 and3 families remain below
+the64/5 guide, so no heavy candidate reference8192/gate2048/paired2048/fixed80/
+fresh review/confirmation/release/frontend/browser evaluation or formal freeze
+was started. These are NOT_RUN, not REJECTED. A separately source-bound V150
+release-profile8192 baseline remains unestablished for final adoption.
+
+Next bounded work: Action+Scene coverage from remaining502 fallback inputs.
+No single-domain-only fallback remains; four have Action+Scene blockers and
+one Action+Clothing. Examples are diagnostic, never seed allowlists or promised
+rescues. Handoff evidence relative to original main:
+`assets/results/diversity_refactor/r43/handoff-20260912-01/`.
+No main merge/push, N2.8/D3 or production activation. R43 development/conditional
+handoff sequence is complete; formal evaluation and adoption remain BLOCKED.
+
+## 2026-09-12 — Post-R43 coverage AS01 complete
+
+Bounded common-only Action+Scene grammar now handles the actual recording-booth
+input. Existing aggregation/materialization and source binding are reused;
+legacy defaults remain unchanged. The event keeps its own nonhuman subject and
+cannot lead Action; pen/wall articles are explicit, source-preserving transforms.
+Pads keep the wall attachment and both source-owned atmosphere constituents stay.
+
+Ordinary v2 rises10→11/512 across3 families. All10 earlier successes and501
+remaining fallbacks are byte/semantic/context-preserved; original nine-case
+baseline comparison also passes. All6 real-input forced families remain proved.
+Focused534 tests/2,020 subtests, regression87 tests/33 subtests, validators/assets/
+full flow and portable intake PASS. Exclusion/error counters are all0. Independent
+root/package512 replay uses reversed order, different actual hash seeds and a
+clean source copy, with identical evidence/final prose and no constructor mismatch.
+Independent scoped code/prose review passes; eight reviewed cases now bind the
+new runtime. Existing awkward template/mood phrasing remains a formal-review gap.
+
+Final source53a4fe8048cfd71cdcd9f3a7cb414e0b96ec6c0450b96795c465470d6963b56e.
+V150120 protected files, original main and previous user files remain unchanged.
+Python3.10 AST and whitespace checks pass; typecheck is not configured. Evidence
+relative to original main: assets/results/diversity_refactor/r43/coverage-as01-20260912-01.
+Initial audit was invalidated by final edits; audit-final/intake are authoritative.
+See [plan/result](./coverage_as01_plan.md) and [receipt inventory](./coverage_as01_summary.json).
+
+Architecture/development PASS; formal handoff/adoption BLOCKED.64/5 guide unmet,
+formal/frontend/browser NOT_RUN. No main merge/push, N2.8 or D3. Next bounded work
+continues the remaining Action+Scene intersections with this11-case preservation
+baseline. Changes remain uncommitted.

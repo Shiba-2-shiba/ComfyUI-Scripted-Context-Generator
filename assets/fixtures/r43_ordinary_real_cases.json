@@ -1,0 +1,1347 @@
+{
+  "classification": "REAL_GRAPH",
+  "source_tree_hash": "0c8c421de459f62afa8731d60994d23a4409165b726095e5b24c13d363ebd281",
+  "cohort": {
+    "base_workflow_hash": "91c4baa1455799d9c50519c605241058897d6cc66ae83a4eeef1cef0fab4ce18",
+    "config_hash": "24da86b8c6b58abce1f54c0d5703d3ef96536282ceda33a20595d03bb66d3ce4"
+  },
+  "cases": [
+    {
+      "run_seed": 2,
+      "builder_inputs": {
+        "composition_mode": true,
+        "context_json": "{\"context_version\": \"2.0\", \"seed\": 0, \"subj\": \"A solo girl with messy bun, purple hair and green eyes\", \"costume\": \"street_casual\", \"loc\": \"bedroom_boudoir\", \"action\": \"lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping\", \"meta\": {\"mood\": \"a quiet room holding around her while the task in front of her sets the pace\", \"style\": \"\", \"tags\": {\"emotion_nuance\": \"absorbed\", \"place_type\": \"public\", \"progress\": \"preparing\", \"purpose\": \"study\", \"social_distance\": \"viewer\"}}, \"extras\": {\"character_name\": \"Nina (Tech)\", \"hair_color\": \"purple\", \"eye_color\": \"green\", \"personality\": \"quirky\", \"color_palette\": [\"brown\", \"brass\", \"purple\"], \"character_palette_str\": \"brown, brass, purple\", \"clothing_prompt\": \"purple fair isle cashmere warm turtleneck sweater dress, with knit belt\", \"location_prompt\": \"gothic victorian boudoir, during quiet night, featuring vintage vanity mirror with lights and wooden wardrobe with open doors\", \"garnish\": \"brows knit in concentration, steady gaze, still posture\", \"staging_tags\": \"settled concentration, careful hands\", \"source_subj_key\": \"barber\", \"raw_costume_key\": \"street_casual\", \"raw_loc_tag\": \"bedroom_boudoir\", \"character_id\": \"nina_tech\", \"action_frame\": {\"schema_version\": \"action-frame/v1\", \"legacy_text\": \"lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping\", \"main_verb\": \"lying\", \"primary_object\": \"book\", \"posture\": \"lying down\", \"hand_action\": \"reading a book\", \"gaze_target\": \"eyes following the detail she is working through\", \"progress\": \"preparing\", \"stimulus_or_obstacle\": \"forgot\", \"social_relation\": \"viewer\", \"legacy_slots\": {\"location\": \"bedroom_boudoir\", \"purpose\": \"study\", \"progress_state\": \"preparing\", \"social_distance\": \"viewer\", \"obstacle_or_trigger\": \"forgot\", \"daily_life_tags\": [\"domestic\", \"home_life\"], \"primary_action\": \"lying down reading a book\", \"anchor\": \"\", \"posture\": \"lying down\", \"hand_action\": \"reading a book\", \"gaze_target\": \"eyes following the detail she is working through\", \"purpose_clause\": \"rechecking a small detail\", \"progress_clause\": \"as she gets herself ready\", \"social_clause\": \"leaving room for a quiet exchange with the viewer\", \"obstacle_clause\": \"after realizing something is missing\", \"optional_micro_action\": \"rechecking a small detail\", \"time_or_weather\": \"before sleeping\", \"object_state\": \"open pages visible\"}}, \"raw_mood_key\": \"quiet_focused\"}, \"history\": [{\"node\": \"ContextSceneVariator\", \"seed\": 5510864929729530216, \"decision\": {\"mode\": \"full\", \"candidates_count\": 92, \"selected_source\": \"universal\", \"selected_loc\": \"bedroom_boudoir\", \"action\": \"placing a completed intake form in the privacy slot\", \"compat_subject_key\": \"barber\", \"compatible_unique_count\": 56, \"candidates_preview\": [\"clinic_waiting_room (existing)\", \"convenience_store (tag:retail_service)\", \"bakery_shop (tag:retail_service)\", \"supermarket_aisle (tag:retail_service)\", \"drugstore_aisle (tag:retail_service)\", \"family_restaurant (tag:retail_service)\", \"food_court (tag:retail_service)\", \"shopping_mall_atrium (tag:retail_service)\", \"fashion_boutique (tag:retail_service)\", \"shopping_arcade (tag:retail_service)\", \"local_market_street (tag:retail_service)\", \"street_cafe (tag:retail_service)\", \"cozy_bookstore (tag:retail_service)\", \"antique_shop (tag:retail_service)\", \"flower_market (tag:retail_service)\", \"greenhouse_nursery (tag:retail_service)\", \"postal_service_counter (tag:retail_service)\", \"print_shop (tag:retail_service)\", \"modern_office (tag:workplace)\", \"boardroom (tag:workplace)\", \"office_elevator (tag:workplace)\", \"surveillance_room (tag:workplace)\", \"messy_copy_room (tag:workplace)\", \"coworking_space (tag:workplace)\"], \"candidates_preview_total_count\": 92, \"candidates_preview_truncated_count\": 68, \"candidate_source_counts\": {\"existing\": 1, \"tag\": 52, \"universal\": 3, \"daily_life\": 36}, \"candidate_weight_profile\": {\"existing\": 11.0, \"tag\": 36.75, \"universal\": 51.0, \"daily_life\": 45.9}, \"generator_mode\": \"pool\", \"action_pool_size\": 20, \"action_pool_dominant_objects\": [], \"action_pool_object_hits\": {\"book\": 1}, \"solo_safety_filtered_pool_count\": 0, \"base_action\": \"lying down reading a book\", \"normalized_action\": \"lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping\", \"action_load\": \"calm\", \"pool_slots\": {\"primary_action\": \"lying down reading a book\", \"location\": \"bedroom_boudoir\", \"posture\": \"lying down\", \"hand_action\": \"reading a book\", \"purpose\": \"study\"}, \"slot_sources\": {\"location\": \"pool\", \"purpose\": \"pool\", \"progress_state\": \"generated\", \"social_distance\": \"generated\", \"obstacle_or_trigger\": \"generated\", \"primary_action\": \"pool\", \"posture\": \"pool\", \"hand_action\": \"pool\", \"gaze_target\": \"generated\", \"purpose_clause\": \"generated\", \"progress_clause\": \"generated\", \"social_clause\": \"generated\", \"obstacle_clause\": \"generated\", \"optional_micro_action\": \"generated\", \"time_or_weather\": \"generated\", \"object_state\": \"generated\"}, \"object_focus\": {\"detected_objects\": [\"book\"], \"slot_map\": {\"hand_action\": [\"book\"]}, \"classifications\": {\"book\": \"general\"}}, \"slots\": {\"location\": \"bedroom_boudoir\", \"purpose\": \"study\", \"progress_state\": \"preparing\", \"social_distance\": \"viewer\", \"obstacle_or_trigger\": \"forgot\", \"daily_life_tags\": [\"domestic\", \"home_life\"], \"primary_action\": \"lying down reading a book\", \"anchor\": \"\", \"posture\": \"lying down\", \"hand_action\": \"reading a book\", \"gaze_target\": \"eyes following the detail she is working through\", \"purpose_clause\": \"rechecking a small detail\", \"progress_clause\": \"as she gets herself ready\", \"social_clause\": \"leaving room for a quiet exchange with the viewer\", \"obstacle_clause\": \"after realizing something is missing\", \"optional_micro_action\": \"rechecking a small detail\", \"time_or_weather\": \"before sleeping\", \"object_state\": \"open pages visible\"}, \"semantic_epig\": {\"action\": {\"mode\": \"active\", \"target_vector\": {\"motion_energy\": 0.2, \"body_openness\": 0.3, \"precision\": 0.85, \"object_coupling\": 0.83, \"social_intensity\": 0.15, \"time_pressure\": 0.5}, \"slot_rankings\": {\"posture\": [{\"text\": \"leaning in over what she is doing\", \"score\": 0.831, \"distance\": 0.0926, \"source\": \"action_slot_descriptors:posture[0]\", \"role\": \"posture\"}, {\"text\": \"paused in a still working posture\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:posture[2]\", \"role\": \"posture\"}, {\"text\": \"settled at the edge of her seat\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:posture[0]\", \"role\": \"posture\"}], \"hand_action\": [{\"text\": \"fingers keeping her notes in order\", \"score\": 0.8325, \"distance\": 0.0917, \"source\": \"action_slot_descriptors:hand_action[0]\", \"role\": \"hand_action\"}, {\"text\": \"thumb keeping the page open\", \"score\": 0.7862, \"distance\": 0.1203, \"source\": \"action_slot_descriptors:hand_action[4]\", \"role\": \"hand_action\"}, {\"text\": \"hands staying precise and controlled\", \"score\": 0.785, \"distance\": 0.121, \"source\": \"action_slot_descriptors:hand_action[1]\", \"role\": \"hand_action\"}, {\"text\": \"hands busy with the material in front of her\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:hand_action[2]\", \"role\": \"hand_action\"}, {\"text\": \"one hand resting near the page she needs\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:hand_action[1]\", \"role\": \"hand_action\"}], \"gaze_target\": [{\"text\": \"eyes following the detail she is working through\", \"score\": 0.8009, \"distance\": 0.111, \"source\": \"action_slot_descriptors:gaze_target[0]\", \"role\": \"gaze_target\"}, {\"text\": \"eyes tracking the line on the page\", \"score\": 0.7653, \"distance\": 0.1337, \"source\": \"action_slot_descriptors:gaze_target[4]\", \"role\": \"gaze_target\"}, {\"text\": \"checking what is happening nearby\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:gaze_target[2]\", \"role\": \"gaze_target\"}, {\"text\": \"looking over the exact thing that needs her attention\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:gaze_target[1]\", \"role\": \"gaze_target\"}, {\"text\": \"looking toward the next thing she needs\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:gaze_target[3]\", \"role\": \"gaze_target\"}], \"purpose_clause\": [{\"text\": \"rechecking a small detail\", \"score\": 0.8237, \"distance\": 0.097, \"source\": \"action_slot_descriptors:purpose_clause[0]\", \"role\": \"purpose_clause\"}, {\"text\": \"highlighting text\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:purpose_clause[3]\", \"role\": \"purpose_clause\"}, {\"text\": \"quietly marking her place\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:purpose_clause[0]\", \"role\": \"purpose_clause\"}, {\"text\": \"staying with the line she was following\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:purpose_clause[2]\", \"role\": \"purpose_clause\"}], \"progress_clause\": [{\"text\": \"as she gets herself ready\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:progress_clause[1]\", \"role\": \"progress_clause\"}, {\"text\": \"before fully getting started\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:progress_clause[0]\", \"role\": \"progress_clause\"}, {\"text\": \"while setting up the next step\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:progress_clause[2]\", \"role\": \"progress_clause\"}], \"social_clause\": [{\"text\": \"as if responding directly to the viewer\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:social_clause[1]\", \"role\": \"social_clause\"}, {\"text\": \"leaving room for a quiet exchange with the viewer\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:social_clause[2]\", \"role\": \"social_clause\"}, {\"text\": \"meeting the viewer with a quiet look\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:social_clause[0]\", \"role\": \"social_clause\"}], \"obstacle_clause\": [{\"text\": \"after realizing something is missing\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:obstacle_clause[0]\", \"role\": \"obstacle_clause\"}], \"optional_micro_action\": [{\"text\": \"staying with the line she was following\", \"score\": 0.804, \"distance\": 0.1091, \"source\": \"action_slot_descriptors:optional_micro_action[0]\", \"role\": \"optional_micro_action\"}, {\"text\": \"quietly marking her place\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:optional_micro_action[0]\", \"role\": \"optional_micro_action\"}, {\"text\": \"rechecking a small detail\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:optional_micro_action[1]\", \"role\": \"optional_micro_action\"}], \"time_or_weather\": [{\"text\": \"after finally coming home\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:time_or_weather[1]\", \"role\": \"time_or_weather\"}, {\"text\": \"before getting ready to leave\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:time_or_weather[0]\", \"role\": \"time_or_weather\"}, {\"text\": \"before sleeping\", \"score\": 0.5667, \"distance\": 0.284, \"source\": \"runtime:time_or_weather[2]\", \"role\": \"time_or_weather\"}]}, \"slot_changes\": {\"posture\": {\"baseline\": \"lying down\", \"semantic\": \"lying down\", \"changed\": false, \"semantic_top_candidate\": \"leaning in over what she is doing\", \"selected_candidate_rank\": null}, \"hand_action\": {\"baseline\": \"reading a book\", \"semantic\": \"reading a book\", \"changed\": false, \"semantic_top_candidate\": \"fingers keeping her notes in order\", \"selected_candidate_rank\": null}, \"gaze_target\": {\"baseline\": \"eyes following the detail she is working through\", \"semantic\": \"eyes following the detail she is working through\", \"changed\": false, \"semantic_top_candidate\": \"eyes following the detail she is working through\", \"selected_candidate_rank\": 1}, \"purpose_clause\": {\"baseline\": \"rechecking a small detail\", \"semantic\": \"rechecking a small detail\", \"changed\": false, \"semantic_top_candidate\": \"rechecking a small detail\", \"selected_candidate_rank\": 1}, \"progress_clause\": {\"baseline\": \"as she gets herself ready\", \"semantic\": \"as she gets herself ready\", \"changed\": false, \"semantic_top_candidate\": \"as she gets herself ready\", \"selected_candidate_rank\": 1}, \"social_clause\": {\"baseline\": \"leaving room for a quiet exchange with the viewer\", \"semantic\": \"leaving room for a quiet exchange with the viewer\", \"changed\": false, \"semantic_top_candidate\": \"as if responding directly to the viewer\", \"selected_candidate_rank\": 2}, \"obstacle_clause\": {\"baseline\": \"after realizing something is missing\", \"semantic\": \"after realizing something is missing\", \"changed\": false, \"semantic_top_candidate\": \"after realizing something is missing\", \"selected_candidate_rank\": 1}, \"optional_micro_action\": {\"baseline\": \"rechecking a small detail\", \"semantic\": \"rechecking a small detail\", \"changed\": false, \"semantic_top_candidate\": \"staying with the line she was following\", \"selected_candidate_rank\": 3}, \"time_or_weather\": {\"baseline\": \"before sleeping\", \"semantic\": \"before sleeping\", \"changed\": false, \"semantic_top_candidate\": \"after finally coming home\", \"selected_candidate_rank\": 3}}, \"changed_slots\": [], \"selected_by_semantic\": true, \"semantic_scoring_enabled\": true, \"selection_changed_by_semantic\": false, \"baseline_candidate\": \"\", \"semantic_candidate\": \"\", \"semantic_top_candidate\": \"\", \"selected_candidate_rank\": null}, \"object_relation\": {\"detected_objects\": [\"book\"], \"relation_key\": \"book:reading\", \"required_roles\": {\"hand_action\": [\"holding an open book\", \"one hand supporting the book\"], \"gaze_target\": [\"eyes lowered toward the pages\"], \"object_state\": [\"open pages visible\"]}, \"mode\": \"active\", \"applied_slots\": {\"object_state\": \"open pages visible\"}, \"skipped_slots\": {\"hand_action\": \"existing slot already set\", \"gaze_target\": \"existing slot already set\"}}}, \"action_updated\": true, \"action_refresh_reason\": \"location_changed\", \"new_action\": \"lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping\", \"action_frame\": {\"schema_version\": \"action-frame/v1\", \"legacy_text\": \"lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping\", \"main_verb\": \"lying\", \"primary_object\": \"book\", \"posture\": \"lying down\", \"hand_action\": \"reading a book\", \"gaze_target\": \"eyes following the detail she is working through\", \"progress\": \"preparing\", \"stimulus_or_obstacle\": \"forgot\", \"social_relation\": \"viewer\", \"legacy_slots\": {\"location\": \"bedroom_boudoir\", \"purpose\": \"study\", \"progress_state\": \"preparing\", \"social_distance\": \"viewer\", \"obstacle_or_trigger\": \"forgot\", \"daily_life_tags\": [\"domestic\", \"home_life\"], \"primary_action\": \"lying down reading a book\", \"anchor\": \"\", \"posture\": \"lying down\", \"hand_action\": \"reading a book\", \"gaze_target\": \"eyes following the detail she is working through\", \"purpose_clause\": \"rechecking a small detail\", \"progress_clause\": \"as she gets herself ready\", \"social_clause\": \"leaving room for a quiet exchange with the viewer\", \"obstacle_clause\": \"after realizing something is missing\", \"optional_micro_action\": \"rechecking a small detail\", \"time_or_weather\": \"before sleeping\", \"object_state\": \"open pages visible\"}}, \"action_frame_source\": \"generated_slots\"}, \"warnings\": []}, {\"node\": \"ContextClothingExpander\", \"seed\": 95896548457319638, \"decision\": {\"theme\": \"street_casual\", \"chosen_type\": \"dresses\", \"base_pack\": \"winter_knit_dress\", \"base_variant\": \"warm_turtleneck_sweater_dress~purple~cashmere~fair_isle~knit_belt\", \"outerwear_pack\": \"\", \"outerwear_variant\": \"\", \"signature\": \"sha256:a13cb8b865d748c62e7d95cd4b4533de20d1c7529651db7489c8f1a5f992b925\", \"objects\": [], \"repeat_guard_penalty\": 0, \"attempt_index\": 0, \"semantic_tpo_score\": 0.8596879630790087, \"semantic_tpo_penalty\": 0, \"semantic_tpo_distance\": 0.07559289460184546, \"semantic_tpo_final_penalty\": 0, \"semantic_epig\": {\"clothing_tpo\": {\"mode\": \"active\", \"target_vector\": {\"formality\": 0.5, \"warmth\": 0.45, \"movement_freedom\": 0.5, \"softness\": 0.55, \"weather_fit\": 0.4, \"activity_fit\": 0.55, \"visual_prominence\": 0.35}, \"candidate_score_count\": 5, \"candidate_scores\": [{\"attempt_index\": 0, \"score\": 0.8597, \"distance\": 0.0756, \"semantic_penalty\": 0, \"repeat_penalty\": 0, \"final_penalty\": 0}, {\"attempt_index\": 1, \"score\": 0.8597}, {\"attempt_index\": 2, \"score\": 0.8597}, {\"attempt_index\": 3, \"score\": 0.8597}, {\"attempt_index\": 4, \"score\": 0.8597}], \"selected_attempt_index\": 0, \"baseline_selected_attempt_index\": 0, \"semantic_selected_attempt_index\": 0, \"selected_by_semantic\": true, \"semantic_scoring_enabled\": true, \"selection_changed_by_semantic\": false, \"baseline_candidate\": 0, \"semantic_candidate\": 0, \"semantic_top_candidate\": 0, \"selected_candidate_rank\": 0}}}, \"warnings\": []}, {\"node\": \"ContextLocationExpander\", \"seed\": 9680703326848413771, \"decision\": {\"pack_key\": \"bedroom_boudoir\", \"objects\": [], \"selected_props\": [], \"template_key\": \"detailed\", \"semantic_epig\": {\"location_scene\": {\"mode\": \"active\", \"target_vector\": {\"crowd_density\": 0.5, \"activity_level\": 0.35000000000000003, \"openness\": 0.5, \"orderliness\": 0.6, \"weather_intensity\": 0.5, \"light_softness\": 0.55, \"intimacy\": 0.5, \"time_pressure\": 0.5}, \"segment_rankings\": {\"environment\": [{\"text\": \"cozy romantic bedroom\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:environment[0]\", \"role\": \"environment\"}, {\"text\": \"gothic victorian boudoir\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:environment[1]\", \"role\": \"environment\"}], \"core\": [{\"text\": \"canopied four-poster bed\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:core[0]\", \"role\": \"core\"}, {\"text\": \"scattered soft cushions\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:core[4]\", \"role\": \"core\"}, {\"text\": \"strings of fairy lights on wall\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:core[3]\", \"role\": \"core\"}], \"props\": [{\"text\": \"cute plush toys on bed\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:props[0]\", \"role\": \"props\"}, {\"text\": \"glass perfume bottles\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:props[1]\", \"role\": \"props\"}, {\"text\": \"single decorative pillow\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:props[2]\", \"role\": \"props\"}], \"texture\": [{\"text\": \"fluffy thick rug\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:texture[1]\", \"role\": \"texture\"}, {\"text\": \"smooth silk sheets\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:texture[0]\", \"role\": \"texture\"}], \"time\": [{\"text\": \"quiet night\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:time[0]\", \"role\": \"time\"}], \"fx\": [{\"text\": \"intimate warm atmosphere\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:fx[1]\", \"role\": \"fx\"}, {\"text\": \"muted colors\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:fx[2]\", \"role\": \"fx\"}, {\"text\": \"soft dreamy focus\", \"score\": 0.8761, \"distance\": 0.0661, \"source\": \"runtime:fx[0]\", \"role\": \"fx\"}]}, \"segment_ranking_counts\": {\"environment\": 2, \"core\": 5, \"props\": 3, \"texture\": 2, \"time\": 1, \"fx\": 3}, \"segment_ranking_truncated_counts\": {\"environment\": 0, \"core\": 2, \"props\": 0, \"texture\": 0, \"time\": 0, \"fx\": 0}, \"section_changes\": {\"environment\": {\"baseline\": \"gothic victorian boudoir\", \"semantic\": \"gothic victorian boudoir\", \"changed\": false, \"semantic_top_candidate\": \"cozy romantic bedroom\", \"selected_candidate_rank\": 2}, \"core\": {\"baseline\": [\"vintage vanity mirror with lights\", \"wooden wardrobe with open doors\"], \"semantic\": [\"vintage vanity mirror with lights\", \"wooden wardrobe with open doors\"], \"changed\": false, \"semantic_top_candidate\": \"canopied four-poster bed\", \"selected_candidate_rank\": 4}, \"time\": {\"baseline\": \"quiet night\", \"semantic\": \"quiet night\", \"changed\": false, \"semantic_top_candidate\": \"quiet night\", \"selected_candidate_rank\": 1}}, \"changed_sections\": [], \"selected_by_semantic\": true, \"semantic_scoring_enabled\": true, \"selection_changed_by_semantic\": false, \"baseline_candidate\": \"\", \"semantic_candidate\": \"\", \"semantic_top_candidate\": \"\", \"selected_candidate_rank\": null}}}, \"warnings\": []}, {\"node\": \"ContextGarnish\", \"seed\": 0, \"decision\": {\"semantic_epig\": {\"personality_behavior\": {\"mode\": \"active\", \"personality\": \"quirky\", \"target_vector\": {}, \"prefer_category\": null, \"slot_rankings\": {\"gaze\": [], \"posture\": [], \"hands\": []}, \"selected\": \"\", \"selected_by_semantic\": false, \"semantic_scoring_enabled\": true, \"selection_changed_by_semantic\": false, \"baseline_candidate\": \"\", \"semantic_candidate\": \"\", \"semantic_top_candidate\": \"\", \"selected_candidate_rank\": null, \"fallback_used\": false, \"rejected_candidates\": [], \"subject_centric_overrides\": {\"source\": \"subject_centric_descriptor_overrides.json\", \"adoption_state\": \"active_candidate_selection\", \"mode\": \"active\", \"max_candidates_per_slot\": 1, \"available_count\": 0, \"by_slot\": {}, \"mode_counts\": {}, \"candidates\": []}}}, \"action_load\": \"calm\", \"generation_mode\": \"scene_emotion_priority\", \"emotion_role_mode\": \"subject_only\", \"subject_role\": \"context subject / character profile\", \"stimulus_role\": \"lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping\", \"context_role\": {\"location\": \"bedroom_boudoir\", \"costume\": \"street_casual\", \"scene_tags\": {\"emotion_nuance\": \"absorbed\", \"place_type\": \"public\", \"progress\": \"preparing\", \"purpose\": \"study\", \"social_distance\": \"viewer\"}}, \"emotion_core\": \"focus\", \"emotion_intensity\": \"medium\", \"target_vad\": [0.55, 0.37], \"target_vad_source\": \"legacy_mood\", \"vad_category_distances\": [{\"category\": \"focus\", \"vad\": [0.55, 0.45], \"distance\": 0.08}, {\"category\": \"care\", \"vad\": [0.72, 0.35], \"distance\": 0.1712}, {\"category\": \"moved\", \"vad\": [0.68, 0.55], \"distance\": 0.222}, {\"category\": \"relax\", \"vad\": [0.7, 0.2], \"distance\": 0.2267}, {\"category\": \"sadness\", \"vad\": [0.2, 0.3], \"distance\": 0.3569}], \"vad_descriptor_rankings\": {\"expression\": [{\"tag\": \"brows knit in concentration\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"composed face\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"focused expression\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}], \"gaze\": [{\"tag\": \"attention locked forward\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"eyes fixed on what she is doing\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"steady gaze\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}], \"behavior\": [{\"tag\": \"body held carefully still\", \"vad\": [0.55, 0.33], \"distance\": 0.04, \"score\": 0.9231}, {\"tag\": \"still posture\", \"vad\": [0.55, 0.33], \"distance\": 0.04, \"score\": 0.9231}, {\"tag\": \"fingers working with care\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"hands kept precise and controlled\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}, {\"tag\": \"ignoring the rest of the room\", \"vad\": [0.55, 0.45], \"distance\": 0.08, \"score\": 0.8521}]}, \"emotion_expression\": \"brows knit in concentration\", \"emotion_behavior\": [\"steady gaze\", \"still posture\"], \"action_anchors\": [\"daily_life\", \"work_office\", \"performance\", \"tech\"], \"emotion_nuance_tag\": \"keeping every movement deliberate\", \"final_tags\": [\"brows knit in concentration\", \"steady gaze\", \"still posture\"]}, \"warnings\": []}], \"notes\": [], \"warnings\": []}",
+        "seed": 13580770845026455939,
+        "template": ""
+      },
+      "baseline_raw": "A solo girl with messy bun, purple hair and green eyes in purple fair isle cashmere warm turtleneck sweater dress, with knit belt, lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping, brows knit in concentration, still posture, with the scene around her staying in gothic victorian boudoir, during quiet night, featuring vintage vanity mirror with lights and wooden wardrobe with open doors, a quiet room holding around her while the task in front of her sets the pace, settled concentration",
+      "baseline_cleaned": "a solo girl with messy bun, purple hair and green eyes in purple fair isle cashmere warm turtleneck sweater dress, with knit belt, lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping, brows knit in concentration, still posture, with the scene around her staying in gothic victorian boudoir, during quiet night, featuring vintage vanity mirror with lights and wooden wardrobe with open doors, a quiet room holding around her while the task in front of her sets the pace, settled concentration",
+      "baseline_builder_context": {
+        "action": "lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping",
+        "context_version": "2.0",
+        "costume": "street_casual",
+        "extras": {
+          "action_frame": {
+            "gaze_target": "eyes following the detail she is working through",
+            "hand_action": "reading a book",
+            "legacy_slots": {
+              "anchor": "",
+              "daily_life_tags": [
+                "domestic",
+                "home_life"
+              ],
+              "gaze_target": "eyes following the detail she is working through",
+              "hand_action": "reading a book",
+              "location": "bedroom_boudoir",
+              "object_state": "open pages visible",
+              "obstacle_clause": "after realizing something is missing",
+              "obstacle_or_trigger": "forgot",
+              "optional_micro_action": "rechecking a small detail",
+              "posture": "lying down",
+              "primary_action": "lying down reading a book",
+              "progress_clause": "as she gets herself ready",
+              "progress_state": "preparing",
+              "purpose": "study",
+              "purpose_clause": "rechecking a small detail",
+              "social_clause": "leaving room for a quiet exchange with the viewer",
+              "social_distance": "viewer",
+              "time_or_weather": "before sleeping"
+            },
+            "legacy_text": "lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping",
+            "main_verb": "lying",
+            "posture": "lying down",
+            "primary_object": "book",
+            "progress": "preparing",
+            "schema_version": "action-frame/v1",
+            "social_relation": "viewer",
+            "stimulus_or_obstacle": "forgot"
+          },
+          "character_id": "nina_tech",
+          "character_name": "Nina (Tech)",
+          "character_palette_str": "brown, brass, purple",
+          "clothing_prompt": "purple fair isle cashmere warm turtleneck sweater dress, with knit belt",
+          "color_palette": [
+            "brown",
+            "brass",
+            "purple"
+          ],
+          "eye_color": "green",
+          "garnish": "brows knit in concentration, steady gaze, still posture",
+          "hair_color": "purple",
+          "location_prompt": "gothic victorian boudoir, during quiet night, featuring vintage vanity mirror with lights and wooden wardrobe with open doors",
+          "personality": "quirky",
+          "raw_costume_key": "street_casual",
+          "raw_loc_tag": "bedroom_boudoir",
+          "raw_mood_key": "quiet_focused",
+          "source_subj_key": "barber",
+          "staging_tags": "settled concentration, careful hands"
+        },
+        "history": [
+          {
+            "decision": {
+              "action": "placing a completed intake form in the privacy slot",
+              "action_frame": {
+                "gaze_target": "eyes following the detail she is working through",
+                "hand_action": "reading a book",
+                "legacy_slots": {
+                  "anchor": "",
+                  "daily_life_tags": [
+                    "domestic",
+                    "home_life"
+                  ],
+                  "gaze_target": "eyes following the detail she is working through",
+                  "hand_action": "reading a book",
+                  "location": "bedroom_boudoir",
+                  "object_state": "open pages visible",
+                  "obstacle_clause": "after realizing something is missing",
+                  "obstacle_or_trigger": "forgot",
+                  "optional_micro_action": "rechecking a small detail",
+                  "posture": "lying down",
+                  "primary_action": "lying down reading a book",
+                  "progress_clause": "as she gets herself ready",
+                  "progress_state": "preparing",
+                  "purpose": "study",
+                  "purpose_clause": "rechecking a small detail",
+                  "social_clause": "leaving room for a quiet exchange with the viewer",
+                  "social_distance": "viewer",
+                  "time_or_weather": "before sleeping"
+                },
+                "legacy_text": "lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping",
+                "main_verb": "lying",
+                "posture": "lying down",
+                "primary_object": "book",
+                "progress": "preparing",
+                "schema_version": "action-frame/v1",
+                "social_relation": "viewer",
+                "stimulus_or_obstacle": "forgot"
+              },
+              "action_frame_source": "generated_slots",
+              "action_load": "calm",
+              "action_pool_dominant_objects": [],
+              "action_pool_object_hits": {
+                "book": 1
+              },
+              "action_pool_size": 20,
+              "action_refresh_reason": "location_changed",
+              "action_updated": true,
+              "base_action": "lying down reading a book",
+              "candidate_source_counts": {
+                "daily_life": 36,
+                "existing": 1,
+                "tag": 52,
+                "universal": 3
+              },
+              "candidate_weight_profile": {
+                "daily_life": 45.9,
+                "existing": 11.0,
+                "tag": 36.75,
+                "universal": 51.0
+              },
+              "candidates_count": 92,
+              "candidates_preview": [
+                "clinic_waiting_room (existing)",
+                "convenience_store (tag:retail_service)",
+                "bakery_shop (tag:retail_service)",
+                "supermarket_aisle (tag:retail_service)",
+                "drugstore_aisle (tag:retail_service)",
+                "family_restaurant (tag:retail_service)",
+                "food_court (tag:retail_service)",
+                "shopping_mall_atrium (tag:retail_service)",
+                "fashion_boutique (tag:retail_service)",
+                "shopping_arcade (tag:retail_service)",
+                "local_market_street (tag:retail_service)",
+                "street_cafe (tag:retail_service)",
+                "cozy_bookstore (tag:retail_service)",
+                "antique_shop (tag:retail_service)",
+                "flower_market (tag:retail_service)",
+                "greenhouse_nursery (tag:retail_service)",
+                "postal_service_counter (tag:retail_service)",
+                "print_shop (tag:retail_service)",
+                "modern_office (tag:workplace)",
+                "boardroom (tag:workplace)",
+                "office_elevator (tag:workplace)",
+                "surveillance_room (tag:workplace)",
+                "messy_copy_room (tag:workplace)",
+                "coworking_space (tag:workplace)"
+              ],
+              "candidates_preview_total_count": 92,
+              "candidates_preview_truncated_count": 68,
+              "compat_subject_key": "barber",
+              "compatible_unique_count": 56,
+              "generator_mode": "pool",
+              "mode": "full",
+              "new_action": "lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping",
+              "normalized_action": "lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping",
+              "object_focus": {
+                "classifications": {
+                  "book": "general"
+                },
+                "detected_objects": [
+                  "book"
+                ],
+                "slot_map": {
+                  "hand_action": [
+                    "book"
+                  ]
+                }
+              },
+              "pool_slots": {
+                "hand_action": "reading a book",
+                "location": "bedroom_boudoir",
+                "posture": "lying down",
+                "primary_action": "lying down reading a book",
+                "purpose": "study"
+              },
+              "selected_loc": "bedroom_boudoir",
+              "selected_source": "universal",
+              "semantic_epig": {
+                "action": {
+                  "baseline_candidate": "",
+                  "changed_slots": [],
+                  "mode": "active",
+                  "selected_by_semantic": true,
+                  "selected_candidate_rank": null,
+                  "selection_changed_by_semantic": false,
+                  "semantic_candidate": "",
+                  "semantic_scoring_enabled": true,
+                  "semantic_top_candidate": "",
+                  "slot_changes": {
+                    "gaze_target": {
+                      "baseline": "eyes following the detail she is working through",
+                      "changed": false,
+                      "selected_candidate_rank": 1,
+                      "semantic": "eyes following the detail she is working through",
+                      "semantic_top_candidate": "eyes following the detail she is working through"
+                    },
+                    "hand_action": {
+                      "baseline": "reading a book",
+                      "changed": false,
+                      "selected_candidate_rank": null,
+                      "semantic": "reading a book",
+                      "semantic_top_candidate": "fingers keeping her notes in order"
+                    },
+                    "obstacle_clause": {
+                      "baseline": "after realizing something is missing",
+                      "changed": false,
+                      "selected_candidate_rank": 1,
+                      "semantic": "after realizing something is missing",
+                      "semantic_top_candidate": "after realizing something is missing"
+                    },
+                    "optional_micro_action": {
+                      "baseline": "rechecking a small detail",
+                      "changed": false,
+                      "selected_candidate_rank": 3,
+                      "semantic": "rechecking a small detail",
+                      "semantic_top_candidate": "staying with the line she was following"
+                    },
+                    "posture": {
+                      "baseline": "lying down",
+                      "changed": false,
+                      "selected_candidate_rank": null,
+                      "semantic": "lying down",
+                      "semantic_top_candidate": "leaning in over what she is doing"
+                    },
+                    "progress_clause": {
+                      "baseline": "as she gets herself ready",
+                      "changed": false,
+                      "selected_candidate_rank": 1,
+                      "semantic": "as she gets herself ready",
+                      "semantic_top_candidate": "as she gets herself ready"
+                    },
+                    "purpose_clause": {
+                      "baseline": "rechecking a small detail",
+                      "changed": false,
+                      "selected_candidate_rank": 1,
+                      "semantic": "rechecking a small detail",
+                      "semantic_top_candidate": "rechecking a small detail"
+                    },
+                    "social_clause": {
+                      "baseline": "leaving room for a quiet exchange with the viewer",
+                      "changed": false,
+                      "selected_candidate_rank": 2,
+                      "semantic": "leaving room for a quiet exchange with the viewer",
+                      "semantic_top_candidate": "as if responding directly to the viewer"
+                    },
+                    "time_or_weather": {
+                      "baseline": "before sleeping",
+                      "changed": false,
+                      "selected_candidate_rank": 3,
+                      "semantic": "before sleeping",
+                      "semantic_top_candidate": "after finally coming home"
+                    }
+                  },
+                  "slot_rankings": {
+                    "gaze_target": [
+                      {
+                        "distance": 0.111,
+                        "role": "gaze_target",
+                        "score": 0.8009,
+                        "source": "action_slot_descriptors:gaze_target[0]",
+                        "text": "eyes following the detail she is working through"
+                      },
+                      {
+                        "distance": 0.1337,
+                        "role": "gaze_target",
+                        "score": 0.7653,
+                        "source": "action_slot_descriptors:gaze_target[4]",
+                        "text": "eyes tracking the line on the page"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "gaze_target",
+                        "score": 0.5667,
+                        "source": "runtime:gaze_target[2]",
+                        "text": "checking what is happening nearby"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "gaze_target",
+                        "score": 0.5667,
+                        "source": "runtime:gaze_target[1]",
+                        "text": "looking over the exact thing that needs her attention"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "gaze_target",
+                        "score": 0.5667,
+                        "source": "runtime:gaze_target[3]",
+                        "text": "looking toward the next thing she needs"
+                      }
+                    ],
+                    "hand_action": [
+                      {
+                        "distance": 0.0917,
+                        "role": "hand_action",
+                        "score": 0.8325,
+                        "source": "action_slot_descriptors:hand_action[0]",
+                        "text": "fingers keeping her notes in order"
+                      },
+                      {
+                        "distance": 0.1203,
+                        "role": "hand_action",
+                        "score": 0.7862,
+                        "source": "action_slot_descriptors:hand_action[4]",
+                        "text": "thumb keeping the page open"
+                      },
+                      {
+                        "distance": 0.121,
+                        "role": "hand_action",
+                        "score": 0.785,
+                        "source": "action_slot_descriptors:hand_action[1]",
+                        "text": "hands staying precise and controlled"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "hand_action",
+                        "score": 0.5667,
+                        "source": "runtime:hand_action[2]",
+                        "text": "hands busy with the material in front of her"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "hand_action",
+                        "score": 0.5667,
+                        "source": "runtime:hand_action[1]",
+                        "text": "one hand resting near the page she needs"
+                      }
+                    ],
+                    "obstacle_clause": [
+                      {
+                        "distance": 0.284,
+                        "role": "obstacle_clause",
+                        "score": 0.5667,
+                        "source": "runtime:obstacle_clause[0]",
+                        "text": "after realizing something is missing"
+                      }
+                    ],
+                    "optional_micro_action": [
+                      {
+                        "distance": 0.1091,
+                        "role": "optional_micro_action",
+                        "score": 0.804,
+                        "source": "action_slot_descriptors:optional_micro_action[0]",
+                        "text": "staying with the line she was following"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "optional_micro_action",
+                        "score": 0.5667,
+                        "source": "runtime:optional_micro_action[0]",
+                        "text": "quietly marking her place"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "optional_micro_action",
+                        "score": 0.5667,
+                        "source": "runtime:optional_micro_action[1]",
+                        "text": "rechecking a small detail"
+                      }
+                    ],
+                    "posture": [
+                      {
+                        "distance": 0.0926,
+                        "role": "posture",
+                        "score": 0.831,
+                        "source": "action_slot_descriptors:posture[0]",
+                        "text": "leaning in over what she is doing"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "posture",
+                        "score": 0.5667,
+                        "source": "runtime:posture[2]",
+                        "text": "paused in a still working posture"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "posture",
+                        "score": 0.5667,
+                        "source": "runtime:posture[0]",
+                        "text": "settled at the edge of her seat"
+                      }
+                    ],
+                    "progress_clause": [
+                      {
+                        "distance": 0.284,
+                        "role": "progress_clause",
+                        "score": 0.5667,
+                        "source": "runtime:progress_clause[1]",
+                        "text": "as she gets herself ready"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "progress_clause",
+                        "score": 0.5667,
+                        "source": "runtime:progress_clause[0]",
+                        "text": "before fully getting started"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "progress_clause",
+                        "score": 0.5667,
+                        "source": "runtime:progress_clause[2]",
+                        "text": "while setting up the next step"
+                      }
+                    ],
+                    "purpose_clause": [
+                      {
+                        "distance": 0.097,
+                        "role": "purpose_clause",
+                        "score": 0.8237,
+                        "source": "action_slot_descriptors:purpose_clause[0]",
+                        "text": "rechecking a small detail"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "purpose_clause",
+                        "score": 0.5667,
+                        "source": "runtime:purpose_clause[3]",
+                        "text": "highlighting text"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "purpose_clause",
+                        "score": 0.5667,
+                        "source": "runtime:purpose_clause[0]",
+                        "text": "quietly marking her place"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "purpose_clause",
+                        "score": 0.5667,
+                        "source": "runtime:purpose_clause[2]",
+                        "text": "staying with the line she was following"
+                      }
+                    ],
+                    "social_clause": [
+                      {
+                        "distance": 0.284,
+                        "role": "social_clause",
+                        "score": 0.5667,
+                        "source": "runtime:social_clause[1]",
+                        "text": "as if responding directly to the viewer"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "social_clause",
+                        "score": 0.5667,
+                        "source": "runtime:social_clause[2]",
+                        "text": "leaving room for a quiet exchange with the viewer"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "social_clause",
+                        "score": 0.5667,
+                        "source": "runtime:social_clause[0]",
+                        "text": "meeting the viewer with a quiet look"
+                      }
+                    ],
+                    "time_or_weather": [
+                      {
+                        "distance": 0.284,
+                        "role": "time_or_weather",
+                        "score": 0.5667,
+                        "source": "runtime:time_or_weather[1]",
+                        "text": "after finally coming home"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "time_or_weather",
+                        "score": 0.5667,
+                        "source": "runtime:time_or_weather[0]",
+                        "text": "before getting ready to leave"
+                      },
+                      {
+                        "distance": 0.284,
+                        "role": "time_or_weather",
+                        "score": 0.5667,
+                        "source": "runtime:time_or_weather[2]",
+                        "text": "before sleeping"
+                      }
+                    ]
+                  },
+                  "target_vector": {
+                    "body_openness": 0.3,
+                    "motion_energy": 0.2,
+                    "object_coupling": 0.83,
+                    "precision": 0.85,
+                    "social_intensity": 0.15,
+                    "time_pressure": 0.5
+                  }
+                },
+                "object_relation": {
+                  "applied_slots": {
+                    "object_state": "open pages visible"
+                  },
+                  "detected_objects": [
+                    "book"
+                  ],
+                  "mode": "active",
+                  "relation_key": "book:reading",
+                  "required_roles": {
+                    "gaze_target": [
+                      "eyes lowered toward the pages"
+                    ],
+                    "hand_action": [
+                      "holding an open book",
+                      "one hand supporting the book"
+                    ],
+                    "object_state": [
+                      "open pages visible"
+                    ]
+                  },
+                  "skipped_slots": {
+                    "gaze_target": "existing slot already set",
+                    "hand_action": "existing slot already set"
+                  }
+                }
+              },
+              "slot_sources": {
+                "gaze_target": "generated",
+                "hand_action": "pool",
+                "location": "pool",
+                "object_state": "generated",
+                "obstacle_clause": "generated",
+                "obstacle_or_trigger": "generated",
+                "optional_micro_action": "generated",
+                "posture": "pool",
+                "primary_action": "pool",
+                "progress_clause": "generated",
+                "progress_state": "generated",
+                "purpose": "pool",
+                "purpose_clause": "generated",
+                "social_clause": "generated",
+                "social_distance": "generated",
+                "time_or_weather": "generated"
+              },
+              "slots": {
+                "anchor": "",
+                "daily_life_tags": [
+                  "domestic",
+                  "home_life"
+                ],
+                "gaze_target": "eyes following the detail she is working through",
+                "hand_action": "reading a book",
+                "location": "bedroom_boudoir",
+                "object_state": "open pages visible",
+                "obstacle_clause": "after realizing something is missing",
+                "obstacle_or_trigger": "forgot",
+                "optional_micro_action": "rechecking a small detail",
+                "posture": "lying down",
+                "primary_action": "lying down reading a book",
+                "progress_clause": "as she gets herself ready",
+                "progress_state": "preparing",
+                "purpose": "study",
+                "purpose_clause": "rechecking a small detail",
+                "social_clause": "leaving room for a quiet exchange with the viewer",
+                "social_distance": "viewer",
+                "time_or_weather": "before sleeping"
+              },
+              "solo_safety_filtered_pool_count": 0
+            },
+            "node": "ContextSceneVariator",
+            "seed": 5510864929729530216,
+            "warnings": []
+          },
+          {
+            "decision": {
+              "attempt_index": 0,
+              "base_pack": "winter_knit_dress",
+              "base_variant": "warm_turtleneck_sweater_dress~purple~cashmere~fair_isle~knit_belt",
+              "chosen_type": "dresses",
+              "objects": [],
+              "outerwear_pack": "",
+              "outerwear_variant": "",
+              "repeat_guard_penalty": 0,
+              "semantic_epig": {
+                "clothing_tpo": {
+                  "baseline_candidate": 0,
+                  "baseline_selected_attempt_index": 0,
+                  "candidate_score_count": 5,
+                  "candidate_scores": [
+                    {
+                      "attempt_index": 0,
+                      "distance": 0.0756,
+                      "final_penalty": 0,
+                      "repeat_penalty": 0,
+                      "score": 0.8597,
+                      "semantic_penalty": 0
+                    },
+                    {
+                      "attempt_index": 1,
+                      "score": 0.8597
+                    },
+                    {
+                      "attempt_index": 2,
+                      "score": 0.8597
+                    },
+                    {
+                      "attempt_index": 3,
+                      "score": 0.8597
+                    },
+                    {
+                      "attempt_index": 4,
+                      "score": 0.8597
+                    }
+                  ],
+                  "mode": "active",
+                  "selected_attempt_index": 0,
+                  "selected_by_semantic": true,
+                  "selected_candidate_rank": 0,
+                  "selection_changed_by_semantic": false,
+                  "semantic_candidate": 0,
+                  "semantic_scoring_enabled": true,
+                  "semantic_selected_attempt_index": 0,
+                  "semantic_top_candidate": 0,
+                  "target_vector": {
+                    "activity_fit": 0.55,
+                    "formality": 0.5,
+                    "movement_freedom": 0.5,
+                    "softness": 0.55,
+                    "visual_prominence": 0.35,
+                    "warmth": 0.45,
+                    "weather_fit": 0.4
+                  }
+                }
+              },
+              "semantic_tpo_distance": 0.07559289460184546,
+              "semantic_tpo_final_penalty": 0,
+              "semantic_tpo_penalty": 0,
+              "semantic_tpo_score": 0.8596879630790087,
+              "signature": "sha256:a13cb8b865d748c62e7d95cd4b4533de20d1c7529651db7489c8f1a5f992b925",
+              "theme": "street_casual"
+            },
+            "node": "ContextClothingExpander",
+            "seed": 95896548457319638,
+            "warnings": []
+          },
+          {
+            "decision": {
+              "objects": [],
+              "pack_key": "bedroom_boudoir",
+              "selected_props": [],
+              "semantic_epig": {
+                "location_scene": {
+                  "baseline_candidate": "",
+                  "changed_sections": [],
+                  "mode": "active",
+                  "section_changes": {
+                    "core": {
+                      "baseline": [
+                        "vintage vanity mirror with lights",
+                        "wooden wardrobe with open doors"
+                      ],
+                      "changed": false,
+                      "selected_candidate_rank": 4,
+                      "semantic": [
+                        "vintage vanity mirror with lights",
+                        "wooden wardrobe with open doors"
+                      ],
+                      "semantic_top_candidate": "canopied four-poster bed"
+                    },
+                    "environment": {
+                      "baseline": "gothic victorian boudoir",
+                      "changed": false,
+                      "selected_candidate_rank": 2,
+                      "semantic": "gothic victorian boudoir",
+                      "semantic_top_candidate": "cozy romantic bedroom"
+                    },
+                    "time": {
+                      "baseline": "quiet night",
+                      "changed": false,
+                      "selected_candidate_rank": 1,
+                      "semantic": "quiet night",
+                      "semantic_top_candidate": "quiet night"
+                    }
+                  },
+                  "segment_ranking_counts": {
+                    "core": 5,
+                    "environment": 2,
+                    "fx": 3,
+                    "props": 3,
+                    "texture": 2,
+                    "time": 1
+                  },
+                  "segment_ranking_truncated_counts": {
+                    "core": 2,
+                    "environment": 0,
+                    "fx": 0,
+                    "props": 0,
+                    "texture": 0,
+                    "time": 0
+                  },
+                  "segment_rankings": {
+                    "core": [
+                      {
+                        "distance": 0.0661,
+                        "role": "core",
+                        "score": 0.8761,
+                        "source": "runtime:core[0]",
+                        "text": "canopied four-poster bed"
+                      },
+                      {
+                        "distance": 0.0661,
+                        "role": "core",
+                        "score": 0.8761,
+                        "source": "runtime:core[4]",
+                        "text": "scattered soft cushions"
+                      },
+                      {
+                        "distance": 0.0661,
+                        "role": "core",
+                        "score": 0.8761,
+                        "source": "runtime:core[3]",
+                        "text": "strings of fairy lights on wall"
+                      }
+                    ],
+                    "environment": [
+                      {
+                        "distance": 0.0661,
+                        "role": "environment",
+                        "score": 0.8761,
+                        "source": "runtime:environment[0]",
+                        "text": "cozy romantic bedroom"
+                      },
+                      {
+                        "distance": 0.0661,
+                        "role": "environment",
+                        "score": 0.8761,
+                        "source": "runtime:environment[1]",
+                        "text": "gothic victorian boudoir"
+                      }
+                    ],
+                    "fx": [
+                      {
+                        "distance": 0.0661,
+                        "role": "fx",
+                        "score": 0.8761,
+                        "source": "runtime:fx[1]",
+                        "text": "intimate warm atmosphere"
+                      },
+                      {
+                        "distance": 0.0661,
+                        "role": "fx",
+                        "score": 0.8761,
+                        "source": "runtime:fx[2]",
+                        "text": "muted colors"
+                      },
+                      {
+                        "distance": 0.0661,
+                        "role": "fx",
+                        "score": 0.8761,
+                        "source": "runtime:fx[0]",
+                        "text": "soft dreamy focus"
+                      }
+                    ],
+                    "props": [
+                      {
+                        "distance": 0.0661,
+                        "role": "props",
+                        "score": 0.8761,
+                        "source": "runtime:props[0]",
+                        "text": "cute plush toys on bed"
+                      },
+                      {
+                        "distance": 0.0661,
+                        "role": "props",
+                        "score": 0.8761,
+                        "source": "runtime:props[1]",
+                        "text": "glass perfume bottles"
+                      },
+                      {
+                        "distance": 0.0661,
+                        "role": "props",
+                        "score": 0.8761,
+                        "source": "runtime:props[2]",
+                        "text": "single decorative pillow"
+                      }
+                    ],
+                    "texture": [
+                      {
+                        "distance": 0.0661,
+                        "role": "texture",
+                        "score": 0.8761,
+                        "source": "runtime:texture[1]",
+                        "text": "fluffy thick rug"
+                      },
+                      {
+                        "distance": 0.0661,
+                        "role": "texture",
+                        "score": 0.8761,
+                        "source": "runtime:texture[0]",
+                        "text": "smooth silk sheets"
+                      }
+                    ],
+                    "time": [
+                      {
+                        "distance": 0.0661,
+                        "role": "time",
+                        "score": 0.8761,
+                        "source": "runtime:time[0]",
+                        "text": "quiet night"
+                      }
+                    ]
+                  },
+                  "selected_by_semantic": true,
+                  "selected_candidate_rank": null,
+                  "selection_changed_by_semantic": false,
+                  "semantic_candidate": "",
+                  "semantic_scoring_enabled": true,
+                  "semantic_top_candidate": "",
+                  "target_vector": {
+                    "activity_level": 0.35000000000000003,
+                    "crowd_density": 0.5,
+                    "intimacy": 0.5,
+                    "light_softness": 0.55,
+                    "openness": 0.5,
+                    "orderliness": 0.6,
+                    "time_pressure": 0.5,
+                    "weather_intensity": 0.5
+                  }
+                }
+              },
+              "template_key": "detailed"
+            },
+            "node": "ContextLocationExpander",
+            "seed": 9680703326848413771,
+            "warnings": []
+          },
+          {
+            "decision": {
+              "action_anchors": [
+                "daily_life",
+                "work_office",
+                "performance",
+                "tech"
+              ],
+              "action_load": "calm",
+              "context_role": {
+                "costume": "street_casual",
+                "location": "bedroom_boudoir",
+                "scene_tags": {
+                  "emotion_nuance": "absorbed",
+                  "place_type": "public",
+                  "progress": "preparing",
+                  "purpose": "study",
+                  "social_distance": "viewer"
+                }
+              },
+              "emotion_behavior": [
+                "steady gaze",
+                "still posture"
+              ],
+              "emotion_core": "focus",
+              "emotion_expression": "brows knit in concentration",
+              "emotion_intensity": "medium",
+              "emotion_nuance_tag": "keeping every movement deliberate",
+              "emotion_role_mode": "subject_only",
+              "final_tags": [
+                "brows knit in concentration",
+                "steady gaze",
+                "still posture"
+              ],
+              "generation_mode": "scene_emotion_priority",
+              "semantic_epig": {
+                "personality_behavior": {
+                  "baseline_candidate": "",
+                  "fallback_used": false,
+                  "mode": "active",
+                  "personality": "quirky",
+                  "prefer_category": null,
+                  "rejected_candidates": [],
+                  "selected": "",
+                  "selected_by_semantic": false,
+                  "selected_candidate_rank": null,
+                  "selection_changed_by_semantic": false,
+                  "semantic_candidate": "",
+                  "semantic_scoring_enabled": true,
+                  "semantic_top_candidate": "",
+                  "slot_rankings": {
+                    "gaze": [],
+                    "hands": [],
+                    "posture": []
+                  },
+                  "subject_centric_overrides": {
+                    "adoption_state": "active_candidate_selection",
+                    "available_count": 0,
+                    "by_slot": {},
+                    "candidates": [],
+                    "max_candidates_per_slot": 1,
+                    "mode": "active",
+                    "mode_counts": {},
+                    "source": "subject_centric_descriptor_overrides.json"
+                  },
+                  "target_vector": {}
+                }
+              },
+              "stimulus_role": "lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping",
+              "subject_role": "context subject / character profile",
+              "target_vad": [
+                0.55,
+                0.37
+              ],
+              "target_vad_source": "legacy_mood",
+              "vad_category_distances": [
+                {
+                  "category": "focus",
+                  "distance": 0.08,
+                  "vad": [
+                    0.55,
+                    0.45
+                  ]
+                },
+                {
+                  "category": "care",
+                  "distance": 0.1712,
+                  "vad": [
+                    0.72,
+                    0.35
+                  ]
+                },
+                {
+                  "category": "moved",
+                  "distance": 0.222,
+                  "vad": [
+                    0.68,
+                    0.55
+                  ]
+                },
+                {
+                  "category": "relax",
+                  "distance": 0.2267,
+                  "vad": [
+                    0.7,
+                    0.2
+                  ]
+                },
+                {
+                  "category": "sadness",
+                  "distance": 0.3569,
+                  "vad": [
+                    0.2,
+                    0.3
+                  ]
+                }
+              ],
+              "vad_descriptor_rankings": {
+                "behavior": [
+                  {
+                    "distance": 0.04,
+                    "score": 0.9231,
+                    "tag": "body held carefully still",
+                    "vad": [
+                      0.55,
+                      0.33
+                    ]
+                  },
+                  {
+                    "distance": 0.04,
+                    "score": 0.9231,
+                    "tag": "still posture",
+                    "vad": [
+                      0.55,
+                      0.33
+                    ]
+                  },
+                  {
+                    "distance": 0.08,
+                    "score": 0.8521,
+                    "tag": "fingers working with care",
+                    "vad": [
+                      0.55,
+                      0.45
+                    ]
+                  },
+                  {
+                    "distance": 0.08,
+                    "score": 0.8521,
+                    "tag": "hands kept precise and controlled",
+                    "vad": [
+                      0.55,
+                      0.45
+                    ]
+                  },
+                  {
+                    "distance": 0.08,
+                    "score": 0.8521,
+                    "tag": "ignoring the rest of the room",
+                    "vad": [
+                      0.55,
+                      0.45
+                    ]
+                  }
+                ],
+                "expression": [
+                  {
+                    "distance": 0.08,
+                    "score": 0.8521,
+                    "tag": "brows knit in concentration",
+                    "vad": [
+                      0.55,
+                      0.45
+                    ]
+                  },
+                  {
+                    "distance": 0.08,
+                    "score": 0.8521,
+                    "tag": "composed face",
+                    "vad": [
+                      0.55,
+                      0.45
+                    ]
+                  },
+                  {
+                    "distance": 0.08,
+                    "score": 0.8521,
+                    "tag": "focused expression",
+                    "vad": [
+                      0.55,
+                      0.45
+                    ]
+                  }
+                ],
+                "gaze": [
+                  {
+                    "distance": 0.08,
+                    "score": 0.8521,
+                    "tag": "attention locked forward",
+                    "vad": [
+                      0.55,
+                      0.45
+                    ]
+                  },
+                  {
+                    "distance": 0.08,
+                    "score": 0.8521,
+                    "tag": "eyes fixed on what she is doing",
+                    "vad": [
+                      0.55,
+                      0.45
+                    ]
+                  },
+                  {
+                    "distance": 0.08,
+                    "score": 0.8521,
+                    "tag": "steady gaze",
+                    "vad": [
+                      0.55,
+                      0.45
+                    ]
+                  }
+                ]
+              }
+            },
+            "node": "ContextGarnish",
+            "seed": 0,
+            "warnings": []
+          },
+          {
+            "decision": {
+              "action_frame": {
+                "gaze_target": "eyes following the detail she is working through",
+                "hand_action": "reading a book",
+                "legacy_slots": {
+                  "anchor": "",
+                  "daily_life_tags": [
+                    "domestic",
+                    "home_life"
+                  ],
+                  "gaze_target": "eyes following the detail she is working through",
+                  "hand_action": "reading a book",
+                  "location": "bedroom_boudoir",
+                  "object_state": "open pages visible",
+                  "obstacle_clause": "after realizing something is missing",
+                  "obstacle_or_trigger": "forgot",
+                  "optional_micro_action": "rechecking a small detail",
+                  "posture": "lying down",
+                  "primary_action": "lying down reading a book",
+                  "progress_clause": "as she gets herself ready",
+                  "progress_state": "preparing",
+                  "purpose": "study",
+                  "purpose_clause": "rechecking a small detail",
+                  "social_clause": "leaving room for a quiet exchange with the viewer",
+                  "social_distance": "viewer",
+                  "time_or_weather": "before sleeping"
+                },
+                "legacy_text": "lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping",
+                "main_verb": "lying",
+                "posture": "lying down",
+                "primary_object": "book",
+                "progress": "preparing",
+                "schema_version": "action-frame/v1",
+                "social_relation": "viewer",
+                "stimulus_or_obstacle": "forgot"
+              },
+              "action_frame_matches_debug_slots": true,
+              "action_slots": {
+                "anchor": "",
+                "daily_life_tags": [
+                  "domestic",
+                  "home_life"
+                ],
+                "gaze_target": "eyes following the detail she is working through",
+                "hand_action": "reading a book",
+                "location": "bedroom_boudoir",
+                "object_state": "open pages visible",
+                "obstacle_clause": "after realizing something is missing",
+                "obstacle_or_trigger": "forgot",
+                "optional_micro_action": "rechecking a small detail",
+                "posture": "lying down",
+                "primary_action": "lying down reading a book",
+                "progress_clause": "as she gets herself ready",
+                "progress_state": "preparing",
+                "purpose": "study",
+                "purpose_clause": "rechecking a small detail",
+                "social_clause": "leaving room for a quiet exchange with the viewer",
+                "social_distance": "viewer",
+                "time_or_weather": "before sleeping"
+              },
+              "action_surface": {
+                "first_token": "lying",
+                "input_surface": "gerund",
+                "rendered_clause": "lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping, brows knit in concentration, still posture",
+                "surface": "gerund",
+                "verb": "lying",
+                "word_count": 36
+              },
+              "body_key": "body_direct_clause",
+              "candidate_eligibility": {
+                "direct_provenance_valid": false,
+                "direct_supported_families": [],
+                "eligible_syntax_families": [
+                  "subject_action_scene"
+                ],
+                "rejected_syntax_families": {
+                  "action_lead_subject_scene": [
+                    "forbidden_fact_not_false:independent_action_subject",
+                    "required_fact_not_true:same_subject_attachment_safe",
+                    "unsupported_or_mismatched_surface",
+                    "unsupported_scene_anchor",
+                    "unsupported_subject"
+                  ],
+                  "scene_lead_subject_action": [
+                    "forbidden_fact_not_false:independent_action_subject",
+                    "required_fact_not_true:scene_lead_safe",
+                    "unsupported_or_mismatched_surface",
+                    "unsupported_scene_anchor",
+                    "unsupported_subject"
+                  ],
+                  "subject_action__scene_tail": [
+                    "forbidden_fact_not_false:independent_action_subject",
+                    "required_fact_not_true:standalone_scene_safe",
+                    "unsupported_or_mismatched_surface",
+                    "unsupported_scene_anchor",
+                    "unsupported_subject"
+                  ],
+                  "subject_action_scene_insert": [
+                    "forbidden_fact_not_false:independent_action_subject",
+                    "forbidden_fact_not_false:scene_action_overlap",
+                    "required_fact_not_true:frame_predicate_safe",
+                    "required_fact_not_true:scene_action_nonduplicative",
+                    "required_fact_not_true:scene_adjunct_safe",
+                    "unsupported_or_mismatched_surface",
+                    "unsupported_scene_anchor",
+                    "unsupported_subject"
+                  ],
+                  "subject_scene_action": [
+                    "forbidden_fact_not_false:independent_action_subject",
+                    "required_fact_not_true:frame_predicate_safe",
+                    "required_fact_not_true:scene_adjunct_safe",
+                    "unsupported_or_mismatched_surface",
+                    "unsupported_scene_anchor",
+                    "unsupported_subject"
+                  ]
+                },
+                "safety_facts": {
+                  "fragment_subject_action": false,
+                  "frame_predicate_safe": false,
+                  "independent_action_subject": null,
+                  "same_subject_attachment_safe": false,
+                  "scene_action_nonduplicative": null,
+                  "scene_action_overlap": null,
+                  "scene_adjunct_safe": false,
+                  "scene_lead_safe": false,
+                  "standalone_scene_safe": false
+                },
+                "syntax_fallback_reason": "baseline_only"
+              },
+              "candidate_v2_applied": false,
+              "clause_order": [
+                "subject",
+                "action",
+                "scene"
+              ],
+              "composition_mode": true,
+              "content_plan": {
+                "clause_order": [
+                  "subject",
+                  "action",
+                  "scene"
+                ],
+                "discourse_roles": [
+                  "focused",
+                  "neutral",
+                  "quiet",
+                  "transition"
+                ],
+                "lexical_choice": "gerund",
+                "named_seed_streams": {
+                  "lexical": 3890486347,
+                  "syntax": 3368648794,
+                  "template": 1390137026
+                },
+                "semantic_slots": {
+                  "adjunct": "{action_clause}",
+                  "object": "book",
+                  "predicate": "lying",
+                  "scene": "with the scene around her staying in {scene_anchor_clause}",
+                  "subject": "{subject_clause}"
+                },
+                "syntax_family": "subject_action_scene"
+              },
+              "eligible_syntax_families": [
+                "subject_action_scene",
+                "subject_action__scene_tail"
+              ],
+              "end_key": "end_scene_holding",
+              "fallback_origin_syntax_family": "single-sentence-scene-tail",
+              "intro_key": "intro_plain_subject",
+              "prompt": "A solo girl with messy bun, purple hair and green eyes in purple fair isle cashmere warm turtleneck sweater dress, with knit belt, lying down reading a book, open pages visible, eyes following the detail she is working through, after realizing something is missing, rechecking a small detail, leaving room for a quiet exchange with the viewer, before sleeping, brows knit in concentration, still posture, with the scene around her staying in gothic victorian boudoir, during quiet night, featuring vintage vanity mirror with lights and wooden wardrobe with open doors, a quiet room holding around her while the task in front of her sets the pace, settled concentration",
+              "realizer_dropped_garnish": [],
+              "realizer_version": "v1",
+              "semantic_family_budget": {
+                "base_families": [
+                  "gaze"
+                ],
+                "exact_redundancy_dropped": [],
+                "final_families": [
+                  "gaze",
+                  "hands",
+                  "posture"
+                ],
+                "garnish_dropped_tags": [
+                  "steady gaze"
+                ],
+                "garnish_input_tags": [
+                  "brows knit in concentration",
+                  "steady gaze",
+                  "still posture"
+                ],
+                "garnish_kept_families": [
+                  "posture"
+                ],
+                "garnish_kept_tags": [
+                  "brows knit in concentration",
+                  "still posture"
+                ],
+                "staging_dropped_tags": [],
+                "staging_input_tags": [
+                  "settled concentration",
+                  "careful hands"
+                ],
+                "staging_kept_families": [
+                  "hands"
+                ],
+                "staging_kept_tags": [
+                  "settled concentration",
+                  "careful hands"
+                ]
+              },
+              "solo_support_dropped_tags": [
+                "careful hands"
+              ],
+              "solo_template_filter_applied": true,
+              "solo_template_filtered_keys": {
+                "body": [],
+                "end": [],
+                "intro": []
+              },
+              "syntax_fallback_reason": "candidate_ineligible_preserve_v1",
+              "syntax_family": "subject_action_scene",
+              "template_key": "intro_plain_subject||body_direct_clause||end_scene_holding",
+              "template_roles": {
+                "body_roles": [
+                  "focused",
+                  "transition",
+                  "quiet",
+                  "neutral"
+                ],
+                "end_roles": [
+                  "focused",
+                  "transition",
+                  "quiet",
+                  "neutral"
+                ],
+                "intro_roles": [
+                  "focused",
+                  "transition",
+                  "quiet",
+                  "neutral"
+                ]
+              }
+            },
+            "node": "ContextPromptBuilder",
+            "seed": 13580770845026455939,
+            "warnings": []
+          }
+        ],
+        "loc": "bedroom_boudoir",
+        "meta": {
+          "mood": "a quiet room holding around her while the task in front of her sets the pace",
+          "style": "",
+          "tags": {
+            "emotion_nuance": "absorbed",
+            "place_type": "public",
+            "progress": "preparing",
+            "purpose": "study",
+            "social_distance": "viewer"
+          }
+        },
+        "notes": [],
+        "seed": 13580770845026455939,
+        "subj": "A solo girl with messy bun, purple hair and green eyes",
+        "warnings": []
+      }
+    }
+  ]
+}

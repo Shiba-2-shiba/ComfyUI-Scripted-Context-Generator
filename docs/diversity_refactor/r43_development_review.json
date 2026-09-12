@@ -1,0 +1,67 @@
+{
+  "cases": [
+    {
+      "cleaned_sha256": "fb4b96b560e810a4eb1f7329af081cb935c17865c8946a265a8ced341bd99e02",
+      "family": "subject_action__scene_tail",
+      "input_binding_sha256": "f2067077f6862cae8e29534eccaf3596c1c6e0bb17896af6bf46dbad9714f7a1",
+      "raw_sha256": "b044804e07a7c56513f5a58234c14d64096af16a9cb472406942e56970dfeb49",
+      "run_seed": 2
+    },
+    {
+      "cleaned_sha256": "620960fe9859790ba72e0d9d4577ad4c82c7359a28e7d576306e61b72c457a4f",
+      "family": "action_lead_subject_scene",
+      "input_binding_sha256": "fd85aa7f60f5b7033295c717942d56b76769366fcb83becbe6e6752c5f6bc326",
+      "raw_sha256": "620960fe9859790ba72e0d9d4577ad4c82c7359a28e7d576306e61b72c457a4f",
+      "run_seed": 51
+    },
+    {
+      "cleaned_sha256": "64758e7a07f2efb4619a34bd78be7220b8e45119c34d2916b716e821a90bee83",
+      "family": "scene_lead_subject_action",
+      "input_binding_sha256": "fd85aa7f60f5b7033295c717942d56b76769366fcb83becbe6e6752c5f6bc326",
+      "raw_sha256": "64758e7a07f2efb4619a34bd78be7220b8e45119c34d2916b716e821a90bee83",
+      "run_seed": 51
+    },
+    {
+      "cleaned_sha256": "de44909618709dc145564f3ebfcb5a2c131f06cf6c1588a5f976cde292f56efe",
+      "family": "subject_action__scene_tail",
+      "input_binding_sha256": "fd85aa7f60f5b7033295c717942d56b76769366fcb83becbe6e6752c5f6bc326",
+      "raw_sha256": "0facbf5acd8f35d2b5e5cc9505b7925a66abddf164d15cd02dfa027a4c0b7f4d",
+      "run_seed": 51
+    },
+    {
+      "cleaned_sha256": "c35f1e018b1fb890d09683f7a7d7d76b432cc603a372509bb7f4999299c40ced",
+      "family": "subject_action_scene",
+      "input_binding_sha256": "fd85aa7f60f5b7033295c717942d56b76769366fcb83becbe6e6752c5f6bc326",
+      "raw_sha256": "eec63d1fa924a9a7f8e2e5ce5d0c368ed39ef8b9be167884f830ab8e9a5e7582",
+      "run_seed": 51
+    },
+    {
+      "cleaned_sha256": "03fed9f0923e61f1386dd8bef6e9be5a94cf4ded784afd8ef019e387219b606f",
+      "family": "subject_action_scene_insert",
+      "input_binding_sha256": "fd85aa7f60f5b7033295c717942d56b76769366fcb83becbe6e6752c5f6bc326",
+      "raw_sha256": "5d9e61ba8426a933dde0779a1adca1ef65870ba06b46b14d78414c4399d78646",
+      "run_seed": 51
+    },
+    {
+      "cleaned_sha256": "b27d098e8861f832d67995b2db0e364ce250c1955f8f15d351105a95d1f0dd71",
+      "family": "subject_scene_action",
+      "input_binding_sha256": "fd85aa7f60f5b7033295c717942d56b76769366fcb83becbe6e6752c5f6bc326",
+      "raw_sha256": "494d7c9bfec656a20b82b0674feb6bd967f3befbe631aa663ac1fe27d6fcd213",
+      "run_seed": 51
+    },
+    {
+      "cleaned_sha256": "e4757b223c63a759eddddc7d94b6f1bd933e3c8f278bd2b03c370699a365a041",
+      "family": "subject_action__scene_tail",
+      "input_binding_sha256": "10f0f43d0857b05212aba783abbe8699910ce4226f62cefb070e00b0c37f01e7",
+      "raw_sha256": "73ae4cc667458ed37cec0440d3b2d2d3f16032a8c38e1a779c3f3e36ac1e153b",
+      "run_seed": 91
+    }
+  ],
+  "config_hash": "24da86b8c6b58abce1f54c0d5703d3ef96536282ceda33a20595d03bb66d3ce4",
+  "review_kind": "independent assistant code and final prose review; not blinded formal review",
+  "runtime_source_identity": "57c79ac549ff05674d9da0675acc46307f35d624e0405333aac8c9fbcb29f6f8",
+  "schema_version": "r43-development-prose-review/v1",
+  "scope": "Preserved selected content, polarity, subject/artifact/body ownership, scene temporal scope and final cleaned phrasing. Independent prior reviews documented in r43_ordinary_plan.md and r43_placement_plan.md. AS01 input91 reviewed independently against actual raw/cleaned prose; event subject, pen article and pads-wall ownership preserved. Existing template/mood redundancy remains; not formal naturalness acceptance.",
+  "verdict": "PASS",
+  "workflow_hash": "91c4baa1455799d9c50519c605241058897d6cc66ae83a4eeef1cef0fab4ce18"
+}
