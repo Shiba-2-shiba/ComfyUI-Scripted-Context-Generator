@@ -15,7 +15,7 @@ R45 is diagnostic/provenance work. Ordinary Realizer v2 remains 11/512 until a l
 - [x] R45-03: Scene provenance separation.
 - [x] R45-04: capability audit graph.
 - [x] R45-05: `BLOCKED_CAPABILITY_MODEL`; final-source preservation and all development checks PASS; [compact receipts](./comparison_sources/r45/README.md).
-- [ ] R45-06: handoff/checkpoint.
+- [x] R45-06: restored checkpoint and handoff PASS; immutable source tag and dedicated branch published.
 
 Formal evaluation remains NOT_RUN; N2.8/adoption BLOCKED; D3 DEFERRED.
 

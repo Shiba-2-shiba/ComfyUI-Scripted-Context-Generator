@@ -17,8 +17,8 @@
 | R45-02 | PASS | 659c4e7dcebf29ac7e4567fcb3c58e0683be63ba | r45-02-reachability | capability projection; pairs unchanged |
 | R45-03 | PASS | 7ee02172f13d2e7a92ef2d3060ff0479e69d6cc5 | r45-03-verification.json | Scene source-bound 479; ordinary pairs unchanged |
 | R45-04 | PASS | d59b1fc2272acd5094571578fcee0b1f7dee7032 | r45-04-capabilities | 131 capabilities; 50 candidates; rescue max 0 |
-| R45-05 | PASS | this change; SHA in R45-05-report.md | comparison_sources/r45/registry.json | BLOCKED_CAPABILITY_MODEL; preservation PASS |
-| R45-06 | PENDING | | | handoff/checkpoint |
+| R45-05 | PASS | 8861ceaedcf50b5803fdb7f3afa52a96a093caac | comparison_sources/r45/registry.json | BLOCKED_CAPABILITY_MODEL; preservation PASS |
+| R45-06 | PASS | final handoff commit (Git history / task report) | comparison_sources/r45/restore-verification.json; comparison_sources/r45/publication.json | restore PASS; source tag/branch remotely verified |
 
 ## Formal scope
 Formal N2.7/N2.8/D3 evaluation: NOT_RUN / BLOCKED / DEFERRED.
@@ -153,7 +153,7 @@ source. The parent independently restored the task03 commit archive and verified
 all entries against its historical source manifest. No full seed lists or raw
 prompt/rows/log artifacts are tracked.
 
-R45-06 archive restore, handoff/checkpoint and publication remain pending.
+R45-06 subsequently completed restore, checkpoint publication and handoff; see its completion record below.
 Formal reference8192, gate2048, paired formal comparison, fixed80, blind review,
 fresh confirmations, frontend/browser and release8192 are all **NOT_RUN**.
 N2.8/adoption remains **BLOCKED**; D3 remains **DEFERRED**.
@@ -434,3 +434,34 @@ git -c safe.directory=<absolute R45 worktree> diff --check
 - Self-review: scope and diff hygiene PASS; no runtime/protected source edits,
   dependency changes, signature rehashing or threshold changes. No standalone
   lint/typecheck configuration is present. Formal evaluations remain NOT_RUN.
+
+## R45-06 execution record
+
+2026-09-13: IN_PROGRESS before handoff/receipt edits. Approved R45-05 head:
+`8861ceaedcf50b5803fdb7f3afa52a96a093caac`; verified source bytes remain
+`8a1977116e64c1d8bfd135b1a1376854b67cfa48` / `db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f`.
+Source-scope and whole-branch independent reviews APPROVE; task06 repeats scope
+checks, creates an immutable blocked tag, restores and replays before publication.
+
+
+### R45-06 restored checkpoint evidence
+
+Archive of approved checkpoint `8861ceaedcf50b5803fdb7f3afa52a96a093caac`
+restored to new ignored `assets/results/diversity_refactor/r45/restore-06/source`.
+All **640** manifest entries and the source-tree hash match final-development-02
+before/after. Fresh fixed512 reachability, capability audit and root hashseed
+**29**/ascending plus package hashseed **101**/reverse replay all exit zero.
+**13 canonical artifacts** (rows, records, pairs, four capability files, six
+replay files) are byte-identical to final-development-02. Three additional
+metadata artifacts match after exactly four recorded checkout Git/input-path
+fields; no semantic result fields are excluded. Both replays cover 512 inputs,
+3,072 family rows, zero output/context/proof/RNG mismatches, and reject all 512
+stale bindings. Both local R44 annotated-tag objects and peeled commits match.
+
+Task06 runtime authorization and V150 protected source diffs against R44 are
+empty; source-scope and whole-branch independent reviews APPROVE. Compact
+[restore receipt](./comparison_sources/r45/restore-verification.json) contains
+commands, artifact/log hashes and exact metadata differences. Source tag `realizer-v2-r45-blocked-20260913` and branch publication are **VERIFIED**.
+The tag object `fb6e5a2993b4c7cf9339522749421fd936371d4d` peels to `8861cea`, never later handoff
+documentation. The final documentation commit is recorded in Git history and
+the task report; it does not move the source tag. All formal gates remain NOT_RUN.

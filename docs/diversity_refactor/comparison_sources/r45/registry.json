@@ -1,8 +1,11 @@
 {
-  "archive_restore": "NOT_RUN; R45-06 pending",
+  "archive_restore": "PASS",
   "baseline_receipt": "baseline-identity.json",
-  "checkpoint_tag": null,
+  "checkpoint_source_commit": "8861ceaedcf50b5803fdb7f3afa52a96a093caac",
+  "checkpoint_tag": "realizer-v2-r45-blocked-20260913",
+  "checkpoint_tag_object": "fb6e5a2993b4c7cf9339522749421fd936371d4d",
   "development_verdict": "BLOCKED_CAPABILITY_MODEL",
+  "documentation_commit_policy": "The immutable checkpoint refers to source commit 8861ceaedcf50b5803fdb7f3afa52a96a093caac; final handoff documentation is a later commit recorded in the local task report and Git history, without a self-referential hash.",
   "final_source_receipts": [
     "final-reachability.json",
     "capability-summary.json",
@@ -23,7 +26,7 @@
     "release8192": "NOT_RUN"
   },
   "post_scene_historical_receipt": "post-scene-reachability.json",
-  "publication": "NOT_RUN; R45-06 pending",
+  "publication": "SOURCE_TAGS_VERIFIED",
   "raw_artifact_policy": "Large raw rows, full seed lists, prompts and logs remain local and are regenerated from these source identities.",
   "receipt_sha256": {
     "baseline-identity.json": "8a0e048786e81cab25269a8b2dfb41eefb9c12cb8b970b96b87e532b2bffe5b1",
@@ -33,8 +36,12 @@
     "final-reachability.json": "e7b085a4d1e44b6906c72390fe21bc43583f51e69a0ff43a23b9edb80958bc96",
     "post-scene-reachability.json": "8af6d886e533da7054cc8455826eb557a9618e623d173a7a6827b44ed1b79a04",
     "protected-inputs.json": "574c4243b14ffb9ee4ac02c1f90f53fd4f3501c0c6b035785b75285e056e4935",
-    "reproduction.json": "753b5087158a5dccdb357a2aaa1307f3dd39468e6c54132f51dc95c6f7f1ac8f"
+    "publication.json": "6421aa58eeda99f3151ec3f2cae4b476f20a56d0ae6e6b67ffee7767e25246df",
+    "reproduction.json": "753b5087158a5dccdb357a2aaa1307f3dd39468e6c54132f51dc95c6f7f1ac8f",
+    "restore-verification.json": "5563ac95a543d756367d325b63d2d59e788128a1d19e58e44b12ae90229b2b83"
   },
+  "remote_observation": "publication.json",
+  "restore_receipt": "restore-verification.json",
   "schema_version": "r45-compact-receipt/v1",
   "source_branch": "refactor/realizer-v2-r45",
   "source_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",

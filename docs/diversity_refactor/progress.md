@@ -3059,5 +3059,5 @@ replays agree; all **120** explicit V150 and **166** broader protected hashes ar
 unchanged. One legacy Scene test was corrected to distinguish exact source binding
 from unknown grammar while retaining all cases and constructor rejection controls;
 no R45-05 runtime source changed. Formal gates remain **NOT_RUN**, N2.8/adoption
-**BLOCKED**, D3 **DEFERRED**. R45-06 archive restore/handoff/checkpoint remains pending.
+**BLOCKED**, D3 **DEFERRED**. R45-06 local archive restore is PASS: 640 source entries and 13 canonical result files match; the dedicated branch and immutable source tag are published and remotely verified. See [handoff](./r45_handoff.md).
 See [R45 ledger](./r45_progress.md) and [source receipts](./comparison_sources/r45/README.md).

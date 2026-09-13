@@ -17,7 +17,7 @@ artifacts it summarizes.
 
 | Receipt | Meaning |
 |---|---|
-| [registry.json](./registry.json) | Recoverable source, receipt hashes and pending R45-06 boundary |
+| [registry.json](./registry.json) | Recoverable source, receipt hashes and verified R45-06 checkpoint |
 | [baseline-identity.json](./baseline-identity.json) | Historical R45-00/R44 baseline, published immutable tags |
 | [post-scene-reachability.json](./post-scene-reachability.json) | Historical R45-03 result; original invocation and recoverable source differ explicitly |
 | [final-reachability.json](./final-reachability.json) | Fresh final-source fixed512 and root/package replay preservation |
@@ -26,6 +26,8 @@ artifacts it summarizes.
 | [protected-inputs.json](./protected-inputs.json) | 120 explicit V150 and 166 broader R44 protected-input comparisons |
 | [development-verification.json](./development-verification.json) | Focused/regression/all-R45, validators, AST and corrected obsolete test evidence |
 | [reproduction.json](./reproduction.json) | Final artifact/source hashes and deterministic comparison results |
+| [restore-verification.json](./restore-verification.json) | Independent archive restore, 640 source entries and canonical replay comparisons |
+| [publication.json](./publication.json) | Verified remote branch and immutable annotated-tag identities |
 
 R45-03 source-tree hash `a50a4c01ec95664426e14c7723a79b566aa53cb46fd6a336d993d306bb3eceba`
 is recoverable at commit `7ee02172f13d2e7a92ef2d3060ff0479e69d6cc5`.
@@ -41,9 +43,11 @@ three already ordinary and three not yet ordinary. These work-scope counts do no
 predict 64/512 coverage. Tracked examples are capped at eight per candidate;
 complete seed lists are never tracked or used as runtime allowlists.
 
-For R45-06, restore the final source commit with `git archive`, verify every
-manifest entry, and run the replay tools from the restored source using the fresh
-fixed512 pairs. The existing receipt hashes identify the original local
+R45-06 restored checkpoint `8861ceaedcf50b5803fdb7f3afa52a96a093caac` and verified every manifest entry,
+fresh fixed512 audit and both replay modes. For a new restoration, fetch tag
+`realizer-v2-r45-blocked-20260913` and verify its peeled commit against the registry before using
+`git archive`. Follow the [handoff commands](../../r45_handoff.md#reproduce)
+with fresh output directories. The existing receipt hashes identify the original local
 invocation artifacts; retain the restored invocation's own provenance separately.
 The exact executed verification/audit/replay commands are in the
 [R45 ledger](../../r45_progress.md); local `commands.json` retains argv, exit codes
@@ -56,7 +60,8 @@ cases, exact source binding, UNKNOWN grammar, mandatory deferred blockers and
 rejection by all four rendering constructors. Full final verification was rerun
 after that correction. All 14 changed Python files pass Python 3.10 AST parsing.
 
-R45-06 archive restore, final handoff/checkpoint, tag and publication are pending.
+R45-06 archive restore and handoff are complete; the immutable source tag
+and dedicated branch are published with verified remote identities.
 Formal reference8192, gate2048, paired formal comparison, fixed80, blind review,
 fresh confirmations, frontend/browser and release8192 remain **NOT_RUN**.
 N2.8/adoption remains **BLOCKED**; D3 remains **DEFERRED**. Published R44 comparison

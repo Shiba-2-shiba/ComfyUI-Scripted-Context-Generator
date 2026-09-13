@@ -1,0 +1,27 @@
+{
+  "checkpoint_source_commit": "8861ceaedcf50b5803fdb7f3afa52a96a093caac",
+  "checkpoint_tag": "realizer-v2-r45-blocked-20260913",
+  "checkpoint_tag_object": "fb6e5a2993b4c7cf9339522749421fd936371d4d",
+  "publication": {
+    "refs": {
+      "refs/heads/refactor/realizer-v2-r45": "8861ceaedcf50b5803fdb7f3afa52a96a093caac",
+      "refs/tags/realizer-v2-r44-baseline-11": "eb0600409b463a578e47f55cf6d696fdf2654397",
+      "refs/tags/realizer-v2-r44-baseline-11^{}": "b16a4dbca7d91d6d1cdefbfd521fd6a44787765a",
+      "refs/tags/realizer-v2-r44-blocked-20260913": "0f4d49af59d8e679a9471e4c982acb5534e35f79",
+      "refs/tags/realizer-v2-r44-blocked-20260913^{}": "98a8ef33ab9a851240cf678864b0ed65879228e4",
+      "refs/tags/realizer-v2-r45-blocked-20260913": "fb6e5a2993b4c7cf9339522749421fd936371d4d",
+      "refs/tags/realizer-v2-r45-blocked-20260913^{}": "8861ceaedcf50b5803fdb7f3afa52a96a093caac"
+    },
+    "remote": "origin",
+    "status": "SOURCE_TAGS_VERIFIED"
+  },
+  "schema_version": "r45-compact-receipt/v1",
+  "source_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+  "source_tree_hash": "db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f",
+  "underlying_artifacts": [
+    {
+      "path": "assets/results/diversity_refactor/r45/restore-06/remote-observation.json",
+      "sha256": "92e0a4faba7bb550ef6011e89f3c554067a24db4bd4136ab82d1e7f0fe006b21"
+    }
+  ]
+}

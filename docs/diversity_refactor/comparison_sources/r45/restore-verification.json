@@ -1,0 +1,178 @@
+{
+  "archive_sha256": "387c4a2e2955e489d466c602040d92353a6b3e8dee55655757038976bca6a24a",
+  "canonical_artifact_checks": {
+    "capabilities/capability-blocker-intersections.json": {
+      "byte_equal_final": true,
+      "sha256": "cd227861a6be602869fddaef2ffca431e4090fdbc0c74fd6d1468443a81d5d2e"
+    },
+    "capabilities/capability-occurrences.jsonl": {
+      "byte_equal_final": true,
+      "sha256": "c763b831726db37cdfa4ba8819a6dfe23792e2501d6d9b7303afa8178804e9e3"
+    },
+    "capabilities/capability-summary.json": {
+      "byte_equal_final": true,
+      "sha256": "2f097f1efa1975a635e9fe1f6df8ee076c18090fe8ac41fb491c753bbc45b06b"
+    },
+    "capabilities/environment.json": {
+      "equal_except_listed_metadata": true,
+      "sha256": "874031b4b7323f48a8a43e5918175a4d79aac60538dafd967a7c36125e83f1ec"
+    },
+    "capabilities/r46-candidates.json": {
+      "byte_equal_final": true,
+      "sha256": "2662eda0b772624b47c14309c9431dc708dc1ef51e403d69d7f0d7aa134966f5"
+    },
+    "capabilities/source-input.json": {
+      "equal_except_listed_metadata": true,
+      "sha256": "cd10fe710b60c587292c489063b4d35c858f222b344f48908231cd6acacc88eb"
+    },
+    "reachability/normal-pairs.jsonl": {
+      "byte_equal_final": true,
+      "sha256": "a3b8a28e873bb4cbcfbd338125eef6165e809f228cd5d7cafa73d1589255b87d"
+    },
+    "reachability/reachability.json": {
+      "equal_except_listed_metadata": true,
+      "sha256": "716c50d135ee1a8ed558155eb5373a5b2a2dc261219ded91bbd8de81045642c3"
+    },
+    "reachability/records.jsonl": {
+      "byte_equal_final": true,
+      "sha256": "a821d0264957ee602f0e9a80d2f112c213b9f88df839f258e7a6fb483290026c"
+    },
+    "reachability/rows.jsonl": {
+      "byte_equal_final": true,
+      "sha256": "3d164a865a7d44f16236c7cedcd479f7bbe48fbddcb1cb453ef78ae1f0edc7af"
+    },
+    "replay-package/evidence.jsonl": {
+      "byte_equal_final": true,
+      "sha256": "954612c5a41a4c2946aef1cfd7cc7b97426ec280fc49b74eaa3a36874a448f38"
+    },
+    "replay-package/family-rows.jsonl": {
+      "byte_equal_final": true,
+      "sha256": "3e1cb0280f30e8b254f5120ecbcc0e3461182817e98b28183cfb966e1ea3208b"
+    },
+    "replay-package/summary.json": {
+      "byte_equal_final": true,
+      "sha256": "c342b0f7ad5295f425b420f455d5bf1b712e05594c119a53a16ebec54b20b8cf"
+    },
+    "replay-root/evidence.jsonl": {
+      "byte_equal_final": true,
+      "sha256": "954612c5a41a4c2946aef1cfd7cc7b97426ec280fc49b74eaa3a36874a448f38"
+    },
+    "replay-root/family-rows.jsonl": {
+      "byte_equal_final": true,
+      "sha256": "3e1cb0280f30e8b254f5120ecbcc0e3461182817e98b28183cfb966e1ea3208b"
+    },
+    "replay-root/summary.json": {
+      "byte_equal_final": true,
+      "sha256": "c342b0f7ad5295f425b420f455d5bf1b712e05594c119a53a16ebec54b20b8cf"
+    }
+  },
+  "commands": [
+    {
+      "argv": "python tools/audit_realizer_reachability.py --profile intake --force-families all --output-dir ../reachability",
+      "exit_code": 0,
+      "log": "reachability.log",
+      "log_sha256": "fad1dd657b9bbfec532a391488a9e7d6901bdc759fcc97e11c013464365416a9"
+    },
+    {
+      "argv": "python tools/audit_realizer_capabilities.py --rows ../reachability/rows.jsonl --output-dir ../capabilities",
+      "exit_code": 0,
+      "log": "capabilities.log",
+      "log_sha256": "28cdba800e96c98c9cce384108826f8c981167b877302ee613d48fee85af6b33"
+    },
+    {
+      "PYTHONHASHSEED": "29",
+      "argv": "python tools/realizer_candidate_replay.py --source-root . --pairs ../reachability/normal-pairs.jsonl --output-dir ../replay-root --import-mode root --order ascending",
+      "exit_code": 0,
+      "log": "replay-root.log",
+      "log_sha256": "ced80695db64e1f2bc07f7b3ae931b0248c190a9372600e58a4971b4da3afe1d"
+    },
+    {
+      "PYTHONHASHSEED": "101",
+      "argv": "python tools/realizer_candidate_replay.py --source-root . --pairs ../reachability/normal-pairs.jsonl --output-dir ../replay-package --import-mode package --order reverse",
+      "exit_code": 0,
+      "log": "replay-package.log",
+      "log_sha256": "ced80695db64e1f2bc07f7b3ae931b0248c190a9372600e58a4971b4da3afe1d"
+    }
+  ],
+  "commands_cwd": "assets/results/diversity_refactor/r45/restore-06/source",
+  "compared_to": "assets/results/diversity_refactor/r45/final-development-02",
+  "development_verdict": "BLOCKED_CAPABILITY_MODEL",
+  "formal_gates": {
+    "blind_review": "NOT_RUN",
+    "fixed80": "NOT_RUN",
+    "fresh_confirmations": "NOT_RUN",
+    "frontend_browser": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "paired_formal_comparison": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "local_evidence_root": "assets/results/diversity_refactor/r45/restore-06",
+  "metadata_explanation": "Archive extraction has no Git repository metadata: Git commit is null. Input rows path describes the separate restored invocation; no rows, graph or replay content is excluded.",
+  "only_metadata_exclusions": [
+    {
+      "artifact": "capabilities/source-input.json",
+      "field": "rows_path",
+      "final_value": "C:/Users/inott/Downloads/ComfyUI-Scripted-Context-Generator/assets/results/r45-worktree/assets/results/diversity_refactor/r45/final-development-02/reachability/rows.jsonl",
+      "restored_value": "../reachability/rows.jsonl"
+    },
+    {
+      "artifact": "capabilities/source-input.json",
+      "field": "audit_tool_git_commit",
+      "final_value": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+      "restored_value": null
+    },
+    {
+      "artifact": "capabilities/environment.json",
+      "field": "git_commit",
+      "final_value": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+      "restored_value": null
+    },
+    {
+      "artifact": "reachability/reachability.json",
+      "field": "identity.git_commit",
+      "final_value": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+      "restored_value": null
+    }
+  ],
+  "published_r44_sources_preserved_locally": {
+    "pre_r44_baseline": {
+      "commit": "b16a4dbca7d91d6d1cdefbfd521fd6a44787765a",
+      "source_tree_hash": "53a4fe8048cfd71cdcd9f3a7cb414e0b96ec6c0450b96795c465470d6963b56e",
+      "tag": "realizer-v2-r44-baseline-11",
+      "tag_object": "eb0600409b463a578e47f55cf6d696fdf2654397"
+    },
+    "r44_diagnostics": {
+      "commit": "98a8ef33ab9a851240cf678864b0ed65879228e4",
+      "source_tree_hash": "a113f9908fd53be35ff0e457445c4a6717f2d32bbaefb36cc95da1728c76a778",
+      "tag": "realizer-v2-r44-blocked-20260913",
+      "tag_object": "0f4d49af59d8e679a9471e4c982acb5534e35f79"
+    }
+  },
+  "replay": {
+    "family_rows": 3072,
+    "ordinary_output_context_mismatches": 0,
+    "proof_constructor_mismatches": 0,
+    "rng_mismatches": 0,
+    "sample_count": 512,
+    "stale_bindings_rejected_each": 512
+  },
+  "restore_method": "git archive exact approved commit; annotated tag creation/publication handled separately and must peel to this commit",
+  "root_package_canonical_equal": true,
+  "schema_version": "r45-compact-receipt/v1",
+  "source_commit": "8861ceaedcf50b5803fdb7f3afa52a96a093caac",
+  "source_manifest_before_after_equal_final": true,
+  "source_manifest_entry_count": 640,
+  "source_scope_review": {
+    "checkpoint_commit": "8861ceaedcf50b5803fdb7f3afa52a96a093caac",
+    "comparison_base": "origin/refactor/realizer-v2-r44",
+    "independent_source_scope": "APPROVE",
+    "independent_whole_branch": "APPROVE",
+    "task06_diff_check": "PASS",
+    "task06_protected_data_diff": "EMPTY",
+    "task06_runtime_authorization_diff": "EMPTY"
+  },
+  "source_tree_hash": "db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f",
+  "status": "PASS",
+  "verified_source_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48"
+}
