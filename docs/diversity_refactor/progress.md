@@ -3024,3 +3024,17 @@ BLOCKED; these are development baselines, not the formal V150 reference.
 ## R44 Coverage Engineering
 
 2026-09-13: Profile-first R44 diagnostics and deterministic packet selection are implemented on refactor/realizer-v2-r44. Measured ordinary11/512 and3families remain unchanged, with all6common-forced families and exact512pair preservation. The cohort has511full structural signatures (maximum2seeds), so no packet meets the minimum4seeds. Task2 viability is BLOCKED and runtime packets are skipped. Focused534/2020subtests, regression87/33, R44tests45/53, validators/full-flow and independent restored512replay PASS. Formal gates NOT_RUN, N2.8BLOCKED, D3DEFERRED. See [R44 progress](./r44_progress.md), [handoff](./r44_handoff.md) and [source registry](./comparison_sources/r44/registry.json).
+
+
+## 2026-09-13 — R45 baseline locked
+
+R45 diagnostic/provenance work starts on isolated `refactor/realizer-v2-r45` at
+`8c0dce2a6a2f485d683c306736b76a114bae3165`. Fresh R44 baseline verification is
+PASS: ordinary 11/512 across 3 families, 501 exact fallbacks, all 6 real-input
+common-forced families, focused 534 tests / 2,020 subtests, regression 87 / 33
+plus validators, and 512-input replay. Pair/record/diagnostic hashes and replay
+summary bytes equal R44 receipts. All 120 Step 6 V150 hashes are recorded and
+all 166 broader R44 protected inputs remain unchanged. Published R44 tags and
+runtime source are unchanged. Formal gates NOT_RUN, N2.8/adoption BLOCKED,
+D3 DEFERRED. See [R45 progress](./r45_progress.md) and
+[implementation plan](./R45_IMPLEMENTATION_PLAN.md).

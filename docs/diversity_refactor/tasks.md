@@ -1,5 +1,24 @@
 # Semantic Diversity / Natural Language Refactor Tasks
 
+## R45 capability projection and provenance separation
+
+Governing design: [R45_DESIGN.md](./R45_DESIGN.md); implementation:
+[R45_IMPLEMENTATION_PLAN.md](./R45_IMPLEMENTATION_PLAN.md); execution ledger:
+[r45_progress.md](./r45_progress.md).
+
+R45 is diagnostic/provenance work. Ordinary Realizer v2 remains 11/512 until a later R46 runtime capability task is explicitly approved.
+
+- [x] R45-00: isolated baseline locked; 11/512, 3 ordinary families, 501 exact
+  fallbacks and 6 real-input forced families; focused/regression/replay PASS.
+- [ ] R45-01: blocker taxonomy.
+- [ ] R45-02: capability projection.
+- [ ] R45-03: Scene provenance separation.
+- [ ] R45-04: capability audit graph.
+- [ ] R45-05: R46 readiness verdict.
+- [ ] R45-06: handoff/checkpoint.
+
+Formal evaluation remains NOT_RUN; N2.8/adoption BLOCKED; D3 DEFERRED.
+
 ## R44 coverage engineering
 
 Governing design: [R44_DESIGN.md](./R44_DESIGN.md); execution: [R44_IMPLEMENTATION_PLAN.md](./R44_IMPLEMENTATION_PLAN.md). R44 supersedes case-first coverage expansion. Follow [r44_progress.md](./r44_progress.md).
