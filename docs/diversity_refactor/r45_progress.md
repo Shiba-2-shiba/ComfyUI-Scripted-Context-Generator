@@ -16,12 +16,71 @@
 | R45-01 | PASS | 2a328547e81bf26f16b22b83014bf1a9ccafd608 | r45-01-verification.json | taxonomy; selector []; pairs unchanged |
 | R45-02 | PASS | 659c4e7dcebf29ac7e4567fcb3c58e0683be63ba | r45-02-reachability | capability projection; pairs unchanged |
 | R45-03 | PASS | this change; SHA in R45-03-report.md | r45-03-verification.json | Scene source-bound 479; ordinary pairs unchanged |
-| R45-04 | PENDING | | | capability audit graph |
+| R45-04 | PASS | this change; SHA in R45-04-report.md | r45-04-capabilities | 131 capabilities; 50 candidates; rescue max 0 |
 | R45-05 | PENDING | | | R46 readiness verdict |
 | R45-06 | PENDING | | | handoff/checkpoint |
 
 ## Formal scope
 Formal N2.7/N2.8/D3 evaluation: NOT_RUN / BLOCKED / DEFERRED.
+
+## R45-04 execution record
+
+2026-09-13: IN_PROGRESS before source edits. Prior approved commit:
+`7ee02172f13d2e7a92ef2d3060ff0479e69d6cc5`. Input is the final R45-03
+reachability artifact at
+`assets/results/diversity_refactor/r45/r45-03-reachability-final/rows.jsonl`.
+Ownership is limited to the capability audit CLI, its focused tests, this ledger,
+task report, and generated R45-04 receipts.
+
+The audit keeps the typed capability identity and its canonical hash unchanged,
+then adds only occurrence context. Descriptive blocker counts also consume the
+raw reachability rows, so components without projected capabilities remain in
+the graph. Candidate count, floor and order use the union of source-bound,
+ordinary-v1 seeds with a repairable domain blocker after row/error and all-family
+hard exclusions. A hard sibling family excludes the complete row. Ranking uses
+all co-blocker classes before capping the displayed top eight. Counts deduplicate
+repeated atoms and `(seed, family)` edges; examples are capped independently.
+
+Required commands from the isolated worktree all exited zero:
+
+```text
+python -m pytest --rootdir=. -o addopts= -p no:cacheprovider -q assets/test_r45_capability_audit.py
+python -m pytest --rootdir=. -o addopts= -p no:cacheprovider -q assets/test_r45_capability_projection.py assets/test_r45_capability_audit.py
+python -m pytest --rootdir=. -o addopts= -p no:cacheprovider -q assets/test_r45_blocker_taxonomy.py assets/test_r45_capability_projection.py assets/test_r45_scene_provenance_separation.py assets/test_r45_capability_audit.py
+python tools/audit_realizer_capabilities.py --rows assets/results/diversity_refactor/r45/r45-03-reachability-final/rows.jsonl --output-dir assets/results/diversity_refactor/r45/r45-04-capabilities-final-a
+python tools/audit_realizer_capabilities.py --rows assets/results/diversity_refactor/r45/r45-03-reachability-final/rows.jsonl --output-dir assets/results/diversity_refactor/r45/r45-04-capabilities-final-b
+python -m py_compile tools/audit_realizer_capabilities.py assets/test_r45_capability_audit.py
+git -c safe.directory=<absolute R45 worktree> diff --check
+```
+
+- RED: expected missing audit-module collection error (exit 1); the focused
+  correction cycle then produced three expected adversarial failures. GREEN:
+  corrected focused audit suite **15 passed**. Before the final corrections, the
+  required projection/audit suite passed 21 tests and all R45 suites passed 37
+  tests plus 33 subtests, with zero failures/skips/errors.
+- Final R45-03 input: 512 rows, SHA-256
+  `69deea7151bc39d9d6a699ca548f701adc089637cd9dab1710bcc8146045fdd4`;
+  embedded source-tree hash
+  `a50a4c01ec95664426e14c7723a79b566aa53cb46fd6a336d993d306bb3eceba`.
+  The receipt records this separately from the audit invocation commit and audit
+  tool hash.
+- Audit: 8,684 occurrences, **131** unique capability hashes, largest
+  descriptive distinct-seed count **470**; action unknown-grammar groups with
+  at least four seeds **8**, Scene unknown-grammar groups **11**.
+- Candidate accounting: **50** qualifying hashes before the top-12 output cap,
+  maximum `affected_seed_count` **451**, maximum
+  `single_capability_rescue_upper_bound` **0**. Per-hash affected/rescue counts
+  exactly match the independent oracle. R45-04 passes because reusable groups
+  exist; the zero rescue result is preserved for the R45-05 verdict rather than
+  weakening accounting.
+- Both audit runs match byte-for-byte for all six artifacts. Primary hashes:
+  occurrences `c763b831726db37cdfa4ba8819a6dfe23792e2501d6d9b7303afa8178804e9e3`,
+  summary `2f097f1efa1975a635e9fe1f6df8ee076c18090fe8ac41fb491c753bbc45b06b`,
+  intersections `cd227861a6be602869fddaef2ffca431e4090fdbc0c74fd6d1468443a81d5d2e`,
+  candidates `2662eda0b772624b47c14309c9431dc708dc1ef51e403d69d7f0d7aa134966f5`.
+- No runtime authorization, protected source, dependency, public I/O, threshold,
+  full-clause allowlist or seed allowlist changed. Formal evaluations remain
+  **NOT_RUN**.
 
 ## R45-03 execution record
 
