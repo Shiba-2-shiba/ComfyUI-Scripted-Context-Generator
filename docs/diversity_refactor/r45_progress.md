@@ -13,8 +13,8 @@
 | Task | State | Commit | Evidence | Notes |
 |---|---|---|---|---|
 | R45-00 | PASS | 24d902b8099c433def50f87ac80536c05773a123 | baseline/baseline-verification.json | baseline lock |
-| R45-01 | PASS | this change; SHA in R45-01-report.md | r45-01-verification.json | taxonomy; selector []; pairs unchanged |
-| R45-02 | PENDING | | | capability projection |
+| R45-01 | PASS | 2a328547e81bf26f16b22b83014bf1a9ccafd608 | r45-01-verification.json | taxonomy; selector []; pairs unchanged |
+| R45-02 | PASS | this change; SHA in R45-02-report.md | r45-02-reachability | capability projection; pairs unchanged |
 | R45-03 | PENDING | | | Scene provenance separation |
 | R45-04 | PENDING | | | capability audit graph |
 | R45-05 | PENDING | | | R46 readiness verdict |
@@ -111,6 +111,47 @@ was introduced by this documentation baseline task.
 Formal candidate reference8192, gate2048, paired formal comparison, fixed80,
 blind review, fresh confirmations, frontend/browser and release8192: **NOT_RUN**.
 N2.8/adoption: **BLOCKED**. D3: **DEFERRED**.
+
+## R45-02 execution record
+
+2026-09-13: Marked IN_PROGRESS before source edits. Added a diagnostic-only,
+typed atomic capability projection that resolves each atom through its declared
+`source_part_ids`, rebuilds current evidence only after R44 common-input binding
+validation, and attaches canonical projection bytes without changing the R44
+signature schema or runtime authorization.
+
+Commands from the R45 worktree (evidence under `assets/results/diversity_refactor/r45/`):
+
+```text
+python -m pytest --rootdir=. -o addopts= -p no:cacheprovider -q assets/test_r45_capability_projection.py
+python -m pytest --rootdir=. -o addopts= -p no:cacheprovider -q assets/test_r45_capability_projection.py assets/test_r43_common_diagnostics.py assets/test_r44_coverage_signatures.py assets/test_r44_reachability_accounting.py
+python tools/audit_realizer_reachability.py --profile intake --force-families all --sample-count 16 --output-dir assets/results/diversity_refactor/r45/r45-02-repeat16-a
+python tools/audit_realizer_reachability.py --profile intake --force-families all --sample-count 16 --output-dir assets/results/diversity_refactor/r45/r45-02-repeat16-b
+python tools/audit_realizer_reachability.py --profile intake --force-families all --output-dir assets/results/diversity_refactor/r45/r45-02-reachability
+```
+
+- RED: expected missing `tools.realizer_capability_projection` collection error
+  (exit 1).
+- GREEN: 37 tests / 17 subtests PASS; no failures, skips or errors.
+- Repeat16: both complete rows are equal. Projection payloads and hashes match
+  for 16/16 seeds; after removing only the two additive capability fields, all
+  pre-R45 diagnostic fields match. The same comparisons match the first 16
+  fixed512 rows exactly.
+- Fixed512: 512 AVAILABLE projections; 6,466 capability identities; 112 unique
+  capability hashes; largest repeated capability count 470. These are
+  measurement facts only and grant no runtime permission.
+- Preservation: ordinary v2 remains 11/512 across three families with 501
+  fallbacks and zero errors. `normal-pairs.jsonl` is byte-equal to the R45-00
+  baseline, SHA-256
+  `a3b8a28e873bb4cbcfbd338125eef6165e809f228cd5d7cafa73d1589255b87d`.
+  The fixed512 source manifests before/after are equal.
+- R44 `realizer-coverage-signature/v1` code and tests are unchanged. Capability
+  identity excludes source text, selected-text hashes, exact catalog keys,
+  evidence/input bindings and unrelated domains; invalid part references fail
+  closed. No runtime/protected source, dependency, threshold or public I/O changed.
+- Formal candidate reference8192, gate2048, paired formal comparison, fixed80,
+  blind review, fresh confirmations, frontend/browser and release8192 remain
+  **NOT_RUN**.
 
 ## R45-01 execution record
 

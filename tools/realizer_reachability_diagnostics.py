@@ -6,6 +6,7 @@ it does not establish semantic safety of a different ordering or hidden atoms.
 """
 from collections import Counter
 from dataclasses import replace
+import hashlib
 
 from core.schema import ActionFrame
 from nodes_prompt_cleaner import PromptCleaner
@@ -19,6 +20,8 @@ from pipeline.v2_template_provenance import scene_template_kind
 from vocab.loader import load_json
 from vocab.syntax_families import BASELINE_FAMILY, CATALOG_FILENAME
 from tools.realizer_coverage_signatures import build_coverage_signature, coverage_signature_hash
+from tools.realizer_capability_projection import build_capability_projection
+from tools.workflow_prompt_runner import canonical_json_bytes
 
 
 def _domain(supported, binding=None, *, basis="NOT_AVAILABLE", blockers=()):
@@ -239,8 +242,12 @@ def diagnose_snapshot(snapshot, *, force_families=False):
             "errors": [] if disabled else [{"id": blocker, "detail": "bridge snapshot unavailable"}],
         }
         signature = build_coverage_signature(snapshot, result)
+        projection = build_capability_projection(snapshot, signature)
         return {**result, "coverage_signature": signature,
-                "coverage_signature_sha256": coverage_signature_hash(signature)}
+                "coverage_signature_sha256": coverage_signature_hash(signature),
+                "capability_projection": projection,
+                "capability_projection_sha256": hashlib.sha256(
+                    canonical_json_bytes(projection)).hexdigest()}
     common_route = bridge.get("common_route") is True
     domains = _common_components(bridge) if common_route else _components(bridge)
     common_proofs = {proof["family"]: proof for proof in bridge.get("common_proofs", ())}
@@ -338,5 +345,9 @@ def diagnose_snapshot(snapshot, *, force_families=False):
     result = {"domains": domains, "families": families, "route": route, "trace_mode": trace_mode,
               "blockers": [indexed[key] for key in sorted(indexed)], "errors": errors}
     signature = build_coverage_signature(snapshot, result)
+    projection = build_capability_projection(snapshot, signature)
     return {**result, "coverage_signature": signature,
-            "coverage_signature_sha256": coverage_signature_hash(signature)}
+            "coverage_signature_sha256": coverage_signature_hash(signature),
+            "capability_projection": projection,
+            "capability_projection_sha256": hashlib.sha256(
+                canonical_json_bytes(projection)).hexdigest()}

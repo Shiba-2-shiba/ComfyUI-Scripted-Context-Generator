@@ -1,5 +1,6 @@
 """Common-route diagnostics replay constructors without widening parity claims."""
 import copy
+import hashlib
 import random
 from unittest.mock import patch
 
@@ -10,6 +11,7 @@ from pipeline import v2_candidate_bridge as bridge
 from pipeline.prompt_realizer import realize_content_plan
 import prompt_renderer
 from tools import realizer_reachability_diagnostics as diagnostics
+from tools.workflow_prompt_runner import canonical_json_bytes
 
 
 def captured_common(*, standalone=False):
@@ -42,6 +44,11 @@ def test_common_route_uses_typed_binding_and_same_forced_parity_definition():
     assert snapshot == before and random.getstate() == state
     assert result['route'] == result['trace_mode'] == 'common_evidence'
     assert not result['errors']
+    projection = result['capability_projection']
+    assert projection['schema_version'] == 'realizer-capability-projection/v1'
+    assert projection['status'] == 'AVAILABLE' and projection['capabilities']
+    assert result['capability_projection_sha256'] == hashlib.sha256(
+        canonical_json_bytes(projection)).hexdigest()
     for component in result['domains'].values():
         assert component['constructor_supported'] and component['grammar_known']
         assert component['binding_success'] and component['runtime_available']
@@ -113,12 +120,23 @@ def test_unused_common_inputs_do_not_change_legacy_diagnostics():
     snapshot['bridge'].update(common_route=False, common_inputs=common_snapshot()[0], common_proofs=[])
     with patch.object(diagnostics, '_common_evidence', side_effect=AssertionError('legacy priority')):
         actual = diagnostics.diagnose_snapshot(snapshot, force_families=True)
-    signature_fields = {'coverage_signature', 'coverage_signature_sha256'}
-    assert {key: value for key, value in actual.items() if key not in signature_fields} == {
-        key: value for key, value in original.items() if key not in signature_fields}
+    additive_fields = {
+        'coverage_signature', 'coverage_signature_sha256',
+        'capability_projection', 'capability_projection_sha256',
+    }
+    assert {key: value for key, value in actual.items() if key not in additive_fields} == {
+        key: value for key, value in original.items() if key not in additive_fields}
     signature = actual['coverage_signature']
     assert signature['proof_basis'] == 'invalid_common_inputs'
     assert signature['eligible_families'] == []
     assert signature['family_blockers']
     assert all('binding.current_input_mismatch' in blockers
                for blockers in signature['family_blockers'].values())
+    projection = actual['capability_projection']
+    assert projection == {
+        'schema_version': 'realizer-capability-projection/v1',
+        'status': 'NOT_AVAILABLE',
+        'capabilities': [],
+    }
+    assert actual['capability_projection_sha256'] == hashlib.sha256(
+        canonical_json_bytes(projection)).hexdigest()
