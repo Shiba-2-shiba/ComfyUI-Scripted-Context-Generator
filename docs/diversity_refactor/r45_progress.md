@@ -16,12 +16,40 @@
 | R45-01 | PASS | 2a328547e81bf26f16b22b83014bf1a9ccafd608 | r45-01-verification.json | taxonomy; selector []; pairs unchanged |
 | R45-02 | PASS | 659c4e7dcebf29ac7e4567fcb3c58e0683be63ba | r45-02-reachability | capability projection; pairs unchanged |
 | R45-03 | PASS | this change; SHA in R45-03-report.md | r45-03-verification.json | Scene source-bound 479; ordinary pairs unchanged |
-| R45-04 | PASS | this change; SHA in R45-04-report.md | r45-04-capabilities | 131 capabilities; 50 candidates; rescue max 0 |
-| R45-05 | PENDING | | | R46 readiness verdict |
+| R45-04 | PASS | d59b1fc2272acd5094571578fcee0b1f7dee7032 | r45-04-capabilities | 131 capabilities; 50 candidates; rescue max 0 |
+| R45-05 | IN_PROGRESS | | final-development/ | final-source verification and measured readiness verdict |
 | R45-06 | PENDING | | | handoff/checkpoint |
 
 ## Formal scope
 Formal N2.7/N2.8/D3 evaluation: NOT_RUN / BLOCKED / DEFERRED.
+
+## R45-05 execution record
+
+2026-09-13: IN_PROGRESS before documentation/receipt edits. Prior approved source
+commit: `d59b1fc2272acd5094571578fcee0b1f7dee7032`. Only the three progress/task
+documents, compact R45 comparison receipts and ignored final-development evidence
+are in scope. Final-source checks use fresh directories; historical R45-00 and
+R45-03 evidence retain their original source identities. Zero single-capability
+rescue is a measured blocked verdict, not a reason to weaken the readiness rule.
+
+### Focused-suite expectation correction
+
+The first final-development focused run at `d59b1fc2272acd5094571578fcee0b1f7dee7032`
+failed ten cases in one parametrized Scene coverage test (524 passed / 2,020
+subtests passed). Like the two tests corrected in R45-03, it still required
+absent provenance for exact catalog-matched but grammatically unsupported input.
+The parent approved a narrow scope extension to that test in
+`assets/test_r43_coverage_scene.py`. All ten cases now require exact source
+field/catalog/raw binding, UNKNOWN grammar and unproved ownership, both
+grammar-unknown and deferred-permission blockers, and rejection by all four
+Scene rendering constructors. No runtime source or other rejection case changed.
+
+The complete Scene coverage file passes **31 tests** with no skips or errors:
+`python -m pytest --rootdir=. -o addopts= -p no:cacheprovider -p tools.verify_realizer_v2_candidate -q assets/test_r43_coverage_scene.py`.
+Initial failure and correction logs remain in `final-development/`; complete
+final verification will restart in fresh `final-development-02/` directories
+after this correction is committed. This is a diagnostic expectation correction,
+not a relaxation of the ordinary/protected/determinism preservation gates.
 
 ## R45-04 execution record
 

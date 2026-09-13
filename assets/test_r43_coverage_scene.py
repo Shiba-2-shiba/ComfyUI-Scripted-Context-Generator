@@ -141,7 +141,22 @@ def test_catalog_membership_cannot_authorize_unknown_grammar_or_wrong_fields(fie
     source = defaults if field == 'details' else packs['recording_studio']
     source.setdefault(field, []).append(raw)
     with mock.patch.object(scene, 'load_background_packs', return_value=packs), mock.patch.object(scene, 'load_json', return_value=defaults):
-        assert component(ctx).trace is None
+        value = component(ctx)
+        assert value.trace is not None
+        assert [(part.source.field, part.source.catalog_key, part.text) for part in value.trace.parts] == [
+            (name, 'background_defaults' if name == 'details' else 'recording_studio', selected(ctx, name))
+            for name in ('environment', 'core', 'fx', 'details')
+        ]
+        changed = value.atoms[('environment', 'core', 'fx', 'details').index(field)]
+        assert changed.source_text == raw
+        assert changed.grammar_known is Truth.UNKNOWN
+        assert changed.owner_id is None and changed.antecedent_ids is None
+        assert 'scene.grammar_unknown' in value.blockers
+        assert 'scene.r45_source_only_permission_deferred' in value.blockers
+        assert scene.producer_scene_parts(ctx['extras']['location_prompt'], ctx['loc']) is None
+        assert scene.producer_owned_scene(ctx['extras']['location_prompt'], ctx['loc']) is None
+        assert scene.common_scene_parts(ctx['extras']['location_prompt'], ctx['loc']) is None
+        assert scene.common_standalone_scene_parts(ctx['extras']['location_prompt'], ctx['loc']) is None
 
 
 def test_section_shuffle_preserves_both_atmosphere_sources_without_deduplication():
