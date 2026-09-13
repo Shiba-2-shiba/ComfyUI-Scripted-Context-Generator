@@ -43,13 +43,24 @@ def test_missing_reference_wrong_owner_and_unknown_weather_keep_original_text():
     for text in (GALLERY + ', featuring ' + PLAQUES,
                  GALLERY + ', featuring ' + PLAQUES + ' and ' + WORKS,
                  GALLERY + ', featuring ' + WORKS + ' and small title plaques mounted beside her',
-                 GALLERY + ', soft daylight filtered through the front glass',
                  GALLERY + ', unrecognized crowd clause'):
         value = component(context(text))
         assert value.trace is None and not value.runtime_available
         assert value.atoms[0].source_text == text
         assert value.atoms[0].grammar_known is Truth.UNKNOWN
         assert value.atoms[0].antecedent_ids is None
+
+    text = GALLERY + ', soft daylight filtered through the front glass'
+    value = component(context(text))
+    assert value.trace is not None and value.runtime_available
+    assert [(part.source.field, part.source.catalog_key, part.text) for part in value.trace.parts] == [
+        ('environment', 'art_gallery', GALLERY),
+        ('weather', 'art_gallery', 'soft daylight filtered through the front glass')]
+    assert value.atoms[1].grammar_known is Truth.UNKNOWN
+    assert value.atoms[1].antecedent_ids is None
+    assert 'scene.grammar_unknown' in value.blockers
+    assert 'scene.r45_source_only_permission_deferred' in value.blockers
+    assert scene.common_scene_parts(text, 'art_gallery') is None
 
 
 def test_latest_history_and_current_raw_frame_locations_must_agree():

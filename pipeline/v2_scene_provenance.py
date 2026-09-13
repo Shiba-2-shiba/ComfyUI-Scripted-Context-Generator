@@ -1,6 +1,7 @@
 """Reconstruct producer-owned scene fields and validate their nominal grammar."""
 import re
 from collections.abc import Mapping
+from dataclasses import dataclass
 
 try:
     from ..location_service import load_background_packs
@@ -275,6 +276,98 @@ def _producer_scene_components(location, location_key, *, bind_sources=False, re
     return 'in ' + parsed_anchor, tuple(modifiers), tuple(components)
 
 
+@dataclass(frozen=True)
+class _BoundScenePart:
+    field: str
+    raw: str
+    source_key: str
+
+
+def _bind_scene_source_parts(location, location_key, *, bind_sources=True):
+    """Return exact ordered producer source parts without requiring grammar proof."""
+    from .location_builder import _assemble_location_prompt
+    if __package__ and '.' in __package__:
+        from ..core.semantic_policy import sanitize_text
+    else:
+        from core.semantic_policy import sanitize_text
+    if not isinstance(location, str) or not isinstance(location_key, str):
+        return None
+    pack = load_background_packs().get(location_key, {})
+    anchor, *segments = location.split(', ')
+
+    def matching_raw(value, source):
+        return {raw for raw in source if isinstance(raw, str) and sanitize_text(raw) == value}
+
+    if matching_raw(anchor, pack.get('environment', ())) != {anchor}:
+        return None
+    if any(sanitize_text(raw) != anchor and (location == sanitize_text(raw)
+           or location.startswith(sanitize_text(raw) + ', '))
+           for raw in pack.get('environment', ()) if isinstance(raw, str)):
+        return None
+    defaults = load_json('background_defaults.json')
+    bare_sources = [('texture', pack.get('texture', ()), location_key),
+                    ('details', defaults.get('details', ()), 'background_defaults'),
+                    ('fx', pack.get('fx', ()), location_key),
+                    ('texture', defaults.get('texture', ()), 'background_defaults'),
+                    ('fx', defaults.get('fx', ()), 'background_defaults')]
+    if bind_sources:
+        bare_sources += [('weather', pack.get('weather', ()), location_key),
+                         ('crowd', pack.get('crowd', ()), location_key)]
+    seen = set()
+    parts = [_BoundScenePart('environment', anchor, location_key)]
+    for segment in segments:
+        prefix = next((word for word in ('featuring ', 'adorned with ', 'with ', 'during ')
+                       if segment.startswith(word)), '')
+        if prefix:
+            field = {'featuring ': 'core', 'adorned with ': 'props', 'with ': 'props', 'during ': 'time'}[prefix]
+            source_key, source = location_key, pack.get(field, ())
+            raw = segment[len(prefix):].split(' and ')
+            if not 1 <= len(raw) <= (1 if field == 'time' else 2):
+                return None
+            if any(matching_raw(segment, values) for _, values, _ in bare_sources):
+                return None
+            if any(matching_raw(value, source) != {value} for value in raw):
+                return None
+            if len(raw) > 1 and matching_raw(' and '.join(raw), source):
+                return None
+        else:
+            origins = {(field, source_key, raw) for field, source, source_key in bare_sources
+                       for raw in matching_raw(segment, source)}
+            if len(origins) != 1:
+                return None
+            field, source_key, value = next(iter(origins))
+            if value != segment:
+                return None
+            raw = [value]
+        if field in seen or len(raw) != len(set(raw)):
+            return None
+        seen.add(field)
+        parts.extend(_BoundScenePart(field, value, source_key) for value in raw)
+    if _assemble_location_prompt(anchor, segments)[1] != location:
+        return None
+    return tuple(parts), anchor, tuple(segments)
+
+
+def _classify_bound_scene_part(part: _BoundScenePart, *, reviewed=False):
+    """Return existing grammar proof or None without changing source binding."""
+    structured = (_scene_nominal if reviewed else _common_scene_nominal)(part.raw, part.field)
+    if structured is not None:
+        return structured
+    nominal = _nominal(part.raw, part.field)
+    if nominal is not None:
+        return nominal, part.raw.partition(' with ')[0].split()[-1], None
+    if reviewed:
+        from .v2_direct_provenance import _ENVIRONMENTS, _article, _scene_modifier
+        if part.field == 'environment':
+            rendered = _article(part.raw) if part.raw in _ENVIRONMENTS.get(part.source_key, ()) else None
+        else:
+            prefix = {'core': 'featuring ', 'props': 'with ', 'time': 'during '}.get(part.field, '')
+            rendered = _scene_modifier(prefix + part.raw)
+        if rendered is not None:
+            return rendered, None, None
+    return None
+
+
 def adapt_scene_component(context, current_scene=None, frame_value=None, *, input_binding_sha256, source_identity_sha256):
     """Bind current Scene constituents; absent historical settings are not replayed."""
     from .realization_evidence import (
@@ -326,9 +419,14 @@ def adapt_scene_component(context, current_scene=None, frame_value=None, *, inpu
     reviewed = parsed is None
     if reviewed:
         parsed = _producer_scene_components(value, key, bind_sources=True, reviewed=True)
+    recovered_source_only = parsed is None
     if parsed is None:
-        return unavailable('scene.source_or_grammar_unknown')
-    _, _, components = parsed
+        bound = _bind_scene_source_parts(value, key)
+        if bound is None:
+            return unavailable('scene.source_unavailable')
+        components = tuple((part.field, part.raw, part.source_key, None) for part in bound[0])
+    else:
+        _, _, components = parsed
     if decision['template_key'] == 'simple' and len(components) != 1:
         return unavailable('binding.history_stale')
     selected = {}
@@ -356,16 +454,36 @@ def adapt_scene_component(context, current_scene=None, frame_value=None, *, inpu
     raw_output, emitted = _assemble_location_prompt(anchor, segments)
     if emitted != value:
         return unavailable('binding.current_text_mismatch')
-    parts, ids_by_head = [], {}
+    parts = []
     for index, (field, raw, source_key, structured) in enumerate(components):
         part = ProducerPart(f'scene:{field}:{index}', SourceRef('scene', 'pipeline.location_builder',
             field, source_key, text_sha256(raw)), raw)
         parts.append(part)
+    trace = ProducerTrace('bound_constructor', 'pipeline.location_builder', source_identity_sha256, input_binding_sha256,
+        text_sha256(raw_output), text_sha256(emitted), tuple(parts), tuple(part.part_id for part in parts), None,
+        'scene.r45_source_bound_unproved/v1' if recovered_source_only else
+        'scene.reviewed_legacy_constituents/v1' if reviewed else 'scene.selected_pack_constituents/v1')
+    if recovered_source_only:
+        classified, reviewed_parts = [], set()
+        for index, part in enumerate(bound[0]):
+            structured = _classify_bound_scene_part(part)
+            if structured is None:
+                structured = _classify_bound_scene_part(part, reviewed=True)
+                reviewed_parts.add(index)
+            classified.append((part.field, part.raw, part.source_key, structured))
+        components = tuple(classified)
+    ids_by_head = {}
+    for part, (_, _, _, structured) in zip(parts, components):
         if structured:
             ids_by_head.setdefault(structured[1], []).append(part.part_id)
     atoms = []
     positions = {part.part_id: index for index, part in enumerate(parts)}
     for index, (part, (field, raw, _, structured)) in enumerate(zip(parts, components)):
+        if recovered_source_only and structured is None:
+            atoms.append(ClauseEvidence(part.part_id + ':clause', (part.part_id,), raw,
+                Truth.UNKNOWN, None, None, 'unknown', 'unknown', Truth.UNKNOWN,
+                None, None, (), None))
+            continue
         reference = structured[2] if structured else None
         antecedents = tuple(ids_by_head.get(reference, ())) if reference else ()
         if reference and (len(antecedents) != 1 or positions[antecedents[0]] >= index):
@@ -373,8 +491,10 @@ def adapt_scene_component(context, current_scene=None, frame_value=None, *, inpu
         attached = structured is not None and (any(' ' + word in raw for word in ('arranged ', 'spaced ', 'mounted '))
                    or structured[1] == 'pads' and ' on ' in raw)
         subject = ('scene:0' if field == 'environment' else part.part_id) if attached else None
-        rule = 'v2_direct_provenance.reviewed_scene:' if reviewed else 'v2_scene_provenance.nominal:'
-        if not reviewed and structured is not None and _scene_nominal(raw, field) is None:
+        atom_reviewed = reviewed and (not recovered_source_only or index in reviewed_parts)
+        rule = 'v2_direct_provenance.reviewed_scene:' if atom_reviewed else 'v2_scene_provenance.nominal:'
+        if (not atom_reviewed and structured is not None and _scene_nominal(raw, field) is None
+                and (not recovered_source_only or _common_scene_nominal(raw, field) is not None)):
             rule = 'v2_scene_provenance.common_nominal:'
         rules = (rule + field + '/v1',)
         if reference:
@@ -387,11 +507,11 @@ def adapt_scene_component(context, current_scene=None, frame_value=None, *, inpu
             ('scene:0',) if field == 'environment' else None, antecedents,
             rules,
             structured[1] if structured else None))
-    trace = ProducerTrace('bound_constructor', 'pipeline.location_builder', source_identity_sha256, input_binding_sha256,
-        text_sha256(raw_output), text_sha256(emitted), tuple(parts), tuple(part.part_id for part in parts), None,
-        'scene.reviewed_legacy_constituents/v1' if reviewed else 'scene.selected_pack_constituents/v1')
-    return EvidenceComponent('scene', trace, tuple(atoms), True, (),
-        (('source_order_known', Truth.TRUE), ('ownership_known', Truth.TRUE),
+    unknown = any(atom.grammar_known is not Truth.TRUE for atom in atoms)
+    blockers = (('scene.r45_source_only_permission_deferred',) +
+                (('scene.grammar_unknown',) if unknown else ())) if recovered_source_only else ()
+    return EvidenceComponent('scene', trace, tuple(atoms), True, blockers,
+        (('source_order_known', Truth.TRUE), ('ownership_known', Truth.UNKNOWN if unknown else Truth.TRUE),
          ('frame_location_matches', Truth.TRUE if frame_known else Truth.UNKNOWN)))
 
 

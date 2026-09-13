@@ -93,7 +93,15 @@ def test_catalog_membership_does_not_grant_reviewed_grammar():
     packs = copy.deepcopy(scene.load_background_packs())
     packs['observatory_dome']['core'].append('telescope silently rotating')
     with mock.patch.object(scene, 'load_background_packs', return_value=packs):
-        assert component(ctx).trace is None
+        value = component(ctx)
+        assert value.trace is not None and value.runtime_available
+        assert [(part.source.field, part.source.catalog_key, part.text) for part in value.trace.parts] == [
+            ('environment', 'observatory_dome', 'circular telescope chamber'),
+            ('core', 'observatory_dome', 'telescope silently rotating')]
+        assert value.atoms[1].grammar_known is Truth.UNKNOWN
+        assert value.atoms[1].antecedent_ids is None
+        assert 'scene.grammar_unknown' in value.blockers
+        assert 'scene.r45_source_only_permission_deferred' in value.blockers
         assert scene.common_scene_parts(ctx['extras']['location_prompt'], ctx['loc']) is None
 
 
