@@ -12,8 +12,8 @@
 ## Task ledger
 | Task | State | Commit | Evidence | Notes |
 |---|---|---|---|---|
-| R45-00 | PASS | baseline commit (this change; exact SHA in task report) | baseline/baseline-verification.json | baseline lock |
-| R45-01 | PENDING | | | blocker taxonomy |
+| R45-00 | PASS | 24d902b8099c433def50f87ac80536c05773a123 | baseline/baseline-verification.json | baseline lock |
+| R45-01 | PASS | this change; SHA in R45-01-report.md | r45-01-verification.json | taxonomy; selector []; pairs unchanged |
 | R45-02 | PENDING | | | capability projection |
 | R45-03 | PENDING | | | Scene provenance separation |
 | R45-04 | PENDING | | | capability audit graph |
@@ -111,3 +111,37 @@ was introduced by this documentation baseline task.
 Formal candidate reference8192, gate2048, paired formal comparison, fixed80,
 blind review, fresh confirmations, frontend/browser and release8192: **NOT_RUN**.
 N2.8/adoption: **BLOCKED**. D3: **DEFERRED**.
+
+## R45-01 execution record
+
+2026-09-13: Marked IN_PROGRESS before code. Centralized diagnostic blocker
+normalization, hard exclusions and domain ownership; selector retains the
+four-distinct-seed floor and leaves forensic signatures untouched.
+
+Commands from the R45 worktree (evidence under `assets/results/diversity_refactor/r45/`):
+
+```text
+python -m pytest --rootdir=. -o addopts= -p no:cacheprovider -q assets/test_r45_blocker_taxonomy.py
+python -m pytest --rootdir=. -o addopts= -p no:cacheprovider -q assets/test_r45_blocker_taxonomy.py assets/test_r44_packet_selection.py
+python tools/select_r44_coverage_packets.py --rows assets/results/diversity_refactor/r45/baseline/reachability/rows.jsonl --output assets/results/diversity_refactor/r45/r45-01-r44-selector.json --max-packets 3
+python tools/audit_realizer_reachability.py --profile intake --force-families all --output-dir assets/results/diversity_refactor/r45/r45-01-reachability
+git -c safe.directory=<absolute R45 worktree> diff --check
+```
+
+- RED: missing taxonomy import (exit 2), then both selector regressions fail
+  while five taxonomy tests pass (exit 1). Logs: `r45-01-red.log`,
+  `r45-01-selector-red.log`.
+- GREEN: 30 tests / 69 subtests PASS; no failures, skips or errors.
+  Log: `r45-01-green.log`.
+- Preserved selector input returns `[]` (exit 0).
+- Fresh512: exit 0; ordinary 11/512, three families, 501 fallbacks, zero errors;
+  source manifests before/after equal. Python `read_bytes()` equality against
+  baseline pairs PASS; SHA-256
+  `a3b8a28e873bb4cbcfbd338125eef6165e809f228cd5d7cafa73d1589255b87d`.
+  Receipt: `r45-01-verification.json`.
+- Approved adaptation: package-first import with sibling fallback supports
+  existing `spec_from_file_location` consumers as well as package/CLI use.
+  The plan's relative-first import failed existing tests; old tests are unchanged.
+- Self-review: scope and diff hygiene PASS; no runtime/protected source edits,
+  dependency changes, signature rehashing or threshold changes. No standalone
+  lint/typecheck configuration is present. Formal evaluations remain NOT_RUN.

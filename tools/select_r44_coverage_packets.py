@@ -15,34 +15,22 @@ import re
 import sys
 from typing import Any
 
+try:
+    from tools.realizer_blocker_taxonomy import (
+        canonical_blocker_id, is_hard_excluded, is_repairable_blocker,
+    )
+except ImportError:
+    from realizer_blocker_taxonomy import (
+        canonical_blocker_id, is_hard_excluded, is_repairable_blocker,
+    )
 
-HARD_EXCLUDE_IDS = frozenset({
-    "policy.conflict", "binding.frame_current_text_mismatch", "binding.replay_mismatch",
-    "binding.current_input_mismatch", "render.proof_constructor_mismatch",
-    "transport.runtime_inputs_missing",
-})
 ROUTE_ONLY_EXCLUDE_IDS = frozenset({
     "family.role_mismatch", "family.composition_mode_disabled",
 })
-REPAIRABLE_PREFIXES = (
-    "action.", "scene.", "clothing.", "subject.", "template.", "garnish.", "mood.",
-    "family.required_fact_not_true.", "family.forbidden_fact_not_false.",
-    "family.missing_slot.",
-)
 REQUIRED_FAMILIES = frozenset({
     "action_lead_subject_scene", "scene_lead_subject_action", "subject_action__scene_tail",
     "subject_action_scene", "subject_action_scene_insert", "subject_scene_action",
 })
-
-
-def _hard_excluded(identifier: str) -> bool:
-    return (
-        identifier in HARD_EXCLUDE_IDS
-        or identifier.startswith(("policy.", "binding.", "transport."))
-        or "stale" in identifier
-        or ("mismatch" in identifier and any(part in identifier for part in
-                                             ("binding", "replay", "current_input", "constructor")))
-    )
 
 
 def _blocker_ids(value: Any) -> set[str]:
@@ -51,15 +39,16 @@ def _blocker_ids(value: Any) -> set[str]:
     if isinstance(value, Mapping):
         for key, item in value.items():
             if key == "id" and isinstance(item, str):
-                result.add(item)
+                result.add(canonical_blocker_id(item))
             elif key in {"blockers", "blocker_ids", "errors"}:
                 if isinstance(item, (list, tuple)):
-                    result.update(part for part in item if isinstance(part, str))
+                    result.update(canonical_blocker_id(part) for part in item if isinstance(part, str))
                 result.update(_blocker_ids(item))
             elif key == "family_blockers" and isinstance(item, Mapping):
                 for blockers in item.values():
                     if isinstance(blockers, (list, tuple)):
-                        result.update(part for part in blockers if isinstance(part, str))
+                        result.update(canonical_blocker_id(part) for part in blockers
+                                      if isinstance(part, str))
             elif isinstance(item, (Mapping, list, tuple)):
                 result.update(_blocker_ids(item))
     elif isinstance(value, (list, tuple)):
@@ -78,7 +67,7 @@ def _candidate(row: Mapping[str, Any]) -> dict[str, Any] | None:
         raise ValueError("unsupported coverage signature schema")
     if signature.get("proof_basis") == "invalid_common_inputs":
         return None
-    if any(_hard_excluded(identifier) for identifier in _blocker_ids(row)):
+    if any(is_hard_excluded(identifier) for identifier in _blocker_ids(row)):
         return None
     if signature.get("proof_basis") not in {"common_reconstructed", "legacy_diagnostic"}:
         raise ValueError("unsupported coverage signature proof_basis")
@@ -100,12 +89,12 @@ def _candidate(row: Mapping[str, Any]) -> dict[str, Any] | None:
     for family, ids in family_blockers.items():
         if not isinstance(ids, list) or any(not isinstance(identifier, str) for identifier in ids):
             raise ValueError("family_blockers values must be lists of blocker IDs")
+        ids = [canonical_blocker_id(identifier) for identifier in ids]
         if family not in REQUIRED_FAMILIES or ROUTE_ONLY_EXCLUDE_IDS.intersection(ids):
             continue
         if row.get("families", {}).get(family, {}).get("constructor_present") is False:
             continue
-        family_repairable = {identifier for identifier in ids
-                             if identifier.startswith(REPAIRABLE_PREFIXES)}
+        family_repairable = {identifier for identifier in ids if is_repairable_blocker(identifier)}
         if not family_repairable or any(
             identifier not in family_repairable and identifier != "family.legacy_route_ceiling"
             for identifier in ids
