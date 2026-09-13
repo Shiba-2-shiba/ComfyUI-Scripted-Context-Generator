@@ -1,0 +1,427 @@
+{
+  "development_verdict": "BLOCKED_CAPABILITY_MODEL",
+  "formal_gates": {
+    "blind_review": "NOT_RUN",
+    "fixed80": "NOT_RUN",
+    "fresh_confirmations": "NOT_RUN",
+    "frontend_browser": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "paired_formal_comparison": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "interpretation": "Planning work bound only; affected occurrences do not imply rescue, runtime permission, or 64/512 coverage. All six target families include three already ordinary and three not yet ordinary.",
+  "ranking_top12": [
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 451,
+      "capability_sha256": "bb804ceebb60791a88d8148571adddb7f5cfd933e28c37b8f2577b0c74c5ed2f",
+      "co_blocker_class_count": 20,
+      "domain": "action",
+      "example_seeds": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "rank": 1,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 399,
+      "capability_sha256": "17bb004da9c8ed9c47f4c6e44bea2ed1234c68d2015b5a83dd5c184f7ff1dacd",
+      "co_blocker_class_count": 18,
+      "domain": "scene",
+      "example_seeds": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11
+      ],
+      "rank": 2,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 398,
+      "capability_sha256": "94e8d4d3eb4c3814d02fca051f653a623388d98fae260d246ba1bd0e3a397a16",
+      "co_blocker_class_count": 18,
+      "domain": "scene",
+      "example_seeds": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11
+      ],
+      "rank": 3,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 312,
+      "capability_sha256": "458de0c6e13733780676ecea9facfae029ed9930ca84e2db9793f0d801a50a74",
+      "co_blocker_class_count": 18,
+      "domain": "action",
+      "example_seeds": [
+        0,
+        4,
+        5,
+        12,
+        13,
+        14,
+        15,
+        17
+      ],
+      "rank": 4,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 291,
+      "capability_sha256": "3b607ce152462972c046ca96c2b5bbc9d476d25b9c62cef5c2a54bf8362808df",
+      "co_blocker_class_count": 18,
+      "domain": "template",
+      "example_seeds": [
+        0,
+        1,
+        5,
+        6,
+        7,
+        8,
+        13,
+        15
+      ],
+      "rank": 5,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 291,
+      "capability_sha256": "91a5965ecd9d4aeab954c11b9772ca9e36b8e3b928a79ab19ed6858c4d01c8bf",
+      "co_blocker_class_count": 18,
+      "domain": "template",
+      "example_seeds": [
+        0,
+        1,
+        5,
+        6,
+        7,
+        8,
+        13,
+        15
+      ],
+      "rank": 6,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 291,
+      "capability_sha256": "a6e8acb9d17d0f8d61105ed7f749a1592a03c022ff4f690544ec5ff1bb61e698",
+      "co_blocker_class_count": 18,
+      "domain": "template",
+      "example_seeds": [
+        0,
+        1,
+        5,
+        6,
+        7,
+        8,
+        13,
+        15
+      ],
+      "rank": 7,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 282,
+      "capability_sha256": "af2054f69dc75e6c7049dcbce71680e27c6f670a76fe2415bc442ed51da05d44",
+      "co_blocker_class_count": 18,
+      "domain": "action",
+      "example_seeds": [
+        0,
+        3,
+        4,
+        11,
+        12,
+        13,
+        16,
+        17
+      ],
+      "rank": 8,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 276,
+      "capability_sha256": "fe87163e6a6b0d272d395357b98cca636eb9191a9e1eba73e7abb8b6e5fdb389",
+      "co_blocker_class_count": 18,
+      "domain": "action",
+      "example_seeds": [
+        0,
+        7,
+        11,
+        12,
+        15,
+        17,
+        21,
+        22
+      ],
+      "rank": 9,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 267,
+      "capability_sha256": "0308661af8359c7af5ae8e8cfb1f7436baa643caad95b44e56108175d8177604",
+      "co_blocker_class_count": 17,
+      "domain": "scene",
+      "example_seeds": [
+        6,
+        7,
+        12,
+        13,
+        14,
+        16,
+        18,
+        21
+      ],
+      "rank": 10,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 252,
+      "capability_sha256": "397efc6cb0e9375446f705f7836bb3930258cbe97a90827c5d9b9c08feda1a09",
+      "co_blocker_class_count": 19,
+      "domain": "action",
+      "example_seeds": [
+        0,
+        1,
+        4,
+        7,
+        12,
+        18,
+        20,
+        21
+      ],
+      "rank": 11,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "affected_family_keys": [
+        "action_lead_subject_scene",
+        "scene_lead_subject_action",
+        "subject_action__scene_tail",
+        "subject_action_scene",
+        "subject_action_scene_insert",
+        "subject_scene_action"
+      ],
+      "affected_seed_count": 237,
+      "capability_sha256": "31cf8274c7a52a30b0bf2d1738fd35f492212e10e0b891c4f9fd6892103b40c9",
+      "co_blocker_class_count": 16,
+      "domain": "subject",
+      "example_seeds": [
+        1,
+        3,
+        4,
+        6,
+        11,
+        14,
+        15,
+        17
+      ],
+      "rank": 12,
+      "single_capability_rescue_upper_bound": 0
+    }
+  ],
+  "readiness_conditions": {
+    "any_candidate_rescue_positive": false,
+    "determinism_preservation": true,
+    "largest_group_at_least_four": true,
+    "ordinary_preservation": true,
+    "protected_preservation": true
+  },
+  "schema_version": "r45-compact-receipt/v1",
+  "source_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+  "source_role": "final_candidate",
+  "source_tree_hash": "db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f",
+  "top3": [
+    {
+      "capability_sha256": "bb804ceebb60791a88d8148571adddb7f5cfd933e28c37b8f2577b0c74c5ed2f",
+      "domain": "action",
+      "example_seeds": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "full_occurrence_distinct_seed_count": 470,
+      "qualifying_affected_seed_count": 451,
+      "rank": 1,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "capability_sha256": "17bb004da9c8ed9c47f4c6e44bea2ed1234c68d2015b5a83dd5c184f7ff1dacd",
+      "domain": "scene",
+      "example_seeds": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11
+      ],
+      "full_occurrence_distinct_seed_count": 416,
+      "qualifying_affected_seed_count": 399,
+      "rank": 2,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "capability_sha256": "94e8d4d3eb4c3814d02fca051f653a623388d98fae260d246ba1bd0e3a397a16",
+      "domain": "scene",
+      "example_seeds": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11
+      ],
+      "full_occurrence_distinct_seed_count": 416,
+      "qualifying_affected_seed_count": 398,
+      "rank": 3,
+      "single_capability_rescue_upper_bound": 0
+    }
+  ],
+  "top3_affected_seed_union": 497,
+  "top3_affected_seed_union_definition": "Union of complete occurrence seed sets for the three different top-ranked capability hashes, as required by R45-05 Step 3; includes non-qualifying descriptive occurrences.",
+  "top3_domains": [
+    "action",
+    "scene",
+    "scene"
+  ],
+  "top3_family_union": [
+    "action_lead_subject_scene",
+    "scene_lead_subject_action",
+    "subject_action__scene_tail",
+    "subject_action_scene",
+    "subject_action_scene_insert",
+    "subject_scene_action"
+  ],
+  "top3_not_yet_ordinary_family_count": 3,
+  "top3_qualifying_affected_seed_union": 474,
+  "top3_single_capability_rescue_upper_bound_sum": 0,
+  "underlying_artifacts": [
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/capabilities/r46-candidates.json",
+      "sha256": "2662eda0b772624b47c14309c9431dc708dc1ef51e403d69d7f0d7aa134966f5"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/capabilities/capability-occurrences.jsonl",
+      "sha256": "c763b831726db37cdfa4ba8819a6dfe23792e2501d6d9b7303afa8178804e9e3"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/capabilities/capability-summary.json",
+      "sha256": "2f097f1efa1975a635e9fe1f6df8ee076c18090fe8ac41fb491c753bbc45b06b"
+    }
+  ]
+}

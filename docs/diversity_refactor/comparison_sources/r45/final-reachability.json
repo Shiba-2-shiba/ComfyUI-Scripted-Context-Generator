@@ -1,0 +1,94 @@
+{
+  "all_3072_family_eligibility_and_forced_versions_equal_baseline": true,
+  "common_forced_by_family": {
+    "action_lead_subject_scene": 1,
+    "scene_lead_subject_action": 2,
+    "subject_action__scene_tail": 7,
+    "subject_action_scene": 2,
+    "subject_action_scene_insert": 2,
+    "subject_scene_action": 2
+  },
+  "formal_gates": {
+    "blind_review": "NOT_RUN",
+    "fixed80": "NOT_RUN",
+    "fresh_confirmations": "NOT_RUN",
+    "frontend_browser": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "paired_formal_comparison": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "fresh_replay": {
+    "ordinary_output_context_mismatches": 0,
+    "proof_constructor_mismatches": 0,
+    "real_graph_seed_family_rows": 3072,
+    "rng_mismatches": 0,
+    "sample_count": 512,
+    "stale_bindings_rejected": 512,
+    "status": "PASS"
+  },
+  "normal_pairs_equal_baseline": true,
+  "ordinary": {
+    "errors": [],
+    "executed_v2_family_count": 3,
+    "observed_structure_count": 4,
+    "v1_fallback_structure_counts": {
+      "subject_action__scene_tail": 128,
+      "subject_action_scene": 373
+    },
+    "v2_applied_count": 11,
+    "v2_family_counts": {
+      "scene_lead_subject_action": 1,
+      "subject_action__scene_tail": 9,
+      "subject_scene_action": 1
+    }
+  },
+  "records_equal_baseline": true,
+  "restore_verification": "NOT_RUN; R45-06 pending",
+  "scene": {
+    "blockers": {
+      "scene.antecedent_unknown": 1,
+      "scene.grammar_unknown": 463,
+      "scene.r45_source_only_permission_deferred": 463,
+      "scene.source_unavailable": 32
+    },
+    "grammar_known": 16,
+    "runtime_bound": 479,
+    "source_trace": 479
+  },
+  "schema_version": "r45-compact-receipt/v1",
+  "source_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+  "source_role": "final_candidate",
+  "source_tree_hash": "db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f",
+  "status": "PASS",
+  "underlying_artifacts": [
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/reachability/reachability.json",
+      "sha256": "4762af00743caf5be06214b9435f525e0120e294294ddbba8d7617006bbe0c48"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/reachability/rows.jsonl",
+      "sha256": "3d164a865a7d44f16236c7cedcd479f7bbe48fbddcb1cb453ef78ae1f0edc7af"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/reachability/normal-pairs.jsonl",
+      "sha256": "a3b8a28e873bb4cbcfbd338125eef6165e809f228cd5d7cafa73d1589255b87d"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/replay-root/summary.json",
+      "sha256": "c342b0f7ad5295f425b420f455d5bf1b712e05594c119a53a16ebec54b20b8cf"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/replay-root/family-rows.jsonl",
+      "sha256": "3e1cb0280f30e8b254f5120ecbcc0e3461182817e98b28183cfb966e1ea3208b"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/replay-package/summary.json",
+      "sha256": "c342b0f7ad5295f425b420f455d5bf1b712e05594c119a53a16ebec54b20b8cf"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/family-preservation.log",
+      "sha256": "89bcf400ee888c8eea463f3b6fc4ee1a8ffa989af1031be065b486a9b9e198c1"
+    }
+  ]
+}

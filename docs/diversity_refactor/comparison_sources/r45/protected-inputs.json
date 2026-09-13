@@ -1,0 +1,29 @@
+{
+  "broader_inventory_count": 166,
+  "explicit_inventory_count": 120,
+  "inventories_are_distinct": true,
+  "mismatches": 0,
+  "schema_version": "r45-compact-receipt/v1",
+  "source_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+  "source_role": "final_candidate",
+  "source_tree_hash": "db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f",
+  "status": "PASS",
+  "underlying_artifacts": [
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/protected-comparison.json",
+      "sha256": "75de045e5612b06f992e015c92e76711ce3d74d414e63c83fc83a2ac5c38c96f"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/protected-inputs.sha256",
+      "sha256": "6a2b8e61eec69d768d682786dc464967ec5cc33854015f4250f646866237e00b"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/baseline/protected-inputs.sha256",
+      "sha256": "6a2b8e61eec69d768d682786dc464967ec5cc33854015f4250f646866237e00b"
+    },
+    {
+      "path": "docs/diversity_refactor/comparison_sources/r44/baseline/protected-inputs.json",
+      "sha256": "f2b153f73cd517e4e266c611c916d806f793d0519f4a4617981a4ec64f195234"
+    }
+  ]
+}

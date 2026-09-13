@@ -1,0 +1,245 @@
+{
+  "checks": {
+    "all_r45": {
+      "status": "PASS",
+      "subtests": 33,
+      "tests": 40
+    },
+    "focused": {
+      "checks": [
+        {
+          "exit_code": 0,
+          "name": "pytest",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "test_counts": {
+        "collection_errors": 0,
+        "collection_skipped": 0,
+        "deselected": 0,
+        "failed": 0,
+        "passed": 534,
+        "setup_teardown_errors": 0,
+        "skipped": 0,
+        "subtests": 2020,
+        "subtests_failed": 0,
+        "subtests_skipped": 0,
+        "subtests_xfail": 0,
+        "subtests_xpass": 0,
+        "tests": 534,
+        "xfail": 0,
+        "xpass": 0
+      }
+    },
+    "python310_ast": {
+      "files": [
+        "assets/test_r43_common_diagnostics.py",
+        "assets/test_r43_coverage_scene.py",
+        "assets/test_r43_reviewed_scene_binding.py",
+        "assets/test_r43_scene_binding.py",
+        "assets/test_r45_blocker_taxonomy.py",
+        "assets/test_r45_capability_audit.py",
+        "assets/test_r45_capability_projection.py",
+        "assets/test_r45_scene_provenance_separation.py",
+        "pipeline/v2_scene_provenance.py",
+        "tools/audit_realizer_capabilities.py",
+        "tools/realizer_blocker_taxonomy.py",
+        "tools/realizer_capability_projection.py",
+        "tools/realizer_reachability_diagnostics.py",
+        "tools/select_r44_coverage_packets.py"
+      ],
+      "source_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+      "source_tree_hash": "db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f",
+      "status": "PASS"
+    },
+    "regression": {
+      "checks": [
+        {
+          "exit_code": 0,
+          "name": "pytest",
+          "status": "PASS"
+        },
+        {
+          "exit_code": 0,
+          "name": "variations",
+          "status": "PASS"
+        },
+        {
+          "exit_code": 0,
+          "name": "prompt_data",
+          "status": "PASS"
+        },
+        {
+          "exit_code": 0,
+          "name": "variation_scope",
+          "status": "PASS"
+        },
+        {
+          "exit_code": 0,
+          "name": "action_pools",
+          "status": "PASS"
+        },
+        {
+          "exit_code": 0,
+          "name": "compatibility",
+          "status": "PASS"
+        },
+        {
+          "exit_code": 0,
+          "name": "full_flow",
+          "status": "PASS"
+        },
+        {
+          "exit_code": 0,
+          "name": "asset_validation",
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS",
+      "test_counts": {
+        "collection_errors": 0,
+        "collection_skipped": 0,
+        "deselected": 0,
+        "failed": 0,
+        "passed": 87,
+        "setup_teardown_errors": 0,
+        "skipped": 0,
+        "subtests": 33,
+        "subtests_failed": 0,
+        "subtests_skipped": 0,
+        "subtests_xfail": 0,
+        "subtests_xpass": 0,
+        "tests": 87,
+        "xfail": 0,
+        "xpass": 0
+      }
+    }
+  },
+  "commands": [
+    {
+      "exit_code": 0,
+      "log_sha256": "050c3978164a79253076e30dbdc3dd915bc7948751fea7f3e7fe71e0baf72321",
+      "name": "focused"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "24be0d336847414ee5f14c0387a2a98c671eacf92500d7e7c51901b0d567918d",
+      "name": "regression"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "fe30c2b41f7ed12d360da789c2bd0698f613f30aafaf6f202f79c17606f16db8",
+      "name": "all-r45"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "48c9fca6faa41199223917af6b16fa0b8ef55f13f61b41add7204db4a6acda4d",
+      "name": "data"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "cbd0cc5f38dbb3606d91838a8f446015b7186c3bb13c1bd34a6aca9928427f83",
+      "name": "scope"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "a2fe63ac78f3e6748233cf7974a0fd146ab332244601fd9cb645e979b27ab8e1",
+      "name": "action-build"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "b6cede2000ad9722bcbbd38c90cd88aedaadd7f35e0b805374d1b6548241b4e2",
+      "name": "compatibility-build"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "4e7024bbab9109cc83d937b39b25c4d869bce0b79243b3386352a5b1dc06feda",
+      "name": "full-flow"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "fad1dd657b9bbfec532a391488a9e7d6901bdc759fcc97e11c013464365416a9",
+      "name": "reachability"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "5560799a68a2c8e2c6b1225b9d2bde0e0e6182ca714b4515a0d70da1cbe39a01",
+      "name": "capabilities"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "ef1b4658f6c8139c4d859a818ff20ce15bea4bfd7e529bfa51c9ba6dd427a17c",
+      "name": "capabilities-repeat"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "ced80695db64e1f2bc07f7b3ae931b0248c190a9372600e58a4971b4da3afe1d",
+      "name": "replay-root"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "ced80695db64e1f2bc07f7b3ae931b0248c190a9372600e58a4971b4da3afe1d",
+      "name": "replay-package"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "89bcf400ee888c8eea463f3b6fc4ee1a8ffa989af1031be065b486a9b9e198c1",
+      "name": "family-preservation"
+    }
+  ],
+  "formal_gates": {
+    "blind_review": "NOT_RUN",
+    "fixed80": "NOT_RUN",
+    "fresh_confirmations": "NOT_RUN",
+    "frontend_browser": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "paired_formal_comparison": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "initial_focused_failure": {
+    "corrected_scene_file_tests": 31,
+    "correction_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+    "failed": 10,
+    "reason": "One old Scene test equated unknown grammar with absent provenance; narrow approved test correction preserves all negative authorization controls.",
+    "source_commit": "d59b1fc2272acd5094571578fcee0b1f7dee7032",
+    "source_tree_hash": "089c8e94d0f945b01868b09dc1a7483bfa5ff2a0152a9200a8fcc56bbcf517ab"
+  },
+  "schema_version": "r45-compact-receipt/v1",
+  "source_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+  "source_role": "final_candidate",
+  "source_tree_hash": "db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f",
+  "standalone_lint_typecheck": "No configured standalone lint/typecheck; required validators, build checks, AST and diff hygiene are used.",
+  "status": "PASS",
+  "underlying_artifacts": [
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/commands.json",
+      "sha256": "194224faa7ec7856bd75344c9be4dfa4389937018414b824235100eac6d2408b"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/focused/verdict.json",
+      "sha256": "c281ca2f1fc90c0a98b71b1a8ac85f20df1d27c36869e4f03cd1366e58c1991f"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/regression/verdict.json",
+      "sha256": "5afe82d2e9d824e43affc9d6b849eec796b24f7fa8639c21062422199ca8f376"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/all-r45.log",
+      "sha256": "fe30c2b41f7ed12d360da789c2bd0698f613f30aafaf6f202f79c17606f16db8"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/python310-ast.json",
+      "sha256": "4f2398d3e2d2950bcb19b7e3a2ca6856a7d4ce559e8d2770d264bc4de3b754ca"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development/focused/verdict.json",
+      "sha256": "eb22de6415c4dc8890b5f856f17df96ef10aebe9cdb808d86e74442adf40a566"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development/coverage-scene-green.log",
+      "sha256": "ec4ee4f1eb97a81c75dd59a28d913f410183763fcb891e14eb166a673a9f0644"
+    }
+  ]
+}

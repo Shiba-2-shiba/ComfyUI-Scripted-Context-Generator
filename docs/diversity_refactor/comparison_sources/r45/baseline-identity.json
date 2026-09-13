@@ -1,0 +1,56 @@
+{
+  "baseline": {
+    "common_forced_family_count": 6,
+    "fallback_count": 501,
+    "ordinary_family_count": 3,
+    "ordinary_v2": 11,
+    "sample_count": 512
+  },
+  "formal_gates": {
+    "blind_review": "NOT_RUN",
+    "fixed80": "NOT_RUN",
+    "fresh_confirmations": "NOT_RUN",
+    "frontend_browser": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "paired_formal_comparison": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "published_r44_sources": {
+    "pre_r44_baseline": {
+      "commit": "b16a4dbca7d91d6d1cdefbfd521fd6a44787765a",
+      "source_tree_hash": "53a4fe8048cfd71cdcd9f3a7cb414e0b96ec6c0450b96795c465470d6963b56e",
+      "tag": "realizer-v2-r44-baseline-11",
+      "tag_object": "eb0600409b463a578e47f55cf6d696fdf2654397"
+    },
+    "r44_diagnostics": {
+      "commit": "98a8ef33ab9a851240cf678864b0ed65879228e4",
+      "source_tree_hash": "a113f9908fd53be35ff0e457445c4a6717f2d32bbaefb36cc95da1728c76a778",
+      "tag": "realizer-v2-r44-blocked-20260913",
+      "tag_object": "0f4d49af59d8e679a9471e4c982acb5534e35f79"
+    }
+  },
+  "schema_version": "r45-compact-receipt/v1",
+  "source_commit": "8c0dce2a6a2f485d683c306736b76a114bae3165",
+  "source_role": "historical_R45_00_baseline",
+  "source_tree_hash": "a113f9908fd53be35ff0e457445c4a6717f2d32bbaefb36cc95da1728c76a778",
+  "status": "PASS",
+  "underlying_artifacts": [
+    {
+      "path": "assets/results/diversity_refactor/r45/baseline/preflight.json",
+      "sha256": "f02a2cfadfb4474aab2fa6e67bca24154b8cefdf0b23f89c707d03ce0dea5aaf"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/baseline/baseline-verification.json",
+      "sha256": "52a014762f6ae11c9b11dbfc97a21b03c2c6e321145077a3f68eadbe205842be"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/baseline/reachability/source-manifest.json",
+      "sha256": "e642ffff54203003f48c9e09470a47df6e79d098e83a5254f76af2d26ba7d76e"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/baseline/reachability/normal-pairs.jsonl",
+      "sha256": "a3b8a28e873bb4cbcfbd338125eef6165e809f228cd5d7cafa73d1589255b87d"
+    }
+  ]
+}

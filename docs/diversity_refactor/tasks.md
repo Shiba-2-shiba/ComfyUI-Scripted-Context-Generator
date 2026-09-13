@@ -10,11 +10,11 @@ R45 is diagnostic/provenance work. Ordinary Realizer v2 remains 11/512 until a l
 
 - [x] R45-00: isolated baseline locked; 11/512, 3 ordinary families, 501 exact
   fallbacks and 6 real-input forced families; focused/regression/replay PASS.
-- [ ] R45-01: blocker taxonomy.
-- [ ] R45-02: capability projection.
-- [ ] R45-03: Scene provenance separation.
-- [ ] R45-04: capability audit graph.
-- [ ] R45-05: R46 readiness verdict.
+- [x] R45-01: blocker taxonomy.
+- [x] R45-02: capability projection.
+- [x] R45-03: Scene provenance separation.
+- [x] R45-04: capability audit graph.
+- [x] R45-05: `BLOCKED_CAPABILITY_MODEL`; final-source preservation and all development checks PASS; [compact receipts](./comparison_sources/r45/README.md).
 - [ ] R45-06: handoff/checkpoint.
 
 Formal evaluation remains NOT_RUN; N2.8/adoption BLOCKED; D3 DEFERRED.

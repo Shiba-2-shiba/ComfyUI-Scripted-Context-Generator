@@ -1,0 +1,130 @@
+{
+  "artifact_hashes": {
+    "capabilities/capability-blocker-intersections.json": "cd227861a6be602869fddaef2ffca431e4090fdbc0c74fd6d1468443a81d5d2e",
+    "capabilities/capability-occurrences.jsonl": "c763b831726db37cdfa4ba8819a6dfe23792e2501d6d9b7303afa8178804e9e3",
+    "capabilities/capability-summary.json": "2f097f1efa1975a635e9fe1f6df8ee076c18090fe8ac41fb491c753bbc45b06b",
+    "capabilities/r46-candidates.json": "2662eda0b772624b47c14309c9431dc708dc1ef51e403d69d7f0d7aa134966f5",
+    "reachability/normal-pairs.jsonl": "a3b8a28e873bb4cbcfbd338125eef6165e809f228cd5d7cafa73d1589255b87d",
+    "reachability/records.jsonl": "a821d0264957ee602f0e9a80d2f112c213b9f88df839f258e7a6fb483290026c",
+    "reachability/rows.jsonl": "3d164a865a7d44f16236c7cedcd479f7bbe48fbddcb1cb453ef78ae1f0edc7af",
+    "replay-package/summary.json": "c342b0f7ad5295f425b420f455d5bf1b712e05594c119a53a16ebec54b20b8cf",
+    "replay-root/evidence.jsonl": "954612c5a41a4c2946aef1cfd7cc7b97426ec280fc49b74eaa3a36874a448f38",
+    "replay-root/family-rows.jsonl": "3e1cb0280f30e8b254f5120ecbcc0e3461182817e98b28183cfb966e1ea3208b",
+    "replay-root/summary.json": "c342b0f7ad5295f425b420f455d5bf1b712e05594c119a53a16ebec54b20b8cf",
+    "source-manifest-after.json": "90cb1be4155573129bfbc42aa0c6a2830304604b06aceb8ca51a991974bab863",
+    "source-manifest.json": "90cb1be4155573129bfbc42aa0c6a2830304604b06aceb8ca51a991974bab863"
+  },
+  "development_verdict": "BLOCKED_CAPABILITY_MODEL",
+  "formal_gates": {
+    "blind_review": "NOT_RUN",
+    "fixed80": "NOT_RUN",
+    "fresh_confirmations": "NOT_RUN",
+    "frontend_browser": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "paired_formal_comparison": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "interpretation": "Planning work bound only; affected occurrences do not imply rescue, runtime permission, or 64/512 coverage. All six target families include three already ordinary and three not yet ordinary.",
+  "repeat_audit_all_artifacts_byte_equal": true,
+  "root_package_replay_canonical_artifacts_byte_equal": true,
+  "schema_version": "r45-compact-receipt/v1",
+  "source_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+  "source_guards_equal": true,
+  "source_manifest_rules": "tools.prompt_quality_loop.build_source_manifest; documentation excluded",
+  "source_role": "final_candidate",
+  "source_tree_hash": "db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f",
+  "status": "PASS",
+  "top3": [
+    {
+      "capability_sha256": "bb804ceebb60791a88d8148571adddb7f5cfd933e28c37b8f2577b0c74c5ed2f",
+      "domain": "action",
+      "example_seeds": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "full_occurrence_distinct_seed_count": 470,
+      "qualifying_affected_seed_count": 451,
+      "rank": 1,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "capability_sha256": "17bb004da9c8ed9c47f4c6e44bea2ed1234c68d2015b5a83dd5c184f7ff1dacd",
+      "domain": "scene",
+      "example_seeds": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11
+      ],
+      "full_occurrence_distinct_seed_count": 416,
+      "qualifying_affected_seed_count": 399,
+      "rank": 2,
+      "single_capability_rescue_upper_bound": 0
+    },
+    {
+      "capability_sha256": "94e8d4d3eb4c3814d02fca051f653a623388d98fae260d246ba1bd0e3a397a16",
+      "domain": "scene",
+      "example_seeds": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11
+      ],
+      "full_occurrence_distinct_seed_count": 416,
+      "qualifying_affected_seed_count": 398,
+      "rank": 3,
+      "single_capability_rescue_upper_bound": 0
+    }
+  ],
+  "top3_affected_seed_union": 497,
+  "top3_affected_seed_union_definition": "Union of complete occurrence seed sets for the three different top-ranked capability hashes, as required by R45-05 Step 3; includes non-qualifying descriptive occurrences.",
+  "top3_domains": [
+    "action",
+    "scene",
+    "scene"
+  ],
+  "top3_family_union": [
+    "action_lead_subject_scene",
+    "scene_lead_subject_action",
+    "subject_action__scene_tail",
+    "subject_action_scene",
+    "subject_action_scene_insert",
+    "subject_scene_action"
+  ],
+  "top3_not_yet_ordinary_family_count": 3,
+  "top3_qualifying_affected_seed_union": 474,
+  "top3_single_capability_rescue_upper_bound_sum": 0,
+  "underlying_artifacts": [
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/reproduction.json",
+      "sha256": "14d783695c7cbd19f3ce554b8401c2df7ed22a074a9ad989c294f4da33437abe"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/source-manifest.json",
+      "sha256": "90cb1be4155573129bfbc42aa0c6a2830304604b06aceb8ca51a991974bab863"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/source-manifest-after.json",
+      "sha256": "90cb1be4155573129bfbc42aa0c6a2830304604b06aceb8ca51a991974bab863"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/run_verification.py",
+      "sha256": "7b1b9d335cdbee4a919583b67b6bf0d58d9a64bdc144fce5a3e08b5136c28919"
+    }
+  ]
+}

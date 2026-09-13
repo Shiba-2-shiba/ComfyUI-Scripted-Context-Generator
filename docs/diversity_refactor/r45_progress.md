@@ -15,9 +15,9 @@
 | R45-00 | PASS | 24d902b8099c433def50f87ac80536c05773a123 | baseline/baseline-verification.json | baseline lock |
 | R45-01 | PASS | 2a328547e81bf26f16b22b83014bf1a9ccafd608 | r45-01-verification.json | taxonomy; selector []; pairs unchanged |
 | R45-02 | PASS | 659c4e7dcebf29ac7e4567fcb3c58e0683be63ba | r45-02-reachability | capability projection; pairs unchanged |
-| R45-03 | PASS | this change; SHA in R45-03-report.md | r45-03-verification.json | Scene source-bound 479; ordinary pairs unchanged |
+| R45-03 | PASS | 7ee02172f13d2e7a92ef2d3060ff0479e69d6cc5 | r45-03-verification.json | Scene source-bound 479; ordinary pairs unchanged |
 | R45-04 | PASS | d59b1fc2272acd5094571578fcee0b1f7dee7032 | r45-04-capabilities | 131 capabilities; 50 candidates; rescue max 0 |
-| R45-05 | IN_PROGRESS | | final-development/ | final-source verification and measured readiness verdict |
+| R45-05 | PASS | this change; SHA in R45-05-report.md | comparison_sources/r45/registry.json | BLOCKED_CAPABILITY_MODEL; preservation PASS |
 | R45-06 | PENDING | | | handoff/checkpoint |
 
 ## Formal scope
@@ -50,6 +50,113 @@ Initial failure and correction logs remain in `final-development/`; complete
 final verification will restart in fresh `final-development-02/` directories
 after this correction is committed. This is a diagnostic expectation correction,
 not a relaxation of the ordinary/protected/determinism preservation gates.
+
+## Final development verdict
+- development_verdict: BLOCKED_CAPABILITY_MODEL
+
+R45-05 verification passes. Ordinary/protected/determinism preservation has no
+regression, and the largest capability spans 470 distinct seeds. However, all
+50 qualifying candidates have `single_capability_rescue_upper_bound == 0`.
+The exact readiness rule therefore returns `BLOCKED_CAPABILITY_MODEL`.
+No threshold is relaxed; R46 runtime implementation is not authorized by this
+measurement. Source-only Scene binding still grants no grammar permission.
+
+### Final-source evidence
+
+- Recoverable source commit: `8a1977116e64c1d8bfd135b1a1376854b67cfa48`
+  (the separately committed Scene test expectation correction).
+- Source-tree hash: `db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f`.
+- Evidence root: `assets/results/diversity_refactor/r45/final-development-02/`.
+  Source manifests use `tools.prompt_quality_loop.build_source_manifest` and
+  match before/after every check. Documentation is outside that source scope,
+  so the following receipt/documentation commit preserves these verified bytes.
+- Focused **534 tests / 2,020 subtests PASS**; regression **87 / 33 PASS**;
+  all R45 suites **40 / 33 PASS**. All failure, skip, xfail/xpass, deselection,
+  collection and setup/teardown counters are zero. Data, scope, action-pool and
+  compatibility build checks, full flow, and all **14 changed Python files**
+  parsed with Python 3.10 AST all PASS. No standalone lint/typecheck is configured;
+  authored diff hygiene also passes.
+- Fixed512: ordinary v2 **11**, ordinary families **3**, fallback **501**, errors
+  **0**. Normal pairs and records are byte-identical to R45-00. Root/ascending
+  hashseed 17 and package/reverse hashseed 73 replay all 512 inputs; their canonical
+  summary/evidence/family rows match byte-for-byte. All **3,072** baseline
+  `(seed, family)` eligibility and forced-version states are unchanged; all six
+  real-input common-forced families remain positive. Output/context, proof and
+  RNG mismatches are zero; stale bindings rejected **512** in each fresh replay.
+- Exact R45-00 Step 6 inventory: **120/120** protected V150 hashes match, with
+  identical manifest bytes. Broader R44 inventory: **166/166** hashes match.
+  These are separate inventories. No runtime authorization or protected data
+  source changed in R45-05.
+- Fresh capability audit: **8,684** occurrences, **131** capability hashes,
+  **50** qualifying candidates before the top-12 display cap. Maximum descriptive
+  distinct-seed count **470**, maximum qualifying affected count **451**, maximum
+  single-capability rescue upper bound **0**. Repeated unknown-grammar groups
+  with at least four seeds: action **8**, Scene **11**. All six repeat-audit
+  artifacts match byte-for-byte.
+
+| Final artifact | SHA-256 |
+|---|---|
+| reachability/rows.jsonl | 3d164a865a7d44f16236c7cedcd479f7bbe48fbddcb1cb453ef78ae1f0edc7af |
+| reachability/normal-pairs.jsonl | a3b8a28e873bb4cbcfbd338125eef6165e809f228cd5d7cafa73d1589255b87d |
+| capabilities/capability-occurrences.jsonl | c763b831726db37cdfa4ba8819a6dfe23792e2501d6d9b7303afa8178804e9e3 |
+| capabilities/capability-summary.json | 2f097f1efa1975a635e9fe1f6df8ee076c18090fe8ac41fb491c753bbc45b06b |
+| capabilities/r46-candidates.json | 2662eda0b772624b47c14309c9431dc708dc1ef51e403d69d7f0d7aa134966f5 |
+
+### Top-three planning bound
+
+- top3_affected_seed_union: **497** (the complete occurrence seed sets required
+  by Step 3, including descriptive occurrences outside candidate qualification).
+- top3_qualifying_affected_seed_union: **474** (reported separately).
+- top3_single_capability_rescue_upper_bound_sum: **0**.
+- top3_domains: **action, scene, scene**.
+- top3_family_union: all six target families, including three not yet ordinary:
+  `action_lead_subject_scene`, `scene_lead_subject_action`,
+  `subject_action__scene_tail`, `subject_action_scene`,
+  `subject_action_scene_insert`, `subject_scene_action`.
+
+| Rank | Domain | Complete occurrence seeds | Qualifying affected seeds | Rescue upper bound |
+|---|---|---:|---:|---:|
+| 1 | action | 470 | 451 | 0 |
+| 2 | scene | 416 | 399 | 0 |
+| 3 | scene | 416 | 398 | 0 |
+
+The candidate hashes and at most eight examples per candidate are in the compact
+[candidate receipt](./comparison_sources/r45/candidate-ranking.json). Counts use
+complete occurrence sets, never the capped examples. These are development-work
+bounds, not a forecast of 64/512 or a permission to activate runtime grammar.
+
+### Reproduction and remaining boundary
+
+Executed from the isolated worktree, all exit zero on the final source:
+
+```text
+python tools/verify_realizer_v2_candidate.py --stage focused --output-dir assets/results/diversity_refactor/r45/final-development-02/focused
+python tools/verify_realizer_v2_candidate.py --stage regression --output-dir assets/results/diversity_refactor/r45/final-development-02/regression
+python -m pytest --rootdir=. -o addopts= -p no:cacheprovider -p tools.verify_realizer_v2_candidate -q assets/test_r45_blocker_taxonomy.py assets/test_r45_capability_projection.py assets/test_r45_scene_provenance_separation.py assets/test_r45_capability_audit.py
+python tools/validate_prompt_data.py
+python tools/check_variation_scope.py
+python tools/build_action_pools.py --check
+python tools/build_compatibility_review.py --check
+python tools/verify_full_flow.py
+python tools/audit_realizer_reachability.py --profile intake --force-families all --output-dir assets/results/diversity_refactor/r45/final-development-02/reachability
+python tools/audit_realizer_capabilities.py --rows assets/results/diversity_refactor/r45/final-development-02/reachability/rows.jsonl --output-dir assets/results/diversity_refactor/r45/final-development-02/capabilities
+python tools/audit_realizer_capabilities.py --rows assets/results/diversity_refactor/r45/final-development-02/reachability/rows.jsonl --output-dir assets/results/diversity_refactor/r45/final-development-02/capabilities-repeat
+python tools/realizer_candidate_replay.py --source-root . --pairs assets/results/diversity_refactor/r45/final-development-02/reachability/normal-pairs.jsonl --output-dir assets/results/diversity_refactor/r45/final-development-02/replay-root --import-mode root --order ascending
+python tools/realizer_candidate_replay.py --source-root . --pairs assets/results/diversity_refactor/r45/final-development-02/reachability/normal-pairs.jsonl --output-dir assets/results/diversity_refactor/r45/final-development-02/replay-package --import-mode package --order reverse
+```
+
+The local driver records full argv, exit codes, log hashes, Python 3.10 AST files,
+protected comparisons and source guards. [Compact receipts and registry](./comparison_sources/r45/README.md)
+retain every summarized local artifact SHA-256 plus source commit/tree identity.
+Historical baseline and post-Scene receipts are labeled separately from final
+source. The parent independently restored the task03 commit archive and verified
+all entries against its historical source manifest. No full seed lists or raw
+prompt/rows/log artifacts are tracked.
+
+R45-06 archive restore, handoff/checkpoint and publication remain pending.
+Formal reference8192, gate2048, paired formal comparison, fixed80, blind review,
+fresh confirmations, frontend/browser and release8192 are all **NOT_RUN**.
+N2.8/adoption remains **BLOCKED**; D3 remains **DEFERRED**.
 
 ## R45-04 execution record
 

@@ -1,0 +1,42 @@
+{
+  "candidate_output_count": 12,
+  "capability_count": 131,
+  "largest_descriptive_distinct_seed_count": 470,
+  "maximum_qualifying_affected_seed_count": 451,
+  "maximum_single_capability_rescue_upper_bound": 0,
+  "occurrence_count": 8684,
+  "ordinary_families": [
+    "scene_lead_subject_action",
+    "subject_action__scene_tail",
+    "subject_scene_action"
+  ],
+  "qualifying_candidate_count_before_top12_cap": 50,
+  "repeat_all_six_artifacts_byte_equal": true,
+  "repeated_unknown_grammar_capabilities": {
+    "action": 8,
+    "scene": 11
+  },
+  "schema_version": "r45-compact-receipt/v1",
+  "source_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+  "source_role": "final_candidate",
+  "source_tree_hash": "db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f",
+  "status": "PASS",
+  "underlying_artifacts": [
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/capabilities/capability-summary.json",
+      "sha256": "2f097f1efa1975a635e9fe1f6df8ee076c18090fe8ac41fb491c753bbc45b06b"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/capabilities/capability-occurrences.jsonl",
+      "sha256": "c763b831726db37cdfa4ba8819a6dfe23792e2501d6d9b7303afa8178804e9e3"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/capabilities/source-input.json",
+      "sha256": "c3f93fedccd8e1d142532b48e2df8d108f1433d63f12ab89397354cfba070c7f"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/capabilities-repeat/source-input.json",
+      "sha256": "c3f93fedccd8e1d142532b48e2df8d108f1433d63f12ab89397354cfba070c7f"
+    }
+  ]
+}

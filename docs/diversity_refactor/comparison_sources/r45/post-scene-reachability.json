@@ -1,0 +1,58 @@
+{
+  "family_eligibility_preserved_rows": 3072,
+  "ordinary": {
+    "errors": [],
+    "executed_v2_family_count": 3,
+    "observed_structure_count": 4,
+    "v1_fallback_structure_counts": {
+      "subject_action__scene_tail": 128,
+      "subject_action_scene": 373
+    },
+    "v2_applied_count": 11,
+    "v2_family_counts": {
+      "scene_lead_subject_action": 1,
+      "subject_action__scene_tail": 9,
+      "subject_scene_action": 1
+    }
+  },
+  "recorded_invocation_commit": "659c4e7dcebf29ac7e4567fcb3c58e0683be63ba",
+  "scene": {
+    "blockers": {
+      "scene.antecedent_unknown": 1,
+      "scene.grammar_unknown": 463,
+      "scene.r45_source_only_permission_deferred": 463,
+      "scene.source_unavailable": 32
+    },
+    "grammar_known": 16,
+    "runtime_bound": 479,
+    "source_trace": 479
+  },
+  "schema_version": "r45-compact-receipt/v1",
+  "source_commit": "7ee02172f13d2e7a92ef2d3060ff0479e69d6cc5",
+  "source_identity_note": "Invocation preceded the R45-03 commit; source_tree_hash identifies the edited bytes recoverable at source_commit. This is historical, not final-source verification.",
+  "source_role": "historical_R45_03_post_scene",
+  "source_tree_hash": "a50a4c01ec95664426e14c7723a79b566aa53cb46fd6a336d993d306bb3eceba",
+  "status": "PASS",
+  "underlying_artifacts": [
+    {
+      "path": "assets/results/diversity_refactor/r45/r45-03-reachability-final/reachability.json",
+      "sha256": "4159ba8a0b3a0a6b8d53f1eccdc19233b2f9f3d794175dc08da6fcd36dd6e1f0"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/r45-03-reachability-final/rows.jsonl",
+      "sha256": "69deea7151bc39d9d6a699ca548f701adc089637cd9dab1710bcc8146045fdd4"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/r45-03-reachability-final/normal-pairs.jsonl",
+      "sha256": "a3b8a28e873bb4cbcfbd338125eef6165e809f228cd5d7cafa73d1589255b87d"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/r45-03-replay-root/summary.json",
+      "sha256": "9060fd11c48b90ec216b77f611b8879e82dc0065ebbc8e7a13b9af9512b3fd36"
+    },
+    {
+      "path": "assets/results/diversity_refactor/r45/r45-03-verification.json",
+      "sha256": "619e373e2abcaabd9f32e30ea8a49412e01f2d8c591ecb3f3f6c6a517b534de2"
+    }
+  ]
+}

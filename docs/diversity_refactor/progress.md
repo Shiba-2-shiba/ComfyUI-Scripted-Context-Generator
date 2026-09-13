@@ -3038,3 +3038,26 @@ all 166 broader R44 protected inputs remain unchanged. Published R44 tags and
 runtime source are unchanged. Formal gates NOT_RUN, N2.8/adoption BLOCKED,
 D3 DEFERRED. See [R45 progress](./r45_progress.md) and
 [implementation plan](./R45_IMPLEMENTATION_PLAN.md).
+
+
+## 2026-09-13 — R45 measured capability verdict
+
+R45-01 through R45-05 pass on `refactor/realizer-v2-r45`; development verdict is
+**BLOCKED_CAPABILITY_MODEL**. Final source `8a1977116e64c1d8bfd135b1a1376854b67cfa48`
+preserves ordinary **11/512**, **3** families, **501** fallbacks, exact baseline
+pairs/records and all **3,072** family eligibility/forced-version states. Source
+Scene binding reaches 479 inputs while unknown grammar and deferred permission
+remain enforced. Capability audit measures **131** hashes and **50** qualifying
+candidates (12 displayed), largest descriptive group **470**, maximum qualifying
+affected count **451**, and every single-capability rescue upper bound **0**.
+Top-three complete occurrence union is **497**; qualifying affected union **474**;
+rescue-bound sum **0**. The union describes work scope and predicts no coverage gain.
+
+Final focused **534/2,020 subtests**, regression **87/33**, all-R45 **40/33**,
+validators/build checks/full-flow and Python 3.10 AST all PASS. Root/package fresh
+replays agree; all **120** explicit V150 and **166** broader protected hashes are
+unchanged. One legacy Scene test was corrected to distinguish exact source binding
+from unknown grammar while retaining all cases and constructor rejection controls;
+no R45-05 runtime source changed. Formal gates remain **NOT_RUN**, N2.8/adoption
+**BLOCKED**, D3 **DEFERRED**. R45-06 archive restore/handoff/checkpoint remains pending.
+See [R45 ledger](./r45_progress.md) and [source receipts](./comparison_sources/r45/README.md).

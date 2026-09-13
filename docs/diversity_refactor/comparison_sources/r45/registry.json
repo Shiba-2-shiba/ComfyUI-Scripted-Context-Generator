@@ -1,0 +1,49 @@
+{
+  "archive_restore": "NOT_RUN; R45-06 pending",
+  "baseline_receipt": "baseline-identity.json",
+  "checkpoint_tag": null,
+  "development_verdict": "BLOCKED_CAPABILITY_MODEL",
+  "final_source_receipts": [
+    "final-reachability.json",
+    "capability-summary.json",
+    "candidate-ranking.json",
+    "protected-inputs.json",
+    "development-verification.json",
+    "reproduction.json"
+  ],
+  "final_verification_root": "assets/results/diversity_refactor/r45/final-development-02",
+  "formal_gates": {
+    "blind_review": "NOT_RUN",
+    "fixed80": "NOT_RUN",
+    "fresh_confirmations": "NOT_RUN",
+    "frontend_browser": "NOT_RUN",
+    "gate2048": "NOT_RUN",
+    "paired_formal_comparison": "NOT_RUN",
+    "reference8192": "NOT_RUN",
+    "release8192": "NOT_RUN"
+  },
+  "post_scene_historical_receipt": "post-scene-reachability.json",
+  "publication": "NOT_RUN; R45-06 pending",
+  "raw_artifact_policy": "Large raw rows, full seed lists, prompts and logs remain local and are regenerated from these source identities.",
+  "receipt_sha256": {
+    "baseline-identity.json": "8a0e048786e81cab25269a8b2dfb41eefb9c12cb8b970b96b87e532b2bffe5b1",
+    "candidate-ranking.json": "322109f4b2b74b0c23dd6b81004e0ad729ded25244f9620a1d1e4fceb31ed70a",
+    "capability-summary.json": "57aa05e88359571620c629199084e0db9ac538d6b5bd3584e324c5bcb5ee1a6a",
+    "development-verification.json": "8de370a226c3c6e49369b0e645a150fa4c09c2dd5c5d9f0bb814f2ee8d68856a",
+    "final-reachability.json": "e7b085a4d1e44b6906c72390fe21bc43583f51e69a0ff43a23b9edb80958bc96",
+    "post-scene-reachability.json": "8af6d886e533da7054cc8455826eb557a9618e623d173a7a6827b44ed1b79a04",
+    "protected-inputs.json": "574c4243b14ffb9ee4ac02c1f90f53fd4f3501c0c6b035785b75285e056e4935",
+    "reproduction.json": "753b5087158a5dccdb357a2aaa1307f3dd39468e6c54132f51dc95c6f7f1ac8f"
+  },
+  "schema_version": "r45-compact-receipt/v1",
+  "source_branch": "refactor/realizer-v2-r45",
+  "source_commit": "8a1977116e64c1d8bfd135b1a1376854b67cfa48",
+  "source_role": "final_candidate",
+  "source_tree_hash": "db45a5e058ec2ee1c2de2cd22d59b3f97bc7133ffa26315f972b14b91b27641f",
+  "underlying_artifacts": [
+    {
+      "path": "assets/results/diversity_refactor/r45/final-development-02/reproduction.json",
+      "sha256": "14d783695c7cbd19f3ce554b8401c2df7ed22a074a9ad989c294f4da33437abe"
+    }
+  ]
+}
